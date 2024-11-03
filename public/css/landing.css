@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    cursor: default;
+    transition: all 0.3s ease;
+}
+
+.main {
+    position: relative;
+    overflow: hidden;
+}
+
+.main::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/12.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1;
+    z-index: 1;
+    animation: bgimage 20s infinite alternate;
+}
+
+@keyframes bgimage {
+    0% {
+        background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/12.jpg);
+    }
+
+    30% {
+        background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/13.jpg);
+    }
+
+    60% {
+        background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/12.jpg);
+    }
+
+    80% {
+        background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/13.jpg);
+    }
+
+    100% {
+        background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/12.jpg);
+    }
+}
+
+.main::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.5;
+    z-index: 2;
+}
+
+.main::after {
+    z-index: 1;
+}
+
+.title {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+    z-index: 10;
+}
+
+/* Keyframe Animation for fade-in effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* General fade-in class */
+.animation-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+/* Delays for each list item */
+.animation-delay-1 {
+    animation-delay: 0.1s;
+}
+
+.animation-delay-2 {
+    animation-delay: 0.2s;
+}
+
+.animation-delay-3 {
+    animation-delay: 0.3s;
+}
+
+.animation-delay-4 {
+    animation-delay: 0.4s;
+}
+
+.animation-delay-5 {
+    animation-delay: 0.5s;
+}
+
+/* Transition effects */
+ul {
+    transition: opacity 10s ease-in-out, transform 10s ease-in-out;
+}
+
+/* Visibility classes to toggle */
+.opacity-100 {
+    opacity: 1;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.pointer-events-auto {
+    pointer-events: auto;
+}
