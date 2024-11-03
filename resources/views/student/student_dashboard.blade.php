@@ -58,8 +58,11 @@
             </div>
 
             <div class="bg-white py-5 px-3 text-teal-800 rounded-lg shadow-lg text-start mt-5">
-              <p class="font-bold text-[15px]">
-                {{ session('student_last_name') . ', ' . session('student_first_name') . ' ' . session('student_middle_name')}}
+            <p class="font-bold text-[15px]">
+                @php
+                  $middleName = session('student_middle_name', '');
+                @endphp
+                {{ session('student_last_name') . ', ' . session('student_first_name') . ' ' . strtoupper(substr($middleName, 0, 1)) . '.'}}
               </p>
               <p class="font-normal text-[12px]">{{ session('grade') . ' - ' . session('section') }}
               </p>
