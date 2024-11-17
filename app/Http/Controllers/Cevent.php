@@ -119,12 +119,13 @@ class Cevent extends BaseController // Extend the correct base controller
         return view('admin.admin_dashboard', compact('studentCounts', 'totalStaff', 'currentStaff', 'totalMaleStudent', 'totalFemaleStudent'));
     }
 
-    public function showDashboard()
+    public function showDashboardstudent()
     {
-        // Retrieve the latest announcements (e.g., the 5 most recent)
+        // Retrieve the latest announcements
         $latestAnnouncements = Mannouncement::latest()->take(5)->get();
 
-        return view('student.student_dashboard', compact( 'latestAnnouncements'));
+        // Return the view with the variable
+        return view('student.student_dashboard', compact('latestAnnouncements'));
     }
 
     public function showCalendar()

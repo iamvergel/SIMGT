@@ -7,6 +7,11 @@ use App\Models\StudentAdditionalInfo;
 use App\Models\StudentDocuments;
 use App\Models\Mstudentaccount;
 use App\Models\Mstudentgradeone;
+use App\Models\Mstudentgradetwo;
+use App\Models\Mstudentgradethree;
+use App\Models\Mstudentgradefour;
+use App\Models\Mstudentgradefive;
+use App\Models\Mstudentgradesix;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\Madminaccount;
@@ -357,7 +362,6 @@ class Cstudentinfo extends Controller
     {
         // Fetch all active student records with pagination
         $students = StudentInfo::where('status', 'Active')->get();
-        ;
 
         // Fetch additional student information for each student
         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
@@ -365,11 +369,45 @@ class Cstudentinfo extends Controller
         // Fetch additional student information for each student
         $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
 
+        $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+
+        $studentGradeOne = Mstudentgradeone::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentGradeTwo = Mstudentgradetwo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentGradeThree = Mstudentgradethree::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentGradeFour = Mstudentgradefour::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentGradeFive = Mstudentgradefive::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentGradeSix = Mstudentgradesix::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+
         // Check if there are no active students
         $noActiveMessage = $students->isEmpty() ? "No active students found." : null;
+        $gradeOne = Mstudentgradeone::all();
+        $gradeTwo = Mstudentgradetwo::all();
+        $gradeThree = Mstudentgradethree::all();
+        $gradeFour = Mstudentgradefour::all();
+        $gradeFive = Mstudentgradefive::all();
+        $gradeSix = Mstudentgradesix::all();
 
-        return view('admin.admin_show_all_data', compact('students', 'studentsAdditional', 'studentDocuments', 'noActiveMessage'));
+        return view('admin.admin_show_all_data', compact('students', 'gradeOne', 'gradeTwo', 'gradeThree', 'gradeFour', 'gradeFive', 'gradeSix', 'studentsAdditional', 'studentDocuments', 'studentAccount', 'studentGradeOne', 'studentGradeTwo', 'studentGradeThree', 'studentGradeFour', 'studentGradeFive', 'studentGradeSix', 'noActiveMessage'));
     }
+
+    public function fetchGrades($studentNumber)
+{
+    // Fetch the student grades from the database based on the student number
+    $grades = Mstudentgradeone::where('student_number', $studentNumber)->get();
+    
+    // Format the grades for the modal response
+    $formattedGrades = $grades->map(function ($grade) {
+        return [
+            'subject' => $grade->subject,
+            'Q1' => $grade->Q1 ?? 'N/A',
+            'Q2' => $grade->Q2 ?? 'N/A',
+            'Q3' => $grade->Q3 ?? 'N/A',
+            'Q4' => $grade->Q4 ?? 'N/A',
+        ];
+    });
+
+    return response()->json(['grades' => $formattedGrades]);
+}
 
     public function showAllStudentGraduateData()
     {

@@ -39,7 +39,6 @@ class Cstudentgrades extends Controller
     {
         // Typically used to show a form, not needed for API
     }
-
     /**
      * Store a newly created resource in storage.
      *

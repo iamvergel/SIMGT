@@ -81,14 +81,6 @@
                         <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search by name..."
                             class="text-sm px-4 py-3 text-teal-900 border border-gray-300 rounded-lg w-80 shadow-lg focus:outline-none" />
                     </div>
-
-                    <div class="flex">
-                        <button data-modal-target="addnewstudent" data-modal-toggle="addnewstudent"
-                            class="block w-86 right-0 mr-5 text-[12px] text-white shadow-lg px-10 bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded py-2.5 text-center"
-                            type="button" aria-label="Add Student">
-                            Add Student
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Main modal -->
@@ -136,11 +128,76 @@
                                                         </thead>
                                                         <tbody class="bg-white" id="tableBody">
                                                             @foreach ($students as $student)
-                                                                                            <tr class="text-gray-700 table-row">
+                                                                                            <tr class="text-gray-700 table-row" onclick="openStudentModal(this)"
+                                                                                                data-student-id="{{ $student->id }}"
+                                                                                                data-status="{{ $student->status }}"
+                                                                                                data-student-number="{{ $student->student_number }}"
+                                                                                                data-lrn="{{ $student->lrn }}"
+                                                                                                data-school-year="{{ $student->school_year }}"
+                                                                                                data-school="{{ $student->School }}"
+                                                                                                data-grade="{{ $student->grade }}"
+                                                                                                data-section="{{ $student->section }}"
+                                                                                                data-last-name="{{ $student->student_last_name }}"
+                                                                                                data-first-name=" {{ $student->student_first_name }}"
+                                                                                                data-middle-name="{{ $student->student_middle_name }}"
+                                                                                                data-suffix-name="{{ $student->student_suffix_name }}"
+                                                                                                data-email="{{ $student->email_address_send }}"
+                                                                                                data-place-of-birth="{{ $student->place_of_birth }}"
+                                                                                                data-birth-date="{{ \Carbon\Carbon::parse($student->birth_date)->format('Y-m-d') }}"
+                                                                                                data-sex="{{ $student->sex }}"
+                                                                                                data-age="{{ $student->age }}"
+                                                                                                data-contact-number="{{ $student->contact_number }}"
+                                                                                                data-religion="{{ $student->religion }}"
+                                                                                                data-house-number="{{ $student->house_number }}"
+                                                                                                data-street="{{ $student->street }}"
+                                                                                                data-barangay="{{ $student->barangay }}"
+                                                                                                data-city="{{ $student->city }}"
+                                                                                                data-province="{{ $student->province }}"
+                                                                                                @php
+                                                                                                    $account = $studentAccount[$student->student_number] ?? null;
+                                                                                                    $avatar = $account && $account->avatar ? asset('storage/' . $account->avatar) : null;
+                                                                                                    $initials = strtoupper(substr($student->student_last_name, 0, 1) . substr($student->student_first_name, 0, 1));
+                                                                                                @endphp
+                                                                                                data-avatar="{{ $avatar }}"
+                                                                                                data-initials="{{ $initials }}"
+
+                                                                                                @php
+                                                                                                    $additionalInfo = $studentsAdditional[$student->student_number];
+                                                                                                @endphp
+                                                                                                
+                                                                                                data-father-last-name="{{$additionalInfo ? $additionalInfo->father_last_name : ''}}"
+        data-father-first-name="{{ $additionalInfo ? $additionalInfo->father_first_name : '' }}"
+        data-father-middle-name="{{ $additionalInfo ? $additionalInfo->father_middle_name : '' }}"
+        data-father-suffix="{{ $additionalInfo ? $additionalInfo->father_suffix : '' }}"
+        data-father-occupation="{{ $additionalInfo ? $additionalInfo->father_occupation : '' }}"
+
+        data-mother-last-name="{{ $additionalInfo ? $additionalInfo->mother_last_name : '' }}"
+        data-mother-first-name="{{ $additionalInfo ? $additionalInfo->mother_first_name : '' }}"
+        data-mother-middle-name="{{ $additionalInfo ? $additionalInfo->mother_middle_name : '' }}"
+        data-mother-occupation="{{ $additionalInfo ? $additionalInfo->mother_occupation : '' }}"
+
+        data-guardian-last-name="{{ $additionalInfo ? $additionalInfo->guardian_last_name : '' }}"
+        data-guardian-first-name="{{ $additionalInfo ? $additionalInfo->guardian_first_name : '' }}"
+        data-guardian-middle-name="{{ $additionalInfo ? $additionalInfo->guardian_middle_name : '' }}"
+        data-guardian-suffix="{{ $additionalInfo ? $additionalInfo->guardian_suffix : '' }}"
+        data-guardian-relationship="{{ $additionalInfo ? $additionalInfo->guardian_relationship : '' }}"
+        data-guardian-contact="{{ $additionalInfo ? $additionalInfo->guardian_contact_number : '' }}"
+        data-guardian-religion="{{ $additionalInfo? $additionalInfo->guardian_religion : '' }}"
+
+        data-emergency-contact-person="{{ $additionalInfo ? $additionalInfo->emergency_contact_person : '' }}"
+        data-emergency-contact-number="{{ $additionalInfo ? $additionalInfo->emergency_contact_number : '' }}"
+        data-emergency-email="{{ $additionalInfo ? $additionalInfo->email_address : '' }}"
+        data-emergency-messenger="{{ $additionalInfo ? $additionalInfo->messenger_account : '' }}"
+        data-birth-certificate="{{ isset($studentDocuments[$student->student_number]) ? asset('storage/' . $studentDocuments[$student->student_number]->birth_certificate) : 'N/A' }}"
+    data-proof-of-residency="{{ isset($studentDocuments[$student->student_number]) ? asset('storage/' . $studentDocuments[$student->student_number]->proof_of_residency) : 'N/A' }}">
+                                                                                                
                                                                                                 <td class="px-4 py-3 h-28 border flex items-center mt-2 w-40">
-                                                                                                    <div
-                                                                                                        class="w-10 h-10 rounded-full bg-gray-500 text-white flex items-center justify-center font-bold">
-                                                                                                        {{ strtoupper(substr($student->student_last_name, 0, 1) . substr($student->student_first_name, 0, 1)) }}
+                                                                                                    <div class="w-12 h-12 rounded-full bg-gray-500 text-white flex items-center justify-center font-bold">
+                                                                                                        @if ($avatar)
+                                                                                                            <img src="{{ $avatar }}" alt="Student Avatar" class="w-12 h-12 rounded-full object-cover">
+                                                                                                        @else
+                                                                                                            {{ $initials }}
+                                                                                                        @endif
                                                                                                     </div>
                                                                                                     <span class="ml-2">{{ $student->student_number }}</span>
                                                                                                 </td>
@@ -202,70 +259,14 @@
                         </div>
                     </div>
                 </section>
-
             </div>
         </main>
+
+        @include('admin.includes.show_student_profile')
+
     </div>
 
-    <script>
-        $(document).ready(function () {
-            $('#studentTable').DataTable({
-                paging: true,
-                searching: false,
-                ordering: true,
-                order: [[0, 'asc']], // Default order by first column (Student Number)
-                scrollY: 'auto', // Set the height for scrolling
-                scrollX: 'auto',
-                scrollCollapse: true, // Allow the table to resize
-                language: {
-                    search: "Search by name or other fields:"
-                }
-            });
-        });
-
-        function searchTable() {
-            const input = document.getElementById("searchInput");
-            const filter = input.value.toLowerCase();
-            const tableBody = document.getElementById("tableBody");
-            const rows = tableBody.getElementsByTagName("tr");
-
-            for (let i = 0; i < rows.length; i++) {
-                const cells = rows[i].getElementsByTagName("td");
-                let displayRow = false;
-
-                if (cells.length > 0) {
-                    const nameText = cells[5].textContent.toLowerCase(); // Name column
-                    const numberText = cells[0].textContent.toLowerCase(); // Student Number column
-                    const sectionText = cells[3].textContent.toLowerCase(); // Student Section column
-                    const gradeText = cells[6].textContent.toLowerCase(); // Student Grade column
-
-                    // Check if any cell includes the filter text
-                    displayRow = nameText.includes(filter) || numberText.includes(filter) ||
-                        sectionText.includes(filter) || gradeText.includes(filter);
-                }
-
-                rows[i].style.display = displayRow ? "" : "none";
-            }
-        }
-
-        // Improved modal toggle function
-        function toggleModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.toggle("hidden");
-            modal.classList.toggle("flex");
-        }
-
-        // Event listeners for opening modals
-        document.querySelector('[data-modal-target="addnewstudent"]').onclick = function () {
-            toggleModal('addnewstudent');
-        };
-
-        // Event listeners for closing modals
-        document.getElementById('addnewstudentClose').onclick = function () {
-            toggleModal('addnewstudent');
-        };
-    </script>
-
+    <script src="{{ asset('../js/admin/admin.js') }}"></script>
 </body>
 
 </html>

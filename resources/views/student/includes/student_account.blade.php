@@ -53,24 +53,26 @@
                         value="{{ Auth::guard('student')->check() ? Auth::guard('student')->user()->student_number : '' }}"
                         required class="mt-2" />
 
-                    <input type="file" name="avatar" accept="image/*" required class="hidden" id="avatar-input"
-                        onchange="handleFileInput(event)" />
+                    <input type="file" name="avatar" accept="image/*" id="avatar-input"
+                        onchange="handleFileInput(event)" class="sr-only">
 
                     <button type="button" onclick="document.getElementById('avatar-input').click()"
-                        class="bg-teal-600 mt-10 w-full py-3 text-center rounded-full text-white hover:bg-teal-800 focus:outline-none">
+                        class="bg-teal-600 mt-10 w-full py-3 text-center rounded-full text-white hover:bg-teal-800 focus:outline-none" id="buttonClick">
                         Choose Image
                     </button>
                     <button type="submit"
-                        class="bg-teal-600 mt-2 w-full py-3 text-center rounded-full text-white hover:bg-teal-800">
+                        class="bg-teal-600 mt-2 w-full py-3 text-center rounded-full text-white hover:bg-teal-800" id="buttonClick">
                         Update Avatar
                     </button>
+
+                    <p class="text-red-900 text-[14px] mt-5 bg-red-300 rounded-md" id="alert"></p>
                 </form>
             </div>
         </div>
 
         <div class="accountInfo mt-10 text-[15px] text-teal-900 p-5 shadow-lg font-semibold">
             <p class="mb-3"> {{ session('student_id') }}</p>
-            <p class="mb-3"> {{ $firstName . ' ' . $lastName . ' ' . $middleName }}</p>
+            <p class="mb-3"> {{ $firstName . ' ' . $middleName . ' ' . $lastName }}</p>
             <p class="mb-3">{{ session('grade') . ' - ' . session('section')}}</p>
         </div>
 
@@ -84,8 +86,8 @@
                         <label for="firstname" class="block mb-1 text-sm font-normal text-teal-900">First Name :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fas fa-user mr-2 "></i>
-                            <input type="text" name="firstname" id="firstname" class="myInput block w-full p-2.5 "
-                                value="{{$firstName}}" disabled readonly>
+                            <input type="text" name="firstname" id="firstname" class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
+                                value="{{$firstName}}"  readonly>
                         </div>
                     </div>
 
@@ -94,8 +96,8 @@
                             :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fas fa-user mr-2 "></i>
-                            <input type="text" name="middlename" id="middlename" class="myInput block w-full p-2.5 "
-                                value="{{$middleName}}" disabled readonly>
+                            <input type="text" name="middlename" id="middlename" class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
+                                value="{{$middleName}}"  readonly>
                         </div>
                     </div>
 
@@ -103,18 +105,18 @@
                         <label for="lastname" class="block mb-1 text-sm font-normal text-teal-900">Last Name :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fas fa-user mr-2 "></i>
-                            <input type="text" name="lastname" id="lastname" class="myInput block w-full p-2.5 "
-                                value="{{$lastName}}" disabled readonly>
+                            <input type="text" name="lastname" id="lastname" class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
+                                value="{{$lastName}}"  readonly>
                         </div>
                     </div>
 
                     <div class="my-3">
-                        <label for="suffixname" class="block mb-1 text-sm font-normal text-teal-900">suffix Name
+                        <label for="suffixname" class="block mb-1 text-sm font-normal text-teal-900">Suffix Name
                             :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fas fa-user mr-2 "></i>
-                            <input type="text" name="suffixname" id="suffixname" class="myInput block w-full p-2.5 "
-                                value="{{$suffixName}}" disabled readonly>
+                            <input type="text" name="suffixname" id="suffixname" class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
+                                value="{{$suffixName}}"  readonly>
                         </div>
                     </div>
 
@@ -123,8 +125,8 @@
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fa-solid fa-address-card mr-2"></i>
                             <input type="text" name="username" id="username"
-                                class="myInput block w-full p-2.5 text-[13px]" value="{{session('student_username')}}"
-                                disabled readonly>
+                                class="myInput block w-full p-2.5 text-[13px] focus:outline-none focus:ring-none" value="{{session('student_username')}}"
+                                 readonly>
                         </div>
                     </div>
 
@@ -132,8 +134,8 @@
                         <label for="role" class="block mb-1 text-sm font-normal text-teal-900">Role/s :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fa-solid fa-address-card mr-2"></i>
-                            <input type="text" name="role" id="role" class="myInput block w-full p-2.5 " value="Student"
-                                disabled readonly>
+                            <input type="text" name="role" id="role" class="myInput block w-full p-2.5  focus:outline-none focus:ring-none" value="Student"
+                                 readonly>
                         </div>
                     </div>
 
@@ -141,8 +143,8 @@
                         <label for="school" class="block mb-1 text-sm font-normal text-teal-900">School :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fa-solid fa-school mr-2"></i>
-                            <input type="text" name="school" id="school" class="myInput block w-full p-2.5 "
-                                value="St. Emelie Learning Center" disabled readonly>
+                            <input type="text" name="school" id="school" class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
+                                value="St. Emelie Learning Center"  readonly>
                         </div>
                     </div>
 
@@ -155,8 +157,8 @@
                         <label for="email" class="block mb-1 text-sm font-normal text-teal-900">Email :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fa-solid fa-envelope mr-2"></i>
-                            <input type="text" name="email" id="email" class="myInput block w-full p-2.5 text-[13px]"
-                                value="{{ session('email_address_send')}}" disabled readonly>
+                            <input type="text" name="email" id="email" class="myInput block w-full p-2.5 text-[13px]  focus:outline-none focus:ring-none"
+                                value="{{ session('email_address_send')}}"  readonly>
                         </div>
                     </div>
 
@@ -165,16 +167,16 @@
                             :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fa-solid fa-mobile mr-2"></i>
-                            <input type="text" name="contact" id="contact" class="myInput block w-full p-2.5 "
-                                value="{{ session('contact_number') }}" disabled readonly>
+                            <input type="text" name="contact" id="contact" class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
+                                value="{{ session('contact_number') }}"  readonly>
                         </div>
                     </div>
 
                     <div class="my-3">
                         <label for="birthday" class="block mb-1 text-sm font-normal text-teal-900">Birthday :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
-                            <input type="date" name="birthday" id="birthday" class="myInput block w-full p-2.5 "
-                                value="{{ session('birth_date') }}" disabled readonly>
+                            <input type="date" name="birthday" id="birthday" class="myInput block w-full p-2.5 focus:outline-none focus:ring-none"
+                                value="{{ session('birth_date') }}"  readonly>
                             <i class="fa-regular fa-calendar-days"></i>
                         </div>
                     </div>
@@ -250,19 +252,54 @@
             const fileInput = document.getElementById('avatar-input');
             const file = fileInput.files[0];
 
+            const alert = document.getElementById('alert');
+
             // Validate file type and size
             if (file) {
                 const validTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
                 if (!validTypes.includes(file.type)) {
-                    alert('Invalid file type. Please upload an image (jpeg, png, jpg, gif).');
+                    alert.classList.add('p-3');
+                    alert.classList.add('border');
+                    alert.classList.add('border-red-500');
+                    alert.innerHTML = 'Invalid file type. Please upload an image (jpeg, png, jpg, gif).';
+
+                    setTimeout(function () {
+                        alert.innerHTML = '';
+                        alert.classList.remove('p-3');
+                        alert.classList.remove('border');
+                        alert.classList.remove('border-red-500');
+                    }, 3000);
+
                     return;
                 }
                 if (file.size > 2048 * 1024) { // 2048 KB
-                    alert('File size exceeds 2 MB. Please upload a smaller image.');
+                    alert.classList.add('p-3');
+                    alert.classList.add('border');
+                    alert.classList.add('border-red-500');
+                    alert.innerHTML = 'File size exceeds 2 MB. Please upload a smaller image.';
+
+                    setTimeout(function () {
+                        alert.innerHTML = '';
+                        alert.classList.remove('p-3');
+                        alert.classList.remove('border');
+                        alert.classList.remove('border-red-500');
+                    }, 3000);
+
                     return;
                 }
             } else {
-                alert('Please choose an image file.');
+                alert.classList.add('p-3');
+                alert.classList.add('border');
+                alert.classList.add('border-red-500');
+                alert.innerHTML = 'Please select a picture first.';
+
+                setTimeout(function () {
+                    alert.innerHTML = '';
+                    alert.classList.remove('p-3');
+                    alert.classList.remove('border');
+                    alert.classList.remove('border-red-500');
+                }, 3000);
+
                 return;
             }
 
@@ -306,7 +343,19 @@
                         location.reload();
                     } else if (data.error) {
                         console.error(data.error);
-                        alert(data.error);
+                        alert.classList.add('p-3');
+                        alert.classList.add('border');
+                        alert.classList.add('border-red-500');
+                        alert.innerHTML = data.error;
+
+                        setTimeout(function () {
+                            alert.innerHTML = '';
+                            alert.classList.remove('p-3');
+                            alert.classList.remove('border');
+                            alert.classList.remove('border-red-500');
+                        }, 3000);
+
+                        return;
                     }
                 })
                 .catch(error => console.error('Error:', error));

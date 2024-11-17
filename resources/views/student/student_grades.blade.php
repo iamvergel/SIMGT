@@ -68,6 +68,8 @@
                             As
                             PDF</button>
                     </div>
+
+                    <p class="text-red-900 text-[14px] mt-5 bg-red-300 rounded-md" id="alert"></p>
                 </div>
             </div>
         </main>
@@ -374,7 +376,19 @@
                         alert('No grade record found for this selection.');
                     }
                 } else {
-                    alert('Please select a grade and quarter before downloading.');
+                    const alert = document.getElementById('alert');
+
+                    alert.classList.add('p-3');
+                    alert.classList.add('border');
+                    alert.classList.add('border-red-500');
+                    alert.innerHTML = 'Please select a grade and quarter before downloading.';
+
+                    setTimeout(function () {
+                        alert.innerHTML = '';
+                        alert.classList.remove('p-3');
+                        alert.classList.remove('border');
+                        alert.classList.remove('border-red-500');
+                    }, 3000);
                 }
             });
         });

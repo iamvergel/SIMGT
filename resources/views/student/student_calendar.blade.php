@@ -31,7 +31,7 @@
         }
 
         .fc-toolbar {
-            background-color: #e0f7fa;
+            background-color: #fff;
             font-size: 9px;
             font-weight: 700;
             color: #134e4a;
@@ -60,7 +60,7 @@
 
         @media (min-width: 1024px) {
             .fc-toolbar {
-                background-color: #e0f7fa;
+                background-color: #fff;
                 font-size: 15px;
             }
         }

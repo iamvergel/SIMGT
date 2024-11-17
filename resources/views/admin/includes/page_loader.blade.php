@@ -77,7 +77,7 @@
         // Redirect after 2 seconds
         setTimeout(() => {
           window.location.href = link.href; // Navigate to the link's href
-        }, 3000); // 2000 milliseconds = 2 seconds
+        }, 500); // 2000 milliseconds = 2 seconds
       });
     });
 

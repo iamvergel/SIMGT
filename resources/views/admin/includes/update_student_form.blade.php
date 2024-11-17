@@ -94,15 +94,53 @@
                             <label for="grade" class="block mb-2 text-sm font-bold text-gray-900">
                                 <span class="text-red-600 mr-1">*</span>Select Grade :</label>
                             <select id="grade" name="grade" class="select-field" required>
-                                <option value="">Select Grade</option>
-                                <option value="Grade One" {{ old('grade', $student->grade) == 'Grade One' ? 'selected' : '' }}>Grade One</option>
-                                <option value="Grade Two" {{ old('grade', $student->grade) == 'Grade Two' ? 'selected' : '' }}>Grade Two</option>
-                                <option value="Grade Three" {{ old('grade', $student->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
-                                <option value="Grade Four" {{ old('grade', $student->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
-                                <option value="Grade Five" {{ old('grade', $student->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
-                                <option value="Grade Six" {{ old('grade', $student->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+                                <!-- Default Grade One Option (shown only if no specific grade selected) -->
+                                @if(request()->is('*/GradeOne') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
+                                    <option value="Grade One" {{ old('grade', $student->grade) == 'Grade One' ? 'selected' : '' }}>Grade One</option>
+                                    <option value="Grade Two" {{ old('grade', $student->grade) == 'Grade Two' ? 'selected' : '' }}>Grade Two</option>
+                                    <option value="Grade Three" {{ old('grade', $student->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
+                                    <option value="Grade Four" {{ old('grade', $student->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
+                                    <option value="Grade Five" {{ old('grade', $student->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
+                                    <option value="Grade Six" {{ old('grade', $student->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+                                @endif
+
+                                <!-- Show Grade Two and above (Grade Two to Grade Six) -->
+                                @if(request()->is('*/GradeTwo') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
+                                    <option value="Grade Two" {{ old('grade', $student->grade) == 'Grade Two' ? 'selected' : '' }}>Grade Two</option>
+                                    <option value="Grade Three" {{ old('grade', $student->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
+                                    <option value="Grade Four" {{ old('grade', $student->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
+                                    <option value="Grade Five" {{ old('grade', $student->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
+                                    <option value="Grade Six" {{ old('grade', $student->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+                                @endif
+
+                                <!-- Show Grade Three and above (Grade Three to Grade Six) -->
+                                @if(request()->is('*/GradeThree') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
+                                    <option value="Grade Three" {{ old('grade', $student->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
+                                    <option value="Grade Four" {{ old('grade', $student->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
+                                    <option value="Grade Five" {{ old('grade', $student->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
+                                    <option value="Grade Six" {{ old('grade', $student->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+                                @endif
+
+                                <!-- Show Grade Four and above (Grade Four to Grade Six) -->
+                                @if(request()->is('*/GradeFour') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
+                                    <option value="Grade Four" {{ old('grade', $student->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
+                                    <option value="Grade Five" {{ old('grade', $student->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
+                                    <option value="Grade Six" {{ old('grade', $student->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+                                @endif
+
+                                <!-- Show Grade Five and above (Grade Five to Grade Six) -->
+                                @if(request()->is('*/GradeFive') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
+                                    <option value="Grade Five" {{ old('grade', $student->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
+                                    <option value="Grade Six" {{ old('grade', $student->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+                                @endif
+
+                                <!-- Show Grade Six only (if on Grade Six page) -->
+                                @if(request()->is('*/GradeSix') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
+                                    <option value="Grade Six" {{ old('grade', $student->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+                                @endif
                             </select>
                         </div>
+
 
                         <div class="">
                             <label for="section" class="block mb-2 text-sm font-bold text-gray-900">
@@ -173,13 +211,13 @@
                         </div>
 
                         <div>
-                        <label for="age" class="block mb-2 text-sm font-bold text-gray-900">
-                            <span class="text-red-600 mr-1">*</span>Age:
-                        </label>
-                        <input type="number" name="age" id="age"
-                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                            value="{{ old('age', $student->age) }}" placeholder="Enter Age" min="0" required readonly>
-                    </div>
+                            <label for="age" class="block mb-2 text-sm font-bold text-gray-900">
+                                <span class="text-red-600 mr-1">*</span>Age:
+                            </label>
+                            <input type="number" name="age" id="age"
+                                class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                value="{{ old('age', $student->age) }}" placeholder="Enter Age" min="0" required readonly>
+                        </div>
 
                         <div>
                             <label for="gender" class="block mb-2 text-sm font-bold text-gray-900"><span
@@ -478,7 +516,7 @@
                         </div>
 
                         <div>
-                            <label for="guardianRelationship" class="block mb-2 text-sm font-bold text-gray-900">
+                            <label for="guardianRelationship" class="block mb-2 text-[12px] font-bold text-gray-900">
                                 <span class="text-red-600 mr-1">*</span>Guardian's Relationship to Student:
                             </label>
                             <input type="text" name="guardian_relationship" id="guardianRelationship"

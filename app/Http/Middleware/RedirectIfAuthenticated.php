@@ -17,7 +17,7 @@ class RedirectIfAuthenticated
         }
 
         if (Auth::guard('student')->check() && $request->is($loginPath)) {
-            return redirect()->route('includes.student_loader');
+            return redirect()->route('includes.student_dashboard');
         }
 
         // Allow access to the login page if not authenticated

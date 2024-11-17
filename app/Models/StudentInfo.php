@@ -42,6 +42,10 @@ class StudentInfo extends Model
     {
         return $this->hasOne(StudentAdditionalInfo::class, 'student_number', 'student_number');
     }
+    public function studentAccount()
+    {
+        return $this->hasOne(Mstudentaccount::class, 'student_number', 'student_number');
+    }
 
     // Define the relationship to StudentDocuments
     public function documents()

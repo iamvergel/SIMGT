@@ -192,7 +192,7 @@
             <p class="mt-5 ml-3 text-[12px] tracking-widest">St. Emilie Learning Center</p>
         </div>
 
-        <div class="flex items-center justify-center max-h-1/4 p-4 border-b border-b-teal-600 mt-10">
+        <div class="flex items-center justify-center max-h-1/4 p-4 mt-10">
             <div class="flex flex-col items-center justify-center h-full p-4 bg-teal-600 rounded-xl w-56 shadow-lg"
                 id="account">
                 <div class="mt-5 w-20 h-20 border-4 border-white bg-gray-600 rounded-full flex items-center justify-center text-white text-4xl font-semibold transition-all duration-300 shadow-lg"
