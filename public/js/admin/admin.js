@@ -53,8 +53,20 @@ function openStudentModal(row) {
         " " +
         row.getAttribute("data-suffix-name") +
         " ";
+        document.getElementById("StudentName1").value =
+        row.getAttribute("data-last-name") +
+        ", " +
+        row.getAttribute("data-first-name") +
+        " " +
+        row.getAttribute("data-middle-name") +
+        " " +
+        row.getAttribute("data-suffix-name") +
+        " ";
     document.getElementById("modalStudentNumber").value = row.getAttribute(
         "data-student-number"
+    );
+    document.getElementById("modalUsername").value = row.getAttribute(
+        "data-username"
     );
     document.getElementById("modalStatus").value =
         row.getAttribute("data-status");

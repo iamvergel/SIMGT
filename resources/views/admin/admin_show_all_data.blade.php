@@ -160,6 +160,7 @@
                                                                                                 @endphp
                                                                                                 data-avatar="{{ $avatar }}"
                                                                                                 data-initials="{{ $initials }}"
+                                                                                                data-username="{{ $account->username }}"
 
                                                                                                 @php
                                                                                                     $additionalInfo = $studentsAdditional[$student->student_number];
