@@ -61,7 +61,6 @@
                                 <option value="Graduated" {{ old('status', $student->status) == 'Graduated' ? 'selected' : '' }}>Graduated</option>
                                 <option value="Dropped" {{ old('status', $student->status) == 'Dropped' ? 'selected' : '' }}>
                                     Dropped</option>
-                                <option value="Transferred" {{ old('status', $student->status) == 'Transferred' ? 'selected' : '' }}>Transferred</option>
                             </select>
                         </div>
                         <div></div>

@@ -151,3 +151,5 @@ Route::put('/students/retrive/{id}', [Cstudentinfo::class, 'retrieveStudent'])->
 Route::post('/profile/update-avatar', [CStudentProfile::class, 'update'])->name('profile.update-avatar');
 Route::post('/student/change-password/{studentId}', [CStudentProfile::class, 'changePassword'])->name('student.changePassword');
 Route::post('/show-grades', [CStudentProfile::class, 'showGrades'])->name('showGrades');
+
+Route::get('/get-sections', [Cstudentgrades::class, 'getSections'])->name('get.sections');

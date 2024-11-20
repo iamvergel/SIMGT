@@ -195,14 +195,14 @@
     <script>
         $(document).ready(function () {
             $('#studentTable').DataTable({
-                paging: true,
-                searching: false,
-                ordering: true,
-                info: true,
-                language: {
-                    search: "<i class='fas fa-search text-xl text-teal-700 px-3'></i>",
-                },
-                dom: '<"top"B>frtip',
+                dom: `
+        <'flex justify-between items-center mb-4'<'flex space-x-4'l><'flex space-x-4'B>>` +
+                `<tr>` +
+                `<'flex justify-between items-center'<'flex-1'i><'flex-1'p>>`,
+            paging: true,
+            searching: false,
+            ordering: true,
+            info: true,
                 buttons: [
                     {
                         extend: 'copyHtml5',

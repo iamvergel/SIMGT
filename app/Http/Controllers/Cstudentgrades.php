@@ -563,4 +563,17 @@ class Cstudentgrades extends Controller
         $studentGradeOne->delete();
         return response()->json(null, 204);
     }
+
+    public function getSections()
+{
+    // Fetch all distinct sections from the StudentInfo model where section is not null or empty
+    $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
+                           ->where('section', '!=', '') // Ensure section is not an empty string
+                           ->where('grade', 'Grade One')
+                           ->distinct()  // Get only distinct sections
+                           ->pluck('section'); // Get only the 'section' column
+
+    // Return sections as a JSON response
+    return response()->json($sections);
+}
 }

@@ -470,21 +470,21 @@
                             </thead>
                             <tbody>
                                 @foreach ($gradeOne as $gradeOneGrade)
-                                @php
-                                                                                                    $additionalInfo = $studentsAdditional[$student->student_number];
-                                                                                                @endphp
-                                    <tr data-student-number="{{ $gradeOneGrade->student_number }}">
-                                        <td>{{ $gradeOneGrade->quarter }}</td>
-                                        <td>{{ $gradeOneGrade->subject_one }}</td>
-                                        <td>{{ $gradeOneGrade->subject_two }}</td>
-                                        <td>{{ $gradeOneGrade->subject_three }}</td>
-                                        <td>{{ $gradeOneGrade->subject_four }}</td>
-                                        <td>{{ $gradeOneGrade->subject_five }}</td>
-                                        <td>{{ $gradeOneGrade->subject_six }}</td>
-                                        <td>{{ $gradeOneGrade->subject_seven }}</td>
-                                        <td>{{ $gradeOneGrade->subject_eight }}</td>
-                                        <td>{{ $gradeOneGrade->subject_nine }}</td>
-                                    </tr>
+                                                                @php
+                                                                    $additionalInfo = $studentsAdditional[$student->student_number];
+                                                                @endphp
+                                                                <tr data-student-number="{{ $gradeOneGrade->student_number }}">
+                                                                    <td>{{ $gradeOneGrade->quarter }}</td>
+                                                                    <td>{{ $gradeOneGrade->subject_one }}</td>
+                                                                    <td>{{ $gradeOneGrade->subject_two }}</td>
+                                                                    <td>{{ $gradeOneGrade->subject_three }}</td>
+                                                                    <td>{{ $gradeOneGrade->subject_four }}</td>
+                                                                    <td>{{ $gradeOneGrade->subject_five }}</td>
+                                                                    <td>{{ $gradeOneGrade->subject_six }}</td>
+                                                                    <td>{{ $gradeOneGrade->subject_seven }}</td>
+                                                                    <td>{{ $gradeOneGrade->subject_eight }}</td>
+                                                                    <td>{{ $gradeOneGrade->subject_nine }}</td>
+                                                                </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -675,141 +675,78 @@
             </form>
 
             <div>
-    <!-- Search Bar -->
-    <input type="text" id="modalStudentNumber1" class="input-field focus:outline-none focus:ring-none"
-        value="" placeholder="Search by Student Number" onkeyup="filterTable()">
-</div>
+                <!-- Search Bar -->
+                <input type="text" id="modalStudentNumber1" class="input-field focus:outline-none focus:ring-none"
+                    value="" placeholder="Search by Student Number" onkeyup="filterTable()">
+            </div>
 
-<script>
-    $(document).ready(function () {
-        // Initialize DataTable
-        $('#tableGradeOne').DataTable({
-            paging: false,
-            searching: false,
-            ordering: false,
-            info: false,
-            language: {
-                search: "<i class='fas fa-search text-xl text-teal-700 px-3'></i>",
-            },
-            dom: '<"top"B>frtip',
-            buttons: [
-                {
-                    extend: 'copyHtml5',
-                    className: '!bg-sky-800 !text-[12px] !text-white !border-none !hover:bg-sky-700 !px-4 !py-2 !rounded !flex !items-center !justify-center',
-                    text: '<i class="fas fa-clipboard"></i> Copy',
-                    titleAttr: 'Click to copy data'
-                },
-                {
-                    extend: 'excelHtml5',
-                    text: '<i class="fas fa-file-excel mr-2"></i> Excel',
-                    className: '!bg-teal-700 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !flex !items-center !justify-center',
-                    titleAttr: 'Export to Excel',
-                },
-                {
-                    extend: 'csvHtml5',
-                    text: '<i class="fas fa-file-csv mr-2"></i> CSV',
-                    className: '!bg-yellow-500 !text-[12px] !text-white !border-none !hover:bg-yellow-400 !px-4 !py-2 !rounded !flex !items-center !justify-center',
-                    titleAttr: 'Export to CSV'
-                },
-                {
-                    extend: 'pdfHtml5',
-                    text: '<i class="fas fa-file-pdf mr-2"></i> PDF',
-                    className: '!bg-red-600 !text-[12px] !text-white !border-none !hover:bg-red-500 !px-4 !py-2 !rounded !flex !items-center !justify-center',
-                    orientation: 'landscape',
-                    pageSize: 'A4',
-                    titleAttr: 'Export to PDF',
-                    customize: function (doc) {
-                        doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
-                    }
-                },
-                {
-                    extend: 'print',
-                    text: '<i class="fas fa-print mr-2"></i> Print',
-                    className: '!bg-blue-600 !text-[12px] !text-white !border-none !hover:bg-blue-500 !px-4 !py-2 !rounded !flex !items-center !justify-center',
-                    orientation: 'landscape',
-                    autoPrint: true,
-                    titleAttr: 'Print Table',
-                    customize: function (win) {
-                        var studentNumber = $('#modalStudentNumber1').val(); // Get student number from the input field
-
-                        // Customize the printed content
-                        $(win.document.body).find('table').css('width', '100%');
-                        $(win.document.body).find('table').css('font-size', '10px');
-
-                        // Add the student number (search term) to the print content if there is a value in the input field
-                        if (studentNumber) {
-                            $(win.document.body).find('table').before('<h4>Student Number Search: ' + studentNumber + '</h4>');
-                        }
-                    }
-                },
-            ],
-            initComplete: function () {
-                $('.dt-buttons').css({
-                    'display': 'flex',
-                    'justify-content': 'flex-end',
-                    'width': '100%',
-                    'padding': '1rem',
+            <script>
+                $(document).ready(function () {
+                    // Initialize DataTable
+                    $('#tableGradeOne').DataTable({
+                        paging: false,
+                        searching: false,
+                        ordering: false,
+                        info: false,
+                    });
                 });
-            }
-        });
-    });
 
-    // Function to filter the table based on the search bar
-    function filterTable() {
-        var studentNumber = $('#modalStudentNumber1').val();
-        var table = $('#tableGradeOne').DataTable();
-        
-        // Filter the table based on the entered student number (or search term)
-        table.search(studentNumber).draw();
-    }
+                // Function to filter the table based on the search bar
+                function filterTable() {
+                    var studentNumber = $('#modalStudentNumber1').val();
+                    var table = $('#tableGradeOne').DataTable();
 
-    $(document).ready(function () {
-        $('#tableGradeTwo').DataTable({
-            // Optional configuration options (if needed)
-            "paging": false,
-            "searching": false,
-            "ordering": true,
-            "info": false
-        });
-    });
+                    // Filter the table based on the entered student number (or search term)
+                    table.search(studentNumber).draw();
+                }
 
-    $(document).ready(function () {
-        $('#tableGradeThree').DataTable({
-            // Optional configuration options (if needed)
-            "paging": false,
-            "searching": false,
-            "ordering": true,
-            "info": false
-        });
-    });
+                $(document).ready(function () {
+                    $('#tableGradeTwo').DataTable({
+                        // Optional configuration options (if needed)
+                        "paging": false,
+                        "searching": false,
+                        "ordering": true,
+                        "info": false
+                    });
+                });
 
-    $(document).ready(function () {
-        $('#tableGradeFour').DataTable({
-            // Optional configuration options (if needed)
-            "paging": false,
-            "searching": false,
-            "ordering": true,
-            "info": false
-        });
-    });
+                $(document).ready(function () {
+                    $('#tableGradeThree').DataTable({
+                        // Optional configuration options (if needed)
+                        "paging": false,
+                        "searching": false,
+                        "ordering": true,
+                        "info": false
+                    });
+                });
 
-    $(document).ready(function () {
-        $('#tableGradeFive').DataTable({
-            // Optional configuration options (if needed)
-            "paging": false,
-            "searching": false,
-            "ordering": true,
-            "info": false
-        });
-    });
+                $(document).ready(function () {
+                    $('#tableGradeFour').DataTable({
+                        // Optional configuration options (if needed)
+                        "paging": false,
+                        "searching": false,
+                        "ordering": true,
+                        "info": false
+                    });
+                });
 
-    $(document).ready(function () {
-        $('#tableGradeSix').DataTable({
-            // Optional configuration options (if needed)
-            "paging": false,
-            "searching": false,
-            "ordering": true,
-            "info": false
-        });
-    });
-</script>
+                $(document).ready(function () {
+                    $('#tableGradeFive').DataTable({
+                        // Optional configuration options (if needed)
+                        "paging": false,
+                        "searching": false,
+                        "ordering": true,
+                        "info": false
+                    });
+                });
+
+                $(document).ready(function () {
+                    $('#tableGradeSix').DataTable({
+                        // Optional configuration options (if needed)
+                        "paging": false,
+                        "searching": false,
+                        "ordering": true,
+                        "info": false
+                    });
+                });
+            </script>
