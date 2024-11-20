@@ -27,20 +27,69 @@ function searchTable() {
 }
 
 $(document).ready(function () {
-    // Initialize DataTable
-    $("#studentTable").DataTable({
+    $('#studentTable').DataTable({
         paging: true,
         searching: false,
         ordering: true,
-        order: [[0, "asc"]], // Default order by first column (Student Number)
-        scrollY: "auto",
-        scrollX: "auto",
-        scrollCollapse: true,
+        info: true,
         language: {
-            search: "Search by name or other fields:",
+            search: "<i class='fas fa-search text-xl text-teal-700 px-3'></i>",
         },
+        dom: '<"top"B>frtip',
+        buttons: [
+            {
+                extend: 'copyHtml5',
+                className: '!bg-sky-800 !text-[12px] !text-white !border-none !hover:bg-sky-700 !px-4 !py-2 !rounded !flex !items-center !justify-center',
+                text: '<i class="fas fa-clipboard"></i> Copy',
+                titleAttr: 'Click to copy data'
+            },
+            {
+                extend: 'excelHtml5',
+                text: '<i class="fas fa-file-excel mr-2"></i> Excel',
+                className: '!bg-teal-700 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !important !flex !items-center !justify-center',
+                titleAttr: 'Export to Excel',
+            },
+            {
+                extend: 'csvHtml5',
+                text: '<i class="fas fa-file-csv mr-2"></i> CSV',
+                className: '!bg-yellow-500 !text-[12px] !text-white !border-none !hover:bg-yellow-400 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
+                titleAttr: 'Export to CSV'
+            },
+            {
+                extend: 'pdfHtml5',
+                text: '<i class="fas fa-file-pdf mr-2"></i> PDF',
+                className: '!bg-red-600 !text-[12px] !text-white !border-none !hover:bg-red-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
+                orientation: 'landscape',
+                pageSize: 'A4',
+                titleAttr: 'Export to PDF',
+                customize: function (doc) {
+                    doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+                }
+            },
+            {
+                extend: 'print',
+                text: '<i class="fas fa-print mr-2"></i> Print',
+                className: '!bg-blue-600 !text-[12px] !text-white !border-none !hover:bg-blue-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
+                orientation: 'landscape',
+                autoPrint: true,
+                titleAttr: 'Print Table',
+                customize: function (win) {
+                    $(win.document.body).find('table').css('width', '100%');
+                    $(win.document.body).find('table').css('font-size', '10px');
+                }
+            },
+        ],
+        initComplete: function () {
+            $('.dt-buttons').css({
+                'display': 'flex',
+                'justify-content': 'flex-end',
+                'width': '100%',
+                'padding': '1rem',
+            });
+        }
     });
 });
+
 
 function openStudentModal(row) {
     // Populating basic student info
