@@ -30,8 +30,23 @@
             box-sizing: border-box;
             font-family: "Poppins", sans-serif;
             scroll-behavior: smooth;
+            scrollbar-width: none;
             transition: all 0.3s ease;
             cursor: default;
+        }
+
+        .dataTables_filter input {
+            width: 200px;
+            font-size: 14px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        .dataTables_filter label {
+            font-size: 14px;
+            margin-right: 10px;
         }
 
         .dropdown {
@@ -57,18 +72,19 @@
             </header>
 
             <div class="p-5">
-                <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
-                <p class="text-2xl font-bold text-teal-900 ml-5">
-                    <span onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/admin/student-management'"
-                        class="hover:text-teal-700">Student Management</span> / Grade Three
-                </p>
-
-                <!-- Search Bar -->
-                <div class="mt-10 ml-5 flex justify-between items-center">
-                    <div class="flex items-center">
+            <div>
+                    <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
+                    <p class="text-2xl font-bold text-teal-900 ml-5">
+                        <span
+                            onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/admin/student-management'"
+                            class="hover:text-teal-700">Student Management</span> / Grade Three
+                    </p>
+                </div>
+                <div class="flex justify-end items-center gap-4 mt-10">
+                    <div class="ml-5 flex items-center hidden">
                         <i class="fas fa-search text-xl text-teal-700 px-3"></i>
                         <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search by name..."
-                            class="text-sm px-4 py-3 text-teal-900 border border-gray-300 rounded-lg w-80 shadow-lg focus:outline-none" />
+                            class="text-sm px-4 py-3 text-teal-900 border border-gray-300 rounded-lg w-96 shadow-lg focus:outline-none" />
                     </div>
 
                     <div class="flex">
@@ -82,6 +98,30 @@
                             onclick="window.location.href = '/StEmelieLearningCenter.HopeSci66/admin/student-management/AllStudentData'">
                             Show student data
                         </button>
+                    </div>
+
+                    <div class="mr-10">
+                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                            class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            type="button">Select Section <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+
+                        <!-- Dropdown menu -->
+                        <div id="dropdown"
+                            class="z-10 fixed hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                            <ul class="p-2 text-md text-gray-700 dark:text-gray-200 shadow-lg"
+                                aria-labelledby="dropdownDefaultButton">
+                                <!-- Default placeholder value (empty or custom message) -->
+                                <li>
+                                    <a href="#" class="dropdown-item text-gray-500">Select a Section</a>
+                                </li>
+                                <!-- Dropdown items will be injected here by AJAX -->
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -193,94 +233,129 @@
     <script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.print.min.js"></script>
 
     <script>
-        $('#studentTable').DataTable({
-            dom: `
-        <'flex justify-between items-center mb-4'<'flex space-x-4'l><'flex space-x-4'B>>` +
+        var table = $('#studentTable').DataTable({
+            dom: ` 
+            <'flex justify-between items-center mb-4'<'flex space-x-4'l><'flex space-x-4'B><'flex space-x-4'f>>` +
                 `<tr>` +
                 `<'flex justify-between items-center'<'flex-1'i><'flex-1'p>>`,
             paging: true,
-            searching: false,
+            searching: true,
             ordering: true,
             info: true,
-                buttons: [
-                    {
-                        extend: 'copyHtml5',
-                        className: '!bg-sky-800 !text-[12px] !text-white !border-none !hover:bg-sky-700 !px-4 !py-2 !rounded !flex !items-center !justify-center',
-                        text: '<i class="fas fa-clipboard"></i> Copy',
-                        titleAttr: 'Click to copy data'
-                    },
-                    {
-                        extend: 'excelHtml5',
-                        text: '<i class="fas fa-file-excel mr-2"></i> Excel',
-                        className: '!bg-teal-700 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !important !flex !items-center !justify-center',
-                        titleAttr: 'Export to Excel',
-                    },
-                    {
-                        extend: 'csvHtml5',
-                        text: '<i class="fas fa-file-csv mr-2"></i> CSV',
-                        className: '!bg-yellow-500 !text-[12px] !text-white !border-none !hover:bg-yellow-400 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
-                        titleAttr: 'Export to CSV'
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        text: '<i class="fas fa-file-pdf mr-2"></i> PDF',
-                        className: '!bg-red-600 !text-[12px] !text-white !border-none !hover:bg-red-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
-                        orientation: 'landscape',
-                        pageSize: 'A4',
-                        titleAttr: 'Export to PDF',
-                        customize: function (doc) {
-                            doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    className: '!bg-sky-800 !text-[12px] !text-white !border-none !hover:bg-sky-700 !px-4 !py-2 !rounded !flex !items-center !justify-center',
+                    text: '<i class="fas fa-clipboard"></i> Copy',
+                    titleAttr: 'Click to copy data'
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fas fa-file-excel mr-2"></i> Excel',
+                    className: '!bg-teal-700 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !important !flex !items-center !justify-center',
+                    titleAttr: 'Export to Excel',
+                },
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fas fa-file-csv mr-2"></i> CSV',
+                    className: '!bg-yellow-500 !text-[12px] !text-white !border-none !hover:bg-yellow-400 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
+                    titleAttr: 'Export to CSV'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fas fa-file-pdf mr-2"></i> PDF',
+                    className: '!bg-red-600 !text-[12px] !text-white !border-none !hover:bg-red-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
+                    orientation: 'landscape',
+                    pageSize: 'A4',
+                    titleAttr: 'Export to PDF',
+                    customize: function (doc) {
+                        doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+                    }
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fas fa-print mr-2"></i> Print',
+                    className: '!bg-blue-600 !text-[12px] !text-white !border-none !hover:bg-blue-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
+                    orientation: 'landscape',
+                    autoPrint: true,
+                    titleAttr: 'Print Table',
+                    customize: function (win) {
+                        $(win.document.body).find('table').css('width', '100%');
+                        $(win.document.body).find('table').css('font-size', '10px');
+                    }
+                },
+            ],
+            initComplete: function () {
+                $('.dt-buttons').css({
+                    'display': 'flex',
+                    'justify-content': 'flex-end',
+                    'width': '100%',
+                });
+            }
+        });
+
+        $(document).ready(function () {
+            // When the dropdown button is clicked, make an AJAX call
+            $('#dropdownDefaultButton').click(function () {
+                // Toggle the dropdown visibility
+                $('#dropdown').toggleClass('hidden');
+
+                // Make an AJAX request to get the sections
+                $.ajax({
+                    url: '{{ route('get.threesections') }}', // The route for fetching sections
+                    type: 'GET',
+                    success: function (data) {
+                        // Check if sections are returned
+                        if (data.length > 0) {
+                            // Empty the dropdown list
+                            $('#dropdown ul').empty();
+
+                            // Append the default placeholder as the first item
+                            $('#dropdown ul').append('<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item"  data-section="">Select a Section</a></li>');
+
+                            // Append each section as a list item in the dropdown
+                            data.forEach(function (section) {
+                                $('#dropdown ul').append('<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="' + section + '">' + section + '</a></li>');
+                            });
+                        } else {
+                            // If no sections, show a message
+                            $('#dropdown ul').html('<li><a href="#" class="dropdown-item text-gray-500">No Sections Available</a></li>');
                         }
                     },
-                    {
-                        extend: 'print',
-                        text: '<i class="fas fa-print mr-2"></i> Print',
-                        className: '!bg-blue-600 !text-[12px] !text-white !border-none !hover:bg-blue-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
-                        orientation: 'landscape',
-                        autoPrint: true,
-                        titleAttr: 'Print Table',
-                        customize: function (win) {
-                            $(win.document.body).find('table').css('width', '100%');
-                            $(win.document.body).find('table').css('font-size', '10px');
-                        }
-                    },
-                ],
-                initComplete: function () {
-                    $('.dt-buttons').css({
-                        'display': 'flex',
-                        'justify-content': 'flex-end',
-                        'width': '100%',
-                    });
-                }
+                    error: function (xhr, status, error) {
+                        console.log("Error fetching sections: " + error);
+                    }
+                });
+
             });
 
-        function searchTable() {
-            const input = document.getElementById("searchInput");
-            const filter = input.value.toLowerCase();
-            const tableBody = document.getElementById("tableBody");
-            const rows = tableBody.getElementsByTagName("tr");
+            // Filter table by section when dropdown item is clicked
+            $(document).on('click', '.dropdown-item', function (event) {
+                event.preventDefault(); // Prevent default anchor click behavior
 
-            for (let i = 0; i < rows.length; i++) {
-                const studentnoCell = rows[i].getElementsByTagName("td")[0];
-                const nameCell = rows[i].getElementsByTagName("td")[2];
-                const gradeCell = rows[i].getElementsByTagName("td")[3];
-                const sectionCell = rows[i].getElementsByTagName("td")[4];
+                const selectedSection = $(this).data('section');
 
-                if (studentnoCell && nameCell && gradeCell && sectionCell) {
-                    const studentnoText = studentnoCell.textContent || studentnoCell.innerText;
-                    const nameText = nameCell.textContent || nameCell.innerText;
-                    const gradeText = gradeCell.textContent || gradeCell.innerText;
-                    const sectionText = sectionCell.textContent || sectionCell.innerText;
+                // Update the search input with the selected section
+                $('#searchInput').val(selectedSection);
 
-                    const displayRow = studentnoText.toLowerCase().includes(filter) ||
-                        nameText.toLowerCase().includes(filter) ||
-                        gradeText.toLowerCase().includes(filter) ||
-                        sectionText.toLowerCase().includes(filter);
+                // Trigger the search function and search the table
+                table.search(selectedSection).draw();  // Directly apply the search to the DataTable
 
-                    rows[i].style.display = displayRow ? "" : "none";
+                // Close the dropdown after selection
+                $('#dropdown').addClass('hidden');
+            });
+
+            // Close the dropdown if clicked outside
+            $(document).click(function (event) {
+                const dropdownButton = $('#dropdownDefaultButton');
+                const dropdownMenu = $('#dropdown');
+
+                // Close dropdown if clicked outside the dropdown button or menu
+                if (!dropdownButton.is(event.target) && !dropdownMenu.is(event.target) && dropdownMenu.has(event.target).length === 0) {
+                    dropdownMenu.addClass('hidden');
                 }
-            }
-        }
+            });
+        });
 
         // Improved modal toggle function
         function toggleModal(modalId) {

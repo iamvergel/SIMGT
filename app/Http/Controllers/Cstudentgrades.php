@@ -564,16 +564,100 @@ class Cstudentgrades extends Controller
         return response()->json(null, 204);
     }
 
-    public function getSections()
-{
-    // Fetch all distinct sections from the StudentInfo model where section is not null or empty
-    $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
-                           ->where('section', '!=', '') // Ensure section is not an empty string
-                           ->where('grade', 'Grade One')
-                           ->distinct()  // Get only distinct sections
-                           ->pluck('section'); // Get only the 'section' column
+    public function getGradeOneSections()
+    {
+        // Fetch all distinct sections from the StudentInfo model where section is not null or empty
+        $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
+            ->where('section', '!=', '') // Ensure section is not an empty string
+            ->where('grade', 'Grade One')
+            ->where('status', 'Active')  // Ensure student is active
+            ->distinct()  // Get only distinct sections
+            ->pluck('section'); // Get only the 'section' column
 
-    // Return sections as a JSON response
-    return response()->json($sections);
-}
+        // Return sections as a JSON response
+        return response()->json($sections);
+    }
+
+    public function getGradeTwoSections()
+    {
+        // Fetch all distinct sections from the StudentInfo model where section is not null or empty
+        $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
+            ->where('section', '!=', '') // Ensure section is not an empty string
+            ->where('grade', 'Grade Two')
+            ->where('status', 'Active')  // Ensure student is active
+            ->distinct()  // Get only distinct sections
+            ->pluck('section'); // Get only the 'section' column
+
+        // Return sections as a JSON response
+        return response()->json($sections);
+    }
+
+    public function getGradeThreeSections()
+    {
+        // Fetch all distinct sections from the StudentInfo model where section is not null or empty
+        $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
+            ->where('section', '!=', '') // Ensure section is not an empty string
+            ->where('grade', 'Grade Three')
+            ->where('status', 'Active')  // Ensure student is active
+            ->distinct()  // Get only distinct sections
+            ->pluck('section'); // Get only the 'section' column
+
+        // Return sections as a JSON response
+        return response()->json($sections);
+    }
+
+    public function getGradeFourSections()
+    {
+        // Fetch all distinct sections from the StudentInfo model where section is not null or empty
+        $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
+            ->where('section', '!=', '') // Ensure section is not an empty string
+            ->where('grade', 'Grade Four')
+            ->where('status', 'Active')  // Ensure student is active
+            ->distinct()  // Get only distinct sections
+            ->pluck('section'); // Get only the 'section' column
+
+        // Return sections as a JSON response
+        return response()->json($sections);
+    }
+
+    public function getGradeFiveSections()
+    {
+        // Fetch all distinct sections from the StudentInfo model where section is not null or empty
+        $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
+            ->where('section', '!=', '') // Ensure section is not an empty string
+            ->where('grade', 'Grade Five')
+            ->where('status', 'Active')  // Ensure student is active
+            ->distinct()  // Get only distinct sections
+            ->pluck('section'); // Get only the 'section' column
+
+        // Return sections as a JSON response
+        return response()->json($sections);
+    }
+
+    public function getGradeSixSections()
+    {
+        // Fetch all distinct sections from the StudentInfo model where section is not null or empty
+        $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
+            ->where('section', '!=', '') // Ensure section is not an empty string
+            ->where('grade', 'Grade Six')
+            ->where('status', 'Active')  // Ensure student is active
+            ->distinct()  // Get only distinct sections
+            ->pluck('section'); // Get only the 'section' column
+
+        // Return sections as a JSON response
+        return response()->json($sections);
+    }
+
+    public function getAllGrade()
+    {
+        // Fetch all distinct sections from the StudentInfo model where section is not null or empty
+        $sections = StudentInfo::whereNotNull('grade')  // Ensure section is not null // Ensure section is not an empty string
+            ->where('grade', '!=', '')
+            ->where('status', 'Active')  // Ensure student is active
+            ->distinct()  // Get only distinct sections
+            ->pluck('grade'); // Get only the 'section' column
+
+        // Return sections as a JSON response
+        return response()->json($sections);
+    }
 }

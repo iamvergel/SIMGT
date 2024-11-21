@@ -152,4 +152,10 @@ Route::post('/profile/update-avatar', [CStudentProfile::class, 'update'])->name(
 Route::post('/student/change-password/{studentId}', [CStudentProfile::class, 'changePassword'])->name('student.changePassword');
 Route::post('/show-grades', [CStudentProfile::class, 'showGrades'])->name('showGrades');
 
-Route::get('/get-sections', [Cstudentgrades::class, 'getSections'])->name('get.sections');
+Route::get('/get-onesections', [Cstudentgrades::class, 'getGradeOneSections'])->name('get.sections');
+Route::get('/get-twosections', [Cstudentgrades::class, 'getGradeTwoSections'])->name('get.twosections');
+Route::get('/get-threesections', [Cstudentgrades::class, 'getGradeThreeSections'])->name('get.threesections');
+Route::get('/get-foursections', [Cstudentgrades::class, 'getGradeFourSections'])->name('get.foursections');
+Route::get('/get-fivesections', [Cstudentgrades::class, 'getGradeFiveSections'])->name('get.fivesections');
+Route::get('/get-sixsections', [Cstudentgrades::class, 'getGradeSixSections'])->name('get.sixsections');
+Route::get('/get-grade', [Cstudentgrades::class, 'getAllGrade'])->name('get.allgrade');

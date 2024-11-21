@@ -19,29 +19,39 @@
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-    <!-- DataTables FixedHeader CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.4/css/fixedHeader.dataTables.min.css">
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <!-- DataTables FixedHeader JS -->
-    <script src="https://cdn.datatables.net/fixedheader/3.2.4/js/dataTables.fixedHeader.min.js"></script>
+
 
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.0/css/buttons.dataTables.min.css">
 
     <style>
-        * {
+         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: "Poppins", sans-serif;
-            scroll-behavior: smooth;
             scrollbar-width: thin;
             transition: all 0.3s ease;
             cursor: default;
+        }
+
+        .dataTables_filter input {
+            width: 200px;
+            font-size: 14px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        .dataTables_filter label {
+            font-size: 14px;
+            margin-right: 10px;
         }
 
         .dropdown {
@@ -77,11 +87,35 @@
                 </div>
 
                 <!-- Search Bar -->
-                <div class="mt-10 ml-5 flex justify-between items-center">
-                    <div class="flex items-center">
+                <div class="mt-10 ml-5 flex justify-end items-center">
+                    <div class="flex items-center hidden">
                         <i class="fas fa-search text-xl text-teal-700 px-3"></i>
                         <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search by name..."
                             class="text-sm px-4 py-3 text-teal-900 border border-gray-300 rounded-lg w-80 shadow-lg focus:outline-none" />
+                    </div>
+
+                    <div class="mr-10">
+                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                            class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            type="button">Select Grade<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+
+                        <!-- Dropdown menu -->
+                        <div id="dropdown"
+                            class="z-10 fixed hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                            <ul class="p-2 text-md text-gray-700 dark:text-gray-200 shadow-lg"
+                                aria-labelledby="dropdownDefaultButton">
+                                <!-- Default placeholder value (empty or custom message) -->
+                                <li>
+                                    <a href="#" class="dropdown-item text-gray-500">Select a Grade</a>
+                                </li>
+                                <!-- Dropdown items will be injected here by AJAX -->
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -96,11 +130,11 @@
                 <!-- component -->
                 <section class="mx-auto p-6 mt-5 rounded-lg shadow-lg bg-gray-200">
                     <div class="w-full bg-white mb-8 rounded-lg shadow-lg text-[12px]">
-                        <div class="w-full h-full overflow-auto border-4 border-teal-50 rounded-lg">
+                        <div class="w-full h-full overflow-auto border-4 border-teal-50 rounded-lg p-10">
                             @if ($noActiveMessage)
                                 <p class="text-red-600 text-center text-md">{{ $noActiveMessage }}</p>
                             @else
-                                                    <table id="studentTable" class="display w-full h-full p-5" style="width: 200rem;">
+                                                    <table id="studentTable" class="display w-full h-full p-5 " style="width: 200rem;">
                                                         <thead class="table-header bg-gray-100">
                                                             <tr class="text-md font-semibold tracking-wide text-left uppercase border">
                                                                 <th class="px-4 py-3">Student Number</th>

@@ -676,7 +676,7 @@
 
             <div>
                 <!-- Search Bar -->
-                <input type="text" id="modalStudentNumber1" class="input-field focus:outline-none focus:ring-none"
+                <input type="hidden" id="modalStudentNumber1" class="input-field focus:outline-none focus:ring-none"
                     value="" placeholder="Search by Student Number" onkeyup="filterTable()">
             </div>
 

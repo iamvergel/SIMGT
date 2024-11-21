@@ -1,41 +1,14 @@
-function searchTable() {
-    const input = document.getElementById("searchInput");
-    const filter = input.value.toLowerCase();
-    const tableBody = document.getElementById("tableBody");
-    const rows = tableBody.getElementsByTagName("tr");
-
-    for (let i = 0; i < rows.length; i++) {
-        const cells = rows[i].getElementsByTagName("td");
-        let displayRow = false;
-
-        if (cells.length > 0) {
-            const nameText = cells[5].textContent.toLowerCase(); // Name column
-            const numberText = cells[0].textContent.toLowerCase(); // Student Number column
-            const sectionText = cells[3].textContent.toLowerCase(); // Student Section column
-            const gradeText = cells[6].textContent.toLowerCase(); // Student Grade column
-
-            // Check if any cell includes the filter text
-            displayRow =
-                nameText.includes(filter) ||
-                numberText.includes(filter) ||
-                sectionText.includes(filter) ||
-                gradeText.includes(filter);
-        }
-
-        rows[i].style.display = displayRow ? "" : "none";
-    }
-}
-
 $(document).ready(function () {
-    $('#studentTable').DataTable({
-        dom: `
-        <'flex justify-between items-center mb-4'<'flex space-x-4'l><'flex space-x-4'B>>` +
-                `<tr>` +
-                `<'flex justify-between items-center'<'flex-1'i><'flex-1'p>>`,
-            paging: true,
-            searching: false,
-            ordering: true,
-            info: true,
+    // Initialize the DataTable
+    var table = $('#studentTable').DataTable({
+        dom: ` 
+        <'flex justify-between items-center mb-4'<'flex space-x-4'l><'flex space-x-4'B><'flex space-x-4'f>>` +
+            `<tr>` +
+            `<'flex justify-between items-center'<'flex-1'i><'flex-1'p>>`,
+        paging: true,
+        searching: true,
+        ordering: true,
+        info: true,
         buttons: [
             {
                 extend: 'copyHtml5',
@@ -63,9 +36,19 @@ $(document).ready(function () {
                 pageSize: 'A4',
                 titleAttr: 'Export to PDF',
                 customize: function (doc) {
-                    doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+                    // Adjust the width of the table in the PDF document
+                    doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 2).join('*').split('');
+                    
+                    doc.content[1].table.styles = {
+                        tableWidth: '100%',
+                        cellPadding: 0,
+                        cellMargin: 0,
+                        fontSize: 10,
+                        lineHeight: 'normal',
+                        font: 'Arial',
+                    };
                 }
-            },
+            },            
             {
                 extend: 'print',
                 text: '<i class="fas fa-print mr-2"></i> Print',
@@ -74,8 +57,8 @@ $(document).ready(function () {
                 autoPrint: true,
                 titleAttr: 'Print Table',
                 customize: function (win) {
-                    $(win.document.body).find('table').css('width', '100%');
-                    $(win.document.body).find('table').css('font-size', '10px');
+                    $(win.document.body).find('table').css('width', '80%');
+                    $(win.document.body).find('table').css('font-size', '12px');
                 }
             },
         ],
@@ -84,8 +67,64 @@ $(document).ready(function () {
                 'display': 'flex',
                 'justify-content': 'flex-end',
                 'width': '100%',
-                'padding': '1rem',
             });
+        }
+    });
+
+    // When the dropdown button is clicked, make an AJAX call
+    $('#dropdownDefaultButton').click(function () {
+        // Toggle the dropdown visibility
+        $('#dropdown').toggleClass('hidden');
+
+        // Make an AJAX request to get the sections
+        $.ajax({
+            url: '/get-grade', // The route for fetching sections
+            type: 'GET',
+            success: function (data) {
+                // Check if sections are returned
+                if (data.length > 0) {
+                    // Empty the dropdown list
+                    $('#dropdown ul').empty();
+
+                    // Append the default placeholder as the first item
+                    $('#dropdown ul').append('<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="">Select a Grade</a></li>');
+
+                    // Append each section as a list item in the dropdown
+                    data.forEach(function (section) {
+                        $('#dropdown ul').append('<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="' + section + '">' + section + '</a></li>');
+                    });
+                } else {
+                    // If no sections, show a message
+                    $('#dropdown ul').html('<li><a href="#" class="dropdown-item text-gray-500">No Sections Available</a></li>');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Error fetching sections: " + error);
+            }
+        });
+    });
+
+    // Filter table by section when dropdown item is clicked
+    $(document).on('click', '.dropdown-item', function (event) {
+        event.preventDefault(); // Prevent default anchor click behavior
+
+        const selectedSection = $(this).data('section');
+
+        // Trigger the search function and search the table
+        table.search(selectedSection).draw();  // Directly apply the search to the DataTable
+
+        // Close the dropdown after selection
+        $('#dropdown').addClass('hidden');
+    });
+
+    // Close the dropdown if clicked outside
+    $(document).click(function (event) {
+        const dropdownButton = $('#dropdownDefaultButton');
+        const dropdownMenu = $('#dropdown');
+
+        // Close dropdown if clicked outside the dropdown button or menu
+        if (!dropdownButton.is(event.target) && !dropdownMenu.is(event.target) && dropdownMenu.has(event.target).length === 0) {
+            dropdownMenu.addClass('hidden');
         }
     });
 });
@@ -102,7 +141,7 @@ function openStudentModal(row) {
         " " +
         row.getAttribute("data-suffix-name") +
         " ";
-        document.getElementById("StudentName1").value =
+    document.getElementById("StudentName1").value =
         row.getAttribute("data-last-name") +
         ", " +
         row.getAttribute("data-first-name") +
@@ -114,9 +153,8 @@ function openStudentModal(row) {
     document.getElementById("modalStudentNumber").value = row.getAttribute(
         "data-student-number"
     );
-    document.getElementById("modalUsername").value = row.getAttribute(
-        "data-username"
-    );
+    document.getElementById("modalUsername").value =
+        row.getAttribute("data-username");
     document.getElementById("modalStatus").value =
         row.getAttribute("data-status");
     document.getElementById("modalLrn").value = row.getAttribute("data-lrn");
@@ -284,11 +322,15 @@ function closeStudentModal() {
 }
 
 function filterTable() {
-    const searchValue = document.getElementById("modalStudentNumber1").value.toLowerCase();
+    const searchValue = document
+        .getElementById("modalStudentNumber1")
+        .value.toLowerCase();
     const rows = document.querySelectorAll("table[id^='tableGrade'] tbody tr"); // All rows from tables with IDs starting with 'tableGrade'
 
-    rows.forEach(row => {
-        const studentNumber = row.getAttribute("data-student-number").toLowerCase();
+    rows.forEach((row) => {
+        const studentNumber = row
+            .getAttribute("data-student-number")
+            .toLowerCase();
         if (studentNumber.includes(searchValue)) {
             row.style.display = ""; // Show row
         } else {
@@ -297,8 +339,10 @@ function filterTable() {
     });
 
     // Filter the copied tables as well
-    const targetRows = document.querySelectorAll("table[id^='tableGrade'][id$='Copy'] tbody tr");
-    targetRows.forEach(row => {
+    const targetRows = document.querySelectorAll(
+        "table[id^='tableGrade'][id$='Copy'] tbody tr"
+    );
+    targetRows.forEach((row) => {
         const studentNumber = row.cells[0].textContent.toLowerCase();
         if (studentNumber.includes(searchValue)) {
             row.style.display = ""; // Show row

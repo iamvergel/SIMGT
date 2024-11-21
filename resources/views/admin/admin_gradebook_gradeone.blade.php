@@ -34,6 +34,24 @@
             transition: all 0.3s ease;
             cursor: default;
         }
+
+        .dataTables_filter input {
+            width: 200px;
+            font-size: 14px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        @media (min-width: 1400px) {
+            width: 300px;
+        }
+
+        .dataTables_filter label {
+            font-size: 14px;
+            margin-right: 10px;
+        }
     </style>
 </head>
 
@@ -50,21 +68,21 @@
             </header>
 
             <div class="p-5">
-                <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
-                <p class="text-2xl font-bold text-teal-900 ml-5">
-                    <span onclick="window.location.href ='/StEmelieLearningCenter.HopeSci66/admin/Grade-book'"
-                        class="hover:text-teal-700">Grade Book</span> / Grade One
-                </p>
-
-                <!-- Search Bar -->
-                <div class="flex gap-4 mt-10">
-                    <div class="ml-5 flex items-center">
+                <div>
+                    <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
+                    <p class="text-2xl font-bold text-teal-900 ml-5">
+                        <span onclick="window.location.href ='/StEmelieLearningCenter.HopeSci66/admin/Grade-book'"
+                            class="hover:text-teal-700">Grade Book</span> / Grade One
+                    </p>
+                </div>
+                <div class="flex justify-end items-center gap-4 mt-10">
+                    <div class="ml-5 flex items-center hidden">
                         <i class="fas fa-search text-xl text-teal-700 px-3"></i>
                         <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search by name..."
                             class="text-sm px-4 py-3 text-teal-900 border border-gray-300 rounded-lg w-96 shadow-lg focus:outline-none" />
                     </div>
 
-                    <div>
+                    <div class="mr-10">
                         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
                             class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                             type="button">Select Section <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
@@ -75,17 +93,20 @@
                         </button>
 
                         <!-- Dropdown menu -->
-                        <!-- Dropdown menu -->
                         <div id="dropdown"
-                            class="z-10 absolute hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                            class="z-10 fixed hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                            <ul class="p-2 text-md text-gray-700 dark:text-gray-200 shadow-lg"
                                 aria-labelledby="dropdownDefaultButton">
+                                <!-- Default placeholder value (empty or custom message) -->
+                                <li>
+                                    <a href="#" class="dropdown-item text-gray-500">Select a Section</a>
+                                </li>
                                 <!-- Dropdown items will be injected here by AJAX -->
                             </ul>
                         </div>
-
                     </div>
                 </div>
+
 
                 <!-- Main modal -->
                 @include('admin.includes.student_input_grade')
@@ -308,154 +329,130 @@
     <script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.print.min.js"></script>
 
     <script>
-    // Initialize DataTable
-    var table = $('#studentTable').DataTable({
-        dom: `
-            <'flex justify-between items-center mb-4'<'flex space-x-4'l><'flex space-x-4'B>>` +
-            `<tr>` +
-            `<'flex justify-between items-center'<'flex-1'i><'flex-1'p>>`,
-        paging: true,
-        searching: false,
-        ordering: true,
-        info: true,
-        buttons: [
-            {
-                extend: 'copyHtml5',
-                className: '!bg-sky-800 !text-[12px] !text-white !border-none !hover:bg-sky-700 !px-4 !py-2 !rounded !flex !items-center !justify-center',
-                text: '<i class="fas fa-clipboard"></i> Copy',
-                titleAttr: 'Click to copy data'
-            },
-            {
-                extend: 'excelHtml5',
-                text: '<i class="fas fa-file-excel mr-2"></i> Excel',
-                className: '!bg-teal-700 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !important !flex !items-center !justify-center',
-                titleAttr: 'Export to Excel',
-            },
-            {
-                extend: 'csvHtml5',
-                text: '<i class="fas fa-file-csv mr-2"></i> CSV',
-                className: '!bg-yellow-500 !text-[12px] !text-white !border-none !hover:bg-yellow-400 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
-                titleAttr: 'Export to CSV'
-            },
-            {
-                extend: 'pdfHtml5',
-                text: '<i class="fas fa-file-pdf mr-2"></i> PDF',
-                className: '!bg-red-600 !text-[12px] !text-white !border-none !hover:bg-red-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
-                orientation: 'landscape',
-                pageSize: 'A4',
-                titleAttr: 'Export to PDF',
-                customize: function (doc) {
-                    doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
-                }
-            },
-            {
-                extend: 'print',
-                text: '<i class="fas fa-print mr-2"></i> Print',
-                className: '!bg-blue-600 !text-[12px] !text-white !border-none !hover:bg-blue-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
-                orientation: 'landscape',
-                autoPrint: true,
-                titleAttr: 'Print Table',
-                customize: function (win) {
-                    $(win.document.body).find('table').css('width', '100%');
-                    $(win.document.body).find('table').css('font-size', '10px');
-                }
-            },
-        ],
-        initComplete: function () {
-            $('.dt-buttons').css({
-                'display': 'flex',
-                'justify-content': 'flex-end',
-                'width': '100%',
-            });
-        }
-    });
-
-    $(document).ready(function () {
-        // When the dropdown button is clicked, make an AJAX call
-        $('#dropdownDefaultButton').click(function () {
-            // Toggle the dropdown visibility
-            $('#dropdown').toggleClass('hidden');
-
-            // Make an AJAX request to get the sections
-            $.ajax({
-                url: '{{ route('get.sections') }}', // The route for fetching sections
-                type: 'GET',
-                success: function (data) {
-                    // Check if sections are returned
-                    if (data.length > 0) {
-                        // Empty the dropdown list
-                        $('#dropdown ul').empty();
-
-                        // Append each section as a list item in the dropdown
-                        data.forEach(function (section) {
-                            $('#dropdown ul').append('<li><a href="#" class="dropdown-item" data-section="' + section + '">' + section + '</a></li>');
-                        });
-                    } else {
-                        // If no sections, show a message
-                        $('#dropdown ul').html('<li>No sections available</li>');
+        var table = $('#studentTable').DataTable({
+            dom: ` 
+            <'flex justify-between items-center mb-4'<'flex space-x-4'l><'flex space-x-4'B><'flex space-x-4'f>>` +
+                `<tr>` +
+                `<'flex justify-between items-center'<'flex-1'i><'flex-1'p>>`,
+            paging: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    className: '!bg-sky-800 !text-[12px] !text-white !border-none !hover:bg-sky-700 !px-4 !py-2 !rounded !flex !items-center !justify-center',
+                    text: '<i class="fas fa-clipboard"></i> Copy',
+                    titleAttr: 'Click to copy data'
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fas fa-file-excel mr-2"></i> Excel',
+                    className: '!bg-teal-700 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !important !flex !items-center !justify-center',
+                    titleAttr: 'Export to Excel',
+                },
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fas fa-file-csv mr-2"></i> CSV',
+                    className: '!bg-yellow-500 !text-[12px] !text-white !border-none !hover:bg-yellow-400 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
+                    titleAttr: 'Export to CSV'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fas fa-file-pdf mr-2"></i> PDF',
+                    className: '!bg-red-600 !text-[12px] !text-white !border-none !hover:bg-red-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
+                    orientation: 'landscape',
+                    pageSize: 'A4',
+                    titleAttr: 'Export to PDF',
+                    customize: function (doc) {
+                        doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
                     }
                 },
-                error: function (xhr, status, error) {
-                    console.log("Error fetching sections: " + error);
+                {
+                    extend: 'print',
+                    text: '<i class="fas fa-print mr-2"></i> Print',
+                    className: '!bg-blue-600 !text-[12px] !text-white !border-none !hover:bg-blue-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
+                    orientation: 'landscape',
+                    autoPrint: true,
+                    titleAttr: 'Print Table',
+                    customize: function (win) {
+                        $(win.document.body).find('table').css('width', '100%');
+                        $(win.document.body).find('table').css('font-size', '10px');
+                    }
+                },
+            ],
+            initComplete: function () {
+                $('.dt-buttons').css({
+                    'display': 'flex',
+                    'justify-content': 'flex-end',
+                    'width': '100%',
+                });
+            }
+        });
+
+        $(document).ready(function () {
+            // When the dropdown button is clicked, make an AJAX call
+            $('#dropdownDefaultButton').click(function () {
+                // Toggle the dropdown visibility
+                $('#dropdown').toggleClass('hidden');
+
+                // Make an AJAX request to get the sections
+                $.ajax({
+                    url: '{{ route('get.sections') }}', // The route for fetching sections
+                    type: 'GET',
+                    success: function (data) {
+                        // Check if sections are returned
+                        if (data.length > 0) {
+                            // Empty the dropdown list
+                            $('#dropdown ul').empty();
+
+                            // Append the default placeholder as the first item
+                            $('#dropdown ul').append('<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item"  data-section="">Select a Section</a></li>');
+
+                            // Append each section as a list item in the dropdown
+                            data.forEach(function (section) {
+                                $('#dropdown ul').append('<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="' + section + '">' + section + '</a></li>');
+                            });
+                        } else {
+                            // If no sections, show a message
+                            $('#dropdown ul').html('<li><a href="#" class="dropdown-item text-gray-500">No Sections Available</a></li>');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("Error fetching sections: " + error);
+                    }
+                });
+
+            });
+
+            // Filter table by section when dropdown item is clicked
+            $(document).on('click', '.dropdown-item', function (event) {
+                event.preventDefault(); // Prevent default anchor click behavior
+
+                const selectedSection = $(this).data('section');
+
+                // Update the search input with the selected section
+                $('#searchInput').val(selectedSection);
+
+                // Trigger the search function and search the table
+                table.search(selectedSection).draw();  // Directly apply the search to the DataTable
+
+                // Close the dropdown after selection
+                $('#dropdown').addClass('hidden');
+            });
+
+            // Close the dropdown if clicked outside
+            $(document).click(function (event) {
+                const dropdownButton = $('#dropdownDefaultButton');
+                const dropdownMenu = $('#dropdown');
+
+                // Close dropdown if clicked outside the dropdown button or menu
+                if (!dropdownButton.is(event.target) && !dropdownMenu.is(event.target) && dropdownMenu.has(event.target).length === 0) {
+                    dropdownMenu.addClass('hidden');
                 }
             });
         });
-
-        // Filter table by section when dropdown item is clicked
-        $(document).on('click', '.dropdown-item', function (event) {
-            event.preventDefault(); // Prevent default anchor click behavior
-
-            const selectedSection = $(this).data('section');
-
-            // Filter the DataTable based on the selected section
-            table.columns(4).search(selectedSection).draw(); // Assuming 'Section' is the 5th column (index 4)
-            $('#dropdown').addClass('hidden'); // Hide the dropdown after selection
-        });
-
-        // Close the dropdown if clicked outside
-        $(document).click(function (event) {
-            const dropdownButton = $('#dropdownDefaultButton');
-            const dropdownMenu = $('#dropdown');
-
-            // Close dropdown if clicked outside the dropdown button or menu
-            if (!dropdownButton.is(event.target) && !dropdownMenu.is(event.target) && dropdownMenu.has(event.target).length === 0) {
-                dropdownMenu.addClass('hidden');
-            }
-        });
-    });
-
-    function searchTable() {
-    const input = document.getElementById("searchInput");
-    const filter = input.value.toLowerCase();  // Convert the input to lowercase
-    const tableBody = document.getElementById("tableBody");
-    const rows = tableBody.getElementsByTagName("tr");
-
-    for (let i = 0; i < rows.length; i++) {
-        const nameCell = rows[i].getElementsByTagName("td")[0]; // First column (name)
-        const name = rows[i].getElementsByTagName("td")[2]; // Third column (name)
-        const section = rows[i].getElementsByTagName("td")[4]; // Fifth column (section)
-
-        // Ensure the columns exist (not undefined or null)
-        if (nameCell && name && section) {
-            const nameText = nameCell.textContent || nameCell.innerText;
-            const nameTextValue = name.textContent || name.innerText;
-            const sectionText = section.textContent || section.innerText;
-
-            // Check if any column contains the search term
-            if (
-                nameText.toLowerCase().includes(filter) ||
-                nameTextValue.toLowerCase().includes(filter) ||
-                sectionText.toLowerCase().includes(filter)
-            ) {
-                rows[i].style.display = "";  // Show row
-            } else {
-                rows[i].style.display = "none";  // Hide row
-            }
-        }
-    }
-}
-</script>
-
+    </script>
 </body>
 
 </html>

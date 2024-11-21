@@ -17,18 +17,13 @@
     <script src="https://kit.fontawesome.com/20a0e1e87d.js" crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-    <!-- DataTables FixedHeader CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.4/css/fixedHeader.dataTables.min.css">
-
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <!-- DataTables FixedHeader JS -->
-    <script src="https://cdn.datatables.net/fixedheader/3.2.4/js/dataTables.fixedHeader.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.0/css/buttons.dataTables.min.css">
 
     <style>
         * {
@@ -36,18 +31,23 @@
             padding: 0;
             box-sizing: border-box;
             font-family: "Poppins", sans-serif;
-            scroll-behavior: smooth;
             scrollbar-width: thin;
             transition: all 0.3s ease;
             cursor: default;
         }
 
-        .dropdown {
-            display: none;
+        .dataTables_filter input {
+            width: 200px;
+            font-size: 14px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
         }
 
-        .dropdown-active {
-            display: block;
+        .dataTables_filter label {
+            font-size: 14px;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -75,7 +75,7 @@
                 </div>
 
                 <!-- Search Bar -->
-                <div class="mt-10 ml-5 flex justify-between items-center">
+                <div class="mt-10 ml-5 flex justify-between items-center hidden">
                     <div class="flex items-center">
                         <i class="fas fa-search text-xl text-teal-700 px-3"></i>
                         <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search by name..."
@@ -86,7 +86,7 @@
                 <!-- component -->
                 <section class="mx-auto p-6 mt-5 rounded-lg shadow-lg bg-gray-200">
                     <div class="w-full bg-white mb-8 rounded-lg shadow-lg text-[12px]">
-                        <div class="w-full h-full overflow-auto border-4 border-teal-50 rounded-lg">
+                        <div class="w-full h-full overflow-auto border-4 border-teal-50 rounded-lg p-5">
                             @if ($noGraduatesMessage)
                                 <p class="text-red-600 text-center text-md">{{ $noGraduatesMessage }}</p>
                             @else
@@ -191,20 +191,78 @@
         </main>
     </div>
 
+    <script src="https://cdn.datatables.net/buttons/2.2.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.print.min.js"></script>
+
     <script>
-        $(document).ready(function () {
-            $('#studentTable').DataTable({
-                paging: true,
-                searching: false,
-                ordering: true,
-                order: [[0, 'asc']], // Default order by first column (Student Number)
-                scrollY: 'auto', // Set the height for scrolling
-                scrollX: 'auto',
-                scrollCollapse: true, // Allow the table to resize
-                language: {
-                    search: "Search by name or other fields:"
-                }
-            });
+        var table = $('#studentTable').DataTable({
+            dom: ` 
+            <'flex justify-between items-center mb-4'<'flex space-x-4'l><'flex space-x-4'B><'flex space-x-4'f>>` +
+                `<tr>` +
+                `<'flex justify-between items-center'<'flex-1'i><'flex-1'p>>`,
+            paging: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            lengthChang: true,
+                scrollX: true,
+                crollY: 'auto',
+                scrollCollapse: true,
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    className: '!bg-sky-800 !text-[12px] !text-white !border-none !hover:bg-sky-700 !px-4 !py-2 !rounded !flex !items-center !justify-center',
+                    text: '<i class="fas fa-clipboard"></i> Copy',
+                    titleAttr: 'Click to copy data'
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fas fa-file-excel mr-2"></i> Excel',
+                    className: '!bg-teal-700 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !important !flex !items-center !justify-center',
+                    titleAttr: 'Export to Excel',
+                },
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fas fa-file-csv mr-2"></i> CSV',
+                    className: '!bg-yellow-500 !text-[12px] !text-white !border-none !hover:bg-yellow-400 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
+                    titleAttr: 'Export to CSV'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fas fa-file-pdf mr-2"></i> PDF',
+                    className: '!bg-red-600 !text-[12px] !text-white !border-none !hover:bg-red-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
+                    orientation: 'landscape',
+                    pageSize: 'A4',
+                    titleAttr: 'Export to PDF',
+                    customize: function (doc) {
+                        doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+                    }
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fas fa-print mr-2"></i> Print',
+                    className: '!bg-blue-600 !text-[12px] !text-white !border-none !hover:bg-blue-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important',
+                    orientation: 'landscape',
+                    autoPrint: true,
+                    titleAttr: 'Print Table',
+                    customize: function (win) {
+                        $(win.document.body).find('table').css('width', '80%');
+                        $(win.document.body).find('table').css('font-size', '10px');
+                    }
+                },
+            ],
+            initComplete: function () {
+                $('.dt-buttons').css({
+                    'display': 'flex',
+                    'justify-content': 'flex-end',
+                    'width': '100%',
+                });
+            },
+            fixedHeader: true,
         });
 
         function searchTable() {

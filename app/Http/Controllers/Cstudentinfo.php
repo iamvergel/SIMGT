@@ -391,23 +391,23 @@ class Cstudentinfo extends Controller
     }
 
     public function fetchGrades($studentNumber)
-{
-    // Fetch the student grades from the database based on the student number
-    $grades = Mstudentgradeone::where('student_number', $studentNumber)->get();
-    
-    // Format the grades for the modal response
-    $formattedGrades = $grades->map(function ($grade) {
-        return [
-            'subject' => $grade->subject,
-            'Q1' => $grade->Q1 ?? 'N/A',
-            'Q2' => $grade->Q2 ?? 'N/A',
-            'Q3' => $grade->Q3 ?? 'N/A',
-            'Q4' => $grade->Q4 ?? 'N/A',
-        ];
-    });
+    {
+        // Fetch the student grades from the database based on the student number
+        $grades = Mstudentgradeone::where('student_number', $studentNumber)->get();
 
-    return response()->json(['grades' => $formattedGrades]);
-}
+        // Format the grades for the modal response
+        $formattedGrades = $grades->map(function ($grade) {
+            return [
+                'subject' => $grade->subject,
+                'Q1' => $grade->Q1 ?? 'N/A',
+                'Q2' => $grade->Q2 ?? 'N/A',
+                'Q3' => $grade->Q3 ?? 'N/A',
+                'Q4' => $grade->Q4 ?? 'N/A',
+            ];
+        });
+
+        return response()->json(['grades' => $formattedGrades]);
+    }
 
     public function showAllStudentGraduateData()
     {
