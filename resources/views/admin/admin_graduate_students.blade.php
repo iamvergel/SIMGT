@@ -250,7 +250,7 @@
                     autoPrint: true,
                     titleAttr: 'Print Table',
                     customize: function (win) {
-                        $(win.document.body).find('table').css('width', '80%');
+                        $(win.document.body).find('table').css('width', '70%');
                         $(win.document.body).find('table').css('font-size', '10px');
                     }
                 },
