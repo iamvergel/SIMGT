@@ -448,6 +448,10 @@
                     </div>
                 </div>
             </div>
+            <div class="col-span-4 mt-10 flex justify-end px-20">
+                        <button id="btnPrint" class="text-[12px] text-white shadow-lg bg-red-700 rounded-lg shadow hover:bg-red-600 px-3 mt-5"><i class="fas fa-file-pdf mr-2"></i>Download Reports
+                            Grade</button>
+                    </div>
             <form action="" class="p-20 pt-0 shadow-lg">
                 <div class="grid grid-cols-1 lg:grid-cols-4 lg:gap-5 text-[13px] text-gray-900">
                     <div class="col-span-4 mt-10">
@@ -456,6 +460,7 @@
                         <table class="table table-bordered shadow-lg" id="tableGradeOne">
                             <thead class="bg-yellow-100">
                                 <tr>
+                                    <th>Student Number</th>
                                     <th>Quarter</th>
                                     <th>Subject 1</th>
                                     <th>Subject 2</th>
@@ -474,6 +479,7 @@
                                                                     $additionalInfo = $studentsAdditional[$student->student_number];
                                                                 @endphp
                                                                 <tr data-student-number="{{ $gradeOneGrade->student_number }}">
+                                                                    <td>{{ $gradeOneGrade->student_number }}</td>
                                                                     <td>{{ $gradeOneGrade->quarter }}</td>
                                                                     <td>{{ $gradeOneGrade->subject_one }}</td>
                                                                     <td>{{ $gradeOneGrade->subject_two }}</td>
@@ -496,6 +502,7 @@
                         <table class="table table-bordered shadow-lg" id="tableGradeTwo">
                             <thead class="bg-teal-200">
                                 <tr>
+                                    <th>Student Number</th>
                                     <th>Quarter</th>
                                     <th>Subject 1</th>
                                     <th>Subject 2</th>
@@ -511,6 +518,7 @@
                             <tbody>
                                 @foreach ($gradeTwo as $gradeTwoGrade)
                                     <tr data-student-number="{{ $gradeTwoGrade->student_number }}">
+                                        <td>{{ $gradeTwoGrade->student_number }}</td>
                                         <td>{{ $gradeTwoGrade->quarter }}</td>
                                         <td>{{ $gradeTwoGrade->subject_one }}</td>
                                         <td>{{ $gradeTwoGrade->subject_two }}</td>
@@ -679,74 +687,6 @@
                 <input type="hidden" id="modalStudentNumber1" class="input-field focus:outline-none focus:ring-none"
                     value="" placeholder="Search by Student Number" onkeyup="filterTable()">
             </div>
-
-            <script>
-                $(document).ready(function () {
-                    // Initialize DataTable
-                    $('#tableGradeOne').DataTable({
-                        paging: false,
-                        searching: false,
-                        ordering: false,
-                        info: false,
-                    });
-                });
-
-                // Function to filter the table based on the search bar
-                function filterTable() {
-                    var studentNumber = $('#modalStudentNumber1').val();
-                    var table = $('#tableGradeOne').DataTable();
-
-                    // Filter the table based on the entered student number (or search term)
-                    table.search(studentNumber).draw();
-                }
-
-                $(document).ready(function () {
-                    $('#tableGradeTwo').DataTable({
-                        // Optional configuration options (if needed)
-                        "paging": false,
-                        "searching": false,
-                        "ordering": true,
-                        "info": false
-                    });
-                });
-
-                $(document).ready(function () {
-                    $('#tableGradeThree').DataTable({
-                        // Optional configuration options (if needed)
-                        "paging": false,
-                        "searching": false,
-                        "ordering": true,
-                        "info": false
-                    });
-                });
-
-                $(document).ready(function () {
-                    $('#tableGradeFour').DataTable({
-                        // Optional configuration options (if needed)
-                        "paging": false,
-                        "searching": false,
-                        "ordering": true,
-                        "info": false
-                    });
-                });
-
-                $(document).ready(function () {
-                    $('#tableGradeFive').DataTable({
-                        // Optional configuration options (if needed)
-                        "paging": false,
-                        "searching": false,
-                        "ordering": true,
-                        "info": false
-                    });
-                });
-
-                $(document).ready(function () {
-                    $('#tableGradeSix').DataTable({
-                        // Optional configuration options (if needed)
-                        "paging": false,
-                        "searching": false,
-                        "ordering": true,
-                        "info": false
-                    });
-                });
-            </script>
+        </div>
+    </div>
+</div>
