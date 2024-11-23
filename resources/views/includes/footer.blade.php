@@ -1,22 +1,80 @@
-<footer class="w-full h-72 bg-teal-950">
-    <div class="grid grid-cols-3 gap-4">
-        <div class="col-span-1 w-full h-72">
-            <div class="grid grid-cols-2">
-                <div class="col-span-1 flex items-end h-60">
-                    <img src="{{ asset('../assets/images/SELC.png') }}" alt="SELC" class="rounded-full mb-3 ml-3"
-                        width="60">
-                    <img src="{{ asset('../assets/images/grouplogo.png') }}" alt="HSMGT66" class="w-20 h-20 mb-0 ml-2">
-                </div>
-                <div class="col-span-2">
-                    <p class="text-[12px] pl-1 tracking-wider text-left text-teal-50">@ Copyright &copy; 2024 St
-                        Emilie
-                        Learning Center-HopeSci66.SIMGT66.
-                        All Right Reserved</p>
-                </div>
-            </div>
+<footer class="w-full bg-teal-950 relative">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 py-10 px-10 lg:py-20 lg:px-20">
+        <div class="text-white text-[12px] text-start">
+            <a href="/"
+                class="text-[30px] font-bold hover:text-yellow-500">SIMGT</a>
+            <h1 class="text-[15px]">Student Management System</h1>
+
+            <p class=" mt-10 mb-3 font-light">
+                <i class="fas fa-clock text-sm mr-3"></i><strong></strong> Open 24 Hours
+            </p>
+
+            <p class=" mb-3 font-light hover:text-yellow-500 transition-colors">
+                <i class="fas fa-phone-alt text-sm mr-3"></i><strong>Telephone : </strong>+63279550392
+            </p>
+
+            <p class=" mb-3 font-light hover:text-yellow-500 transition-colors">
+                <i class="fas fa-mobile-alt text-sm mr-3"></i><strong>Phone : </strong>+639154218235
+            </p>
+
+            <p class=" font-light hover:text-yellow-500 transition-colors">
+                <i class="fas fa-envelope text-sm mr-3"></i><strong>Email : </strong> theemilians@gmail.com
+            </p>
         </div>
-        <div class=" col-span-1 h-56">
+
+        <div class="text-white text-[12px] text-start mt-10 lg:mt-0">
+            <h2 class="text-xl font-semibold mb-4">Useful Links</h2>
+            <ul class="space-y-2">
+                <li><a href="#" class="hover:text-yellow-500 transition-colors">Home</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition-colors">About Us</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition-colors">Staff</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition-colors">Contact Us</a></li>
+                <li><a href="https://stemilielearningcenteramparo.blogspot.com/2009/09/who-is-st-emilie.html" class="hover:text-yellow-500 transition-colors">Blog</a></li>
+            </ul>
         </div>
-        <div class="col-span-1 h-56"></div>
+
+
+        <div class="text-white text-[12px] text-start mt-10 lg:mt-0">
+            <h2 class="text-xl font-semibold mb-4">Our Courses</h2>
+            <ul class="space-y-2">
+                <li><a href="#" class="hover:text-yellow-500 transition-colors">Mathematics</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition-colors">English Language Arts</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition-colors">Science</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition-colors">Social Studies</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition-colors">Physical Education</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition-colors">Art</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition-colors">Music</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition-colors">Computer Studies</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition-colors">Health Education</a></li>
+            </ul>
+        </div>
+
+        <div class="text-white text-[12px] text-start mt-10 lg:mt-0">
+            <h2 class="text-xl font-semibold mb-4">Follow Us</h2>
+            <ul class="space-y-2">
+                <li>
+                    <a href="https://www.facebook.com/StEmilieLC" target="_blank"
+                        class="flex items-center hover:text-yellow-500 transition-colors">
+                        <i class="fab fa-facebook-square text-xl mr-2"></i>
+                        Facebook
+                    </a>
+                </li>
+                <!-- You can add more social media links here if needed -->
+            </ul>
+        </div>
+
+    </div>
+    <div class="block lg:flex items-end py-3 w-full bg-white">
+        <div class="flex">
+            <img src="{{ asset('../assets/images/SELC.png') }}" alt="SELC"
+                class="w-12 h-12 rounded-full mb-0 ml-3 border-2 border-teal-900">
+            <img src="{{ asset('../assets/images/grouplogo.png') }}" alt="HSMGT66"
+                class="w-12 h-12 mb-0 ml-2 grayscale brightness-0 rounded-full border-2 border-black">
+
+        </div>
+        <p class="text-[12px] pl-3 tracking-wider text-left text-black py-3">@ Copyright &copy; 2024 St
+            Emilie
+            Learning Center-HopeSci66.SIMGT66.
+            All Right Reserved</p>
     </div>
 </footer>

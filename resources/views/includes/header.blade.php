@@ -1,12 +1,12 @@
-<header class="flex justify-between z-[200] items-center bg-[#00000060] w-full p-5 fixed top-0 left-0 px-10">
+<header class="flex justify-between z-[500] items-center bg-[#00000060] w-full 2xl:w-[1536px] 2xl:max-w-[1536px] p-5 px-3 lg:px-5 fixed top-0 px-10" data-aos="fade-down" data-aos-duration="600">
     <div class="h-full flex items-center hidden lg:block">
         <div class="h-full flex items-center">
             <img src="{{ asset('../assets/images/SELC.png') }}" alt="logo" class="w-12 rounded-full hidden lg:block">
-            <h6 class="text-white font-bold text-md ml-2 tracking-wider hidden lg:block">St. Emilie Learning Center</h6>
+            <a href="/" class="text-white font-bold text-md ml-2 tracking-wider hidden lg:block hover:text-yellow-500">St. Emilie Learning Center</a>
         </div>
     </div>
 
-    <div class="hidden lg:flex">
+    <div class="hidden lg:flex text-[15px]">
         <ul class="flex justify-between">
             <li
                 class="mx-5 transition-transform transform hover:scale-105 hover:text-yellow-400 text-white flex items-center">
@@ -36,25 +36,25 @@
     <div>
         <button onclick="window.open('/StEmelieLearningCenter.HopeSci66/sign-in', '_blank')"
             class="bg-yellow-400 shadow-lg px-10 py-1 text-teal-700 font-bold rounded-md transition-all duration-300 hover:bg-yellow-200 hover:text-teal-900 flex items-center">
-            Go To Portal
-            <i class="fas fa-chevron-right ml-2 text-sm"></i>
+            Sign in
+            <i class="fas fa-chevron-right ml-2 text-[10px]"></i>
         </button>
     </div>
 </header>
 
 <!-- Offcanvas Menu -->
-<div id="offcanvas" class="fixed inset-0 bg-black bg-opacity-60 hidden z-[500] transition-opacity duration-300">
+<div id="offcanvas" class="fixed inset-0 bg-black bg-opacity-60 hidden z-[500] transition-opacity duration-300" data-aos="fade-down" data-aos-duration="600">
     <div class="absolute top-0 left-0 max-w-96 bg-white p-5 h-full transition-transform duration-300 ease-in-out transform-translate-x-full"
         id="offcanvas-menu">
-        <div class="flex items-center border-b border-teal-900 py-3">
+        <div class="flex items-center py-3">
             <img src="{{ asset('../assets/images/SELC.png') }}" alt="logo" class="w-12 rounded-full">
             <h6 class="font-bold text-md ml-2 tracking-wider text-teal-800">St. Emilie Learning Center</h6>
         </div>
         <div class="text-end my-5">
-            <button id="close-menu" class="text-center p-2 py-1 text-xl"><i
+            <button id="close-menu" class="text-center p-2 py-1 text-[15px]"><i
                     class="fas fa-times text-teal-800"></i></button>
         </div>
-        <ul class="mt-5 text-teal-800 text-lg">
+        <ul class="mt-5 text-teal-800 text-[15px]">
             <li class="py-3 hover:text-yellow-500 cursor-pointer"><a href="/"><i class="fas fa-home mr-2"></i> Home</a>
             </li>
             <li class="py-3 hover:text-yellow-500 cursor-pointer"><i class="fas fa-info-circle mr-2"></i> About Us</li>
@@ -63,10 +63,7 @@
         </ul>
         <div class="absolute bottom-0">
             <img src="{{ asset('../assets/images/grouplogo.png') }}" alt="grouplogo" width="200"
-                class="opacity-25 filter invert absolute bottom-[-2rem] left-[-2rem]">
-            <p class="text-[12px] mb-5 px-5 text-center text-teal-800 font-semibold">@ Copyright &copy; 2024 St Emilie
-                Learning Center-HopeSci66.SIMGT66.
-                All Right Reserved</p>
+                class="opacity-50 mb-[-1rem] ml-[-2rem] grayscale brightness-0">
         </div>
     </div>
 </div>
