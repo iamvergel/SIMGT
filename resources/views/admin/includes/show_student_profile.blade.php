@@ -541,6 +541,7 @@
                         <table class="table table-bordered shadow-lg" id="tableGradeThree">
                             <thead class="bg-green-200">
                                 <tr>
+                                    <th>Student Number</th>
                                     <th>Quarter</th>
                                     <th>Subject 1</th>
                                     <th>Subject 2</th>
@@ -556,6 +557,7 @@
                             <tbody>
                                 @foreach ($gradeThree as $gradeThreeGrade)
                                     <tr data-student-number="{{ $gradeThreeGrade->student_number }}">
+                                        <td>{{ $gradeThreeGrade->student_number }}</td>
                                         <td>{{ $gradeThreeGrade->quarter }}</td>
                                         <td>{{ $gradeThreeGrade->subject_one }}</td>
                                         <td>{{ $gradeThreeGrade->subject_two }}</td>
@@ -577,6 +579,7 @@
                         <table class="table table-bordered shadow-lg" id="tableGradeFour">
                             <thead class="bg-red-200">
                                 <tr>
+                                    <th>Student Number</th>
                                     <th>Quarter</th>
                                     <th>Subject 1</th>
                                     <th>Subject 2</th>
@@ -592,6 +595,7 @@
                             <tbody>
                                 @foreach ($gradeFour as $gradeFourGrade)
                                     <tr data-student-number="{{ $gradeFourGrade->student_number }}">
+                                        <td>{{ $gradeFourGrade->student_number }}</td>
                                         <td>{{ $gradeFourGrade->quarter }}</td>
                                         <td>{{ $gradeFourGrade->subject_one }}</td>
                                         <td>{{ $gradeFourGrade->subject_two }}</td>
@@ -613,6 +617,7 @@
                         <table class="table table-bordered shadow-lg" id="tableGradeFive">
                             <thead class="bg-cyan-200">
                                 <tr>
+                                    <th>Student Number</th>
                                     <th>Quarter</th>
                                     <th>Subject 1</th>
                                     <th>Subject 2</th>
@@ -628,6 +633,7 @@
                             <tbody>
                                 @foreach ($gradeFive as $gradeFiveGrade)
                                     <tr data-student-number="{{ $gradeFiveGrade->student_number }}">
+                                        <td>{{ $gradeFiveGrade->student_number }}</td>
                                         <td>{{ $gradeFiveGrade->quarter }}</td>
                                         <td>{{ $gradeFiveGrade->subject_one }}</td>
                                         <td>{{ $gradeFiveGrade->subject_two }}</td>
@@ -649,6 +655,7 @@
                         <table class="table table-bordered shadow-lg" id="tableGradeSix">
                             <thead class="bg-blue-200">
                                 <tr>
+                                    <th>Student Number</th>
                                     <th>Quarter</th>
                                     <th>Subject 1</th>
                                     <th>Subject 2</th>
@@ -664,6 +671,7 @@
                             <tbody>
                                 @foreach ($gradeSix as $gradeSixGrade)
                                     <tr data-student-number="{{ $gradeSixGrade->student_number }}">
+                                        <td>{{ $gradeSixGrade->student_number }}</td>
                                         <td>{{ $gradeSixGrade->quarter }}</td>
                                         <td>{{ $gradeSixGrade->subject_one }}</td>
                                         <td>{{ $gradeSixGrade->subject_two }}</td>
