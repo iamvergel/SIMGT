@@ -412,7 +412,9 @@ class Cstudentinfo extends Controller
     public function showAllStudentGraduateData()
     {
         // Fetch all graduate student records
-        $students = StudentInfo::where('status', 'Graduated')->get();
+        $students = StudentInfo::where('status', 'Graduated')
+        ->whereIn('school_year', ['2021-2022', '2022-2023', '2023-2024', '2024-2025', '2025-2026', '2026-2027'])
+        ->get();
 
         // Fetch additional student information for each student
         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
@@ -430,9 +432,6 @@ class Cstudentinfo extends Controller
     {
         // Fetch all dropped student records
         $students = StudentInfo::where('status', 'Dropped')->get();
-
-        // Fetch all graduate student records
-        $students = StudentInfo::where('status', 'Graduated')->get();
 
         // Fetch additional student information for each student
         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');

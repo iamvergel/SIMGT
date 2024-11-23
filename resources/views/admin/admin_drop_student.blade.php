@@ -70,9 +70,6 @@
                     </div>
                 </div>
 
-                <!-- Main modal -->
-                @include('admin.includes.add_student_form')
-
                 <!-- component -->
                 <section class="mx-auto p-6 mt-5 rounded-lg shadow-lg bg-gray-200">
                     <div class="w-full bg-white mb-8 rounded-lg shadow-lg text-[12px]">
