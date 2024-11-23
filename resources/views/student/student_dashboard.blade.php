@@ -31,42 +31,49 @@
 </head>
 
 <body class="font-poppins bg-gray-200">
-  <div class="flex lg:p-2 w-full h-screen">
+  <div class="flex flex-col lg:flex-row lg:p-2 w-full h-screen">
     <!-- Sidebar -->
     @include('student.includes.sidebar')
 
     <!-- Main Content -->
     <main
-      class="flex-grow rounded-none lg:rounded-r-lg lg:rounded-l-none bg-white shadow-lg overflow-x-hidden overflow-y-scroll w-full bg-zinc-50"
-      id="content">
+      class="flex-grow rounded-none lg:rounded-r-lg lg:rounded-l-none bg-white shadow-lg overflow-hidden overflow-y-scroll">
       @include('student.includes.header')
-
 
       <div class="p-5 py-3">
         <p class="text-[15px] font-normal text-teal-900 mt-5">Student</p>
         <h1 class="text-xl font-bold text-teal-900">Dashboard</h1>
       </div>
+
+
       <div class="grid grid-cols-2">
         <div class="col-span-2 lg:col-span-1">
           <div class="p-5">
+            <!-- Avatar Section -->
+            <div class="flex justify-between items-end mx-10">
+            <div class="mt-5 pb-5">
+              <button id="colorTeal"
+                class="py-2 px-4 bg-gradient-to-tr from-teal-700 to-teal-500 hover:bg-gradient-to-tr hover:from-teal-900 hover:to-teal-500 text-white rounded-md mr-2">Teal</button>
+              <button id="colorSky"
+                class="py-2 px-4 bg-gradient-to-tr from-cyan-700 to-cyan-500 hover:bg-gradient-to-tr hover:from-cyan-900 hover:to-cyan-500 text-white rounded-md mr-2">Sky</button>
+              <button id="colorYellow"
+                class="py-2 px-4 bg-gradient-to-tr from-yellow-700 to-yellow-500 hover:bg-gradient-to-tr hover:from-yellow-900 hover:to-yellow-500 text-white rounded-md">Yellow</button>
+            </div>
+              <!-- Default Avatar -->
+              <div id="avatarContainerCharacter" class="avatar-container w-60">
+                <img id="currentAvatarCharacter" src="{{ asset('../assets/images/avatar1.png') }}" alt="Default Avatar"
+                  class="avatar h-full cursor-pointer" />
+              </div>
+            </div>
             <div id="dashboard"
               class="bg-gradient-to-tr from-teal-700 to-teal-500 py-0 lg:py-0 pl-3 text-white rounded-lg shadow-lg text-start flex items-center justify-between">
-              <div class="flex flex-col">
+              <div class="flex flex-col py-20">
                 <p id="welcomeText" class="font-bold text-[20px] lg:text-[30px] 2xl:text-[40px]">
                   Welcome, <br
                     class="lg:hidden">{{ session('student_first_name') . ' ' . session('student_last_name') }}!
                 </p>
                 <p id="descriptionText" class="font-normal text-[12px] lg:text-[15px]">Always stay updated in your
                   student portal</p>
-              </div>
-
-              <!-- Avatar Section -->
-              <div class="w-1/2">
-                <!-- Default Avatar -->
-                <div id="avatarContainerCharacter" class="avatar-container">
-                  <img id="currentAvatarCharacter" src="{{ asset('../assets/images/avatar1.png') }}"
-                    alt="Default Avatar" class="avatar w-full h-full cursor-pointer" />
-                </div>
               </div>
 
               <!-- Avatar Selection Modal (Initially Hidden) -->
@@ -98,15 +105,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div class="mt-5">
-              <button id="colorTeal"
-                class="py-2 px-4 bg-gradient-to-tr from-teal-700 to-teal-500 hover:bg-gradient-to-tr hover:from-teal-900 hover:to-teal-500 text-white rounded-md mr-2">Teal</button>
-              <button id="colorSky"
-                class="py-2 px-4 bg-gradient-to-tr from-cyan-700 to-cyan-500 hover:bg-gradient-to-tr hover:from-cyan-900 hover:to-cyan-500 text-white rounded-md mr-2">Sky</button>
-              <button id="colorYellow"
-                class="py-2 px-4 bg-gradient-to-tr from-yellow-700 to-yellow-500 hover:bg-gradient-to-tr hover:from-yellow-900 hover:to-yellow-500 text-white rounded-md">Yellow</button>
             </div>
 
             <div class="bg-white py-5 px-3 text-teal-800 rounded-lg shadow-lg text-start mt-5">

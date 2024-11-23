@@ -10,6 +10,10 @@ $(document).ready(function () {
         searching: true,
         ordering: true,
         info: true,
+        lengthChang: true,
+                scrollX: true,
+                crollY: 'auto',
+                scrollCollapse: true,
         buttons: [
             {
                 extend: "copyHtml5",

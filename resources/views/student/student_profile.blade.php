@@ -37,7 +37,7 @@
 
         <!-- Main Content -->
         <main
-            class="flex-grow rounded-none lg:rounded-r-lg lg:rounded-l-none bg-white shadow-lg overflow-x-hidden overflow-y-auto w-full bg-zinc-50">
+            class="flex-grow rounded-none lg:rounded-r-lg lg:rounded-l-none bg-white shadow-lg overflow-hidden overflow-y-scroll">
             @include('student.includes.header')
 
             <div id="container">

@@ -133,7 +133,7 @@
                                                                                                 <td class="px-4 py-3 border">{{ $student->section }}</td>
                                                                                                 <td class="px-4 py-3 text-xs border">
                                                                                                     <span
-                                                                                                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
+                                                                                                        class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
                                                                                                         {{ $student->status }}
                                                                                                     </span>
                                                                                                 </td>
@@ -191,20 +191,101 @@
         </main>
     </div>
 
+    <script src="https://cdn.datatables.net/buttons/2.2.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.18/jspdf.plugin.autotable.min.js"></script>
+
     <script>
         $(document).ready(function () {
-            $('#studentTable').DataTable({
-                paging: true,
-                searching: false,
-                ordering: true,
-                order: [[0, 'asc']], // Default order by first column (Student Number)
-                scrollY: 'auto', // Set the height for scrolling
-                scrollX: 'auto',
-                scrollCollapse: true, // Allow the table to resize
-                language: {
-                    search: "Search by name or other fields:"
-                }
+            var table = $("#studentTable").DataTable({
+        dom:
+            ` 
+        <'flex justify-between items-center mb-4'<'flex space-x-4'l><'flex space-x-4'B><'flex space-x-4'f>>` +
+            `<tr>` +
+            `<'flex justify-between items-center'<'flex-1'i><'flex-1'p>>`,
+        paging: true,
+        searching: true,
+        ordering: true,
+        info: true,
+        lengthChang: true,
+                scrollX: true,
+                crollY: 'auto',
+                scrollCollapse: true,
+        buttons: [
+            {
+                extend: "copyHtml5",
+                className:
+                    "!bg-sky-800 !text-[12px] !text-white !me-2 !border-none !hover:bg-sky-700 !px-4 !py-2 !rounded !flex !items-center !justify-center",
+                text: '<i class="fas fa-clipboard"></i> Copy',
+                titleAttr: "Click to copy data",
+            },
+            {
+                extend: "excelHtml5",
+                text: '<i class="fas fa-file-excel mr-2"></i> Excel',
+                className:
+                    "!bg-teal-700 !text-[12px] !me-2 !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !important !flex !items-center !justify-center",
+                titleAttr: "Export to Excel",
+            },
+            {
+                extend: "csvHtml5",
+                text: '<i class="fas fa-file-csv mr-2"></i> CSV',
+                className:
+                    "!bg-yellow-500 !text-[12px] !me-2 !text-white !border-none !hover:bg-yellow-400 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
+                titleAttr: "Export to CSV",
+            },
+            {
+                extend: "pdfHtml5",
+                text: '<i class="fas fa-file-pdf mr-2"></i> PDF',
+                className:
+                    "!bg-red-600 !text-[12px] !me-2 !text-white !border-none !hover:bg-red-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
+                orientation: "landscape",
+                pageSize: "A4",
+                titleAttr: "Export to PDF",
+                customize: function (doc) {
+                    // Adjust the width of the table in the PDF document
+                    doc.content[1].table.widths = Array(
+                        doc.content[1].table.body[0].length + 2
+                    )
+                        .join("*")
+                        .split("");
+
+                    doc.content[1].table.styles = {
+                        tableWidth: "100%",
+                        cellPadding: 0,
+                        cellMargin: 0,
+                        fontSize: 10,
+                        lineHeight: "normal",
+                        font: "Arial",
+                    };
+                },
+            },
+            {
+                extend: "print",
+                text: '<i class="fas fa-print mr-2"></i> Print',
+                className:
+                    "!bg-blue-600 !text-[12px] !text-white !border-none !hover:bg-blue-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
+                orientation: "landscape",
+                autoPrint: true,
+                titleAttr: "Print Table",
+                customize: function (win) {
+                    $(win.document.body).find("table").css("width", "80%");
+                    $(win.document.body).find("table").css("font-size", "12px");
+                },
+            },
+        ],
+        initComplete: function () {
+            $(".dt-buttons").css({
+                display: "flex",
+                "justify-content": "flex-end",
+                width: "100%",
             });
+        },
+    });
         });
 
         function searchTable() {

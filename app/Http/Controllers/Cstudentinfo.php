@@ -431,10 +431,19 @@ class Cstudentinfo extends Controller
         // Fetch all dropped student records
         $students = StudentInfo::where('status', 'Dropped')->get();
 
+        // Fetch all graduate student records
+        $students = StudentInfo::where('status', 'Graduated')->get();
+
+        // Fetch additional student information for each student
+        $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+
+        // Fetch additional student information for each student
+        $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+
         // Check if there are no dropped students
         $noDroppedMessage = $students->isEmpty() ? "No dropped students found." : null;
 
-        return view('admin.admin_drop_student', compact('students', 'noDroppedMessage'));
+        return view('admin.admin_drop_student', compact('students', 'studentsAdditional', 'studentDocuments','noDroppedMessage'));
     }
 
     public function showAllStudentDroppedData()
@@ -461,10 +470,16 @@ class Cstudentinfo extends Controller
             ->whereIn('school_year', ['2020-2021', '2019-2020', '2018-2019', '2017-2018', '2016-2015', '2014-2015'])
             ->get();
 
+            // Fetch additional student information for each student
+        $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+
+        // Fetch additional student information for each student
+        $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+
         // Check if there are no archived students
         $noArchiveMessage = $students->isEmpty() ? "No Archive students found." : null;
 
-        return view('admin.admin_archive_student', compact('students', 'noArchiveMessage'));
+        return view('admin.admin_archive_student', compact('students', 'studentsAdditional', 'studentDocuments', 'noArchiveMessage'));
     }
 
     public function showGradeData()
