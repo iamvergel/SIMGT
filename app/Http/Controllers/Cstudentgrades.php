@@ -648,6 +648,19 @@ class Cstudentgrades extends Controller
         return response()->json($sections);
     }
 
+    public function getxSections()
+    {
+        // Fetch all distinct sections from the StudentInfo model where section is not null or empty
+        $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
+            ->where('section', '!=', '') // Ensure section is not an empty string
+            ->where('status', 'Active')  // Ensure student is active
+            ->distinct()  // Get only distinct sections
+            ->pluck('section'); // Get only the 'section' column
+
+        // Return sections as a JSON response
+        return response()->json($sections);
+    }
+
     public function getAllGrade()
     {
         // Fetch all distinct sections from the StudentInfo model where section is not null or empty

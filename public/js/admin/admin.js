@@ -11,9 +11,9 @@ $(document).ready(function () {
         ordering: true,
         info: true,
         lengthChang: true,
-                scrollX: true,
-                crollY: 'auto',
-                scrollCollapse: true,
+        scrollX: true,
+        crollY: "auto",
+        scrollCollapse: true,
         buttons: [
             {
                 extend: "copyHtml5",
@@ -40,7 +40,7 @@ $(document).ready(function () {
                 extend: "pdfHtml5",
                 text: '<i class="fas fa-file-pdf mr-2"></i> PDF',
                 className:
-                    "!bg-red-600 !text-[12px] !text-white !border-none !hover:bg-red-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
+                    "!bg-orange-700 !text-[12px] !text-white !border-none !hover:bg-orange-700 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
                 orientation: "landscape",
                 pageSize: "A4",
                 titleAttr: "Export to PDF",
@@ -85,66 +85,95 @@ $(document).ready(function () {
         },
     });
 
-    // When the dropdown button is clicked, make an AJAX call
-    $("#dropdownDefaultButton").click(function () {
+    // Function to toggle dropdown and fetch data
+    function toggleDropdownAndFetchData(dropdownButtonId, dropdownMenuId, url) {
         // Toggle the dropdown visibility
-        $("#dropdown").toggleClass("hidden");
+        $(dropdownButtonId).click(function () {
+            $(dropdownMenuId).toggleClass("hidden");
 
-        // Make an AJAX request to get the sections
-        $.ajax({
-            url: "/get-grade", // The route for fetching sections
-            type: "GET",
-            success: function (data) {
-                // Check if sections are returned
-                if (data.length > 0) {
-                    // Empty the dropdown list
-                    $("#dropdown ul").empty();
+            // Make an AJAX request to get the sections
+            $.ajax({
+                url: url, // The route for fetching sections
+                type: "GET",
+                success: function (data) {
+                    // Check if sections are returned
+                    if (data.length > 0) {
+                        // Empty the dropdown list
+                        $(`${dropdownMenuId} ul`).empty();
 
-                    // Append the default placeholder as the first item
-                    $("#dropdown ul").append(
-                        '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="">Select a Grade</a></li>'
-                    );
-
-                    // Append each section as a list item in the dropdown
-                    data.forEach(function (section) {
-                        $("#dropdown ul").append(
-                            '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="' +
-                                section +
-                                '">' +
-                                section +
-                                "</a></li>"
+                        // Append the default placeholder as the first item
+                        $(`${dropdownMenuId} ul`).append(
+                            `<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg">
+                            <a href="#" class="dropdown-item" data-section="">Select a Section</a>
+                        </li>`
                         );
-                    });
-                } else {
-                    // If no sections, show a message
-                    $("#dropdown ul").html(
-                        '<li><a href="#" class="dropdown-item text-gray-500">No Sections Available</a></li>'
-                    );
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log("Error fetching sections: " + error);
-            },
+
+                        // Append each section as a list item in the dropdown
+                        data.forEach(function (section) {
+                            $(`${dropdownMenuId} ul`).append(
+                                `<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg">
+                                <a href="#" class="dropdown-item" data-section="${section}">${section}</a>
+                            </li>`
+                            );
+                        });
+                    } else {
+                        // If no sections, show a message
+                        $(`${dropdownMenuId} ul`).html(
+                            '<li><a href="#" class="dropdown-item text-gray-500">No Sections Available</a></li>'
+                        );
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error fetching sections: " + error);
+                },
+            });
         });
-    });
+    }
 
-    // Filter table by section when dropdown item is clicked
-    $(document).on("click", ".dropdown-item", function (event) {
-        event.preventDefault(); // Prevent default anchor click behavior
+    // Call the toggleDropdownAndFetchData function for both dropdowns
+    toggleDropdownAndFetchData(
+        "#dropdownDefaultButton",
+        "#dropdown",
+        "/get-grade"
+    );
+    toggleDropdownAndFetchData(
+        "#dropdownDefaultButtonSection",
+        "#dropdownSection",
+        "/get-Section"
+    );
 
-        const selectedSection = $(this).data("section");
+    // Function to handle the selection and filter the table
+    function handleDropdownItemSelection(dropdownMenuId) {
+        $(document).on(
+            "click",
+            `${dropdownMenuId} .dropdown-item`,
+            function (event) {
+                event.preventDefault(); // Prevent default anchor click behavior
 
-        // Trigger the search function and search the table
-        table.search(selectedSection).draw(); // Directly apply the search to the DataTable
+                const selectedSection = $(this).data("section");
 
-        // Close the dropdown after selection
-        $("#dropdown").addClass("hidden");
-    });
+                // Update the search input with the selected section
+                $("#searchInput").val(selectedSection);
+
+                // Trigger the search function and search the table
+                table.search(selectedSection).draw(); // Directly apply the search to the DataTable
+
+                // Close the dropdown after selection
+                $(dropdownMenuId).addClass("hidden");
+            }
+        );
+    }
+
+    // Call the function to handle dropdown item selection for both dropdowns
+    handleDropdownItemSelection("#dropdown");
+    handleDropdownItemSelection("#dropdownSection");
 
     // Close the dropdown if clicked outside
     $(document).click(function (event) {
-        const dropdownButton = $("#dropdownDefaultButton");
-        const dropdownMenu = $("#dropdown");
+        const dropdownButton = $(
+            "#dropdownDefaultButton, #dropdownDefaultButtonSection"
+        );
+        const dropdownMenu = $("#dropdown, #dropdownSection");
 
         // Close dropdown if clicked outside the dropdown button or menu
         if (
@@ -154,6 +183,11 @@ $(document).ready(function () {
         ) {
             dropdownMenu.addClass("hidden");
         }
+    });
+
+    // Hide the dropdown if the page is scrolled
+    $(window).scroll(function () {
+        $("#dropdown, #dropdownSection").addClass("hidden");
     });
 });
 
@@ -387,7 +421,7 @@ $(document).ready(function () {
                     extend: "pdfHtml5",
                     text: '<i class="fas fa-file-pdf mr-2"></i> PDF',
                     className:
-                        "!bg-red-600 !text-[12px] !text-white !border-none !hover:bg-red-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
+                        "!bg-orange-700 !text-[12px] !text-white !border-none !hover:bg-red-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
                     orientation: "landscape",
                     pageSize: "A4",
                     titleAttr: "Export to PDF",
@@ -500,25 +534,24 @@ $(document).ready(function () {
         filterTablesByStudentNumber(studentNumber);
     });
 
-
     // When the "Generate PDF" button is clicked
     $("#btnPrint").on("click", function () {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
         doc.setFontSize(12);
-    
+
         const name = document.getElementById("StudentName1").value;
-        const logoUrl = '/assets/images/SELC.png';
+        const logoUrl = "/assets/images/SELC.png";
         const logoWidth = 15; // width of the logo
         const logoHeight = 15; // height of the logo
-    
+
         // Set top margin and starting Y offset
         const topMargin = 5;
         let yOffset = topMargin + 20; // Initial Y position for content after logo
-    
+
         // Add logo and name to the PDF
-        doc.addImage(logoUrl, 'PNG', 10, topMargin, logoWidth, logoHeight);
-    
+        doc.addImage(logoUrl, "PNG", 10, topMargin, logoWidth, logoHeight);
+
         // Title for PDF (Centering the text)
         const title = "St. Emilie Learning Center";
         doc.setFontSize(20);
@@ -526,7 +559,7 @@ $(document).ready(function () {
         const titleWidth = doc.getTextWidth(title);
         const titleX = (doc.internal.pageSize.width - titleWidth) / 2;
         doc.text(title, titleX, 10);
-    
+
         // Center the address
         const address = "Amparo Village, 18 Bangkal, Caloocan, Metro Manila";
         doc.setFontSize(10);
@@ -534,18 +567,18 @@ $(document).ready(function () {
         const addressWidth = doc.getTextWidth(address);
         const addressX = (doc.internal.pageSize.width - addressWidth) / 2;
         doc.text(address, addressX, 15);
-    
+
         // Title for PDF
         doc.text("Grades Report : " + name, 10, 25);
-    
+
         // Function to add tables to the PDF
         function addTableToPDF(table, title) {
-            doc.text(title, 5, yOffset);  // Title for the table
+            doc.text(title, 5, yOffset); // Title for the table
             yOffset += 5; // Add space before the table
-    
+
             // Get filtered data from the DataTable
             const filteredData = table.rows({ search: "applied" }).data();
-    
+
             // Prepare an array to store the subject-wise grades and remarks
             const subjectsData = [];
             for (let i = 1; i <= 9; i++) {
@@ -556,7 +589,7 @@ $(document).ready(function () {
                     remarks: "", // For storing the remark (Passed/Failed)
                 });
             }
-    
+
             // Loop through the filtered data and fill the subjectsData array
             filteredData.each(function (row) {
                 const quarterIndex = [
@@ -565,12 +598,12 @@ $(document).ready(function () {
                     "3rd Quarter",
                     "4th Quarter",
                 ].indexOf(row[1]);
-    
+
                 for (let i = 2; i <= 10; i++) {
                     subjectsData[i - 2].grades[quarterIndex] = row[i];
                 }
             });
-    
+
             // Calculate the final grade and remarks for each subject
             subjectsData.forEach(function (subjectData) {
                 const totalGrade = subjectData.grades.reduce(
@@ -581,7 +614,7 @@ $(document).ready(function () {
                 subjectData.remarks =
                     subjectData.finals >= 75 ? "Passed" : "Failed";
             });
-    
+
             // Table headers and body preparation
             const tableHeaders = [
                 "Subject",
@@ -592,10 +625,10 @@ $(document).ready(function () {
                 "Finals",
                 "Remarks",
             ];
-    
+
             const tableBody = subjectsData.map(function (subjectData) {
                 return [
-                    subjectData.subject, 
+                    subjectData.subject,
                     subjectData.grades[0], // 1st Quarter
                     subjectData.grades[1], // 2nd Quarter
                     subjectData.grades[2], // 3rd Quarter
@@ -604,13 +637,13 @@ $(document).ready(function () {
                     subjectData.remarks, // Remarks (Passed/Failed)
                 ];
             });
-    
+
             // Create the table using autoTable
             doc.autoTable({
                 startY: yOffset,
                 head: [tableHeaders],
                 body: tableBody,
-                theme: 'grid',
+                theme: "grid",
                 columnStyles: {
                     0: { cellWidth: 40 }, // Adjust width of Subject column
                     1: { cellWidth: 20 }, // Adjust width of 1st Quarter column
@@ -622,11 +655,11 @@ $(document).ready(function () {
                 },
                 margin: { top: 10 },
                 didDrawPage: function (data) {
-                    yOffset = data.cursor.y;  // Update yOffset to handle page breaks
+                    yOffset = data.cursor.y; // Update yOffset to handle page breaks
                 },
             });
         }
-    
+
         // Add each table's data to the PDF (using the existing tables)
         addTableToPDF(tableGradeOne, "");
         addTableToPDF(tableGradeTwo, "");
@@ -634,11 +667,28 @@ $(document).ready(function () {
         addTableToPDF(tableGradeFour, "");
         addTableToPDF(tableGradeFive, "");
         addTableToPDF(tableGradeSix, "");
-    
+
         // Save the PDF with the student's name in the filename
         doc.save("grades_report(" + name + ").pdf");
     });
-    
+});
+
+// Get all list items
+const menuItems = document.querySelectorAll("li[data-target]");
+
+// Add event listener to each menu item
+menuItems.forEach((item) => {
+    item.addEventListener("click", function () {
+        // Hide all table containers
+        const tables = document.querySelectorAll(".table-container");
+        tables.forEach((table) => {
+            table.style.display = "none";
+        });
+
+        // Show the target table
+        const target = document.querySelector(this.getAttribute("data-target"));
+        target.style.display = "block";
+    });
 });
 
 // function filterTable() {

@@ -80,23 +80,23 @@
                 <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
                 <p class="text-2xl font-bold text-teal-900 ml-5">
                     <span onclick="window.location.href ='/StEmelieLearningCenter.HopeSci66/admin/student-management'"
-                        class="hover:text-teal-700">Student Management</span> / All Student Data
+                        class="hover:text-teal-700">Student Management
                 </p>
-                <div class="w-24 mt-5 ml-5 text-[12px] text-white shadow-lg bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full py-2 text-center"
+                <!-- <div class="w-24 mt-5 ml-5 text-[12px] text-white shadow-lg bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full py-2 text-center"
                     onclick="window.history.back();"><i class="fas fa-arrow-left" style="color: white;"></i> Go Back
-                </div>
+                </div> -->
 
                 <!-- Search Bar -->
                 <div class="mt-10 ml-5 flex justify-end items-center">
-                    <div class="flex items-center hidden">
+                    <!-- <div class="flex items-center hidden">
                         <i class="fas fa-search text-xl text-teal-700 px-3"></i>
                         <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search by name..."
                             class="text-sm px-4 py-3 text-teal-900 border border-gray-300 rounded-lg w-80 shadow-lg focus:outline-none" />
-                    </div>
+                    </div> -->
 
-                    <div class="mr-10">
+                    <div class="mr-2">
                         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                            class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                             type="button">Select Grade<svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -112,6 +112,30 @@
                                 <!-- Default placeholder value (empty or custom message) -->
                                 <li>
                                     <a href="#" class="dropdown-item text-gray-500">Select a Grade</a>
+                                </li>
+                                <!-- Dropdown items will be injected here by AJAX -->
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <button id="dropdownDefaultButtonSection" data-dropdown-toggle="dropdown"
+                            class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            type="button">Select Section <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+
+                        <!-- Dropdown menu -->
+                        <div id="dropdownSection"
+                            class="z-10 fixed hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                            <ul class="p-2 text-md text-gray-700 dark:text-gray-200 shadow-lg"
+                                aria-labelledby="dropdownDefaultButtonSection">
+                                <!-- Default placeholder value (empty or custom message) -->
+                                <li>
+                                    <a href="#" class="dropdown-item text-gray-500">Select a Section</a>
                                 </li>
                                 <!-- Dropdown items will be injected here by AJAX -->
                             </ul>

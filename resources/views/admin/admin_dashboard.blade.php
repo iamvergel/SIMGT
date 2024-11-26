@@ -169,7 +169,7 @@
 
         <div class="grid grid-cols-4 gap-5 mt-10">
           <!---->
-          <div class="bg-white rounded-lg p-5 shadow-lg col-span-4 lg:col-span-2 xl:col-span-2 border-2 studentchart">
+          <div class="bg-white rounded-lg p-5 shadow-lg col-span-4 lg:col-span-4 xl:col-span-4 border-2 studentchart">
             <div class="bg-teal-100 p-5 rounded-lg shadow-lg">
               <h2 class="text-md font-bold text-teal-900">
                 <i class="fas fa-users text-teal-950 mr-2"></i> Total Number of Students by Grade
@@ -196,7 +196,7 @@
           </div>
 
           <!---->
-          <div class="bg-gray-200 rounded-lg p-5 shadow-lg col-span-4 lg:col-span-2 xl:col-span-2 border-2 staffchart">
+          <!-- <div class="bg-gray-200 rounded-lg p-5 shadow-lg col-span-4 lg:col-span-2 xl:col-span-2 border-2 staffchart">
             <div class="bg-white p-5 py-7 rounded-lg shadow-lg">
               <div class="bg-yellow-100 p-5 py-7 rounded-lg shadow-lg">
                 <h2 class="text-md font-bold text-yellow-900">
@@ -216,7 +216,7 @@
                 Total of Admins
               </div>
             </div>
-          </div>
+          </div> -->
 
           <!---->
           <div
@@ -336,31 +336,67 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const studentData = @json($studentCounts);
-      const totalStudents = Object.values(studentData).reduce((sum, current) => sum + current, 0);
+    const totalStudents = Object.values(studentData).reduce((sum, current) => sum + current, 0);
+    const totalMaleStudent = @json($totalMaleStudent);
+    const totalMaleStudents = Object.values(totalMaleStudent).reduce((sum, current) => sum + current, 0);
+    const totalFemaleStudent = @json($totalFemaleStudent);
+    const totalFemaleStudents = Object.values(totalFemaleStudent).reduce((sum, current) => sum + current, 0);
 
-      const totalMaleStudent = @json($totalMaleStudent);
-      const totalMaleStudents = Object.values(totalMaleStudent).reduce((sum, current) => sum + current, 0);
+    // Ensure totals are rounded to the nearest whole number
+    const roundedTotalStudents = Math.round(totalStudents);
+    const roundedTotalMaleStudents = Math.round(totalMaleStudents);
+    const roundedTotalFemaleStudents = Math.round(totalFemaleStudents);
 
-      const totalFemaleStudent = @json($totalFemaleStudent);
-      const totalFemaleStudents = Object.values(totalFemaleStudent).reduce((sum, current) => sum + current, 0);
+    // Update chart
+    const ctx = document.getElementById('studentChart').getContext('2d');
 
-      // Update chart
-      const ctx = document.getElementById('studentChart').getContext('2d');
+    // Create a gradient
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(1, 'rgba(19,78,74,1)');
+    gradient.addColorStop(0.5, 'rgba(15,118,110,0.8)');
+    gradient.addColorStop(0, 'rgba(20,184,166,0.5)');
 
-      // Create a gradient
-      const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-      gradient.addColorStop(1, 'rgba(19,78,74,1)');
-      gradient.addColorStop(0.5, 'rgba(15,118,110,0.8)');
-      gradient.addColorStop(0, 'rgba(20,184,166,0.5)');
+    // Create the initial chart
+    let studentChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: Object.keys(studentData),
+        datasets: [{
+          label: 'Number of Students',
+          data: Object.values(studentData).map(count => Math.round(count)), // Round each data point to a whole number
+          backgroundColor: gradient,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Number of Students'
+            },
+            ticks: {
+              stepSize: 1, // Ensures y-axis values are whole numbers
+              callback: function(value) {
+                return value; // Displays values as whole numbers
+              }
+            }
+          }
+        }
+      }
+    });
 
-      // Create the initial chart
-      let studentChart = new Chart(ctx, {
+    // Button event listeners
+    document.getElementById('barButton').addEventListener('click', () => {
+      studentChart.destroy();
+      studentChart = new Chart(ctx, {
         type: 'bar',
         data: {
           labels: Object.keys(studentData),
           datasets: [{
             label: 'Number of Students',
-            data: Object.values(studentData),
+            data: Object.values(studentData).map(count => Math.round(count)), // Round each data point
             backgroundColor: gradient,
             borderWidth: 1
           }]
@@ -372,118 +408,100 @@
               title: {
                 display: true,
                 text: 'Number of Students'
+              },
+              ticks: {
+                stepSize: 1, // Ensures y-axis values are whole numbers
+                callback: function(value) {
+                  return value;
+                }
               }
             }
           }
         }
       });
+    });
 
-      // Button event listeners
-      document.getElementById('barButton').addEventListener('click', () => {
-        studentChart.destroy();
-        studentChart = new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: Object.keys(studentData),
-            datasets: [{
-              label: 'Number of Students',
-              data: Object.values(studentData),
-              backgroundColor: gradient,
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true,
-                title: {
-                  display: true,
-                  text: 'Number of Students'
+    document.getElementById('lineButton').addEventListener('click', () => {
+      studentChart.destroy();
+      studentChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: Object.keys(studentData),
+          datasets: [{
+            label: 'Number of Students',
+            data: Object.values(studentData).map(count => Math.round(count)), // Round each data point
+            borderColor: gradient,
+            backgroundColor: 'rgba(255, 255, 255, 0)', // Transparent fill
+            borderWidth: 2,
+            pointBackgroundColor: 'rgba(15,118,110,1)', // Dot color
+            pointRadius: 5, // Size of the dots
+            fill: false // No fill under the line
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Number of Students'
+              },
+              ticks: {
+                stepSize: 1, // Ensures y-axis values are whole numbers
+                callback: function(value) {
+                  return value;
                 }
               }
             }
           }
-        });
+        }
       });
+    });
 
-      document.getElementById('lineButton').addEventListener('click', () => {
-        studentChart.destroy();
-        studentChart = new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: Object.keys(studentData),
-            datasets: [{
-              label: 'Number of Students',
-              data: Object.values(studentData),
-              borderColor: gradient,
-              backgroundColor: 'rgba(255, 255, 255, 0)', // Transparent fill
-              borderWidth: 2,
-              pointBackgroundColor: 'rgba(15,118,110,1)', // Dot color
-              pointRadius: 5, // Size of the dots
-              fill: false // No fill under the line
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true,
-                title: {
-                  display: true,
-                  text: 'Number of Students'
+    // Wave effect using line chart
+    document.getElementById('waveButton').addEventListener('click', () => {
+      studentChart.destroy();
+      studentChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: Object.keys(studentData),
+          datasets: [{
+            label: 'Number of Students',
+            data: Object.values(studentData).map(count => Math.round(count)), // Round each data point
+            borderColor: gradient,
+            backgroundColor: 'rgba(255, 255, 255, 0)',
+            borderWidth: 2,
+            pointBackgroundColor: 'rgba(15,118,110,1)', // Dot color
+            pointRadius: 5,
+            fill: false,
+            tension: 0.4 // Makes the line more wave-like
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Number of Students'
+              },
+              ticks: {
+                stepSize: 1, // Ensures y-axis values are whole numbers
+                callback: function(value) {
+                  return value;
                 }
               }
             }
           }
-        });
+        }
       });
+    });
 
-      // Wave effect using line chart
-      document.getElementById('waveButton').addEventListener('click', () => {
-        studentChart.destroy();
-        studentChart = new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: Object.keys(studentData),
-            datasets: [{
-              label: 'Number of Students',
-              data: Object.values(studentData),
-              borderColor: gradient,
-              backgroundColor: 'rgba(255, 255, 255, 0)',
-              borderWidth: 2,
-              pointBackgroundColor: 'rgba(15,118,110,1)', // Dot color
-              pointRadius: 5,
-              fill: false,
-              tension: 0.4 // Makes the line more wave-like
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true,
-                title: {
-                  display: true,
-                  text: 'Number of Students'
-                }
-              }
-            }
-          }
-        });
-      });
+    // Update totals with rounded values
+    document.getElementById('totalStudents').innerHTML = `Total Number of Active Students: <span class="font-bold text-md">${roundedTotalStudents}</span> Students`;
+    document.getElementById('totalMaleStudent').innerHTML = `Total Number of Male Students: <span class="font-bold text-md">${roundedTotalMaleStudents}</span> Students`;
+    document.getElementById('totalFemaleStudent').innerHTML = `Total Number of Female Students: <span class="font-bold text-md">${roundedTotalFemaleStudents}</span> Students`;
 
-      // Update totals
-      document.getElementById('totalStudents').innerHTML = `Total Number of Active Students: <span class="font-bold text-md">${totalStudents}</span> Students`;
-      document.getElementById('totalMaleStudent').innerHTML = `Total Number of Male Students: <span class="font-bold text-md">${totalMaleStudents}</span> Students`;
-      document.getElementById('totalFemaleStudent').innerHTML = `Total Number of Female Students: <span class="font-bold text-md">${totalFemaleStudents}</span> Students`;
-
-      // Staff percentage calculations
-      const totalStaff = {{ $totalStaff }};
-      const currentStaff = {{ $currentStaff }};
-      const percentage = totalStaff > 0 ? (currentStaff / totalStaff) * 100 : 0;
-
-      document.getElementById('percentage').innerText = Math.round(percentage) + '%';
-      document.getElementById('currentStaff').innerText = currentStaff;
-      document.getElementById('total').innerText = totalStaff;
-      document.querySelector('.circle').style.setProperty('--percentage', `${percentage}%`);
 
       // Fetch events and display them
       function fetchEvents() {

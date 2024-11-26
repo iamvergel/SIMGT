@@ -160,7 +160,8 @@
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>
 
-            <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management"
+            <!-- <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management" -->
+             <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/AllStudentData"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 tooltip"
                 id="studentManagementButton1">
                 <i class="fa-solid fa-users"></i>
@@ -212,7 +213,52 @@
                         class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Archive
                         <br /> Student</span>
                 </a>
-            </div> <br /><br />
+            </div>
+
+            <a href="#"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 tooltip"
+                id="studentManagementButton4">
+                <i class="fa-solid fa-book"></i>
+                <span class="sidebar-text ml-2 sm:text-[10px] lg:text-[12px]">Website Setting</span>
+                <span class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[8px] p-1 font-bold">Website <br />
+                    Setting</span>
+            </a>
+            
+            <button
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-600 rounded-md mt-4 tooltip"
+                id="studentManagementButton5" aria-expanded="false" aria-controls="collapse4">
+                <i class="fa-solid fa-user"></i>
+                <span class="sidebar-text ml-2">Manage Account</span>
+                <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px]"></i></p>
+                <span class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[8px] p-1 font-bold">Manage
+                    <br /> Account</span>
+            </button>
+            <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-2 px-5" id="collapse4">
+                <a href="#"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 mt-10 tooltip">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <span class="sidebar-text ml-2">My Account</span>
+                    <span
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">My
+                        <br /> Account</span>
+                </a>
+                <a href="#"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 tooltip">
+                    <i class="fa-solid fa-user-xmark"></i>
+                    <span class="sidebar-text ml-2">Student Accounts</span>
+                    <span
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dropped
+                        <br /> Student</span>
+                </a>
+                <a href="#"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-600 rounded-md mb-5 ml-0 tooltip">
+                    <i class="fa-solid fa-box-archive"></i>
+                    <span class="sidebar-text ml-2">Admins Account</span>
+                    <span
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Archive
+                        <br /> Student</span>
+                </a>
+            </div><br /><br />
 
             <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline">
                 @csrf

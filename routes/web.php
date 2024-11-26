@@ -159,3 +159,4 @@ Route::get('/get-foursections', [Cstudentgrades::class, 'getGradeFourSections'])
 Route::get('/get-fivesections', [Cstudentgrades::class, 'getGradeFiveSections'])->name('get.fivesections');
 Route::get('/get-sixsections', [Cstudentgrades::class, 'getGradeSixSections'])->name('get.sixsections');
 Route::get('/get-grade', [Cstudentgrades::class, 'getAllGrade'])->name('get.allgrade');
+Route::get('/get-Section', [Cstudentgrades::class, 'getxSections'])->name('get.allsection');

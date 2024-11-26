@@ -32,12 +32,11 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-
             <!-- Student Details -->
             <div class="grid grid-cols-4">
                 <div class="col-span-1 p-5 bg-gray-100">
                     <!-- Profile Section -->
-                    <div class="mt-5 bg-white shadow-lg p-5 rounded-lg">
+                    <div class="bg-white shadow-lg p-5 rounded-lg mt-10">
                         <div class="flex justify-center ">
                             <div id="modalAvatar"
                                 class="modal-avatar bg-gray-500 text-white flex items-center justify-center font-bold">
@@ -139,561 +138,642 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-span-3 p-20">
-                    <div class="grid grid-cols-1 lg:grid-cols-4 lg:gap-5 text-[13px] text-gray-900">
-                        <div class="col-span-2">
-                            <label for="modalLrn" class="block mb-2 text-[12px] font-bold text-gray-900">Learner
-                                Reference Number (LRN):</label>
-                            <input type="text" name="lrn" class="input-field focus:outline-none focus:ring-none"
-                                id="modalLrn" value="" readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalSchoolYear" class="block mb-2 text-[12px] font-bold text-gray-900">School
-                                Year:</label>
-                            <input type="text" name="schoolYear" class="input-field focus:outline-none focus:ring-none"
-                                id="modalSchoolYear" value="" readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalSchool"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">School:</label>
-                            <input type="text" name="school" class="input-field focus:outline-none focus:ring-none"
-                                id="modalSchool" value="" readonly>
-                        </div>
-
-                        <div class="hidden">
-                            <label for="modalLastName" class="block mb-2 text-[12px] font-bold text-gray-900">Last
-                                Name:</label>
-                            <input type="hidden" name="lastname" class="input-field focus:outline-none focus:ring-none"
-                                id="modalLastName" value="" readonly>
-                        </div>
-
-                        <div class="hidden">
-                            <label for="modalFirstName" class="block mb-2 text-[12px] font-bold text-gray-900">First
-                                Name:</label>
-                            <input type="hidden" name="lastname" class="input-field focus:outline-none focus:ring-none"
-                                id="modalFirstName" value="" readonly>
-                        </div>
-
-                        <div class="hidden">
-                            <label for="modalMiddleName" class="block mb-2 text-[12px] font-bold text-gray-900">Middle
-                                Name:</label>
-                            <input type="hidden" name="lastname" class="input-field focus:outline-none focus:ring-none"
-                                id="modalMiddleName" value="" readonly>
-                        </div>
-
-                        <div class="hidden">
-                            <label for="modalSuffixName" class="block mb-2 text-[12px] font-bold text-gray-900">Suffix
-                                Name:</label>
-                            <input type="hidden" name="lastname" class="input-field focus:outline-none focus:ring-none"
-                                id="modalSuffixName" value="" readonly>
-                        </div>
-
-                        <div class="col-span-4">
-                            <p class="text-[16px] font-bold">Address</p>
-                        </div>
-                        <div>
-                            <label for="modalhouseNumber" class="block mb-2 text-[12px] font-bold text-gray-900">House
-                                No.:</label>
-                            <input type="text" name="address" class="input-field focus:outline-none focus:ring-none"
-                                id="modalhouseNumber" value="" readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalStreet"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Street:</label>
-                            <input type="text" name="address" class="input-field focus:outline-none focus:ring-none"
-                                id="modalStreet" value="" readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalBarangay"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Barangay:</label>
-                            <input type="text" name="address" class="input-field focus:outline-none focus:ring-none"
-                                id="modalBarangay" value="" readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalCity" class="block mb-2 text-[12px] font-bold text-gray-900">City:</label>
-                            <input type="text" name="address" class="input-field focus:outline-none focus:ring-none"
-                                id="modalCity" value="" readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalProvince"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Province:</label>
-                            <input type="text" name="address" class="input-field focus:outline-none focus:ring-none"
-                                id="modalProvince" value="" readonly>
-                        </div>
-
-                        <div></div>
-                        <div></div>
-                        <div></div>
-
-                        <!-- Father's Information -->
-                        <div class="col-span-4">
-                            <p class="text-[16px] font-bold">Father Information </p>
-                        </div>
-                        <div>
-                            <label for="modalFatherLastName"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Father's
-                                Last Name:</label>
-                            <input type="text" name="fatherLastName" id="modalFatherLastName"
-                                class="input-field focus:outline-none focus:ring-none" placeholder="Father's Last Name"
-                                readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalFatherFirstName"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Father's First Name:</label>
-                            <input type="text" name="fatherFirstName" id="modalFatherFirstName"
-                                class="input-field focus:outline-none focus:ring-none" placeholder="Father's First Name"
-                                readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalFatherMiddleName"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Father's Middle Name:</label>
-                            <input type="text" name="fatherMiddleName" id="modalFatherMiddleName"
-                                class="input-field focus:outline-none focus:ring-none"
-                                placeholder="Father's Middle Name" readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalFatherSuffix"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Father's
-                                Suffix (if any):</label>
-                            <input type="text" name="fatherSuffix" id="modalFatherSuffix"
-                                class="input-field focus:outline-none focus:ring-none" placeholder="Father's Suffix"
-                                readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalFatherOccupation"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Father's Occupation:</label>
-                            <input type="text" name="fatherOccupation" id="modalFatherOccupation"
-                                class="input-field focus:outline-none focus:ring-none" placeholder="Father's Occupation"
-                                readonly>
-                        </div>
-
-                        <div></div>
-                        <div></div>
-                        <div></div>
-
-                        <!-- Mother's Information -->
-                        <div class="col-span-4">
-                            <p class="text-[16px] font-bold">Mother Information </p>
-                        </div>
-                        <div>
-                            <label for="modalMotherLastName"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Mother's
-                                Last Name:</label>
-                            <input type="text" name="motherLastName" id="modalMotherLastName"
-                                class="input-field focus:outline-none focus:ring-none" placeholder="Mother's Last Name"
-                                readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalMotherFirstName"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Mother's First Name:</label>
-                            <input type="text" name="motherFirstName" id="modalMotherFirstName"
-                                class="input-field focus:outline-none focus:ring-none" placeholder="Mother's First Name"
-                                readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalMotherMiddleName"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Mother's Middle Name:</label>
-                            <input type="text" name="motherMiddleName" id="modalMotherMiddleName"
-                                class="input-field focus:outline-none focus:ring-none"
-                                placeholder="Mother's Middle Name" readonly>
-                        </div>
-
-                        <div></div>
-
-                        <div>
-                            <label for="modalMotherOccupation"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Mother's Occupation:</label>
-                            <input type="text" name="motherOccupation" id="modalMotherOccupation"
-                                class="input-field focus:outline-none focus:ring-none" placeholder="Mother's Occupation"
-                                readonly>
-                        </div>
-
-                        <div></div>
-                        <div></div>
-                        <div></div>
-
-                        <!-- Guardian's Information -->
-                        <div class="col-span-4">
-                            <p class="text-[16px] font-bold">Guardian Information </p>
-                        </div>
-                        <div>
-                            <label for="modalGuardianLastName"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Guardian's Last Name:</label>
-                            <input type="text" name="guardianLastName" id="modalGuardianLastName"
-                                class="input-field focus:outline-none focus:ring-none"
-                                placeholder="Guardian's Last Name" readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalGuardianFirstName"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Guardian's First Name:</label>
-                            <input type="text" name="guardianFirstName" id="modalGuardianFirstName"
-                                class="input-field focus:outline-none focus:ring-none"
-                                placeholder="Guardian's First Name" readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalGuardianMiddleName"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Guardian's Middle Name:</label>
-                            <input type="text" name="guardianMiddleName" id="modalGuardianMiddleName"
-                                class="input-field focus:outline-none focus:ring-none"
-                                placeholder="Guardian's Middle Name" readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalGuardianSuffix"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Guardian's Suffix (if
-                                any):</label>
-                            <input type="text" name="guardianSuffix" id="modalGuardianSuffix"
-                                class="input-field focus:outline-none focus:ring-none" placeholder="Guardian's Suffix"
-                                readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalGuardianRelationship"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Guardian's Relationship:</label>
-                            <input type="text" name="guardianRelationship" id="modalGuardianRelationship"
-                                class="input-field focus:outline-none focus:ring-none"
-                                placeholder="Guardian's Relationship" readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalGuardianContact"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Guardian's Contact
-                                Number:</label>
-                            <input type="text" name="guardianContact" id="modalGuardianContact"
-                                class="input-field focus:outline-none focus:ring-none"
-                                placeholder="Guardian's Contact Number" readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalGuardianReligion"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Religion:</label>
-                            <input type="text" name="guardianReligion" id="modalGuardianReligion"
-                                class="input-field focus:outline-none focus:ring-none"
-                                placeholder="Guardian's Contact Number" readonly>
-                        </div>
-
-                        <div></div>
-
-                        <!-- Emergency Contact Information -->
-                        <div class="col-span-4">
-                            <p class="text-[16px] font-bold">Emergency Information </p>
-                        </div>
-                        <div>
-                            <label for="modalEmergencyContactPerson"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Emergency Contact Person:</label>
-                            <input type="text" name="emergencyContactPerson" id="modalEmergencyContactPerson"
-                                class="input-field focus:outline-none focus:ring-none"
-                                placeholder="Emergency Contact Person" readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalEmergencyContactNumber"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Emergency Contact Number:</label>
-                            <input type="text" name="emergencyContactNumber" id="modalEmergencyContactNumber"
-                                class="input-field focus:outline-none focus:ring-none"
-                                placeholder="Emergency Contact Number" readonly>
-                        </div>
-
-                        <!-- Contact Information -->
-                        <div>
-                            <label for="modalEmailAddress" class="block mb-2 text-[12px] font-bold text-gray-900">Email
-                                Address:</label>
-                            <input type="email" name="emailAddress" id="modalEmailAddress"
-                                class="input-field focus:outline-none focus:ring-none" placeholder="Email Address"
-                                readonly>
-                        </div>
-
-                        <div>
-                            <label for="modalMessengerAccount"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Messenger Account
-                                (optional):</label>
-                            <input type="text" name="messengerAccount" id="modalMessengerAccount"
-                                class="input-field focus:outline-none focus:ring-none"
-                                placeholder="Messenger Account (optional)" readonly>
-                        </div>
-
-                        <div class="col-span-4">
-                            <p class="text-[16px] font-bold">Student Documents Information</p>
-                        </div>
-                        <div>
-                            <label for="modalBirthCertificate"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Birth
-                                Certificate:</label>
-                            <div id="modalBirthCertificate" class="document-preview">No Document Available</div>
-                        </div>
-
-                        <div>
-                            <label for="modalProofOfResidency"
-                                class="block mb-2 text-[12px] font-bold text-gray-900">Proof of Residency:</label>
-                            <div id="modalProofOfResidency" class="document-preview">No Document Available</div>
-                        </div>
-
-                        <div></div>
-                        <div></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-span-4 mt-10 flex justify-end px-20">
-                        <button id="btnPrint" class="text-[12px] text-white shadow-lg bg-red-700 rounded-lg shadow hover:bg-red-600 px-3 mt-5"><i class="fas fa-file-pdf mr-2"></i>Download Reports
+                <div class="col-span-3 container">
+                    <div class="col-span-3 my-5 flex justify-end px-20">
+                        <button id="btnPrint"
+                            class="text-[12px] text-white shadow-lg bg-orange-700 rounded-lg shadow hover:bg-orange-600 px-3 mt-5"><i
+                                class="fas fa-file-pdf mr-2"></i>Download Reports
                             Grade</button>
                     </div>
-            <form action="" class="p-20 pt-0 shadow-lg">
-                <div class="grid grid-cols-1 lg:grid-cols-4 lg:gap-5 text-[13px] text-gray-900">
-                    <div class="col-span-4 mt-10">
-                        <h1 class="text-[15px] font-bold">Grades for Grade One</h1>
-                        <!-- First table (existing one) -->
-                        <table class="table table-bordered shadow-lg" id="tableGradeOne">
-                            <thead class="bg-yellow-100">
-                                <tr>
-                                    <th>Student Number</th>
-                                    <th>Quarter</th>
-                                    <th>Subject 1</th>
-                                    <th>Subject 2</th>
-                                    <th>Subject 3</th>
-                                    <th>Subject 4</th>
-                                    <th>Subject 5</th>
-                                    <th>Subject 6</th>
-                                    <th>Subject 7</th>
-                                    <th>Subject 8</th>
-                                    <th>Subject 9</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($gradeOne as $gradeOneGrade)
-                                                                @php
-                                                                    $additionalInfo = $studentsAdditional[$student->student_number];
-                                                                @endphp
-                                                                <tr data-student-number="{{ $gradeOneGrade->student_number }}">
-                                                                    <td>{{ $gradeOneGrade->student_number }}</td>
-                                                                    <td>{{ $gradeOneGrade->quarter }}</td>
-                                                                    <td>{{ $gradeOneGrade->subject_one }}</td>
-                                                                    <td>{{ $gradeOneGrade->subject_two }}</td>
-                                                                    <td>{{ $gradeOneGrade->subject_three }}</td>
-                                                                    <td>{{ $gradeOneGrade->subject_four }}</td>
-                                                                    <td>{{ $gradeOneGrade->subject_five }}</td>
-                                                                    <td>{{ $gradeOneGrade->subject_six }}</td>
-                                                                    <td>{{ $gradeOneGrade->subject_seven }}</td>
-                                                                    <td>{{ $gradeOneGrade->subject_eight }}</td>
-                                                                    <td>{{ $gradeOneGrade->subject_nine }}</td>
-                                                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                    <div class="flex">
+                        <div class="p-2 mx-2 rounded-lg">
+                            <div class="flex mb-4 text-[14px]">
+                                <ul class="flex space-x-6 list-none p-4 m-0 bg-gray-50 rounded-lg shadow-lg">
+                                    <li class="cursor-pointer text-white bg-red-600 hover:bg-red-800 hover:underline transition-all duration-300 p-2 rounded-lg"
+                                        data-target="#Information">Student Information</li>
+                                    <li class="cursor-pointer text-blue-600 bg-gray-100 hover:bg-gray-200 hover:text-blue-800 hover:underline transition-all duration-300 p-2 rounded-lg"
+                                        data-target="#gradeOne">Grades for Grade One</li>
+                                    <li class="cursor-pointer text-blue-600 bg-gray-100 hover:bg-gray-200 hover:text-blue-800 hover:underline transition-all duration-300 p-2 rounded-lg"
+                                        data-target="#gradeTwo">Grades for Grade Two</li>
+                                    <li class="cursor-pointer text-blue-600 bg-gray-100 hover:bg-gray-200 hover:text-blue-800 hover:underline transition-all duration-300 p-2 rounded-lg"
+                                        data-target="#gradeThree">Grades for Grade Three</li>
+                                    <li class="cursor-pointer text-blue-600 bg-gray-100 hover:bg-gray-200 hover:text-blue-800 hover:underline transition-all duration-300 p-2 rounded-lg"
+                                        data-target="#gradeFour">Grades for Grade Four</li>
+                                    <li class="cursor-pointer text-blue-600 bg-gray-100 hover:bg-gray-200 hover:text-blue-800 hover:underline transition-all duration-300 p-2 rounded-lg"
+                                        data-target="#gradeFive">Grades for Grade Five</li>
+                                    <li class="cursor-pointer text-blue-600 bg-gray-100 hover:bg-gray-200 hover:text-blue-800 hover:underline transition-all duration-300 p-2 rounded-lg"
+                                        data-target="#gradeSix">Grades for Grade Six</li>
+                                </ul>
+                            </div>
 
-                    <!-- Grade Two -->
-                    <div class="col-span-4 mt-10">
-                        <h1 class="text-[15px] font-bold">Grades for Grade Two</h1>
-                        <table class="table table-bordered shadow-lg" id="tableGradeTwo">
-                            <thead class="bg-teal-200">
-                                <tr>
-                                    <th>Student Number</th>
-                                    <th>Quarter</th>
-                                    <th>Subject 1</th>
-                                    <th>Subject 2</th>
-                                    <th>Subject 3</th>
-                                    <th>Subject 4</th>
-                                    <th>Subject 5</th>
-                                    <th>Subject 6</th>
-                                    <th>Subject 7</th>
-                                    <th>Subject 8</th>
-                                    <th>Subject 9</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($gradeTwo as $gradeTwoGrade)
-                                    <tr data-student-number="{{ $gradeTwoGrade->student_number }}">
-                                        <td>{{ $gradeTwoGrade->student_number }}</td>
-                                        <td>{{ $gradeTwoGrade->quarter }}</td>
-                                        <td>{{ $gradeTwoGrade->subject_one }}</td>
-                                        <td>{{ $gradeTwoGrade->subject_two }}</td>
-                                        <td>{{ $gradeTwoGrade->subject_three }}</td>
-                                        <td>{{ $gradeTwoGrade->subject_four }}</td>
-                                        <td>{{ $gradeTwoGrade->subject_five }}</td>
-                                        <td>{{ $gradeTwoGrade->subject_six }}</td>
-                                        <td>{{ $gradeTwoGrade->subject_seven }}</td>
-                                        <td>{{ $gradeTwoGrade->subject_eight }}</td>
-                                        <td>{{ $gradeTwoGrade->subject_nine }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            <!-- Scheduled Table -->
+                            <div class="table-container shadow-lg mt-20 pb-10" id="Information" style="display:block;">
+                                <div class="">
+                                    <div class="grid grid-cols-1 lg:grid-cols-4 lg:gap-5 text-[13px] text-gray-900">
+                                        <div class="col-span-2">
+                                            <label for="modalLrn"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Learner
+                                                Reference Number (LRN):</label>
+                                            <input type="text" name="lrn"
+                                                class="input-field focus:outline-none focus:ring-none" id="modalLrn"
+                                                value="" readonly>
+                                        </div>
 
-                    <!-- Grade Three -->
-                    <div class="col-span-4 mt-10">
-                        <h1 class="text-[15px] font-bold">Grades for Grade Three</h1>
-                        <table class="table table-bordered shadow-lg" id="tableGradeThree">
-                            <thead class="bg-green-200">
-                                <tr>
-                                    <th>Student Number</th>
-                                    <th>Quarter</th>
-                                    <th>Subject 1</th>
-                                    <th>Subject 2</th>
-                                    <th>Subject 3</th>
-                                    <th>Subject 4</th>
-                                    <th>Subject 5</th>
-                                    <th>Subject 6</th>
-                                    <th>Subject 7</th>
-                                    <th>Subject 8</th>
-                                    <th>Subject 9</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($gradeThree as $gradeThreeGrade)
-                                    <tr data-student-number="{{ $gradeThreeGrade->student_number }}">
-                                        <td>{{ $gradeThreeGrade->student_number }}</td>
-                                        <td>{{ $gradeThreeGrade->quarter }}</td>
-                                        <td>{{ $gradeThreeGrade->subject_one }}</td>
-                                        <td>{{ $gradeThreeGrade->subject_two }}</td>
-                                        <td>{{ $gradeThreeGrade->subject_three }}</td>
-                                        <td>{{ $gradeThreeGrade->subject_four }}</td>
-                                        <td>{{ $gradeThreeGrade->subject_five }}</td>
-                                        <td>{{ $gradeThreeGrade->subject_six }}</td>
-                                        <td>{{ $gradeThreeGrade->subject_seven }}</td>
-                                        <td>{{ $gradeThreeGrade->subject_eight }}</td>
-                                        <td>{{ $gradeThreeGrade->subject_nine }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                        <div>
+                                            <label for="modalSchoolYear"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">School
+                                                Year:</label>
+                                            <input type="text" name="schoolYear"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                id="modalSchoolYear" value="" readonly>
+                                        </div>
 
-                    <div class="col-span-4 mt-10">
-                        <h1 class="text-[15px] font-bold">Grades for Grade Four</h1>
-                        <table class="table table-bordered shadow-lg" id="tableGradeFour">
-                            <thead class="bg-red-200">
-                                <tr>
-                                    <th>Student Number</th>
-                                    <th>Quarter</th>
-                                    <th>Subject 1</th>
-                                    <th>Subject 2</th>
-                                    <th>Subject 3</th>
-                                    <th>Subject 4</th>
-                                    <th>Subject 5</th>
-                                    <th>Subject 6</th>
-                                    <th>Subject 7</th>
-                                    <th>Subject 8</th>
-                                    <th>Subject 9</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($gradeFour as $gradeFourGrade)
-                                    <tr data-student-number="{{ $gradeFourGrade->student_number }}">
-                                        <td>{{ $gradeFourGrade->student_number }}</td>
-                                        <td>{{ $gradeFourGrade->quarter }}</td>
-                                        <td>{{ $gradeFourGrade->subject_one }}</td>
-                                        <td>{{ $gradeFourGrade->subject_two }}</td>
-                                        <td>{{ $gradeFourGrade->subject_three }}</td>
-                                        <td>{{ $gradeFourGrade->subject_four }}</td>
-                                        <td>{{ $gradeFourGrade->subject_five }}</td>
-                                        <td>{{ $gradeFourGrade->subject_six }}</td>
-                                        <td>{{ $gradeFourGrade->subject_seven }}</td>
-                                        <td>{{ $gradeFourGrade->subject_eight }}</td>
-                                        <td>{{ $gradeFourGrade->subject_nine }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                        <div>
+                                            <label for="modalSchool"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">School:</label>
+                                            <input type="text" name="school"
+                                                class="input-field focus:outline-none focus:ring-none" id="modalSchool"
+                                                value="" readonly>
+                                        </div>
 
-                    <div class="col-span-4 mt-10">
-                        <h1 class="text-[15px] font-bold">Grades for Grade Five</h1>
-                        <table class="table table-bordered shadow-lg" id="tableGradeFive">
-                            <thead class="bg-cyan-200">
-                                <tr>
-                                    <th>Student Number</th>
-                                    <th>Quarter</th>
-                                    <th>Subject 1</th>
-                                    <th>Subject 2</th>
-                                    <th>Subject 3</th>
-                                    <th>Subject 4</th>
-                                    <th>Subject 5</th>
-                                    <th>Subject 6</th>
-                                    <th>Subject 7</th>
-                                    <th>Subject 8</th>
-                                    <th>Subject 9</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($gradeFive as $gradeFiveGrade)
-                                    <tr data-student-number="{{ $gradeFiveGrade->student_number }}">
-                                        <td>{{ $gradeFiveGrade->student_number }}</td>
-                                        <td>{{ $gradeFiveGrade->quarter }}</td>
-                                        <td>{{ $gradeFiveGrade->subject_one }}</td>
-                                        <td>{{ $gradeFiveGrade->subject_two }}</td>
-                                        <td>{{ $gradeFiveGrade->subject_three }}</td>
-                                        <td>{{ $gradeFiveGrade->subject_four }}</td>
-                                        <td>{{ $gradeFiveGrade->subject_five }}</td>
-                                        <td>{{ $gradeFiveGrade->subject_six }}</td>
-                                        <td>{{ $gradeFiveGrade->subject_seven }}</td>
-                                        <td>{{ $gradeFiveGrade->subject_eight }}</td>
-                                        <td>{{ $gradeFiveGrade->subject_nine }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                                        <div class="hidden">
+                                            <label for="modalLastName"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Last
+                                                Name:</label>
+                                            <input type="hidden" name="lastname"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                id="modalLastName" value="" readonly>
+                                        </div>
 
-                    <div class="col-span-4 mt-10">
-                        <h1 class="text-[15px] font-bold">Grades for Grade Six</h1>
-                        <table class="table table-bordered shadow-lg" id="tableGradeSix">
-                            <thead class="bg-blue-200">
-                                <tr>
-                                    <th>Student Number</th>
-                                    <th>Quarter</th>
-                                    <th>Subject 1</th>
-                                    <th>Subject 2</th>
-                                    <th>Subject 3</th>
-                                    <th>Subject 4</th>
-                                    <th>Subject 5</th>
-                                    <th>Subject 6</th>
-                                    <th>Subject 7</th>
-                                    <th>Subject 8</th>
-                                    <th>Subject 9</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($gradeSix as $gradeSixGrade)
-                                    <tr data-student-number="{{ $gradeSixGrade->student_number }}">
-                                        <td>{{ $gradeSixGrade->student_number }}</td>
-                                        <td>{{ $gradeSixGrade->quarter }}</td>
-                                        <td>{{ $gradeSixGrade->subject_one }}</td>
-                                        <td>{{ $gradeSixGrade->subject_two }}</td>
-                                        <td>{{ $gradeSixGrade->subject_three }}</td>
-                                        <td>{{ $gradeSixGrade->subject_four }}</td>
-                                        <td>{{ $gradeSixGrade->subject_five }}</td>
-                                        <td>{{ $gradeSixGrade->subject_six }}</td>
-                                        <td>{{ $gradeSixGrade->subject_seven }}</td>
-                                        <td>{{ $gradeSixGrade->subject_eight }}</td>
-                                        <td>{{ $gradeSixGrade->subject_nine }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                        <div class="hidden">
+                                            <label for="modalFirstName"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">First
+                                                Name:</label>
+                                            <input type="hidden" name="lastname"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                id="modalFirstName" value="" readonly>
+                                        </div>
+
+                                        <div class="hidden">
+                                            <label for="modalMiddleName"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Middle
+                                                Name:</label>
+                                            <input type="hidden" name="lastname"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                id="modalMiddleName" value="" readonly>
+                                        </div>
+
+                                        <div class="hidden">
+                                            <label for="modalSuffixName"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Suffix
+                                                Name:</label>
+                                            <input type="hidden" name="lastname"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                id="modalSuffixName" value="" readonly>
+                                        </div>
+
+                                        <div class="col-span-4">
+                                            <p class="text-[16px] font-bold">Address</p>
+                                        </div>
+                                        <div>
+                                            <label for="modalhouseNumber"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">House
+                                                No.:</label>
+                                            <input type="text" name="address"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                id="modalhouseNumber" value="" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalStreet"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Street:</label>
+                                            <input type="text" name="address"
+                                                class="input-field focus:outline-none focus:ring-none" id="modalStreet"
+                                                value="" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalBarangay"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Barangay:</label>
+                                            <input type="text" name="address"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                id="modalBarangay" value="" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalCity"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">City:</label>
+                                            <input type="text" name="address"
+                                                class="input-field focus:outline-none focus:ring-none" id="modalCity"
+                                                value="" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalProvince"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Province:</label>
+                                            <input type="text" name="address"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                id="modalProvince" value="" readonly>
+                                        </div>
+
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+
+                                        <!-- Father's Information -->
+                                        <div class="col-span-4">
+                                            <p class="text-[16px] font-bold">Father Information </p>
+                                        </div>
+                                        <div>
+                                            <label for="modalFatherLastName"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Father's
+                                                Last Name:</label>
+                                            <input type="text" name="fatherLastName" id="modalFatherLastName"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Father's Last Name" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalFatherFirstName"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Father's
+                                                First Name:</label>
+                                            <input type="text" name="fatherFirstName" id="modalFatherFirstName"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Father's First Name" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalFatherMiddleName"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Father's
+                                                Middle Name:</label>
+                                            <input type="text" name="fatherMiddleName" id="modalFatherMiddleName"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Father's Middle Name" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalFatherSuffix"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Father's
+                                                Suffix (if any):</label>
+                                            <input type="text" name="fatherSuffix" id="modalFatherSuffix"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Father's Suffix" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalFatherOccupation"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Father's
+                                                Occupation:</label>
+                                            <input type="text" name="fatherOccupation" id="modalFatherOccupation"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Father's Occupation" readonly>
+                                        </div>
+
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+
+                                        <!-- Mother's Information -->
+                                        <div class="col-span-4">
+                                            <p class="text-[16px] font-bold">Mother Information </p>
+                                        </div>
+                                        <div>
+                                            <label for="modalMotherLastName"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Mother's
+                                                Last Name:</label>
+                                            <input type="text" name="motherLastName" id="modalMotherLastName"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Mother's Last Name" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalMotherFirstName"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Mother's
+                                                First Name:</label>
+                                            <input type="text" name="motherFirstName" id="modalMotherFirstName"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Mother's First Name" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalMotherMiddleName"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Mother's
+                                                Middle Name:</label>
+                                            <input type="text" name="motherMiddleName" id="modalMotherMiddleName"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Mother's Middle Name" readonly>
+                                        </div>
+
+                                        <div></div>
+
+                                        <div>
+                                            <label for="modalMotherOccupation"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Mother's
+                                                Occupation:</label>
+                                            <input type="text" name="motherOccupation" id="modalMotherOccupation"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Mother's Occupation" readonly>
+                                        </div>
+
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+
+                                        <!-- Guardian's Information -->
+                                        <div class="col-span-4">
+                                            <p class="text-[16px] font-bold">Guardian Information </p>
+                                        </div>
+                                        <div>
+                                            <label for="modalGuardianLastName"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Guardian's
+                                                Last Name:</label>
+                                            <input type="text" name="guardianLastName" id="modalGuardianLastName"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Guardian's Last Name" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalGuardianFirstName"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Guardian's
+                                                First Name:</label>
+                                            <input type="text" name="guardianFirstName" id="modalGuardianFirstName"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Guardian's First Name" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalGuardianMiddleName"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Guardian's
+                                                Middle Name:</label>
+                                            <input type="text" name="guardianMiddleName" id="modalGuardianMiddleName"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Guardian's Middle Name" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalGuardianSuffix"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Guardian's
+                                                Suffix (if
+                                                any):</label>
+                                            <input type="text" name="guardianSuffix" id="modalGuardianSuffix"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Guardian's Suffix" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalGuardianRelationship"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Guardian's
+                                                Relationship:</label>
+                                            <input type="text" name="guardianRelationship"
+                                                id="modalGuardianRelationship"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Guardian's Relationship" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalGuardianContact"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Guardian's
+                                                Contact
+                                                Number:</label>
+                                            <input type="text" name="guardianContact" id="modalGuardianContact"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Guardian's Contact Number" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalGuardianReligion"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Religion:</label>
+                                            <input type="text" name="guardianReligion" id="modalGuardianReligion"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Guardian's Contact Number" readonly>
+                                        </div>
+
+                                        <div></div>
+
+                                        <!-- Emergency Contact Information -->
+                                        <div class="col-span-4">
+                                            <p class="text-[16px] font-bold">Emergency Information </p>
+                                        </div>
+                                        <div>
+                                            <label for="modalEmergencyContactPerson"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Emergency
+                                                Contact Person:</label>
+                                            <input type="text" name="emergencyContactPerson"
+                                                id="modalEmergencyContactPerson"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Emergency Contact Person" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalEmergencyContactNumber"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Emergency
+                                                Contact Number:</label>
+                                            <input type="text" name="emergencyContactNumber"
+                                                id="modalEmergencyContactNumber"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Emergency Contact Number" readonly>
+                                        </div>
+
+                                        <!-- Contact Information -->
+                                        <div>
+                                            <label for="modalEmailAddress"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Email
+                                                Address:</label>
+                                            <input type="email" name="emailAddress" id="modalEmailAddress"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Email Address" readonly>
+                                        </div>
+
+                                        <div>
+                                            <label for="modalMessengerAccount"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Messenger
+                                                Account
+                                                (optional):</label>
+                                            <input type="text" name="messengerAccount" id="modalMessengerAccount"
+                                                class="input-field focus:outline-none focus:ring-none"
+                                                placeholder="Messenger Account (optional)" readonly>
+                                        </div>
+
+                                        <div class="col-span-4">
+                                            <p class="text-[16px] font-bold">Student Documents Information</p>
+                                        </div>
+                                        <div class="col-span-2">
+                                            <label for="modalBirthCertificate"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Birth
+                                                Certificate:</label>
+                                            <div id="modalBirthCertificate" class="document-preview">No Document
+                                                Available</div>
+                                        </div>
+
+                                        <div class="col-span-2">
+                                            <label for="modalProofOfResidency"
+                                                class="block mb-2 text-[12px] font-bold text-gray-900">Proof of
+                                                Residency:</label>
+                                            <div id="modalProofOfResidency" class="document-preview">No Document
+                                                Available</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Unsheduled Table -->
+                            <div class="table-container" id="gradeOne" style="display:none;">
+                                <div class="overflow-x-auto">
+                                    <div class="col-span-4 mt-10">
+                                        <!-- First table (existing one) -->
+                                        <table class="table table-bordered shadow-lg" id="tableGradeOne">
+                                            <thead class="bg-yellow-100">
+                                                <tr>
+                                                    <th>Student Number</th>
+                                                    <th>Quarter</th>
+                                                    <th>Subject 1</th>
+                                                    <th>Subject 2</th>
+                                                    <th>Subject 3</th>
+                                                    <th>Subject 4</th>
+                                                    <th>Subject 5</th>
+                                                    <th>Subject 6</th>
+                                                    <th>Subject 7</th>
+                                                    <th>Subject 8</th>
+                                                    <th>Subject 9</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($gradeOne as $gradeOneGrade)
+                                                                                                @php
+                                                                                                    $additionalInfo = $studentsAdditional[$student->student_number];
+                                                                                                @endphp
+                                                                                                <tr data-student-number="{{ $gradeOneGrade->student_number }}">
+                                                                                                    <td>{{ $gradeOneGrade->student_number }}</td>
+                                                                                                    <td>{{ $gradeOneGrade->quarter }}</td>
+                                                                                                    <td>{{ $gradeOneGrade->subject_one }}</td>
+                                                                                                    <td>{{ $gradeOneGrade->subject_two }}</td>
+                                                                                                    <td>{{ $gradeOneGrade->subject_three }}</td>
+                                                                                                    <td>{{ $gradeOneGrade->subject_four }}</td>
+                                                                                                    <td>{{ $gradeOneGrade->subject_five }}</td>
+                                                                                                    <td>{{ $gradeOneGrade->subject_six }}</td>
+                                                                                                    <td>{{ $gradeOneGrade->subject_seven }}</td>
+                                                                                                    <td>{{ $gradeOneGrade->subject_eight }}</td>
+                                                                                                    <td>{{ $gradeOneGrade->subject_nine }}</td>
+                                                                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Settled Table -->
+                            <div class="table-container" id="gradeTwo" style="display:none;">
+                                <div class="overflow-x-auto">
+                                    <!-- Grade Two -->
+                                    <div class="col-span-4 mt-10">
+                                        <table class="table table-bordered shadow-lg" id="tableGradeTwo">
+                                            <thead class="bg-teal-200">
+                                                <tr>
+                                                    <th>Student Number</th>
+                                                    <th>Quarter</th>
+                                                    <th>Subject 1</th>
+                                                    <th>Subject 2</th>
+                                                    <th>Subject 3</th>
+                                                    <th>Subject 4</th>
+                                                    <th>Subject 5</th>
+                                                    <th>Subject 6</th>
+                                                    <th>Subject 7</th>
+                                                    <th>Subject 8</th>
+                                                    <th>Subject 9</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($gradeTwo as $gradeTwoGrade)
+                                                    <tr data-student-number="{{ $gradeTwoGrade->student_number }}">
+                                                        <td>{{ $gradeTwoGrade->student_number }}</td>
+                                                        <td>{{ $gradeTwoGrade->quarter }}</td>
+                                                        <td>{{ $gradeTwoGrade->subject_one }}</td>
+                                                        <td>{{ $gradeTwoGrade->subject_two }}</td>
+                                                        <td>{{ $gradeTwoGrade->subject_three }}</td>
+                                                        <td>{{ $gradeTwoGrade->subject_four }}</td>
+                                                        <td>{{ $gradeTwoGrade->subject_five }}</td>
+                                                        <td>{{ $gradeTwoGrade->subject_six }}</td>
+                                                        <td>{{ $gradeTwoGrade->subject_seven }}</td>
+                                                        <td>{{ $gradeTwoGrade->subject_eight }}</td>
+                                                        <td>{{ $gradeTwoGrade->subject_nine }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Unsheduled Table -->
+                            <div class="table-container" id="gradeThree" style="display:none;">
+                                <div class="overflow-x-auto">
+                                    <!-- Grade Three -->
+                                    <div class="col-span-4 mt-10">
+                                        <table class="table table-bordered shadow-lg" id="tableGradeThree">
+                                            <thead class="bg-green-200">
+                                                <tr>
+                                                    <th>Student Number</th>
+                                                    <th>Quarter</th>
+                                                    <th>Subject 1</th>
+                                                    <th>Subject 2</th>
+                                                    <th>Subject 3</th>
+                                                    <th>Subject 4</th>
+                                                    <th>Subject 5</th>
+                                                    <th>Subject 6</th>
+                                                    <th>Subject 7</th>
+                                                    <th>Subject 8</th>
+                                                    <th>Subject 9</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($gradeThree as $gradeThreeGrade)
+                                                    <tr data-student-number="{{ $gradeThreeGrade->student_number }}">
+                                                        <td>{{ $gradeThreeGrade->student_number }}</td>
+                                                        <td>{{ $gradeThreeGrade->quarter }}</td>
+                                                        <td>{{ $gradeThreeGrade->subject_one }}</td>
+                                                        <td>{{ $gradeThreeGrade->subject_two }}</td>
+                                                        <td>{{ $gradeThreeGrade->subject_three }}</td>
+                                                        <td>{{ $gradeThreeGrade->subject_four }}</td>
+                                                        <td>{{ $gradeThreeGrade->subject_five }}</td>
+                                                        <td>{{ $gradeThreeGrade->subject_six }}</td>
+                                                        <td>{{ $gradeThreeGrade->subject_seven }}</td>
+                                                        <td>{{ $gradeThreeGrade->subject_eight }}</td>
+                                                        <td>{{ $gradeThreeGrade->subject_nine }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Settled Table -->
+                            <div class="table-container" id="gradeFour" style="display:none;">
+                                <div class="overflow-x-auto">
+                                    <div class="col-span-4 mt-10">
+                                        <table class="table table-bordered shadow-lg" id="tableGradeFour">
+                                            <thead class="bg-red-200">
+                                                <tr>
+                                                    <th>Student Number</th>
+                                                    <th>Quarter</th>
+                                                    <th>Subject 1</th>
+                                                    <th>Subject 2</th>
+                                                    <th>Subject 3</th>
+                                                    <th>Subject 4</th>
+                                                    <th>Subject 5</th>
+                                                    <th>Subject 6</th>
+                                                    <th>Subject 7</th>
+                                                    <th>Subject 8</th>
+                                                    <th>Subject 9</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($gradeFour as $gradeFourGrade)
+                                                    <tr data-student-number="{{ $gradeFourGrade->student_number }}">
+                                                        <td>{{ $gradeFourGrade->student_number }}</td>
+                                                        <td>{{ $gradeFourGrade->quarter }}</td>
+                                                        <td>{{ $gradeFourGrade->subject_one }}</td>
+                                                        <td>{{ $gradeFourGrade->subject_two }}</td>
+                                                        <td>{{ $gradeFourGrade->subject_three }}</td>
+                                                        <td>{{ $gradeFourGrade->subject_four }}</td>
+                                                        <td>{{ $gradeFourGrade->subject_five }}</td>
+                                                        <td>{{ $gradeFourGrade->subject_six }}</td>
+                                                        <td>{{ $gradeFourGrade->subject_seven }}</td>
+                                                        <td>{{ $gradeFourGrade->subject_eight }}</td>
+                                                        <td>{{ $gradeFourGrade->subject_nine }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Unsheduled Table -->
+                            <div class="table-container" id="gradeFive" style="display:none;">
+                                <div class="overflow-x-auto">
+                                    <div class="col-span-4 mt-10">
+                                        <table class="table table-bordered shadow-lg" id="tableGradeFive">
+                                            <thead class="bg-cyan-200">
+                                                <tr>
+                                                    <th>Student Number</th>
+                                                    <th>Quarter</th>
+                                                    <th>Subject 1</th>
+                                                    <th>Subject 2</th>
+                                                    <th>Subject 3</th>
+                                                    <th>Subject 4</th>
+                                                    <th>Subject 5</th>
+                                                    <th>Subject 6</th>
+                                                    <th>Subject 7</th>
+                                                    <th>Subject 8</th>
+                                                    <th>Subject 9</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($gradeFive as $gradeFiveGrade)
+                                                    <tr data-student-number="{{ $gradeFiveGrade->student_number }}">
+                                                        <td>{{ $gradeFiveGrade->student_number }}</td>
+                                                        <td>{{ $gradeFiveGrade->quarter }}</td>
+                                                        <td>{{ $gradeFiveGrade->subject_one }}</td>
+                                                        <td>{{ $gradeFiveGrade->subject_two }}</td>
+                                                        <td>{{ $gradeFiveGrade->subject_three }}</td>
+                                                        <td>{{ $gradeFiveGrade->subject_four }}</td>
+                                                        <td>{{ $gradeFiveGrade->subject_five }}</td>
+                                                        <td>{{ $gradeFiveGrade->subject_six }}</td>
+                                                        <td>{{ $gradeFiveGrade->subject_seven }}</td>
+                                                        <td>{{ $gradeFiveGrade->subject_eight }}</td>
+                                                        <td>{{ $gradeFiveGrade->subject_nine }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Settled Table -->
+                            <div class="table-container" id="gradeSix" style="display:none;">
+                                <div class="overflow-x-auto">
+                                    <div class="col-span-4 mt-10">
+                                        <table class="table table-bordered shadow-lg" id="tableGradeSix">
+                                            <thead class="bg-blue-200">
+                                                <tr>
+                                                    <th>Student Number</th>
+                                                    <th>Quarter</th>
+                                                    <th>Subject 1</th>
+                                                    <th>Subject 2</th>
+                                                    <th>Subject 3</th>
+                                                    <th>Subject 4</th>
+                                                    <th>Subject 5</th>
+                                                    <th>Subject 6</th>
+                                                    <th>Subject 7</th>
+                                                    <th>Subject 8</th>
+                                                    <th>Subject 9</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($gradeSix as $gradeSixGrade)
+                                                    <tr data-student-number="{{ $gradeSixGrade->student_number }}">
+                                                        <td>{{ $gradeSixGrade->student_number }}</td>
+                                                        <td>{{ $gradeSixGrade->quarter }}</td>
+                                                        <td>{{ $gradeSixGrade->subject_one }}</td>
+                                                        <td>{{ $gradeSixGrade->subject_two }}</td>
+                                                        <td>{{ $gradeSixGrade->subject_three }}</td>
+                                                        <td>{{ $gradeSixGrade->subject_four }}</td>
+                                                        <td>{{ $gradeSixGrade->subject_five }}</td>
+                                                        <td>{{ $gradeSixGrade->subject_six }}</td>
+                                                        <td>{{ $gradeSixGrade->subject_seven }}</td>
+                                                        <td>{{ $gradeSixGrade->subject_eight }}</td>
+                                                        <td>{{ $gradeSixGrade->subject_nine }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </form>
-
-            <div>
-                <!-- Search Bar -->
-                <input type="hidden" id="modalStudentNumber1" class="input-field focus:outline-none focus:ring-none"
-                    value="" placeholder="Search by Student Number" onkeyup="filterTable()">
             </div>
         </div>
     </div>
