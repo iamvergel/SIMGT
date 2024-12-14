@@ -36,12 +36,12 @@
             transition: all 0.3s ease;
         }
 
-        .main2 {
-            position: relative;
-            overflow: hidden;
+        .main1 {
+            position: absolute;
+            isolation: isolate;
         }
 
-        .main2::after {
+        .main1::after {
             content: "";
             position: absolute;
             top: 0;
@@ -53,8 +53,9 @@
             background-position: center;
             background-repeat: no-repeat;
             opacity: 1;
-            z-index: 1;
+            z-index: -1;
             animation: bgimage 20s infinite alternate;
+            height: 90%;
         }
 
         @keyframes bgimage {
@@ -79,7 +80,7 @@
             }
         }
 
-        .main2::before {
+        .main1::before {
             content: "";
             position: absolute;
             top: 0;
@@ -89,9 +90,10 @@
             background-color: #000;
             opacity: 0.5;
             z-index: 2;
+            height: 90%;
         }
 
-        .main2::after {
+        .main1::after {
             z-index: 1;
         }
 
@@ -111,79 +113,68 @@
 </head>
 
 <body class="bg-white h-screen w-screen flex items-center justify-center">
-    <div class="main bg-white 2xl:max-w-[1536px] w-full h-screen overflow-y-scroll">
-        <div class="w-full h-[500px] lg:h-[800px] 2xl:mx-h-[800px] bg-teal-100">
-            @include("includes.header")
-
-            <div class="main2 h-[100%] lg:h-[90%] w-full" data-aos="fade-up" data-aos-duration="1000">
-                <div class="title pl-[1rem] lg:pl-[5rem] text-start bg-red-100 z-[50] w-full bg-transparent text-white absolute h-full"
-                    data-aos="fade-up" data-aos-duration="1000">
-                    <p class="text-sm lg:text-[1.5rem] leading-8 mt-[10rem]">Welcome To Our Website</p>
-                    <h1 class="text-[3rem] lg:text-[5rem] 2xl:text-[5rem] font-bold uppercase leading-none">Primary
-                        School
-                    </h1>
-                    <h1 class="text-[1.5rem] lg:text-[3rem] 2xl:text-[5rem] font-bold leading-none text-yellow-300">St.
-                        Emilie Learning
-                        Center
-                    </h1>
-                    <a href="https://www.google.com/maps/place/St.+Emilie+Learning+Center/@14.7187826,121.1332403,15z/data=!4m6!3m5!1s0x3397b0083f1e47fb:0xa41cb7b730554b5!8m2!3d14.7533756!4d121.0806689!16s%2Fg%2F1pzpz4rpw?hl=en&entry=ttu&g_ep=EgoyMDI0MDkxNi4wIKXMDSoASAFQAw%3D%3D"
-                        target="_blank" class="leading-10 text-[12px] lg:text-[1.2rem] hover:text-yellow-500"><i
-                            class="fas fa-map"></i>
-                        Amparo Village, 18 Bangkal, Caloocan, Metro Manila
-                    </a>
-                </div>
+    <div class="main1 bg-white 2xl:max-w-[1900px] w-full h-screen overflow-y-scroll">
+        @include("includes.header")
+        <div class=" w-full h-full lg:h-[90%] 2xl:mx-h-[800px] relative top-0">
+            <div class="pl-[1rem] lg:pl-[5rem] text-start z-[100] absolute lg:top-[-40rem] w-full bg-transparent text-white h-full">
+                <p class="text-sm lg:text-[1.5rem] leading-8 mt-[10rem] 2xl:mt-[0rem]">Welcome To Our Website</p>
+                <h1 class="text-[3rem] lg:text-[5rem] 2xl:text-[5rem] font-bold uppercase leading-none">Primary
+                    School
+                </h1>
+                <h1 class="text-[1.5rem] lg:text-[3rem] 2xl:text-[5rem] font-bold leading-none text-yellow-300">St.
+                    Emilie Learning
+                    Center
+                </h1>
             </div>
 
-            <div class="w-full h-[900px] lg:h-40 bg-white relative" data-aos="fade-down" data-aos-duration="1000">
-                <div class="grid grid-cols-4 gap-4 px-[0rem] lg:px-[6rem] relative lg:absolute items-center w-full z-[20] mt-[3rem] lg:mt-[-8rem] lg:bottom-[5rem]"
-                    style="z-index: 40  ;">
-                    <!-- Course Card -->
-                    <div
-                        class="col-span-4 lg:col-span-1 card bg-yellow-300 py-8 rounded-lg mt-10 lg:mt-0 mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform">
-                        <div class="text-center text-white">
-                            <i
-                                class="fas fa-book fa-3x mb-4 text-yellow-400 p-4 px-5 bg-white rounded-full border-[5px] border-yellow-300 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
-                            <h2 class="text-lg font-bold mb-2 mt-10 bg-yellow-400 rounded-full shadow-lg">Courses</h2>
-                            <p>Browse our courses</p>
-                        </div>
+            <div
+                class="grid grid-cols-4 gap-4 px-[0rem] lg:px-[6rem] relative lg:absolute items-center w-full z-[60] mt-[3rem] lg:top-[-15rem]">
+                <!-- Course Card -->
+                <div
+                    class="col-span-4 lg:col-span-1 card bg-yellow-300 py-8 rounded-lg mt-10 lg:mt-0 mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform">
+                    <div class="text-center text-white">
+                        <i
+                            class="fas fa-book fa-3x mb-4 text-yellow-400 p-4 px-5 bg-white rounded-full border-[5px] border-yellow-300 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
+                        <h2 class="text-lg font-bold mb-2 mt-10 bg-yellow-400 rounded-full shadow-lg">Courses</h2>
+                        <p>Browse our courses</p>
                     </div>
+                </div>
 
-                    <!-- Teachers Card -->
-                    <div
-                        class="col-span-4 lg:col-span-1 card bg-green-300 py-8 rounded-lg mt-10 lg:mt-0 mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform">
-                        <div class="text-center text-white">
-                            <i
-                                class="fas fa-chalkboard-teacher fa-3x mb-4 text-green-400 p-3 py-4 bg-white rounded-full border-[5px] border-green-300 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
-                            <h2 class="text-lg font-bold mb-2 mt-10 bg-green-400 rounded-full shadow-lg">Teachers</h2>
-                            <p>Meet our team</p>
-                        </div>
+                <!-- Teachers Card -->
+                <div
+                    class="col-span-4 lg:col-span-1 card bg-green-300 py-8 rounded-lg mt-10 lg:mt-0 mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform">
+                    <div class="text-center text-white">
+                        <i
+                            class="fas fa-chalkboard-teacher fa-3x mb-4 text-green-400 p-3 py-4 bg-white rounded-full border-[5px] border-green-300 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
+                        <h2 class="text-lg font-bold mb-2 mt-10 bg-green-400 rounded-full shadow-lg">Teachers</h2>
+                        <p>Meet our team</p>
                     </div>
+                </div>
 
-                    <!-- Gallery Card -->
-                    <div
-                        class="col-span-4 lg:col-span-1 card bg-red-300 py-8 mt-10 lg:mt-0 rounded-lg mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform">
-                        <div class="text-center text-white">
-                            <i
-                                class="fas fa-image fa-3x mb-4 text-red-400 p-4 bg-white rounded-full border-[5px] border-red-300 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
-                            <h2 class="text-lg font-bold mb-2 mt-10 bg-red-400 rounded-full shadow-lg">Gallery</h2>
-                            <p>View our gallery</p>
-                        </div>
+                <!-- Gallery Card -->
+                <div
+                    class="col-span-4 lg:col-span-1 card bg-red-300 py-8 mt-10 lg:mt-0 rounded-lg mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform">
+                    <div class="text-center text-white">
+                        <i
+                            class="fas fa-image fa-3x mb-4 text-red-400 p-4 bg-white rounded-full border-[5px] border-red-300 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
+                        <h2 class="text-lg font-bold mb-2 mt-10 bg-red-400 rounded-full shadow-lg">Gallery</h2>
+                        <p>View our gallery</p>
                     </div>
+                </div>
 
-                    <!-- News Card -->
-                    <div
-                        class="col-span-4 lg:col-span-1 card bg-blue-300 py-8 rounded-lg mx-4 mt-10 lg:mt-0 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform">
-                        <div class="text-center text-white">
-                            <i
-                                class="fas fa-newspaper fa-3x mb-4 text-blue-400 p-4 bg-white rounded-full border-[5px] border-blue-300 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
-                            <h2 class="text-lg font-bold mb-2 mt-10 bg-blue-400 rounded-full shadow-lg">News</h2>
-                            <p>Latest updates</p>
-                        </div>
+                <!-- News Card -->
+                <div
+                    class="col-span-4 lg:col-span-1 card bg-blue-300 py-8 rounded-lg mx-4 mt-10 lg:mt-0 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform">
+                    <div class="text-center text-white">
+                        <i
+                            class="fas fa-newspaper fa-3x mb-4 text-blue-400 p-4 bg-white rounded-full border-[5px] border-blue-300 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
+                        <h2 class="text-lg font-bold mb-2 mt-10 bg-blue-400 rounded-full shadow-lg">News</h2>
+                        <p>Latest updates</p>
                     </div>
                 </div>
             </div>
 
-            <div class="w-full px-10 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center">
+            <div class="w-full px-10 py-10 h-[900px] lg:h-[600px] mt-[50rem] relative flex justify-center items-center">
                 <div class="container mx-auto lg:px-4">
                     <div class="grid grid-cols-1 lg:grid-cols-3 lg:p-5 border-lg relative shadow-lg">
                         <!-- Video Box -->
@@ -256,8 +247,8 @@
                             </div>
                         </div>
 
-                         <!-- Image 6 -->
-                         <div class="relative overflow-hidden group">
+                        <!-- Image 6 -->
+                        <div class="relative overflow-hidden group">
                             <img src="{{ asset('../assets/images/SELC.png') }}" alt="Image 5"
                                 class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-80">
                             <div

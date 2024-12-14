@@ -31,6 +31,7 @@
 </head>
 
 <body class="font-poppins bg-gray-200">
+
   <div class="flex flex-col lg:flex-row lg:p-2 w-full h-screen">
     <!-- Sidebar -->
     @include('student.includes.sidebar')
