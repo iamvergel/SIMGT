@@ -41,7 +41,7 @@
         @keyframes bgimage {
             0% {
                 background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/12.jpg
-            );
+);
             }
 
             30% {
@@ -142,6 +142,10 @@
                                     <button type="submit" name="submit"
                                         class="bg-teal-700 text-md text-white font-normal px-4 py-2 rounded-full hover:bg-teal-800 w-full mt-10">
                                         Sign in
+                                    </button>
+                                    <button type="button"
+                                        class="bg-sky-700 text-md text-white font-normal px-4 py-2 rounded-full hover:bg-sky-800 w-full mt-2" onclick="windows.location.href = '#'">
+                                        Admission
                                     </button>
                                 </div>
                             </div>

@@ -46,6 +46,11 @@ return [
             'provider' => 'students',
         ],
 
+        'teacher' => [
+            'driver' => 'session',
+            'provider' => 'teachers',
+        ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -82,7 +87,12 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Mstudentaccount::class,
         ],
-        
+
+        'teachers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Mteacheraccount::class,
+        ],
+
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Madminaccount::class,

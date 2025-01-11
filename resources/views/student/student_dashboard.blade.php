@@ -46,20 +46,19 @@
         <h1 class="text-xl font-bold text-teal-900">Dashboard</h1>
       </div>
 
-
       <div class="grid grid-cols-2">
         <div class="col-span-2 lg:col-span-1">
           <div class="p-5">
             <!-- Avatar Section -->
             <div class="flex justify-between items-end mx-10">
-            <div class="mt-5 pb-5">
-              <button id="colorTeal"
-                class="py-2 px-4 bg-gradient-to-tr from-teal-700 to-teal-500 hover:bg-gradient-to-tr hover:from-teal-900 hover:to-teal-500 text-white rounded-md mr-2">Teal</button>
-              <button id="colorSky"
-                class="py-2 px-4 bg-gradient-to-tr from-cyan-700 to-cyan-500 hover:bg-gradient-to-tr hover:from-cyan-900 hover:to-cyan-500 text-white rounded-md mr-2">Sky</button>
-              <button id="colorYellow"
-                class="py-2 px-4 bg-gradient-to-tr from-yellow-700 to-yellow-500 hover:bg-gradient-to-tr hover:from-yellow-900 hover:to-yellow-500 text-white rounded-md">Yellow</button>
-            </div>
+              <div class="mt-5 pb-5">
+                <button id="colorTeal"
+                  class="py-2 px-4 bg-gradient-to-tr from-teal-700 to-teal-500 hover:bg-gradient-to-tr hover:from-teal-900 hover:to-teal-500 text-white rounded-md mr-2">Teal</button>
+                <button id="colorSky"
+                  class="py-2 px-4 bg-gradient-to-tr from-cyan-700 to-cyan-500 hover:bg-gradient-to-tr hover:from-cyan-900 hover:to-cyan-500 text-white rounded-md mr-2">Sky</button>
+                <button id="colorYellow"
+                  class="py-2 px-4 bg-gradient-to-tr from-yellow-700 to-yellow-500 hover:bg-gradient-to-tr hover:from-yellow-900 hover:to-yellow-500 text-white rounded-md">Yellow</button>
+              </div>
               <!-- Default Avatar -->
               <div id="avatarContainerCharacter" class="avatar-container w-60">
                 <img id="currentAvatarCharacter" src="{{ asset('../assets/images/avatar1.png') }}" alt="Default Avatar"
@@ -115,9 +114,7 @@
         @endphp
                 {{ session('student_last_name') . ', ' . session('student_first_name') . ' ' . strtoupper(substr($middleName, 0, 1)) . '.'}}
               </p>
-              <p class="font-normal text-[12px]">{{ session('grade') . ' - ' . session('section') }}
-              </p>
-              </p>
+              <p class="font-normal text-[12px]">{{ session('grade') . ' - ' . session('section') }}</p>
             </div>
           </div>
         </div>
@@ -126,32 +123,32 @@
             <p class="text-[15px] font-normal text-teal-900 my-5"><i
                 class="fas fa-bullhorn text-teal-900 mr-2"></i>Announcement</p>
             <div class="bg-gray-200 p-2 lg:py-5 text-white rounded-lg shadow-lg text-start announcement">
-              @if($latestAnnouncements->isEmpty())
-          <p class="text-red-500">No announcements available.</>
-      @else
 
-      @foreach($latestAnnouncements as $announcement)
-      <div x-data="{ open: false }"
-      class="announcement my-3 p-5 bg-white border rounded-lg text-teal-700 leading-4">
-      <div class="py-3 px-2 bg-teal-700 rounded-lg text-white" id="announcementa">
-      <div class="flex justify-between items-center">
-      <h5 class="font-bold mb-0 text-[15px]">{{ $announcement->announcements_head }}</h5>
-      <button @click="open = !open" class="bg-transparent text-white rounded px-2 py-1 text-sm">
-        <span x-show="!open"><i class="fas fa-angle-right"></i></span>
-        <span x-show="open"><i class="fas fa-angle-down"></i></span>
-      </button>
-      </div>
-      <small class="text-muted text-[12px]">{{ $announcement->created_at->format('F j, Y, g:i a') }}</small>
-      </div>
+            @if($latestAnnouncements->isEmpty())
+                <p class="text-red-500 text-[14px] text-center">No announcements available.</p>
+            @else
+                @foreach($latestAnnouncements as $announcement)
+                    <div x-data="{ open: false }" class="announcement my-3 p-5 bg-white border rounded-lg text-teal-700 leading-4">
+                        <div class="py-3 px-2 bg-teal-700 rounded-lg text-white" id="announcementa">
+                            <div class="flex justify-between items-center">
+                                <h5 class="font-bold mb-0 text-[15px]">{{ $announcement->announcements_head }}</h5>
+                                <button @click="open = !open" class="bg-transparent text-white rounded px-2 py-1 text-sm">
+                                    <span x-show="!open"><i class="fas fa-angle-right"></i></span>
+                                    <span x-show="open"><i class="fas fa-angle-down"></i></span>
+                                </button>
+                            </div>
+                            <small class="text-muted text-[12px]">{{ $announcement->created_at->format('F j, Y, g:i a') }}</small>
+                        </div>
 
-      <div x-show="open" x-transition class="mt-3 px-2 py-2 text-[15px]">
-      <textarea name="announcements_body" id="announcements_body" required
-      class="w-full p-3 rounded-md focus:outline-none focus:ring-none focus:ring-teal-500 text-[13px]"
-      style="resize: none;" rows="20" readonly>{{ $announcement->announcements_body }}</textarea>
-      </div>
-      </div>
-    @endforeach
-    @endif
+                        <div x-show="open" x-transition class="mt-3 px-2 py-2 text-[15px]">
+                            <textarea name="announcements_body" id="announcements_body" required
+                              class="w-full p-3 rounded-md focus:outline-none focus:ring-none focus:ring-teal-500 text-[13px]"
+                              style="resize: none;" rows="20" readonly>{{ $announcement->announcements_body }}</textarea>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+
             </div>
           </div>
         </div>

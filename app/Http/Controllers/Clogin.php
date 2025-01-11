@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon; // Import Carbon for date/time handling
 use App\Models\StudentInfo; // Import StudentInfo model
 use App\Models\StudentAdditionalInfo; // Import StudentAdditionalInfo model
 use App\Models\StudentDocuments; // Import StudentDocuments model
+use App\Models\Mannouncement;
 
 class Clogin extends Controller
 {
@@ -15,9 +17,21 @@ class Clogin extends Controller
     {
         // Check if the user is already authenticated
         if (Auth::guard('admin')->check()) {
+
             return redirect()->route('admin.admin_dashboard'); // Ensure this route is correct
+
+        } elseif (Auth::guard('teacher')->check()) {
+
+            return view('teacher.teacher_dashboard');
+
         } elseif (Auth::guard('student')->check()) {
-            return view('student.student_dashboard');//return redirect()->route('student.dashboard'); // Make sure this route is defined
+            $latestAnnouncements = Mannouncement::latest()->take(5)->get();
+
+            // Check if there are any announcements
+            $newAnnouncements = $latestAnnouncements->count() > 0;
+
+            // Return the view with announcements data
+            return view('student.student_dashboard', compact('latestAnnouncements', 'newAnnouncements'));
         }
 
         // Check if the user is locked out
@@ -67,6 +81,21 @@ class Clogin extends Controller
 
             // Redirect to the admin dashboard or admin loader
             return view('includes.admin_loader');
+        }
+
+        // Attempt to log the user in as admin
+        if (Auth::guard('teacher')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
+            $this->clearLoginAttempts($request);
+
+            // Get the authenticated admin user
+            // $teacherUser = Auth::guard('teacher')->user();
+
+
+            // Flash a success message
+            // $request->session()->flash('success', 'Welcome, ! You are now logged in as Teacher.');
+
+            // Redirect to the admin dashboard or admin loader
+            return view('teacher.teacher_dashboard');
         }
 
 

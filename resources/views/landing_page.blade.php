@@ -196,35 +196,35 @@
             </div>
 
             <div id="default-carousel" class="relative w-full mt-[10rem]" data-carousel="slide">
-                 Carousel wrapper 
+                Carousel wrapper
                 <div class="relative overflow-hidden rounded-lg md:h-[500px] h-1/2">
-                    
+
                     <div class="hidden duration-700 ease-in-out bg-red-500" data-carousel-item>
                         <img src="/docs/images/carousel/carousel-1.svg"
                             class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                     </div>
-                    
+
                     <div class="hidden duration-700 ease-in-out bg-green-500" data-carousel-item>
                         <img src="/docs/images/carousel/carousel-2.svg"
                             class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                     </div>
-  
+
                     <div class="hidden duration-700 ease-in-out bg-blue-500" data-carousel-item>
                         <img src="/docs/images/carousel/carousel-3.svg"
                             class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                     </div>
-       
+
                     <div class="hidden duration-700 ease-in-out bg-emerald-500" data-carousel-item>
                         <img src="/docs/images/carousel/carousel-4.svg"
                             class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                     </div>
-              
+
                     <div class="hidden duration-700 ease-in-out bg-real-500" data-carousel-item>
                         <img src="/docs/images/carousel/carousel-5.svg"
                             class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                     </div>
                 </div>
-             
+
                 <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
                     <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
                         data-carousel-slide-to="0"></button>
@@ -237,7 +237,7 @@
                     <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5"
                         data-carousel-slide-to="4"></button>
                 </div>
-           
+
                 <button type="button"
                     class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
                     data-carousel-prev>
@@ -277,119 +277,13 @@
                 </div>
             </div>
 
+            <script src="{{asset('js/admin/landingpage.js')}}"></script>
+
             @include('includes.footer')
 
             <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    let imagesData = [];
-                    let currentIndex = 0;
-
-                    // Function to fetch and display images
-                    function fetchImages(page = 1) {
-                        fetch(`/api/images?page=${page}`)
-                            .then(response => response.json())
-                            .then(data => {
-                                imagesData = data.data;  // Store the image data
-                                const imagesContainer = document.getElementById('image-gallery');
-                                const paginationLinks = document.getElementById('pagination-links');
-
-                                // Clear current images
-                                imagesContainer.innerHTML = '';
-
-                                // Display images
-                                imagesData.forEach(image => {
-                                    const imageElement = document.createElement('div');
-                                    imageElement.classList.add('relative', 'overflow-hidden', 'group');
-
-                                    imageElement.innerHTML = `
-                            <img src="/storage/images/${image.file_name}" alt="${image.name}"
-                                class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-80" 
-                                onclick="openImageModal(${image.id})">
-                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:bg-teal-500 group-hover:opacity-100 transition-opacity duration-500">
-                                <p class="text-white text-lg">${image.name}</p>
-                            </div>
-                        `;
-                                    imagesContainer.appendChild(imageElement);
-                                });
-
-                                // Display pagination links with active class handling
-                                paginationLinks.innerHTML = data.links.map(link => {
-                                    const isActive = link.active ? 'text-teal-700 font-semibold' : 'text-teal-500';
-                                    return `
-                            <a href="javascript:void(0)" onclick="fetchImages(${parseInt(link.label)})" class="mx-2 ${isActive} hover:underline">
-                                ${link.label}
-                            </a>
-                        `;
-                                }).join('');
-                            })
-                            .catch(error => {
-                                console.error('Error fetching images:', error);
-                            });
-                    }
-
-                    // Open Image Modal to show full image and navigate
-                    window.openImageModal = function (id) {
-                        currentIndex = imagesData.findIndex(image => image.id === id); // Set current index
-                        showModal();
-                    };
-
-                    // Show modal with full image and next/previous functionality
-                    function showModal() {
-                        const modal = document.createElement('div');
-                        const currentImage = imagesData[currentIndex];
-                        modal.classList.add('fixed', 'inset-0', 'flex', 'items-center', 'justify-center', 'bg-black', 'bg-opacity-50');
-                        modal.innerHTML = `
-                <div class="relative p-4 bg-white max-w-4xl max-h-full">
-                    <img src="/storage/images/${currentImage.file_name}" class="max-w-full max-h-full object-contain">
-                    <button onclick="closeModal()" class="absolute top-0 right-0 p-2 bg-red-500 text-white rounded-full">X</button>
-                    
-                    <!-- Navigation Buttons (Positioned at the edges of the screen) -->
-                    <button onclick="prevImage()" class="absolute left-0 top-1/2 transform -translate-y-1/2 p-4 text-white bg-teal-500 hover:bg-teal-600 rounded-full">
-                        &lt;
-                    </button>
-                    <button onclick="nextImage()" class="absolute right-0 top-1/2 transform -translate-y-1/2 p-4 text-white bg-teal-500 hover:bg-teal-600 rounded-full">
-                        &gt;
-                    </button>
-                </div>
-            `;
-                        document.body.appendChild(modal);
-                    }
-
-                    // Close the modal
-                    window.closeModal = function () {
-                        const modal = document.querySelector('.fixed');
-                        if (modal) {
-                            modal.remove();
-                        }
-                    };
-
-                    // Show previous image
-                    window.prevImage = function () {
-                        if (currentIndex > 0) {
-                            currentIndex--;
-                        } else {
-                            currentIndex = imagesData.length - 1; // Loop to the last image
-                        }
-                        showModal();
-                    };
-
-                    // Show next image
-                    window.nextImage = function () {
-                        if (currentIndex < imagesData.length - 1) {
-                            currentIndex++;
-                        } else {
-                            currentIndex = 0; // Loop to the first image
-                        }
-                        showModal();
-                    };
-
-                    // Initially load images for the first page
-                    fetchImages();
-                });
-            </script>
-
+        </div>
+    </div>
 </body>
 
 </html>

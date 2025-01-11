@@ -49,91 +49,105 @@
 </head>
 
 <body class="font-poppins bg-gray-200">
-
     <div class="flex p-2 w-full h-screen">
-        <main class="flex-grow rounded-r-lg bg-white shadow-lg w-full">
-            <header class="p-5">
-                <p class="text-2xl font-bold text-teal-900 ml-5">School Gallery</p>
-                <section class="mx-auto p-6 mt-5 rounded-lg shadow-lg bg-gray-200">
-                    <table id="imageGalleryTable" class="display">
-                        <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Category</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                    <button class="px-4 py-2 bg-teal-500 text-white rounded mt-4" onclick="openAddModal()">Add New
-                        Image</button>
-                </section>
+        <!-- Sidebar -->
+        @include('admin.includes.sidebar')
+
+        <!-- Main Content -->
+        <main class="flex-grow rounded-r-lg bg-white shadow-lg overflow-y-scroll w-full bg-zinc-50" id="content">
+            <header class="">
+                @include('admin.includes.header')
             </header>
+
+
+            <div class="flex p-2 w-full h-screen">
+                <main class="flex-grow rounded-r-lg bg-white shadow-lg w-full">
+                    <header class="p-5">
+                        <p class="text-2xl font-bold text-teal-900 ml-5">School Gallery</p>
+                        <section class="mx-auto p-6 mt-5 rounded-lg shadow-lg bg-gray-200">
+                            <table id="imageGalleryTable" class="display">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Category</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <button class="px-4 py-2 bg-teal-500 text-white rounded mt-4" onclick="openAddModal()">Add
+                                New
+                                Image</button>
+                        </section>
+                    </header>
+                </main>
+            </div>
+
+            <!-- Add Image Modal -->
+            <div id="addImageModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Add New Image</h2>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addImageForm" enctype="multipart/form-data">
+                            <div class="mb-4">
+                                <label for="imageName" class="block text-sm font-semibold">Category</label>
+                                <select id="imageName" name="name"
+                                    class="w-full p-2 border border-gray-300 rounded mt-1" required>
+                                    <option value="Classroom">Classroom</option>
+                                    <option value="Playground">Playground</option>
+                                    <option value="Library">Library</option>
+                                    <option value="Office">Office</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="imageFile" class="block text-sm font-semibold">Select Image</label>
+                                <input type="file" id="imageFile" name="image"
+                                    class="w-full p-2 border border-gray-300 rounded mt-1" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="closeAddModal()">Cancel</button>
+                        <button type="submit" form="addImageForm">Add Image</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Image Modal -->
+            <div id="editImageModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Edit Image</h2>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editImageForm" enctype="multipart/form-data">
+                            <input type="hidden" id="editImageId" name="id">
+                            <div class="mb-4">
+                                <label for="editImageName" class="block text-sm font-semibold">Category</label>
+                                <select id="editImageName" name="name"
+                                    class="w-full p-2 border border-gray-300 rounded mt-1">
+                                    <option value="Classroom">Classroom</option>
+                                    <option value="Playground">Playground</option>
+                                    <option value="Library">Library</option>
+                                    <option value="Office">Office</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="editImageFile" class="block text-sm font-semibold">Select Image</label>
+                                <input type="file" id="editImageFile" name="image"
+                                    class="w-full p-2 border border-gray-300 rounded mt-1">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" onclick="closeEditModal()">Cancel</button>
+                        <button type="submit" form="editImageForm">Update Image</button>
+                    </div>
+                </div>
+            </div>
         </main>
-    </div>
-
-    <!-- Add Image Modal -->
-    <div id="addImageModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Add New Image</h2>
-            </div>
-            <div class="modal-body">
-                <form id="addImageForm" enctype="multipart/form-data">
-                    <div class="mb-4">
-                        <label for="imageName" class="block text-sm font-semibold">Category</label>
-                        <select id="imageName" name="name" class="w-full p-2 border border-gray-300 rounded mt-1"
-                            required>
-                            <option value="Classroom">Classroom</option>
-                            <option value="Playground">Playground</option>
-                            <option value="Library">Library</option>
-                            <option value="Office">Office</option>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label for="imageFile" class="block text-sm font-semibold">Select Image</label>
-                        <input type="file" id="imageFile" name="image"
-                            class="w-full p-2 border border-gray-300 rounded mt-1" required>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" onclick="closeAddModal()">Cancel</button>
-                <button type="submit" form="addImageForm">Add Image</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Edit Image Modal -->
-    <div id="editImageModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Edit Image</h2>
-            </div>
-            <div class="modal-body">
-                <form id="editImageForm" enctype="multipart/form-data">
-                    <input type="hidden" id="editImageId" name="id">
-                    <div class="mb-4">
-                        <label for="editImageName" class="block text-sm font-semibold">Category</label>
-                        <select id="editImageName" name="name" class="w-full p-2 border border-gray-300 rounded mt-1">
-                            <option value="Classroom">Classroom</option>
-                            <option value="Playground">Playground</option>
-                            <option value="Library">Library</option>
-                            <option value="Office">Office</option>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label for="editImageFile" class="block text-sm font-semibold">Select Image</label>
-                        <input type="file" id="editImageFile" name="image"
-                            class="w-full p-2 border border-gray-300 rounded mt-1">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" onclick="closeEditModal()">Cancel</button>
-                <button type="submit" form="editImageForm">Update Image</button>
-            </div>
-        </div>
     </div>
 
     <script>

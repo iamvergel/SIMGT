@@ -121,12 +121,13 @@ class Cevent extends BaseController // Extend the correct base controller
 
     public function showDashboardstudent()
     {
-        // Retrieve the latest announcements
+        // Retrieve the latest announcements (Ensure 'Mannouncement' is your model)
         $latestAnnouncements = Mannouncement::latest()->take(5)->get();
 
+        // Check if there are any announcements
         $newAnnouncements = $latestAnnouncements->count() > 0;
 
-        // Return the view with the variable
+        // Return the view with announcements data
         return view('student.student_dashboard', compact('latestAnnouncements', 'newAnnouncements'));
     }
 

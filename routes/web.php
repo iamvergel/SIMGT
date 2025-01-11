@@ -108,9 +108,14 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/announcements', [Cevent::class, 'showAnnouncements']);
     Route::post('/announcements', [Cevent::class, 'storeAnnouncement'])->name('announcements.store');
     Route::put('/announcements/{id}', [Cevent::class, 'updateAnnouncement'])->name('announcements.update');
-    
+
     Route::get('/StEmelieLearningCenter.HopeSci66/student/dashboard', function () {
         return view('student.student_dashboard');
+    });
+
+    //teacher routes
+    Route::get('/StEmelieLearningCenter.HopeSci66/teacher/dashboard', function () {
+        return view('teacher.teacher_dashboard');
     });
 
     // Student Dashboard Route with Latest Announcements
