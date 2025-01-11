@@ -55,6 +55,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         Route::get('/Archive-Student', [Cpages::class, 'showArchiveStudent'])->name('admin.admin_archive_student');
     });
 
+
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management', [Cstudentinfo::class, 'showGradeData']);
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/Grade-book', [Cstudentinfo::class, 'showGradebook'])->name('gradebook');
 
@@ -93,6 +94,10 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Archive-Student', [Cstudentinfo::class, 'showAllStudentArchiveData'])->name('admin.admin_archive_student');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/dashboard', [Cevent::class, 'showAllAdmin'])->name('admin.admin_dashboard');
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/website-gallery', function () {
+        return view('admin.website.admin_website_gallery');
+    });
 
     // events Routes
     Route::post('/events', [Cevent::class, 'storeEvent'])->name('events.store');

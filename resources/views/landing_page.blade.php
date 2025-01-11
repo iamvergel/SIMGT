@@ -21,6 +21,8 @@
     <!-- AOS CSS -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+
     <!-- AOS JS -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
@@ -55,7 +57,7 @@
             opacity: 1;
             z-index: -1;
             animation: bgimage 20s infinite alternate;
-            height: 90%;
+            height: 850px;
         }
 
         @keyframes bgimage {
@@ -88,9 +90,9 @@
             right: 0;
             bottom: 0;
             background-color: #000;
-            opacity: 0.5;
+            opacity: 0.6;
             z-index: 2;
-            height: 90%;
+            height: 850px;
         }
 
         .main1::after {
@@ -113,10 +115,11 @@
 </head>
 
 <body class="bg-white h-screen w-screen flex items-center justify-center">
-    <div class="main1 bg-white 2xl:max-w-[1900px] w-full h-screen overflow-y-scroll">
+    <div class="main1 bg-white 2xl:max-w-[1900px] w-full h-full overflow-y-scroll">
         @include("includes.header")
         <div class=" w-full h-full lg:h-[90%] 2xl:mx-h-[800px] relative top-0">
-            <div class="pl-[1rem] lg:pl-[5rem] text-start z-[100] absolute lg:top-[-40rem] w-full bg-transparent text-white h-full">
+            <div
+                class="pl-[1rem] lg:pl-[5rem] text-start z-[100] absolute lg:top-[-40rem] w-full bg-transparent text-white h-full">
                 <p class="text-sm lg:text-[1.5rem] leading-8 mt-[10rem] 2xl:mt-[0rem]">Welcome To Our Website</p>
                 <h1 class="text-[3rem] lg:text-[5rem] 2xl:text-[5rem] font-bold uppercase leading-none">Primary
                     School
@@ -192,86 +195,201 @@
                 </div>
             </div>
 
-            <div class="w-full py-10  mb-5">
-                <div class="container mx-auto px-4">
-                    <!-- Grid layout: 3 columns in the first row, 2 columns in the second row -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-20 p-20">
-
-                        <!-- Image 1 -->
-                        <div class="relative overflow-hidden group bg-dred-500">
-                            <img src="{{ asset('../assets/images/SELC.png') }}" alt="Image 1"
-                                class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-80">
-                            <div
-                                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:bg-teal-500 group-hover:opacity-100 transition-opacity duration-500">
-                                <p class="text-white text-lg">Image 1</p>
-                            </div>
-                        </div>
-
-                        <!-- Image 2 -->
-                        <div class="relative overflow-hidden group">
-                            <img src="{{ asset('../assets/images/SELC.png') }}" alt="Image 2"
-                                class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-80">
-                            <div
-                                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:bg-teal-500 group-hover:opacity-100 transition-opacity duration-500">
-                                <p class="text-white text-lg">Image 2</p>
-                            </div>
-                        </div>
-
-                        <!-- Image 3 -->
-                        <div class="relative overflow-hidden group">
-                            <img src="{{ asset('../assets/images/SELC.png') }}" alt="Image 3"
-                                class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-80">
-                            <div
-                                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:bg-teal-500 group-hover:opacity-100 transition-opacity duration-500">
-                                <p class="text-white text-lg">Image 3</p>
-                            </div>
-                        </div>
-
-                        <!-- Image 4 -->
-                        <div class="relative overflow-hidden group">
-                            <img src="{{ asset('../assets/images/SELC.png') }}" alt="Image 4"
-                                class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-80">
-                            <div
-                                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:bg-teal-500 group-hover:opacity-100 transition-opacity duration-500">
-                                <p class="text-white text-lg">Image 4</p>
-                            </div>
-                        </div>
-
-                        <!-- Image 5 -->
-                        <div class="relative overflow-hidden group">
-                            <img src="{{ asset('../assets/images/SELC.png') }}" alt="Image 5"
-                                class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-80">
-                            <div
-                                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:bg-teal-500 group-hover:opacity-100 transition-opacity duration-500">
-                                <p class="text-white text-lg">Image 5</p>
-                            </div>
-                        </div>
-
-                        <!-- Image 6 -->
-                        <div class="relative overflow-hidden group">
-                            <img src="{{ asset('../assets/images/SELC.png') }}" alt="Image 5"
-                                class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-80">
-                            <div
-                                class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:bg-teal-500 group-hover:opacity-100 transition-opacity duration-500">
-                                <p class="text-white text-lg">Image 6</p>
-                            </div>
-                        </div>
+            <div id="default-carousel" class="relative w-full mt-[10rem]" data-carousel="slide">
+                 Carousel wrapper 
+                <div class="relative overflow-hidden rounded-lg md:h-[500px] h-1/2">
+                    
+                    <div class="hidden duration-700 ease-in-out bg-red-500" data-carousel-item>
+                        <img src="/docs/images/carousel/carousel-1.svg"
+                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
                     </div>
+                    
+                    <div class="hidden duration-700 ease-in-out bg-green-500" data-carousel-item>
+                        <img src="/docs/images/carousel/carousel-2.svg"
+                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+  
+                    <div class="hidden duration-700 ease-in-out bg-blue-500" data-carousel-item>
+                        <img src="/docs/images/carousel/carousel-3.svg"
+                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+       
+                    <div class="hidden duration-700 ease-in-out bg-emerald-500" data-carousel-item>
+                        <img src="/docs/images/carousel/carousel-4.svg"
+                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+              
+                    <div class="hidden duration-700 ease-in-out bg-real-500" data-carousel-item>
+                        <img src="/docs/images/carousel/carousel-5.svg"
+                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+                </div>
+             
+                <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
+                        data-carousel-slide-to="0"></button>
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
+                        data-carousel-slide-to="1"></button>
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
+                        data-carousel-slide-to="2"></button>
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4"
+                        data-carousel-slide-to="3"></button>
+                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5"
+                        data-carousel-slide-to="4"></button>
+                </div>
+           
+                <button type="button"
+                    class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                    data-carousel-prev>
+                    <span
+                        class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5 1 1 5l4 4" />
+                        </svg>
+                        <span class="sr-only">Previous</span>
+                    </span>
+                </button>
+                <button type="button"
+                    class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                    data-carousel-next>
+                    <span
+                        class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 9 4-4-4-4" />
+                        </svg>
+                        <span class="sr-only">Next</span>
+                    </span>
+                </button>
+            </div>
+
+            <div class="w-full py-10 mb-5">
+                <div class="container mx-auto px-4">
+                    <!-- Gallery Grid Layout -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-20 p-5"
+                        id="image-gallery">
+                        <!-- Images will be dynamically loaded here -->
+                    </div>
+
                 </div>
             </div>
 
-            @include ('includes.footer')
-        </div>
-    </div>
+            @include('includes.footer')
 
-    <!-- Initialize AOS -->
-    <script>
-        AOS.init({
-            offset: 100, // Start animation when the element is 100px from the viewport
-            duration: 500, // Duration of the animation in ms
-            once: true, // Whether animation should happen only once
-        });
-    </script>
+            <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    let imagesData = [];
+                    let currentIndex = 0;
+
+                    // Function to fetch and display images
+                    function fetchImages(page = 1) {
+                        fetch(`/api/images?page=${page}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                imagesData = data.data;  // Store the image data
+                                const imagesContainer = document.getElementById('image-gallery');
+                                const paginationLinks = document.getElementById('pagination-links');
+
+                                // Clear current images
+                                imagesContainer.innerHTML = '';
+
+                                // Display images
+                                imagesData.forEach(image => {
+                                    const imageElement = document.createElement('div');
+                                    imageElement.classList.add('relative', 'overflow-hidden', 'group');
+
+                                    imageElement.innerHTML = `
+                            <img src="/storage/images/${image.file_name}" alt="${image.name}"
+                                class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-80" 
+                                onclick="openImageModal(${image.id})">
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:bg-teal-500 group-hover:opacity-100 transition-opacity duration-500">
+                                <p class="text-white text-lg">${image.name}</p>
+                            </div>
+                        `;
+                                    imagesContainer.appendChild(imageElement);
+                                });
+
+                                // Display pagination links with active class handling
+                                paginationLinks.innerHTML = data.links.map(link => {
+                                    const isActive = link.active ? 'text-teal-700 font-semibold' : 'text-teal-500';
+                                    return `
+                            <a href="javascript:void(0)" onclick="fetchImages(${parseInt(link.label)})" class="mx-2 ${isActive} hover:underline">
+                                ${link.label}
+                            </a>
+                        `;
+                                }).join('');
+                            })
+                            .catch(error => {
+                                console.error('Error fetching images:', error);
+                            });
+                    }
+
+                    // Open Image Modal to show full image and navigate
+                    window.openImageModal = function (id) {
+                        currentIndex = imagesData.findIndex(image => image.id === id); // Set current index
+                        showModal();
+                    };
+
+                    // Show modal with full image and next/previous functionality
+                    function showModal() {
+                        const modal = document.createElement('div');
+                        const currentImage = imagesData[currentIndex];
+                        modal.classList.add('fixed', 'inset-0', 'flex', 'items-center', 'justify-center', 'bg-black', 'bg-opacity-50');
+                        modal.innerHTML = `
+                <div class="relative p-4 bg-white max-w-4xl max-h-full">
+                    <img src="/storage/images/${currentImage.file_name}" class="max-w-full max-h-full object-contain">
+                    <button onclick="closeModal()" class="absolute top-0 right-0 p-2 bg-red-500 text-white rounded-full">X</button>
+                    
+                    <!-- Navigation Buttons (Positioned at the edges of the screen) -->
+                    <button onclick="prevImage()" class="absolute left-0 top-1/2 transform -translate-y-1/2 p-4 text-white bg-teal-500 hover:bg-teal-600 rounded-full">
+                        &lt;
+                    </button>
+                    <button onclick="nextImage()" class="absolute right-0 top-1/2 transform -translate-y-1/2 p-4 text-white bg-teal-500 hover:bg-teal-600 rounded-full">
+                        &gt;
+                    </button>
+                </div>
+            `;
+                        document.body.appendChild(modal);
+                    }
+
+                    // Close the modal
+                    window.closeModal = function () {
+                        const modal = document.querySelector('.fixed');
+                        if (modal) {
+                            modal.remove();
+                        }
+                    };
+
+                    // Show previous image
+                    window.prevImage = function () {
+                        if (currentIndex > 0) {
+                            currentIndex--;
+                        } else {
+                            currentIndex = imagesData.length - 1; // Loop to the last image
+                        }
+                        showModal();
+                    };
+
+                    // Show next image
+                    window.nextImage = function () {
+                        if (currentIndex < imagesData.length - 1) {
+                            currentIndex++;
+                        } else {
+                            currentIndex = 0; // Loop to the first image
+                        }
+                        showModal();
+                    };
+
+                    // Initially load images for the first page
+                    fetchImages();
+                });
+            </script>
+
 </body>
 
 </html>

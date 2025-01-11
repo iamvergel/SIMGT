@@ -2,18 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImageController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('images')->group(function () {
+    Route::get('/', [ImageController::class, 'index']);         // Get all images
+    Route::post('/store', [ImageController::class, 'store']);    // Store a new image
+    Route::get('/{id}', [ImageController::class, 'show']);        // Get an image by ID
+    Route::put('/{id}', [ImageController::class, 'update']);      // Update an image by ID
+    Route::delete('/{id}', [ImageController::class, 'destroy']);  // Delete an image by ID
 });
+

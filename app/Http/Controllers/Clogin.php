@@ -53,11 +53,22 @@ class Clogin extends Controller
         // Attempt to log the user in as admin
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
             $this->clearLoginAttempts($request);
-            $request->session()->put('admin_username', $request->username);
-            $request->session()->put('admin_id', Auth::guard('admin')->id());
-            $request->session()->flash('success', 'Welcome, ' . $request->username . '! You are now logged in as Admin.');
-            return view('includes.admin_loader'); // Redirect to the admin dashboard
+
+            // Get the authenticated admin user
+            $adminUser = Auth::guard('admin')->user();
+
+            // Store admin's data in the session
+            $request->session()->put('admin_username', $adminUser->username);
+            $request->session()->put('admin_id', $adminUser->id);
+            $request->session()->put('admin_role', $adminUser->role);  // Store the role
+
+            // Flash a success message
+            $request->session()->flash('success', 'Welcome, ' . $adminUser->username . '! You are now logged in as Admin.');
+
+            // Redirect to the admin dashboard or admin loader
+            return view('includes.admin_loader');
         }
+
 
         // Attempt to log the user in as student
         if (Auth::guard('student')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {

@@ -1,4 +1,4 @@
-<header class="z-[500] w-full 2xl:w-[1900px] 2xl:max-w-[1900px] p-5 px-3 lg:px-[10rem] 2xl:px-[20rem] relative top-0 "
+<header class="z-[600] w-full 2xl:w-[1900px] 2xl:max-w-[1900px] p-5 px-3 lg:px-[10rem] 2xl:px-[20rem] relative top-0"
     data-aos="fade-down" data-aos-duration="600">
     <div class="grid grid-cols-2">
         <div class="col-span-2 flex justify-between">
