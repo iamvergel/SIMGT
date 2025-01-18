@@ -191,6 +191,24 @@ $(document).ready(function () {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const items = document.querySelectorAll("ul li");
+
+    items[0].classList.add("active1");
+    items[0].classList.add("bg-teal-600");
+
+    items.forEach((item) => {
+        item.addEventListener("click", function () {
+            items.forEach((i) => {
+                i.classList.remove("active1");
+            });
+
+            item.classList.add("active1");
+            item.classList.add("bg-teal-600");
+        });
+    });
+});
+
 function openStudentModal(row) {
     // Populating basic student info
     document.getElementById("StudentName").innerHTML =
@@ -326,22 +344,114 @@ function openStudentModal(row) {
     const birthCertificate = row.getAttribute("data-birth-certificate");
     const proofOfResidency = row.getAttribute("data-proof-of-residency");
 
+    // Function to check if the file is an image or PDF
+    function isImage(file) {
+        return file.match(/\.(jpeg|jpg|png|gif)$/i);
+    }
+
+    function isPdf(file) {
+        return file.match(/\.pdf$/i);
+    }
+
+    document
+        .getElementById("closeModal")
+        .addEventListener("click", function () {
+            imageModal.classList.add("hidden");
+        });
+
     // Display birth certificate (if available)
     if (birthCertificate && birthCertificate !== "N/A") {
-        document.getElementById(
+        const modalBirthCertificate = document.getElementById(
             "modalBirthCertificate"
-        ).innerHTML = `<a href="${birthCertificate}" target="_blank" class="text-blue-500">View Birth Certificate</a>`;
+        );
+
+        if (isImage(birthCertificate)) {
+            modalBirthCertificate.innerHTML = `
+            <a href="javascript:void(0);" id="imageLinkBirthCertificate">
+                <img src="${birthCertificate}" alt="Birth Certificate" class="text-blue-500 cursor-pointer max-w-[500px]" />
+            </a>
+        `;
+
+            const imageLinkBirthCertificate = document.getElementById(
+                "imageLinkBirthCertificate"
+            );
+            const imageModal = document.getElementById("imageModal");
+            const zoomedImage = document.getElementById("zoomedImage");
+            const downloadButton = document.getElementById("downloadButton");
+
+            imageModal.addEventListener("click", function (event) {
+                // Check if the click was on the background (overlay) and not on the modal content
+                if (event.target === imageModal) {
+                    imageModal.classList.add("hidden");
+                }
+            });
+
+            // Download functionality for images
+            downloadButton.addEventListener("click", function () {
+                downloadImage(zoomedImage.src);
+            });
+        } else if (isPdf(birthCertificate)) {
+            modalBirthCertificate.innerHTML = `
+            <span onclick="window.location.href = '${birthCertificate}'" target="_blank" class="bg-sky-700 hover:bg-sky-600 rounded-lg text-white text-[12px] text-center p-3 py-2">
+                <i class="fas fa-file-pdf mr-2"></i>View Birth Certificate (PDF)
+            </span>
+        `;
+        } else {
+            modalBirthCertificate.innerHTML = "Unsupported file format.";
+        }
     } else {
         document.getElementById("modalBirthCertificate").innerHTML = "N/A";
     }
 
-    // Display proof of residency (if available)
+    // Display proof of residency (if available) with similar logic
     if (proofOfResidency && proofOfResidency !== "N/A") {
-        document.getElementById(
+        const modalProofOfResidency = document.getElementById(
             "modalProofOfResidency"
-        ).innerHTML = `<a href="${proofOfResidency}" target="_blank" class="text-blue-500">View Proof of Residency</a>`;
+        );
+
+        if (isImage(proofOfResidency)) {
+            modalProofOfResidency.innerHTML = `
+            <a href="javascript:void(0);" id="imageLinkProofOfResidency">
+                <img src="${proofOfResidency}" alt="Proof of Residency" class="text-blue-500 cursor-pointer max-w-[500px]" />
+            </a>
+        `;
+
+            const imageLinkProofOfResidency = document.getElementById(
+                "imageLinkProofOfResidency"
+            );
+            const zoomedImage = document.getElementById("zoomedImage");
+            const downloadButton = document.getElementById("downloadButton");
+
+            imageLinkProofOfResidency.addEventListener("click", function () {
+                zoomedImage.src = proofOfResidency;
+                imageModal.classList.remove("hidden");
+            });
+
+            // Download functionality for images
+            downloadButton.addEventListener("click", function () {
+                downloadImage(zoomedImage.src);
+            });
+        } else if (isPdf(proofOfResidency)) {
+            modalProofOfResidency.innerHTML = `
+            <a href="${proofOfResidency}" target="_blank" class="text-blue-500">
+                View Proof of Residency (PDF)
+            </a>
+        `;
+        } else {
+            modalProofOfResidency.innerHTML = "Unsupported file format.";
+        }
     } else {
         document.getElementById("modalProofOfResidency").innerHTML = "N/A";
+    }
+
+    // Download image function
+    function downloadImage(imageSrc) {
+        const a = document.createElement("a");
+        a.href = imageSrc;
+        a.download = imageSrc.split("/").pop(); // Set the file name from the URL
+        document.body.appendChild(a);
+        a.click(); // Trigger the download
+        document.body.removeChild(a); // Clean up the element
     }
 
     // Populating student profile image
@@ -375,12 +485,14 @@ function openStudentModal(row) {
 
     // Display the modal
     document.getElementById("studentModal").classList.remove("hidden");
+    document.getElementById("student-data").classList.add("hidden");
+    // window.location.href = "/StEmelieLearningCenter.HopeSci66/admin/student-management/StudentProfile";
 }
 
-// Function to close the modal
-function closeStudentModal() {
-    document.getElementById("studentModal").classList.add("hidden");
-}
+// // Function to close the modal
+// function closeStudentModal() {
+//     document.getElementById("studentModal").classList.add("hidden");
+// }
 
 $(document).ready(function () {
     // Initialize DataTables for all grade tables with common configuration
@@ -402,20 +514,9 @@ $(document).ready(function () {
                         "!bg-sky-800 !text-[12px] !text-white !border-none !hover:bg-sky-700 !px-4 !py-2 !rounded !flex !items-center !justify-center",
                     text: '<i class="fas fa-clipboard"></i> Copy',
                     titleAttr: "Click to copy data",
-                },
-                {
-                    extend: "excelHtml5",
-                    text: '<i class="fas fa-file-excel mr-2"></i> Excel',
-                    className:
-                        "!bg-teal-700 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !important !flex !items-center !justify-center",
-                    titleAttr: "Export to Excel",
-                },
-                {
-                    extend: "csvHtml5",
-                    text: '<i class="fas fa-file-csv mr-2"></i> CSV',
-                    className:
-                        "!bg-yellow-500 !text-[12px] !text-white !border-none !hover:bg-yellow-400 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
-                    titleAttr: "Export to CSV",
+                    exportOptions: {
+                        columns: ".export",
+                    },
                 },
                 {
                     extend: "pdfHtml5",
@@ -440,6 +541,9 @@ $(document).ready(function () {
                             font: "Arial",
                         };
                     },
+                    exportOptions: {
+                        columns: ".export",
+                    },
                 },
                 {
                     extend: "print",
@@ -454,6 +558,9 @@ $(document).ready(function () {
                         $(win.document.body)
                             .find("table")
                             .css("font-size", "12px");
+                    },
+                    exportOptions: {
+                        columns: ".export",
                     },
                 },
             ],
@@ -671,6 +778,228 @@ $(document).ready(function () {
         // Save the PDF with the student's name in the filename
         doc.save("grades_report(" + name + ").pdf");
     });
+
+    document
+        .getElementById("viewGradeBtn")
+        .addEventListener("click", function () {
+            // Get the modal element
+            const modal = document.getElementById("gradeModal");
+
+            // Get the table content from the main table (#tableGradeOne)
+            const tableRows = document.querySelectorAll(
+                "#tableGradeOne tbody tr"
+            );
+
+            // Assuming the student has a fixed set of subjects
+            const subjects = [
+                "Reading and Literacy",
+                "Language",
+                "Mathematics",
+                "GMRC",
+                "Makabansa",
+            ];
+
+            // Array to store grades per subject
+            const gradesData = {
+                "Reading and Literacy": [],
+                Language: [],
+                Mathematics: [],
+                GMRC: [],
+                Makabansa: [],
+            };
+
+            // Loop through each row and collect the grade data
+            tableRows.forEach((row) => {
+                const quarter = row.cells[0].innerText; // Assuming the quarter is in the first cell
+                const grades = {
+                    "Reading and Literacy": row.cells[2].innerText,
+                    Language: row.cells[3].innerText,
+                    Mathematics: row.cells[4].innerText,
+                    GMRC: row.cells[5].innerText,
+                    Makabansa: row.cells[6].innerText,
+                };
+                gradesData["Reading and Literacy"].push(
+                    grades["Reading and Literacy"]
+                );
+                gradesData["Language"].push(grades["Language"]);
+                gradesData["Mathematics"].push(grades["Mathematics"]);
+                gradesData["GMRC"].push(grades["GMRC"]);
+                gradesData["Makabansa"].push(grades["Makabansa"]);
+            });
+
+            // Build the table rows dynamically in the modal
+            const modalContent = document.getElementById("modalContent");
+
+            let tableContent = `
+            <div class="">
+                <table id="grade" class="table w-full border border-gray-800">
+                    <thead class="text-[12px]">
+                        <tr>
+                            <th class="export border border-gray-800">LEARNING AREAS</th>
+                            <th class="export border border-gray-800" colspan="4" style="text-align: center;">Periodic Rating</th>
+                            <th class="export border border-gray-800">Final Grades</th>
+                            <th class="export border border-gray-800">Remarks</th>
+                        </tr>
+                        <tr>
+                            <th class="export border border-gray-800"></th>
+                            <th class="export border border-gray-800">1</th>
+                            <th class="export border border-gray-800">2</th>
+                            <th class="export border border-gray-800">3</th>
+                            <th class="export border border-gray-800">4</th>
+                            <th class="export border border-gray-800"></th>
+                            <th class="export border border-gray-800"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-[12px]">
+            `;
+
+            // Add each subject's grade data to the table content
+            subjects.forEach((subject) => {
+                tableContent += `
+                <tr>
+                    <td class="font-bold border border-gray-800">${subject}</td>
+                    <td class="text-center border border-gray-800">${
+                        gradesData[subject][0] || ""
+                    }</td>
+                    <td class="text-center border border-gray-800">${
+                        gradesData[subject][1] || ""
+                    }</td>
+                    <td class="text-center border border-gray-800">${
+                        gradesData[subject][2] || ""
+                    }</td>
+                    <td class="text-center border border-gray-800">${
+                        gradesData[subject][3] || ""
+                    }</td>
+                    <td class="text-center border border-gray-800">${
+                        gradesData[subject].length
+                            ? (
+                                  gradesData[subject].reduce(
+                                      (a, b) => parseFloat(a) + parseFloat(b),
+                                      0
+                                  ) / gradesData[subject].length
+                              ).toFixed(2)
+                            : ""
+                    }</td>
+                    <td class="text-center border border-gray-800">${
+                        gradesData[subject].length
+                            ? gradesData[subject].reduce(
+                                  (a, b) => parseFloat(a) + parseFloat(b),
+                                  0
+                              ) /
+                                  gradesData[subject].length >=
+                              75
+                                ? "Passed"
+                                : "Failed"
+                            : ""
+                    }</td>
+                </tr>
+            `;
+            });
+
+            tableContent += `
+                </tbody>
+            </table>
+        </div>
+    `;
+
+            // Insert the dynamic content into the modal
+            modalContent.innerHTML = tableContent;
+
+            // Show the modal
+            modal.classList.remove("hidden");
+        });
+
+    // Close the modal when the "Close" button is clicked
+    document
+        .getElementById("closeModalBtn")
+        .addEventListener("click", function () {
+            const modal = document.getElementById("gradeModal");
+            modal.classList.add("hidden");
+        });
+
+    // When the "Download Grade" button is clicked
+    document
+        .getElementById("downloadGradeButton")
+        .addEventListener("click", function (row) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF("landscape"); // Set to landscape
+            doc.setFontSize(12);
+
+            // Assuming you have a student name and logo URL
+            const name = document.getElementById("studentFullname").innerHTML; // Replace with dynamic student name
+            const logoUrl = "/assets/images/SELC.png"; // Ensure you have a valid logo URL
+            const logoWidth = 15; // width of the logo
+            const logoHeight = 15; // height of the logo
+
+            // Set top margin and starting Y offset
+            const topMargin = 10;
+            let yOffset = topMargin + 20; // Initial Y position for content after logo
+
+            // Title for the grade report
+            doc.text("Grades Report : " + name, 10, 25);
+
+            // Create a left-side column (starting from the X position 10 to about half of the page width)
+            const leftColumnWidth = doc.internal.pageSize.width / 2 - 10;
+
+            // Function to add the modal content (the table) to the left column of the PDF
+            function addModalTableToPDF() {
+                // Get the table content from the modal (#gradeModal)
+                const modalTable = document.querySelector("#gradeModal table");
+
+                // Check if the table exists in the modal
+                if (modalTable) {
+                    // Convert the table into an array of rows and columns
+                    const rows = Array.from(modalTable.rows).map((row) => {
+                        return Array.from(row.cells).map((cell) =>
+                            cell.innerText.trim()
+                        );
+                    });
+
+                    // Set up the PDF table content using autoTable
+                    doc.autoTable({
+                        startY: yOffset, // Starting position for the table
+                        head: [rows[0]], // The header row
+                        body: rows.slice(1), // The rest of the rows
+                        theme: "grid", // Table style
+                        columnStyles: {
+                            0: { cellWidth: 60 }, // Learning Areas column
+                            1: { cellWidth: 20 }, // 1st Quarter
+                            2: { cellWidth: 20 }, // 2nd Quarter
+                            3: { cellWidth: 20 }, // 3rd Quarter
+                            4: { cellWidth: 20 }, // 4th Quarter
+                            5: { cellWidth: 20 }, // Final Grades
+                            6: { cellWidth: 20 }, // Remarks
+                        },
+                        margin: { left: 10, top: 10 },
+                        didDrawPage: function (data) {
+                            yOffset = data.cursor.y; // Update yOffset to handle page breaks
+                        },
+                        bodyStyles: {
+                            valign: "middle", // Vertically align text in cells
+                        },
+                        tableWidth: leftColumnWidth, // Set table width to the left column's width
+                    });
+                } else {
+                    console.error("Table not found in the modal.");
+                }
+            }
+
+            // Add the table from the modal to the left side of the PDF
+            addModalTableToPDF();
+
+            // Draw a vertical line to separate the left and right columns (creating a blank right column)
+            const rightColumnX = doc.internal.pageSize.width / 2;
+            doc.setLineWidth(0.5);
+            doc.line(
+                rightColumnX,
+                topMargin,
+                rightColumnX,
+                doc.internal.pageSize.height
+            );
+
+            // Save the PDF with the student's name in the filename
+            doc.save("grades_report_" + name + ".pdf");
+        });
 });
 
 // Get all list items

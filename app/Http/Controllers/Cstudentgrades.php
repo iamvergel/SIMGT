@@ -35,10 +35,10 @@ class Cstudentgrades extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        // Typically used to show a form, not needed for API
-    }
+    // public function create()
+    // {
+    //     // Typically used to show a form, not needed for API
+    // }
     /**
      * Store a newly created resource in storage.
      *
@@ -49,21 +49,34 @@ class Cstudentgrades extends Controller
     {
         Log::info('Store method called', $request->all());
 
-        // Validate the incoming request
-        $validated = $request->validate([
+        // Determine the validation rules based on the grade
+        $validationRules = [
             'student_number' => 'required',
             'grade' => 'required', // Ensure 'grade' is validated
             'quarter' => 'required|string|in:1st Quarter,2nd Quarter,3rd Quarter,4th Quarter',
+        ];
+
+        // Default rules for 5 subjects (Grade One)
+        $subjectRules = [
             'subject_one' => 'required|numeric',
             'subject_two' => 'required|numeric',
             'subject_three' => 'required|numeric',
             'subject_four' => 'required|numeric',
             'subject_five' => 'required|numeric',
-            'subject_six' => 'required|numeric',
-            'subject_seven' => 'required|numeric',
-            'subject_eight' => 'required|numeric',
-            'subject_nine' => 'required|numeric',
-        ]);
+        ];
+
+        // Add subjects 6 to 9 rules for Grade Two to Grade Six
+        if (in_array($request->grade, ['Grade Two', 'Grade Three', 'Grade Four', 'Grade Five', 'Grade Six'])) {
+            $subjectRules = array_merge($subjectRules, [
+                'subject_six' => 'required|numeric',
+                'subject_seven' => 'required|numeric',
+                'subject_eight' => 'required|numeric',
+                'subject_nine' => 'required|numeric',
+            ]);
+        }
+
+        // Merge grade and quarter rules with subject rules
+        $validated = $request->validate(array_merge($validationRules, $subjectRules));
 
         // Determine the model to use based on the grade
         $model = null;
@@ -99,6 +112,7 @@ class Cstudentgrades extends Controller
 
         return redirect()->back()->with('success', "Grades for {$studentName} have been added successfully for the {$validated['quarter']}!");
     }
+
 
     /**
      * Display the specified resource.

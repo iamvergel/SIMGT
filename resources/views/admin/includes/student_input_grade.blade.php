@@ -34,12 +34,12 @@
                     <div class="mb-5">
                         <label for="studentNumber" class="block mb-2 text-sm font-bold text-gray-900">
                             <span class="text-red-600 mr-1">*</span>Student No. :</label>
-                        <input type="text" name="student_number" id="studentNumber" class="input-field" required
+                        <input type="text" name="student_number" id="studentNumber" class="input-field" 
                             readonly>
                     </div>
 
                     <div class="mb-5">
-                        <input type="hidden" name="grade" id="gradeq" class="input-field" required
+                        <input type="hidden" name="grade" id="gradeq" class="input-field" 
                             readonly>
                     </div>
 
@@ -52,7 +52,7 @@
                         </label>
                         <select id="quarter" name="quarter"
                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                            required>
+                            >
                             <option value="">Select Quarter</option>
                             <option value="1st Quarter">1st Quarter</option>
                             <option value="2nd Quarter">2nd Quarter</option>
@@ -68,7 +68,7 @@
                     <div>
                         <label for="subjectone" class="block mb-2 text-sm font-bold text-gray-900">
                             <span class="text-red-600 mr-1">*</span>Subject One :</label>
-                        <input type="number" name="subject_one" id="subjectone" step="0.01" required
+                        <input type="number" name="subject_one" id="subjectone" step="0.01" 
                             placeholder="Enter Grade"
                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
                     </div>
@@ -76,7 +76,7 @@
                     <div>
                         <label for="subjecttwo" class="block mb-2 text-sm font-bold text-gray-900">
                             <span class="text-red-600 mr-1">*</span>Subject Two :</label>
-                        <input type="number" name="subject_two" id="subjecttwo" step="0.01" required
+                        <input type="number" name="subject_two" id="subjecttwo" step="0.01" 
                             placeholder="Enter Grade"
                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
                     </div>
@@ -84,7 +84,7 @@
                     <div>
                         <label for="subjectthree" class="block mb-2 text-sm font-bold text-gray-900">
                             <span class="text-red-600 mr-1">*</span>Subject Three :</label>
-                        <input type="number" name="subject_three" id="subjectthree" step="0.01" required
+                        <input type="number" name="subject_three" id="subjectthree" step="0.01" 
                             placeholder="Enter Grade"
                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
                     </div>
@@ -92,7 +92,7 @@
                     <div>
                         <label for="subjectfour" class="block mb-2 text-sm font-bold text-gray-900">
                             <span class="text-red-600 mr-1">*</span>Subject Four :</label>
-                        <input type="number" name="subject_four" id="subjectfour" step="0.01" required
+                        <input type="number" name="subject_four" id="subjectfour" step="0.01" 
                             placeholder="Enter Grade"
                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
                     </div>
@@ -100,7 +100,7 @@
                     <div>
                         <label for="subjectfive" class="block mb-2 text-sm font-bold text-gray-900">
                             <span class="text-red-600 mr-1">*</span>Subject Five :</label>
-                        <input type="number" name="subject_five" id="subjectfive" step="0.01" required
+                        <input type="number" name="subject_five" id="subjectfive" step="0.01" 
                             placeholder="Enter Grade"
                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
                     </div>
@@ -108,7 +108,7 @@
                     <div>
                         <label for="subjectsix" class="block mb-2 text-sm font-bold text-gray-900">
                             <span class="text-red-600 mr-1">*</span>Subject Six :</label>
-                        <input type="number" name="subject_six" id="subjectsix" step="0.01" required
+                        <input type="number" name="subject_six" id="subjectsix" step="0.01" 
                             placeholder="Enter Grade"
                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
                     </div>
@@ -116,7 +116,7 @@
                     <div>
                         <label for="subjectseven" class="block mb-2 text-sm font-bold text-gray-900">
                             <span class="text-red-600 mr-1">*</span>Subject Seven :</label>
-                        <input type="number" name="subject_seven" id="subjectseven" step="0.01" required
+                        <input type="number" name="subject_seven" id="subjectseven" step="0.01" 
                             placeholder="Enter Grade"
                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
                     </div>
@@ -124,7 +124,7 @@
                     <div>
                         <label for="subjecteight" class="block mb-2 text-sm font-bold text-gray-900">
                             <span class="text-red-600 mr-1">*</span>Subject Eight :</label>
-                        <input type="number" name="subject_eight" id="subjecteight" step="0.01" required
+                        <input type="number" name="subject_eight" id="subjecteight" step="0.01" 
                             placeholder="Enter Grade"
                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
                     </div>
@@ -132,7 +132,7 @@
                     <div>
                         <label for="subjectnine" class="block mb-2 text-sm font-bold text-gray-900">
                             <span class="text-red-600 mr-1">*</span>Subject Nine :</label>
-                        <input type="number" name="subject_nine" id="subjectnine" step="0.01" required
+                        <input type="number" name="subject_nine" id="subjectnine" step="0.01" 
                             placeholder="Enter Grade"
                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
                     </div>
@@ -150,7 +150,7 @@
 
 <script>
     document.getElementById("inputgradeForm").addEventListener("submit", function (event) {
-        const inputs = this.querySelectorAll("input[required]");
+        const inputs = this.querySelectorAll("input[]");
         let allFilled = true;
 
         inputs.forEach(input => {
@@ -164,7 +164,7 @@
 
         if (!allFilled) {
             event.preventDefault(); // Prevent form submission
-            alert("Please fill out all required fields.");
+            alert("Please fill out all  fields.");
         }
     });
 

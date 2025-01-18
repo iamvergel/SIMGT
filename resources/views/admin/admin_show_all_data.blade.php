@@ -76,7 +76,7 @@
                 @include('admin.includes.header')
             </header>
 
-            <div class="p-5">
+            <div class="p-5" id="student-data">
                 <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
                 <p class="text-2xl font-bold text-teal-900 ml-5">
                     <span onclick="window.location.href ='/StEmelieLearningCenter.HopeSci66/admin/student-management'"
@@ -313,13 +313,13 @@
                     </div>
                 </section>
             </div>
+            @include('admin.includes.show_student_profile')
         </main>
-
-        @include('admin.includes.show_student_profile')
-
     </div>
 
     <script src="{{ asset('../js/admin/admin.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.0/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>

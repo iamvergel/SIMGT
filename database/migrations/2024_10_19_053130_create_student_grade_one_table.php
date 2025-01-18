@@ -22,10 +22,6 @@ return new class extends Migration {
             $table->decimal('subject_three', 5, 2)->nullable();
             $table->decimal('subject_four', 5, 2)->nullable();
             $table->decimal('subject_five', 5, 2)->nullable();
-            $table->decimal('subject_six', 5, 2)->nullable();
-            $table->decimal('subject_seven', 5, 2)->nullable();
-            $table->decimal('subject_eight', 5, 2)->nullable();
-            $table->decimal('subject_nine', 5, 2)->nullable();
             $table->timestamps();
 
             // Unique constraint on student_number and quarter
