@@ -1,12 +1,9 @@
 {{-- resources/views/components/profile.blade.php --}}
 @php
-    $firstName = session('student_first_name', 'Guest');
-    $lastName = session('student_last_name', '');
-    $middleName = session('student_middle_name', '');
-    $suffixName = session('student_suffix_name', '');
-    $initials = strtoupper(substr($firstName, 0, 1) . substr($lastName, 0, 1));
+    $firstName = session('teacher_username', 'Guest');
+    $initials = strtoupper(substr($firstName, 0, 1));
 
-    $user = Auth::guard('student')->user();
+    $user = Auth::guard('teacher')->user();
     $avatarPath = $user && $user->avatar ? asset('storage/' . $user->avatar) : null;
 @endphp
 

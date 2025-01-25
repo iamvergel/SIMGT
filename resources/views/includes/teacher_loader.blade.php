@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St.-Emilie-Learning-Center</title>
+    <link rel="shortcut icon" href="{{ asset('../assets/images/SELC.png') }}" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+
+    </style>
+</head>
+
+<body class="bg-teal-700 flex items-center justify-center min-h-screen">
+    @yield('content')
+
+    <img class="rounded-full logo mt-3 w-[150px] lg:w-[200px]" src="{{ asset('../assets/images/SELC.png') }}"
+        alt="logo">
+
+    <script>
+        setTimeout(function () {
+            window.location.href = "/StEmelieLearningCenter.HopeSci66/teacher/dashboard"; 
+        }, 1000);
+    </script>
+</body>
+
+</html>

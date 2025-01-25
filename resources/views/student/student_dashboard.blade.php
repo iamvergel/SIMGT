@@ -124,30 +124,31 @@
                 class="fas fa-bullhorn text-teal-900 mr-2"></i>Announcement</p>
             <div class="bg-gray-200 p-2 lg:py-5 text-white rounded-lg shadow-lg text-start announcement">
 
-            @if($latestAnnouncements->isEmpty())
-                <p class="text-red-500 text-[14px] text-center">No announcements available.</p>
-            @else
-                @foreach($latestAnnouncements as $announcement)
-                    <div x-data="{ open: false }" class="announcement my-3 p-5 bg-white border rounded-lg text-teal-700 leading-4">
-                        <div class="py-3 px-2 bg-teal-700 rounded-lg text-white" id="announcementa">
-                            <div class="flex justify-between items-center">
-                                <h5 class="font-bold mb-0 text-[15px]">{{ $announcement->announcements_head }}</h5>
-                                <button @click="open = !open" class="bg-transparent text-white rounded px-2 py-1 text-sm">
-                                    <span x-show="!open"><i class="fas fa-angle-right"></i></span>
-                                    <span x-show="open"><i class="fas fa-angle-down"></i></span>
-                                </button>
-                            </div>
-                            <small class="text-muted text-[12px]">{{ $announcement->created_at->format('F j, Y, g:i a') }}</small>
-                        </div>
+              @if($latestAnnouncements->isEmpty())
+          <p class="text-red-500 text-[14px] text-center">No announcements available.</p>
+        @else
+        @foreach($latestAnnouncements as $announcement)
+      <div x-data="{ open: false }"
+      class="announcement my-3 p-5 bg-white border rounded-lg text-teal-700 leading-4">
+      <div class="py-3 px-2 bg-teal-700 rounded-lg text-white" id="announcementa">
+        <div class="flex justify-between items-center">
+        <h5 class="font-bold mb-0 text-[15px]">{{ $announcement->announcements_head }}</h5>
+        <button @click="open = !open" class="bg-transparent text-white rounded px-2 py-1 text-sm">
+        <span x-show="!open"><i class="fas fa-angle-right"></i></span>
+        <span x-show="open"><i class="fas fa-angle-down"></i></span>
+        </button>
+        </div>
+        <small class="text-muted text-[12px]">{{ $announcement->created_at->format('F j, Y, g:i a') }}</small>
+      </div>
 
-                        <div x-show="open" x-transition class="mt-3 px-2 py-2 text-[15px]">
-                            <textarea name="announcements_body" id="announcements_body" required
-                              class="w-full p-3 rounded-md focus:outline-none focus:ring-none focus:ring-teal-500 text-[13px]"
-                              style="resize: none;" rows="20" readonly>{{ $announcement->announcements_body }}</textarea>
-                        </div>
-                    </div>
-                @endforeach
-            @endif
+      <div x-show="open" x-transition class="mt-3 px-2 py-2 text-[15px]">
+        <textarea name="announcements_body" id="announcements_body" required
+        class="w-full p-3 rounded-md focus:outline-none focus:ring-none focus:ring-teal-500 text-[13px]"
+        style="resize: none;" rows="20" readonly>{{ $announcement->announcements_body }}</textarea>
+      </div>
+      </div>
+    @endforeach
+      @endif
 
             </div>
           </div>

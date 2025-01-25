@@ -88,14 +88,17 @@ class Clogin extends Controller
             $this->clearLoginAttempts($request);
 
             // Get the authenticated admin user
-            // $teacherUser = Auth::guard('teacher')->user();
+            $teacherUser = Auth::guard('teacher')->user();
 
+             // Store admin's data in the session
+             $request->session()->put('teacher_username', $teacherUser->username);
+             $request->session()->put('teacher_id', $teacherUser->id);
 
-            // Flash a success message
-            // $request->session()->flash('success', 'Welcome, ! You are now logged in as Teacher.');
+            //Flash a success message
+            $request->session()->flash('success', 'Welcome,' . $teacherUser->username . ' ! You are now logged in as Teacher.');
 
             // Redirect to the admin dashboard or admin loader
-            return view('teacher.teacher_dashboard');
+            return view('includes.teacher_loader');
         }
 
 

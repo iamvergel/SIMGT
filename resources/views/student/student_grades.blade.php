@@ -180,15 +180,11 @@
                         function getSubjectsForGrade(gradeKey, gradeRecord) {
                             const gradeLevels = {
                                 'grade_one': [
-                                    { name: 'Basic Math', grade: gradeRecord.subject_one || 'N/A' },
-                                    { name: 'Reading Fundamentals', grade: gradeRecord.subject_two || 'N/A' },
-                                    { name: 'Simple Science', grade: gradeRecord.subject_three || 'N/A' },
-                                    { name: 'Art and Craft', grade: gradeRecord.subject_four || 'N/A' },
-                                    { name: 'Social Skills', grade: gradeRecord.subject_five || 'N/A' },
-                                    { name: 'Storytelling', grade: gradeRecord.subject_six || 'N/A' },
-                                    { name: 'Health and Nutrition', grade: gradeRecord.subject_seven || 'N/A' },
-                                    { name: 'Music and Rhythm', grade: gradeRecord.subject_eight || 'N/A' },
-                                    { name: 'Physical Education', grade: gradeRecord.subject_nine || 'N/A' },
+                                    { name: 'Reading and Literacy', grade: gradeRecord.subject_one || 'N/A' },
+                                    { name: 'Language', grade: gradeRecord.subject_two || 'N/A' },
+                                    { name: 'Mathematics', grade: gradeRecord.subject_three || 'N/A' },
+                                    { name: 'GMRC', grade: gradeRecord.subject_four || 'N/A' },
+                                    { name: 'Makabansa', grade: gradeRecord.subject_five || 'N/A' },
                                 ],
                                 'grade_two': [
                                     { name: 'Addition and Subtraction', grade: gradeRecord.subject_one || 'N/A' },
@@ -362,8 +358,8 @@
                         // Add average and remark to the PDF
                         const averageStartY = startY + headerHeight + (subjects.length + 2) * cellHeight; // Position below the table
                         doc.setFontSize(10);
-                        doc.text(`${gradeKey}, ${quarter} Average: ${average}`, leftColumnX, astartY + 95);
-                        doc.text(`Remark: ${remark}`, rightColumnX, astartY + 95); // Positioned 10 units below the average
+                        doc.text(`${gradeKey}, ${quarter} Average: ${average}`, leftColumnX, astartY + 75);
+                        doc.text(`Remark: ${remark}`, rightColumnX, astartY + 75); // Positioned 10 units below the average
 
                         // Draw the bottom border of the table
                         const bottomY = startY + headerHeight + (subjects.length + 1) * cellHeight;
@@ -439,15 +435,11 @@
                 // Map of subjects for each grade
                 const subjectsMap = {
                     'grade_one': [
-                        { name: 'Basic Math', grade: gradeRecord.subject_one || 'N/A' },
-                        { name: 'Reading Fundamentals', grade: gradeRecord.subject_two || 'N/A' },
-                        { name: 'Simple Science', grade: gradeRecord.subject_three || 'N/A' },
-                        { name: 'Art and Craft', grade: gradeRecord.subject_four || 'N/A' },
-                        { name: 'Social Skills', grade: gradeRecord.subject_five || 'N/A' },
-                        { name: 'Storytelling', grade: gradeRecord.subject_six || 'N/A' },
-                        { name: 'Health and Nutrition', grade: gradeRecord.subject_seven || 'N/A' },
-                        { name: 'Music and Rhythm', grade: gradeRecord.subject_eight || 'N/A' },
-                        { name: 'Physical Education', grade: gradeRecord.subject_nine || 'N/A' },
+                        { name: 'Reading and Literacy', grade: gradeRecord.subject_one || 'N/A' },
+                        { name: 'Language', grade: gradeRecord.subject_two || 'N/A' },
+                        { name: 'Mathematics', grade: gradeRecord.subject_three || 'N/A' },
+                        { name: 'GMRC', grade: gradeRecord.subject_four || 'N/A' },
+                        { name: 'Makabansa', grade: gradeRecord.subject_five || 'N/A' },
                     ],
                     'grade_two': [
                         { name: 'Addition and Subtraction', grade: gradeRecord.subject_one || 'N/A' },
