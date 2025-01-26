@@ -11,9 +11,10 @@ $(document).ready(function () {
         ordering: true,
         info: true,
         lengthChang: true,
-        scrollX: true,
-        crollY: "auto",
-        scrollCollapse: true,
+        // scrollX: true,
+        // crollY: "auto",
+        // scrollCollapse: true,
+        responsive: true,
         buttons: [
             {
                 extend: "copyHtml5",

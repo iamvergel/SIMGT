@@ -73,7 +73,7 @@
         <!-- Main Content -->
         <main class="flex-grow rounded-r-lg bg-white shadow-lg overflow-y-scroll w-full bg-zinc-50" id="content">
             <header class="">
-                @include('admin.includes.header')
+                @include('admin.includes.topnav')
             </header>
 
             <div class="p-5" id="student-data">
@@ -161,27 +161,28 @@
                                                     <table id="studentTable" class="display w-full h-full p-5 " style="width: 200rem;">
                                                         <thead class="table-header bg-gray-100">
                                                             <tr class="text-md font-semibold tracking-wide text-left uppercase border">
-                                                                <th class="px-4 py-3">Student Number</th>
+                                                                <th class="px-4 py-3">Image</th>
                                                                 <th class="px-4 py-3">LRN</th>
+                                                                <th class="px-4 py-3">Student Number</th>
                                                                 <th class="px-4 py-3">School Year</th>
-                                                                <th class="px-4 py-3">Section</th>
                                                                 <th class="px-4 py-3">Status</th>
                                                                 <th class="px-4 py-3">Name</th>
                                                                 <th class="px-4 py-3">Grade</th>
-                                                                <th class="px-4 py-3">Email</th>
-                                                                <th class="px-4 py-3">Place of Birth</th>
-                                                                <th class="px-4 py-3">Date of Birth</th>
-                                                                <th class="px-4 py-3">Sex</th>
-                                                                <th class="px-4 py-3">Age</th>
-                                                                <th class="px-4 py-3">Contact Number</th>
-                                                                <th class="px-4 py-3">Religion</th>
-                                                                <th class="px-4 py-3">Address</th>
-                                                                <th class="px-4 py-3">Father's Name</th>
-                                                                <th class="px-4 py-3">Mother's Name</th>
-                                                                <th class="px-4 py-3">Guardian's Name</th>
-                                                                <th class="px-4 py-3">Emergency Contact</th>
-                                                                <th class="px-4 py-3">Contact Number</th>
-                                                                <th class="px-4 py-3">Messenger Account</th>
+                                                                <th class="px-4 py-3">Section</th>
+                                                                <th class="px-4 py-3 hidden">Email</th>
+                                                                <th class="px-4 py-3 hidden">Place of Birth</th>
+                                                                <th class="px-4 py-3 hidden">Date of Birth</th>
+                                                                <th class="px-4 py-3 hidden">Sex</th>
+                                                                <th class="px-4 py-3 hidden">Age</th>
+                                                                <th class="px-4 py-3 hidden">Contact Number</th>
+                                                                <th class="px-4 py-3 hidden">Religion</th>
+                                                                <th class="px-4 py-3 hidden">Address</th>
+                                                                <th class="px-4 py-3 hidden">Father's Name</th>
+                                                                <th class="px-4 py-3 hidden">Mother's Name</th>
+                                                                <th class="px-4 py-3 hidden">Guardian's Name</th>
+                                                                <th class="px-4 py-3 hidden">Emergency Contact</th>
+                                                                <th class="px-4 py-3 hidden">Contact Number</th>
+                                                                <th class="px-4 py-3 hidden">Messenger Account</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody class="bg-white" id="tableBody">
@@ -250,7 +251,7 @@
         data-birth-certificate="{{ isset($studentDocuments[$student->student_number]) ? asset('storage/' . $studentDocuments[$student->student_number]->birth_certificate) : 'N/A' }}"
     data-proof-of-residency="{{ isset($studentDocuments[$student->student_number]) ? asset('storage/' . $studentDocuments[$student->student_number]->proof_of_residency) : 'N/A' }}">
                                                                                                 
-                                                                                                <td class="px-4 py-3 h-28 border flex items-center mt-2 w-40">
+                                                                                                <td class="px-4 py-3 border">
                                                                                                     <div class="w-12 h-12 rounded-full bg-gray-500 text-white flex items-center justify-center font-bold">
                                                                                                         @if ($avatar)
                                                                                                             <img src="{{ $avatar }}" alt="Student Avatar" class="w-12 h-12 rounded-full object-cover">
@@ -258,11 +259,12 @@
                                                                                                             {{ $initials }}
                                                                                                         @endif
                                                                                                     </div>
-                                                                                                    <span class="ml-2">{{ $student->student_number }}</span>
                                                                                                 </td>
                                                                                                 <td class="px-4 py-3 border">{{ $student->lrn }}</td>
+                                                                                                <td class="px-4 py-3 border">
+                                                                                                    <span class="ml-2">{{ $student->student_number }}</span>
+                                                                                                </td>
                                                                                                 <td class="px-4 py-3 border">{{ $student->school_year }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->section }}</td>
                                                                                                 <td class="px-4 py-3 text-xs border">
                                                                                                     <span
                                                                                                         class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
@@ -273,36 +275,37 @@
                                                                                                     {{ $student->student_first_name }} {{ $student->student_middle_name }}
                                                                                                     {{ $student->student_suffix_name }}</td>
                                                                                                 <td class="px-4 py-3 border">{{ $student->grade }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->email_address_send }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->place_of_birth }}</td>
-                                                                                                <td class="px-4 py-3 border">
+                                                                                                <td class="px-4 py-3 border">{{ $student->section }}</td>
+                                                                                                <td class="px-4 py-3 border hidden">{{ $student->email_address_send }}</td>
+                                                                                                <td class="px-4 py-3 border hidden">{{ $student->place_of_birth }}</td>
+                                                                                                <td class="px-4 py-3 border hidden">
                                                                                                     {{ \Carbon\Carbon::parse($student->birth_date)->format('Y-m-d') }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->sex }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->age }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->contact_number }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->religion }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->house_number }},
+                                                                                                <td class="px-4 py-3 border hidden">{{ $student->sex }}</td>
+                                                                                                <td class="px-4 py-3 border hidden">{{ $student->age }}</td>
+                                                                                                <td class="px-4 py-3 border hidden">{{ $student->contact_number }}</td>
+                                                                                                <td class="px-4 py-3 border hidden">{{ $student->religion }}</td>
+                                                                                                <td class="px-4 py-3 border hidden">{{ $student->house_number }},
                                                                                                     {{ $student->street }}, {{ $student->barangay }}, {{ $student->city }},
                                                                                                     {{ $student->province }}</td>
                                                                                                 @php
                                                                                                     $additionalInfo = $studentsAdditional[$student->student_number] ?? null;
                                                                                                 @endphp
-                                                                                                <td class="px-4 py-3 border">
+                                                                                                <td class="px-4 py-3 border hidden">
                                                                                                     {{ $additionalInfo ? $additionalInfo->father_last_name . ', ' . $additionalInfo->father_first_name . $additionalInfo->father_suffix_name : 'N/A' }}
                                                                                                 </td>
-                                                                                                <td class="px-4 py-3 border">
+                                                                                                <td class="px-4 py-3 border hidden">
                                                                                                     {{ $additionalInfo ? $additionalInfo->mother_last_name . ', ' . $additionalInfo->mother_first_name : 'N/A' }}
                                                                                                 </td>
-                                                                                                <td class="px-4 py-3 border">
+                                                                                                <td class="px-4 py-3 border hidden">
                                                                                                     {{ $additionalInfo ? $additionalInfo->guardian_last_name . ', ' . $additionalInfo->guardian_first_name . $additionalInfo->guardian_suffix_name : 'N/A' }}
                                                                                                 </td>
-                                                                                                <td class="px-4 py-3 border">
+                                                                                                <td class="px-4 py-3 border hidden">
                                                                                                     {{ $additionalInfo ? $additionalInfo->emergency_contact_person : 'N/A' }}
                                                                                                 </td>
-                                                                                                <td class="px-4 py-3 border">
+                                                                                                <td class="px-4 py-3 border hidden">
                                                                                                     {{ $additionalInfo ? $additionalInfo->emergency_contact_number : 'N/A' }}
                                                                                                 </td>
-                                                                                                <td class="px-4 py-3 border">
+                                                                                                <td class="px-4 py-3 border hidden">
                                                                                                     {{ $additionalInfo ? $additionalInfo->messenger_account : 'N/A' }}</td>
                                                                                             </tr>
                                                             @endforeach

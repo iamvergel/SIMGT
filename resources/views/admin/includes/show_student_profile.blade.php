@@ -97,7 +97,7 @@
                                 <label for="modalLrn" class="block mb-2 text-[12px] font-bold text-gray-900">Learner
                                     Reference Number (LRN):</label>
                                 <input type="text" name="status"
-                                    class="input-field1 focus:outline-none focus:ring-none font-bold bg-gray-200 text-gray-900"
+                                    class="input-field1 focus:outline-none focus:ring-none bg-gray-200 text-gray-900"
                                     name="lrn" id="modalLrn" value="" readonly>
                             </div>
                             <div>

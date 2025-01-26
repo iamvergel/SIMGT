@@ -1,155 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>St. Emilie Learning Center</title>
-  <link rel="shortcut icon" href="{{ asset('../assets/images/SELC.png') }}" type="image/x-icon"
-    style="border-radius: 50%;">
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-
-  <script src="https://kit.fontawesome.com/20a0e1e87d.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
-  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-      scroll-behavior: smooth;
-      scrollbar-width: none;
-    }
-
-    .circle {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background-color: #e0e7ef;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .circle::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background-color: transparent;
-      clip-path: circle(50% at 50% 50%);
-      background: conic-gradient(#38b2ac 0%,
-          #38b2ac var(--percentage),
-          #e0e7ef var(--percentage),
-          #e0e7ef 100%);
-    }
-
-    .bg-white {
-      background-color: #fff;
-    }
-
-    .border-2 {
-      border-width: 2px;
-    }
-
-    #eventContainer {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      padding: 1rem;
-    }
-
-    .activity {
-      background-color: #0d9488;
-      border-radius: 10px;
-      padding: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    .activity h4 {
-      margin: 0;
-      color: #fff;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .activity p {
-      margin: 5px 0 0;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 1px;
-      letter-spacing: 1px;
-    }
-
-    .announcement-item {
-      background-color: #0d9488;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      border-radius: 8px;
-      padding: 10px;
-      margin: 5px 0;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      color: #fff;
-    }
-
-    .announcement-item:hover {
-      background-color: #0f766e;
-    }
-
-    .announcement-item strong {
-      font-size: 15px;
-      color: #fff;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
-
-    #announcementHistory {
-      scrollbar-width: thin;
-    }
-
-    .fc-toolbar {
-      font-size: 9px;
-      font-weight: 700;
-      color: #134e4a;
-    }
-
-    .fc-daygrid-day {
-      background-color: #f9f9f9;
-      border: 1px solid #ddd;
-    }
-
-    .fc-daygrid-event {
-      background-color: #0f766e;
-      color: #134e4a;
-      border-radius: 4px;
-      border: none;
-      padding: 5px;
-    }
-
-    .fc-daygrid-event:hover {
-      background-color: #115e59;
-    }
-
-    @media (min-width: 1024px) {
-      .fc-toolbar {
-        font-size: 15px;
-      }
-    }
-  </style>
-</head>
+@include('admin.includes.header')
 
 <body class="font-poppins bg-gray-200">
   <div class="flex p-2 w-full h-screen">
@@ -160,7 +9,7 @@
     <main class="flex-grow rounded-r-lg bg-white shadow-lg overflow-x-hidden overflow-y-scroll w-full bg-zinc-50"
       id="content">
       <header class="">
-        @include('admin.includes.header')
+        @include('admin.includes.topnav')
       </header>
 
       <div class="p-5">
@@ -175,24 +24,41 @@
                 <i class="fas fa-users text-teal-950 mr-2"></i> Total Number of Students by Grade
               </h2>
               <p class="text-sm text-teal-900 ml-9">Distribution of students in grades 1 to 6</p>
-              <div class="flex justify-end mt-3 transition duration-300">
+              <!-- <div class="flex justify-end mt-3 transition duration-300">
                 <button id="barButton"
                   class="bg-teal-600 text-white rounded px-3 py-1 transform transition-all duration-300 hover:bg-teal-800 hover:-translate-y-1">Bar</button>
                 <button id="lineButton"
                   class="bg-teal-600 text-white rounded px-3 py-1 mx-3 transform transition-all duration-300 hover:bg-teal-800 hover:-translate-y-1">Line</button>
                 <button id="waveButton"
                   class="bg-teal-600 text-white rounded px-3 py-1 transform transition-all duration-300 hover:bg-teal-800 hover:-translate-y-1">Wave</button>
+              </div> -->
+            </div>
+
+            <div class="grid grid-cols-3">
+              <div>
+                <a href="#"
+                  class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-sm md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                  <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
+                    src="/docs/images/blog/image-4.jpg" alt="">
+                  <div class="flex flex-col justify-between p-4 leading-normal">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy
+                      technology
+                      acquisitions 2021</h5>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise
+                      technology acquisitions of 2021 so far, in reverse chronological order.</p>
+                  </div>
+                </a>
               </div>
             </div>
 
-            @if($studentCounts->isEmpty())
+            <!-- @if($studentCounts->isEmpty())
               <p class="mt-5 text-teal-800 text-[12px] text-center">No students found for any grade.</p>
             @else
               <canvas id="studentChart" width="400" height="250"></canvas>
               <div id="totalStudents" class="text-teal-800 my-3 text-[14px]"></div>
               <div id="totalMaleStudent" class="text-teal-800 my-3 text-[14px]"></div>
               <div id="totalFemaleStudent" class="text-teal-800 my-3 text-[14px]"></div>
-            @endif
+            @endif -->
           </div>
 
           <!---->
@@ -225,7 +91,7 @@
               <i class="fa-solid fa-calendar mr-2"></i> Calendar
             </h2>
             <div class="grid grid-cols-4">
-              <div class="col-span-4">
+              <div class="col-span-2">
                 <div id='calendar' class="p-10 bg-white rounded-lg shadow-lg h-auto"></div>
               </div>
 
@@ -330,378 +196,8 @@
         </div>
     </main>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="{{ asset('../js/admin/admin.js') }}" type="text/javascript"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const studentData = @json($studentCounts);
-    const totalStudents = Object.values(studentData).reduce((sum, current) => sum + current, 0);
-    const totalMaleStudent = @json($totalMaleStudent);
-    const totalMaleStudents = Object.values(totalMaleStudent).reduce((sum, current) => sum + current, 0);
-    const totalFemaleStudent = @json($totalFemaleStudent);
-    const totalFemaleStudents = Object.values(totalFemaleStudent).reduce((sum, current) => sum + current, 0);
-
-    // Ensure totals are rounded to the nearest whole number
-    const roundedTotalStudents = Math.round(totalStudents);
-    const roundedTotalMaleStudents = Math.round(totalMaleStudents);
-    const roundedTotalFemaleStudents = Math.round(totalFemaleStudents);
-
-    // Update chart
-    const ctx = document.getElementById('studentChart').getContext('2d');
-
-    // Create a gradient
-    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(1, 'rgba(19,78,74,1)');
-    gradient.addColorStop(0.5, 'rgba(15,118,110,0.8)');
-    gradient.addColorStop(0, 'rgba(20,184,166,0.5)');
-
-    // Create the initial chart
-    let studentChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: Object.keys(studentData),
-        datasets: [{
-          label: 'Number of Students',
-          data: Object.values(studentData).map(count => Math.round(count)), // Round each data point to a whole number
-          backgroundColor: gradient,
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Number of Students'
-            },
-            ticks: {
-              stepSize: 1, // Ensures y-axis values are whole numbers
-              callback: function(value) {
-                return value; // Displays values as whole numbers
-              }
-            }
-          }
-        }
-      }
-    });
-
-    // Button event listeners
-    document.getElementById('barButton').addEventListener('click', () => {
-      studentChart.destroy();
-      studentChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: Object.keys(studentData),
-          datasets: [{
-            label: 'Number of Students',
-            data: Object.values(studentData).map(count => Math.round(count)), // Round each data point
-            backgroundColor: gradient,
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-              title: {
-                display: true,
-                text: 'Number of Students'
-              },
-              ticks: {
-                stepSize: 1, // Ensures y-axis values are whole numbers
-                callback: function(value) {
-                  return value;
-                }
-              }
-            }
-          }
-        }
-      });
-    });
-
-    document.getElementById('lineButton').addEventListener('click', () => {
-      studentChart.destroy();
-      studentChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: Object.keys(studentData),
-          datasets: [{
-            label: 'Number of Students',
-            data: Object.values(studentData).map(count => Math.round(count)), // Round each data point
-            borderColor: gradient,
-            backgroundColor: 'rgba(255, 255, 255, 0)', // Transparent fill
-            borderWidth: 2,
-            pointBackgroundColor: 'rgba(15,118,110,1)', // Dot color
-            pointRadius: 5, // Size of the dots
-            fill: false // No fill under the line
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-              title: {
-                display: true,
-                text: 'Number of Students'
-              },
-              ticks: {
-                stepSize: 1, // Ensures y-axis values are whole numbers
-                callback: function(value) {
-                  return value;
-                }
-              }
-            }
-          }
-        }
-      });
-    });
-
-    // Wave effect using line chart
-    document.getElementById('waveButton').addEventListener('click', () => {
-      studentChart.destroy();
-      studentChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: Object.keys(studentData),
-          datasets: [{
-            label: 'Number of Students',
-            data: Object.values(studentData).map(count => Math.round(count)), // Round each data point
-            borderColor: gradient,
-            backgroundColor: 'rgba(255, 255, 255, 0)',
-            borderWidth: 2,
-            pointBackgroundColor: 'rgba(15,118,110,1)', // Dot color
-            pointRadius: 5,
-            fill: false,
-            tension: 0.4 // Makes the line more wave-like
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-              title: {
-                display: true,
-                text: 'Number of Students'
-              },
-              ticks: {
-                stepSize: 1, // Ensures y-axis values are whole numbers
-                callback: function(value) {
-                  return value;
-                }
-              }
-            }
-          }
-        }
-      });
-    });
-
-    // Update totals with rounded values
-    document.getElementById('totalStudents').innerHTML = `Total Number of Active Students: <span class="font-bold text-md">${roundedTotalStudents}</span> Students`;
-    document.getElementById('totalMaleStudent').innerHTML = `Total Number of Male Students: <span class="font-bold text-md">${roundedTotalMaleStudents}</span> Students`;
-    document.getElementById('totalFemaleStudent').innerHTML = `Total Number of Female Students: <span class="font-bold text-md">${roundedTotalFemaleStudents}</span> Students`;
-
-
-      // Fetch events and display them
-      function fetchEvents() {
-        const calendarEl = document.getElementById('calendar');
-
-        const calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-
-          events: function (info, successCallback, failureCallback) {
-            fetch(`/api/events?start=${info.startStr}&end=${info.endStr}`)
-              .then(response => response.json())
-              .then(data => {
-                successCallback(data);
-              })
-              .catch(() => {
-                failureCallback();
-              });
-          },
-          dateClick: function (info) {
-            fetch(`/api/events?date=${info.dateStr}`)
-              .then(response => response.json())
-              .then(events => {
-                const activityEventContent = document.querySelector('.activityEventContent');
-                activityEventContent.innerHTML = `<p class="text-teal-900 font-semibold">${info.dateStr}</p><br/>`;
-
-                activityEventContent.innerHTML += `<ul class="text-[12px] text-teal-900">`;
-
-                if (events.length > 0) {
-                  events.forEach(event => {
-                    activityEventContent.innerHTML += `<li class="text-[12px] text-teal-900">${event.activity_name}</li>`;
-                  });
-                } else {
-                  activityEventContent.innerHTML += `<p class="text-[12px] text-teal-900">No events for this date.</p>`;
-                }
-
-                // Close the unordered list
-                activityEventContent.innerHTML += `</ul>`;
-
-              })
-              .catch(error => {
-                console.error('Error fetching events:', error);
-              });
-          }
-        });
-
-        calendar.render();
-
-
-        fetch('/events')
-          .then(response => response.json())
-          .then(events => {
-            const eventContainer = document.getElementById('eventContainer');
-            eventContainer.innerHTML = ''; // Clear existing events
-
-            events.forEach(event => {
-              const eventItem = document.createElement('div');
-              eventItem.className = 'announcement-item cursor-pointer p-2 border-b hover:bg-teal-800 text-[13px]';
-              eventItem.innerHTML = `<p>${event.activity_name} <br/> ${new Date(event.event_date).toLocaleDateString()}</p>`;
-
-              // Add click event to edit the event
-              eventItem.addEventListener('click', () => {
-                editEvent(event);
-              });
-
-              eventContainer.appendChild(eventItem);
-            });
-          });
-      }
-      // Edit event function
-      function editEvent(event) {
-        // Populate the form with event data
-        const eventDateInput = document.getElementById('event_date');
-        const activityNameInput = document.getElementById('activity_name');
-
-        const eventDate = new Date(event.event_date);
-        const localDateString = eventDate.toLocaleDateString('en-CA'); // 'en-CA' formats as YYYY-MM-DD
-
-        eventDateInput.value = localDateString;
-        activityNameInput.value = event.activity_name;
-
-        // Change form to handle updating the event
-        const eventForm = document.getElementById('eventForm');
-        eventForm.dataset.eventId = event.id; // Store the event ID for updating
-        eventForm.querySelector('button').innerText = 'Update Event';
-      }
-
-      // Handle event form submission
-      const eventForm = document.getElementById('eventForm');
-      eventForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const formData = new FormData(eventForm);
-        const eventId = eventForm.dataset.eventId;
-
-        const method = eventId ? 'PUT' : 'POST'; // Determine method based on whether editing or adding
-
-        // Make sure to include the CSRF token if needed
-        formData.append('_method', method); // Laravel requires this for PUT
-
-        fetch(`/events${eventId ? '/' + eventId : ''}`, {
-          method: 'POST',
-          body: formData,
-        })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json();
-          })
-          .then(data => {
-            fetchEvents(); // Refresh event list
-            eventForm.reset(); // Clear the form
-            delete eventForm.dataset.eventId; // Remove event ID
-            eventForm.querySelector('button').innerText = 'Add Event'; // Reset button text
-          })
-          .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-          });
-      });
-
-      fetchEvents(); // Fetch events on page load
-
-      // Fetch announcements and display them
-      function fetchAnnouncements() {
-        fetch('/announcements')
-          .then(response => response.json())
-          .then(announcements => {
-            const announcementHistory = document.getElementById('announcementHistory');
-            announcementHistory.innerHTML = ''; // Clear existing announcements
-
-            announcements.forEach(announcement => {
-              const announcementItem = document.createElement('div');
-              const createdAt = new Date(announcement.created_at).toLocaleString();
-
-              announcementItem.className = 'announcement-item cursor-pointer my-4 p-2 border-b hover:bg-teal-800 text-[12px]';
-              announcementItem.innerHTML = `<p>${announcement.announcements_head} <br/>
-                                            Created at: ${createdAt}</p>`;
-              // Add click event to edit the announcement
-              announcementItem.addEventListener('click', () => {
-                editAnnouncement(announcement);
-              });
-
-              announcementHistory.appendChild(announcementItem);
-            });
-          })
-          .catch(error => console.error('Error fetching announcements:', error));
-      }
-
-      // Edit announcement function
-      function editAnnouncement(announcement) {
-        const announcementsHeadInput = document.getElementById('announcements_head');
-        const announcementsBodyInput = document.getElementById('announcements_body');
-
-        announcementsHeadInput.value = announcement.announcements_head;
-        announcementsBodyInput.value = announcement.announcements_body;
-
-        // Change form to handle updating the announcement
-        const announcementForm = document.getElementById('announcementForm');
-        announcementForm.dataset.announcementId = announcement.id; // Store the announcement ID
-        announcementForm.querySelector('button').innerText = 'Update Announcement';
-      }
-
-      // Handle announcement form submission
-      const announcementForm = document.getElementById('announcementForm');
-      announcementForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const formData = new FormData(announcementForm);
-        const announcementId = announcementForm.dataset.announcementId;
-
-        const method = announcementId ? 'PUT' : 'POST'; // Determine method based on whether editing or adding
-
-        // Make sure to include the CSRF token if needed
-        formData.append('_method', method); // Laravel requires this for PUT
-
-        fetch(`/announcements${announcementId ? '/' + announcementId : ''}`, {
-          method: 'POST',
-          body: formData,
-        })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json();
-          })
-          .then(data => {
-            fetchAnnouncements(); // Refresh event list
-            announcementForm.reset(); // Clear the form
-            delete announcementForm.dataset.announcementId; // Remove event ID
-            announcementForm.querySelector('button').innerText = 'Add Announcement'; // Reset button text
-          })
-          .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-          });
-      });
-
-      fetchAnnouncements(); // Fetch announcements on page load
-    });
-  </script>
-
 </body>
 
 </html>
+
+@include('admin.includes.js-link')

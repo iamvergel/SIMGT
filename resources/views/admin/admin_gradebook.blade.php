@@ -41,7 +41,7 @@
         <main class="flex-grow rounded-r-lg bg-white shadow-lg overflow-x-hidden overflow-y-scroll w-full bg-zinc-50"
             id="content">
             <header class="">
-                @include('admin.includes.header')
+                @include('admin.includes.topnav')
             </header>
 
             <div class="p-5">
