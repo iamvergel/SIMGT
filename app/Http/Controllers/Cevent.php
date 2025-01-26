@@ -100,23 +100,49 @@ class Cevent extends BaseController // Extend the correct base controller
 
     public function showAllAdmin()
     {
-        $studentCounts = StudentInfo::select(DB::raw('count(*) as count, grade'))->Where('status', 'Active')
+        // Count the number of active students for each grade (Grade One to Grade Six)
+        $studentCounts = StudentInfo::select(DB::raw('count(*) as count, grade'))
+            ->where('status', 'Active')
+            ->whereIn('grade', ['Grade One', 'Grade Two', 'Grade Three', 'Grade Four', 'Grade Five', 'Grade Six']) // Filter by Grade One to Grade Six
             ->groupBy('grade')
             ->pluck('count', 'grade');
 
-        $totalMaleStudent = StudentInfo::select(DB::raw('count(*) as count, sex'))->Where('status', 'Active')->where('sex', 'Male')
+        // Count the number of active students for each grade (Grade One to Grade Six)
+        $studentDroppedCounts = StudentInfo::select(DB::raw('count(*) as count, grade'))
+            ->where('status', 'Dropped')
+            ->whereIn('grade', ['Grade One', 'Grade Two', 'Grade Three', 'Grade Four', 'Grade Five', 'Grade Six']) // Filter by Grade One to Grade Six
+            ->groupBy('grade')
+            ->pluck('count', 'grade');
+
+        // Count the number of active students for each grade (Grade One to Grade Six)
+        $studentGraduatedCounts = StudentInfo::select(DB::raw('count(*) as count, grade'))
+            ->where('status', 'Dropped')
+            ->whereIn('grade', ['Grade One', 'Grade Two', 'Grade Three', 'Grade Four', 'Grade Five', 'Grade Six']) // Filter by Grade One to Grade Six
+            ->groupBy('grade')
+            ->pluck('count', 'grade');
+
+        // Count the number of active male students
+        $totalMaleStudent = StudentInfo::select(DB::raw('count(*) as count, sex'))
+            ->where('status', 'Active')
+            ->where('sex', 'Male')
             ->groupBy('sex')
             ->pluck('count', 'sex');
 
-        $totalFemaleStudent = StudentInfo::select(DB::raw('count(*) as count, sex'))->Where('status', 'Active')->where('sex', 'Female')
+        // Count the number of active female students
+        $totalFemaleStudent = StudentInfo::select(DB::raw('count(*) as count, sex'))
+            ->where('status', 'Active')
+            ->where('sex', 'Female')
             ->groupBy('sex')
             ->pluck('count', 'sex');
 
-        $totalStaff = Madminaccount::count(); // Adjust as needed
+        // Count the total number of staff
+        $totalStaff = Madminaccount::count();
+
+        // Count the number of current staff (You may want to modify this query depending on your definition of "current staff")
         $currentStaff = Madminaccount::count();
-        ;
 
-        return view('admin.admin_dashboard', compact('studentCounts', 'totalStaff', 'currentStaff', 'totalMaleStudent', 'totalFemaleStudent'));
+        // Return the view with all the necessary data
+        return view('admin.admin_dashboard', compact('studentCounts', 'studentGraduatedCounts', 'studentDroppedCounts', 'totalStaff', 'currentStaff', 'totalMaleStudent', 'totalFemaleStudent'));
     }
 
     public function showDashboardstudent()

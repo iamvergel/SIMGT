@@ -483,6 +483,7 @@ class Cstudentinfo extends Controller
 
     public function showGradeData()
     {
+
         // Fetch all student records
         $students = StudentInfo::all();
 

@@ -54,8 +54,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
           events.forEach(event => {
             const eventItem = document.createElement('div');
-            eventItem.className = 'announcement-item cursor-pointer p-2 border-b hover:bg-teal-800 text-[13px]';
-            eventItem.innerHTML = `<p>${event.activity_name} <br/> ${new Date(event.event_date).toLocaleDateString()}</p>`;
+            eventItem.className = 'announcement-item cursor-pointer p-3 border-b hover:bg-teal-800 text-[13px]';
+            eventItem.innerHTML = `<p>${event.activity_name} <br/><br/> ${new Date(event.event_date).toLocaleDateString()}</p>`;
 
             // Add click event to edit the event
             eventItem.addEventListener('click', () => {

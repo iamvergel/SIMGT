@@ -22,5 +22,5 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">">
+  <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">
 </head>
