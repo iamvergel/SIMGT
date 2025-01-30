@@ -599,9 +599,9 @@
                     <div id="gradeModal"
                         class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden p-10">
                         <div class="bg-white p-6 rounded-lg w-[800px] h-[400px]">
-                            <h2 class="text-2xl font-bold mb-4" id="studentFullname">
-                                {{ $student->student_last_name . ' ' . $student->student_first_name . ' ' . $student->student_middle_name}}
-                                Grades</h2>
+                                <h2 class="text-2xl font-bold mb-4" id="studentFullname">
+                                    {{ $student->student_last_name . ' ' . $student->student_first_name . ' ' . $student->student_middle_name}}
+                                    Grades</h2>
                             <div id="modalContent">
                                 <!-- Dynamic content will be inserted here -->
                             </div>

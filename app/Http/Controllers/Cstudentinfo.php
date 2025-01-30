@@ -319,7 +319,7 @@ class Cstudentinfo extends Controller
             ]
         );
 
-        return back()->with('success', 'Student information updated successfully!');
+        return back()->with('success',  'Student information updated successfully!');
     }
 
     public function dropStudent(Request $request, $studentId)
