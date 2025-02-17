@@ -1,8 +1,7 @@
 <footer class="w-full bg-teal-950 relative">
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 py-10 px-10 lg:py-20 lg:px-20">
         <div class="text-white text-[12px] text-start">
-            <a href="/"
-                class="text-[30px] font-bold hover:text-yellow-500">SIMGT</a>
+            <a href="/" class="text-[30px] font-bold hover:text-yellow-500">SIMGT</a>
             <h1 class="text-[15px]">Student Management System</h1>
 
             <p class=" mt-10 mb-3 font-light">
@@ -29,23 +28,16 @@
                 <li><a href="#" class="hover:text-yellow-500 transition-colors">About Us</a></li>
                 <li><a href="#" class="hover:text-yellow-500 transition-colors">Staff</a></li>
                 <li><a href="#" class="hover:text-yellow-500 transition-colors">Contact Us</a></li>
-                <li><a href="https://stemilielearningcenteramparo.blogspot.com/2009/09/who-is-st-emilie.html" class="hover:text-yellow-500 transition-colors">Blog</a></li>
+                <li><a href="https://stemilielearningcenteramparo.blogspot.com/2009/09/who-is-st-emilie.html"
+                        class="hover:text-yellow-500 transition-colors">Blog</a></li>
             </ul>
         </div>
 
 
         <div class="text-white text-[12px] text-start mt-10 lg:mt-0">
-            <h2 class="text-xl font-semibold mb-4">Our Courses</h2>
+            <h2 class="text-xl font-semibold mb-4">Adress</h2>
             <ul class="space-y-2">
-                <li><a href="#" class="hover:text-yellow-500 transition-colors">Mathematics</a></li>
-                <li><a href="#" class="hover:text-yellow-500 transition-colors">English Language Arts</a></li>
-                <li><a href="#" class="hover:text-yellow-500 transition-colors">Science</a></li>
-                <li><a href="#" class="hover:text-yellow-500 transition-colors">Social Studies</a></li>
-                <li><a href="#" class="hover:text-yellow-500 transition-colors">Physical Education</a></li>
-                <li><a href="#" class="hover:text-yellow-500 transition-colors">Art</a></li>
-                <li><a href="#" class="hover:text-yellow-500 transition-colors">Music</a></li>
-                <li><a href="#" class="hover:text-yellow-500 transition-colors">Computer Studies</a></li>
-                <li><a href="#" class="hover:text-yellow-500 transition-colors">Health Education</a></li>
+                <li><a target="_blank" href="https://www.google.com/maps/place/St.+Emilie+Learning+Center/@14.7533808,121.078094,17z/data=!4m6!3m5!1s0x3397b0083f1e47fb:0xa41cb7b730554b5!8m2!3d14.7533756!4d121.0806689!16s%2Fg%2F1pzpz4rpw?entry=ttu&g_ep=EgoyMDI1MDIxMi4wIKXMDSoASAFQAw%3D%3D" class="hover:text-yellow-500 transition-colors">Amparo Village, 18 Bangkal, Caloocan, Metro Manila</a></li>
             </ul>
         </div>
 
@@ -74,7 +66,11 @@
         </div>
         <p class="text-[12px] pl-3 tracking-wider text-left text-black py-3">@ Copyright &copy; 2024 St
             Emilie
-            Learning Center-HopeSci66.SIMGT66.
+            Learning Center-HopeSci66.SIMGT.
             All Right Reserved</p>
     </div>
 </footer>
+
+</body>
+
+</html>

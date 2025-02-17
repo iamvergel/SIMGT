@@ -12,7 +12,7 @@ use App\Http\Controllers\Cstudentgrades;
 use App\Http\Controllers\CStudentProfile;
 
 // Landing Page
-Route::get('/', function () {
+Route::get('/StEmelieLearningCenter', function () {
     return view('landing_page');
 });
 

@@ -10,10 +10,12 @@
 
 <nav class="bg-white flex items-center justify-between p-3 rounded-tr-lg shadow-lg" id="header">
     <div class="flex items-center text-white">
-        <div id="btn-toggle"
-            class="text-2xl bg-teal-800 text-white shadow-lg ml-0 py-1 px-3 transition-all duration-300 hover:bg-teal-700 rounded-full">
-            <i class="fas fa-bars text-lg text-normal"></i>
+        <div >
+            
         </div>
+
+        <button id="btn-toggle"
+        class="text-2xl flex justify-center items-center bg-teal-800 text-white shadow-lg ml-0 py-1 px-1 transition-all duration-300 hover:bg-teal-700 rounded-full"><i class="fas fa-bars text-lg text-normal p-3"></i></button>
     </div>
     <div class="ml-10 mr-20 w-48 lg:w-96 relative">
         <div class="flex justify-center items-center">
