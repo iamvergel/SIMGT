@@ -32,7 +32,7 @@
         <div class="currentDate"></div>
     </div>
     <div class="relative ml-5">
-        <div class="border-2 w-[40px] h-[40px] bg-gray-500 hover:bg-gray-600 rounded-full flex items-center justify-center text-white text-2xl font-semibold transition-all duration-300 shadow-lg cursor-pointer"
+        <div class="border-2 w-[40px] h-[40px] bg-teal-700 hover:bg-gray-600 rounded-full flex items-center justify-center text-white text-2xl font-semibold transition-all duration-300 shadow-lg cursor-pointer"
             id="profileTop">
             {{ strtoupper(substr(session('admin_username') ?? 'G', 0, 1)) }}
         </div>
@@ -166,6 +166,7 @@
         const header = document.getElementById('header');
         const toggleBtn = document.getElementById('btn-toggle');
         const reportSection = document.getElementById('collapse3');
+        const dashboard = document.getElementById('dashboard');
         const searchBar = document.getElementById('search-bar');
 
         toggleBtn.addEventListener('click', () => {
@@ -176,6 +177,8 @@
             profileContainer.classList.toggle('shadow-none');
             reportSection.classList.toggle('mx-0');
             reportSection.classList.toggle('px-0');
+            dashboard.classList.toggle('mx-0');
+            dashboard.classList.toggle('px-0');
             sidebar.classList.toggle('w-80');
             sidebar.classList.toggle('collapsed');
         });

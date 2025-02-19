@@ -98,6 +98,10 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/dashboard', [Cevent::class, 'showAllAdmin'])->name('admin.admin_dashboard');
 
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/calendar', function () {
+        return view('admin.admin_calendar');
+    });
+
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/website-gallery', function () {
         return view('admin.website.admin_website_gallery');
     });
@@ -105,6 +109,9 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     // events Routes
     Route::post('/events', [Cevent::class, 'storeEvent'])->name('events.store');
     Route::put('/events/{id}', [Cevent::class, 'updateEvent'])->name('events.update');
+    // Laravel route definition in web.php
+    Route::put('/events/{id}', [Cevent::class, 'updateEvent'])->name('events.update');
+
     Route::get('/events', [Cevent::class, 'showEvents']);
 
     // Announcement Routes

@@ -33,6 +33,7 @@
 
         .sidebar-text {
             transition: all 0.3s;
+            font-weight: 400;
         }
 
         p,
@@ -98,8 +99,8 @@
         }
 
         .fa-chevron-down {
-            transform: rotate(360deg);
-            transition: transform 0.2s;
+            transform: rotate(0deg);
+            transition: transform 1s;
         }
 
         .tooltip {
@@ -139,7 +140,7 @@
         <div class="flex items-center justify-center max-h-1/4 p-4 mt-10">
             <div class="flex flex-col items-center justify-center h-full p-4 bg-teal-700 rounded-xl w-56 shadow-lg"
                 id="account">
-                <div class="w-20 h-20 bg-gray-500 rounded-full flex items-center justify-center text-white text-4xl font-semibold transition-all duration-300 shadow-lg"
+                <div class="w-20 h-20 bg-teal-600 rounded-full flex items-center justify-center text-white text-4xl font-semibold transition-all duration-300 shadow-lg"
                     id="profile">
                     {{ strtoupper(substr(session('admin_username') ?? 'G', 0, 1)) }}
                 </div>
@@ -153,15 +154,48 @@
         <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">
 
         <div class="mt-10 mx-1">
-            <p class="text-[14px] mt-10 ml-7 text-white font-normal uppercase tracking-wider">{{ session('admin_role') ?? 'Guest' }} DASHBOARD</p>
-            <a href="/StEmelieLearningCenter.HopeSci66/admin/dashboard"
+            <p class="text-[14px] mt-10 ml-7 text-white font-normal uppercase tracking-wider">
+                {{ session('admin_role') ?? 'Guest' }} DASHBOARD
+            </p>
+            <!-- <a href="/StEmelieLearningCenter.HopeSci66/admin/dashboard"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
                 id="dashboardLink">
                 <i class="fa-solid fa-table-columns"></i>
                 <span class="sidebar-text ml-2">Dashboard</span>
                 <span
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
-            </a>
+            </a> -->
+            <button
+                class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip"
+                id="studentManagementButton6" aria-expanded="false" aria-controls="dashboard">
+                <i class="fa-solid fa-table-columns"><span class="sidebar-text ml-2">Dashboard</span></i>
+                <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
+                <span
+                    class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[8px] p-1 font-bold">Dashboard</span>
+            </button>
+            <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="dashboard">
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/dashboard"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip">
+                    <i class="fa-solid fa-table-columns"></i>
+                    <span class="sidebar-text ml-2">Dashboard</span>
+                    <span
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
+                </a>
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/calendar"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip">
+                    <i class="fa-solid fa-calendar"></i>
+                    <span class="sidebar-text ml-2">Calendar</span>
+                    <span
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Calendar</span>
+                </a>
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Archive-Student"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0 tooltip">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span class="sidebar-text ml-2">Announcement</span>
+                    <span
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Announcement</span>
+                </a>
+            </div>
 
             <!-- <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management" -->
             <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/AllStudentData"
@@ -252,25 +286,25 @@
                             class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Teacher</span>
                     </a>
                     <!-- <a href="#"
-                                class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip">
-                                <i class="fa-solid fa-user-xmark"></i>
-                                <span class="sidebar-text ml-2">Student Accounts</span>
-                                <span
-                                    class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dropped
-                                    <br /> Student</span>
-                            </a>
-                            <a href="#"
-                                class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0 tooltip">
-                                <i class="fa-solid fa-box-archive"></i>
-                                <span class="sidebar-text ml-2">Admins Account</span>
-                                <span
-                                    class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Archive
-                                    <br /> Student</span>
-                            </a> -->
+                                                class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip">
+                                                <i class="fa-solid fa-user-xmark"></i>
+                                                <span class="sidebar-text ml-2">Student Accounts</span>
+                                                <span
+                                                    class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dropped
+                                                    <br /> Student</span>
+                                            </a>
+                                            <a href="#"
+                                                class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0 tooltip">
+                                                <i class="fa-solid fa-box-archive"></i>
+                                                <span class="sidebar-text ml-2">Admins Account</span>
+                                                <span
+                                                    class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Archive
+                                                    <br /> Student</span>
+                                            </a> -->
                 </div>
 
                 <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">
-                
+
                 <p class="text-[14px] mt-10 ml-7 text-white font-normal uppercase tracking-wider">MANAGE WEBSITE</p>
                 <button
                     class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip"
@@ -291,21 +325,21 @@
                             <br />Page</span>
                     </a>
                     <!-- <a href="#"
-                                class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip">
-                                <i class="fa-solid fa-user-xmark"></i>
-                                <span class="sidebar-text ml-2">Student Accounts</span>
-                                <span
-                                    class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dropped
-                                    <br /> Student</span>
-                            </a>
-                            <a href="#"
-                                class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0 tooltip">
-                                <i class="fa-solid fa-box-archive"></i>
-                                <span class="sidebar-text ml-2">Admins Account</span>
-                                <span
-                                    class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Archive
-                                    <br /> Student</span>
-                            </a> -->
+                                                class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip">
+                                                <i class="fa-solid fa-user-xmark"></i>
+                                                <span class="sidebar-text ml-2">Student Accounts</span>
+                                                <span
+                                                    class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dropped
+                                                    <br /> Student</span>
+                                            </a>
+                                            <a href="#"
+                                                class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0 tooltip">
+                                                <i class="fa-solid fa-box-archive"></i>
+                                                <span class="sidebar-text ml-2">Admins Account</span>
+                                                <span
+                                                    class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Archive
+                                                    <br /> Student</span>
+                                            </a> -->
                 </div>
             @endif
 

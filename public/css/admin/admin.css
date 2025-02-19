@@ -127,3 +127,27 @@
         font-size: 15px;
     }
 }
+
+/* Change background and text color of FullCalendar buttons */
+.fc-button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border-radius: 5px; /* Optional: rounded corners */
+    padding: 10px 20px; /* Optional: padding */
+  }
+  
+  /* Change hover state of buttons */
+  .fc-button:hover {
+    background-color: #45a049; /* Darker green */
+    color: white;
+  }
+  
+  /* Optionally, you can change specific buttons */
+  .fc-prev-button {
+    background-color: #FF5722; /* Example: orange for prev button */
+  }
+  
+  .fc-next-button {
+    background-color: #2196F3; /* Example: blue for next button */
+  }
+  

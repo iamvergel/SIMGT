@@ -23,13 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
 
                     imageElement.innerHTML = `
-            <img src="/storage/images/${image.file_name}" alt="${image.name}"
-                class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-80" 
-                onclick="openImageModal(${image.id})">
-            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:bg-teal-500 group-hover:opacity-100 transition-opacity duration-500">
-                <p class="text-white text-lg">${image.name}</p>
-            </div>
-        `;
+                        <img src="/storage/images/${image.file_name}" alt="${image.name}"
+                            class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-80" 
+                            onclick="openImageModal(${image.id})">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:bg-teal-500 group-hover:opacity-100 transition-opacity duration-500">
+                            <p class="text-white text-lg">${image.name}</p>
+                        </div>
+                    `;
                     imagesContainer.appendChild(imageElement);
                 });
 

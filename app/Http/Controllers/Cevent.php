@@ -185,11 +185,12 @@ class Cevent extends BaseController // Extend the correct base controller
 
         $events = Mevent::whereBetween('event_date', [$start, $end])->get()->map(function ($event) {
             return [
+                'id' => $event->id,  // Add event ID
                 'title' => $event->activity_name,
                 'start' => $event->event_date,
             ];
         });
-
+        
         return response()->json($events);
     }
 }
