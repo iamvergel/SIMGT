@@ -109,9 +109,6 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     // events Routes
     Route::post('/events', [Cevent::class, 'storeEvent'])->name('events.store');
     Route::put('/events/{id}', [Cevent::class, 'updateEvent'])->name('events.update');
-    // Laravel route definition in web.php
-    Route::put('/events/{id}', [Cevent::class, 'updateEvent'])->name('events.update');
-
     Route::get('/events', [Cevent::class, 'showEvents']);
 
     // Announcement Routes
