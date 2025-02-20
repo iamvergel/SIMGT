@@ -2,32 +2,28 @@ $(document).ready(function () {
     $("#announcements_body").summernote({
         placeholder: "Enter Announcement...",
         tabsize: 2,
-        height: 120,
+        height: 200,
         zIndex: 500,
         toolbar: [
             ["style", ["style"]],
             ["font", ["bold", "underline", "clear"]],
             ["color", ["color"]],
             ["para", ["ul", "ol", "paragraph"]],
-            ["insert", ["link", "picture", "video"]],
-            ["view", ["fullscreen", "codeview", "help"]],
+            ["view", ["fullscreen"]],
         ],
         callbacks: {
-            onInit: function() {
-                $('.note-editor').css('background-color', '#fff'); // Background color for editor
+            onInit: function () {
+                $(".note-editor").css("background-color", "#fff");
             },
-            onFullscreen: function(isFullscreen) {
+            onFullscreen: function (isFullscreen) {
                 if (isFullscreen) {
-                    // Add background color when fullscreen is activated
-                    $('.note-editor').css('background-color', '#fff');
+                    $(".note-editor").css("background-color", "#fff");
                 } else {
-                    // Revert the background when exiting fullscreen (if needed)
-                    $('.note-editor').css('background-color', '');
+                    $(".note-editor").css("background-color", "");
                 }
-            }
-        }
+            },
+        },
     });
-    
 
     function fetchAnnouncements() {
         fetch("/announcements")
@@ -36,7 +32,7 @@ $(document).ready(function () {
                 const announcementHistory = document.getElementById(
                     "announcementHistory"
                 );
-                announcementHistory.innerHTML = "";
+                announcementHistory.innerHTML = ""; // Clear the announcement history
 
                 announcements.forEach((announcement) => {
                     const announcementItem = document.createElement("div");
@@ -44,15 +40,48 @@ $(document).ready(function () {
                         announcement.created_at
                     ).toLocaleString();
 
+                    // Generate unique ID for each textarea
+                    const textareaId = `announcementsbody_${announcement.id}`;
+
                     announcementItem.className =
-                        "announcement-item cursor-pointer my-4 p-2 border-b hover:bg-teal-800 text-[12px]";
-                    announcementItem.innerHTML = `<p>${announcement.announcements_head} <br/>
-                                      Created at: ${createdAt}</p>`;
+                        "announcement-item cursor-pointer border-b hover:bg-teal-800 text-[12px]";
+                    announcementItem.innerHTML = `
+                        <p class="text-lg font-bold uppercase my-3"> <small class="font-normal mr-2">TITLE : </small> ${announcement.announcements_head} </p>
+                        <textarea name="announcements_body" id="${textareaId}" required
+                        class="w-full bg-teal-700 p-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-700 text-[15px]"
+                        style="resize: none;" rows="15"></textarea>
+                        <p class="mt-5">${createdAt}</p>
+                    `;
+
+                    announcementHistory.appendChild(announcementItem);
+
+                    $("#" + textareaId).summernote({
+                        placeholder: "Enter Announcement...",
+                        tabsize: 2,
+                        height: 250,
+                        toolbar: [
+                            ["style", ["style"]],
+                            ["font", ["bold", "underline", "clear", "superscript", "subscript"]],
+                            ["fontsize", ["fontsize"]], 
+                            ["color", ["color"]],
+                            ["para", ["ul", "ol", "paragraph"]],
+                        ],
+                        callbacks: {
+                            onInit: function () {
+                                $(".note-editor").css("background-color", "#fff");
+                                $(".note-editor").css("font-size", "15px");
+                            },
+                        },
+                    });
+
+                    $("#" + textareaId).summernote(
+                        "code",
+                        announcement.announcements_body
+                    );
+
                     announcementItem.addEventListener("click", () => {
                         editAnnouncement(announcement);
                     });
-
-                    announcementHistory.appendChild(announcementItem);
                 });
             })
             .catch((error) =>
@@ -67,7 +96,11 @@ $(document).ready(function () {
             document.getElementById("announcements_body");
 
         announcementsHeadInput.value = announcement.announcements_head;
-        announcementsBodyInput.value = announcement.announcements_body;
+
+        $("#announcements_body").summernote(
+            "code",
+            announcement.announcements_body
+        );
 
         const announcementForm = document.getElementById("announcementForm");
         announcementForm.dataset.announcementId = announcement.id;
@@ -167,6 +200,8 @@ $(document).ready(function () {
             document
                 .getElementById("announcementFormModal")
                 .classList.remove("hidden");
+
+            $("#announcements_body").summernote("code", "");
 
             document.getElementById("delete").classList.add("hidden");
 

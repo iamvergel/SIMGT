@@ -21,14 +21,15 @@
             <i class="fa-solid fa-calendar mr-2"></i> Calendar
           </h2>
         </div>
-        <div class="w-full flex justify-end py-3 px-5">
-          <button
-            class="indent-[0rem] px-3 bg-sky-600 text-white rounded-md hover:bg-sky-700 transition py-3 text-md font-semibold"
-            id="addEvent"> <i class="fa-solid fa-plus me-1"></i> Add Event & Activities</button>
-        </div>
         <!---->
         <div
-          class="bg-white rounded-b-lg p-5 shadow-lg border-t-2 border-teal-700 col-span-4 lg:col-span-4 xl:col-span-4 calendar ">
+          class="bg-white rounded-b-lg p-5 shadow-lg mt-3 border-t-2 border-teal-700 col-span-4 lg:col-span-4 xl:col-span-4 calendar ">
+          <div class="w-full flex justify-end py-2 px-5">
+            <button
+              class="indent-[0rem] px-3 bg-sky-600 text-white rounded-md hover:bg-sky-700 transition py-3 text-md font-semibold"
+              id="addEvent"> <i class="fa-solid fa-plus me-1"></i> Add Event & Activities</button>
+          </div>
+
           <div class="grid grid-cols-4 gap-4">
             <div class="col-span-4 lg:col-span-3">
               <div id='calendar' class="mt-5 bg-white rounded-lg shadow-lg h-auto"></div>
