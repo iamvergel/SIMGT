@@ -49,6 +49,18 @@ class Cevent extends BaseController // Extend the correct base controller
         return response()->json($event, 200);
     }
 
+    public function deleteEvent($id)
+    {
+        try {
+            $event = Mevent::findOrFail($id);
+            $event->delete();
+
+            return response()->json(['message' => 'Event deleted successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to delete event', 'error' => $e->getMessage()], 500);
+        }
+    }
+
     // Show all events
     public function showEvents()
     {
@@ -78,6 +90,18 @@ class Cevent extends BaseController // Extend the correct base controller
         ]);
 
         return response()->json($announcement, 201);
+    }
+
+    public function deleteAnnouncement($id)
+    {
+        try {
+            $event = Mannouncement::findOrFail($id);
+            $event->delete();
+
+            return response()->json(['message' => 'Announcement deleted successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to delete event', 'error' => $e->getMessage()], 500);
+        }
     }
 
     // Update an existing announcement
@@ -190,7 +214,7 @@ class Cevent extends BaseController // Extend the correct base controller
                 'start' => $event->event_date,
             ];
         });
-        
+
         return response()->json($events);
     }
 }

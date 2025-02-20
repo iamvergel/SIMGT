@@ -102,6 +102,10 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         return view('admin.admin_calendar');
     });
 
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/announcement', function () {
+        return view('admin.admin_announcement');
+    });
+
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/website-gallery', function () {
         return view('admin.website.admin_website_gallery');
     });
@@ -109,12 +113,14 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     // events Routes
     Route::post('/events', [Cevent::class, 'storeEvent'])->name('events.store');
     Route::put('/events/{id}', [Cevent::class, 'updateEvent'])->name('events.update');
+    Route::delete('/events/{id}', [Cevent::class, 'deleteEvent'])->name('events.delete');
     Route::get('/events', [Cevent::class, 'showEvents']);
 
     // Announcement Routes
     Route::get('/announcements', [Cevent::class, 'showAnnouncements']);
     Route::post('/announcements', [Cevent::class, 'storeAnnouncement'])->name('announcements.store');
     Route::put('/announcements/{id}', [Cevent::class, 'updateAnnouncement'])->name('announcements.update');
+    Route::delete('/announcements/{id}', [Cevent::class, 'deleteAnnouncement'])->name('announcements.delete');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/student/dashboard', function () {
         return view('student.student_dashboard');

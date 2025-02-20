@@ -188,7 +188,7 @@
                     <span
                         class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Calendar</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Archive-Student"
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/announcement"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0 tooltip">
                     <i class="fa-solid fa-bullhorn"></i>
                     <span class="sidebar-text ml-2">Announcement</span>

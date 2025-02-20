@@ -23,7 +23,7 @@
         </div>
         <div class="w-full flex justify-end py-3 px-5">
           <button
-            class="indent-[0rem] px-3 bg-sky-600 text-white rounded-lg hover:bg-sky-700 transition py-2 text-md font-semibold"
+            class="indent-[0rem] px-3 bg-sky-600 text-white rounded-md hover:bg-sky-700 transition py-3 text-md font-semibold"
             id="addEvent"> <i class="fa-solid fa-plus me-1"></i> Add Event & Activities</button>
         </div>
         <!---->
@@ -39,7 +39,8 @@
               <h2 class="mt-5 text-md text-center rounded-t-lg font-bold bg-teal-700 text-white tracking-wider p-3">
                 Activities and
                 Events</h2>
-              <div class="eventContainer h-[30rem] xl:h-[55rem] border-2 shadow-lg rounded-b-lg overflow-y-scroll overflow-x-hidden"
+              <div
+                class="eventContainer h-[30rem] xl:h-[55rem] border-2 shadow-lg rounded-b-lg overflow-y-scroll overflow-x-hidden"
                 id="eventContainer"></div>
             </div>
           </div>
@@ -49,7 +50,7 @@
         <div id="activityModal"
           class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-[20]">
           <div class="bg-gray-100 rounded-lg shadow-lg p-5 w-11/12 max-w-md">
-            <div class="flex justify-between items-center p-2 px-4 bg-gray-200 shadow-lg">
+            <div class="flex justify-between items-center p-2 px-4 bg-white  shadow-lg">
               <p id="dateEvent" class="font-bold text-teal-900"></p>
               <span id="closeModal"
                 class="py-1 px-2 text-[12px] bg-teal-700 hover:bg-teal-800 font-semibold text-white rounded-full float-right"><i
@@ -62,7 +63,7 @@
         <!-- Modal -->
         <div id="EventForm" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-[20]">
           <div class="bg-gray-100 rounded-lg shadow-lg p-5 w-11/12 max-w-md">
-            <div class="flex justify-between items-center p-2 px-4 bg-gray-200 shadow-lg">
+            <div class="flex justify-between items-center p-2 px-4 bg-white shadow-l rounded-md">
               <p id="eventFormTitle" class="font-bold text-teal-900"></p>
               <span id="closeModalForm"
                 class="py-1 px-2 text-[12px] bg-teal-700 hover:bg-teal-800 font-semibold text-white rounded-full float-right"><i
@@ -73,7 +74,7 @@
                   class="fas fa-calendar mr-2"></i>Activities and
                 Events </h2> -->
               <form id="eventForm" action="{{ route('events.store') }}" method="POST"
-                class="mt-5 bg-white p-5 rounded-lg shadow-lg border-2">
+                class="mt-1 bg-white p-5 rounded-lg shadow-lg border-2">
                 @csrf
 
                 <label for="event_date" class="font-semibold text-[15px] mt-4"><span class="text-red-500">*</span>Event
@@ -84,8 +85,9 @@
                 <small id="eventDateHelp" class="text-gray-500">Please select a date for the event.</small>
                 <br /><br />
 
-                <label for="activity_name" class="font-semibold text-[15px]"><span class="text-red-500">*</span>Event
-                  Name</label>
+                <label for="activity_name" class="font-semibold text-[15px]"><span class="text-red-500">*</span>Event /
+                  Activities
+                </label>
                 <input type="text" name="activity_name" id="activity_name" required
                   class="w-full p-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-700 text-md"
                   aria-describedby="activityNameHelp">
@@ -94,8 +96,11 @@
                 <input type="hidden" name="_method" id="method" value="POST">
 
                 <div class="flex justify-end">
-                  <button type="submit"
-                    class="mt-10 w-1/2 indent-[-2rem] bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition py-2 text-md font-semibold">Submit
+                  <button type="submit" id="delete"
+                    class="mt-10 w-1/4 indent-[-2rem] bg-red-700 text-white rounded-lg hover:bg-red-800 transition py-2 text-md font-semibold me-2 hidden">Delete
+                  </button>
+                  <button type="submit" id="submitUpdate"
+                    class="mt-10 w-1/4 indent-[-2rem] bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition py-2 text-md font-semibold ">Submit
                   </button>
                 </div>
               </form>
@@ -115,6 +120,8 @@
     </main>
   </div>
 
+  <script src="{{ asset('../js/admin/admin.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('../js/admin/dashboard.js') }}" type="text/javascript"></script>
   @include('admin.includes.js-link')
 </body>
 

@@ -248,121 +248,13 @@
           </div> -->
           </div>
         </div>
-
-        <div class="bg-teal-700 p-5 shadow-lg mt-10 rounded-t-lg">
-          <h2 class="text-md font-semibold text-white">
-            <i class="fa-solid fa-calendar mr-2"></i> Calendar
-          </h2>
-        </div>
-        <!---->
-        <div
-          class="bg-white rounded-b-lg p-5 shadow-lg border-t-2 border-teal-700 mt-1 col-span-4 lg:col-span-4 xl:col-span-4 calendar text-teal-900">
-          <div class="grid grid-cols-4 gap-4">
-            <div class="col-span-4 lg:col-span-2">
-              <div id='calendar' class="mt-5 bg-white rounded-lg shadow-lg h-auto"></div>
-            </div>
-
-            <div class="col-span-4 lg:col-span-1">
-              <h2 class="mt-5 text-sm text-center rounded-t-lg font-bold bg-teal-700 text-white tracking-wider p-3">
-                Activities and
-                Events</h2>
-              <div class="eventContainer h-[40rem] border-2 shadow-lg rounded-b-lg overflow-y-scroll overflow-x-hidden"
-                id="eventContainer"></div>
-            </div>
-
-            <div class="col-span-4 lg:col-span-1">
-              <!-- <h2 class="mt-5 text-sm font-bold bg-teal-700 text-white tracking-wider p-5 py-5 rounded-lg"><i
-                  class="fas fa-calendar mr-2"></i>Activities and
-                Events </h2> -->
-              <form id="eventForm" action="{{ route('events.store') }}" method="POST"
-                class="mt-5 bg-white p-5 rounded-lg shadow-lg border-2">
-                @csrf
-
-                <label for="event_date" class="font-semibold text-[15px] mt-4"><span class="text-red-500">*</span>Event
-                  Date</label>
-                <input type="date" name="event_date" id="event_date" required
-                  class="w-full p-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-700 font-bold text-[15px]"
-                  aria-describedby="eventDateHelp">
-                <small id="eventDateHelp" class="text-gray-500">Please select a date for the event.</small>
-                <br /><br />
-
-                <label for="activity_name" class="font-semibold text-[15px]"><span class="text-red-500">*</span>Event
-                  Name</label>
-                <input type="text" name="activity_name" id="activity_name" required
-                  class="w-full p-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-700 text-[15px]"
-                  aria-describedby="activityNameHelp">
-                <small id="activityNameHelp" class="text-gray-500">Enter the name of the event.</small>
-
-                <input type="hidden" name="_method" id="method" value="POST">
-
-                <button type="submit"
-                  class="mt-3 w-full indent-[-1rem] bg-teal-700 text-white py-2 rounded-lg hover:bg-teal-800 transition py-5 text-[15px] font-bold">Submit
-                  Event
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <!-- announcement rows -->
-        <div class="bg-gray-200 rounded-lg p-4 col-span-4 lg:col-span-4 xl:col-span-4 shadow-lg">
-          <div class="bg-gray-200 rounded-lg p-2 col-span-2">
-            <div class="grid grid-cols-4 gap-2">
-              <div class="bg-white rounded-lg p-5 col-span-4 xl:col-span-2 shadow-lg">
-                <div class="bg-yellow-100 p-5 rounded-lg shadow-lg">
-                  <h2 class="text-md font-bold text-yellow-900">
-                    <i class="fas fa-bullhorn text-yellow-950 mr-2"></i>Announcements
-                  </h2>
-                </div>
-
-                <div class="col-span-4 lg:col-span-2 px-5 text-teal-900">
-                  <form id="announcementForm" action="{{ route('announcements.store') }}" method="POST"
-                    class="mt-5 bg-white p-5 rounded-lg shadow-lg border-2">
-                    @csrf
-
-                    <label for="announcements_head" class="font-semibold text-[15px] mt-4"><span
-                        class="text-red-500">*</span>Announcement Title</label>
-                    <input type="text" name="announcements_head" id="announcements_head" required
-                      class="w-full p-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-700 font-bold text-[15px]">
-                    <small id="titleHelp" class="text-gray-500">Enter the title of the announcement.</small> <br />
-                    <br />
-
-                    <label for="announcements_body" class="font-semibold text-[15px] mt-4"> <span
-                        class="text-red-500">*</span>Announcement
-                      Description</label>
-                    <textarea name="announcements_body" id="announcements_body" required
-                      class="w-full p-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-700 text-[15px]"
-                      style="resize: none;" rows="15"></textarea>
-                    <small id="descriptionHelp" class="text-gray-500">Enter the description of the
-                      announcement.</small>
-
-                    <button type="submit"
-                      class="mt-3 w-full bg-yellow-700 text-white py-2 rounded-lg hover:bg-yellow-800 transition py-5 ">
-                      Add Announcement
-                    </button>
-                  </form>
-                </div>
-              </div>
-              <div class="bg-white my-2 rounded-lg p-1 col-span-4 xl:col-span-2 shadow-lg">
-                <div class="bg-yellow-100 p-2 rounded-lg shadow-lg text-center mb-5">
-                  <h2 class="text-md font-bold text-yellow-900">
-                    <i class="fas fa-bullhorn text-yellow-900 mr-2"></i>Announcements <br /> History
-                  </h2>
-                </div>
-                <div
-                  class="bg-white h-96 xl:h-[650px] overflow-x-hidden overflow-y-scroll rounded-lg border-2 p-5 shadow-lg"
-                  id="announcementHistory"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-lg p-5 col-span-4 lg:col-span-4 xl:col-span-4 border-2 shadow-lg"></div>
-        </div>
       </div>
     </main>
   </div>
+
+  <script src="{{ asset('../js/admin/admin.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('../js/admin/dashboard.js') }}" type="text/javascript"></script>
+  @include('admin.includes.js-link')
 </body>
 
 </html>
-
-@include('admin.includes.js-link')
