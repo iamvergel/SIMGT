@@ -42,41 +42,6 @@ $(document).ready(function () {
         },
     });
 
-    document
-        .getElementById("addAnnouncementPicture")
-        .addEventListener("click", function () {
-            let date = new Date().toISOString().split("T")[0];
-
-            document.getElementById("announcementDate").value = date;
-            document
-                .getElementById("addAnnouncementModal")
-                .classList.remove("hidden");
-        });
-
-    document
-        .getElementById("closeModal")
-        .addEventListener("click", function () {
-            document
-                .getElementById("addAnnouncementModal")
-                .classList.add("hidden");
-        });
-
-    document
-        .getElementById("closeModalFormAnnouncement")
-        .addEventListener("click", function () {
-            document
-                .getElementById("addAnnouncementModal")
-                .classList.add("hidden");
-        });
-
-    document
-        .getElementById("closeUpdateModal")
-        .addEventListener("click", function () {
-            document
-                .getElementById("updateAnnouncementModal")
-                .classList.add("hidden");
-        });
-
     function fetchAnnouncements() {
         fetch("/announcements")
             .then((response) => response.json())
@@ -84,7 +49,17 @@ $(document).ready(function () {
                 const announcementHistory = document.getElementById(
                     "announcementHistory"
                 );
-                announcementHistory.innerHTML = ""; // Clear the announcement history
+                announcementHistory.innerHTML = ""; 
+
+                if (announcements.length === 0) {
+                    const noAnnouncementMessage = document.createElement("div");
+                    noAnnouncementMessage.className =
+                        "text-center text-sm text-gray-600 py-5";
+                    noAnnouncementMessage.innerHTML =
+                        "No Announcements Available";
+                    announcementHistory.appendChild(noAnnouncementMessage);
+                    return; 
+                }
 
                 announcements.forEach((announcement) => {
                     const announcementItem = document.createElement("div");
@@ -92,7 +67,6 @@ $(document).ready(function () {
                         announcement.created_at
                     ).toLocaleString();
 
-                    // Generate unique ID for each textarea
                     const textareaId = `announcementsbody_${announcement.id}`;
 
                     announcementItem.className =
@@ -279,4 +253,46 @@ $(document).ready(function () {
         });
 
     fetchAnnouncements();
+
+    document
+        .getElementById("addAnnouncementPicture")
+        .addEventListener("click", function () {
+            let date = new Date().toISOString().split("T")[0];
+
+            document.getElementById("announcementDate").value = date;
+
+            document
+                .getElementById("addAnnouncementModal")
+                .classList.remove("hidden");
+        });
+
+    document
+        .getElementById("closeModalFormAnnouncement")
+        .addEventListener("click", function () {
+            document
+                .getElementById("addAnnouncementModal")
+                .classList.add("hidden");
+        });
+
+    document
+        .getElementById("closeUpdateModal")
+        .addEventListener("click", function () {
+            document
+                .getElementById("updateAnnouncementModal")
+                .classList.add("hidden");
+        });
+
+    document
+        .getElementById("closeDeleteModal")
+        .addEventListener("click", function () {
+            document
+                .getElementById("deleteAnnouncementModal")
+                .classList.add("hidden");
+        });
+
+    document.getElementById("cancel").addEventListener("click", function () {
+        document
+            .getElementById("deleteAnnouncementModal")
+            .classList.add("hidden");
+    });
 });
