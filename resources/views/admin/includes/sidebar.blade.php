@@ -22,7 +22,7 @@
         }
 
         #sidebar {
-            scrollbar-width: none;
+            scrollbar-width: thin;
             scrollbar-color: #4b8b8a #2d7a7a;
             overflow-x: hidden;
         }

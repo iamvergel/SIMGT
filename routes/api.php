@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ImageController;
 
 Route::prefix('images')->group(function () {
@@ -12,3 +13,9 @@ Route::prefix('images')->group(function () {
     Route::delete('/{id}', [ImageController::class, 'destroy']);  // Delete an image by ID
 });
 
+use App\Http\Controllers\PictureAnnouncementController;
+
+Route::get('/announcements', [PictureAnnouncementController::class, 'showAnnouncements']);
+Route::post('/announcements', [PictureAnnouncementController::class, 'store']);
+Route::delete('/announcements/{id}', [PictureAnnouncementController::class, 'deleteAnnouncement']);
+Route::put('/announcements/{id}', [PictureAnnouncementController::class, 'updateAnnouncement']);

@@ -1,4 +1,21 @@
 $(document).ready(function () {
+    const csrfToken = document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
+
+    var table = $("#announcementTable").DataTable({
+        dom:
+            ` 
+            <'flex justify-between items-center hidden'>` +
+            `<tr>` +
+            `<'flex justify-between items-center'<'flex-1'l><'flex-1'p>>`,
+        paging: true,
+        searching: false,
+        ordering: true,
+        info: true,
+        scrollY: "600px",
+    });
+
     $("#announcements_body").summernote({
         placeholder: "Enter Announcement...",
         tabsize: 2,
@@ -24,6 +41,41 @@ $(document).ready(function () {
             },
         },
     });
+
+    document
+        .getElementById("addAnnouncementPicture")
+        .addEventListener("click", function () {
+            let date = new Date().toISOString().split("T")[0];
+
+            document.getElementById("announcementDate").value = date;
+            document
+                .getElementById("addAnnouncementModal")
+                .classList.remove("hidden");
+        });
+
+    document
+        .getElementById("closeModal")
+        .addEventListener("click", function () {
+            document
+                .getElementById("addAnnouncementModal")
+                .classList.add("hidden");
+        });
+
+    document
+        .getElementById("closeModalFormAnnouncement")
+        .addEventListener("click", function () {
+            document
+                .getElementById("addAnnouncementModal")
+                .classList.add("hidden");
+        });
+
+    document
+        .getElementById("closeUpdateModal")
+        .addEventListener("click", function () {
+            document
+                .getElementById("updateAnnouncementModal")
+                .classList.add("hidden");
+        });
 
     function fetchAnnouncements() {
         fetch("/announcements")
@@ -61,14 +113,26 @@ $(document).ready(function () {
                         height: 250,
                         toolbar: [
                             ["style", ["style"]],
-                            ["font", ["bold", "underline", "clear", "superscript", "subscript"]],
-                            ["fontsize", ["fontsize"]], 
+                            [
+                                "font",
+                                [
+                                    "bold",
+                                    "underline",
+                                    "clear",
+                                    "superscript",
+                                    "subscript",
+                                ],
+                            ],
+                            ["fontsize", ["fontsize"]],
                             ["color", ["color"]],
                             ["para", ["ul", "ol", "paragraph"]],
                         ],
                         callbacks: {
                             onInit: function () {
-                                $(".note-editor").css("background-color", "#fff");
+                                $(".note-editor").css(
+                                    "background-color",
+                                    "#fff"
+                                );
                                 $(".note-editor").css("font-size", "15px");
                             },
                         },
@@ -121,10 +185,6 @@ $(document).ready(function () {
     }
 
     function deleteAnnouncementHandler(announcementId) {
-        const csrfToken = document
-            .querySelector('meta[name="csrf-token"]')
-            .getAttribute("content");
-
         if (confirm("Are you sure you want to delete this Announcement?")) {
             fetch(`/announcements/${announcementId}`, {
                 method: "DELETE",

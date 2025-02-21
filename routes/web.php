@@ -10,6 +10,8 @@ use App\Http\Controllers\Cevent;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\Cstudentgrades;
 use App\Http\Controllers\CStudentProfile;
+use App\Http\Controllers\PictureAnnouncementController;
+
 
 // Landing Page
 Route::get('/StEmelieLearningCenter', function () {
@@ -121,6 +123,15 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::post('/announcements', [Cevent::class, 'storeAnnouncement'])->name('announcements.store');
     Route::put('/announcements/{id}', [Cevent::class, 'updateAnnouncement'])->name('announcements.update');
     Route::delete('/announcements/{id}', [Cevent::class, 'deleteAnnouncement'])->name('announcements.delete');
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/announcement', [PictureAnnouncementController::class, 'showAnnouncements'])->name('announcements.show');
+    Route::delete('/StEmelieLearningCenter.HopeSci66/admin/announcement/{id}', [PictureAnnouncementController::class, 'deleteAnnouncement'])->name('pictureannouncements.delete');
+    // Route::post('/admin/announcement/{id}', [PictureAnnouncementController::class, 'updateAnnouncement'])->name('announcements.update');
+    Route::post('/StEmelieLearningCenter.HopeSci66/admin/announcement', [PictureAnnouncementController::class, 'store'])->name('announcementspicture.store');
+    // Route::get('/announcements', [PictureAnnouncementController::class, 'index'])->name('announcements.index');
+    // Update announcement route
+    Route::post('/announcements/{id}', [PictureAnnouncementController::class, 'update'])->name('announcements.update');
+
 
     Route::get('/StEmelieLearningCenter.HopeSci66/student/dashboard', function () {
         return view('student.student_dashboard');
