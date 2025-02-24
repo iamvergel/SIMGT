@@ -69,6 +69,14 @@ class Cevent extends BaseController // Extend the correct base controller
         return response()->json($events, 200);
     }
 
+    // Show all events
+    public function showEventslanding()
+    {
+        $events = Mevent::orderBy('created_at', 'desc')->get(); // Retrieve all events
+
+        return response()->json($events, 200);
+    }
+
     // Show all announcements
     public function showAnnouncements()
     {

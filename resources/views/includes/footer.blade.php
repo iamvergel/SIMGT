@@ -24,10 +24,10 @@
         <div class="text-white text-[12px] text-start mt-10 lg:mt-0">
             <h2 class="text-xl font-semibold mb-4">Useful Links</h2>
             <ul class="space-y-2">
-                <li><a href="#" class="hover:text-yellow-500 transition-colors">Home</a></li>
+                <!-- <li><a href="#" class="hover:text-yellow-500 transition-colors">Home</a></li>
                 <li><a href="#" class="hover:text-yellow-500 transition-colors">About Us</a></li>
                 <li><a href="#" class="hover:text-yellow-500 transition-colors">Staff</a></li>
-                <li><a href="#" class="hover:text-yellow-500 transition-colors">Contact Us</a></li>
+                <li><a href="#" class="hover:text-yellow-500 transition-colors">Contact Us</a></li> -->
                 <li><a href="https://stemilielearningcenteramparo.blogspot.com/2009/09/who-is-st-emilie.html"
                         class="hover:text-yellow-500 transition-colors">Blog</a></li>
             </ul>

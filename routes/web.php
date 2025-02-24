@@ -14,9 +14,12 @@ use App\Http\Controllers\PictureAnnouncementController;
 
 
 // Landing Page
-Route::get('/StEmelieLearningCenter', function () {
+Route::get('/StEmelieLearningCenter.Admission', function () {
     return view('landing_page');
 });
+
+use App\Http\Controllers\GradeController;
+
 
 // Authentication Routes
 Route::get('/StEmelieLearningCenter.HopeSci66/sign-in', [Clogin::class, 'showLoginForm'])->name('admin.login');
@@ -136,6 +139,9 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/StEmelieLearningCenter.HopeSci66/student/dashboard', function () {
         return view('student.student_dashboard');
     });
+
+    Route::get('grades/upload', [GradeController::class, 'index'])->name('grades.upload');
+    Route::post('grades/upload', [GradeController::class, 'store'])->name('grades.store');
 
     //teacher routes
     Route::get('/StEmelieLearningCenter.HopeSci66/teacher/dashboard', function () {

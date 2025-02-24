@@ -32,6 +32,8 @@
 
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.0/css/buttons.dataTables.min.css">
 
+  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.0.5/dist/css/glightbox.min.css" rel="stylesheet">
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">
 </head>

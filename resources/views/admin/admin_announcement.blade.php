@@ -151,14 +151,14 @@
 
               <div id="deleteAnnouncementModal"
                 class="absolute inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-[20]">
-                <div class="absolute bg-gray-100 rounded-lg shadow-lg p-5">
-                  <div class="flex justify-between items-center p-2 px-4 bg-white shadow-l rounded-md">
+                <div class="absolute bg-gray-100 rounded-lg shadow-lg px-5 h-96 overflow-y-scroll lg:overflow-hidden lg:h-auto">
+                  <div class="flex justify-between items-center py-5 mt-5 px-4 bg-white shadow-lg  sticky top-0">
                     <p class="font-bold text-teal-900">Are you sure to delete this announcement?</p>
                     <span id="closeDeleteModal"
                       class="py-1 px-2 text-[12px] bg-teal-700 hover:bg-teal-800 font-semibold text-white rounded-full float-right"><i
                         class="fas fa-times fa-lg"></i></span>
                   </div>
-                  <div class="">
+                  <div class="mb-5">
                     <form id="deleteAnnouncementForm"
                       action="{{ route('pictureannouncements.delete', $announcement->id) }}" method="POST"
                       class="mt-5 bg-white p-5 rounded-lg shadow-lg border-2">
@@ -176,7 +176,7 @@
                         Add Announcement
                       </button> -->
 
-                      <div class="flex justify-end">
+                      <div class="flex justify-end sticky bottom-0 bg-white py-5">
                         <button id="cancel" type="button"
                           class="mt-2 w-1/4 indent-[-2rem] bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition py-2 text-md font-semibold me-2">Cancel
                         </button>
@@ -219,10 +219,9 @@
                         <label for="announcementImage" class="font-semibold text-[15px] mt-4"><span
                             class="text-red-500">*</span>Announcement</label>
                         <input type="file" id="announcementImage" name="image"
-                          class="w-full p-3 border-2 uppercase rounded-md focus:outline-none focus:ring-2 focus:ring-teal-700 text-[15px]"
+                          class="w-full p-3 border-2 uppercase rounded-md focus:outline-none focus:ring-2 focus:ring-teal-700 text-[15px] file:mr-4 file:rounded-full file:border-0 file:bg-teal-100 file:px-4 file:py-2 file:text-md file:font-semibold file:text-teal-800 hover:file:bg-teal-200"
                           required>
-                        <small id="descriptionHelp" class="text-gray-500">Enter picture (jpeg, png anf jpg) size
-                          ()</small>
+                        <small id="descriptionHelp" class="text-gray-500">Enter picture (jpeg, png anf jpg)</small>
                       </div>
 
                       <!-- <button type="submit"
@@ -245,14 +244,14 @@
 
               <div id="updateAnnouncementModal"
                 class="absolute inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-[20]">
-                <div class="absolute bg-gray-100 rounded-lg shadow-lg p-5">
-                  <div class="flex justify-between items-center p-2 px-4 bg-white shadow-l rounded-md">
+                <div class="absolute bg-gray-100 rounded-lg shadow-lg px-5 overflow-y-scroll lg:overflow-hidden h-1/2 lg:h-auto">
+                  <div class="flex justify-between items-center p-2 px-4  py-5 mt-5 px-4 bg-white shadow-lg  sticky top-0">
                     <p class="font-bold text-teal-900">Update Announcement</p>
                     <span id="closeUpdateModal"
                       class="py-1 px-2 text-[12px] bg-teal-700 hover:bg-teal-800 font-semibold text-white rounded-full float-right"><i
                         class="fas fa-times fa-lg"></i></span>
                   </div>
-                  <div class="">
+                  <div class="mb-5">
                     <form id="updateAnnouncementForm" action="{{ route('announcements.update', '') }}" method="POST"
                       enctype="multipart/form-data" class="mt-5 bg-white p-5 rounded-lg shadow-lg border-2">
                       @csrf
@@ -270,10 +269,10 @@
                         <label for="updateAnnouncementImage" class="font-semibold text-[15px] mt-4"><span
                             class="text-red-500">*</span>Image</label>
                         <input type="file" id="updateAnnouncementImage" name="image"
-                          class="w-full p-3 border-2 uppercase rounded-md focus:outline-none focus:ring-2 focus:ring-teal-700 text-[15px]">
+                          class="w-full p-3 border-2 uppercase rounded-md focus:outline-none focus:ring-2 focus:ring-teal-700 text-[15px] file:mr-4 file:rounded-full file:border-0 file:bg-teal-100 file:px-4 file:py-2 file:text-md file:font-semibold file:text-teal-800 hover:file:bg-teal-200">
                       </div>
 
-                      <div class="mb-4 ">
+                      <div class="">
                         <label for="currentAnnouncement" class="font-semibold text-[15px] mt-4">Current
                           Announcement</label>
                         <div class="w-[550px] h-[400px]">
@@ -286,12 +285,12 @@
                         Add Announcement
                       </button> -->
 
-                      <div class="flex justify-end">
+                      <div class="flex justify-end sticky bottom-0 bg-white py-5">
                         <!-- <button type="submit" id="delete"
                           class="mt-10 w-1/4 indent-[-2rem] bg-red-700 text-white rounded-lg hover:bg-red-800 transition py-2 text-md font-semibold me-2 hidden">Delete
                         </button> -->
                         <button type="submit"
-                          class="mt-10 w-1/4 indent-[-2rem] bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition py-2 text-md font-semibold ">Submit
+                          class="w-1/4 indent-[-2rem] bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition py-2 text-md font-semibold ">Submit
                         </button>
                       </div>
                     </form>

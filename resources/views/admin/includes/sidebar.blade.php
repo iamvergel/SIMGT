@@ -197,15 +197,79 @@
                 </a>
             </div>
 
+            <p class="text-[14px] mt-5 ml-7 text-white font-normal uppercase tracking-wider">
+                STUDENT MANAGEMENT
+            </p>
+
+            <button
+                class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip"
+                id="studentManagementButton7" aria-expanded="false" aria-controls="studentmanagement">
+                <i class="fa-solid fa-users"><span class="sidebar-text ml-2">Students</span></i>
+                <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
+                <span
+                    class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[8px] p-1 font-bold">Student Management</span>
+            </button>
+            <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="studentmanagement">
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/GradeOne"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip">
+                    <i class="fa-regular fa-circle"></i>
+                    <span class="sidebar-text ml-2">Grade One</span>
+                    <span
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Grade </span>
+                </a>
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/GradeTwo"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip">
+                    <i class="fa-regular fa-circle"></i>
+                    <span class="sidebar-text ml-2">Grade Two</span>
+                    <span
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Grade 1</span>
+                </a>
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/GradeThree"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0 tooltip">
+                    <i class="fa-regular fa-circle"></i>
+                    <span class="sidebar-text ml-2">Grade Three</span>
+                    <span
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Grade 2</span>
+                </a>
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/GradeFour"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0 tooltip">
+                    <i class="fa-regular fa-circle"></i>
+                    <span class="sidebar-text ml-2">Grade Four</span>
+                    <span
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Grade 3</span>
+                </a>
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/GradeFive"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0 tooltip">
+                    <i class="fa-regular fa-circle"></i>
+                    <span class="sidebar-text ml-2">Grade Five</span>
+                    <span
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Grade 4</span>
+                </a>
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/GradeSix"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0 tooltip">
+                    <i class="fa-regular fa-circle"></i>
+                    <span class="sidebar-text ml-2">Grade Six</span>
+                    <span
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Grade 5</span>
+                </a>
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/AllStudentData"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0 tooltip">
+                    <i class="fa-regular fa-circle"></i>
+                    <span class="sidebar-text ml-2">All Student</span>
+                    <span
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Grade 6</span>
+                </a>
+            </div>
+
             <!-- <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management" -->
-            <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/AllStudentData"
+            <!-- <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/AllStudentData"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
                 id="studentManagementButton1">
-                <i class="fa-solid fa-users"></i>
+                </i>
                 <span class="sidebar-text ml-2 sm:text-[10px] lg:text-[12px]">Student Management</span>
                 <span class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[8px] p-1 font-bold">Student
                     <br /> Management</span>
-            </a>
+            </a> -->
 
             @if(session('admin_role') != 'Admission')
                 <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book"

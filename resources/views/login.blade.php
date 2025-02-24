@@ -144,7 +144,7 @@
                                         Sign in
                                     </button>
                                     <button type="button"
-                                        class="bg-sky-700 text-md text-white font-normal px-4 py-2 rounded-full hover:bg-sky-800 w-full mt-2" onclick="windows.location.href = '#'">
+                                        class="bg-sky-700 text-md text-white font-normal px-4 py-2 rounded-full hover:bg-sky-800 w-full mt-2" onclick="window.open('/StEmelieLearningCenter.Admission', '_blank')">
                                         Admission
                                     </button>
                                 </div>

@@ -22,29 +22,40 @@ document.addEventListener("DOMContentLoaded", function () {
                         "group"
                     );
 
-                    imageElement.innerHTML = `
+                    // Add GLightbox data attributes
+                    imageElement.innerHTML = ` 
+                    <a href="/storage/images/${image.file_name}" data-glightbox="image-gallery">
                         <img src="/storage/images/${image.file_name}" alt="${image.name}"
-                            class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-80" 
+                            class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110 group-hover:opacity-80 rounded-lg" 
                             onclick="openImageModal(${image.id})">
-                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:bg-teal-500 group-hover:opacity-100 transition-opacity duration-500">
-                            <p class="text-white text-lg">${image.name}</p>
-                        </div>
-                    `;
+                    </a>
+                       
+                `;
                     imagesContainer.appendChild(imageElement);
                 });
 
+                // Initialize GLightbox after images are added
+                const lightbox = GLightbox({
+                    selector: '[data-glightbox="image-gallery"]',
+                    touchNavigation: true,
+                    loop: true,
+                    openEffect: "fade",
+                    closeEffect: "fade",
+                });
+
+                // Pagination Links
                 paginationLinks.innerHTML = data.links
                     .map((link) => {
                         const isActive = link.active
                             ? "text-teal-700 font-semibold"
                             : "text-teal-500";
                         return `
-            <a href="javascript:void(0)" onclick="fetchImages(${parseInt(
-                link.label
-            )})" class="mx-2 ${isActive} hover:underline">
-                ${link.label}
-            </a>
-        `;
+                        <a href="javascript:void(0)" onclick="fetchImages(${parseInt(
+                            link.label
+                        )})" class="mx-2 ${isActive} hover:underline">
+                            ${link.label}
+                        </a>
+                    `;
                     })
                     .join("");
             })
@@ -53,65 +64,98 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    window.openImageModal = function (id) {
-        currentIndex = imagesData.findIndex((image) => image.id === id);
-        showModal();
-    };
+    fetchImages();
 
-    function showModal() {
-        const modal = document.createElement("div");
-        const currentImage = imagesData[currentIndex];
-        modal.classList.add(
-            "fixed",
-            "inset-0",
-            "flex",
-            "items-center",
-            "justify-center",
-            "bg-black",
-            "bg-opacity-50"
-        );
-        modal.innerHTML = `
-            <div class="relative p-4 bg-white max-w-4xl max-h-full">
-                <img src="/storage/images/${currentImage.file_name}" class="max-w-full max-h-full object-contain">
-                <button onclick="closeModal()" class="absolute top-0 right-0 p-2 bg-red-500 text-white rounded-full">X</button>
-                
-                <button onclick="prevImage()" class="absolute left-0 top-1/2 transform -translate-y-1/2 p-4 text-white bg-teal-500 hover:bg-teal-600 rounded-full">
-                    &lt;
-                </button>
-                <button onclick="nextImage()" class="absolute right-0 top-1/2 transform -translate-y-1/2 p-4 text-white bg-teal-500 hover:bg-teal-600 rounded-full">
-                    &gt;
-                </button>
-            </div>
-        `;
-        document.body.appendChild(modal);
+    async function fetchAnnouncements() {
+        try {
+            const response = await fetch("/api/announcements"); // Your API endpoint
+            const announcements = await response.json();
+
+            const swiperWrapper = document.getElementById("swiper-wrapper");
+
+            // Loop through the announcements and create slides dynamically
+            announcements.forEach((announcement) => {
+                const slide = document.createElement("div");
+                slide.classList.add("swiper-slide");
+
+                // Assuming 'announcement.image' holds the URL for the image
+                const slideContent = `
+                    <div class="flex justify-center items-center p-2 lg:p-10 lg:px-[10rem] w-full h-[500px] lg:h-[700px] xl:h-[900px]">
+                        <img src="/storage/announcements/${announcement.image}" alt="Announcement"
+                            class="object-cover w-full h-full rounded-xl cursor-pointer" />
+                    </div>
+                `;
+                slide.innerHTML = slideContent;
+
+                swiperWrapper.appendChild(slide);
+            });
+
+            // Initialize the Swiper after populating the slides
+            const swiper = new Swiper(".swiper-container", {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                navigation: {
+                    nextEl: "#slider-button-right",
+                    prevEl: "#slider-button-left",
+                },
+                loop: true,
+                autoplay: {
+                    delay: 8000,
+                },
+                // Allow users to click on the image to trigger the slide change
+                slideToClickedSlide: true, // Make the slides clickable
+            });
+        } catch (error) {
+            console.error("Error fetching announcements:", error);
+        }
     }
 
-    window.closeModal = function () {
-        const modal = document.querySelector(".fixed");
-        if (modal) {
-            modal.remove();
-        }
-    };
+    // Call the function to fetch and populate the Swiper
+    fetchAnnouncements();
 
-    window.prevImage = function () {
-        if (currentIndex > 0) {
-            currentIndex--;
-        } else {
-            currentIndex = imagesData.length - 1;
-        }
-        showModal();
-    };
+    fetch("/api/allevents")
+        .then((response) => response.json())
+        .then((events) => {
+            const eventContainer = document.getElementById("eventContainer");
+            eventContainer.innerHTML = ""; // Clear existing content
 
-    window.nextImage = function () {
-        if (currentIndex < imagesData.length - 1) {
-            currentIndex++;
-        } else {
-            currentIndex = 0;
-        }
-        showModal();
-    };
+            events.forEach((event) => {
+                const eventItem = document.createElement("div"); // Use 'div' instead of 'li' for inline layout
+                eventItem.className = "relative w-[250px] shrink-0"; // Fixed width for each item, no wrapping
 
-    fetchImages();
+                // Create the content of each event
+                eventItem.innerHTML = `
+                <div class="flex items-center justify-between w-full">
+                    <div class="z-10 flex items-center justify-center w-8 h-8 bg-teal-100 rounded-full ring-0 ring-white sm:ring-8 shrink-0">
+                        <i class="fa-solid fa-calendar text-teal-500"></i>
+                    </div>
+                    <div class="flex-1 bg-teal-700 h-0.5 "></div>
+                </div>
+                <div class="mt-3 sm:pe-8">
+                    <time class="block mb-2 text-sm font-normal leading-none text-gray-400">${new Date(
+                        event.event_date
+                    ).toLocaleDateString()}</time>
+                    <p class="text-base font-normal text-gray-500 ">${
+                        event.activity_name || "No description available"
+                    }</p>
+                </div>
+            `;
+
+                // Add click event to edit the event
+                eventItem.addEventListener("click", () => {
+                    editEvent(event);
+
+                    document.querySelector("#eventFormTitle").innerHTML =
+                        "Edit Event / Activities";
+                    document
+                        .getElementById("EventForm")
+                        .classList.remove("hidden");
+                });
+
+                // Append the item to the event container
+                eventContainer.appendChild(eventItem);
+            });
+        });
 });
 
 /*cursor head design*/
@@ -203,5 +247,3 @@ function animate() {
 }
 
 animate();
-
-$(document).ready(function () {});

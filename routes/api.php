@@ -14,8 +14,13 @@ Route::prefix('images')->group(function () {
 });
 
 use App\Http\Controllers\PictureAnnouncementController;
-
-Route::get('/announcements', [PictureAnnouncementController::class, 'showAnnouncements']);
+// In your routes/api.php
+Route::get('/announcements', [PictureAnnouncementController::class, 'getAnnouncements']);
 Route::post('/announcements', [PictureAnnouncementController::class, 'store']);
 Route::delete('/announcements/{id}', [PictureAnnouncementController::class, 'deleteAnnouncement']);
 Route::put('/announcements/{id}', [PictureAnnouncementController::class, 'updateAnnouncement']);
+
+use App\Http\Controllers\Cevent;
+// In your routes/api.php
+Route::get('/allevents', [Cevent::class, 'showEventslanding']);
+

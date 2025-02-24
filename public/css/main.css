@@ -10,7 +10,7 @@
 }
 
 .main1 {
-    position: absolute;
+    position: relative;
     isolation: isolate;
 }
 

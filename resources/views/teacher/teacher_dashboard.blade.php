@@ -84,82 +84,34 @@
 
             <h2>Import Excel Data into DataTable</h2>
 
-            <!-- File input for uploading Excel files -->
-            <input type="file" id="file-input" accept=".xlsx, .xls" />
+            @if(session('success'))
+                <p style="color:green;">{{ session('success') }}</p>
+            @endif
 
-            <!-- Table where the data will be imported -->
-            <table id="example" class="display">
-                <thead>
-                    <!-- Column headers will be dynamic based on Excel -->
-                </thead>
-                <tbody>
-                    <!-- Data rows will be added dynamically -->
-                </tbody>
-            </table>
+            <form action="{{ route('grades.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <label for="teacher_number">Teacher Number:</label>
+                <input type="text" id="teacher_number" name="teacher_number" required>
+                <br>
 
-            <script>
-                $(document).ready(function () {
-                    // Initialize an empty DataTable, but don't call it yet
-                    var table;
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject">
+                <br>
 
-                    // Handle file input
-                    $('#file-input').on('change', function (e) {
-                        var file = e.target.files[0];
-                        if (file && file.name.endsWith('.xlsx')) {
-                            var reader = new FileReader();
-                            reader.onload = function (event) {
-                                var data = event.target.result;
-                                var workbook = XLSX.read(data, { type: 'binary' });
+                <label for="grade">Grade:</label>
+                <input type="text" id="grade" name="grade">
+                <br>
 
-                                // Assuming the first sheet is what we want
-                                var sheetName = workbook.SheetNames[0];
-                                var worksheet = workbook.Sheets[sheetName];
+                <label for="section">Section:</label>
+                <input type="text" id="section" name="section">
+                <br>
 
-                                // Convert sheet to JSON (array of arrays)
-                                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                <label for="excelfile">Excel File:</label>
+                <input type="file" id="excelfile" name="excelfile" accept=".xlsx,.csv">
+                <br><br>
 
-                                // Clear existing table data (in case there was any before)
-                                $('#example thead').empty();
-                                $('#example tbody').empty();
-
-                                // Set table headers (first row of the JSON data)
-                                var headers = jsonData[0];
-                                var headerRow = headers.map(function (header) {
-                                    return '<th>' + header + '</th>';
-                                }).join('');
-                                $('#example thead').html('<tr>' + headerRow + '</tr>');
-
-                                // Add table rows from the JSON data (excluding the header)
-                                var rows = jsonData.slice(1);
-                                rows.forEach(function (row) {
-                                    var rowData = row.map(function (cell) {
-                                        return '<td>' + cell + '</td>';
-                                    }).join('');
-                                    $('#example tbody').append('<tr>' + rowData + '</tr>');
-                                });
-
-                                // Now initialize the DataTable (after table data is fully populated)
-                                if (!$.fn.DataTable.isDataTable('#example')) {
-                                    table = $('#example').DataTable({
-                                        responsive: true,
-                                        paging: true,
-                                        searching: true,
-                                        ordering: true
-                                    });
-                                } else {
-                                    table.clear().draw();  // Clear and redraw the table if already initialized
-                                    table.rows.add($('#example').find('tbody tr')).draw(); // Add new rows
-                                }
-                            };
-
-                            // Read the Excel file as binary string
-                            reader.readAsBinaryString(file);
-                        } else {
-                            alert("Please upload a valid Excel file (.xlsx)");
-                        }
-                    });
-                });
-            </script>
+                <button type="submit">Upload Grade</button>
+            </form>
 
 
             <div class="grid grid-cols-2">

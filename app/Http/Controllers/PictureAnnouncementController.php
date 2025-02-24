@@ -16,6 +16,16 @@ class PictureAnnouncementController extends Controller
         return view('admin.admin_announcement', compact('announcements'));
     }
 
+    // In your PictureAnnouncementController
+    public function getAnnouncements()
+    {
+        // Fetch announcements ordered by created_at
+        $announcements = PictureAnnouncement::orderBy('created_at', 'desc')->get();
+
+        // Return announcements as JSON
+        return response()->json($announcements);
+    }
+
     // Store a new announcement
     public function store(Request $request)
     {

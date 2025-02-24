@@ -26,8 +26,12 @@
     <!-- AOS JS -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9.0.0/swiper-bundle.min.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/glightbox@3.0.5/dist/css/glightbox.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
 
 </head>
 
-<body class="bg-white h-screen w-screen flex items-center justify-center"></body>
+<body class="bg-gradient-to-tr from-sky-50 via-white to-white h-screen w-screen flex items-center justify-center "></body>
