@@ -77,6 +77,10 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         Route::get('/AllStudentData', [Cstudentinfo::class, 'showAllStudentData'])->name('admin.admin_show_all_data');
     });
 
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management/GradeOne/{id}', [Cstudentinfo::class, 'showStudenyInfotmation'])->name('student.show');
+
+
     Route::prefix('StEmelieLearningCenter.HopeSci66/admin/Grade-book')->group(function () {
         Route::get('/GradeOne', [Cstudentgrades::class, 'showGradebookOneData'])->name('grade.one');
         Route::get('/GradeTwo', [Cstudentgrades::class, 'showGradebookTwoData'])->name('grade.two');

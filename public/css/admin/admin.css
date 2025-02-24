@@ -151,3 +151,24 @@
     background-color: #2196F3; /* Example: blue for next button */
   }
   
+  .dataTables_filter input {
+    width: 200px;
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.dataTables_filter label {
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.dropdown {
+    display: none;
+}
+
+.dropdown-active {
+    display: block;
+}

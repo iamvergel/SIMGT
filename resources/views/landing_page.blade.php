@@ -16,7 +16,7 @@
             </div>
 
             <div class="pl-[1rem] lg:pl-[5rem] text-start z-[12] relative ">
-                <a href="#aboutSchool">
+                <a href="#missionvission">
                     <button
                         class="z-[700] bg-transparent border-4 border-yellow-300 py-4 px-10 text-white rounded-full font-bold text-lg uppercase mt-5 text-center transform duration-500 hover:scale-110 hover:z-[10] hover:bg-yellow-100 hover:border-yellow-700 hover:text-yellow-500 transition-transform">About
                         Our School <i class="fa-solid fa-location-arrow ml-3 text-2xl"></i></button>
@@ -27,7 +27,7 @@
                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  xl:grid-cols-4 gap-4 px-[0rem] lg:px-[6rem] relative lg:absolute items-center w-full z-[13] mt-[30rem] md:mt-[20rem] lg:mt-[15rem]">
                 <!-- Course Card -->
                 <div
-                    class="card bg-yellow-400 py-8 rounded-lg mt-10 lg:mt-0 mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform">
+                    class="card bg-yellow-400 py-8 rounded-lg mt-10 lg:mt-0 mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform" onclick="window.location.href = '#courses'">
                     <div class="text-center text-white px-5">
                         <i
                             class="fas fa-book fa-3x mb-4 text-yellow-500 p-4 px-5 bg-white rounded-full border-[5px] border-yellow-400 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>

@@ -319,7 +319,32 @@ class Cstudentinfo extends Controller
             ]
         );
 
-        return back()->with('success',  'Student information updated successfully!');
+        return back()->with('success', 'Student information updated successfully!');
+    }
+
+    public function showStudenyInfotmation(Request $request, $id)
+    {
+        // Fetch the specific student based on the provided id
+        $students = StudentInfo::where('id', $id)->where('status', 'Active')->first();
+
+        // If the student doesn't exist, you could redirect back or show an error message
+        if (!$students) {
+            return redirect()->route('student.show')->with('error', 'Student not found.');
+        }
+
+        // Fetch related data for the specific student
+        $studentsAdditional = StudentAdditionalInfo::where('student_number', $students->student_number)->first();
+        $studentDocuments = StudentDocuments::where('student_number', $students->student_number)->first();
+        $studentAccount = Mstudentaccount::where('student_number', $students->student_number)->first();
+        $studentGradeOne = Mstudentgradeone::where('student_number', $students->student_number)->first();
+        $studentGradeTwo = Mstudentgradetwo::where('student_number', $students->student_number)->first();
+        $studentGradeThree = Mstudentgradethree::where('student_number', $students->student_number)->first();
+        $studentGradeFour = Mstudentgradefour::where('student_number', $students->student_number)->first();
+        $studentGradeFive = Mstudentgradefive::where('student_number', $students->student_number)->first();
+        $studentGradeSix = Mstudentgradesix::where('student_number', $students->student_number)->first();
+
+        // You can pass other data here as needed
+        return view('admin.includes.student_information', compact('students', 'studentsAdditional', 'studentDocuments', 'studentAccount', 'studentGradeOne', 'studentGradeTwo', 'studentGradeThree', 'studentGradeFour', 'studentGradeFive', 'studentGradeSix'));
     }
 
     public function dropStudent(Request $request, $studentId)
@@ -413,8 +438,8 @@ class Cstudentinfo extends Controller
     {
         // Fetch all graduate student records
         $students = StudentInfo::where('status', 'Graduated')
-        ->whereIn('school_year', ['2021-2022', '2022-2023', '2023-2024', '2024-2025', '2025-2026', '2026-2027'])
-        ->get();
+            ->whereIn('school_year', ['2021-2022', '2022-2023', '2023-2024', '2024-2025', '2025-2026', '2026-2027'])
+            ->get();
 
         // Fetch additional student information for each student
         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
@@ -442,7 +467,7 @@ class Cstudentinfo extends Controller
         // Check if there are no dropped students
         $noDroppedMessage = $students->isEmpty() ? "No dropped students found." : null;
 
-        return view('admin.admin_drop_student', compact('students', 'studentsAdditional', 'studentDocuments','noDroppedMessage'));
+        return view('admin.admin_drop_student', compact('students', 'studentsAdditional', 'studentDocuments', 'noDroppedMessage'));
     }
 
     public function showAllStudentDroppedData()
@@ -469,7 +494,7 @@ class Cstudentinfo extends Controller
             ->whereIn('school_year', ['2020-2021', '2019-2020', '2018-2019', '2017-2018', '2016-2015', '2014-2015'])
             ->get();
 
-            // Fetch additional student information for each student
+        // Fetch additional student information for each student
         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
 
         // Fetch additional student information for each student
@@ -506,11 +531,18 @@ class Cstudentinfo extends Controller
             ->where('status', 'Active')
             ->get();
 
+        $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+
+        // Fetch additional student information for each student
+        $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+
+        $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+
         // Check if there are no active students
         $noGradeOneMessage = $students->isEmpty() ? "No students found in Grade One." : null;
 
         // Pass the data to the view
-        return view('admin.admin_student_management_gradeone', compact('students', 'noGradeOneMessage'));
+        return view('admin.admin_student_management_gradeone', compact('students', 'noGradeOneMessage', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
     }
 
     public function additionalInfo()

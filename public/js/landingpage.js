@@ -135,9 +135,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     <time class="block mb-2 text-sm font-normal leading-none text-gray-400">${new Date(
                         event.event_date
                     ).toLocaleDateString()}</time>
-                    <p class="text-base font-normal text-gray-500 ">${
-                        event.activity_name || "No description available"
-                    }</p>
+                    <div class="w-22">
+                        <p class="text-base font-normal text-gray-500 break-words">${
+                            event.activity_name || "No description available"
+                        }</p>
+                    </div>
                 </div>
             `;
 
