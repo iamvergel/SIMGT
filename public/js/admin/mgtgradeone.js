@@ -1,7 +1,8 @@
 var table = $("#studentTable").DataTable({
     dom:
-        ` 
-    <'grid grid-cols-3 mb-4'<'col-span-1 space-x-4'l><'col-span-1 space-x-4'B><'col-span-1 space-x-4'f>>` +
+        ` <'flex justify-center items-center mb-4'<><'block xl:hidden'B><>>` +
+        `<tr>` +
+        `<'flex justify-center items-center mb-4'<'flex-3'l><'flex-1 xl:block hidden'B><'flex-1'f>>` +
         `<tr>` +
         `<'flex justify-between items-center'<'flex-1'i><'flex-1'p>>`,
     paging: true,
@@ -149,6 +150,67 @@ $(document).ready(function () {
             dropdownMenu.has(event.target).length === 0
         ) {
             dropdownMenu.addClass("hidden");
+        }
+    });
+
+    // When the dropdown button is clicked, make an AJAX call
+    $('#dropdownDefaultButton2').click(function () {
+        // Toggle the dropdown visibility
+        $('#dropdown2').toggleClass('hidden');
+
+        // Make an AJAX request to get the sections
+        $.ajax({
+            url: '/get-twosections', // The route for fetching sections
+            type: 'GET',
+            success: function (data) {
+                // Check if sections are returned
+                if (data.length > 0) {
+                    // Empty the dropdown list
+                    $('#dropdown2 ul').empty();
+
+                    // Append the default placeholder as the first item
+                    $('#dropdown2 ul').append('<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item"  data-section="">Select a Section</a></li>');
+
+                    // Append each section as a list item in the dropdown
+                    data.forEach(function (section) {
+                        $('#dropdown2 ul').append('<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="' + section + '">' + section + '</a></li>');
+                    });
+                } else {
+                    // If no sections, show a message
+                    $('#dropdown2 ul').html('<li><a href="#" class="dropdown-item text-gray-500">No Sections Available</a></li>');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Error fetching sections: " + error);
+            }
+        });
+
+    });
+
+    // Filter table by section when dropdown item is clicked
+    $(document).on('click', '.dropdown-item', function (event) {
+        event.preventDefault(); // Prevent default anchor click behavior
+
+        const selectedSection = $(this).data('section');
+
+        // Update the search input with the selected section
+        $('#searchInput').val(selectedSection);
+
+        // Trigger the search function and search the table
+        table.search(selectedSection).draw();  // Directly apply the search to the DataTable
+
+        // Close the dropdown after selection
+        $('#dropdown').addClass('hidden');
+    });
+
+    // Close the dropdown if clicked outside
+    $(document).click(function (event) {
+        const dropdownButton2 = $('#dropdownDefaultButton2');
+        const dropdownMenu2 = $('#dropdown2');
+
+        // Close dropdown if clicked outside the dropdown button or menu
+        if (!dropdownButton2.is(event.target) && !dropdownMenu2.is(event.target) && dropdownMenu2.has(event.target).length === 0) {
+            dropdownMenu2.addClass('hidden');
         }
     });
 });

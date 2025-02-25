@@ -74,6 +74,9 @@ class Clogin extends Controller
             // Store admin's data in the session
             $request->session()->put('admin_username', $adminUser->username);
             $request->session()->put('admin_id', $adminUser->id);
+            $request->session()->put('admin_fname', $adminUser->first_name);
+            $request->session()->put('admin_mname', $adminUser->middle_name);
+            $request->session()->put('admin_lname', $adminUser->last_name);
             $request->session()->put('admin_role', $adminUser->role);  // Store the role
 
             // Flash a success message

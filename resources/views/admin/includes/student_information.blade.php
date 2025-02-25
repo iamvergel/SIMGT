@@ -32,11 +32,11 @@
                                             </div>
 
                                             <!-- <div class="flex items-center justify-start p-0 px-5 py-2 border-b bg-gray-200 rounded-lg mt-5">
-                                                                                                                        <div class="p-5 mr-5 text-[12px] text-white shadow-lg bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full py-2 text-center"
-                                                                                                                            onclick="window.location.href = '/StEmelieLearningCenter.HopeSci66/admin/student-management/AllStudentData'">
-                                                                                                                            <i class="fas fa-arrow-left" style="color: white;"></i>
-                                                                                                                        </div>
-                                                                                                                    </div> -->
+                                                                                                                                                        <div class="p-5 mr-5 text-[12px] text-white shadow-lg bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full py-2 text-center"
+                                                                                                                                                            onclick="window.location.href = '/StEmelieLearningCenter.HopeSci66/admin/student-management/AllStudentData'">
+                                                                                                                                                            <i class="fas fa-arrow-left" style="color: white;"></i>
+                                                                                                                                                        </div>
+                                                                                                                                                    </div> -->
 
 
                                             <div class="mt-5 text-[12px] w-full">
@@ -64,153 +64,136 @@
                                             <!-- Student Details -->
                                             <div
                                                 class="grid grid-cols-5 xl:grid-cols-6 border-0 border-t-4 border-teal-800 h-full pt-5">
-                                                <div class="col-span-2 rounded-tl-xl rounded-bl-xl bg-gray-200">
+                                                <div class="col-span-5 lg:col-span-2 rounded-tl-xl rounded-bl-xl bg-gray-200">
                                                     <!-- Profile Section -->
                                                     <div class=" p-5 h-auto">
-                                                        <div class="flex justify-center ">
+                                                        <div class="flex justify-center mt-5">
                                                             @php
 
                                                                 $avatar = $studentAccount && $studentAccount->avatar ? asset('storage/' . $studentAccount->avatar) : null;
                                                                 $initials = strtoupper(substr($students->student_last_name, 0, 1) . substr($students->student_first_name, 0, 1));
                                                             @endphp
                                                             <div
-                                                                class="w-36 h-36 xl:w-48 xl:h-48 border-[3px] border-white text-[50px] rounded-full bg-teal-700 text-white flex items-center justify-center font-bold mx-2">
+                                                                class="w-36 h-36 xl:w-36 xl:h-36 border-[3px] border-white text-[50px] rounded-full bg-teal-700 text-white flex items-center justify-center font-bold mx-2">
                                                                 @if ($avatar)
                                                                     <img src="{{ $avatar }}" alt="Student Avatar"
                                                                         class="w-full h-full rounded-full object-cover">
                                                                 @else
-
                                                                     {{ $initials }}
                                                                 @endif
 
                                                             </div>
                                                         </div>
-                                                        <div class="flex justify-center font-bold mt-5 ">
-                                                            <p class="text-center">{{ $students->student_last_name }},
+                                                        <div class="text-center mt-5 text-teal-800 ">
+                                                            <p
+                                                                class="text-md tracking-widest font-semibold  shadow-text-lg mt-2 leading-3">
+                                                                {{ $students->student_last_name }},
                                                                 {{ $students->student_first_name }}
                                                                 {{ $students->student_suffix_name }}
-                                                                {{ $students->student_middle_name }} <br />
-                                                                <span
-                                                                    class="text-gray-600 font-normal text-sm">{{ $studentAccount->username ?? 'no username'}}</span>
+                                                                {{ $students->student_middle_name }}
                                                             </p>
-
+                                                            <span
+                                                                class="text-xs tracking-widest font-normal shadow-text-lg mt-0">{{ $studentAccount->username ?? 'no username'}}</span>
+                                                            <p class="text-xs">
+                                                                Student
+                                                            </p>
                                                         </div>
-                                                        <hr class="border-1 border-gray-400 mt-5">
+                                                        <hr class="border-1 border-gray-400 mt-10">
                                                         <div
-                                                            class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 2xl:grid-cols-2 gap-3 2xl:gap-5 mt-10 text-[13px] text-gray-900">
-                                                            <div class="">
+                                                            class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-2 gap-3 2xl:gap-5 mt-10 text-[13px] text-gray-900">
+                                                            <div class="col-span-1 lg:col-span-2 ">
                                                                 <label for="modalLrn"
-                                                                    class="block mb-2 text-[12px] font-bold text-gray-900">Learner
+                                                                    class="block mb-2 text-[14px] font-bold text-gray-900">Learner
                                                                     Reference Number (LRN):</label>
-                                                                <input type="text" name="lrn" id="modalLrn"
-                                                                    class="input-field1 focus:outline-none focus:ring-none bg-gray-200 text-gray-900"
-                                                                    value="" readonly>
+                                                                {{ $students->lrn }}
                                                             </div>
-                                                            <div></div>
 
                                                             <div>
                                                                 <label for="modalStudentNumber"
-                                                                    class="block text-[12px] font-bold text-gray-900">Student Number
+                                                                    class="block text-[14px] font-bold text-gray-900">Student Number
                                                                     :</label>
-                                                                <input type="text" name="studentNumber" id="modalStudentNumber"
-                                                                    class="input-field1 focus:outline-none border-hidden bg-gray-200 focus:ring-none"
-                                                                    value="" readonly>
+                                                                {{ $students->student_number }}
                                                             </div>
 
-                                                            <div>
+                                                            <div class="text-green-500 font-bold">
                                                                 <label for="modalStatus"
-                                                                    class="block text-[12px] font-bold text-gray-900">Status :</label>
-                                                                <input type="text" name="status" id="modalStatus"
-                                                                    class="input-field1 focus:outline-none focus:ring-none font-bold bg-gray-200 text-green-500"
-                                                                    value="" readonly>
+                                                                    class="block text-[14px] font-bold text-gray-900">Status :</label>
+                                                                {{ $students->status }}
                                                             </div>
 
                                                             <div>
                                                                 <label for="modalGrade"
-                                                                    class="block text-[12px] font-bold text-gray-900">Grade:</label>
-                                                                <input type="text" name="grade" id="modalGrade"
-                                                                    class="input-field1 bg-gray-200 focus:outline-none focus:ring-none"
-                                                                    value="" readonly>
+                                                                    class="block text-[14px] font-bold text-gray-900">Grade:</label>
+                                                                {{ $students->grade }}
                                                             </div>
 
                                                             <div>
                                                                 <label for="modalSection"
-                                                                    class="block text-[12px] font-bold text-gray-900">Section:</label>
-                                                                <input type="text" name="section" id="modalSection"
-                                                                    class="input-field1 focus:outline-none focus:ring-none bg-gray-200"
-                                                                    value="" readonly>
+                                                                    class="block text-[14px] font-bold text-gray-900">Section:</label>
+                                                                {{ $students->section }}
                                                             </div>
 
-                                                            <div><p>personal information</p></div>
-                                                            <div></div>
+                                                            <div class="col-span-1 lg:col-span-2 mt-5 text-[16px] font-semibold">
+                                                                <hr class="border-1 border-gray-400 mb-3">
+                                                                <p>Personal Information</p>
+                                                            </div>
+
+
                                                             <div>
                                                                 <label for="modalPlaceOfBirth"
-                                                                    class="block text-[12px] font-bold text-gray-900">Place of
+                                                                    class="block text-[14px] font-bold text-gray-900">Place of
                                                                     Birth:</label>
-                                                                <input type="text" name="placeOfBirth" id="modalPlaceOfBirth"
-                                                                    class="input-field1 focus:outline-none focus:ring-none bg-gray-200"
-                                                                    value="" readonly>
+                                                                {{ $students->place_of_birth }}
                                                             </div>
 
                                                             <div>
                                                                 <label for="modalBirthDate"
-                                                                    class="block text-[12px] font-bold text-gray-900">Birth
+                                                                    class="block text-[14px] font-bold text-gray-900">Birth
                                                                     Date:</label>
-                                                                <input type="date" name="birthDate" id="modalBirthDate"
-                                                                    class="input-field1 focus:outline-none focus:ring-none bg-gray-200"
-                                                                    value="" readonly>
+                                                                    {{ $students->birth_date }}
                                                             </div>
 
                                                             <div>
                                                                 <label for="modalAge"
-                                                                    class="block text-[12px] font-bold text-gray-900">Age:</label>
-                                                                <input type="number" name="age" id="modalAge"
-                                                                    class="input-field1 focus:outline-none bg-gray-200 focus:ring-none"
-                                                                    value="" readonly>
+                                                                    class="block text-[14px] font-bold text-gray-900">Age:</label>
+                                                                    {{ $students->age }}
                                                             </div>
 
                                                             <div>
                                                                 <label for="modalSex"
-                                                                    class="block text-[12px] font-bold text-gray-900">Sex:</label>
-                                                                <input type="text" name="sex" id="modalSex"
-                                                                    class="input-field1 focus:outline-none bg-gray-200 focus:ring-none"
-                                                                    value="" readonly>
+                                                                    class="block text-[14px] font-bold text-gray-900">Sex:</label>
+                                                                    {{ $students->sex }}
                                                             </div>
 
                                                             <div>
                                                                 <label for="modalReligion"
-                                                                    class="block text-[12px] font-bold text-gray-900">Religion:</label>
-                                                                <input type="text" name="religion" id="modalReligion"
-                                                                    class="input-field1 focus:outline-none focus:ring-none bg-gray-200"
-                                                                    value="" readonly>
+                                                                    class="block text-[14px] font-bold text-gray-900">Religion:</label>
+                                                                    {{ $students->religion }}
                                                             </div>
 
-                                                            <div></div>
+                                                            <div class="col-span-1 lg:col-span-2 mt-5 text-[16px] font-semibold">
+                                                                <hr class="border-1 border-gray-400 mb-3">
+                                                                <p>Contact Information</p>
+                                                            </div>
 
-                                                            <div><p>contact information</p></div>
-                                                            <div></div>
 
-                                                            <div class="">
+                                                            <div class="col-span-1 lg:col-span-2">
                                                                 <label for="modalEmail"
-                                                                    class="block text-[12px] font-bold text-gray-900">Email:</label>
-                                                                <input type="email" name="email" id="modalEmail"
-                                                                    class="input-field1 focus:outline-none bg-gray-200 focus:ring-none"
-                                                                    value="" readonly>
+                                                                    class="block text-[14px] font-bold text-gray-900">Email:</label>
+                                                                    {{ $students->email_address_send}}
                                                             </div>
 
-                                                            <div>
+                                                            <div class="col-span-1 lg:col-span-2">
                                                                 <label for="modalContactNumber"
-                                                                    class="block text-[12px] font-bold text-gray-900">Contact
+                                                                    class="block text-[14px] font-bold text-gray-900">Contact
                                                                     Number:</label>
-                                                                <input type="text" name="contactNumber" id="modalContactNumber"
-                                                                    class="input-field1 focus:outline-none focus:ring-none bg-gray-200"
-                                                                    value="" readonly>
+                                                                    {{ $students->contact_number}}
                                                             </div>
 
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-span-3 px-5">
+                                                <div class="col-span-5 lg:col-span-3 xl:col-span-4 px-5">
                                                     <div class="col-span-3 my-5 flex justify-start">
                                                         <button id="btnPrint"
                                                             class="text-[12px] text-white shadow-lg bg-sky-700 rounded-lg shadow hover:bg-sky-600 px-3 mt-3"><i
@@ -218,102 +201,42 @@
                                                             Grade</button>
                                                     </div>
                                                     <!-- Scheduled Table -->
-                                                    <div class="table-container mt-10 pb-10" id="Information" style="display:block;">
-                                                        <div class="grid grid-cols-1 lg:grid-cols-4 lg:gap-5 text-[13px] text-gray-900">
-                                                            <!-- <div class="">
-                                                                                                                                            <label for="modalLrn" class="block mb-2 text-[12px] font-bold text-gray-900">Learner
-                                                                                                                                                Reference Number (LRN):</label>
-                                                                                                                                            <input type="text" name="lrn" class="input-field focus:outline-none focus:ring-none"
-                                                                                                                                                id="modalLrn" value="" readonly>
-                                                                                                                                        </div> -->
-
-                                                            <div>
+                                                    <div class="table-container w-full mt-10 pb-10 " id="Information" style="display:block;">
+                                                        <div class="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+                                                            <div class="">
                                                                 <label for="modalSchoolYear"
-                                                                    class="block mb-2 text-[12px] font-bold text-gray-900">School
+                                                                    class="block text-[14px] font-bold text-gray-900">School
                                                                     Year:</label>
-                                                                <input type="text" name="schoolYear"
-                                                                    class="input-field focus:outline-none focus:ring-none"
-                                                                    id="modalSchoolYear" value="" readonly>
+                                                                    {{ $students->school_year }}
                                                             </div>
 
-                                                            <div>
-                                                                <label for="modalSchool"
-                                                                    class="block mb-2 text-[12px] font-bold text-gray-900">School:</label>
-                                                                <input type="text" name="school"
-                                                                    class="input-field focus:outline-none focus:ring-none"
-                                                                    id="modalSchool" value="" readonly>
-                                                            </div>
-
-                                                            <div class="hidden">
-                                                                <label for="modalLastName"
-                                                                    class="block mb-2 text-[12px] font-bold text-gray-900">Last
-                                                                    Name:</label>
-                                                                <input type="hidden" name="lastname"
-                                                                    class="input-field focus:outline-none focus:ring-none"
-                                                                    id="modalLastName" value="" readonly>
-                                                            </div>
-
-                                                            <div class="hidden">
-                                                                <label for="modalFirstName"
-                                                                    class="block mb-2 text-[12px] font-bold text-gray-900">First
-                                                                    Name:</label>
-                                                                <input type="hidden" name="lastname"
-                                                                    class="input-field focus:outline-none focus:ring-none"
-                                                                    id="modalFirstName" value="" readonly>
-                                                            </div>
-
-                                                            <div class="hidden">
-                                                                <label for="modalMiddleName"
-                                                                    class="block mb-2 text-[12px] font-bold text-gray-900">Middle
-                                                                    Name:</label>
-                                                                <input type="hidden" name="lastname"
-                                                                    class="input-field focus:outline-none focus:ring-none"
-                                                                    id="modalMiddleName" value="" readonly>
-                                                            </div>
-
-                                                            <div class="hidden">
-                                                                <label for="modalSuffixName"
-                                                                    class="block mb-2 text-[12px] font-bold text-gray-900">Suffix
-                                                                    Name:</label>
-                                                                <input type="hidden" name="lastname"
-                                                                    class="input-field focus:outline-none focus:ring-none"
-                                                                    id="modalSuffixName" value="" readonly>
-                                                            </div>
-
-                                                            <div class="col-span-4">
+                                                            <div class=" lg:col-span-2 xl:col-span-3 2xl:col-span-4 my-5">
                                                                 <p class="text-[16px] font-bold">Address</p>
                                                             </div>
+
                                                             <div>
                                                                 <label for="modalhouseNumber"
-                                                                    class="block mb-2 text-[12px] font-bold text-gray-900">House
+                                                                    class="block text-[14px] font-bold text-gray-900">House
                                                                     No.:</label>
-                                                                <input type="text" name="address"
-                                                                    class="input-field focus:outline-none focus:ring-none"
-                                                                    id="modalhouseNumber" value="" readonly>
+                                                                    {{ $students->house_number }}
                                                             </div>
 
                                                             <div>
                                                                 <label for="modalStreet"
-                                                                    class="block mb-2 text-[12px] font-bold text-gray-900">Street:</label>
-                                                                <input type="text" name="address"
-                                                                    class="input-field focus:outline-none focus:ring-none"
-                                                                    id="modalStreet" value="" readonly>
+                                                                    class="block text-[14px] font-bold text-gray-900">Street:</label>
+                                                                    {{ $students->street }}
                                                             </div>
 
                                                             <div>
                                                                 <label for="modalBarangay"
-                                                                    class="block mb-2 text-[12px] font-bold text-gray-900">Barangay:</label>
-                                                                <input type="text" name="address"
-                                                                    class="input-field focus:outline-none focus:ring-none"
-                                                                    id="modalBarangay" value="" readonly>
+                                                                    class="block text-[14px] font-bold text-gray-900">Barangay:</label>
+                                                                    {{ $students->barangay }}
                                                             </div>
 
                                                             <div>
                                                                 <label for="modalCity"
-                                                                    class="block mb-2 text-[12px] font-bold text-gray-900">City:</label>
-                                                                <input type="text" name="address"
-                                                                    class="input-field focus:outline-none focus:ring-none"
-                                                                    id="modalCity" value="" readonly>
+                                                                    class="block text-[14px] font-bold text-gray-900">City:</label>
+                                                                    {{ $students->city }}
                                                             </div>
 
                                                             <div>
@@ -324,12 +247,9 @@
                                                                     id="modalProvince" value="" readonly>
                                                             </div>
 
-                                                            <div></div>
-                                                            <div></div>
-                                                            <div></div>
 
                                                             <!-- Father's Information -->
-                                                            <div class="col-span-4">
+                                                            <div >
                                                                 <p class="text-[16px] font-bold">Father Information </p>
                                                             </div>
                                                             <div>
@@ -382,7 +302,7 @@
                                                             <div></div>
 
                                                             <!-- Mother's Information -->
-                                                            <div class="col-span-4">
+                                                            <div >
                                                                 <p class="text-[16px] font-bold">Mother Information </p>
                                                             </div>
                                                             <div>
@@ -428,7 +348,7 @@
                                                             <div></div>
 
                                                             <!-- Guardian's Information -->
-                                                            <div class="col-span-4">
+                                                            <div >
                                                                 <p class="text-[16px] font-bold">Guardian Information </p>
                                                             </div>
                                                             <div>
@@ -500,7 +420,7 @@
                                                             <div></div>
 
                                                             <!-- Emergency Contact Information -->
-                                                            <div class="col-span-4">
+                                                            <div >
                                                                 <p class="text-[16px] font-bold">Emergency Information </p>
                                                             </div>
                                                             <div>
@@ -553,10 +473,9 @@
                                                                     class="block text-[12px] font-bold text-gray-900">
                                                                     Birth Certificate:
                                                                 </label>
-                                                                <div id="modalBirthCertificate"
-                                                                    class="document-preview flex items-center justify-center">No
-                                                                    Document Available
-                                                                </div>
+                                                                <img src="{{ asset('storage/' . $studentDocuments->proof_of_residency) }}" alt="">
+                                                                <a href="">ss</a>
+   
                                                             </div>
 
                                                             <div id="imageModal"

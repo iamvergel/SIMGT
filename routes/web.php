@@ -11,7 +11,8 @@ use App\Http\Controllers\MyController;
 use App\Http\Controllers\Cstudentgrades;
 use App\Http\Controllers\CStudentProfile;
 use App\Http\Controllers\PictureAnnouncementController;
-
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\SectionController;
 
 // Landing Page
 Route::get('/StEmelieLearningCenter.Admission', function () {
@@ -77,8 +78,26 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         Route::get('/AllStudentData', [Cstudentinfo::class, 'showAllStudentData'])->name('admin.admin_show_all_data');
     });
 
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/manage-accounts/admin-users', [Cadmininfo::class, 'showAllAdmin'])->name('admin.user');
+    Route::post('/admin/create', [Cadmininfo::class, 'store'])->name('admin.create');
+    Route::delete('/admin/{id}', [Cadmininfo::class, 'destroy'])->name('admin.delete');
 
-    Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management/GradeOne/{id}', [Cstudentinfo::class, 'showStudenyInfotmation'])->name('student.show');
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/manage-system/subject', [SubjectController::class, 'index'])->name('admin.subject');
+    Route::get('admin/createsubject', [SubjectController::class, 'create'])->name('subject.create');
+    Route::post('admin/createsubject', [SubjectController::class, 'store'])->name('subject.store');
+    Route::get('admin/subject/{id}/edit', [SubjectController::class, 'edit'])->name('subject.edit'); // Edit subject route
+    Route::put('admin/subject/{id}', [SubjectController::class, 'update'])->name('subject.update'); // Update subject route
+    Route::delete('admin/subject/{id}', [SubjectController::class, 'destroy'])->name('subject.destroy'); // Delete subject route
+
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/manage-system/section', [SectionController::class, 'index'])->name('admin.section');
+    Route::get('admin/createsection', [SectionController::class, 'create'])->name('section.create');
+    Route::post('admin/createsection', [SectionController::class, 'store'])->name('section.store');
+    Route::get('admin/section/{id}/edit', [SectionController::class, 'edit'])->name('section.edit'); // Edit subject route
+    Route::put('admin/section/{id}', [SectionController::class, 'update'])->name('section.update'); // Update subject route
+    Route::delete('admin/section/{id}', [SectionController::class, 'destroy'])->name('section.destroy'); // Delete subject route
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management/{id}', [Cstudentinfo::class, 'showStudenyInfotmation'])->name('student.show');
 
 
     Route::prefix('StEmelieLearningCenter.HopeSci66/admin/Grade-book')->group(function () {
@@ -117,6 +136,10 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/website-gallery', function () {
         return view('admin.website.admin_website_gallery');
+    });
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/SIMGT-Profile', function () {
+        return view('admin.admin_profile');
     });
 
     // events Routes
@@ -195,6 +218,11 @@ Route::put('/students/retrive/{id}', [Cstudentinfo::class, 'retrieveStudent'])->
 Route::post('/profile/update-avatar', [CStudentProfile::class, 'update'])->name('profile.update-avatar');
 Route::post('/student/change-password/{studentId}', [CStudentProfile::class, 'changePassword'])->name('student.changePassword');
 Route::post('/show-grades', [CStudentProfile::class, 'showGrades'])->name('showGrades');
+
+Route::post('/profile/update-avatar', [Cadmininfo::class, 'updateProfile'])->name('profile.update-avatar');
+Route::put('/admin/{id}/update', [Cadmininfo::class, 'update'])->name('admin.update');
+Route::post('/admin/change-password/{studentId}', [Cadmininfo::class, 'changePassword'])->name('admin.changePassword');
+
 
 Route::get('/get-onesections', [Cstudentgrades::class, 'getGradeOneSections'])->name('get.sections');
 Route::get('/get-twosections', [Cstudentgrades::class, 'getGradeTwoSections'])->name('get.twosections');

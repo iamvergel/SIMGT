@@ -20,6 +20,10 @@ return new class extends Migration
             $table->string('teacher_number')->unique(); // Unique teacher number
             $table->string('username')->unique(); // Unique username
             $table->string('password')->nullable(); // Password
+            $table->string('first_name')->nullable(); // Password
+            $table->string('middle_name')->nullable(); // Password
+            $table->string('last_name')->nullable(); // Password
+            $table->string('address')->nullable(); // Password
             $table->rememberToken(); // Remember token for sessions
             $table->string('avatar')->nullable(); // Avatar column, nullable
             $table->timestamp('last_avatar_change')->nullable(); // Timestamp for when avatar was last changed
@@ -32,6 +36,10 @@ return new class extends Migration
             'teacher_number' => '1000-0000', // Default teacher number (starting from 1)
             'username' => 'teacher@stemilie.edu.ph', // Default username
             'password' => 'TeacherSELC', // Default password
+            'first_name' => 'Teacher', // Default first name
+            'middle_name' => 'Teacher', // Default middle name
+            'last_name' => 'Teacher', // Default last name
+            'address' => 'Teacher', // Default address
         ];
 
         // Insert user with hashed password if it doesn't already exist
@@ -44,6 +52,10 @@ return new class extends Migration
                 'avatar' => null, // Set default avatar to null
                 'created_at' => now(),
                 'updated_at' => now(),
+                'first_name' => $defaultUser['first_name'],
+                'middle_name' => $defaultUser['middle_name'],
+                'last_name' => $defaultUser['last_name'],
+                'address' => $defaultUser['address'],
             ]);
         }
     }

@@ -14,14 +14,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admin_user_account', function (Blueprint $table) {
+        Schema::create('admission_user_account', function (Blueprint $table) {
             $table->id(); // Auto-incrementing ID
             $table->string('username')->unique();
             $table->string('password');
-            $table->string('role')->nullable();
-            $table->string('first_name')->nullable(); // Password
-            $table->string('middle_name')->nullable(); // Password
-            $table->string('last_name')->nullable(); // Password
+            $table->string('role');
+            $table->string('first_name')->nullable(); // First Name
+            $table->string('middle_name')->nullable(); // Middle Name
+            $table->string('last_name')->nullable(); // Last Name
             $table->string('avatar')->nullable(); // Avatar column, nullable
             $table->timestamp('last_avatar_change')->nullable(); // Timestamp for when avatar was last changed
             $table->timestamp('last_password_change')->nullable(); // Timestamp for when password was last changed
@@ -31,13 +31,13 @@ return new class extends Migration
 
         // Array of default data to insert with hashed passwords
         $defaultUsers = [
-            ['username' => 'SELC@stemilie.edu.ph', 'password' => 'SELC2024', 'role' => 'Admin', 'first_name' => 'St Emilie', 'last_name' => 'Center', 'middle_name' => 'Learning'],
+            ['username' => 'admission@school.edu.ph', 'password' => 'Admission2024', 'role' => 'Admission', 'first_name' => 'Admission', 'last_name' => 'Admission', 'middle_name' => 'Admission'],
         ];
 
         // Insert each user with hashed password if it doesn't already exist
         foreach ($defaultUsers as $user) {
-            if (!DB::table('admin_user_account')->where('username', $user['username'])->exists()) {
-                DB::table('admin_user_account')->insert([
+            if (!DB::table('admission_user_account')->where('username', $user['username'])->exists()) {
+                DB::table('admission_user_account')->insert([
                     'username' => $user['username'],
                     'password' => bcrypt($user['password']), // Hash the password here
                     'role' => $user['role'], 
@@ -58,6 +58,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admin_user_account');
+        Schema::dropIfExists('admission_user_account');
     }
 };

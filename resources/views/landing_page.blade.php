@@ -1,5 +1,5 @@
 @include("includes.header")
-<div class=" 2xl:max-w-[1900px] w-full h-full overflow-hidden overflow-y-scroll">
+<div class=" 2xl:max-w-[1500px] w-full h-full overflow-hidden overflow-y-scroll">
     <div class="main1">
         <canvas id="canvas" class="w-screen h-screen absolute bg-transparent z-[11] left-0 top-0 "></canvas>
         <!-- @include("main.topbar") -->
@@ -139,7 +139,7 @@
         <div class="flex justify-start items-center px-5 md:px-10">
             <i class="fa-solid fa-book font-bold lg:text-[150px] text-teal-900 me-5 text-[50px]"></i>
             <h1
-                class="font-bold xl:text-[150px] lg:text-[100px] text-teal-900 text-start lg:leading-[5rem] xl:leading-[7rem] text-[50px] leading-[2.5rem]">
+                class="font-bold xl:text-[120px] lg:text-[100px] text-teal-900 text-start lg:leading-[5rem] xl:leading-[7rem] text-[50px] leading-[2.5rem]">
                 <span class="text-teal-500">S</span>CHOOL <span class="text-teal-500">C</span>OURSES
             </h1>
         </div>
@@ -155,7 +155,7 @@
         <div class="flex justify-start items-center px-5 md:px-10">
             <i class="fa-solid fa-calendar-days font-bold lg:text-[150px] text-teal-900 me-5 text-[50px]"></i>
             <h1
-                class="font-bold xl:text-[150px] lg:text-[100px] text-teal-900 text-start lg:leading-[5rem] xl:leading-[7rem] text-[50px] leading-[2.5rem]">
+                class="font-bold xl:text-[120px] lg:text-[100px] text-teal-900 text-start lg:leading-[5rem] xl:leading-[7rem] text-[50px] leading-[2.5rem]">
                 <span class="text-teal-500">S</span>CHOOL <span class="text-teal-500">E</span>VENTS
             </h1>
         </div>
@@ -169,7 +169,7 @@
         <div class="flex justify-start items-center px-5 md:px-10">
             <i class="fa-solid fa-bullhorn font-bold lg:text-[150px] text-teal-900 me-5 text-[50px]"></i>
             <h1
-                class="font-bold xl:text-[150px] lg:text-[100px] text-teal-900 text-start lg:leading-[5rem] xl:leading-[7rem] text-[30px] md:text-[50px] md:leading-[2.5rem] leading-[2rem]">
+                class="font-bold xl:text-[120px] lg:text-[100px] text-teal-900 text-start lg:leading-[5rem] xl:leading-[7rem] text-[30px] md:text-[50px] md:leading-[2.5rem] leading-[2rem]">
                 <span class="text-teal-500">S</span>CHOOL <br /> <span class="text-teal-500">A</span>NNOUNCEMENT
             </h1>
         </div>
@@ -199,7 +199,7 @@
         <div class="flex justify-start items-center px-5 md:px-10">
             <i class="fa-solid fa-layer-group font-bold lg:text-[150px] text-teal-900 me-5 text-[50px]"></i>
             <h1
-                class="font-bold xl:text-[150px] lg:text-[100px] text-teal-900 text-start lg:leading-[5rem] xl:leading-[7rem] text-[50px] leading-[2.5rem]">
+                class="font-bold xl:text-[120px] lg:text-[100px] text-teal-900 text-start lg:leading-[5rem] xl:leading-[7rem] text-[50px] leading-[2.5rem]">
                 <span class="text-teal-500">S</span>CHOOL <span class="text-teal-500">G</span>ALLERY
             </h1>
         </div>

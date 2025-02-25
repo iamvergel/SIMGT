@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Assuming 'announcement.image' holds the URL for the image
                 const slideContent = `
-                    <div class="flex justify-center items-center p-2 lg:p-10 lg:px-[10rem] w-full h-[500px] lg:h-[700px] xl:h-[900px]">
+                    <div class="flex justify-center items-center p-2 lg:p-10 lg:px-[10rem] w-full h-auto lg:h-[500px] xl:h-[700px]">
                         <img src="/storage/announcements/${announcement.image}" alt="Announcement"
                             class="object-cover w-full h-full rounded-xl cursor-pointer" />
                     </div>

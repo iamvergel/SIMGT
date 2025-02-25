@@ -1,64 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+@include('admin.includes.header')
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>St. Emilie Learning Center</title>
-    <link rel="shortcut icon" href="{{ asset('../assets/images/SELC.png') }}" type="image/x-icon">
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
 
-    <!-- Tailwind and DataTable CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.2.4/css/fixedHeader.dataTables.min.css">
+<body class="font-poppins bg-gray-200 overflow-hidden">
 
-    <!-- jQuery & DataTables JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/fixedheader/3.2.4/js/dataTables.fixedHeader.min.js"></script>
-
-    <style>
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            padding-top: 100px;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.4);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: #fff;
-            margin: auto;
-            padding: 20px;
-            width: 80%;
-            max-width: 500px;
-            border-radius: 10px;
-        }
-    </style>
-</head>
-
-<body class="font-poppins bg-gray-200">
-    <div class="flex p-2 w-full h-screen">
+    <div class="flex w-full h-screen">
         <!-- Sidebar -->
         @include('admin.includes.sidebar')
 
         <!-- Main Content -->
         <main class="flex-grow rounded-r-lg bg-white shadow-lg overflow-y-scroll w-full bg-zinc-50" id="content">
-            <header class="">
+            <header>
                 @include('admin.includes.topnav')
             </header>
-
 
             <div class="flex p-2 w-full h-screen">
                 <main class="flex-grow rounded-r-lg bg-white shadow-lg w-full">
@@ -263,5 +217,29 @@
     </script>
 
 </body>
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: auto;
+        padding: 20px;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 10px;
+    }
+</style>
 
 </html>

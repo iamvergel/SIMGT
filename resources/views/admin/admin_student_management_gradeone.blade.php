@@ -78,9 +78,7 @@
                 <!-- component -->
                 <section class="mx-auto p-6 mt-5 rounded-lg shadow-lg bg-gray-200">
                     <div class="w-full bg-white overflow-hidden rounded-lg shadow-lg text-[12px]">
-                        @if ($noGradeOneMessage)
-                            <p class="text-red-600 text-center text-md">{{ $noGradeOneMessage }}</p>
-                        @else
+
                             <div class="p-5">
                                 <table id="studentTable" class="p-3">
                                     <thead class="bg-gray-200">
@@ -124,7 +122,7 @@
                                                     </div>
                                                     <div class="">
                                                         <span class="text-sm font-semibold">{{ $student->student_last_name }}, {{ $student->student_first_name }}  {{ $student->student_suffix_name }} {{ $student->student_middle_name }}</span>
-                                                        <span class="text-xs text-gray-500">{{ $student->email_address_send }}</span>
+                                                        <br><span class="text-xs text-gray-500">{{ $student->email_address_send }}</span>
                                                     </div>
                                                 </td>
                                                 <td class="">{{ $student->grade }}</td>
@@ -166,7 +164,7 @@
                                                     </form>
 
                                                     <button class="text-white font-medium text-xl p-3 text-center inline-flex items-center me-2 bg-blue-700 rounded-full hover:bg-blue-600"
-                                                            type="button" onclick="window.location.href = '{{ route('student.show', ['id' => $student->id]) }}'">
+                                                            type="button" onclick="window.location.href = '{{ route('student.show', ['id' => $student->id]) }}'" title="Show Student Information">
                                                         <i class="fa-solid fa-eye"></i>
                                                     </button>
                                                 </td>
@@ -175,7 +173,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                        @endif
+                        
                     </div>
                 </section>
             </div>
