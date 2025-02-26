@@ -43,7 +43,7 @@
                                                 <ul
                                                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-1 xl:gap-1 bg-gray-50 p-0 m-0">
                                                     <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 active1"
-                                                        data-target="#Information">{{ $teachers->student_first_name }} Information</li>
+                                                        data-target="#Information"> Information</li>
                                                     <!-- <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5"
                                                         data-target="#documents">Documents</li> -->
                                                     <!-- <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5"
@@ -97,6 +97,8 @@
                                                             <p class="text-xs">
                                                             {{ $teachers->position ?? 'no username'}}
                                                             </p>
+
+                                                            <p>Advisory Class : {{ $teacherAdvisory->grade }} | {{ $teacherAdvisory->section }}</p>
                                                         </div>
                                                         <hr class="border-1 border-gray-400 mt-10">
                                                         <div

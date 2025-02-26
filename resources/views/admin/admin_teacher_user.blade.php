@@ -269,8 +269,8 @@
                                                 <span class="ml-2">{{ $teachers->teacher_number }}</span>
                                             </td>
                                             <!-- <td>
-                                                                                        <span class="ml-2">{{ $teachers->department }}</span>
-                                                                                    </td> -->
+                                                                                            <span class="ml-2">{{ $teachers->department }}</span>
+                                                                                        </td> -->
                                             <td class="{{ $teachers->status == "Inactive" ? "bg-red-100" : "" }}">
                                                 <span class="ml-2">{{ $teachers->position }}</span>
                                             </td>
@@ -356,75 +356,121 @@
                 </section>
 
                 @foreach ($teacher as $teachers)
-                <div id="addAdvisoryModal{{ $teachers->id }}"
-                    class="hidden fixed top-0 right-0 left-0 z-10 flex justify-center items-center w-screen h-screen bg-black bg-opacity-50 overflow-y-scroll">
-                    <div class="relative px-20 py-10 w-screen h-screen flex justify-center">
-                        <div class="w-1/2 h-full bg-white rounded-lg shadow overflow-y-scroll">
-                            <div
-                                class="flex items-center justify-between p-5 px-10 shadow-lg border-b bg-gray-200 rounded-lg sticky top-0">
-                                <h3 class="text-lg font-bold text-teal-800 uppercase"><i
-                                        class="fa-solid fa-users mr-2"></i>Add Teacher
-                                </h3>
-                                <button type="button"
-                                    class="text-white bg-teal-700 hover:bg-teal-800 p-3 py-2 rounded-full text-xl font-bold flex items-center justify-center shadow-lg"
-                                    aria-label="Close modal" id="closeAdvisoryModal{{ $teachers->id }}">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                            <div class="mb-5 mt-5 bg-white p-10">
-                                <!-- Add Admin Form -->
-                                <form action="{{ route('teacher.create') }}" method="POST"
-                                    class="grid grid-cols-1 gap-4">
-                                    @csrf
-                                    <div class="col-span-1">
-                                        <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="teacher_number">
-                                            <span class="text-red-600 mr-1">*</span>Employee Number
-                                        </label>
-                                        <input type="text" name="teacher_number" placeholder="Input Employee ID.."
-                                            id="adviser_teacher_number" required
-                                            class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
-                                    </div>
-                                    <div class="col-span-1 mt-5">
-                                        <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="first_name">
-                                            <span class="text-red-600 mr-1">*</span>First Name
-                                        </label>
-                                        <input type="text" name="first_name" placeholder="Input First Name.."
-                                            id="adviser_first_name" required
-                                            class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
-                                    </div>
-                                    <div class="col-span-1 mt-5">
-                                        <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="first_name">
-                                            <span class="text-red-600 mr-1">*</span>First Name
-                                        </label>
-                                        <input type="text" name="first_name" placeholder="Input First Name.."
-                                            id="adviser_last_name" required
-                                            class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
-                                    </div>
-                                    <div class="col-span-1 mt-5">
-                                        <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="middle_name">
-                                            <span class="text-red-600 mr-1">*</span>Middle Name
-                                        </label>
-                                        <input type="text" name="middle_name" placeholder="Input Middle Name.."
-                                            id="adviser_middle_name" required
-                                            class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
-                                    </div>
-                                    <div class="col-span-4 flex justify-end mt-5">
-                                        <button type="submit"
-                                            class="w-1/4 indent-[-2rem] bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition py-2 text-md font-semibold ">Submit</button>
-                                    </div>
-                                </form>
+                    <div id="addAdvisoryModal{{ $teachers->id }}"
+                        class="hidden fixed top-0 right-0 left-0 z-10 flex justify-center items-center w-screen h-screen bg-black bg-opacity-50 overflow-y-scroll">
+                        <div class="relative px-20 py-10 w-screen h-screen flex justify-center">
+                            <div class="w-1/3 h-full bg-white rounded-lg shadow overflow-y-scroll">
+                                <div
+                                    class="flex items-center justify-between p-5 px-10 shadow-lg border-b bg-gray-200 rounded-lg sticky top-0">
+                                    <h3 class="text-lg font-bold text-teal-800 uppercase"><i
+                                            class="fa-solid fa-users mr-2"></i>Add Advisory {
+                                        {{ old('lastName', $teachers->last_name) }},
+                                        {{ old('lastName', $teachers->first_name) }}
+                                        {{ old('lastName', $teachers->suffix_name) }}
+                                        {{ old('lastName', $teachers->middle_name) }}}
+                                    </h3>
+                                    <button type="button"
+                                        class="text-white bg-teal-700 hover:bg-teal-800 p-3 py-2 rounded-full text-xl font-bold flex items-center justify-center shadow-lg"
+                                        aria-label="Close modal" id="closeAdvisoryModal{{ $teachers->id }}">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="mb-5 mt-5 bg-white p-10">
+                                    <!-- Add Admin Form -->
+                                    <form action="{{ route('advisory.create') }}" method="POST"
+                                        class="grid grid-cols-1 gap-4">
+                                        @csrf
+                                        <div class="col-span-1 hidden">
+                                            <label
+                                                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                for="teacher_number">
+                                                <span class="text-red-600 mr-1">*</span>Employee Number
+                                            </label>
+                                            <input type="text" value="{{ $teachers->teacher_number }}" name="teacher_number"
+                                                placeholder="Input Employee ID.."
+                                                id="adviser_teacher_number{{ $teachers->id }}" required
+                                                class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
+                                        </div>
+                                        <div class="col-span-1 mt-5">
+                                            <label
+                                                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                for="school_year">
+                                                <span class="text-red-600 mr-1">*</span>School Year
+                                            </label>
+                                            <input type="text" name="school_year" placeholder="Input School Year"
+                                                id="school_year{{ $teachers->id }}" required
+                                                class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
+                                        </div>
+                                        <div class="col-span-1 mt-5">
+                                            <label
+                                                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                for="grade">
+                                                <span class="text-red-600 mr-1">*</span>Grade
+                                            </label>
+                                            <select name="grade" id="grade{{ $teachers->id }}" required
+                                                class="form-select block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize"
+                                                onchange="getSections(this.value, {{ $teachers->id }})">
+                                                <option value="">Select Grade</option>
+                                                <option value="Grade One">Grade One</option>
+                                                <option value="Grade Two">Grade Two</option>
+                                                <option value="Grade Three">Grade Three</option>
+                                                <option value="Grade Four">Grade Four</option>
+                                                <option value="Grade Five">Grade Five</option>
+                                                <option value="Grade Six">Grade Six</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-span-1 mt-5">
+                                            <label
+                                                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                for="section">
+                                                <span class="text-red-600 mr-1">*</span>Section
+                                            </label>
+                                            <select name="section" id="section{{ $teachers->id }}" required
+                                                class="form-select block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
+                                            </select>
+
+                                            <script>
+                                                function getSections(grade, id) {
+                                                    const sectionSelect = document.getElementById("section" + id);
+
+                                                    fetch(`/api/allsections?grade=${grade}`)
+                                                        .then(response => response.json())
+                                                        .then(data => {
+                                                            sectionSelect.innerHTML = '<option value="">Select Section</option>';
+
+                                                            if (data.length) {
+                                                                data.forEach(section => {
+                                                                    const option = document.createElement("option");
+                                                                    option.value = section.section;
+                                                                    option.textContent = section.section;
+                                                                    sectionSelect.appendChild(option);
+                                                                });
+                                                            } else {
+                                                                const option = document.createElement("option");
+                                                                option.value = "";
+                                                                option.textContent = "No Sections Available";
+                                                                sectionSelect.appendChild(option);
+                                                            }
+                                                        })
+                                                        .catch(error => {
+                                                            console.error('Error fetching sections:', error);
+                                                            const option = document.createElement("option");
+                                                            option.value = "";
+                                                            option.textContent = "Error loading sections";
+                                                            sectionSelect.appendChild(option);
+                                                        });
+                                                }
+                                            </script>
+                                        </div>
+                                        <div class="col-span-1 flex justify-end mt-5">
+                                            <button type="submit"
+                                                class="w-1/4 indent-[-2rem] bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition py-2 text-md font-semibold ">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
 
                 @foreach ($teacher as $teachers)
@@ -435,8 +481,8 @@
                             <div class="w-full h-full bg-white rounded-lg shadow overflow-y-scroll">
                                 <div
                                     class="flex items-center justify-between p-5 px-10 shadow-lg border-b bg-gray-200 rounded-lg sticky top-0">
-                                    <h3 class="text-lg font-bold text-teal-800 uppercase">
-                                        <i class="fa-solid fa-users mr-2"></i>Update
+                                    <h3 class="text-lg font-bold text-teal-800 uppercase"><i
+                                            class="fa-solid fa-users mr-2"></i>Update
                                         {{ old('lastName', $teachers->last_name) }},
                                         {{ old('lastName', $teachers->first_name) }}
                                         {{ old('lastName', $teachers->suffix_name) }}
@@ -449,7 +495,6 @@
                                         <i class="fas fa-times"></i>
                                     </button>
                                 </div>
-
                                 @if ($errors->any())
                                     <div class="alert alert-danger text-red-800 text-md font-normal p-2 mx-auto shadow-lg bg-red-100 transition duration-300 ease-in-out my-5"
                                         role="alert" id="alert">
@@ -483,11 +528,9 @@
                                     class="grid grid-cols-4 gap-4 p-10">
                                     @csrf
                                     @method('PUT')
-
-                                    <!-- Employee Number -->
                                     <div class="col-span-1">
                                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="teacher_number{{ $teachers->id }}">
+                                            for="teacher_number">
                                             <span class="text-red-600 mr-1">*</span>Employee Number
                                         </label>
                                         <input type="text" name="teacher_number" placeholder="Input Employee ID.." readonly
@@ -495,11 +538,9 @@
                                             value="{{ old('teacher_number', $teachers->teacher_number) }}"
                                             class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
                                     </div>
-
-                                    <!-- Position -->
                                     <div class="col-span-1 {{ $teachers->status == "Inactive" ? "hidden" : "block" }}">
                                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="position{{ $teachers->id }}">
+                                            for="position">
                                             <span class="text-red-600 mr-1">*</span>Position
                                         </label>
                                         <select name="position" id="position{{ $teachers->id }}" required
@@ -514,11 +555,9 @@
                                             @endif
                                         </select>
                                     </div>
-
-                                    <!-- Status -->
-                                    <div class="col-span-1">
+                                    <div class="col-span-1 ">
                                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="status{{ $teachers->id }}">
+                                            for="status">
                                             <span class="text-red-600 mr-1">*</span>Status
                                         </label>
                                         <select name="status" id="status{{ $teachers->id }}" required
@@ -527,13 +566,10 @@
                                             <option value="Inactive" {{ old('status', $teachers->status) == 'Inactive' ? 'selected' : '' }}>Inactive</option>
                                         </select>
                                     </div>
-
                                     <div></div>
-
-                                    <!-- First Name -->
                                     <div class="col-span-1 mt-5 {{ $teachers->status == "Inactive" ? "hidden" : "block" }}">
                                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="first_name{{ $teachers->id }}">
+                                            for="first_name">
                                             <span class="text-red-600 mr-1">*</span>First Name
                                         </label>
                                         <input type="text" name="first_name"
@@ -541,11 +577,9 @@
                                             placeholder="Input First Name.." id="first_name{{ $teachers->id }}" required
                                             class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
                                     </div>
-
-                                    <!-- Middle Name -->
                                     <div class="col-span-1 mt-5 {{ $teachers->status == "Inactive" ? "hidden" : "block" }}">
                                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="middle_name{{ $teachers->id }}">
+                                            for="middle_name">
                                             <span class="text-red-600 mr-1">*</span>Middle Name
                                         </label>
                                         <input type="text" name="middle_name"
@@ -553,11 +587,9 @@
                                             placeholder="Input Middle Name.." id="middle_name{{ $teachers->id }}" required
                                             class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
                                     </div>
-
-                                    <!-- Last Name -->
                                     <div class="col-span-1 mt-5 {{ $teachers->status == "Inactive" ? "hidden" : "block" }}">
                                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="last_name{{ $teachers->id }}">
+                                            for="last_name">
                                             <span class="text-red-600 mr-1">*</span>Last Name
                                         </label>
                                         <input type="text" name="last_name"
@@ -565,33 +597,55 @@
                                             id="last_name{{ $teachers->id }}" required
                                             class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
                                     </div>
-
-                                    <!-- Suffix -->
                                     <div class="col-span-1 mt-5 {{ $teachers->status == "Inactive" ? "hidden" : "block" }}">
                                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="suffix{{ $teachers->id }}">
+                                            for="suffix">
                                             Suffix
                                         </label>
                                         <input type="text" name="suffix" value="{{ old('suffix', $teachers->suffix) }}"
                                             placeholder="Suffix.." id="suffix{{ $teachers->id }}"
                                             class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
                                     </div>
-
-                                    <!-- Address -->
                                     <div class="col-span-4 mt-5 {{ $teachers->status == "Inactive" ? "hidden" : "block" }}">
                                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="address{{ $teachers->id }}">
+                                            for="address">
                                             <span class="text-red-600 mr-1">*</span>Address
                                         </label>
                                         <input type="text" name="address" value="{{ old('address', $teachers->address) }}"
                                             placeholder="Address.." id="address{{ $teachers->id }}" required
                                             class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
                                     </div>
-
-                                    <!-- Gender -->
+                                    <div class="col-span-2 mt-5 {{ $teachers->status == "Inactive" ? "hidden" : "block" }}">
+                                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="email">
+                                            <span class="text-red-600 mr-1">*</span>Email
+                                        </label>
+                                        <input type="email" name="email" value="{{ old('email', $teachers->email) }}"
+                                            placeholder="Input Email.." id="email{{ $teachers->id }}" required
+                                            class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md">
+                                    </div>
+                                    <div class="col-span-2 mt-5 {{ $teachers->status == "Inactive" ? "hidden" : "block" }}">
+                                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="contact_number">
+                                            <span class="text-red-600 mr-1">*</span>Contact Number
+                                        </label>
+                                        <input type="text" name="contact_number"
+                                            value="{{ old('contact_number', $teachers->contact_number) }}"
+                                            placeholder="Contact Number.." id="contact_number{{ $teachers->id }}" required
+                                            class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
+                                    </div>
+                                    <div class="col-span-1  hidden">
+                                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="department">
+                                            <span class="text-red-600 mr-1">*</span>Department
+                                        </label>
+                                        <input type="text" name="department" value="Department" placeholder="Department.."
+                                            id="department{{ $teachers->id }}"
+                                            class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
+                                    </div>
                                     <div class="col-span-1 mt-5 {{ $teachers->status == "Inactive" ? "hidden" : "block" }}">
                                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="gender{{ $teachers->id }}">
+                                            for="gender">
                                             <span class="text-red-600 mr-1">*</span>Gender
                                         </label>
                                         <select name="gender" id="gender{{ $teachers->id }}"
@@ -602,8 +656,26 @@
                                             <option value="Female" {{ old('gender', $teachers->gender) == "Female" ? 'selected' : '' }}>Female</option>
                                         </select>
                                     </div>
-
-                                    <!-- Submit Button -->
+                                    <div class="col-span-1 mt-5 {{ $teachers->status == "Inactive" ? "hidden" : "block" }}">
+                                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="birthdate">
+                                            <span class="text-red-600 mr-1">*</span>Birthdate
+                                        </label>
+                                        <input type="date" name="birthdate"
+                                            value="{{ old('birthdate', $teachers->birthdate) }}"
+                                            id="birthdate{{ $teachers->id }}" required
+                                            class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
+                                    </div>
+                                    <div class="col-span-2 mt-5 {{ $teachers->status == "Inactive" ? "hidden" : "block" }}">
+                                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                            for="religion">
+                                            <span class="text-red-600 mr-1">*</span>Religion
+                                        </label>
+                                        <input type="text" name="religion"
+                                            value="{{ old('religion', $teachers->religion) }}" placeholder="Religion.."
+                                            id="religion{{ $teachers->id }}" required
+                                            class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
+                                    </div>
                                     <div class="col-span-4 flex justify-end mt-5">
                                         <button type="submit"
                                             class="w-1/4 indent-[-2rem] bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition py-2 text-md font-semibold ">Submit</button>

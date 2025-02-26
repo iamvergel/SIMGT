@@ -32,13 +32,13 @@
 
 <body class="font-poppins bg-gray-200">
 
-  <div class="flex flex-col lg:flex-row lg:p-2 w-full h-screen">
+  <div class="flex w-full h-screen">
     <!-- Sidebar -->
     @include('student.includes.sidebar')
 
     <!-- Main Content -->
     <main
-      class="flex-grow rounded-none lg:rounded-r-lg lg:rounded-l-none bg-white shadow-lg overflow-hidden overflow-y-scroll">
+      class="flex-grow bg-white shadow-lg overflow-x-hidden overflow-y-scroll w-full bg-zinc-50">
       @include('student.includes.header')
 
       <div class="p-5 py-3">
@@ -115,6 +115,8 @@
                 {{ session('student_last_name') . ', ' . session('student_first_name') . ' ' . strtoupper(substr($middleName, 0, 1)) . '.'}}
               </p>
               <p class="font-normal text-[12px]">{{ session('grade') . ' - ' . session('section') }}</p>
+              <p>Adviser: {{ session('adviser_first_name'). ' '.  session('adviser_middle_name'). ' ' . session('adviser_last_name') }}</p>
+
             </div>
           </div>
         </div>

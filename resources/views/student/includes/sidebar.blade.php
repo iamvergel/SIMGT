@@ -185,7 +185,7 @@
     @include('admin.includes.page_loader')
     <!-- Sidebar -->
     <nav id="sidebar"
-        class="bg-teal-700 text-teal-50 h-full max-w-80 w-80 transition-all duration-200 ease-in-out rounded-l-lg overflow-y-auto hidden lg:block">
+        class="bg-teal-800 text-teal-50 h-full max-w-80 w-80 transition-all duration-200 ease-in-out overflow-y-auto hidden lg:block">
         <div class="flex justify-start items-center text-center">
             <img class="rounded-full logo border-2 mt-5 ml-5 border-teal-700"
                 src="{{ asset('assets/images/SELC.png') }}" alt="logo" width="40" id="logo">
@@ -193,7 +193,7 @@
         </div>
 
         <div class="flex items-center justify-center max-h-1/4 p-4 mt-10">
-            <div class="flex flex-col items-center justify-center h-full p-4 bg-teal-600 rounded-xl w-56 shadow-lg"
+            <div class="flex flex-col items-center justify-center h-full p-4 bg-teal-700 rounded-xl w-56 shadow-lg"
                 id="account">
                 <div class="mt-5 w-20 h-20 border-4 border-white bg-teal-600 rounded-full flex items-center justify-center text-white text-4xl font-semibold transition-all duration-300 shadow-lg"
                     id="profile">
@@ -221,7 +221,7 @@
         <div class="mt-10 mx-1">
             <p class="text-[14px] mt-5 ml-7 text-teal-100 font-semibold">STUDENT DASHBOARD</p>
             <a href="/StEmelieLearningCenter.HopeSci66/student/dashboard"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 tooltip mt-2"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip mt-2"
                 id="dashboardLink">
                 <i class="fa-solid fa-table-columns"></i>
                 <span class="sidebar-text ml-2">Dashboard</span>
@@ -230,7 +230,7 @@
             </a>
 
             <a href="/StEmelieLearningCenter.HopeSci66/student/calendar"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 tooltip"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
                 id="dashboardLink">
                 <i class="fas fa-calendar"></i>
                 <span class="sidebar-text ml-2">
@@ -240,7 +240,7 @@
             </a>
 
             <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/account"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 tooltip"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
                 id="dashboardLink">
                 <i class="fas fa-user"></i>
                 <span class="sidebar-text ml-2">
@@ -250,7 +250,7 @@
             </a>
 
             <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/grades"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 tooltip"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
                 id="dashboardLink">
                 <i class="fa-solid fa-file"></i>
                 <span class="sidebar-text ml-2">
@@ -260,7 +260,7 @@
             </a>
 
             <p class="text-[14px] mt-5 ml-7 text-teal-100 font-semibold">ENROLLMENT</p>
-            <button class="flex justify-start w-full items-center sidebar-link hover:bg-teal-600 rounded-md tooltip mt-2"
+            <button class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md tooltip mt-2"
                 id="studentManagementButton3" aria-expanded="false" aria-controls="collapse3">
                 <i class="fa-solid fa-file"></i>
                 <span class="sidebar-text ml-2">Enrollment</span>
@@ -270,7 +270,7 @@
             </button>
             <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-2 px-2" id="collapse3">
                 <a href="#"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 mt-5 tooltip">
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-5 tooltip">
                     <i class="fa-solid fa-file"></i>
                     <span class="sidebar-text ml-2">Current Enrollment</span>
                     <span
@@ -278,7 +278,7 @@
                         <br /> Enrollment</span>
                 </a>
                 <a href="#"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 tooltip">
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip">
                     <i class="fa-solid fa-file"></i>
                     <span class="sidebar-text ml-2">Dropped Student</span>
                     <span
@@ -290,7 +290,7 @@
             <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline">
                 @csrf
                 <a href="#"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 mt-2 tooltip"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
                     id="dashboardLink"
                     onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -344,7 +344,7 @@
 
         <div class="mt-10 mx-1">
             <a href="/StEmelieLearningCenter.HopeSci66/student/dashboard"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 tooltip"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
                 id="dashboardLink">
                 <i class="fa-solid fa-table-columns"></i>
                 <span class="sidebar-text ml-2">Dashboard</span>
@@ -353,7 +353,7 @@
             </a>
 
             <a href="/StEmelieLearningCenter.HopeSci66/student/calendar"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 tooltip"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
                 id="dashboardLink">
                 <i class="fas fa-calendar"></i>
                 <span class="sidebar-text ml-2">
@@ -363,7 +363,7 @@
             </a>
 
             <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/account"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 tooltip"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
                 id="dashboardLink">
                 <i class="fas fa-user"></i>
                 <span class="sidebar-text ml-2">
@@ -373,7 +373,7 @@
             </a>
 
             <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/grades"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 tooltip"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
                 id="dashboardLink">
                 <i class="fa-solid fa-file"></i>
                 <span class="sidebar-text ml-2">
@@ -385,7 +385,7 @@
             <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline">
                 @csrf
                 <a href="#"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 ml-0 mt-2 tooltip"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
                     id="signoutLink" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     <span class="sidebar-text ml-2">Signout</span>

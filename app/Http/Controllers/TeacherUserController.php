@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TeacherUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +9,8 @@ use Carbon\Carbon; // Make sure to import Carbon
 use Illuminate\Support\Facades\Storage;
 use App\Mail\TeacherEmail;
 use Illuminate\Support\Facades\Mail;
+use App\Models\TeacherUser;
+use App\Models\TeacherAdvisory;
 
 class TeacherUserController extends Controller
 {
@@ -117,7 +118,7 @@ class TeacherUserController extends Controller
         }
 
         // Fetch related data for the specific teacher
-        // $teachersAdditional = teacherAdditionalInfo::where('teacher_number', $teachers->teacher_number)->first();
+        $teacherAdvisory = TeacherAdvisory::where('teacher_number', $teachers->teacher_number)->first();
         // $teacherDocuments = teacherDocuments::where('teacher_number', $teachers->teacher_number)->first();
         // $teacherAccount = TeacherUser::where('teacher_number', $teachers->teacher_number)->first();
         // $teacherGradeOne = Mteachergradeone::where('teacher_number', $teachers->teacher_number)->first();
@@ -128,7 +129,7 @@ class TeacherUserController extends Controller
         // $teacherGradeSix = Mteachergradesix::where('teacher_number', $teachers->teacher_number)->first();
 
         // You can pass other data here as needed
-        return view('admin.includes.teacher_information', compact('teachers', ));
+        return view('admin.includes.teacher_information', compact('teachers', 'teacherAdvisory'));
     }
 
     public function resetAccount(Request $request, $teacherId)

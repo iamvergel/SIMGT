@@ -21,12 +21,12 @@ class TeacherAdvisoryController extends Controller
         // Create the new teacher user
         $teacherUser = TeacherAdvisory::create([
             'teacher_number' => $request->teacher_number,
-            'grade' => $request->grade ? ucwords(strtolower($request['middle_name'])) : null,
-            'section' => $request->section ? ucwords(strtolower($request['last_name'])) : null,
+            'grade' => $request->grade ? ucwords(strtolower($request['grade'])) : null,
+            'section' => $request->section ? ucwords(strtolower($request['section'])) : null,
             'school_year' => $request->school_year,
         ]);
 
         // Return success response
-        return redirect()->route('teacher.user')->with('success', 'New teacher added successfully!');
+        return redirect()->route('teacher.user')->with('success', 'Advisory added successfully!');
     }
 }

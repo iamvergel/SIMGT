@@ -20,6 +20,11 @@ class TeacherAdvisory extends Model
         'school_year',
     ];
 
+    public function teacher()
+    {
+        return $this->belongsTo(TeacherUser::class, 'teacher_number', 'teacher_number');
+    }
+
     // Define any relationships if needed
     // Example: public function students() { return $this->hasMany(Student::class); }
 }

@@ -15,6 +15,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TeacherUserController;
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\TeacherAdvisoryController;
 
 // Landing Page
 Route::get('/StEmelieLearningCenter.Admission', function () {
@@ -86,6 +87,8 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::delete('/teacher/{id}', [TeacherUserController::class, 'destroy'])->name('teacher.delete');
     Route::post('/manage-account/{teacherId}/reset', [TeacherUserController::class, 'resetAccount'])->name('teacher.reset');
     Route::put('/teacher/{id}', [TeacherUserController::class, 'update'])->name('teacher.update');
+
+    Route::post('/advisory/create', [TeacherAdvisoryController::class, 'store'])->name('advisory.create');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/manage-system/subject', [SubjectController::class, 'index'])->name('admin.subject');
     Route::get('admin/createsubject', [SubjectController::class, 'create'])->name('subject.create');

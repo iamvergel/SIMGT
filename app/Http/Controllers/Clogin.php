@@ -10,6 +10,8 @@ use App\Models\StudentInfo; // Import StudentInfo model
 use App\Models\StudentAdditionalInfo; // Import StudentAdditionalInfo model
 use App\Models\StudentDocuments; // Import StudentDocuments model
 use App\Models\Mannouncement;
+use App\Models\TeacherAdvisory;
+use App\Models\TeacherUser;
 
 class Clogin extends Controller
 {
@@ -111,13 +113,12 @@ class Clogin extends Controller
             $this->clearLoginAttempts($request);
 
             $student = Auth::guard('student')->user(); // Get the authenticated student
-
+ 
             $request->session()->put('student_username', $student->username); // Adjust based on your username field
             $request->session()->put('student_id', $student->student_number);
 
             // Fetch additional student info from StudentInfo
             $studentInfo = StudentInfo::where('student_number', $student->student_number)->first();
-
 
             if ($studentInfo) {
                 // Store the names in the session from StudentInfo
@@ -145,6 +146,7 @@ class Clogin extends Controller
                 $request->session()->put('city', $studentInfo->city);
 
             }
+
             // Fetch additional information
             $additionalInfo = StudentAdditionalInfo::where('student_number', $student->student_number)->first();
 
@@ -176,12 +178,31 @@ class Clogin extends Controller
 
             $documents = StudentDocuments::where('student_number', $student->student_number)->first();
 
-            // Pass the data to the view
-            return view('includes.student_loader', [
-                'student' => $studentInfo,
-                'additionalInfo' => $additionalInfo,
-                'documents' => $documents,
-            ]);
+
+    // Fetch the advisory (teacher's details based on section)
+    $section = TeacherAdvisory::where('section', $studentInfo->section)->first();
+
+    if ($section) {
+        // Fetch the teacher's information (adviser)
+        $adviser = TeacherUser::where('teacher_number', $section->teacher_number)->first();
+
+        if ($adviser) {
+            // Store the adviser's information in session
+            $request->session()->put('adviser_employee_number', $adviser->teacher_number);
+            $request->session()->put('adviser_last_name', $adviser->last_name);
+            $request->session()->put('adviser_first_name', $adviser->first_name);
+            $request->session()->put('adviser_middle_name', $adviser->middle_name);
+            $request->session()->put('adviser_email', $adviser->email);
+        }
+    }
+
+    // Pass the data to the view
+    return view('includes.student_loader', [
+        'student' => $studentInfo,
+        'additionalInfo' => $additionalInfo,
+        'documents' => $documents,
+        'adviser' => $adviser,  // Pass the adviser details to the view
+    ]);
         }
 
         // Increment login attempts and show error message
