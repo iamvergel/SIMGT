@@ -24,7 +24,8 @@
 
             <div class="p-5">
                 <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
-                <h1 class="text-2xl font-bold text-teal-900 ml-5">SIMGT Profile / {{ $firstName . ' ' . $middleName . ' ' . $lastName ?: 'Guest' }}</h1>
+                <h1 class="text-2xl font-bold text-teal-900 ml-5">SIMGT Profile /
+                    {{ $firstName . ' ' . $middleName . ' ' . $lastName ?: 'Guest' }}</h1>
 
                 <div class="bg-teal-800 p-5 shadow-lg mt-10 rounded-t-lg">
                     <h2 class="text-md font-semibold text-white">
@@ -81,14 +82,14 @@
                                                 {{ $firstName . ' ' . $middleName . ' ' . $lastName ?: 'Guest' }}
                                             </p>
                                             <span
-                                                class="text-xs tracking-widest font-normal shadow-text-lg mt-0">{{ session('admin_username') ?? 'Guest' }}</span>
+                                                class="text-xs tracking-widest font-normal shadow-text-lg mt-0"> {{ session('admin_number') ?? 'Guest' }} | {{ session('admin_username') ?? 'Guest' }}</span>
                                             <p class="text-xs">
                                                 {{ session('admin_role') ?? 'Guest' }}
                                             </p>
                                         </div>
 
-                                        <form id="avatar-form" method="POST" action="" enctype="multipart/form-data" class="lg:px-20 2xl:px-0"
-                                            class="">
+                                        <form id="avatar-form" method="POST" action="" enctype="multipart/form-data"
+                                            class="lg:px-20 2xl:px-0" class="">
                                             @csrf
                                             <input type="hidden" name="id"
                                                 value="{{ Auth::guard('admin')->check() ? Auth::guard('admin')->user()->id : '' }}"
@@ -155,9 +156,9 @@
                                             for="">
                                             <span class="text-red-600 mr-1">*</span>First Name
                                         </label>
-                                        <input type="text" name="first_name" placeholder="" value="{{ $user->first_name }}"
-                                            class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                             />
+                                        <input type="text" name="first_name" placeholder=""
+                                            value="{{ $user->first_name }}"
+                                            class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
                                     </div>
 
                                     <div>
@@ -166,9 +167,9 @@
                                             for="">
                                             <span class="text-red-600 mr-1">*</span>Middle Name
                                         </label>
-                                        <input type="text" name="middle_name" placeholder="" value="{{ $user->middle_name }}"
-                                            class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                             />
+                                        <input type="text" name="middle_name" placeholder=""
+                                            value="{{ $user->middle_name }}"
+                                            class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
                                     </div>
 
                                     <div>
@@ -177,9 +178,9 @@
                                             for="">
                                             <span class="text-red-600 mr-1">*</span>Last Name
                                         </label>
-                                        <input type="text" name="last_name" placeholder="" value="{{ $user->last_name }}"
-                                            class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                             />
+                                        <input type="text" name="last_name" placeholder=""
+                                            value="{{ $user->last_name }}"
+                                            class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
                                     </div>
                                 </div>
                                 <!-- Submit Button -->
@@ -197,7 +198,7 @@
                             @if(session('success'))
                                 <script>
                                     alert("{{ session('success') }}");
-                                    
+
                                     document.getElementById('logoutForm').submit();
                                 </script>
                             @endif

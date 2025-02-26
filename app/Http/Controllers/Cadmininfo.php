@@ -15,6 +15,7 @@ class Cadmininfo extends Controller
     {
         // Validate the incoming request
         $request->validate([
+            'admin_number' => 'required|string|unique:admin_user_account,admin_number',
             'username' => 'required|string|unique:admin_user_account,username',
             'password' => 'required',
             'role' => 'required|string',
@@ -25,6 +26,7 @@ class Cadmininfo extends Controller
 
         // Create the new admin user
         $adminUser = Madminaccount::create([
+            'admin_number' => $request->admin_number,
             'username' => $request->username,
             'password' => $request->password, // Hash the password
             'role' => $request->role,

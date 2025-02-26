@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\PictureAnnouncementController;
+use App\Http\Controllers\Cevent;
+use App\Http\Controllers\SectionController;
 
 Route::prefix('images')->group(function () {
     Route::get('/', [ImageController::class, 'index']);         // Get all images
@@ -13,14 +16,14 @@ Route::prefix('images')->group(function () {
     Route::delete('/{id}', [ImageController::class, 'destroy']);  // Delete an image by ID
 });
 
-use App\Http\Controllers\PictureAnnouncementController;
 // In your routes/api.php
 Route::get('/announcements', [PictureAnnouncementController::class, 'getAnnouncements']);
 Route::post('/announcements', [PictureAnnouncementController::class, 'store']);
 Route::delete('/announcements/{id}', [PictureAnnouncementController::class, 'deleteAnnouncement']);
 Route::put('/announcements/{id}', [PictureAnnouncementController::class, 'updateAnnouncement']);
 
-use App\Http\Controllers\Cevent;
 // In your routes/api.php
 Route::get('/allevents', [Cevent::class, 'showEventslanding']);
 
+// In your routes/api.php
+Route::get('/allsections', [SectionController::class, 'getAllSectionsByGrade']);

@@ -7,21 +7,30 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Madminaccount extends Authenticatable
+class TeacherUser extends Model
 {
     use Notifiable;
 
-    protected $table = 'admin_user_account';
+    protected $table = 'teacher_user';
 
     // Fillable fields for mass assignment
     protected $fillable = [
-        'admin_number',
+        'teacher_number',
         'username',
         'password',
-        'role',
         'first_name',
         'middle_name',
         'last_name',
+        'suffix',
+        'address',
+        'email',
+        'contact_number',
+        'department',
+        'position',
+        'status',
+        'gender',
+        'birthdate',
+        'religion',
         'avatar',
         'last_avatar_change',
         'last_password_change',

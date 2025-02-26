@@ -29,7 +29,8 @@
     class="hidden fixed top-0 right-0 left-0 z-10 flex justify-center items-center w-screen h-screen bg-black bg-opacity-50 overflow-y-scroll">
     <div class="relative px-20 py-10 w-screen h-screen">
         <div class="w-full h-full bg-white rounded-lg shadow overflow-y-scroll">
-            <div class="flex items-center justify-between p-5 px-10 shadow-lg border-b bg-gray-200 rounded-lg sticky top-0">
+            <div
+                class="flex items-center justify-between p-5 px-10 shadow-lg border-b bg-gray-200 rounded-lg sticky top-0">
                 <h3 class="text-lg font-bold text-teal-800 uppercase"><i class="fa-solid fa-users mr-2"></i>Add New
                     Student</h3>
                 <button type="button"
@@ -95,7 +96,7 @@
                             <span class="text-red-600 mr-1">*</span>Select Grade :
                         </label>
                         <select id="grade" name="grade"
-                            class="myInput bloc w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                             required>
                             <option value="">Select Grade</option>
                             <option value="Grade One">Grade One</option>
@@ -107,13 +108,64 @@
                         </select>
                     </div>
 
-                    <div class="">
+                    <div>
                         <label for="section" class="block mb-2 text-sm font-bold text-gray-900">
                             <span class="text-red-600 mr-1">*</span>Section :</label>
-                        <input type="text" name="section" id="section"
+                        <select id="section" name="section"
                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                            placeholder="Enter Section" required>
+                            required>
+                            <option value="">Select Section</option>
+                        </select>
                     </div>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const gradeSelect = document.getElementById("grade");
+                            const sectionSelect = document.getElementById("section");
+
+                            // Add event listener for grade change
+                            gradeSelect.addEventListener("change", function () {
+                                const selectedGrade = gradeSelect.value;
+
+                                if (selectedGrade) {
+                                    // Fetch sections based on the selected grade
+                                    fetch(`/api/allsections?grade=${selectedGrade}`)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            // Clear previous options
+                                            sectionSelect.innerHTML = '<option value="">Select Section</option>';
+
+                                            // Add new options
+                                            if (data.length) {
+                                                data.forEach(section => {
+                                                    const option = document.createElement("option");
+                                                    option.value = section.section;  // Make sure 'section' is the correct field in your model
+                                                    option.textContent = section.section;
+                                                    sectionSelect.appendChild(option);
+                                                });
+                                            } else {
+                                                // Handle case where no sections are found
+                                                const option = document.createElement("option");
+                                                option.value = "";
+                                                option.textContent = "No Sections Available";
+                                                sectionSelect.appendChild(option);
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error('Error fetching sections:', error);
+                                            // Handle error and display a message in the dropdown
+                                            const option = document.createElement("option");
+                                            option.value = "";
+                                            option.textContent = "Error loading sections";
+                                            sectionSelect.appendChild(option);
+                                        });
+                                } else {
+                                    // If no grade selected, clear sections
+                                    sectionSelect.innerHTML = '<option value="">Select Section</option>';
+                                }
+                            });
+                        });
+                    </script>
 
                     <!-- Personal Information -->
                     <div class="col-span-4 w-86 border-b border-b-gray-300 my-5">

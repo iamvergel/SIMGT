@@ -163,10 +163,12 @@
                     @endif
                 </div>
                 <p class="text-[12px] tracking-widest font-semibold text-emerald-50 shadow-text-lg mt-2">
-                    {{ $firstName . ' ' . $middleName . ' ' . $lastName ?: 'Guest' }}
+                    {{ session('admin_username') ?? 'Guest' }}
+
                 </p>
                 <p class="text-[10px] tracking-widest font-normal text-teal-100 shadow-text-lg mt-0">
-                    {{ session('admin_username') ?? 'Guest' }}</p>
+                    {{ session('admin_number') ?? 'Guest' }}
+                </p>
                 <p class="text-[10px] text-emerald-50 mt-1">{{ session('admin_role') ?? 'Guest' }}</p>
             </div>
         </div>
@@ -390,7 +392,7 @@
                         <i class="fa-solid fa-user"></i>
                         <span class="sidebar-text ml-2">Registrar</span>
                     </a>
-                    <a href="#" class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
+                    <a href="/StEmelieLearningCenter.HopeSci66/admin/manage-accounts/teacher-users" class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Teachers">
                         <i class="fa-solid fa-user"></i>
                         <span class="sidebar-text ml-2">Teachers</span>
@@ -408,18 +410,19 @@
                 <p class="text-[14px] mt-10 ml-7 text-white font-normal uppercase tracking-wider">MANAGE SYSTEM
                 </p>
                 <button class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2"
-                    id="studentManagementButton4" aria-expanded="false" aria-controls="managesystem"
-                    title="Manage System">
+                    id="studentManagementButton4" aria-expanded="false" aria-controls="managesystem" title="Manage System">
                     <i class="fa-solid fa-globe"><span class="sidebar-text ml-2">Manage System</span></i>
                     <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
                 </button>
                 <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="managesystem">
-                    <a href="/StEmelieLearningCenter.HopeSci66/admin/manage-system/section" class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
+                    <a href="/StEmelieLearningCenter.HopeSci66/admin/manage-system/section"
+                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Section">
                         <i class="fa-regular fa-circle"></i>
                         <span class="sidebar-text ml-2">Section</span>
                     </a>
-                    <a href="/StEmelieLearningCenter.HopeSci66/admin/manage-system/subject" class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
+                    <a href="/StEmelieLearningCenter.HopeSci66/admin/manage-system/subject"
+                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Subject">
                         <i class="fa-regular fa-circle"></i>
                         <span class="sidebar-text ml-2">Subject</span>

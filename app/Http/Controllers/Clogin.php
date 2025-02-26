@@ -78,6 +78,7 @@ class Clogin extends Controller
             $request->session()->put('admin_mname', $adminUser->middle_name);
             $request->session()->put('admin_lname', $adminUser->last_name);
             $request->session()->put('admin_role', $adminUser->role);  // Store the role
+            $request->session()->put('admin_number', $adminUser->admin_number);
 
             // Flash a success message
             $request->session()->flash('success', 'Welcome, ' . $adminUser->username . '! You are now logged in as Admin.');

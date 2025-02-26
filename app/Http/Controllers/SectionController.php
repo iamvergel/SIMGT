@@ -20,6 +20,15 @@ class SectionController extends Controller
         return view('admin.admin_section'); // Display the create form
     }
 
+    // Method to fetch sections by grade
+    public function getAllSectionsByGrade(Request $request)
+    {
+        // Fetch sections based on the selected grade
+        $sections = Section::where('grade', $request->grade)->get();
+
+        // Return the sections as a JSON response
+        return response()->json($sections);
+    }
     // Store a new Section
     public function store(Request $request)
     {

@@ -78,6 +78,15 @@
                                 </div>
                                 <div class="mb-4">
                                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        for="admin_number">
+                                        <span class="text-red-600 mr-1">*</span>Employee ID
+                                    </label>
+                                    <input type="text" name="admin_number" placeholder="Input Employee ID.."
+                                        id="admin_number" required
+                                        class="form-input block text-sm text-normal text-dark tracking-wider w-full lg:w-96 pl-5 p-3 border border-gray-400 rounded-md px-5">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                         for="first_name">
                                         <span class="text-red-600 mr-1">*</span>First Name
                                     </label>
@@ -140,49 +149,50 @@
                                 <table id="studentTable" class="p-3">
                                     <thead class="bg-gray-200">
                                         <tr class="text-[14px] font-normal uppercase text-left text-black">
-                                            <th class="export">id</th>
+                                            <th class="export">Employee Number</th>
                                             <th class="export">Admin</th>
                                             <th class="">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody class="" id="tableBody">
                                         @foreach ($admin as $admins)
-                                            <!-- Add a condition to highlight the logged-in admin -->
-                                            <tr
-                                                class="{{  Auth::guard('admin')->user()->id == $admins->id ? 'hidden' : '' }} hover:bg-gray-100">
-                                                <td>
-                                                    <span class="ml-2">{{ $admins->id }}</span>
-                                                </td>
-                                                <td class="flex justify-start items-center">
-                                                    <div
-                                                        class="w-12 h-12 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold mx-2">
-                                                        @if ($admins->avatar)
-                                                            <img src="/storage/{{ $admins->avatar }}" alt="{{$admins->avatar }}"
-                                                                class="w-12 h-12 rounded-full object-cover">
-                                                        @else
-                                                            {{ strtoupper(substr($admins->first_name, 0, 1) . substr($admins->last_name, 0, 1)) }}
-                                                        @endif
-                                                    </div>
-                                                    <div class="">
-                                                        <span class="text-sm font-semibold">{{ $admins->last_name }},
-                                                            {{ $admins->first_name }} {{ $admins->middle_name }}</span><br />
-                                                        <span class="text-xs text-gray-500">{{ $admins->username }}</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <form action="{{ route('admin.delete', $admins->id) }}" method="POST"
-                                                        onsubmit="return confirm('Are you sure you want to delete this admin?');">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            onclick="return confirm('Are you sure you want to delete this admin?');"
-                                                            class="text-white font-medium text-lg p-3 text-center inline-flex items-center me-2 bg-red-700 rounded-full hover:bg-red-600"
-                                                            title="Delete Admin">
-                                                            <i class="fa-solid fa-user-xmark"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                            @if (Auth::guard('admin')->user()->id == $admins->id ) 
+                                            @else
+                                                <tr
+                                                    class=" hover:bg-gray-100">
+                                                    <td>
+                                                        <span class="ml-2">{{ $admins->admin_number }}</span>
+                                                    </td>
+                                                    <td class="flex justify-start items-center">
+                                                        <div
+                                                            class="w-12 h-12 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold mx-2">
+                                                            @if ($admins->avatar)
+                                                                <img src="/storage/{{ $admins->avatar }}" alt="{{$admins->avatar }}"
+                                                                    class="w-12 h-12 rounded-full object-cover">
+                                                            @else
+                                                                {{ strtoupper(substr($admins->first_name, 0, 1) . substr($admins->last_name, 0, 1)) }}
+                                                            @endif
+                                                        </div>
+                                                        <div class="">
+                                                            <span class="text-sm font-semibold">{{ $admins->last_name }},
+                                                                {{ $admins->first_name }} {{ $admins->middle_name }}</span><br />
+                                                            <span class="text-xs text-gray-500">{{ $admins->username }}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <form action="{{ route('admin.delete', $admins->id) }}" method="POST"
+                                                            onsubmit="return confirm('Are you sure you want to delete this admin?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="text-white font-medium text-lg p-3 text-center inline-flex items-center me-2 bg-red-700 rounded-full hover:bg-red-600"
+                                                                title="Delete Admin">
+                                                                <i class="fa-solid fa-user-xmark"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -238,13 +248,14 @@
                 }
             }
 
-            // Function to generate the password
             function generatePassword() {
                 const firstName = firstNameField.value.trim();
                 const lastName = lastNameField.value.trim();
-                const currentYear = new Date().getFullYear();
-                if (firstName && lastName) {
-                    const password = 'SELC' + lastName.charAt(0).toUpperCase() + lastName.slice(1) + currentYear;
+                const employeeId = document.getElementById('admin_number').value.trim();
+
+                if (firstName && lastName && employeeId.length >= 4) {
+                    const last4Digits = employeeId.slice(-4);  // Get the last 4 digits of the employee ID
+                    const password = 'SELC' + lastName.charAt(0).toUpperCase() + lastName.slice(1) + last4Digits;
                     passwordField.value = password;
                 }
             }

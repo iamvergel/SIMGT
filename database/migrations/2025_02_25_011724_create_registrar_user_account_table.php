@@ -16,6 +16,7 @@ return new class extends Migration
     {
         Schema::create('registrar_user_account', function (Blueprint $table) {
             $table->id(); // Auto-incrementing ID
+            $table->string('registrar_number')->unique();
             $table->string('username')->unique();
             $table->string('password');
             $table->string('role');
@@ -31,13 +32,14 @@ return new class extends Migration
 
         // Array of default data to insert with hashed passwords
         $defaultUsers = [
-            ['username' => 'registrar@school.edu.ph', 'password' => 'Registrar2024', 'role' => 'Registrar', 'first_name' => 'Registrar', 'last_name' => 'Registrar', 'middle_name' => 'Registrar'],
+            ['registrar_number' => '1000-0000', 'username' => 'registrar@school.edu.ph', 'password' => 'Registrar2024', 'role' => 'Registrar', 'first_name' => 'Registrar', 'last_name' => 'Registrar', 'middle_name' => 'Registrar'],
         ];
 
         // Insert each user with hashed password if it doesn't already exist
         foreach ($defaultUsers as $user) {
             if (!DB::table('registrar_user_account')->where('username', $user['username'])->exists()) {
                 DB::table('registrar_user_account')->insert([
+                    'registrar_number' => $user['registrar_number'],
                     'username' => $user['username'],
                     'password' => bcrypt($user['password']), // Hash the password here
                     'role' => $user['role'], 

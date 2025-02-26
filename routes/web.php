@@ -13,6 +13,7 @@ use App\Http\Controllers\CStudentProfile;
 use App\Http\Controllers\PictureAnnouncementController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\TeacherUserController;
 
 // Landing Page
 Route::get('/StEmelieLearningCenter.Admission', function () {
@@ -82,6 +83,10 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::post('/admin/create', [Cadmininfo::class, 'store'])->name('admin.create');
     Route::delete('/admin/{id}', [Cadmininfo::class, 'destroy'])->name('admin.delete');
 
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/manage-accounts/teacher-users', [TeacherUserController::class, 'showAllTeacher'])->name('teacher.user');
+    Route::post('/teacher/create', [TeacherUserController::class, 'store'])->name('teacher.create');
+    Route::delete('/teacher/{id}', [TeacherUserController::class, 'destroy'])->name('teacher.delete');
+
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/manage-system/subject', [SubjectController::class, 'index'])->name('admin.subject');
     Route::get('admin/createsubject', [SubjectController::class, 'create'])->name('subject.create');
     Route::post('admin/createsubject', [SubjectController::class, 'store'])->name('subject.store');
@@ -98,6 +103,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::delete('admin/section/{id}', [SectionController::class, 'destroy'])->name('section.destroy'); // Delete subject route
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management/{id}', [Cstudentinfo::class, 'showStudenyInfotmation'])->name('student.show');
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/teacher-management/{id}', [TeacherUserController::class, 'showTeacherInfotmation'])->name('teacher.show');
 
 
     Route::prefix('StEmelieLearningCenter.HopeSci66/admin/Grade-book')->group(function () {
@@ -214,6 +220,8 @@ Route::put('/students/{id}', [Cstudentinfo::class, 'updateStudentInfo'])->name('
 Route::post('/send-email/{id}', [Cstudentinfo::class, 'sendEmail'])->name('send.email');
 Route::put('/students/drop/{id}', [Cstudentinfo::class, 'dropStudent'])->name('students.drop');
 Route::put('/students/retrive/{id}', [Cstudentinfo::class, 'retrieveStudent'])->name('students.retrieve');
+
+Route::post('/send-email/{id}', [TeacherUserController::class, 'sendEmail'])->name('send.email');
 
 Route::post('/profile/update-avatar', [CStudentProfile::class, 'update'])->name('profile.update-avatar');
 Route::post('/student/change-password/{studentId}', [CStudentProfile::class, 'changePassword'])->name('student.changePassword');
