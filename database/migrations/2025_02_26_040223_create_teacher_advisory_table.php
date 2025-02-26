@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeacherAdvisoryTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
@@ -14,10 +14,9 @@ class CreateTeacherAdvisoryTable extends Migration
             $table->string('teacher_number');
             $table->string('grade');
             $table->string('section');
+            $table->string('school_year');
             $table->timestamps();
 
-            // Adding a unique index to ensure one teacher is assigned to one grade-section combination
-            $table->unique(['teacher_number', 'grade', 'section']);
         });
     }
 
@@ -25,6 +24,6 @@ class CreateTeacherAdvisoryTable extends Migration
     {
         Schema::dropIfExists('teacher_advisory');
     }
-}
+};
 
 

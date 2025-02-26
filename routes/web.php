@@ -14,14 +14,12 @@ use App\Http\Controllers\PictureAnnouncementController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TeacherUserController;
+use App\Http\Controllers\GradeController;
 
 // Landing Page
 Route::get('/StEmelieLearningCenter.Admission', function () {
     return view('landing_page');
 });
-
-use App\Http\Controllers\GradeController;
-
 
 // Authentication Routes
 Route::get('/StEmelieLearningCenter.HopeSci66/sign-in', [Clogin::class, 'showLoginForm'])->name('admin.login');
@@ -86,6 +84,8 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/manage-accounts/teacher-users', [TeacherUserController::class, 'showAllTeacher'])->name('teacher.user');
     Route::post('/teacher/create', [TeacherUserController::class, 'store'])->name('teacher.create');
     Route::delete('/teacher/{id}', [TeacherUserController::class, 'destroy'])->name('teacher.delete');
+    Route::post('/manage-account/{teacherId}/reset', [TeacherUserController::class, 'resetAccount'])->name('teacher.reset');
+    Route::put('/teacher/{id}', [TeacherUserController::class, 'update'])->name('teacher.update');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/manage-system/subject', [SubjectController::class, 'index'])->name('admin.subject');
     Route::get('admin/createsubject', [SubjectController::class, 'create'])->name('subject.create');

@@ -35,7 +35,7 @@
                     action="{{ route('students.update', $student->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="grid grid-cols-4 gap-4 mb-4 text-[13px] text-gray-900">
+                    <div class="grid grid-cols-3 xl:grid=cols=4 gap-4 mb-4 text-[13px] text-gray-900">
                         <div class="col-span-2 2xl:col-span-1 p-10 bg-gray-200 flex justify-center items-center">
                             @php
                                 $account = $studentAccount[$student->student_number] ?? null;

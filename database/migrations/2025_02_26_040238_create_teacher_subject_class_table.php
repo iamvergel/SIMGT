@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeacherSubjectClassTable extends Migration
+return new class extends Migration
 {
     public function up()
     {
@@ -15,10 +15,8 @@ class CreateTeacherSubjectClassTable extends Migration
             $table->string('grade');
             $table->string('section');
             $table->string('subject');
+            $table->string('school_year');
             $table->timestamps();
-
-            // Adding a unique index to ensure a teacher is assigned to a specific subject in a specific grade-section combination
-            $table->unique(['teacher_number', 'grade', 'section', 'subject']);
         });
     }
 
@@ -26,5 +24,5 @@ class CreateTeacherSubjectClassTable extends Migration
     {
         Schema::dropIfExists('teacher_subject_class');
     }
-}
+};
 

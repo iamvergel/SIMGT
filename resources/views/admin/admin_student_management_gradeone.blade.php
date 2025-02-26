@@ -143,7 +143,7 @@
                                                         type="button" aria-label="Update Student" title="Update Student Info">
                                                         <i class="fa-solid fa-square-pen"></i>
                                                     </button>
-s
+
                                                     <form action="{{ route('send.email', $student->id) }}" method="POST" style="display:inline;">
                                                         @csrf
                                                         <button type="submit"

@@ -44,21 +44,20 @@ class TeacherUserController extends Controller
             'middle_name' => $request->middle_name ? ucwords(strtolower($request['middle_name'])) : null,
             'last_name' => $request->last_name ? ucwords(strtolower($request['last_name'])) : null,
             'suffix' => $request->suffix ? ucwords(strtolower($request['suffix'])) : null,
-            'address' => $request->address,
+            'address' => $request->address ? ucwords(strtolower($request['address'])) : null,
             'email' => $request->email,
             'contact_number' => $request->contact_number,
-            'department' => $request->department,
-            'position' => $request->position,
-            'status' => $request->status,
-            'gender' => $request->gender,
+            'department' => $request->department ? ucwords(strtolower($request['department'])) : null,
+            'position' => $request->position ? ucwords(strtolower($request['position'])) : null,
+            'status' => $request->status ? ucwords(strtolower($request['status'])) : null,
+            'gender' => $request->gender ? ucwords(strtolower($request['gender'])) : null,
             'birthdate' => $request->birthdate,
-            'religion' => $request->religion,
+            'religion' => $request->religion ? ucwords(strtolower($request['religion'])) : null,
         ]);
 
         // Return success response
         return redirect()->route('teacher.user')->with('success', 'New teacher added successfully!');
     }
-
 
     public function update(Request $request, $id)
     {
@@ -86,19 +85,19 @@ class TeacherUserController extends Controller
         }
 
         // Update the other fields
-        $user->first_name = $request->first_name;
-        $user->middle_name = $request->middle_name;
-        $user->last_name = $request->last_name;
-        $user->suffix = $request->suffix;
-        $user->address = $request->address;
+        $user->first_name = $request->first_name ? ucfirst(strtolower($request['first_name'])) : null;
+        $user->middle_name = $request->middle_name ? ucfirst(strtolower($request['middle_name'])) : null;
+        $user->last_name = $request->last_name ? ucfirst(strtolower($request['last_name'])) : null;
+        $user->suffix = $request->suffix ? ucfirst(strtolower($request['suffix'])) : null;
+        $user->address = ucfirst(strtolower($request->address));
         $user->email = $request->email;
-        $user->contact_number = $request->contact_number;
-        $user->department = $request->department;
-        $user->position = $request->position;
-        $user->status = $request->status;
-        $user->gender = $request->gender;
+        $user->contact_number = ucfirst(strtolower($request->contact_number));
+        $user->department = ucfirst(strtolower($request->department));
+        $user->position = ucfirst(strtolower($request->position));
+        $user->status = ucfirst(strtolower($request->status));
+        $user->gender = ucfirst(strtolower($request->gender));
         $user->birthdate = $request->birthdate;
-        $user->religion = $request->religion;
+        $user->religion = ucfirst(strtolower($request->religion));
 
         // Save the updated user details
         $user->save();
@@ -159,7 +158,7 @@ class TeacherUserController extends Controller
         $userAccount->password = $validatedData['defaultPassword']; // Hash the provided password
         $userAccount->save();
 
-        return back()->with('success', 'Account reset successfully for ' . $teacher->teacher_first_name . '!');
+        return back()->with('success', 'Account reset successfully for ' . $teacher->first_name . '!');
     }
 
     public function sendEmail(Request $request, $teacherId)
@@ -244,7 +243,7 @@ class TeacherUserController extends Controller
         $currentteacherId = auth()->id(); // Assuming you use Laravel's built-in auth system
 
         // Fetch all teachers but exclude the currently logged-in teacher
-        $teacher = TeacherUser::where('status', 'Active')->get();
+        $teacher = TeacherUser::all();
 
         // Check if there are no teachers
         $noteacher = $teacher->isEmpty() ? "No teacher found" : null;
