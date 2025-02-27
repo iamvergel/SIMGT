@@ -336,7 +336,7 @@ class Cstudentinfo extends Controller
         }
 
         // Fetch related data for the specific student
-        $studentsAdditional = StudentPrimaryInfo::where('lrn', $students->lrn)->first();
+        $studentsPrimary = StudentPrimaryInfo::where('studentnumber', $students->student_number)->first();
         $studentsAdditional = StudentAdditionalInfo::where('student_number', $students->student_number)->first();
         $studentDocuments = StudentDocuments::where('student_number', $students->student_number)->first();
         $studentAccount = Mstudentaccount::where('student_number', $students->student_number)->first();
@@ -348,7 +348,7 @@ class Cstudentinfo extends Controller
         $studentGradeSix = Mstudentgradesix::where('student_number', $students->student_number)->first();
 
         // You can pass other data here as needed
-        return view('admin.includes.student_information', compact('students', 'studentsAdditional', 'studentDocuments', 'studentAccount', 'studentGradeOne', 'studentGradeTwo', 'studentGradeThree', 'studentGradeFour', 'studentGradeFive', 'studentGradeSix'));
+        return view('admin.includes.student_information', compact('students', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount', 'studentGradeOne', 'studentGradeTwo', 'studentGradeThree', 'studentGradeFour', 'studentGradeFive', 'studentGradeSix'));
     }
 
     public function dropStudent(Request $request, $studentId)

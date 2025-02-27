@@ -397,12 +397,12 @@
                         <i class="fa-solid fa-user"></i>
                         <span class="sidebar-text ml-2">Teachers</span>
                     </a>
-                    <a href="#"
+                    <!-- <a href="#"
                         class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-0"
                         title="Students">
                         <i class="fa-solid fa-user"></i>
                         <span class="sidebar-text ml-2">Students</span>
-                    </a>
+                    </a> -->
                 </div>
 
                 <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">

@@ -36,8 +36,9 @@ class StudentInfo extends Model
     // Define the relationship to StudentAdditionalInfo
     public function student()
     {
-        return $this->belongsTo(StudentPrimaryInfo::class, 'studentnumber', 'student_number');
+        return $this->hasMany(StudentPrimaryInfo::class, 'studentnumber', 'student_number');
     }
+
     public function additionalInfo()
     {
         return $this->hasOne(StudentAdditionalInfo::class, 'student_number', 'student_number');

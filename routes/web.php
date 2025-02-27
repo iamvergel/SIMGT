@@ -17,6 +17,8 @@ use App\Http\Controllers\TeacherUserController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\TeacherAdvisoryController;
 use App\Http\Controllers\TeacherSubjectClassController;
+use App\Http\Controllers\TeacherProfile;
+
 // Landing Page
 Route::get('/StEmelieLearningCenter.Admission', function () {
     return view('landing_page');
@@ -154,6 +156,10 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         return view('admin.admin_profile');
     });
 
+    Route::get('/StEmelieLearningCenter.HopeSci66/teacher/SIMGT-Profile', function () {
+        return view('teacher.teacher_profile');
+    });
+
     // events Routes
     Route::post('/events', [Cevent::class, 'storeEvent'])->name('events.store');
     Route::put('/events/{id}', [Cevent::class, 'updateEvent'])->name('events.update');
@@ -192,6 +198,8 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/StEmelieLearningCenter.HopeSci66/student/calendar', [Cevent::class, 'showCalendar'])->name('student.calendar');
     Route::get('/api/events', [Cevent::class, 'getEvents']);
 
+    Route::get('/StEmelieLearningCenter.HopeSci66/teacher/calendar', [Cevent::class, 'showteacherCalendar'])->name('teacher.calendar');
+
     Route::get('/StEmelieLearningCenter.HopeSci66/student/student-profile/account', function () {
         return view('student.student_profile');
     });
@@ -207,6 +215,9 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/StEmelieLearningCenter.HopeSci66/student/student-profile/grades', function () {
         return view('student.student_grades');
     });
+
+    Route::post('/update-avatar', [TeacherProfile::class, 'updateprofile'])->name('teacher.update-avatar');
+    Route::post('/student/update-avatar', [CStudentProfile::class, 'update'])->name('student.update-avatar');
 });
 
 Route::get('/caloocan_barangay', function () {
@@ -229,7 +240,6 @@ Route::put('/students/retrive/{id}', [Cstudentinfo::class, 'retrieveStudent'])->
 
 Route::post('/send-email/{id}', [TeacherUserController::class, 'sendEmail'])->name('send.email');
 
-Route::post('/profile/update-avatar', [CStudentProfile::class, 'update'])->name('profile.update-avatar');
 Route::post('/student/change-password/{studentId}', [CStudentProfile::class, 'changePassword'])->name('student.changePassword');
 Route::post('/show-grades', [CStudentProfile::class, 'showGrades'])->name('showGrades');
 
@@ -237,6 +247,7 @@ Route::post('/profile/update-avatar', [Cadmininfo::class, 'updateProfile'])->nam
 Route::put('/admin/{id}/update', [Cadmininfo::class, 'update'])->name('admin.update');
 Route::post('/admin/change-password/{studentId}', [Cadmininfo::class, 'changePassword'])->name('admin.changePassword');
 
+Route::post('/teacher/change-password/{studentId}', [TeacherProfile::class, 'changePassword'])->name('teacher.changePassword');
 
 Route::get('/get-onesections', [Cstudentgrades::class, 'getGradeOneSections'])->name('get.sections');
 Route::get('/get-twosections', [Cstudentgrades::class, 'getGradeTwoSections'])->name('get.twosections');

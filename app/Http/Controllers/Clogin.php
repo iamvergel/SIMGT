@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\StudentPrimaryInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon; // Import Carbon for date/time handling
@@ -12,6 +13,7 @@ use App\Models\StudentDocuments; // Import StudentDocuments model
 use App\Models\Mannouncement;
 use App\Models\TeacherAdvisory;
 use App\Models\TeacherUser;
+use App\Models\TeacherSubjectClass;
 
 class Clogin extends Controller
 {
@@ -96,17 +98,43 @@ class Clogin extends Controller
             // Get the authenticated admin user
             $teacherUser = Auth::guard('teacher')->user();
 
-            // Store admin's data in the session
+            // Store teacher's data in the session
+            $request->session()->put('teacher_number', $teacherUser->teacher_number);
             $request->session()->put('teacher_username', $teacherUser->username);
             $request->session()->put('teacher_id', $teacherUser->id);
+            $request->session()->put('teacher_fname', $teacherUser->first_name);
+            $request->session()->put('teacher_mname', $teacherUser->middle_name);
+            $request->session()->put('teacher_lname', $teacherUser->last_name);
+            $request->session()->put('teacher_suffix', $teacherUser->suffix);
+            $request->session()->put('teacher_address', $teacherUser->address);
+            $request->session()->put('teacher_email', $teacherUser->email);
+            $request->session()->put('teacher_contact_number', $teacherUser->contact_number);
+            $request->session()->put('teacher_department', $teacherUser->department);
+            $request->session()->put('teacher_position', $teacherUser->position);
+            $request->session()->put('teacher_status', $teacherUser->status);
+            $request->session()->put('teacher_gender', $teacherUser->gender);
+            $request->session()->put('teacher_birthdate', $teacherUser->birthdate);
+            $request->session()->put('teacher_religion', $teacherUser->religion);
+            $request->session()->put('teacher_avatar', $teacherUser->avatar);
+            $request->session()->put('teacher_last_avatar_change', $teacherUser->last_avatar_change);
+            $request->session()->put('teacher_last_password_change', $teacherUser->last_password_change);
 
-            //Flash a success message
+            $teacheradvisory = TeacherAdvisory::where('teacher_number', $teacherUser->teacher_number)->first();
+
+            // Store the names in the session from StudentInfo if teacher advisory exists
+            if ($teacheradvisory) {
+                $request->session()->put('teacher_number', $teacheradvisory->teacher_number);
+                $request->session()->put('school_year', $teacheradvisory->school_year);
+                $request->session()->put('section', $teacheradvisory->section);
+                $request->session()->put('grade', $teacheradvisory->grade);
+            }
+            
+            // Flash a success message
             $request->session()->flash('success', 'Welcome,' . $teacherUser->username . ' ! You are now logged in as Teacher.');
-
+            
             // Redirect to the admin dashboard or admin loader
-            return view('includes.teacher_loader');
+            return view('includes.teacher_loader', ['advisory' => $teacheradvisory]);
         }
-
 
         // Attempt to log the user in as student
         if (Auth::guard('student')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
@@ -178,14 +206,17 @@ class Clogin extends Controller
 
             $documents = StudentDocuments::where('student_number', $student->student_number)->first();
 
-            $adviser = null;
+            $primary = StudentPrimaryInfo::where('studentnumber', $student->student_number)->first();
 
-            // Fetch the advisory (teacher's details based on section)
-            $section = TeacherAdvisory::where('section', $studentInfo->section)->first();
+            if ($primary) {
+                $request->session()->put('student_numbera', $primary->studentnumber);
+                $request->session()->put('lrna', $primary->lrn);
+                $request->session()->put('gradea', $primary->grade);
+                $request->session()->put('school_yeara', $primary->school_year);
+                $request->session()->put('sectiona', $primary->section);
+                $request->session()->put('statusa', $primary->status);
 
-            if ($section) {
-                // Fetch the teacher's information (adviser)
-                $adviser = TeacherUser::where('teacher_number', $section->teacher_number)->first();
+                $adviser = TeacherUser::where('teacher_number', $primary->adviser)->first();
 
                 if ($adviser) {
                     // Store the adviser's information in session
@@ -197,12 +228,23 @@ class Clogin extends Controller
                 }
             }
 
+            $adviser = null;
+
+            // Fetch the advisory (teacher's details based on section)
+            $section = TeacherAdvisory::where('section', $studentInfo->section)->first();
+
+            if ($section) {
+                // Fetch the teacher's information (adviser)
+                
+            }
+
             // Pass the data to the view
             return view('includes.student_loader', [
                 'student' => $studentInfo,
                 'additionalInfo' => $additionalInfo,
                 'documents' => $documents,
                 'adviser' => $adviser,  // Pass the adviser details to the view
+                'primary' => $primary,
             ]);
         }
 
@@ -251,6 +293,9 @@ class Clogin extends Controller
         } elseif (Auth::guard('student')->check()) {
             Auth::guard('student')->logout();
             $request->session()->flash('success', 'You have been logged out successfully as Student.');
+        } elseif (Auth::guard('teacher')->check()) {
+            Auth::guard('teacher')->logout();
+            $request->session()->flash('success', 'You have been logged out successfully as Teacher.');
         }
 
         // Invalidate the session

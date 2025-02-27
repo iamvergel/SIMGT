@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class TeacherUser extends Model
+class TeacherUser extends Authenticatable
 {
     use Notifiable;
 
@@ -51,5 +51,10 @@ class TeacherUser extends Model
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password); // Hash the password when setting
+    }
+
+    public function advisory()
+    {
+        return $this->hasMany(TeacherAdvisory::class, 'teacher_number', localKey: 'teacher_number');
     }
 }

@@ -195,51 +195,6 @@ class TeacherUserController extends Controller
         return back()->with('success', 'teacher user deleted successfully!');
     }
 
-
-    public function updateProfile(Request $request)
-    {
-        // Validate the incoming request
-        $request->validate([
-            'avatar' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Avatar validation
-            'id' => 'required|integer', // teacher ID (we'll use this to identify the teacher)
-        ]);
-
-        // Find the teacher user by their ID
-        $teacherUser = TeacherUser::find($request->id);
-
-        // Check if the teacher user exists
-        if (!$teacherUser) {
-            return response()->json(['error' => 'teacher user not found.'], 404);
-        }
-
-        // Check if the user has changed their avatar recently
-        if ($teacherUser->last_avatar_change) {
-            $lastChange = Carbon::parse($teacherUser->last_avatar_change);
-            $now = Carbon::now();
-
-            // Ensure that the teacher can only change the avatar once every 10 days
-            if ($now->diffInDays($lastChange) < 10) {
-                return response()->json(['error' => 'You can only change your avatar every 10 days.'], 400);
-            }
-        }
-
-        // Handle avatar upload
-        if ($request->hasFile('avatar')) {
-            // Store the avatar in the 'avatars' directory inside the public storage
-            $path = $request->file('avatar')->store('teacher', 'public');
-
-            // Update the teacher user's avatar field and the timestamp for the last avatar change
-            $teacherUser->avatar = $path;
-            $teacherUser->last_avatar_change = now();
-            $teacherUser->save();
-
-            // Return the URL for the uploaded avatar
-            return response()->json(['avatar' => asset('storage/' . $path)]); // Public URL of the avatar
-        }
-
-        return response()->json(['error' => 'No file uploaded.'], 400);
-    }
-
     public function showAllTeacher()
     {
         // Get the currently logged-in teacher's ID

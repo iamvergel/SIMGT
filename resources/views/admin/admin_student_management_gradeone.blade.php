@@ -2,13 +2,13 @@
 
 <body class="font-poppins bg-gray-200 overflow-hidden">
 
-    <div class="flex p-2 w-full h-screen">
+    <div class="flex w-full h-screen">
         <!-- Sidebar -->
         @include('admin.includes.sidebar')
 
         <!-- Main Content -->
         <main class="flex-grow rounded-r-lg bg-white shadow-lg overflow-y-scroll w-full bg-zinc-50" id="content">
-            <header>
+            <header class="sticky top-0 z-[10]">
                 @include('admin.includes.topnav')
             </header>
 
@@ -93,13 +93,7 @@
                                         </tr>
                                     </thead>
                                     <tbody class="" id="tableBody">
-                                        @if($noGradeOneMessage)
-                                            <tr>
-                                                <td colspan="8" class="text-center text-red-500">
-                                                    {{ $noGradeOneMessage }}
-                                                </td>
-                                            </tr>
-                                        @else
+
                                             @foreach ($students as $student)
                                                 @php
                                                     $account = $studentAccount[$student->student_number] ?? null;
@@ -116,8 +110,8 @@
                                                             <span class="ml-2">{{ $student->student_number }}</span>
                                                         </td>
                                                         <td>
-                                                            <span class="px-2 py-1 uppercase font-semibold text-md leading-tight text-green-800 bg-green-200 rounded-sm">
-                                                                {{ $student->status }} || {{ $primaryInfo->grade }}
+                                                            <span class="px-2 py-1 uppercase font-semibold text-[10px] rounded-lg leading-tight text-green-800 bg-green-200">
+                                                                {{ $student->status }} | {{ $primaryInfo->status }}
                                                             </span>
                                                         </td>
                                                         <td class="flex justify-start items-center">
@@ -141,7 +135,7 @@
                                                                 @csrf
                                                                 <input class="hidden" type="text" name="defaultPassword" value="{{ 'SELC' . $student->student_last_name . substr($student->student_number, -4) }}" required>
                                                                 <button type="submit" onclick="return confirm('Are you sure you want to reset this student\'s account?');"
-                                                                    class="text-white font-medium text-xl p-3 text-center inline-flex items-center me-2 bg-sky-800 rounded-full hover:bg-sky-700"
+                                                                    class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-sky-800 rounded-full hover:bg-sky-700"
                                                                     title="Reset Student Account">
                                                                     <i class="fa-solid fa-rotate-right"></i>
                                                                 </button>
@@ -149,7 +143,7 @@
 
                                                             <!-- Update Student Info Button -->
                                                             <button data-modal-toggle="updatetudentinfo{{ $student->id }}" data-modal-target="updatetudentinfo{{ $student->id }}"
-                                                                    class="text-white font-medium text-xl p-3 text-center inline-flex items-center me-2 bg-teal-700 rounded-full hover:bg-teal-600"
+                                                                    class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-teal-700 rounded-full hover:bg-teal-600"
                                                                     type="button" aria-label="Update Student" title="Update Student Info">
                                                                 <i class="fa-solid fa-square-pen"></i>
                                                             </button>
@@ -158,7 +152,7 @@
                                                             <form action="{{ route('send.email', $student->id) }}" method="POST" style="display:inline;">
                                                                 @csrf
                                                                 <button type="submit"
-                                                                    class="text-white font-medium text-xl p-3 text-center inline-flex items-center me-2 bg-cyan-700 rounded-full hover:bg-cyan-600"
+                                                                    class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-cyan-700 rounded-full hover:bg-cyan-600"
                                                                     title="Send Email">
                                                                     <i class="fa-solid fa-envelope"></i>
                                                                 </button>
@@ -169,14 +163,14 @@
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <button type="submit" onclick="return confirm('Are you sure you want to drop this student?');"
-                                                                    class="text-white font-medium text-lg p-3 text-center inline-flex items-center me-2 bg-red-700 rounded-full hover:bg-red-600"
+                                                                    class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-red-700 rounded-full hover:bg-red-600"
                                                                     title="Drop Student">
                                                                     <i class="fa-solid fa-user-xmark"></i>
                                                                 </button>
                                                             </form>
 
                                                             <!-- View Student Information Button -->
-                                                            <button class="text-white font-medium text-xl p-3 text-center inline-flex items-center me-2 bg-blue-700 rounded-full hover:bg-blue-600"
+                                                            <button class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-blue-700 rounded-full hover:bg-blue-600"
                                                                     type="button" onclick="window.location.href = '{{ route('student.show', ['id' => $student->id]) }}'" title="Show Student Information">
                                                                 <i class="fa-solid fa-eye"></i>
                                                             </button>
@@ -184,7 +178,6 @@
                                                     </tr>
                                                 @endif
                                             @endforeach
-                                        @endif
                                     </tbody>
                             </table>
                         </div>

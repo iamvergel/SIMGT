@@ -9,6 +9,7 @@ use App\Models\StudentInfo;
 use App\Models\StudentAdditionalInfo;
 use App\Models\StudentDocuments;
 use App\Models\Mstudentaccount;
+use App\Models\StudentPrimaryInfo;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\Madminaccount;
@@ -133,25 +134,21 @@ class Cevent extends BaseController // Extend the correct base controller
     public function showAllAdmin()
     {
         // Count the number of active students for each grade (Grade One to Grade Six)
-        $studentCounts = StudentInfo::select(DB::raw('count(*) as count, grade'))
-            ->where('status', 'Active')
+        $studentCounts = StudentPrimaryInfo::select(DB::raw('count(*) as count, grade'))
+            ->where('status', 'Enrolled')
             ->whereIn('grade', ['Grade One', 'Grade Two', 'Grade Three', 'Grade Four', 'Grade Five', 'Grade Six']) // Filter by Grade One to Grade Six
             ->groupBy('grade')
             ->pluck('count', 'grade');
 
         // Count the number of active students for each grade (Grade One to Grade Six)
-        $studentDroppedCounts = StudentInfo::select(DB::raw('count(*) as count, grade'))
-            ->where('status', 'Dropped')
-            ->whereIn('grade', ['Grade One', 'Grade Two', 'Grade Three', 'Grade Four', 'Grade Five', 'Grade Six']) // Filter by Grade One to Grade Six
-            ->groupBy('grade')
-            ->pluck('count', 'grade');
+        $studentDroppedCounts = StudentInfo::select(DB::raw('count(*) as count, id'))
+            ->where('status', 'Dropped')->groupBy('id')
+            ->pluck('count', 'id');
 
         // Count the number of active students for each grade (Grade One to Grade Six)
-        $studentGraduatedCounts = StudentInfo::select(DB::raw('count(*) as count, grade'))
-            ->where('status', 'Dropped')
-            ->whereIn('grade', ['Grade One', 'Grade Two', 'Grade Three', 'Grade Four', 'Grade Five', 'Grade Six']) // Filter by Grade One to Grade Six
-            ->groupBy('grade')
-            ->pluck('count', 'grade');
+        $studentGraduatedCounts = StudentInfo::select(DB::raw('count(*) as count, id'))
+            ->where('status', 'Graduated')->groupBy('id')
+            ->pluck('count', 'id');
 
         // Count the number of active male students
         $totalMaleStudent = StudentInfo::select(DB::raw('count(*) as count, sex'))
@@ -193,6 +190,12 @@ class Cevent extends BaseController // Extend the correct base controller
     {
         return view('student.student_calendar'); // Ensure this view file exists
     }
+
+    public function showteacherCalendar()
+    {
+        return view('teacher.teacher_calendar'); // Ensure this view file exists
+    }
+
 
     public function getEvents(Request $request)
     {

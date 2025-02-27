@@ -114,7 +114,7 @@
         @endphp
                 {{ session('student_last_name') . ', ' . session('student_first_name') . ' ' . strtoupper(substr($middleName, 0, 1)) . '.'}}
               </p>
-              <p class="font-normal text-[12px]">{{ session('grade') . ' - ' . session('section') }}</p>
+              <p class="font-normal text-[12px]">{{ session('gradea') . ' - ' . session('sectiona') }} | {{ session('school_yeara') }}</p>
               <p>Adviser: {{ session('adviser_first_name'). ' '.  session('adviser_middle_name'). ' ' . session('adviser_last_name') }}</p>
 
             </div>

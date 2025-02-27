@@ -90,7 +90,7 @@ return [
 
         'teachers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Mteacheraccount::class,
+            'model' => App\Models\TeacherUser::class,
         ],
 
         'admins' => [

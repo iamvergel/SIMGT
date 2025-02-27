@@ -305,7 +305,7 @@
 
             const formData = new FormData(form);
 
-            fetch('{{ route('profile.update-avatar') }}', {
+            fetch('{{ route('student.update-avatar') }}', {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -315,6 +315,11 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.avatar) {
+                        
+
+                        alert('Profile picture updated successfully!'); // Alert on successful update
+                        location.reload();
+                        
                         // Update the image sources
                         const avatarImgElements = [
                             document.getElementById('avatar-img'),
@@ -323,9 +328,6 @@
                             document.getElementById('avatar-img4'),
                             document.getElementById('avatar-img5')
                         ];
-
-                        alert('Profile picture updated successfully!'); // Alert on successful update
-                        location.reload();
 
                         avatarImgElements.forEach(imgElement => {
                             if (imgElement) {
