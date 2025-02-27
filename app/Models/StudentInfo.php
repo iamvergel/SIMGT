@@ -12,11 +12,7 @@ class StudentInfo extends Model
     protected $table = 'student_info'; // Specify the table if it differs from the pluralized model name
 
     protected $fillable = [
-        'student_number',
         'lrn',
-        'grade',
-        'school_year',
-        'section',
         'status',
         'student_last_name',
         'student_first_name',
@@ -38,6 +34,10 @@ class StudentInfo extends Model
     ];
 
     // Define the relationship to StudentAdditionalInfo
+    public function student()
+    {
+        return $this->belongsTo(StudentPrimaryInfo::class, 'studentnumber', 'student_number');
+    }
     public function additionalInfo()
     {
         return $this->hasOne(StudentAdditionalInfo::class, 'student_number', 'student_number');

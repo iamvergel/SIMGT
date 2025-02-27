@@ -93,87 +93,101 @@
                                         </tr>
                                     </thead>
                                     <tbody class="" id="tableBody">
-                                        @foreach ($students as $student)
-                                            <tr class="hover:bg-gray-100">
-                                                <td >
-                                                    <span class="ml-2">{{ $student->lrn }}</span>
-                                                </td>
-                                                <td >
-                                                    <span class="ml-2">{{ $student->student_number }}</span>
-                                                </td>
-                                                <td>
-                                                    <span
-                                                        class="px-2 py-1 uppercase font-semibold text-md leading-tight text-green-800 bg-green-200 rounded-sm">
-                                                        {{ $student->status }}
-                                                    </span>
-                                                </td>
-                                                <td class="flex justify-start items-center">
-                                                    @php
-                                                        $account = $studentAccount[$student->student_number] ?? null;
-                                                        $avatar = $account && $account->avatar ? asset('storage/' . $account->avatar) : null;
-                                                        $initials = strtoupper(substr($student->student_last_name, 0, 1) . substr($student->student_first_name, 0, 1));
-                                                    @endphp
-                                                    <div class="w-12 h-12 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold mx-2">
-                                                        @if ($avatar)
-                                                            <img src="{{ $avatar }}" alt="Student Avatar" class="w-12 h-12 rounded-full object-cover">
-                                                        @else
-                                                            {{ $initials }}
-                                                        @endif
-                                                    </div>
-                                                    <div class="">
-                                                        <span class="text-sm font-semibold">{{ $student->student_last_name }}, {{ $student->student_first_name }}  {{ $student->student_suffix_name }} {{ $student->student_middle_name }}</span>
-                                                        <br><span class="text-xs text-gray-500">{{ $student->email_address_send }}</span>
-                                                    </div>
-                                                </td>
-                                                <td class="">{{ $student->grade }}</td>
-                                                <td class="">{{ $student->section }}</td>
-                                                <td class="">
-                                                    <form action="{{ route('account.reset', $student->id) }}" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        <input class="hidden" type="text" name="defaultPassword" value="{{ 'SELC' . $student->student_last_name . substr($student->student_number, -4) }}" required>
-                                                        <button type="submit" onclick="return confirm('Are you sure you want to reset this student\'s account?');"
-                                                            class="text-white font-medium text-xl p-3 text-center inline-flex items-center me-2 bg-sky-800 rounded-full hover:bg-sky-700"
-                                                            title="Reset Student Account">
-                                                            <i class="fa-solid fa-rotate-right"></i>
-                                                        </button>
-                                                    </form>
-
-                                                    <button data-modal-toggle="updatetudentinfo{{ $student->id }}" data-modal-target="updatetudentinfo{{ $student->id }}"
-                                                        class="text-white font-medium text-xl p-3 text-center inline-flex items-center me-2 bg-teal-700 rounded-full hover:bg-teal-600"
-                                                        type="button" aria-label="Update Student" title="Update Student Info">
-                                                        <i class="fa-solid fa-square-pen"></i>
-                                                    </button>
-
-                                                    <form action="{{ route('send.email', $student->id) }}" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        <button type="submit"
-                                                            class="text-white font-medium text-xl p-3 text-center inline-flex items-center me-2 bg-cyan-700 rounded-full hover:bg-cyan-600"
-                                                            title="Send Email">
-                                                            <i class="fa-solid fa-envelope"></i>
-                                                        </button>
-                                                    </form>
-
-                                                    <form action="{{ route('students.drop', $student->id) }}" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit" onclick="return confirm('Are you sure you want to drop this student?');"
-                                                            class="text-white font-medium text-lg p-3 text-center inline-flex items-center me-2 bg-red-700 rounded-full hover:bg-red-600"
-                                                            title="Drop Student">
-                                                            <i class="fa-solid fa-user-xmark"></i>
-                                                        </button>
-                                                    </form>
-
-                                                    <button class="text-white font-medium text-xl p-3 text-center inline-flex items-center me-2 bg-blue-700 rounded-full hover:bg-blue-600"
-                                                            type="button" onclick="window.location.href = '{{ route('student.show', ['id' => $student->id]) }}'" title="Show Student Information">
-                                                        <i class="fa-solid fa-eye"></i>
-                                                    </button>
+                                        @if($noGradeOneMessage)
+                                            <tr>
+                                                <td colspan="8" class="text-center text-red-500">
+                                                    {{ $noGradeOneMessage }}
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @else
+                                            @foreach ($students as $student)
+                                                @php
+                                                    $account = $studentAccount[$student->student_number] ?? null;
+                                                    $avatar = $account && $account->avatar ? asset('storage/' . $account->avatar) : null;
+                                                    $initials = strtoupper(substr($student->student_last_name, 0, 1) . substr($student->student_first_name, 0, 1));
+                                                    $primaryInfo = $studentsPrimary[$student->student_number] ?? null;
+                                                @endphp
+                                                @if ($primaryInfo && $primaryInfo->grade == 'Grade One' && $primaryInfo->status == 'Enrolled') <!-- Ensuring grade is 'Grade One' and status is 'Enrolled' -->
+                                                    <tr class="hover:bg-gray-100">
+                                                        <td>
+                                                            <span class="ml-2">{{ $student->lrn }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="ml-2">{{ $student->student_number }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="px-2 py-1 uppercase font-semibold text-md leading-tight text-green-800 bg-green-200 rounded-sm">
+                                                                {{ $student->status }} || {{ $primaryInfo->grade }}
+                                                            </span>
+                                                        </td>
+                                                        <td class="flex justify-start items-center">
+                                                            <div class="w-12 h-12 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold mx-2">
+                                                                @if ($avatar)
+                                                                    <img src="{{ $avatar }}" alt="Student Avatar" class="w-12 h-12 rounded-full object-cover">
+                                                                @else
+                                                                    {{ $initials }}
+                                                                @endif
+                                                            </div>
+                                                            <div>
+                                                                <span class="text-sm font-semibold">{{ $student->student_last_name }}, {{ $student->student_first_name }}  {{ $student->student_suffix_name }} {{ $student->student_middle_name }}</span>
+                                                                <br><span class="text-xs text-gray-500">{{ $student->email_address_send }}</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>{{ $primaryInfo->grade }}</td>
+                                                        <td>{{ $primaryInfo->section }}</td>
+                                                        <td>
+                                                            <!-- Reset Account Form -->
+                                                            <form action="{{ route('account.reset', $student->id) }}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                <input class="hidden" type="text" name="defaultPassword" value="{{ 'SELC' . $student->student_last_name . substr($student->student_number, -4) }}" required>
+                                                                <button type="submit" onclick="return confirm('Are you sure you want to reset this student\'s account?');"
+                                                                    class="text-white font-medium text-xl p-3 text-center inline-flex items-center me-2 bg-sky-800 rounded-full hover:bg-sky-700"
+                                                                    title="Reset Student Account">
+                                                                    <i class="fa-solid fa-rotate-right"></i>
+                                                                </button>
+                                                            </form>
+
+                                                            <!-- Update Student Info Button -->
+                                                            <button data-modal-toggle="updatetudentinfo{{ $student->id }}" data-modal-target="updatetudentinfo{{ $student->id }}"
+                                                                    class="text-white font-medium text-xl p-3 text-center inline-flex items-center me-2 bg-teal-700 rounded-full hover:bg-teal-600"
+                                                                    type="button" aria-label="Update Student" title="Update Student Info">
+                                                                <i class="fa-solid fa-square-pen"></i>
+                                                            </button>
+
+                                                            <!-- Send Email Form -->
+                                                            <form action="{{ route('send.email', $student->id) }}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                <button type="submit"
+                                                                    class="text-white font-medium text-xl p-3 text-center inline-flex items-center me-2 bg-cyan-700 rounded-full hover:bg-cyan-600"
+                                                                    title="Send Email">
+                                                                    <i class="fa-solid fa-envelope"></i>
+                                                                </button>
+                                                            </form>
+
+                                                            <!-- Drop Student Form -->
+                                                            <form action="{{ route('students.drop', $student->id) }}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <button type="submit" onclick="return confirm('Are you sure you want to drop this student?');"
+                                                                    class="text-white font-medium text-lg p-3 text-center inline-flex items-center me-2 bg-red-700 rounded-full hover:bg-red-600"
+                                                                    title="Drop Student">
+                                                                    <i class="fa-solid fa-user-xmark"></i>
+                                                                </button>
+                                                            </form>
+
+                                                            <!-- View Student Information Button -->
+                                                            <button class="text-white font-medium text-xl p-3 text-center inline-flex items-center me-2 bg-blue-700 rounded-full hover:bg-blue-600"
+                                                                    type="button" onclick="window.location.href = '{{ route('student.show', ['id' => $student->id]) }}'" title="Show Student Information">
+                                                                <i class="fa-solid fa-eye"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     </tbody>
-                                </table>
-                            </div>
-                        
+                            </table>
+                        </div>
                     </div>
                 </section>
             </div>

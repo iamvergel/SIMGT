@@ -269,8 +269,8 @@
                                                 <span class="ml-2">{{ $teachers->teacher_number }}</span>
                                             </td>
                                             <!-- <td>
-                                                                                            <span class="ml-2">{{ $teachers->department }}</span>
-                                                                                        </td> -->
+                                                                                                <span class="ml-2">{{ $teachers->department }}</span>
+                                                                                            </td> -->
                                             <td class="{{ $teachers->status == "Inactive" ? "bg-red-100" : "" }}">
                                                 <span class="ml-2">{{ $teachers->position }}</span>
                                             </td>
@@ -306,6 +306,7 @@
                                                     <i class="fa-solid fa-chalkboard-user"></i>
                                                 </button>
                                                 <button {{ $teachers->status == "Inactive" ? "disabled" : "" }}
+                                                    id="adddSubject{{ $teachers->id }}"
                                                     class=" {{ $teachers->status == "Inactive" ? "bg-gray-400" : "bg-yellow-700 hover:bg-yellow-600" }} text-white font-medium text-md p-3 text-center inline-flex items-center rounded-full "
                                                     type="button" aria-label="Add subject" title="Add subject">
                                                     <i class="fa-solid fa-book"></i>
@@ -358,8 +359,9 @@
                 @foreach ($teacher as $teachers)
                     <div id="addAdvisoryModal{{ $teachers->id }}"
                         class="hidden fixed top-0 right-0 left-0 z-10 flex justify-center items-center w-screen h-screen bg-black bg-opacity-50 overflow-y-scroll">
-                        <div class="relative px-20 py-10 w-screen h-screen flex justify-center">
-                            <div class="w-1/3 h-full bg-white rounded-lg shadow overflow-y-scroll">
+                        <div class="relative px-20 py-10 w-screen h-screen flex justify-center items-center">
+                            <div
+                                class="w-full lg:w-1/2 xl:w-1/3 h-96 lg:h-auto h-full bg-white rounded-lg shadow overflow-y-scroll">
                                 <div
                                     class="flex items-center justify-between p-5 px-10 shadow-lg border-b bg-gray-200 rounded-lg sticky top-0">
                                     <h3 class="text-lg font-bold text-teal-800 uppercase"><i
@@ -397,9 +399,13 @@
                                                 for="school_year">
                                                 <span class="text-red-600 mr-1">*</span>School Year
                                             </label>
-                                            <input type="text" name="school_year" placeholder="Input School Year"
-                                                id="school_year{{ $teachers->id }}" required
-                                                class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
+                                            <select name="school_year" id="school_year{{ $teachers->id }}" required
+                                                class="form-select block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
+                                                <option value="">Select School Year</option>
+                                                @for ($i = date('Y') - 1; $i <= date('Y'); $i++)
+                                                    <option value="{{ $i . '-' . ($i + 1) }}">{{ $i . '-' . ($i + 1) }}</option>
+                                                @endfor
+                                            </select>
                                         </div>
                                         <div class="col-span-1 mt-5">
                                             <label
@@ -462,6 +468,173 @@
                                                 }
                                             </script>
                                         </div>
+                                        <div class="col-span-1 flex justify-end mt-5">
+                                            <button type="submit"
+                                                class="w-1/4 indent-[-2rem] bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition py-2 text-md font-semibold ">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+                @foreach ($teacher as $teachers)
+                    <div id="addSubjectModal{{ $teachers->id }}"
+                        class="hidden fixed top-0 right-0 left-0 z-10 flex justify-center items-center w-screen h-screen bg-black bg-opacity-50 overflow-y-scroll">
+                        <div class="relative px-20 py-10 w-screen h-screen flex justify-center items-center">
+                            <div
+                                class="w-full lg:w-1/2 xl:w-1/3 h-96 xl:h-auto bg-white rounded-lg shadow overflow-y-scroll">
+                                <div
+                                    class="flex items-center justify-between p-5 px-10 shadow-lg border-b bg-gray-200 rounded-lg sticky top-0">
+                                    <h3 class="text-lg font-bold text-teal-800 uppercase"><i
+                                            class="fa-solid fa-users mr-2"></i>Add Subject {
+                                        {{ old('lastName', $teachers->last_name) }},
+                                        {{ old('lastName', $teachers->first_name) }}
+                                        {{ old('lastName', $teachers->suffix_name) }}
+                                        {{ old('lastName', $teachers->middle_name) }}}
+                                    </h3>
+                                    <button type="button"
+                                        class="text-white bg-teal-700 hover:bg-teal-800 p-3 py-2 rounded-full text-xl font-bold flex items-center justify-center shadow-lg"
+                                        aria-label="Close modal" id="closeSubjectModal{{ $teachers->id }}">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="mb-5 mt-5 bg-white p-10">
+                                    <!-- Add Admin Form -->
+                                    <form action="{{ route('teachersubject.create') }}" method="POST"
+                                        class="grid grid-cols-1 gap-4">
+                                        @csrf
+                                        <div class="col-span-1 ">
+                                            <label
+                                                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                for="teacher_number">
+                                                <span class="text-red-600 mr-1">*</span>Employee Number
+                                            </label>
+                                            <input type="text" value="{{ $teachers->teacher_number }}" name="teacher_number"
+                                                placeholder="Input Employee ID.."
+                                                id="subject_teacher_number{{ $teachers->id }}" required readonly
+                                                class="form-input block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
+                                        </div>
+                                        <div class="col-span-1 mt-5">
+                                            <label
+                                                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                for="school_year">
+                                                <span class="text-red-600 mr-1">*</span>School Year
+                                            </label>
+                                            <select name="school_year" id="subject_school_year{{ $teachers->id }}" required
+                                                class="form-select block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
+                                                <option value="" disabled selected>Select School Year</option>
+                                                @for ($i = date('Y') - 1; $i <= date('Y'); $i++)
+                                                    <option value="{{ $i . '-' . ($i + 1) }}">{{ $i . '-' . ($i + 1) }}</option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                        <div class="col-span-1 mt-5">
+                                            <label
+                                                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                for="grade">
+                                                <span class="text-red-600 mr-1">*</span>Grade
+                                            </label>
+                                            <select name="grade" id="subject_grade{{ $teachers->id }}" required
+                                                class="form-select block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize"
+                                                onchange="updateOptions(this.value, {{ $teachers->id }})">
+                                                <option value="">Select Grade</option>
+                                                <option value="Grade One">Grade One</option>
+                                                <option value="Grade Two">Grade Two</option>
+                                                <option value="Grade Three">Grade Three</option>
+                                                <option value="Grade Four">Grade Four</option>
+                                                <option value="Grade Five">Grade Five</option>
+                                                <option value="Grade Six">Grade Six</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-span-1 mt-5">
+                                            <label
+                                                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                for="section">
+                                                <span class="text-red-600 mr-1">*</span>Section
+                                            </label>
+                                            <select name="section" id="subject_section{{ $teachers->id }}" required
+                                                class="form-select block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
+                                            </select>
+                                        </div>
+
+                                        <div class="col-span-1 mt-5">
+                                            <label
+                                                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                                for="subject">
+                                                <span class="text-red-600 mr-1">*</span>Subject
+                                            </label>
+                                            <select name="subject" id="subject{{ $teachers->id }}" required
+                                                class="form-select block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
+                                            </select>
+                                        </div>
+
+                                        <script>
+                                            // Unified function to handle both section and subject population
+                                            function updateOptions(grade, id) {
+                                                // Fetch sections and subjects simultaneously based on grade
+                                                const sectionSelect = document.getElementById("subject_section" + id);
+                                                const subjectSelect = document.getElementById("subject" + id);
+
+                                                // Clear previous options
+                                                sectionSelect.innerHTML = '<option value="">Select Section</option>';
+                                                subjectSelect.innerHTML = '<option value="">Select Subject</option>';
+
+                                                // Fetch sections
+                                                fetch(`/api/allsections?grade=${grade}`)
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        if (data.length) {
+                                                            data.forEach(section => {
+                                                                const option = document.createElement("option");
+                                                                option.value = section.section;
+                                                                option.textContent = section.section;
+                                                                sectionSelect.appendChild(option);
+                                                            });
+                                                        } else {
+                                                            const option = document.createElement("option");
+                                                            option.value = "";
+                                                            option.textContent = "No Sections Available";
+                                                            sectionSelect.appendChild(option);
+                                                        }
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error fetching sections:', error);
+                                                        const option = document.createElement("option");
+                                                        option.value = "";
+                                                        option.textContent = "Error loading sections";
+                                                        sectionSelect.appendChild(option);
+                                                    });
+
+                                                // Fetch subjects
+                                                fetch(`/api/allsubjects?grade=${grade}`)
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        if (data.length) {
+                                                            data.forEach(subject => {
+                                                                const option = document.createElement("option");
+                                                                option.value = subject.subject;
+                                                                option.textContent = subject.subject;
+                                                                subjectSelect.appendChild(option);
+                                                            });
+                                                        } else {
+                                                            const option = document.createElement("option");
+                                                            option.value = "";
+                                                            option.textContent = "No Subjects Available";
+                                                            subjectSelect.appendChild(option);
+                                                        }
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error fetching subjects:', error);
+                                                        const option = document.createElement("option");
+                                                        option.value = "";
+                                                        option.textContent = "Error loading subjects";
+                                                        subjectSelect.appendChild(option);
+                                                    });
+                                            }
+                                        </script>
                                         <div class="col-span-1 flex justify-end mt-5">
                                             <button type="submit"
                                                 class="w-1/4 indent-[-2rem] bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition py-2 text-md font-semibold ">Submit</button>
@@ -795,6 +968,27 @@
                     closeadviserModal{{ $teachers->id }}.addEventListener("click", () => {
                         if (adviserModal{{ $teachers->id }}) {
                             adviserModal{{ $teachers->id }}.classList.add("hidden");
+                        }
+                    });
+                }
+
+                const addSubjectModal{{ $teachers->id }} = document.getElementById("adddSubject{{ $teachers->id }}");
+                const subjectModal{{ $teachers->id }} = document.getElementById("addSubjectModal{{ $teachers->id }}");
+                const closesubjectModal{{ $teachers->id }} = document.getElementById("closeSubjectModal{{ $teachers->id }}");
+
+                // Open update modal
+                if (addSubjectModal{{ $teachers->id }}) {
+                    addSubjectModal{{ $teachers->id }}.addEventListener("click", () => {
+                        if (addSubjectModal{{ $teachers->id }}) {
+                            subjectModal{{ $teachers->id }}.classList.remove("hidden");
+                        }
+                    });
+                }
+
+                if (closesubjectModal{{ $teachers->id }}) {
+                    closesubjectModal{{ $teachers->id }}.addEventListener("click", () => {
+                        if (addSubjectModal{{ $teachers->id }}) {
+                            subjectModal{{ $teachers->id }}.classList.add("hidden");
                         }
                     });
                 }

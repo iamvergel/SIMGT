@@ -7,6 +7,8 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PictureAnnouncementController;
 use App\Http\Controllers\Cevent;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\TeacherAdvisoryController;
 
 Route::prefix('images')->group(function () {
     Route::get('/', [ImageController::class, 'index']);         // Get all images
@@ -27,3 +29,7 @@ Route::get('/allevents', [Cevent::class, 'showEventslanding']);
 
 // In your routes/api.php
 Route::get('/allsections', [SectionController::class, 'getAllSectionsByGrade']);
+
+Route::get('/allsubjects', [SubjectController::class, 'getAllSubjectsByGrade']);
+
+Route::get('/allteachers', [TeacherAdvisoryController::class, 'getAllAdviserByGrade']);

@@ -96,9 +96,9 @@ class Clogin extends Controller
             // Get the authenticated admin user
             $teacherUser = Auth::guard('teacher')->user();
 
-             // Store admin's data in the session
-             $request->session()->put('teacher_username', $teacherUser->username);
-             $request->session()->put('teacher_id', $teacherUser->id);
+            // Store admin's data in the session
+            $request->session()->put('teacher_username', $teacherUser->username);
+            $request->session()->put('teacher_id', $teacherUser->id);
 
             //Flash a success message
             $request->session()->flash('success', 'Welcome,' . $teacherUser->username . ' ! You are now logged in as Teacher.');
@@ -113,7 +113,7 @@ class Clogin extends Controller
             $this->clearLoginAttempts($request);
 
             $student = Auth::guard('student')->user(); // Get the authenticated student
- 
+
             $request->session()->put('student_username', $student->username); // Adjust based on your username field
             $request->session()->put('student_id', $student->student_number);
 
@@ -178,31 +178,32 @@ class Clogin extends Controller
 
             $documents = StudentDocuments::where('student_number', $student->student_number)->first();
 
+            $adviser = null;
 
-    // Fetch the advisory (teacher's details based on section)
-    $section = TeacherAdvisory::where('section', $studentInfo->section)->first();
+            // Fetch the advisory (teacher's details based on section)
+            $section = TeacherAdvisory::where('section', $studentInfo->section)->first();
 
-    if ($section) {
-        // Fetch the teacher's information (adviser)
-        $adviser = TeacherUser::where('teacher_number', $section->teacher_number)->first();
+            if ($section) {
+                // Fetch the teacher's information (adviser)
+                $adviser = TeacherUser::where('teacher_number', $section->teacher_number)->first();
 
-        if ($adviser) {
-            // Store the adviser's information in session
-            $request->session()->put('adviser_employee_number', $adviser->teacher_number);
-            $request->session()->put('adviser_last_name', $adviser->last_name);
-            $request->session()->put('adviser_first_name', $adviser->first_name);
-            $request->session()->put('adviser_middle_name', $adviser->middle_name);
-            $request->session()->put('adviser_email', $adviser->email);
-        }
-    }
+                if ($adviser) {
+                    // Store the adviser's information in session
+                    $request->session()->put('adviser_employee_number', $adviser->teacher_number);
+                    $request->session()->put('adviser_last_name', $adviser->last_name);
+                    $request->session()->put('adviser_first_name', $adviser->first_name);
+                    $request->session()->put('adviser_middle_name', $adviser->middle_name);
+                    $request->session()->put('adviser_email', $adviser->email);
+                }
+            }
 
-    // Pass the data to the view
-    return view('includes.student_loader', [
-        'student' => $studentInfo,
-        'additionalInfo' => $additionalInfo,
-        'documents' => $documents,
-        'adviser' => $adviser,  // Pass the adviser details to the view
-    ]);
+            // Pass the data to the view
+            return view('includes.student_loader', [
+                'student' => $studentInfo,
+                'additionalInfo' => $additionalInfo,
+                'documents' => $documents,
+                'adviser' => $adviser,  // Pass the adviser details to the view
+            ]);
         }
 
         // Increment login attempts and show error message

@@ -12,6 +12,7 @@ use App\Models\Mstudentgradethree;
 use App\Models\Mstudentgradefour;
 use App\Models\Mstudentgradefive;
 use App\Models\Mstudentgradesix;
+use App\Models\StudentPrimaryInfo;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\Madminaccount;
@@ -23,11 +24,15 @@ class Cstudentinfo extends Controller
     {
         // Validate incoming request
         $validatedData = $request->validate([
-            'student_number' => 'required|unique:student_info,student_number',
-            'lrn' => 'required',
+            'lrn' => 'required|unique:student_info,lrn',
+
+            'student_number' => '|unique:student_info,student_number',
             'grade' => 'required',
             'school_year' => 'required',
             'section' => 'required',
+            'adviser' => 'required',
+            'status' => 'required',
+
             'lastName' => 'required',
             'firstName' => 'required',
             'middleName' => 'nullable',
@@ -75,11 +80,8 @@ class Cstudentinfo extends Controller
         try {
             // Create student record
             $student = new StudentInfo();
-            $student->student_number = $validatedData['student_number'];
             $student->lrn = $validatedData['lrn'];
-            $student->grade = $validatedData['grade'];
-            $student->school_year = $validatedData['school_year'];
-            $student->section = $validatedData['section'] ? ucwords(strtolower($validatedData['section'])) : null;
+            $student->student_number = $validatedData['student_number'];
             $student->student_last_name = $validatedData['lastName'] ? ucwords(strtolower($validatedData['lastName'])) : null;
             $student->student_first_name = $validatedData['firstName'] ? ucwords(strtolower($validatedData['firstName'])) : null;
             $student->student_middle_name = $validatedData['middleName'] ? ucwords(strtolower($validatedData['middleName'])) : null;
@@ -123,7 +125,6 @@ class Cstudentinfo extends Controller
             $additionalInfo->messenger_account = $validatedData['messenger_account'];
             $additionalInfo->save();
 
-
             // Handle file uploads
             $birthCertificatePath = $request->file('birth_certificate')->store('documents', 'public');
             $proofOfResidencyPath = $request->file('proof_of_residency')->store('documents', 'public');
@@ -145,6 +146,16 @@ class Cstudentinfo extends Controller
             $userAccount->username = $username;
             $userAccount->password = $validatedData['password'];
             $userAccount->save();
+
+            $studentprimary = new StudentPrimaryInfo();
+            $studentprimary->lrn = $validatedData['lrn'];
+            $studentprimary->studentnumber = $validatedData['student_number'];
+            $studentprimary->grade = $validatedData['grade'] ? ucwords(strtolower($validatedData['grade'])) : null;
+            $studentprimary->school_year = $validatedData['school_year'];
+            $studentprimary->section = $validatedData['section'] ? ucwords(strtolower($validatedData['section'])) : null;
+            $studentprimary->status = $validatedData['status'] ? ucwords(strtolower($validatedData['status'])) : null;
+            $studentprimary->adviser = $validatedData['adviser'] ? ucwords(strtolower($validatedData['adviser'])) : null;
+            $studentprimary->save();
 
             // Redirect or return response
             return back()->with('success', 'Student added successfully!');
@@ -204,12 +215,8 @@ class Cstudentinfo extends Controller
     {
         // Validate request data
         $validatedData = $request->validate([
-            'student_number' => 'required',
             'status' => 'required',
             'lrn' => 'required',
-            'grade' => 'required',
-            'school_year' => 'required',
-            'section' => 'required',
             'lastName' => 'required',
             'firstName' => 'required',
             'middleName' => 'nullable',
@@ -255,12 +262,8 @@ class Cstudentinfo extends Controller
 
         // Update student info
         $student->update([
-            'student_number' => $validatedData['student_number'],
             'status' => $validatedData['status'],
             'lrn' => $validatedData['lrn'],
-            'school_year' => $validatedData['school_year'],
-            'grade' => $validatedData['grade'],
-            'section' => $validatedData['section'],
             'student_last_name' => $validatedData['lastName'],
             'student_first_name' => $validatedData['firstName'],
             'student_middle_name' => $validatedData['middleName'],
@@ -333,6 +336,7 @@ class Cstudentinfo extends Controller
         }
 
         // Fetch related data for the specific student
+        $studentsAdditional = StudentPrimaryInfo::where('lrn', $students->lrn)->first();
         $studentsAdditional = StudentAdditionalInfo::where('student_number', $students->student_number)->first();
         $studentDocuments = StudentDocuments::where('student_number', $students->student_number)->first();
         $studentAccount = Mstudentaccount::where('student_number', $students->student_number)->first();
@@ -525,24 +529,26 @@ class Cstudentinfo extends Controller
 
     public function showGradeOneData()
     {
-        // Fetch all active student records with additional info and documents using eager loading
-        $students = StudentInfo::with(['additionalInfo', 'documents'])
-            ->where('grade', 'Grade One')
-            ->where('status', 'Active')
+        // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+        $students = StudentInfo::with('student') // Only eager load 'student' relationship
+            ->where('status', 'Active') // Active students only
             ->get();
 
+        // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
+        $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
+            ->where('grade', 'Grade One') // Filter for Grade One
+            ->where('status', 'Enrolled') // Ensure students are enrolled
+            ->get()->keyBy('studentnumber');
+
         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
-
-        // Fetch additional student information for each student
         $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
-
         $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
 
-        // Check if there are no active students
-        $noGradeOneMessage = $students->isEmpty() ? "No students found in Grade One." : null;
+        // Check if there are no students found in Grade One
+        $noGradeOneMessage = $studentsPrimary->isEmpty() ? "No students found in Grade One." : null;
 
         // Pass the data to the view
-        return view('admin.admin_student_management_gradeone', compact('students', 'noGradeOneMessage', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
+        return view('admin.admin_student_management_gradeone', compact('students', 'noGradeOneMessage', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
     }
 
     public function additionalInfo()

@@ -18,9 +18,6 @@ return new class extends Migration
             $table->string('student_number')->unique();               // Student number (unique identifier)
             $table->string('School')->default('St. Emilie learning center');                                 // School name
             $table->string('lrn')->unique();                                   // LRN (Learner's Reference Number)
-            $table->string('grade');                                 // Grade level
-            $table->string('school_year');                           // School year (e.g., 2023-2024)
-            $table->string('section');                               // Section of the student
             $table->string('status')->default('Active');                          // Type of student (e.g., Elementary, Secondary, or High School)
         
             $table->string('student_last_name');                     // Student's last name

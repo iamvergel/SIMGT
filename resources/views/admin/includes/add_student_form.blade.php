@@ -55,16 +55,9 @@
 
                 <div class="grid grid-cols-4 gap-4 mb-4 text-[13px] text-gray-900">
                     <!-- Basic Information -->
-                    <div class="mb-5">
-                        <label for="studentNumber" class="block mb-2 text-sm font-bold text-gray-900">
-                            <span class="text-red-600 mr-1">*</span>Student No. :</label>
-                        <input type="text" name="student_number" id="studentNumber"
-                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                            placeholder="0000-0000" required>
-                    </div>
+                    <!-- <div></div>
                     <div></div>
-                    <div></div>
-                    <div></div>
+                    <div></div> -->
 
                     <div class="mb-5">
                         <label for="lrn" class="block mb-2 text-[12px] font-bold text-gray-900">
@@ -74,22 +67,35 @@
                             placeholder="Enter Learner Reference Number (LRN)" required>
                     </div>
 
-                    <div class="">
-                        <label for="schoolYear" class="block mb-2 text-sm font-bold text-gray-900">
-                            <span class="text-red-600 mr-1">*</span>School Year :
-                        </label>
-                        <input type="text" name="school_year" id="schoolYear"
+                    <div class="mb-5">
+                        <label for="studentNumber" class="block mb-2 text-sm font-bold text-gray-900">
+                            <span class="text-red-600 mr-1">*</span>Student No. :</label>
+                        <input type="text" name="student_number" id="studentNumber"
                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                             placeholder="0000-0000" required>
                     </div>
 
                     <div class="mb-5">
-                        <label for="school" class="block mb-2 text-sm font-bold text-gray-900">School :</label>
-                        <input type="text" name="school" id="school"
+                        <label for="status" class="block mb-2 text-sm font-bold text-gray-900">
+                            <span class="text-red-600 mr-1">*</span>Student No. :</label>
+                        <input type="text" name="status" id="status" value="Enrolled"
                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                            value="St. Emelie Learning Center" readonly>
+                            placeholder="0000-0000" required>
                     </div>
-                    <div></div>
+
+                    <div>
+                        <label for="schoolYear" class="block mb-2 text-sm font-bold text-gray-900">
+                            <span class="text-red-600 mr-1">*</span>School Year :
+                        </label>
+                        <select name="school_year" id="schoolYear"
+                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                            required>
+                            <option value="" disabled selected>Select School Year</option>
+                            @for ($i = date('Y') - 1; $i <= date('Y'); $i++)
+                                <option value="{{ $i . '-' . ($i + 1) }}">{{ $i . '-' . ($i + 1) }}</option>
+                            @endfor
+                        </select>
+                    </div>
 
                     <div>
                         <label for="grade" class="block mb-2 text-sm font-bold text-gray-900">
@@ -118,51 +124,107 @@
                         </select>
                     </div>
 
+                    <div>
+                        <label for="adviser" class="block mb-2 text-sm font-bold text-gray-900">
+                            <span class="text-red-600 mr-1">*</span>Select Adviser :</label>
+                        <select id="teacher" name="adviser"
+                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                            required>
+                            <option value="">Select Teacher</option>
+                        </select>
+                    </div>
+
                     <script>
                         document.addEventListener("DOMContentLoaded", function () {
                             const gradeSelect = document.getElementById("grade");
                             const sectionSelect = document.getElementById("section");
+                            const schoolYearSelect = document.getElementById("schoolYear");
+                            const teacherSelect = document.getElementById("teacher");
 
-                            // Add event listener for grade change
                             gradeSelect.addEventListener("change", function () {
                                 const selectedGrade = gradeSelect.value;
+                                const selectedSection = sectionSelect.value;
+                                const selectedSchoolYear = schoolYearSelect.value;
 
                                 if (selectedGrade) {
-                                    // Fetch sections based on the selected grade
                                     fetch(`/api/allsections?grade=${selectedGrade}`)
                                         .then(response => response.json())
                                         .then(data => {
-                                            // Clear previous options
                                             sectionSelect.innerHTML = '<option value="">Select Section</option>';
 
-                                            // Add new options
                                             if (data.length) {
                                                 data.forEach(section => {
                                                     const option = document.createElement("option");
-                                                    option.value = section.section;  // Make sure 'section' is the correct field in your model
+                                                    option.value = section.section;
                                                     option.textContent = section.section;
                                                     sectionSelect.appendChild(option);
                                                 });
                                             } else {
-                                                // Handle case where no sections are found
                                                 const option = document.createElement("option");
                                                 option.value = "";
                                                 option.textContent = "No Sections Available";
                                                 sectionSelect.appendChild(option);
                                             }
+
+                                            if (selectedSection) {
+                                                sectionSelect.value = selectedSection;
+                                            }
                                         })
                                         .catch(error => {
-                                            console.error('Error fetching sections:', error);
-                                            // Handle error and display a message in the dropdown
                                             const option = document.createElement("option");
                                             option.value = "";
                                             option.textContent = "Error loading sections";
                                             sectionSelect.appendChild(option);
                                         });
                                 } else {
-                                    // If no grade selected, clear sections
                                     sectionSelect.innerHTML = '<option value="">Select Section</option>';
                                 }
+
+                                if (selectedGrade && selectedSection && selectedSchoolYear) {
+                                    fetch(`/api/allteachers?grade=${selectedGrade}&section=${selectedSection}&school_year=${selectedSchoolYear}`)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
+
+                                            if (data.length) {
+                                                data.forEach(teacher => {
+                                                    const option = document.createElement("option");
+                                                    option.value = teacher.teacher_number;
+                                                    option.textContent = teacher.name;
+                                                    teacherSelect.appendChild(option);
+                                                });
+                                            } else {
+                                                const option = document.createElement("option");
+                                                option.value = "";
+                                                option.textContent = "No Teachers Available";
+                                                teacherSelect.appendChild(option);
+                                            }
+                                        })
+                                        .catch(error => {
+                                            const option = document.createElement("option");
+                                            option.value = "";
+                                            option.textContent = "Error loading teachers";
+                                            teacherSelect.appendChild(option);
+                                        });
+                                } else {
+                                    teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
+                                }
+                            });
+
+                            sectionSelect.addEventListener("change", function () {
+                                const selectedGrade = gradeSelect.value;
+                                const selectedSection = sectionSelect.value;
+                                const selectedSchoolYear = schoolYearSelect.value;
+
+                                if (selectedGrade && selectedSchoolYear && selectedSection) {
+                                    gradeSelect.dispatchEvent(new Event("change"));
+                                }
+                            });
+
+                            schoolYearSelect.addEventListener("change", function () {
+                                gradeSelect.value = "";
+                                sectionSelect.innerHTML = '<option value="">Select Section</option>';
+                                teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
                             });
                         });
                     </script>
@@ -211,7 +273,7 @@
                         </select>
                     </div>
 
-                    <div class="hidden">
+                    <div class="">
                         <label for="password" class="block mb-2 text-sm font-bold text-gray-900"><span
                                 class="text-red-600 mr-1">*</span>Password :</label>
                         <input type="text" name="password" id="password"

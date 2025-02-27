@@ -14,6 +14,16 @@ class SubjectController extends Controller
         return view('admin.admin_subject', compact('subjects')); // Pass subjects to the view
     }
 
+     // Method to fetch sections by grade
+     public function getAllSubjectsByGrade(Request $request)
+     {
+         // Fetch sections based on the selected grade
+         $sections = Subject::where('grade', $request->grade)->get();
+ 
+         // Return the sections as a JSON response
+         return response()->json($sections);
+     }
+
     // Show the form to create a new subject
     public function create()
     {

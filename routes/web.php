@@ -16,7 +16,7 @@ use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TeacherUserController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\TeacherAdvisoryController;
-
+use App\Http\Controllers\TeacherSubjectClassController;
 // Landing Page
 Route::get('/StEmelieLearningCenter.Admission', function () {
     return view('landing_page');
@@ -89,6 +89,10 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::put('/teacher/{id}', [TeacherUserController::class, 'update'])->name('teacher.update');
 
     Route::post('/advisory/create', [TeacherAdvisoryController::class, 'store'])->name('advisory.create');
+    Route::post('/advisory/{id}', [TeacherAdvisoryController::class, 'update'])->name('advisory.update');
+
+    Route::post('/subject/create', [TeacherSubjectClassController::class, 'store'])->name('teachersubject.create');
+    Route::post('/subject/{id}', [TeacherSubjectClassController::class, 'update'])->name('teachersubject.update');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/manage-system/subject', [SubjectController::class, 'index'])->name('admin.subject');
     Route::get('admin/createsubject', [SubjectController::class, 'create'])->name('subject.create');
@@ -96,7 +100,6 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('admin/subject/{id}/edit', [SubjectController::class, 'edit'])->name('subject.edit'); // Edit subject route
     Route::put('admin/subject/{id}', [SubjectController::class, 'update'])->name('subject.update'); // Update subject route
     Route::delete('admin/subject/{id}', [SubjectController::class, 'destroy'])->name('subject.destroy'); // Delete subject route
-
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/manage-system/section', [SectionController::class, 'index'])->name('admin.section');
     Route::get('admin/createsection', [SectionController::class, 'create'])->name('section.create');

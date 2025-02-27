@@ -117,6 +117,8 @@ class TeacherUserController extends Controller
             return redirect()->route('teacher.user')->with('error', 'Teacher not found.');
         }
 
+        $teacherAdvisory = null;
+
         // Fetch related data for the specific teacher
         $teacherAdvisory = TeacherAdvisory::where('teacher_number', $teachers->teacher_number)->first();
         // $teacherDocuments = teacherDocuments::where('teacher_number', $teachers->teacher_number)->first();
