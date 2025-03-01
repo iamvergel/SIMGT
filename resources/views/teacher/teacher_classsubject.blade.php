@@ -179,10 +179,16 @@
                                             
                                             </td>
                                             <td class="export border-2  border-gray-900">
+<<<<<<< Updated upstream
                                                 Posible Highest Grade</td>
                                             <td class="export border-2 text-center border-gray-900"></td>
                                                 <td class="export border-2 text-center border-gray-900">
                                                 </td>
+=======
+                                                Highest Possible Score</td>
+                                            <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_written_one }}</td>
+>>>>>>> Stashed changes
                                                 <td class="export border-2 text-center border-gray-900">
                                                 </td>
                                                 <td class="export border-2 text-center border-gray-900">

@@ -174,7 +174,7 @@
                                         const selectedSchoolYear = schoolYearSelect.value;
 
                                         if (selectedGrade) {
-                                            fetch(`/api/allsections?grade=${selectedGrade}`)
+                                            fetch(`/api/sections?grade=${selectedGrade}`)
                                                 .then(response => response.json())
                                                 .then(data => {
                                                     sectionSelect.innerHTML = '<option value="">Select Section</option>';

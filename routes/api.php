@@ -27,8 +27,9 @@ Route::put('/announcements/{id}', [PictureAnnouncementController::class, 'update
 // In your routes/api.php
 Route::get('/allevents', [Cevent::class, 'showEventslanding']);
 
-// In your routes/api.php
+// In your routes/api.php 
 Route::get('/allsections', [SectionController::class, 'getAllSectionsByGrade']);
+Route::get('/sections', [SectionController::class, 'getSectionByGrade']);
 
 Route::get('/allsubjects', [SubjectController::class, 'getAllSubjectsByGrade']);
 

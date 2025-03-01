@@ -83,10 +83,10 @@
                                                 {{ $firstName . ' ' . $middleName . ' ' . $lastName ?: 'Guest' }}
                                             </p>
                                             <span class="text-xs tracking-widest font-normal shadow-text-lg mt-0">
-                                                {{ session('admin_number') ?? 'Guest' }} |
-                                                {{ session('admin_username') ?? 'Guest' }}</span>
+                                                {{ session('teacher_number') ?? 'Guest' }} |
+                                                {{ session('teacher_username') ?? 'Guest' }}</span>
                                             <p class="text-xs">
-                                                {{ session('admin_role') ?? 'Guest' }}
+                                                Teacher
                                             </p>
                                         </div>
 

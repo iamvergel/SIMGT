@@ -261,7 +261,7 @@ Route::post('/send-email/{id}', [Cstudentinfo::class, 'sendEmail'])->name('send.
 Route::put('/students/drop/{id}', [Cstudentinfo::class, 'dropStudent'])->name('students.drop');
 Route::put('/students/retrive/{id}', [Cstudentinfo::class, 'retrieveStudent'])->name('students.retrieve');
 
-Route::post('/send-email/{id}', [TeacherUserController::class, 'sendEmail'])->name('send.email');
+Route::post('/teachersend-email/{id}', [TeacherUserController::class, 'sendEmail'])->name('teacher.email');
 
 Route::post('/student/change-password/{studentId}', [CStudentProfile::class, 'changePassword'])->name('student.changePassword');
 Route::post('/show-grades', [CStudentProfile::class, 'showGrades'])->name('showGrades');

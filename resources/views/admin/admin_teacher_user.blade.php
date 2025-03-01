@@ -331,7 +331,7 @@
                                                         <i class="fa-solid fa-rotate-right"></i>
                                                     </button>
                                                 </form>
-                                                <form action="{{ route('send.email', $teachers->id) }}" method="POST"
+                                                <form action="{{ route('teacher.email', $teachers->id) }}" method="POST"
                                                     style="display:inline;">
                                                     @csrf
                                                     <button type={{ $teachers->status == "Inactive" ? "button" : "submit" }}
@@ -439,7 +439,7 @@
                                                 function getSections(grade, id) {
                                                     const sectionSelect = document.getElementById("section" + id);
 
-                                                    fetch(`/api/allsections?grade=${grade}`)
+                                                    fetch(`/api/sections?grade=${grade}`)
                                                         .then(response => response.json())
                                                         .then(data => {
                                                             sectionSelect.innerHTML = '<option value="">Select Section</option>';
