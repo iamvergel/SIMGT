@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('status'); // Student status (e.g., active, graduated, etc.)
             $table->string('grade'); // Student's grade level
             $table->string('section'); // Section or class group
-            $table->string('adviser'); // Name of the student's adviser
+            $table->string('adviser')->nullable(); // Name of the student's adviser
             $table->string('school_year'); // School year
             $table->timestamps(); // Created and updated timestamps
         });

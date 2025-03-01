@@ -3,6 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\TeacherSubjectClass;
+use App\Models\TeacherUser;
+use App\Models\StudentInfo;
+use App\Models\TeacherAdvisory;
+use App\Models\StudentPrimaryInfo;
+use App\Models\StudentAdditionalInfo;
+use App\Models\StudentDocuments;
+use App\Models\Mstudentaccount;
+use App\Models\Subject;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class TeacherSubjectClassController extends Controller
@@ -56,4 +65,54 @@ class TeacherSubjectClassController extends Controller
         // Return success response
         return back()->with('success', 'Update Information Successfully!');
     }
+
+    public function getClassSubject()
+    {
+        // Get the teacher number of the currently logged in user
+        $teacherNumber = Auth::guard('teacher')->user()->teacher_number;
+
+        // Fetch all distinct sections from the TeacherSubjectClass model where section is not null or empty
+        $Subject = TeacherSubjectClass::whereNotNull('subject') // Ensure section is not null
+            ->where('subject', '!=', '') // Ensure section is not an empty string
+            ->where('teacher_number', $teacherNumber) // Filter by the teacher number
+            ->distinct() // Get only distinct sections
+            ->pluck('subject'); // Get only the 'section' column
+
+        // Return sections as a JSON response
+        return response()->json($Subject);
+    }
+
+    public function getAllSubjectsByGrade(Request $request)
+     {
+         // Fetch sections based on the selected grade
+         $sections = TeacherSubjectClass::where('teacher_number', $request->grade)->get();
+ 
+         // Return the sections as a JSON response
+         return response()->json($sections);
+     }
+
+     public function showclasssubjectadvisory()
+     {
+         // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+         $students = StudentInfo::with('student') // Only eager load 'student' relationship
+             ->where('status', 'Active') // Active students only
+             ->get();
+ 
+         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
+         $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
+             ->where('status', 'Enrolled') // Ensure students are enrolled
+             ->get()->keyBy('studentnumber');
+ 
+         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+         $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+         $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+ 
+         // Check if there are no students found in Grade One
+         $noGradeOneMessage = $studentsPrimary->isEmpty() ? "No students found in Grade One." : null;
+ 
+         // Pass the data to the view
+         return view('teacher.teacher_classsubject', compact('students', 'noGradeOneMessage', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
+ 
+     }
 }
+

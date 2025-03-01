@@ -221,9 +221,9 @@
                 My Advisory
             </p>
 
-            <a href="/StEmelieLearningCenter.HopeSci66/teacher/dashboard"
+            <a href="/StEmelieLearningCenter.HopeSci66/teacher/myadvisory"
                 class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
-                title="Dashbaord">
+                title="My Advisory">
                 <i class="fa-solid fa-users"></i>
                 <span class="sidebar-text ml-2">My Advisory</span>
 
@@ -231,10 +231,22 @@
 
             <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">
 
+            <p class="text-[14px] mt-10 ml-7 text-white font-normal uppercase tracking-wider">
+                Class Record
+            </p>
+
+            <a href="/StEmelieLearningCenter.HopeSci66/teacher/class-record"
+                class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
+                title="Class Record">
+                <i class="fa-solid fa-users"></i>
+                <span class="sidebar-text ml-2">Class Record</span>
+
+            </a>
+
             <br /><br />
 
 
-            <!-- <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline">
+            <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline hidden">
                 @csrf
                 <a href="#"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
@@ -245,14 +257,14 @@
                     <span
                         class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Signout</span>
                 </a>
-            </form> -->
+            </form>
         </div>
 
         <footer class="relative h-28 mt-[8rem] px-5">
             <img src="{{ asset('../assets/images/grouplogo.png') }}" alt="grouplogo" width="200"
                 class="opacity-25 absolute bottom-[-2.5rem] left-[-0.1rem]">
-            <p class="text-[10px] absolute bottom-0 mb-1">@ Copyright &copy; 2024 St Emelie Learning Center HopeSci66.
-                All Right Reserved</p>
+            <p class="text-[10px] absolute bottom-0 mb-1">@ Copyright &copy; {{ date('Y') }} St Emelie Learning Center HopeSci66.
+                All Rights Reserved</p>
         </footer>
     </nav>
 

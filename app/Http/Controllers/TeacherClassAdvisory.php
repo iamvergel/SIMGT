@@ -30,7 +30,6 @@ class TeacherClassAdvisory extends Controller
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
         $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
-            ->where('grade', 'Grade One') // Filter for Grade One
             ->where('status', 'Enrolled') // Ensure students are enrolled
             ->get()->keyBy('studentnumber');
 
@@ -42,6 +41,7 @@ class TeacherClassAdvisory extends Controller
         $noGradeOneMessage = $studentsPrimary->isEmpty() ? "No students found in Grade One." : null;
 
         // Pass the data to the view
-        return route('teacher.dashboard', compact('students', 'noGradeOneMessage', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
+        return view('teacher.teacher_advisory', compact('students', 'noGradeOneMessage', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
+
     }
 }

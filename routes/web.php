@@ -78,7 +78,6 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         Route::get('/Archive-Student', [Cpages::class, 'showArchiveStudent'])->name('admin.admin_archive_student');
     });
 
-
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management', [Cstudentinfo::class, 'showGradeData']);
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/Grade-book', [Cstudentinfo::class, 'showGradebook'])->name('gradebook');
 
@@ -92,7 +91,9 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         Route::get('/AllStudentData', [Cstudentinfo::class, 'showAllStudentData'])->name('admin.admin_show_all_data');
     });
 
-    Route::get('/StEmelieLearningCenter.HopeSci66/teacher/dashboard', [TeacherClassAdvisory::class, 'showMyadvisory'])->name('teacher.dashboard');
+    Route::get('/StEmelieLearningCenter.HopeSci66/teacher/myadvisory', [TeacherClassAdvisory::class, 'showMyadvisory'])->name('teacher.advisory');
+    Route::get('/StEmelieLearningCenter.HopeSci66/teacher/class-record', [TeacherSubjectClassController::class, 'showclasssubjectadvisory'])->name('teacher.class-record');
+
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/manage-accounts/admin-users', [Cadmininfo::class, 'showAllAdmin'])->name('admin.user');
     Route::post('/admin/create', [Cadmininfo::class, 'store'])->name('admin.create');
@@ -263,6 +264,8 @@ Route::put('/admin/{id}/update', [Cadmininfo::class, 'update'])->name('admin.upd
 Route::post('/admin/change-password/{studentId}', [Cadmininfo::class, 'changePassword'])->name('admin.changePassword');
 
 Route::post('/teacher/change-password/{studentId}', [TeacherProfile::class, 'changePassword'])->name('teacher.changePassword');
+
+Route::get('/get-classsubject', [TeacherSubjectClassController::class, 'getClassSubject'])->name('get.classsubject');
 
 Route::get('/get-onesections', [Cstudentgrades::class, 'getGradeOneSections'])->name('get.sections');
 Route::get('/get-twosections', [Cstudentgrades::class, 'getGradeTwoSections'])->name('get.twosections');

@@ -398,8 +398,8 @@
         <footer class="relative h-28 mt-[8rem] px-5">
             <img src="{{ asset('../assets/images/grouplogo.png') }}" alt="grouplogo" width="200"
                 class="opacity-25 absolute bottom-[-2.5rem] left-[-0.1rem]">
-            <p class="text-[10px] absolute bottom-0 mb-1">@ Copyright &copy; 2024 St Emelie Learning Center
-                HopeSci66. All Right Reserved</p>
+            <p class="text-[10px] absolute bottom-0 mb-1">@ Copyright &copy; {{ date('Y') }} St Emelie Learning Center HopeSci66.
+                All Rights Reserved</p>
         </footer>
     </nav>
     <div class="overlay w-screen h-screen bg-black opacity-50 z-[19] hidden lg:hidden absolute left-0 top-0">

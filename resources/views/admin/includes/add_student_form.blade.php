@@ -22,22 +22,27 @@
                 </div>
 
                 @if (session('success'))
-                    <div class="bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md"
-                        role="alert">
+                    <div class="bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md my-5"
+                        role="alert" id="success-alert">
                         <div class="flex">
                             <div class="py-1">{{ session('success') }}<i class="fa-solid fa-check text-green-500"></i></div>
                         </div>
                     </div>
+                    <script>
+                        setTimeout(function() {
+                            document.getElementById("success-alert").remove();
+                        }, 5000);
+                    </script>
                 @endif
 
                 @if ($errors->any())
-                    <div class="bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md"
-                        role="alert">
+                    <div class="bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md my-5"
+                        role="alert" id="error-alert">
                         <div class="flex">
                             <div class="py-1">{{ session('success') }}<i
                                     class="fa-solid fa-circle-exclamation text-red-500"></i></div>
                             <div>
-                                ul>
+                                <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
@@ -45,6 +50,11 @@
                             </div>
                         </div>
                     </div>
+                    <script>
+                        setTimeout(function() {
+                            document.getElementById("error-alert").remove();
+                        }, 5000);
+                    </script>
                 @endif
 
                 <div class="bg-teal-800 p-5 shadow-lg mt-10 rounded-t-lg">
@@ -146,7 +156,7 @@
                                             <span class="text-red-600 mr-1">*</span>Select Adviser :</label>
                                         <select id="teacher" name="adviser"
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                            required>
+                                            >
                                             <option value="">Select Teacher</option>
                                         </select>
                                     </div>
@@ -340,7 +350,7 @@
 
                                     <div class="mb-5">
                                         <label for="gender" class="block mb-2 text-sm font-bold text-gray-900"><span
-                                                class="text-red-600 mr-1">*</span>Sex : </label>
+                                                class="text-red-600 mr-1">*</span>Gender : </label>
                                         <select name="gender" id="gender"
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                             required>

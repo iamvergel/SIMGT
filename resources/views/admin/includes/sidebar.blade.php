@@ -470,7 +470,7 @@
             <br /><br />
 
 
-            <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline">
+            <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline hidden">
                 @csrf
                 <a href="#"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
@@ -487,8 +487,8 @@
         <footer class="relative h-28 mt-[8rem] px-5">
             <img src="{{ asset('../assets/images/grouplogo.png') }}" alt="grouplogo" width="200"
                 class="opacity-25 absolute bottom-[-2.5rem] left-[-0.1rem]">
-            <p class="text-[10px] absolute bottom-0 mb-1">@ Copyright &copy; 2024 St Emelie Learning Center HopeSci66.
-                All Right Reserved</p>
+            <p class="text-[10px] absolute bottom-0 mb-1">@ Copyright &copy; {{ date('Y') }} St Emelie Learning Center HopeSci66.
+                All Rights Reserved</p>
         </footer>
     </nav>
 

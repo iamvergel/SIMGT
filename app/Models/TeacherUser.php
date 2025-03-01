@@ -57,4 +57,9 @@ class TeacherUser extends Authenticatable
     {
         return $this->hasMany(TeacherAdvisory::class, 'teacher_number', localKey: 'teacher_number');
     }
+
+    public function subject()
+    {
+        return $this->hasMany(TeacherSubjectClass::class, 'teacher_number', localKey: 'teacher_number');
+    }
 }

@@ -30,7 +30,7 @@ class Cstudentinfo extends Controller
             'grade' => 'required',
             'school_year' => 'required',
             'section' => 'required',
-            'adviser' => 'required',
+            'adviser' => 'nullable',
             'status' => 'required',
 
             'lastName' => 'required',

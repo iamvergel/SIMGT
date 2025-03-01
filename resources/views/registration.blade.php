@@ -208,7 +208,7 @@
 
                                     <div class="mb-5">
                                         <label for="gender" class="block mb-2 text-sm font-bold text-gray-900"><span
-                                                class="text-red-600 mr-1">*</span>Sex : </label>
+                                                class="text-red-600 mr-1">*</span>Gender : </label>
                                         <select name="gender" id="gender"
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                             required>
