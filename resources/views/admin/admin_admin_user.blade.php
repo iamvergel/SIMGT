@@ -10,7 +10,7 @@
 
         <!-- Main Content -->
         <main class="flex-grow rounded-r-lg bg-white shadow-lg overflow-y-scroll w-full bg-zinc-50" id="content">
-            <header>
+            <header class="sticky top-0 z-[10]">
                 @include('admin.includes.topnav')
             </header>
 
@@ -156,10 +156,9 @@
                                     </thead>
                                     <tbody class="" id="tableBody">
                                         @foreach ($admin as $admins)
-                                            @if (Auth::guard('admin')->user()->id == $admins->id ) 
+                                            @if (Auth::guard('admin')->user()->id == $admins->id)
                                             @else
-                                                <tr
-                                                    class=" hover:bg-gray-100">
+                                                <tr class=" hover:bg-gray-100">
                                                     <td>
                                                         <span class="ml-2">{{ $admins->admin_number }}</span>
                                                     </td>
