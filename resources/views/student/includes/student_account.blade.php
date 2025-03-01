@@ -57,15 +57,17 @@
                         onchange="handleFileInput(event)" class="sr-only">
 
                     <button type="button" onclick="document.getElementById('avatar-input').click()"
-                        class="bg-teal-600 mt-10 w-full py-3 text-center rounded-full text-white hover:bg-teal-800 focus:outline-none" id="buttonClick">
+                        class="bg-teal-600 mt-10 w-full py-3 text-center rounded-full text-white hover:bg-teal-800 focus:outline-none"
+                        id="buttonClick">
                         Choose Image
                     </button>
                     <button type="submit"
-                        class="bg-teal-600 mt-2 w-full py-3 text-center rounded-full text-white hover:bg-teal-800" id="buttonClick">
+                        class="bg-teal-600 mt-2 w-full py-3 text-center rounded-full text-white hover:bg-teal-800"
+                        id="buttonClick">
                         Update Avatar
                     </button>
 
-                    <p class="text-red-900 text-[14px] mt-5 bg-red-300 rounded-md" id="alert"></p>
+                    <p class="rounded-md mt-5" id="alert"></p>
                 </form>
             </div>
         </div>
@@ -86,8 +88,9 @@
                         <label for="firstname" class="block mb-1 text-sm font-normal text-teal-900">First Name :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fas fa-user mr-2 "></i>
-                            <input type="text" name="firstname" id="firstname" class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
-                                value="{{$firstName}}"  readonly>
+                            <input type="text" name="firstname" id="firstname"
+                                class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
+                                value="{{$firstName}}" readonly>
                         </div>
                     </div>
 
@@ -96,8 +99,9 @@
                             :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fas fa-user mr-2 "></i>
-                            <input type="text" name="middlename" id="middlename" class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
-                                value="{{$middleName}}"  readonly>
+                            <input type="text" name="middlename" id="middlename"
+                                class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
+                                value="{{$middleName}}" readonly>
                         </div>
                     </div>
 
@@ -105,8 +109,9 @@
                         <label for="lastname" class="block mb-1 text-sm font-normal text-teal-900">Last Name :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fas fa-user mr-2 "></i>
-                            <input type="text" name="lastname" id="lastname" class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
-                                value="{{$lastName}}"  readonly>
+                            <input type="text" name="lastname" id="lastname"
+                                class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
+                                value="{{$lastName}}" readonly>
                         </div>
                     </div>
 
@@ -115,8 +120,9 @@
                             :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fas fa-user mr-2 "></i>
-                            <input type="text" name="suffixname" id="suffixname" class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
-                                value="{{$suffixName}}"  readonly>
+                            <input type="text" name="suffixname" id="suffixname"
+                                class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
+                                value="{{$suffixName}}" readonly>
                         </div>
                     </div>
 
@@ -125,8 +131,8 @@
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fa-solid fa-address-card mr-2"></i>
                             <input type="text" name="username" id="username"
-                                class="myInput block w-full p-2.5 text-[13px] focus:outline-none focus:ring-none" value="{{session('student_username')}}"
-                                 readonly>
+                                class="myInput block w-full p-2.5 text-[13px] focus:outline-none focus:ring-none"
+                                value="{{session('student_username')}}" readonly>
                         </div>
                     </div>
 
@@ -134,8 +140,9 @@
                         <label for="role" class="block mb-1 text-sm font-normal text-teal-900">Role/s :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fa-solid fa-address-card mr-2"></i>
-                            <input type="text" name="role" id="role" class="myInput block w-full p-2.5  focus:outline-none focus:ring-none" value="Student"
-                                 readonly>
+                            <input type="text" name="role" id="role"
+                                class="myInput block w-full p-2.5  focus:outline-none focus:ring-none" value="Student"
+                                readonly>
                         </div>
                     </div>
 
@@ -143,8 +150,9 @@
                         <label for="school" class="block mb-1 text-sm font-normal text-teal-900">School :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fa-solid fa-school mr-2"></i>
-                            <input type="text" name="school" id="school" class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
-                                value="St. Emelie Learning Center"  readonly>
+                            <input type="text" name="school" id="school"
+                                class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
+                                value="St. Emelie Learning Center" readonly>
                         </div>
                     </div>
 
@@ -157,8 +165,9 @@
                         <label for="email" class="block mb-1 text-sm font-normal text-teal-900">Email :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fa-solid fa-envelope mr-2"></i>
-                            <input type="text" name="email" id="email" class="myInput block w-full p-2.5 text-[13px]  focus:outline-none focus:ring-none"
-                                value="{{ session('email_address_send')}}"  readonly>
+                            <input type="text" name="email" id="email"
+                                class="myInput block w-full p-2.5 text-[13px]  focus:outline-none focus:ring-none"
+                                value="{{ session('email_address_send')}}" readonly>
                         </div>
                     </div>
 
@@ -167,16 +176,18 @@
                             :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
                             <i class="fa-solid fa-mobile mr-2"></i>
-                            <input type="text" name="contact" id="contact" class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
-                                value="{{ session('contact_number') }}"  readonly>
+                            <input type="text" name="contact" id="contact"
+                                class="myInput block w-full p-2.5  focus:outline-none focus:ring-none"
+                                value="{{ session('contact_number') }}" readonly>
                         </div>
                     </div>
 
                     <div class="my-3">
                         <label for="birthday" class="block mb-1 text-sm font-normal text-teal-900">Birthday :</label>
                         <div class="flex items-center text-gray-500 bg-white border border-gray-300 px-5">
-                            <input type="date" name="birthday" id="birthday" class="myInput block w-full p-2.5 focus:outline-none focus:ring-none"
-                                value="{{ session('birth_date') }}"  readonly>
+                            <input type="date" name="birthday" id="birthday"
+                                class="myInput block w-full p-2.5 focus:outline-none focus:ring-none"
+                                value="{{ session('birth_date') }}" readonly>
                             <i class="fa-regular fa-calendar-days"></i>
                         </div>
                     </div>
@@ -261,6 +272,8 @@
                     alert.classList.add('p-3');
                     alert.classList.add('border');
                     alert.classList.add('border-red-500');
+                    alert.classList.add('bg-red-100');
+                    alert.classList.add('text-red-500');
                     alert.innerHTML = 'Invalid file type. Please upload an image (jpeg, png, jpg, gif).';
 
                     setTimeout(function () {
@@ -268,6 +281,8 @@
                         alert.classList.remove('p-3');
                         alert.classList.remove('border');
                         alert.classList.remove('border-red-500');
+                        alert.classList.remove('bg-red-100');
+                        alert.classList.remove('text-red-500');
                     }, 3000);
 
                     return;
@@ -276,6 +291,8 @@
                     alert.classList.add('p-3');
                     alert.classList.add('border');
                     alert.classList.add('border-red-500');
+                    alert.classList.add('bg-red-100');
+                    alert.classList.add('text-red-500');
                     alert.innerHTML = 'File size exceeds 2 MB. Please upload a smaller image.';
 
                     setTimeout(function () {
@@ -283,6 +300,8 @@
                         alert.classList.remove('p-3');
                         alert.classList.remove('border');
                         alert.classList.remove('border-red-500');
+                        alert.classList.remove('bg-red-100');
+                        alert.classList.remove('text-red-500');
                     }, 3000);
 
                     return;
@@ -291,13 +310,17 @@
                 alert.classList.add('p-3');
                 alert.classList.add('border');
                 alert.classList.add('border-red-500');
-                alert.innerHTML = 'Please select a picture first.';
+                alert.classList.add('bg-red-100');
+                alert.classList.add('text-red-500');
+                alert.innerHTML = 'Please input image first.';
 
                 setTimeout(function () {
                     alert.innerHTML = '';
                     alert.classList.remove('p-3');
                     alert.classList.remove('border');
                     alert.classList.remove('border-red-500');
+                    alert.classList.remove('bg-red-100');
+                    alert.classList.remove('text-red-500');
                 }, 3000);
 
                 return;
@@ -315,11 +338,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.avatar) {
-                        
 
-                        alert('Profile picture updated successfully!'); // Alert on successful update
-                        location.reload();
-                        
                         // Update the image sources
                         const avatarImgElements = [
                             document.getElementById('avatar-img'),
@@ -328,6 +347,11 @@
                             document.getElementById('avatar-img4'),
                             document.getElementById('avatar-img5')
                         ];
+
+
+                        // Show success alert before reloading
+                        showSuccessAlert('Profile picture updated successfully!');
+
 
                         avatarImgElements.forEach(imgElement => {
                             if (imgElement) {
@@ -341,26 +365,52 @@
                         avatarDiv.style.backgroundSize = 'cover'; // Ensure the image covers the div
                         avatarDiv.style.backgroundPosition = 'center'; // Center the image
 
-                        alert('Profile picture updated successfully!'); // Alert on successful update
-                        location.reload();
+                        setTimeout(() => {
+                            location.reload();
+                        }, 500);
                     } else if (data.error) {
-                        console.error(data.error);
-                        alert.classList.add('p-3');
-                        alert.classList.add('border');
-                        alert.classList.add('border-red-500');
-                        alert.innerHTML = data.error;
-
-                        setTimeout(function () {
-                            alert.innerHTML = '';
-                            alert.classList.remove('p-3');
-                            alert.classList.remove('border');
-                            alert.classList.remove('border-red-500');
-                        }, 3000);
-
-                        return;
+                        showErrorAlert(data.error);
                     }
                 })
                 .catch(error => console.error('Error:', error));
         });
+
+        function showErrorAlert(message) {
+            const alert = document.getElementById('alert');
+            alert.classList.add('p-3');
+            alert.classList.add('border');
+            alert.classList.add('border-red-500');
+            alert.classList.add('bg-red-100');
+            alert.classList.add('text-red-500');
+            alert.innerHTML = message;
+
+            setTimeout(function () {
+                alert.innerHTML = '';
+                alert.classList.remove('p-3');
+                alert.classList.remove('border');
+                alert.classList.remove('border-red-500');
+                alert.classList.remove('bg-red-100');
+                alert.classList.remove('text-red-500');
+            }, 3000);
+        }
+
+        function showSuccessAlert(message) {
+            const alert = document.getElementById('alert');
+            alert.classList.add('p-3');
+            alert.classList.add('border');
+            alert.classList.add('border-green-500'); // Use green color for success alert
+            alert.classList.add('bg-green-100');
+            alert.classList.add('text-green-500'); // Use white color for success alert
+            alert.innerHTML = message;
+
+            setTimeout(function () {
+                alert.innerHTML = '';
+                alert.classList.remove('p-3');
+                alert.classList.remove('border');
+                alert.classList.remove('border-green-500');
+                alert.classList.remove('bg-green-100');
+                alert.classList.remove('text-green-500');
+            }, 3000);
+        }
     });
 </script>

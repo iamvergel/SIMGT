@@ -49,7 +49,7 @@
 
                 <!-- Gallery Card -->
                 <div
-                    class="card bg-sky-500 py-8 mt-10 lg:mt-0 rounded-lg mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform">
+                    class="card bg-sky-500 py-8 mt-10 lg:mt-0 rounded-lg mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform" onclick="window.open('/StEmelieLearningCenter.HopeSci66/Registration', '_blank')">
                     <div class="text-center text-white px-5">
                         <i
                             class="fas fa-image fa-3x mb-4 text-sky-500 p-4 bg-white rounded-full border-[5px] border-sky-500 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>

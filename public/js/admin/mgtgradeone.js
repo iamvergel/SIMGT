@@ -103,7 +103,7 @@ $(document).ready(function () {
                 if (data.length > 0) {
                     $("#dropdown ul").empty();
                     $("#dropdown ul").append(
-                        '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item"  data-section="">Select a Section</a></li>'
+                        '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="">Select a Section</a></li>'
                     );
                     data.forEach(function (section) {
                         $("#dropdown ul").append(
@@ -126,182 +126,51 @@ $(document).ready(function () {
         });
     });
 
+    // Handle section click to filter table
     $(document).on("click", ".dropdown-item", function (event) {
-        event.preventDefault(); // Prevent default anchor click behavior
+        event.preventDefault();
 
         const selectedSection = $(this).data("section");
+        let section = document.getElementById('section');
 
-        $("#searchInput").val(selectedSection); // Update search input
-
-        table.search(selectedSection).draw(); // Apply the search to DataTable
+        if (selectedSection) {
+            table.column(5).search(selectedSection).draw(); // Filter the table based on the clicked section
+            section.innerHTML = 'Section : ' + selectedSection;
+        } else {
+            table.column(5).search("").draw(); // Clear the filter to show all
+            section.innerHTML = 'Section : ';
+        }
 
         $("#dropdown").addClass("hidden"); // Close the dropdown
     });
+});
+
+    // $(document).on("click", ".dropdown-item", function (event) {
+    //     event.preventDefault(); // Prevent default anchor click behavior
+
+    //     const selectedSection = $(this).data("section");
+
+    //     if (selectedSection) {
+    //         table.search(selectedSection).draw(); // Apply the search to DataTable
+    //     } else {
+    //         table.search("").draw(); // Clear the search to show all
+    //     }
+
+    //     $("#dropdown").addClass("hidden"); // Close the dropdown
+    // });
 
     // Close the dropdown if clicked outside
-    $(document).click(function (event) {
-        const dropdownButton = $("#dropdownDefaultButton");
-        const dropdownMenu = $("#dropdown");
+    // $(document).click(function (event) {
+    //     const dropdownButton = $("#dropdownDefaultButton");
+    //     const dropdownMenu = $("#dropdown");
 
-        // Close dropdown if clicked outside the dropdown button or menu
-        if (
-            !dropdownButton.is(event.target) &&
-            !dropdownMenu.is(event.target) &&
-            dropdownMenu.has(event.target).length === 0
-        ) {
-            dropdownMenu.addClass("hidden");
-        }
-    });
+    //     // Close dropdown if clicked outside the dropdown button or menu
+    //     if (
+    //         !dropdownButton.is(event.target) &&
+    //         !dropdownMenu.is(event.target) &&
+    //         dropdownMenu.has(event.target).length === 0
+    //     ) {
+    //         dropdownMenu.addClass("hidden");
+    //     }
+    // });
 
-    // When the dropdown button is clicked, make an AJAX call
-    $('#dropdownDefaultButton2').click(function () {
-        // Toggle the dropdown visibility
-        $('#dropdown2').toggleClass('hidden');
-
-        // Make an AJAX request to get the sections
-        $.ajax({
-            url: '/get-twosections', // The route for fetching sections
-            type: 'GET',
-            success: function (data) {
-                // Check if sections are returned
-                if (data.length > 0) {
-                    // Empty the dropdown list
-                    $('#dropdown2 ul').empty();
-
-                    // Append the default placeholder as the first item
-                    $('#dropdown2 ul').append('<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item"  data-section="">Select a Section</a></li>');
-
-                    // Append each section as a list item in the dropdown
-                    data.forEach(function (section) {
-                        $('#dropdown2 ul').append('<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="' + section + '">' + section + '</a></li>');
-                    });
-                } else {
-                    // If no sections, show a message
-                    $('#dropdown2 ul').html('<li><a href="#" class="dropdown-item text-gray-500">No Sections Available</a></li>');
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log("Error fetching sections: " + error);
-            }
-        });
-
-    });
-
-    // Filter table by section when dropdown item is clicked
-    $(document).on('click', '.dropdown-item', function (event) {
-        event.preventDefault(); // Prevent default anchor click behavior
-
-        const selectedSection = $(this).data('section');
-
-        // Update the search input with the selected section
-        $('#searchInput').val(selectedSection);
-
-        // Trigger the search function and search the table
-        table.search(selectedSection).draw();  // Directly apply the search to the DataTable
-
-        // Close the dropdown after selection
-        $('#dropdown').addClass('hidden');
-    });
-
-    // Close the dropdown if clicked outside
-    $(document).click(function (event) {
-        const dropdownButton2 = $('#dropdownDefaultButton2');
-        const dropdownMenu2 = $('#dropdown2');
-
-        // Close dropdown if clicked outside the dropdown button or menu
-        if (!dropdownButton2.is(event.target) && !dropdownMenu2.is(event.target) && dropdownMenu2.has(event.target).length === 0) {
-            dropdownMenu2.addClass('hidden');
-        }
-    });
-});
-
-function toggleModal(modalId) {
-    const modal = document.getElementById(modalId);
-    console.log(modal); // Debugging: Ensure modal is found
-    modal.classList.toggle("hidden");
-    modal.classList.toggle("flex");
-}
-
-// Event listeners for opening modals
-document.querySelector('[data-modal-target="addnewstudent"]').onclick =
-    function () {
-        toggleModal("addnewstudent");
-    };
-
-// Event listeners for closing modals
-document.getElementById("addnewstudentClose").onclick = function () {
-    toggleModal("addnewstudent");
-};
-
-// Event listeners for opening modals
-document
-    .querySelectorAll('[data-modal-toggle^="updatetudentinfo"]')
-    .forEach((button) => {
-        button.onclick = function () {
-            const modalId = button.getAttribute("data-modal-target");
-            toggleModal(modalId);
-        };
-    });
-
-// Event listeners for closing modals
-document.querySelectorAll('[id^="updatetudentinfoClose"]').forEach((button) => {
-    button.onclick = function () {
-        const modalId =
-            "updatetudentinfo" + button.id.replace("updatetudentinfoClose", "");
-        toggleModal(modalId);
-    };
-});
-
-// Optional: Close modal when clicking outside of it
-window.onclick = function (event) {
-    const modalBackdrop = event.target.classList.contains("fixed");
-    const isModal = event.target.closest(".modal"); // Assuming your modals have a class 'modal'
-
-    if (modalBackdrop && !isModal) {
-        const modals = document.querySelectorAll(".modal");
-        modals.forEach((modal) => modal.classList.add("hidden"));
-    }
-};
-
-document.addEventListener("DOMContentLoaded", function () {
-    document
-        .querySelector("#birth_certificate")
-        .addEventListener("change", function () {
-            document.querySelector("#birthFileName").textContent = this.files[0]
-                ? this.files[0].name
-                : "No file chosen";
-        });
-
-    document
-        .querySelector("#proof_of_residency")
-        .addEventListener("change", function () {
-            document.querySelector("#residencyFileName").textContent = this
-                .files[0]
-                ? this.files[0].name
-                : "No file chosen";
-        });
-});
-
-document.getElementById("birthDate").addEventListener("change", calculateAge);
-
-function calculateAge() {
-    const birthDateInput = document.getElementById("birthDate");
-    const ageInput = document.getElementById("age");
-    const birthDate = new Date(birthDateInput.value);
-    const today = new Date();
-
-    if (birthDate) {
-        let age = today.getFullYear() - birthDate.getFullYear();
-        const monthDiff = today.getMonth() - birthDate.getMonth();
-        if (
-            monthDiff < 0 ||
-            (monthDiff === 0 && today.getDate() < birthDate.getDate())
-        ) {
-            age--;
-        }
-        console.log("Calculated Age:", age); // Debugging: Check the age calculation
-        ageInput.value = age;
-    } else {
-        ageInput.value = "";
-    }
-}

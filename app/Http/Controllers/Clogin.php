@@ -128,10 +128,10 @@ class Clogin extends Controller
                 $request->session()->put('section', $teacheradvisory->section);
                 $request->session()->put('grade', $teacheradvisory->grade);
             }
-            
+
             // Flash a success message
             $request->session()->flash('success', 'Welcome,' . $teacherUser->username . ' ! You are now logged in as Teacher.');
-            
+
             // Redirect to the admin dashboard or admin loader
             return view('includes.teacher_loader', ['advisory' => $teacheradvisory]);
         }
@@ -235,7 +235,7 @@ class Clogin extends Controller
 
             if ($section) {
                 // Fetch the teacher's information (adviser)
-                
+
             }
 
             // Pass the data to the view

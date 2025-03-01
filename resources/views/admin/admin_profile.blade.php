@@ -25,7 +25,8 @@
             <div class="p-5">
                 <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
                 <h1 class="text-2xl font-bold text-teal-900 ml-5">SIMGT Profile /
-                    {{ $firstName . ' ' . $middleName . ' ' . $lastName ?: 'Guest' }}</h1>
+                    {{ $firstName . ' ' . $middleName . ' ' . $lastName ?: 'Guest' }}
+                </h1>
 
                 <div class="bg-teal-800 p-5 shadow-lg mt-10 rounded-t-lg">
                     <h2 class="text-md font-semibold text-white">
@@ -81,8 +82,9 @@
                                                 class="text-lg tracking-widest font-semibold  shadow-text-lg mt-2 leading-3">
                                                 {{ $firstName . ' ' . $middleName . ' ' . $lastName ?: 'Guest' }}
                                             </p>
-                                            <span
-                                                class="text-xs tracking-widest font-normal shadow-text-lg mt-0"> {{ session('admin_number') ?? 'Guest' }} | {{ session('admin_username') ?? 'Guest' }}</span>
+                                            <span class="text-xs tracking-widest font-normal shadow-text-lg mt-0">
+                                                {{ session('admin_number') ?? 'Guest' }} |
+                                                {{ session('admin_username') ?? 'Guest' }}</span>
                                             <p class="text-xs">
                                                 {{ session('admin_role') ?? 'Guest' }}
                                             </p>
@@ -112,7 +114,7 @@
                                                 </button>
                                             </div>
 
-                                            <p class="text-red-900 text-[14px] mt-5 bg-red-300 rounded-md" id="alert">
+                                            <p class="mt-5 rounded-md" id="alert">
                                             </p>
                                         </form>
                                     </div>
@@ -384,15 +386,60 @@
                 if (file) {
                     const validTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
                     if (!validTypes.includes(file.type)) {
-                        showErrorAlert('Invalid file type. Please upload an image (jpeg, png, jpg, gif).');
+                        alert.classList.add('p-3');
+                        alert.classList.add('border');
+                        alert.classList.add('border-red-500');
+                        alert.classList.add('bg-red-100');
+                        alert.classList.add('text-red-500');
+                        alert.innerHTML = 'Invalid file type. Please upload an image (jpeg, png, jpg, gif).';
+
+                        setTimeout(function () {
+                            alert.innerHTML = '';
+                            alert.classList.remove('p-3');
+                            alert.classList.remove('border');
+                            alert.classList.remove('border-red-500');
+                            alert.classList.remove('bg-red-100');
+                            alert.classList.remove('text-red-500');
+                        }, 3000);
+
                         return;
                     }
                     if (file.size > 2048 * 1024) { // 2048 KB
-                        showErrorAlert('File size exceeds 2 MB. Please upload a smaller image.');
+                        alert.classList.add('p-3');
+                        alert.classList.add('border');
+                        alert.classList.add('border-red-500');
+                        alert.classList.add('bg-red-100');
+                        alert.classList.add('text-red-500');
+                        alert.innerHTML = 'File size exceeds 2 MB. Please upload a smaller image.';
+
+                        setTimeout(function () {
+                            alert.innerHTML = '';
+                            alert.classList.remove('p-3');
+                            alert.classList.remove('border');
+                            alert.classList.remove('border-red-500');
+                            alert.classList.remove('bg-red-100');
+                            alert.classList.remove('text-red-500');
+                        }, 3000);
+
                         return;
                     }
                 } else {
-                    showErrorAlert('Please select a picture first.');
+                    alert.classList.add('p-3');
+                    alert.classList.add('border');
+                    alert.classList.add('border-red-500');
+                    alert.classList.add('bg-red-100');
+                    alert.classList.add('text-red-500');
+                    alert.innerHTML = 'Please input image first.';
+
+                    setTimeout(function () {
+                        alert.innerHTML = '';
+                        alert.classList.remove('p-3');
+                        alert.classList.remove('border');
+                        alert.classList.remove('border-red-500');
+                        alert.classList.remove('bg-red-100');
+                        alert.classList.remove('text-red-500');
+                    }, 3000);
+
                     return;
                 }
 
@@ -446,6 +493,8 @@
                 alert.classList.add('p-3');
                 alert.classList.add('border');
                 alert.classList.add('border-red-500');
+                alert.classList.add('bg-red-100');
+                alert.classList.add('text-red-500');
                 alert.innerHTML = message;
 
                 setTimeout(function () {
@@ -453,6 +502,8 @@
                     alert.classList.remove('p-3');
                     alert.classList.remove('border');
                     alert.classList.remove('border-red-500');
+                    alert.classList.remove('bg-red-100');
+                    alert.classList.remove('text-red-500');
                 }, 3000);
             }
 
@@ -461,6 +512,8 @@
                 alert.classList.add('p-3');
                 alert.classList.add('border');
                 alert.classList.add('border-green-500'); // Use green color for success alert
+                alert.classList.add('bg-green-100');
+                alert.classList.add('text-green-500'); // Use white color for success alert
                 alert.innerHTML = message;
 
                 setTimeout(function () {
@@ -468,6 +521,8 @@
                     alert.classList.remove('p-3');
                     alert.classList.remove('border');
                     alert.classList.remove('border-green-500');
+                    alert.classList.remove('bg-green-100');
+                    alert.classList.remove('text-green-500');
                 }, 3000);
             }
         });

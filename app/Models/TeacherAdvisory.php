@@ -25,6 +25,11 @@ class TeacherAdvisory extends Model
         return $this->belongsTo(TeacherUser::class, 'teacher_number', 'teacher_number');
     }
 
+    public function student()
+    {
+        return $this->belongsTo(StudentInfo::class, 'student_id'); // Adjust the foreign key accordingly
+    }
+
     // Define any relationships if needed
     // Example: public function students() { return $this->hasMany(Student::class); }
 }

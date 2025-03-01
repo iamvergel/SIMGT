@@ -177,7 +177,7 @@
 
         <div class="mt-10 mx-1">
             <p class="text-[14px] mt-10 ml-7 text-white font-normal uppercase tracking-wider">
-                {{ session('admin_role') ?? 'Guest' }} DASHBOARD
+                TEACHER DASHBOARD
             </p>
             <!-- <a href="/StEmelieLearningCenter.HopeSci66/admin/dashboard"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
@@ -216,6 +216,18 @@
             </div>
 
             <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">
+
+            <p class="text-[14px] mt-10 ml-7 text-white font-normal uppercase tracking-wider">
+                My Advisory
+            </p>
+
+            <a href="/StEmelieLearningCenter.HopeSci66/teacher/dashboard"
+                class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
+                title="Dashbaord">
+                <i class="fa-solid fa-users"></i>
+                <span class="sidebar-text ml-2">My Advisory</span>
+
+            </a>
 
             <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">
 

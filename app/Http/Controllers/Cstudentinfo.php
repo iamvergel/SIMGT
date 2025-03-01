@@ -78,6 +78,17 @@ class Cstudentinfo extends Controller
         ]);
 
         try {
+            // Create user account
+            $username = strtolower($validatedData['lastName']) . strtolower($validatedData['firstName']) . '@stemilie.edu.ph';
+            //$password = 'SELC' . $validatedData['lastName'] . substr($validatedData['student_number'], -4);
+            //SELC{{ $student->student_last_name }}{{ substr($student->student_number, -4) }}
+
+            $userAccount = new Mstudentaccount();
+            $userAccount->student_number = $validatedData['student_number'];
+            $userAccount->username = $username;
+            $userAccount->password = $validatedData['password'];
+            $userAccount->save();
+
             // Create student record
             $student = new StudentInfo();
             $student->lrn = $validatedData['lrn'];
@@ -135,17 +146,6 @@ class Cstudentinfo extends Controller
             $studentDocuments->birth_certificate = $birthCertificatePath;
             $studentDocuments->proof_of_residency = $proofOfResidencyPath;
             $studentDocuments->save();
-
-            // Create user account
-            $username = strtolower($validatedData['lastName']) . strtolower($validatedData['firstName']) . '@stemilie.edu.ph';
-            //$password = 'SELC' . $validatedData['lastName'] . substr($validatedData['student_number'], -4);
-            //SELC{{ $student->student_last_name }}{{ substr($student->student_number, -4) }}
-
-            $userAccount = new Mstudentaccount();
-            $userAccount->student_number = $validatedData['student_number'];
-            $userAccount->username = $username;
-            $userAccount->password = $validatedData['password'];
-            $userAccount->save();
 
             $studentprimary = new StudentPrimaryInfo();
             $studentprimary->lrn = $validatedData['lrn'];
@@ -325,18 +325,18 @@ class Cstudentinfo extends Controller
         return back()->with('success', 'Student information updated successfully!');
     }
 
-    public function showStudenyInfotmation(Request $request, $id)
+    public function showStudentInfotmation(Request $request, $id)
     {
         // Fetch the specific student based on the provided id
         $students = StudentInfo::where('id', $id)->where('status', 'Active')->first();
 
         // If the student doesn't exist, you could redirect back or show an error message
         if (!$students) {
-            return redirect()->route('student.show')->with('error', 'Student not found.');
+            return back()->withErrors('Student not found.');
         }
 
         // Fetch related data for the specific student
-        $studentsPrimary = StudentPrimaryInfo::where('studentnumber', $students->student_number)->first();
+        $studentsPrimary = StudentPrimaryInfo::where('lrn', $students->lrn)->first();
         $studentsAdditional = StudentAdditionalInfo::where('student_number', $students->student_number)->first();
         $studentDocuments = StudentDocuments::where('student_number', $students->student_number)->first();
         $studentAccount = Mstudentaccount::where('student_number', $students->student_number)->first();
@@ -365,6 +365,10 @@ class Cstudentinfo extends Controller
         $student->status = 'Dropped';
         $student->save();
 
+        // Update student primary record
+        StudentPrimaryInfo::where('studentnumber', $student->student_number)
+            ->update(['status' => 'Dropped']);
+
         // Redirect or return response
         return back()->with('success', 'Student dropped successfully!');
     }
@@ -382,6 +386,9 @@ class Cstudentinfo extends Controller
         // Update the status to "Dropped"
         $student->status = 'Active';
         $student->save();
+
+        StudentPrimaryInfo::where('studentnumber', $student->student_number)
+        ->update(['status' => 'Enrolled']);
 
         // Redirect or return response
         return back()->with('success', 'Student retrieve successfully!');

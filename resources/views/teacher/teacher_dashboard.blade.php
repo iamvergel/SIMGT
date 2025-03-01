@@ -29,14 +29,18 @@
                         </div>
                     </div>
 
-                    <div class="bg-white text-teal-800 rounded-lg shadow-lg text-start mt-5 p-5 flex justify-center items-center">
+                    <div
+                        class="bg-white text-teal-800 rounded-lg shadow-lg text-start mt-5 p-5 flex justify-center items-center">
                         <div class="p-5 bg-gray-100 shadow-lg rounded-lg">
-                            <p class="text-sm font-semibold">My Advisory Class<br/>
-                                <span class="font-bold text-teal-700 text-xl uppercase">{{session('grade') . ' - ' . session('section') }}</span>
+                            <p class="text-sm font-semibold">My Advisory Class<br />
+                                <span
+                                    class="font-bold text-teal-700 text-xl uppercase">{{session('grade') . ' - ' . session('section') }}</span>
                             </p>
                         </div>
                     </div>
                 </div>
+
+                
             </div>
         </main>
     </div>

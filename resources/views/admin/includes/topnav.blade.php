@@ -60,16 +60,15 @@
         <!-- Dropdown Menu -->
         <div class="absolute right-0 mt-2 w-56 bg-gray-100 border-t-4 border border-teal-700 rounded-lg shadow-lg hidden mt-4 z-[49]"
             id="dropdownMenu">
-            <ul class="text-gray-1=800">
-                <li class="px-4 py-2 hover:bg-gray-300 bg-gray-100 cursor-pointer text-[14px] mt-5"
+            <ul class="text-gray-800">
+                <li class="px-4 py-2 hover:bg-gray-300 bg-gray-100 text-[14px] mt-5"
                     onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/admin/SIMGT-Profile'">
                     <i class="fa-solid fa-user mr-3"></i>SIMGT Profile
                 </li>
 
                 <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
-                    <li class="px-4 py-2 hover:bg-gray-300 rounded-b-lg cursor-pointer text-[14px]"
-                        onclick="confirmLogout(event)">
+                    <li class="px-4 py-2 hover:bg-gray-300 rounded-b-lg text-[14px]" onclick="confirmLogout(event)">
                         <i class="fa-solid fa-arrow-right-from-bracket mr-3"></i>Logout
                     </li>
                 </form>
@@ -192,9 +191,9 @@
             sidebar.classList.toggle('collapsed');
 
             reportSections.forEach(reportSection => {
-            reportSection.classList.toggle('mx-0');
-            reportSection.classList.toggle('px-0');
-        });
+                reportSection.classList.toggle('mx-0');
+                reportSection.classList.toggle('px-0');
+            });
         });
     });
 

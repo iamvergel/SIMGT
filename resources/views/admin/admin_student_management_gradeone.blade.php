@@ -21,24 +21,25 @@
                             class="hover:text-teal-700">Student Management</span> / Grade One
                     </p>
                 </div>
-                <div class="flex justify-end items-center gap-4 mt-10">
-                    <div class="ml-5 flex items-center hidden">
+                <div class="flex justify-between items-center gap-4 mt-10">
+                    <!-- <div class="ml-5 flex items-center hidden">
                         <i class="fas fa-search text-xl text-teal-700 px-3"></i>
                         <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search by name..."
                             class="text-sm px-4 py-3 text-teal-900 border border-gray-300 rounded-lg w-96 shadow-lg focus:outline-none" />
-                    </div>
+                    </div> -->
 
                     <div class="flex">
-                        <button data-modal-target="addnewstudent" data-modal-toggle="addnewstudent"
+                        <!-- <button data-modal-target="addnewstudent" data-modal-toggle="addnewstudent"
                             class="block w-86 right-0 mr-5 text-[12px] text-white shadow-lg px-10 bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded py-2.5 text-center"
                             type="button" aria-label="Add Student">
                             Add Student
-                        </button>
-                        <button
+                        </button> -->
+                        <!-- <button
                             class="block w-86 right-0 mr-10 text-[12px] text-white shadow-lg px-10 bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded py-2.5 text-center"
                             onclick="window.location.href = '/StEmelieLearningCenter.HopeSci66/admin/student-management/AllStudentData'">
                             Show student data
-                        </button>
+                        </button> -->
+                        <h1 class="mx-5 font-semibold text-xl text-teal-800" id="section">Section :</h1>
                     </div>
 
                     <div class="mr-10">
@@ -66,8 +67,6 @@
                     </div>
                 </div>
 
-                <!-- Main modal -->
-                @include('admin.includes.add_student_form')
                 @include('admin.includes.update_student_form') 
 
                 @if (session('success'))
@@ -101,7 +100,7 @@
                                                     $initials = strtoupper(substr($student->student_last_name, 0, 1) . substr($student->student_first_name, 0, 1));
                                                     $primaryInfo = $studentsPrimary[$student->student_number] ?? null;
                                                 @endphp
-                                                @if ($primaryInfo && $primaryInfo->grade == 'Grade One' && $primaryInfo->status == 'Enrolled') <!-- Ensuring grade is 'Grade One' and status is 'Enrolled' -->
+                                                @if ($primaryInfo && $primaryInfo->grade == 'Grade One' && $primaryInfo->status == 'Enrolled')
                                                     <tr class="hover:bg-gray-100">
                                                         <td>
                                                             <span class="ml-2">{{ $student->lrn }}</span>

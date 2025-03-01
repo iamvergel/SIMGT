@@ -263,11 +263,11 @@
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Six</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/AllStudentData"
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/AddStudent"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
-                    title="All Student">
+                    title="All New Student">
                     <i class="fa-regular fa-circle"></i>
-                    <span class="sidebar-text ml-2">All Student</span>
+                    <span class="sidebar-text ml-2">Add New Student</span>
                 </a>
             </div>
 
@@ -319,12 +319,6 @@
                         title="Grade Six">
                         <i class="fa-regular fa-circle"></i>
                         <span class="sidebar-text ml-2">Grade Six</span>
-                    </a>
-                    <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/AllStudentData"
-                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
-                        title="All Student">
-                        <i class="fa-regular fa-circle"></i>
-                        <span class="sidebar-text ml-2">All Student</span>
                     </a>
                 </div>
             @endif
@@ -392,17 +386,18 @@
                         <i class="fa-solid fa-user"></i>
                         <span class="sidebar-text ml-2">Registrar</span>
                     </a>
-                    <a href="/StEmelieLearningCenter.HopeSci66/admin/manage-accounts/teacher-users" class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
+                    <a href="/StEmelieLearningCenter.HopeSci66/admin/manage-accounts/teacher-users"
+                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Teachers">
                         <i class="fa-solid fa-user"></i>
                         <span class="sidebar-text ml-2">Teachers</span>
                     </a>
                     <!-- <a href="#"
-                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-0"
-                        title="Students">
-                        <i class="fa-solid fa-user"></i>
-                        <span class="sidebar-text ml-2">Students</span>
-                    </a> -->
+                            class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-0"
+                            title="Students">
+                            <i class="fa-solid fa-user"></i>
+                            <span class="sidebar-text ml-2">Students</span>
+                        </a> -->
                 </div>
 
                 <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">
@@ -475,7 +470,7 @@
             <br /><br />
 
 
-            <!-- <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline">
+            <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline">
                 @csrf
                 <a href="#"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
@@ -486,7 +481,7 @@
                     <span
                         class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Signout</span>
                 </a>
-            </form> -->
+            </form>
         </div>
 
         <footer class="relative h-28 mt-[8rem] px-5">

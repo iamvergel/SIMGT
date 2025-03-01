@@ -125,8 +125,7 @@
                     </div>
                 </div>
 
-                <!-- Main modal -->
-                @include('admin.includes.add_student_form')
+
                 @include('admin.includes.update_student_form') 
 
                 @if (session('success'))

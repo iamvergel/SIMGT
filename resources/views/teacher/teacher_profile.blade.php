@@ -25,7 +25,8 @@
             <div class="p-5">
                 <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
                 <h1 class="text-2xl font-bold text-teal-900 ml-5">SIMGT Profile /
-                    {{ $firstName . ' ' . $middleName . ' ' . $lastName ?: 'Guest' }}</h1>
+                    {{ $firstName . ' ' . $middleName . ' ' . $lastName ?: 'Guest' }}
+                </h1>
 
                 <div class="bg-teal-800 p-5 shadow-lg mt-10 rounded-t-lg">
                     <h2 class="text-md font-semibold text-white">
@@ -81,8 +82,9 @@
                                                 class="text-lg tracking-widest font-semibold  shadow-text-lg mt-2 leading-3">
                                                 {{ $firstName . ' ' . $middleName . ' ' . $lastName ?: 'Guest' }}
                                             </p>
-                                            <span
-                                                class="text-xs tracking-widest font-normal shadow-text-lg mt-0"> {{ session('admin_number') ?? 'Guest' }} | {{ session('admin_username') ?? 'Guest' }}</span>
+                                            <span class="text-xs tracking-widest font-normal shadow-text-lg mt-0">
+                                                {{ session('admin_number') ?? 'Guest' }} |
+                                                {{ session('admin_username') ?? 'Guest' }}</span>
                                             <p class="text-xs">
                                                 {{ session('admin_role') ?? 'Guest' }}
                                             </p>
@@ -112,7 +114,7 @@
                                                 </button>
                                             </div>
 
-                                            <p class="text-red-900 text-[14px] mt-5 bg-red-300 rounded-md" id="alert">
+                                            <p class="mt-5 rounded-md" id="alert">
                                             </p>
                                         </form>
                                     </div>
@@ -144,53 +146,39 @@
                                 </div>
                             @endif
 
-                            <form id="update-form" action="{{ route('admin.update', $user->id) }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
 
-                                <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-10">
-                                    <div>
-                                        <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="">
-                                            <span class="text-red-600 mr-1">*</span>First Name
-                                        </label>
-                                        <input type="text" name="first_name" placeholder=""
-                                            value="{{ $user->first_name }}"
-                                            class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
-                                    </div>
 
-                                    <div>
-                                        <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="">
-                                            <span class="text-red-600 mr-1">*</span>Middle Name
-                                        </label>
-                                        <input type="text" name="middle_name" placeholder=""
-                                            value="{{ $user->middle_name }}"
-                                            class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
-                                    </div>
-
-                                    <div>
-                                        <label
-                                            class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                                            for="">
-                                            <span class="text-red-600 mr-1">*</span>Last Name
-                                        </label>
-                                        <input type="text" name="last_name" placeholder=""
-                                            value="{{ $user->last_name }}"
-                                            class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
-                                    </div>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-10">
+                                <div>
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        for="">
+                                        <span class="text-red-600 mr-1">*</span>First Name
+                                    </label>
+                                    <input type="text" name="first_name" placeholder="" value="{{ $user->first_name }}"
+                                        class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
                                 </div>
-                                <!-- Submit Button -->
-                                <div class="flex justify-end mt-5">
-                                    <button type="submit"
-                                        class="bg-teal-700 hover:bg-teal-800 text-white font-bold py-3 px-20 rounded-full">
-                                        <i class="fa-solid fa-pen-to-square me-1"></i> Update Information
-                                    </button>
+
+                                <div>
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        for="">
+                                        <span class="text-red-600 mr-1">*</span>Middle Name
+                                    </label>
+                                    <input type="text" name="middle_name" placeholder=""
+                                        value="{{ $user->middle_name }}"
+                                        class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
                                 </div>
-                            </form>
+
+                                <div>
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        for="">
+                                        <span class="text-red-600 mr-1">*</span>Last Name
+                                    </label>
+                                    <input type="text" name="last_name" placeholder="" value="{{ $user->last_name }}"
+                                        class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
+                                </div>
+                            </div>
+                            <!-- Submit Button -->
+                            
                         </div>
 
                         <div class="table-container h-auto  w-full border-t-2 border-teal-900 " id="password"
@@ -384,15 +372,60 @@
                 if (file) {
                     const validTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
                     if (!validTypes.includes(file.type)) {
-                        showErrorAlert('Invalid file type. Please upload an image (jpeg, png, jpg, gif).');
+                        alert.classList.add('p-3');
+                        alert.classList.add('border');
+                        alert.classList.add('border-red-500');
+                        alert.classList.add('bg-red-100');
+                        alert.classList.add('text-red-500');
+                        alert.innerHTML = 'Invalid file type. Please upload an image (jpeg, png, jpg, gif).';
+
+                        setTimeout(function () {
+                            alert.innerHTML = '';
+                            alert.classList.remove('p-3');
+                            alert.classList.remove('border');
+                            alert.classList.remove('border-red-500');
+                            alert.classList.remove('bg-red-100');
+                            alert.classList.remove('text-red-500');
+                        }, 3000);
+
                         return;
                     }
                     if (file.size > 2048 * 1024) { // 2048 KB
-                        showErrorAlert('File size exceeds 2 MB. Please upload a smaller image.');
+                        alert.classList.add('p-3');
+                        alert.classList.add('border');
+                        alert.classList.add('border-red-500');
+                        alert.classList.add('bg-red-100');
+                        alert.classList.add('text-red-500');
+                        alert.innerHTML = 'File size exceeds 2 MB. Please upload a smaller image.';
+
+                        setTimeout(function () {
+                            alert.innerHTML = '';
+                            alert.classList.remove('p-3');
+                            alert.classList.remove('border');
+                            alert.classList.remove('border-red-500');
+                            alert.classList.remove('bg-red-100');
+                            alert.classList.remove('text-red-500');
+                        }, 3000);
+
                         return;
                     }
                 } else {
-                    showErrorAlert('Please select a picture first.');
+                    alert.classList.add('p-3');
+                    alert.classList.add('border');
+                    alert.classList.add('border-red-500');
+                    alert.classList.add('bg-red-100');
+                    alert.classList.add('text-red-500');
+                    alert.innerHTML = 'Please input image first.';
+
+                    setTimeout(function () {
+                        alert.innerHTML = '';
+                        alert.classList.remove('p-3');
+                        alert.classList.remove('border');
+                        alert.classList.remove('border-red-500');
+                        alert.classList.remove('bg-red-100');
+                        alert.classList.remove('text-red-500');
+                    }, 3000);
+
                     return;
                 }
 
@@ -446,6 +479,8 @@
                 alert.classList.add('p-3');
                 alert.classList.add('border');
                 alert.classList.add('border-red-500');
+                alert.classList.add('bg-red-100');
+                alert.classList.add('text-red-500');
                 alert.innerHTML = message;
 
                 setTimeout(function () {
@@ -453,6 +488,8 @@
                     alert.classList.remove('p-3');
                     alert.classList.remove('border');
                     alert.classList.remove('border-red-500');
+                    alert.classList.remove('bg-red-100');
+                    alert.classList.remove('text-red-500');
                 }, 3000);
             }
 
@@ -461,6 +498,8 @@
                 alert.classList.add('p-3');
                 alert.classList.add('border');
                 alert.classList.add('border-green-500'); // Use green color for success alert
+                alert.classList.add('bg-green-100');
+                alert.classList.add('text-green-500'); // Use white color for success alert
                 alert.innerHTML = message;
 
                 setTimeout(function () {
@@ -468,6 +507,8 @@
                     alert.classList.remove('p-3');
                     alert.classList.remove('border');
                     alert.classList.remove('border-green-500');
+                    alert.classList.remove('bg-green-100');
+                    alert.classList.remove('text-green-500');
                 }, 3000);
             }
         });

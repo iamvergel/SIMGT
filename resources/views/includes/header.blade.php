@@ -34,4 +34,4 @@
 
 </head>
 
-<body class="bg-gradient-to-tr from-sky-50 via-white to-white h-screen w-screen flex items-center justify-center "></body>
+<body class="bg-gradient-to-tr from-sky-50 via-white to-white h-screen w-screen flex items-center justify-center ">

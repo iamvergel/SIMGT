@@ -18,11 +18,19 @@ use App\Http\Controllers\GradeController;
 use App\Http\Controllers\TeacherAdvisoryController;
 use App\Http\Controllers\TeacherSubjectClassController;
 use App\Http\Controllers\TeacherProfile;
+use App\Http\Controllers\Registration;
+use App\Http\Controllers\TeacherClassAdvisory;
 
 // Landing Page
-Route::get('/StEmelieLearningCenter.Admission', function () {
+Route::get('/StEmelieLearningCenter.HopeSci66/Admission', function () {
     return view('landing_page');
 });
+
+Route::get('/StEmelieLearningCenter.HopeSci66/Registration', function () {
+    return view('registration');
+});
+
+Route::post('/register', [Registration::class, 'store'])->name('student.register');
 
 // Authentication Routes
 Route::get('/StEmelieLearningCenter.HopeSci66/sign-in', [Clogin::class, 'showLoginForm'])->name('admin.login');
@@ -46,6 +54,10 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         Route::get('/StudentProfile', function () {
             return view('admin.includes.show_student_profile');
         });
+    });
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management/AddStudent', function () {
+        return view('admin.includes.add_student_form');
     });
 
     // Grade Book Routes
@@ -80,6 +92,8 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         Route::get('/AllStudentData', [Cstudentinfo::class, 'showAllStudentData'])->name('admin.admin_show_all_data');
     });
 
+    Route::get('/StEmelieLearningCenter.HopeSci66/teacher/dashboard', [TeacherClassAdvisory::class, 'showMyadvisory'])->name('teacher.dashboard');
+
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/manage-accounts/admin-users', [Cadmininfo::class, 'showAllAdmin'])->name('admin.user');
     Route::post('/admin/create', [Cadmininfo::class, 'store'])->name('admin.create');
     Route::delete('/admin/{id}', [Cadmininfo::class, 'destroy'])->name('admin.delete');
@@ -110,7 +124,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::put('admin/section/{id}', [SectionController::class, 'update'])->name('section.update'); // Update subject route
     Route::delete('admin/section/{id}', [SectionController::class, 'destroy'])->name('section.destroy'); // Delete subject route
 
-    Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management/{id}', [Cstudentinfo::class, 'showStudenyInfotmation'])->name('student.show');
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management/{id}', [Cstudentinfo::class, 'showStudentInfotmation'])->name('student.show');
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/teacher-management/{id}', [TeacherUserController::class, 'showTeacherInfotmation'])->name('teacher.show');
 
 
@@ -124,7 +138,6 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     });
 
     // Other Admin Dashboard Routes
-    Route::post('/students', [Cstudentinfo::class, 'store'])->name('includes.add_student_form.store');
     Route::post('/student-grade', [Cstudentgrades::class, 'store'])->name('student.grade.store');
     Route::get('/fetch-grades', [Cstudentgrades::class, 'fetchGrades'])->name('grades.fetch');
     // web.php
@@ -143,6 +156,8 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/calendar', function () {
         return view('admin.admin_calendar');
     });
+
+    Route::post('/students', [Cstudentinfo::class, 'store'])->name('includes.add_student_form.store');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/announcement', function () {
         return view('admin.admin_announcement');

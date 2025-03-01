@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\StudentInfo;
+use App\Models\Section;
 use App\Models\StudentAdditionalInfo;
 use App\Models\StudentDocuments;
 use App\Models\Mstudentaccount;
@@ -581,10 +582,9 @@ class Cstudentgrades extends Controller
     public function getGradeOneSections()
     {
         // Fetch all distinct sections from the StudentInfo model where section is not null or empty
-        $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
+        $sections = Section::whereNotNull('section')  // Ensure section is not null
             ->where('section', '!=', '') // Ensure section is not an empty string
             ->where('grade', 'Grade One')
-            ->where('status', 'Active')  // Ensure student is active
             ->distinct()  // Get only distinct sections
             ->pluck('section'); // Get only the 'section' column
 
@@ -595,10 +595,9 @@ class Cstudentgrades extends Controller
     public function getGradeTwoSections()
     {
         // Fetch all distinct sections from the StudentInfo model where section is not null or empty
-        $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
+        $sections = Section::whereNotNull('section')  // Ensure section is not null
             ->where('section', '!=', '') // Ensure section is not an empty string
             ->where('grade', 'Grade Two')
-            ->where('status', 'Active')  // Ensure student is active
             ->distinct()  // Get only distinct sections
             ->pluck('section'); // Get only the 'section' column
 
@@ -609,10 +608,9 @@ class Cstudentgrades extends Controller
     public function getGradeThreeSections()
     {
         // Fetch all distinct sections from the StudentInfo model where section is not null or empty
-        $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
+        $sections = Section::whereNotNull('section')  // Ensure section is not null
             ->where('section', '!=', '') // Ensure section is not an empty string
             ->where('grade', 'Grade Three')
-            ->where('status', 'Active')  // Ensure student is active
             ->distinct()  // Get only distinct sections
             ->pluck('section'); // Get only the 'section' column
 
@@ -623,10 +621,9 @@ class Cstudentgrades extends Controller
     public function getGradeFourSections()
     {
         // Fetch all distinct sections from the StudentInfo model where section is not null or empty
-        $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
+        $sections = Section::whereNotNull('section')  // Ensure section is not null
             ->where('section', '!=', '') // Ensure section is not an empty string
             ->where('grade', 'Grade Four')
-            ->where('status', 'Active')  // Ensure student is active
             ->distinct()  // Get only distinct sections
             ->pluck('section'); // Get only the 'section' column
 
@@ -637,10 +634,9 @@ class Cstudentgrades extends Controller
     public function getGradeFiveSections()
     {
         // Fetch all distinct sections from the StudentInfo model where section is not null or empty
-        $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
+        $sections = StuSectiondentInfo::whereNotNull('section')  // Ensure section is not null
             ->where('section', '!=', '') // Ensure section is not an empty string
             ->where('grade', 'Grade Five')
-            ->where('status', 'Active')  // Ensure student is active
             ->distinct()  // Get only distinct sections
             ->pluck('section'); // Get only the 'section' column
 
@@ -651,10 +647,9 @@ class Cstudentgrades extends Controller
     public function getGradeSixSections()
     {
         // Fetch all distinct sections from the StudentInfo model where section is not null or empty
-        $sections = StudentInfo::whereNotNull('section')  // Ensure section is not null
+        $sections = Section::whereNotNull('section')  // Ensure section is not null
             ->where('section', '!=', '') // Ensure section is not an empty string
             ->where('grade', 'Grade Six')
-            ->where('status', 'Active')  // Ensure student is active
             ->distinct()  // Get only distinct sections
             ->pluck('section'); // Get only the 'section' column
 
