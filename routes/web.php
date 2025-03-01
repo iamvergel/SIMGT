@@ -20,6 +20,7 @@ use App\Http\Controllers\TeacherSubjectClassController;
 use App\Http\Controllers\TeacherProfile;
 use App\Http\Controllers\Registration;
 use App\Http\Controllers\TeacherClassAdvisory;
+use App\Http\Controllers\RegisterStudent;
 
 // Landing Page
 Route::get('/StEmelieLearningCenter.HopeSci66/Admission', function () {
@@ -90,6 +91,8 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         Route::get('/GradeSix', [Cstudentinfo::class, 'showGradeSixData'])->name('grade.six');
         Route::get('/AllStudentData', [Cstudentinfo::class, 'showAllStudentData'])->name('admin.admin_show_all_data');
     });
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/online-application', [RegisterStudent::class, 'showAllRegister'])->name('register.student');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/teacher/myadvisory', [TeacherClassAdvisory::class, 'showMyadvisory'])->name('teacher.advisory');
     Route::get('/StEmelieLearningCenter.HopeSci66/teacher/class-record', [TeacherSubjectClassController::class, 'showclasssubjectadvisory'])->name('teacher.class-record');

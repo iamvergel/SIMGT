@@ -571,7 +571,7 @@ class Cstudentinfo extends Controller
     public function showGradeTwoData()
     {
         // Fetch all Grade Two student records
-        $students = StudentInfo::where('grade', 'Grade Two')->where('status', 'Active')->get();
+        $students = StudentInfo::where('status', 'Active')->get();
 
         // Check if there are no students in Grade Two
         $noGradeTwoMessage = $students->isEmpty() ? "No students found in Grade Two." : null;

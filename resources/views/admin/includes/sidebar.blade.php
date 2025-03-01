@@ -333,11 +333,11 @@
                 <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
             </button>
             <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="reportsection">
-                <a href="#"
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/online-application"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
-                    title="Pending Student">
+                    title="Online Application">
                     <i class="fa-solid fa-folder-open"></i>
-                    <span class="sidebar-text ml-2">Pending Student</span>
+                    <span class="sidebar-text ml-2">Online Application</span>
                 </a>
                 <a href="/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Graduate-Student"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"

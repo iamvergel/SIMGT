@@ -257,7 +257,7 @@
                       @csrf
                       @method('POST')
 
-                      <div class="mb-4">
+                      <div class="mb-4 hidden">
                         <label for="updateAnnouncementDate" class="font-semibold text-[15px] mt-4"><span
                             class="text-red-500">*</span>Date</label>
                         <input type="date" id="updateAnnouncementDate" name="date"

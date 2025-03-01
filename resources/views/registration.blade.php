@@ -2,40 +2,76 @@
 <div class="2xl:max-w-[1600px] w-full h-full overflow-hidden overflow-y-scroll bg-gray-100">
     <div class="p-0 lg:p-5">
         @if (session('success'))
-            <div class="bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md" role="alert">
-                <div class="flex">
-                    <div class="py-1">{{ session('success') }}<i class="fa-solid fa-check text-green-500"></i></div>
+            <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div class="bg-white rounded-lg shadow-lg p-5 max-w-sm">
+                    <div class="flex items-center text-green-700 text-md font-bold">
+                        <i class="fa-solid fa-check text-green-700 mr-2"></i>
+                        <span>{{ session('success') }}</span>
+                    </div>
+                    <hr class="border-1 border-teal-700 mt-5">
+                    <div class="mt-5 text-sm">
+                        <span>
+                            Please proceed to the Admissions Office to submit the original copies of the following
+                            required documents: <br /><br />
+
+                            <span class="font-bold">Required Documents:</span>
+                        </span>
+                        <ul class="list-disc pl-5 mt-5">
+                            <li class="list-item">Birth Certificate (PSA/NSO Copy)</li>
+                            <li class="list-item">Form 137 (SPF 10)</li>
+                        </ul>
+                        <span class="block mt-5 bg-gray-200 p-2">
+                            <i class="fa-solid fa-circle-exclamation me-2 text-green-700"></i><span
+                                class="font-bold">Important:</span> Your registration will only be processed once all
+                            required documents have been
+                            submitted.
+                        </span>
+                    </div>
+                    <div class="flex justify-end mt-5">
+                        <button class="cursor-pointer bg-teal-700 hover:bg-teal-800 px-5 py-1 rounded text-white"
+                            onclick="this.parentElement.parentElement.parentElement.style.display='none';">
+                            Close</button>
+                    </div>
                 </div>
             </div>
         @endif
+
 
         @if ($errors->any())
-            <div class="bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md" role="alert">
-                <div class="flex">
-                    <div class="py-1">{{ session('success') }}<i class="fa-solid fa-circle-exclamation text-red-500"></i>
+            <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                <div class="bg-white rounded-lg shadow-lg p-5 max-w-sm">
+                    <div class="flex items-center text-red-700 text-md font-bold">
+                        <i class="fa-solid fa-circle-exclamation text-red-500 mr-2"></i>
+                        <span>Error</span>
                     </div>
-                    <div>
-                        ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
+                    <hr class="border-1 border-red-500 mt-5">
+                    <div class="mt-5 text-sm">
+                        <ul class="list-disc pl-5 mt-5">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
                         </ul>
+                    </div>
+                    <div class="flex justify-end mt-5">
+                        <button class="cursor-pointer bg-red-500 hover:bg-red-700 px-5 py-1 rounded text-white"
+                            onclick="this.parentElement.parentElement.parentElement.style.display='none';">
+                            Close</button>
                     </div>
                 </div>
             </div>
         @endif
 
-        <div class="flex justify-center items-center my-5">
+        <div class="flex justify-center items-center my-5" id="top">
             <img src="{{ asset('../assets/images/SELC.png') }}" alt=""
-                class="me-2 w-[50px] md:w-[60px] lg:w-[70px] xl:w-[90px]">
+                class="me-2 w-[50px] md:w-[60px] lg:w-[70px] xl:w-[90px] rounded-full">
             <p class="text-[15px] md:text-[30px] lg:text-[40px] xl:text-[50px] font-bold text-teal-900">St. Emelie
                 Learning Center</p>
         </div>
 
         <div class="bg-gray-100">
             <!-- Modal body -->
-            <form class="p-5 lg:p-10 " onsubmit="return validateForm()" id="myform" action="{{ route('student.register') }}"
-                method="POST" enctype="multipart/form-data">
+            <form class="p-5 lg:p-10 " onsubmit="return validateForm()" id="myform"
+                action="{{ route('student.register') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="grid grid-cols-4 gap-4 mb-4 text-[13px] text-gray-900">
@@ -68,14 +104,18 @@
                                     </div>
 
 
-                                    <div class="mb-5 hidden">
+                                    <div class="mb-5">
                                         <label for="status" class="block mb-2 text-sm font-bold text-gray-900">
-                                            <span class="text-red-600 mr-1">*</span>Student No. :</label>
-                                        <input type="text" name="status" id="status" value="pending"
-                                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                            placeholder="0000-0000" required>
+                                            <span class="text-red-600 mr-1">*</span>Admission Type :</label>
+                                        <select name="status" id="status" required
+                                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
+                                            <option value="" disabled selected>Select Admission Type</option>
+                                            <option value="new regular">New Regular</option>
+                                            <option value="transferee">Transferee</option>
+                                        </select>
                                         <div class="text-red-600 text-xs hidden" id="alert">This field is required</div>
                                     </div>
+
                                     <div class="mb-5">
                                         <label for="schoolYear" class="block mb-2 text-sm font-bold text-gray-900">
                                             <span class="text-red-600 mr-1">*</span>School Year :
@@ -114,15 +154,17 @@
                                         onclick="showNextStep()" type="button">Next</button>
                                 </div>
                             </div>
-
                         </li>
-
-                        <li class="hidden mb-10 ms-6">
+                        <div>
                             <span
                                 class="absolute flex items-center justify-center w-6 h-6 bg-teal-100 rounded-full -start-3 ring-8 ring-white">
                                 <i class="fa-solid fa-file text-teal-700"></i>
                             </span>
-                            <h1>Primary Information</h1>
+                            <h1 class="ml-5">Personal Information</h1>
+                        </div>
+
+                        <li class="hidden mb-10 ms-6">
+
                             <div
                                 class=" col-span-4 p-5 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
 
@@ -320,12 +362,14 @@
                             </div>
                         </li>
 
-                        <li class="hidden mb-10 ms-6">
+                        <div class="mt-5">
                             <span
                                 class="absolute flex items-center justify-center w-6 h-6 bg-teal-100 rounded-full -start-3 ring-8 ring-white">
                                 <i class="fa-solid fa-file text-teal-700"></i>
                             </span>
-                            <h1>Parents Information</h1>
+                            <h1 class="ml-5">Parents Information</h1>
+                        </div>
+                        <li class="hidden mb-10 ms-6">
                             <div
                                 class=" col-span-4 p-5 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
                                 <div
@@ -452,12 +496,14 @@
                             </div>
                         </li>
 
-                        <li class="hidden mb-10 ms-6">
+                        <div class="mt-5">
                             <span
                                 class="absolute flex items-center justify-center w-6 h-6 bg-teal-100 rounded-full -start-3 ring-8 ring-white">
                                 <i class="fa-solid fa-file text-teal-700"></i>
                             </span>
-                            <h1>Guardian Information</h1>
+                            <h1 class="ml-5">Guardian Information</h1>
+                        </div>
+                        <li class="hidden mb-10 ms-6">
                             <div
                                 class="col-span-4 p-5 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
                                 <div
@@ -573,12 +619,14 @@
                             </div>
                         </li>
 
-                        <li class="hidden mb-10 ms-6">
+                        <div class="mt-5">
                             <span
                                 class="absolute flex items-center justify-center w-6 h-6 bg-teal-100 rounded-full -start-3 ring-8 ring-white">
                                 <i class="fa-solid fa-file text-teal-700"></i>
                             </span>
-                            <h1>Emergency Contact Information</h1>
+                            <h1 class="ml-5">Emergency Contact Information</h1>
+                        </div>
+                        <li class="hidden mb-10 ms-6">
                             <div
                                 class=" col-span-4 p-5 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
                                 <div
@@ -640,12 +688,14 @@
                             </div>
                         </li>
 
-                        <li class="hidden mb-10 ms-6">
+                        <div class="mt-5">
                             <span
                                 class="absolute flex items-center justify-center w-6 h-6 bg-teal-100 rounded-full -start-3 ring-8 ring-white">
                                 <i class="fa-solid fa-file text-teal-700"></i>
                             </span>
-                            <h1>Student Documents</h1>
+                            <h1 class="ml-5">Student Documents</h1>
+                        </div>
+                        <li class="hidden mb-10 ms-6">
                             <div
                                 class=" col-span-4 p-5 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
                                 <div
@@ -684,62 +734,35 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-span-4 flex justify-center mt-1S0">
-                                    <label class="flex items-center space-x-2">
-                                        <span>Double check your information before to proceed</span>
+                                <div class="col-span-4 flex justify-center mt-10">
+                                    <label class="flex items-center space-x-2 text-center">
+                                        <span class="text-gray-600 font-semibold text-lg">Double check your information
+                                            before you proceed <br/> <span onclick="window.location.href = '#top';" class="cursor-pointer p-2 px-3 mt-10 rounded-full text-xl text-white bg-teal-700 hover:bg-teal-800"><i class="fa-solid fa-chevron-up"></i></span></span>
+                                            
                                     </label>
-                                </div>  
+                                </div>
                                 <div class="col-span-4 flex  justify-center lg:justify-end mt-20 lg:me-20">
                                     <label class="flex items-center space-x-2">
                                         <input type="checkbox" id="confirmCheck"
                                             class="form-checkbox h-5 w-5 text-teal-600">
-                                        <span>I Double check my information</span>
+                                        <span>I double-checked my information</span>
+                                        
                                     </label>
-                                </div>  
+                                </div>
                                 <div class="col-span-4 flex justify-end mt-5">
                                     <button type="submit" id="submitButton" disabled
-                                        class="text-white w-96 text-center bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-teal-300 font-bold rounded text-sm px-20 py-2.5 text-center">
+                                        class="text-white w-96 text-center bg-gray-400 focus:ring-4 focus:outline-none focus:ring-teal-300 font-bold rounded text-sm px-20 py-2.5 text-center">
                                         Submit Registration
                                     </button>
                                 </div>
 
-                                <!-- Modal -->
-                                <div id="confirmationModal" class="fixed z-10 inset-0 overflow-y-auto hidden">
-                                    <div class="flex items-center justify-center min-h-screen">
-                                        <div class="bg-white p-6 rounded shadow-lg">
-                                            <h2 class="text-lg font-bold mb-4">Confirm Your Information</h2>
-                                            <div id="modalContent" class="mb-4">
-                                                <!-- Content will be populated by JavaScript -->
-                                            </div>
-                                            <div class="flex justify-end">
-                                                <button type="button" id="modalCloseButton" class="bg-red-600 text-white px-4 py-2 rounded mr-2">Cancel</button>
-                                                <button type="button" id="modalSubmitButton" class="bg-teal-600 text-white px-4 py-2 rounded">Confirm</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <script>
                                     document.getElementById('confirmCheck').addEventListener('change', function () {
                                         const submitButton = document.getElementById('submitButton');
                                         submitButton.disabled = !this.checked;
                                         submitButton.classList.toggle('bg-gray-400', !this.checked);
                                         submitButton.classList.toggle('bg-sky-800', this.checked);
-                                    });
-
-                                    document.getElementById('submitButton').addEventListener('click', function () {
-                                        if (!this.disabled) {
-                                            const { jsPDF } = window.jspdf;
-                                            const doc = new jsPDF();
-
-                                            const inputs = document.querySelectorAll('input[type="text"], input[type="email"]');
-                                            let content = '';
-                                            inputs.forEach(input => {
-                                                content += `${input.name}: ${input.value}\n`;
-                                            });
-
-                                            doc.text(content, 10, 10);
-                                            doc.save('registration_info.pdf');
-                                        }
+                                        submitButton.classList.toggle('hover:bg-sky-700',this.checked);
                                     });
                                 </script>
                             </div>

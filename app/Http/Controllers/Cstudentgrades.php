@@ -217,7 +217,6 @@ class Cstudentgrades extends Controller
     {
         // Fetch all active student records with additional info and documents using eager loading
         $students = StudentInfo::with(['additionalInfo', 'documents', 'gradebookOne'])
-            ->where('grade', 'Grade One')
             ->where('status', 'Active')
             ->get();
 

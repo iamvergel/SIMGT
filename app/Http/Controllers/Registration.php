@@ -123,7 +123,7 @@ class Registration extends Controller
 
 
             // Redirect or return response
-            return back()->with('success', 'Registration Submitted successfully!');
+            return back()->with('success', 'Registration Submitted Successfully!');
         } catch (\Exception $e) {
             \Log::error('Error adding student: ' . $e->getMessage());
 

@@ -269,8 +269,8 @@
                                                 <span class="ml-2">{{ $teachers->teacher_number }}</span>
                                             </td>
                                             <!-- <td>
-                                                                                                <span class="ml-2">{{ $teachers->department }}</span>
-                                                                                            </td> -->
+                                                                                                        <span class="ml-2">{{ $teachers->department }}</span>
+                                                                                                    </td> -->
                                             <td class="{{ $teachers->status == "Inactive" ? "bg-red-100" : "" }}">
                                                 <span class="ml-2">{{ $teachers->position }}</span>
                                             </td>
@@ -399,12 +399,12 @@
                                                 for="school_year">
                                                 <span class="text-red-600 mr-1">*</span>School Year
                                             </label>
-                                            <select name="school_year" id="school_year{{ $teachers->id }}" required
+                                            <select name="school_year" id="schoolYear" required
                                                 class="form-select block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
-                                                <option value="">Select School Year</option>
-                                                @for ($i = date('Y') - 1; $i <= date('Y'); $i++)
-                                                    <option value="{{ $i . '-' . ($i + 1) }}">{{ $i . '-' . ($i + 1) }}</option>
-                                                @endfor
+                                                <option value="" disabled selected>Select School Year</option>
+                                                <option value="{{ date('Y') - 1 }}-{{ date('Y') }}">
+                                                    {{ date('Y')}}-{{ date('Y') + 1 }}
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="col-span-1 mt-5">
@@ -505,7 +505,7 @@
                                     <form action="{{ route('teachersubject.create') }}" method="POST"
                                         class="grid grid-cols-1 gap-4">
                                         @csrf
-                                        <div class="col-span-1 ">
+                                        <div class="col-span-1 hidden">
                                             <label
                                                 class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                                 for="teacher_number">
@@ -522,12 +522,12 @@
                                                 for="school_year">
                                                 <span class="text-red-600 mr-1">*</span>School Year
                                             </label>
-                                            <select name="school_year" id="subject_school_year{{ $teachers->id }}" required
+                                            <select name="school_year" id="schoolYear" required
                                                 class="form-select block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
                                                 <option value="" disabled selected>Select School Year</option>
-                                                @for ($i = date('Y') - 1; $i <= date('Y'); $i++)
-                                                    <option value="{{ $i . '-' . ($i + 1) }}">{{ $i . '-' . ($i + 1) }}</option>
-                                                @endfor
+                                                <option value="{{ date('Y') - 1 }}-{{ date('Y') }}">
+                                                    {{ date('Y')}}-{{ date('Y') + 1 }}
+                                                </option>
                                             </select>
                                         </div>
                                         <div class="col-span-1 mt-5">

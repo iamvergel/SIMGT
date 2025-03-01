@@ -110,14 +110,12 @@
                                         <label for="schoolYear" class="block mb-2 text-sm font-bold text-gray-900">
                                             <span class="text-red-600 mr-1">*</span>School Year :
                                         </label>
-                                        <select name="school_year" id="schoolYear"
-                                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                            required>
+                                        <select name="school_year" id="schoolYear" required
+                                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
                                             <option value="" disabled selected>Select School Year</option>
-                                            @for ($i = date('Y') - 1; $i <= date('Y'); $i++)
-                                                <option value="{{ $i . '-' . ($i + 1) }}">{{ $i . '-' . ($i + 1) }}
-                                                </option>
-                                            @endfor
+                                            <option value="{{ date('Y') - 1 }}-{{ date('Y') }}">
+                                                {{ date('Y')}}-{{ date('Y') + 1 }}
+                                            </option>
                                         </select>
                                     </div>
 
