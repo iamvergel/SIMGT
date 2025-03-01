@@ -11,7 +11,7 @@
                     <hr class="border-1 border-teal-700 mt-5">
                     <div class="mt-5 text-sm">
                         <span>
-                            Please proceed to the Admissions Office to submit the original copies of the following
+                            Please proceed to the Registrar's Office to submit the original copies of the following
                             required documents: <br /><br />
 
                             <span class="font-bold">Required Documents:</span>
