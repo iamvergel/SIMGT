@@ -1,15 +1,15 @@
-@include('admin.includes.header')
+@include('teacher.includes.header')
 
 <body class="font-poppins bg-gray-200 overflow-hidden">
 
     <div class="flex w-full h-screen">
         <!-- Sidebar -->
-        @include('admin.includes.sidebar')
+        @include('teacher.includes.sidebar')
 
         <!-- Main Content -->
         <main class="flex-grow rounded-r-lg bg-white shadow-lg overflow-y-scroll w-full bg-zinc-50" id="content">
             <header class="sticky top-0 z-[10]">
-                @include('admin.includes.topnav')
+                @include('teacher.includes.topnav')
             </header>
 
             <div class="p-5">
@@ -17,11 +17,11 @@
                                 <div id="studentModal" class="relative w-full min-h-screen bg-gray-100">
                                     <div class="relative">
                                         <div class="w-full h-full bg-white rounded-lg shadow p-5">
-                                            <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
+                                            <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Teacher</p>
                                             <p class="text-2xl font-bold text-teal-900 ml-5">
                                                 <span
                                                     onclick="window.location.href ='/StEmelieLearningCenter.HopeSci66/admin/student-management'"
-                                                    class="hover:text-teal-700">Student Management / </span>{{ $studentsPrimary->grade }} /
+                                                    class="hover:text-teal-700">My Advisory / </span>{{ $studentsPrimary->grade }} /
                                                 {{ $students->student_last_name }}, {{ $students->student_first_name }}
                                                 {{ $students->student_suffix_name }} {{ $students->student_middle_name }} | S.Y. {{ $studentsPrimary->school_year }}
                                             </p>
@@ -37,7 +37,7 @@
                                                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-0 xl:gap-0 bg-gray-50 p-0 m-0">
                                                     <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 active1 rounded-lg m-1 xl:rounded-lg xl:m-1"
                                                         data-target="#Information">SIMGT</li>
-                                                    <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 rounded-lg m-1 xl:rounded-lg xl:m-1"
+                                                    <!-- <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 rounded-lg m-1 xl:rounded-lg xl:m-1"
                                                         data-target="#documents">Documents</li>
                                                     <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 rounded-lg m-1 xl:rounded-lg xl:m-1"
                                                         data-target="#gradeOne">Grade One</li>
@@ -50,7 +50,7 @@
                                                     <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 rounded-lg m-1 xl:rounded-lg xl:m-1"
                                                         data-target="#gradeFive">Grade Five</li>
                                                     <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 rounded-lg m-1 xl:rounded-lg xl:m-1"
-                                                        data-target="#gradeSix">Grade Six</li>
+                                                        data-target="#gradeSix">Grade Six</li> -->
                                                 </ul>
                                             </div>
 
@@ -189,12 +189,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-span-5 lg:col-span-3 xl:col-span-4 px-5">
-                                                    <div class="col-span-3 my-5 flex justify-start">
+                                                    <!-- <div class="col-span-3 my-5 flex justify-start">
                                                         <button id="btnPrint"
                                                             class="text-[12px] text-white shadow-lg bg-sky-700 rounded-lg shadow hover:bg-sky-600 px-3 mt-3"><i
                                                                 class="fas fa-file-pdf mr-2"></i>Download Reports
                                                             Grade</button>
-                                                    </div>
+                                                    </div> -->
 
                                                     <!-- Scheduled Table -->
                                                     <div class="table-container w-full mt-10 pb-10" id="Information">

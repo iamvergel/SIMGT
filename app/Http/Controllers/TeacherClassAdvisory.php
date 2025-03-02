@@ -44,4 +44,30 @@ class TeacherClassAdvisory extends Controller
         return view('teacher.teacher_advisory', compact('students', 'noGradeOneMessage', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
 
     }
+
+    public function showStudentInfotmation(Request $request, $id)
+    {
+        // Fetch the specific student based on the provided id
+        $students = StudentInfo::where('id', $id)->where('status', 'Active')->first();
+
+        // If the student doesn't exist, you could redirect back or show an error message
+        if (!$students) {
+            return back()->withErrors('Student not found.');
+        }
+
+        // Fetch related data for the specific student
+        $studentsPrimary = StudentPrimaryInfo::where('lrn', $students->lrn)->first();
+        $studentsAdditional = StudentAdditionalInfo::where('student_number', $students->student_number)->first();
+        $studentDocuments = StudentDocuments::where('student_number', $students->student_number)->first();
+        $studentAccount = Mstudentaccount::where('student_number', $students->student_number)->first();
+        $studentGradeOne = Mstudentgradeone::where('student_number', $students->student_number)->first();
+        $studentGradeTwo = Mstudentgradetwo::where('student_number', $students->student_number)->first();
+        $studentGradeThree = Mstudentgradethree::where('student_number', $students->student_number)->first();
+        $studentGradeFour = Mstudentgradefour::where('student_number', $students->student_number)->first();
+        $studentGradeFive = Mstudentgradefive::where('student_number', $students->student_number)->first();
+        $studentGradeSix = Mstudentgradesix::where('student_number', $students->student_number)->first();
+
+        // You can pass other data here as needed
+        return view('teacher.teacher_myadvisory', compact('students', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount', 'studentGradeOne', 'studentGradeTwo', 'studentGradeThree', 'studentGradeFour', 'studentGradeFive', 'studentGradeSix'));
+    }
 }

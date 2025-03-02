@@ -108,7 +108,7 @@
                                                         <td>
                                                             <!-- View Student Information Button -->
                                                             <button class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-blue-700 rounded-full hover:bg-blue-600"
-                                                                    type="button" onclick="window.location.href = '{{ route('student.show', ['id' => $student->id]) }}'" title="Show Student Information">
+                                                                    type="button" onclick="window.location.href = '{{ route('mystudent.show', ['id' => $student->id]) }}'" title="Show Student Information">
                                                                 <i class="fa-solid fa-eye"></i>
                                                             </button>
                                                         </td>

@@ -8,7 +8,7 @@
 
         <!-- Main Content -->
         <main class="flex-grow rounded-r-lg bg-white shadow-lg overflow-y-scroll w-full bg-zinc-50" id="content">
-            <header>
+            <header class="sticky top-0 z-[10]">
                 @include('admin.includes.topnav')
             </header>
 
@@ -70,7 +70,8 @@
                             <form id="deleteSubjectForm" action="" method="POST" class="mt-8 flex justify-end gap-2">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">Yes,
+                                <button type="submit"
+                                    class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">Yes,
                                     Delete</button>
                                 <button type="button" id="cancelDeleteBtn"
                                     class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded">Cancel</button>
@@ -118,8 +119,8 @@
                                         for="section">
                                         <span class="text-red-600 mr-1">*</span>Section
                                     </label>
-                                    <input type="text" name="subject" placeholder="Input Section Name.." id="editSubject"
-                                        required 
+                                    <input type="text" name="subject" placeholder="Input Section Name.."
+                                        id="editSubject" required
                                         class="form-input block text-sm text-normal text-dark tracking-wider w-full lg:w-96 pl-5 p-3 border border-gray-400 rounded-md px-5">
                                 </div>
                                 <div class="flex justify-end">
@@ -235,7 +236,7 @@
 
 
     @include('admin.includes.js-link')
-    
+
     <script>
         // Get modal and buttons
         const modal = document.getElementById("addAdminModal");

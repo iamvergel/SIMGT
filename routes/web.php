@@ -79,6 +79,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         Route::get('/Archive-Student', [Cpages::class, 'showArchiveStudent'])->name('admin.admin_archive_student');
     });
 
+
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management', [Cstudentinfo::class, 'showGradeData']);
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/Grade-book', [Cstudentinfo::class, 'showGradebook'])->name('gradebook');
 
@@ -131,6 +132,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management/{id}', [Cstudentinfo::class, 'showStudentInfotmation'])->name('student.show');
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/teacher-management/{id}', [TeacherUserController::class, 'showTeacherInfotmation'])->name('teacher.show');
 
+    Route::get('/StEmelieLearningCenter.HopeSci66/taecher/myadvisory/{id}', [TeacherClassAdvisory::class, 'showStudentInfotmation'])->name('mystudent.show');
 
     Route::prefix('StEmelieLearningCenter.HopeSci66/admin/Grade-book')->group(function () {
         Route::get('/GradeOne', [Cstudentgrades::class, 'showGradebookOneData'])->name('grade.one');
@@ -142,6 +144,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     });
 
     // Other Admin Dashboard Routes
+    Route::post('/students', [Cstudentinfo::class, 'store'])->name('includes.add_student_form.store');
     Route::post('/student-grade', [Cstudentgrades::class, 'store'])->name('student.grade.store');
     Route::get('/fetch-grades', [Cstudentgrades::class, 'fetchGrades'])->name('grades.fetch');
     // web.php

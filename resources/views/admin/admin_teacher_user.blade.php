@@ -8,7 +8,7 @@
 
         <!-- Main Content -->
         <main class="flex-grow rounded-r-lg bg-white shadow-lg overflow-y-scroll w-full bg-zinc-50" id="content">
-            <header>
+            <header class="sticky top-0 z-[10]">
                 @include('admin.includes.topnav')
             </header>
 
@@ -269,8 +269,8 @@
                                                 <span class="ml-2">{{ $teachers->teacher_number }}</span>
                                             </td>
                                             <!-- <td>
-                                                                                                        <span class="ml-2">{{ $teachers->department }}</span>
-                                                                                                    </td> -->
+                                                                                                            <span class="ml-2">{{ $teachers->department }}</span>
+                                                                                                        </td> -->
                                             <td class="{{ $teachers->status == "Inactive" ? "bg-red-100" : "" }}">
                                                 <span class="ml-2">{{ $teachers->position }}</span>
                                             </td>
