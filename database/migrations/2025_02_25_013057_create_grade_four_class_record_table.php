@@ -120,9 +120,9 @@ return new class extends Migration
             $table->decimal('performance_ps', 5, 2)->default(100.00)->nullable(); // Performance score for written assessments
             $table->integer('performance_ws')->default(50)->nullable();
 
-            $table->integer('performance_one_score')->nullable(); // Written assessment 1 score
-            $table->integer('performance_two_score')->nullable(); // Written assessment 2 score
-            $table->integer('performance_three_score')->nullable(); // Written assessment 3 score
+            $table->integer('performance_one_score')->nullable(); // Performance assessment 1 score
+            $table->integer('performance_two_score')->nullable(); // Performance assessment 2 score
+            $table->integer('performance_three_score')->nullable(); // Performance assessment 3 score
             $table->integer('performance_four_score')->nullable();
             $table->integer('performance_five_score')->nullable();
             $table->integer('performance_six_score')->nullable();
@@ -133,17 +133,17 @@ return new class extends Migration
             $table->integer('performance_total_score')
                 ->nullable()
                 ->virtualAs(
-                    'IFNULL(written_one_score, 0) +
-                IFNULL(written_two_score, 0) +
-                IFNULL(written_three_score, 0) +
-                IFNULL(written_four_score, 0) +
-                IFNULL(written_five_score, 0) +
-                IFNULL(written_six_score, 0) +
-                IFNULL(written_seven_score, 0) +
-                IFNULL(written_eight_score, 0) +
-                IFNULL(written_nine_score, 0) +
-                IFNULL(written_ten_score, 0)'
-                ); // Total score from written assessments
+                    'IFNULL(performance_one_score, 0) +
+                    IFNULL(performance_two_score, 0) +
+                    IFNULL(performance_three_score, 0) +
+                    IFNULL(performance_four_score, 0) +
+                    IFNULL(performance_five_score, 0) +
+                    IFNULL(performance_six_score, 0) +
+                    IFNULL(performance_seven_score, 0) +
+                    IFNULL(performance_eight_score, 0) +
+                    IFNULL(performance_nine_score, 0) +
+                    IFNULL(performance_ten_score, 0)'
+                ); // Total score from performance assessments
             $table->decimal('performance_ps_score', 5, 2)
                 ->nullable()
                 ->virtualAs(

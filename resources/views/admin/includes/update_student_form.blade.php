@@ -197,7 +197,7 @@
                                         value="{{ old('adviser', $primaryInfo->adviser) }}">
                                     <input type="text"
                                         class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                        value="{{ $teacherInfo->first_name . ' ' . $teacherInfo->last_name . ' ' . $teacherInfo->middle_name . ' ' . $teacherInfo->suffix }}"
+                                        value="{{ $teacherInfo->first_name . ' ' . $teacherInfo->last_name . ' ' . $teacherInfo->middle_name . ' ' . $teacherInfo->suffix ?? 'No Adviser'}}"
                                         placeholder="Enter Adviser" required readonly>
                                 </div>
                             </div>

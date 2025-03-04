@@ -58,7 +58,7 @@ return new class extends Migration
             $table->integer('hps_performance_total')
                 ->nullable()
                 ->virtualAs(
-                    'IFNULL(hps_written_one, 0) +
+                    'IFNULL(hps_performance_total, 0) +
                         IFNULL(hps_performance_two, 0) +
                         IFNULL(hps_performance_three, 0) +
                         IFNULL(hps_performance_four, 0) +

@@ -199,18 +199,22 @@ class Cstudentinfo extends Controller
 
                 foreach ($quarters as $quarter) {
                     foreach ($subjects as $subject) {
-                        $classRecordTwo = new GradeTwoClassRecord();
-                        $classRecordTwo->lrn = $validatedData['lrn'];
-                        $classRecordTwo->student_number = $validatedData['student_number'];
+                        $classRecordOne = new GradeTwoClassRecord();
+                        $classRecordOne->lrn = $validatedData['lrn'];
+                        $classRecordOne->student_number = $validatedData['student_number'];
+                        $classRecordOne->school_year = $validatedData['school_year'];
+                        $classRecordOne->last_name = $validatedData['lastName'] ? ucwords(strtolower($validatedData['lastName'])) : null;
+                        $classRecordOne->first_name = $validatedData['firstName'] ? ucwords(strtolower($validatedData['firstName'])) : null;
+                        $classRecordOne->middle_name = $validatedData['middleName'] ? ucwords(strtolower($validatedData['middleName'])) : null;
+                        $classRecordOne->suffix = $validatedData['suffixName'] ? ucwords(strtolower($validatedData['suffixName'])) : null;
+                        $classRecordOne->gender = $validatedData['gender'];
+                        $classRecordOne->quarter = $quarter;
+                        $classRecordOne->grade = $validatedData['grade'];
+                        $classRecordOne->section = $validatedData['section'];
+                        $classRecordOne->subject = $subject->subject;
 
-                        $classRecordTwo->school_year = $validatedData['school_year'];
-                        $classRecordTwo->quarter = $quarter;
-                        $classRecordTwo->grade = $validatedData['grade'];
-                        $classRecordTwo->section = $validatedData['section'];
-                        $subjectField = strtolower(str_replace(' ', '_', $subject->subject));
-                        $classRecordTwo->$subjectField = $validatedData[$subjectField] ?? null;
-                        $classRecordTwo->subject = $subject->subject;
-                        $classRecordTwo->save();
+                        // You can assign other dynamic fields, like written scores or performance scores, if needed
+                        $classRecordOne->save();
                     }
                 }
             } else if (in_array($validatedData['grade'], ['Grade Three'])) {
@@ -219,17 +223,22 @@ class Cstudentinfo extends Controller
 
                 foreach ($quarters as $quarter) {
                     foreach ($subjects as $subject) {
-                        $classRecordThree = new GradeThreeClassRecord();
-                        $classRecordThree->lrn = $validatedData['lrn'];
-                        $classRecordThree->student_number = $validatedData['student_number'];
-                        $classRecordThree->school_year = $validatedData['school_year'];
-                        $classRecordThree->quarter = $quarter;
-                        $classRecordThree->grade = $validatedData['grade'];
-                        $classRecordThree->section = $validatedData['section'];
-                        $subjectField = strtolower(str_replace(' ', '_', $subject->subject));
-                        $classRecordThree->$subjectField = $validatedData[$subjectField] ?? null;
-                        $classRecordThree->subject = $subject->subject;
-                        $classRecordThree->save();
+                        $classRecordOne = new GradeThreeClassRecord();
+                        $classRecordOne->lrn = $validatedData['lrn'];
+                        $classRecordOne->student_number = $validatedData['student_number'];
+                        $classRecordOne->school_year = $validatedData['school_year'];
+                        $classRecordOne->last_name = $validatedData['lastName'] ? ucwords(strtolower($validatedData['lastName'])) : null;
+                        $classRecordOne->first_name = $validatedData['firstName'] ? ucwords(strtolower($validatedData['firstName'])) : null;
+                        $classRecordOne->middle_name = $validatedData['middleName'] ? ucwords(strtolower($validatedData['middleName'])) : null;
+                        $classRecordOne->suffix = $validatedData['suffixName'] ? ucwords(strtolower($validatedData['suffixName'])) : null;
+                        $classRecordOne->gender = $validatedData['gender'];
+                        $classRecordOne->quarter = $quarter;
+                        $classRecordOne->grade = $validatedData['grade'];
+                        $classRecordOne->section = $validatedData['section'];
+                        $classRecordOne->subject = $subject->subject;
+
+                        // You can assign other dynamic fields, like written scores or performance scores, if needed
+                        $classRecordOne->save();
                     }
                 }
             } else if (in_array($validatedData['grade'], ['Grade Four'])) {
@@ -238,17 +247,22 @@ class Cstudentinfo extends Controller
 
                 foreach ($quarters as $quarter) {
                     foreach ($subjects as $subject) {
-                        $classRecordFour = new GradeFourClassRecord();
-                        $classRecordFour->lrn = $validatedData['lrn'];
-                        $classRecordFour->student_number = $validatedData['student_number'];
-                        $classRecordFour->school_year = $validatedData['school_year'];
-                        $classRecordFour->quarter = $quarter;
-                        $classRecordFour->grade = $validatedData['grade'];
-                        $classRecordFour->section = $validatedData['section'];
-                        $subjectField = strtolower(str_replace(' ', '_', $subject->subject));
-                        $classRecordFour->$subjectField = $validatedData[$subjectField] ?? null;
-                        $classRecordFour->subject = $subject->subject;
-                        $classRecordFour->save();
+                        $classRecordOne = new GradeFourClassRecord();
+                        $classRecordOne->lrn = $validatedData['lrn'];
+                        $classRecordOne->student_number = $validatedData['student_number'];
+                        $classRecordOne->school_year = $validatedData['school_year'];
+                        $classRecordOne->last_name = $validatedData['lastName'] ? ucwords(strtolower($validatedData['lastName'])) : null;
+                        $classRecordOne->first_name = $validatedData['firstName'] ? ucwords(strtolower($validatedData['firstName'])) : null;
+                        $classRecordOne->middle_name = $validatedData['middleName'] ? ucwords(strtolower($validatedData['middleName'])) : null;
+                        $classRecordOne->suffix = $validatedData['suffixName'] ? ucwords(strtolower($validatedData['suffixName'])) : null;
+                        $classRecordOne->gender = $validatedData['gender'];
+                        $classRecordOne->quarter = $quarter;
+                        $classRecordOne->grade = $validatedData['grade'];
+                        $classRecordOne->section = $validatedData['section'];
+                        $classRecordOne->subject = $subject->subject;
+
+                        // You can assign other dynamic fields, like written scores or performance scores, if needed
+                        $classRecordOne->save();
                     }
                 }
             } else if (in_array($validatedData['grade'], ['Grade Five'])) {
@@ -257,17 +271,22 @@ class Cstudentinfo extends Controller
 
                 foreach ($quarters as $quarter) {
                     foreach ($subjects as $subject) {
-                        $classRecordFive = new GradeFiveClassRecord();
-                        $classRecordFive->lrn = $validatedData['lrn'];
-                        $classRecordFive->student_number = $validatedData['student_number'];
-                        $classRecordFive->school_year = $validatedData['school_year'];
-                        $classRecordFive->quarter = $quarter;
-                        $classRecordFive->grade = $validatedData['grade'];
-                        $classRecordFive->section = $validatedData['section'];
-                        $subjectField = strtolower(str_replace(' ', '_', $subject->subject));
-                        $classRecordFive->$subjectField = $validatedData[$subjectField] ?? null;
-                        $classRecordFive->subject = $subject->subject;
-                        $classRecordFive->save();
+                        $classRecordOne = new GradeFiveClassRecord();
+                        $classRecordOne->lrn = $validatedData['lrn'];
+                        $classRecordOne->student_number = $validatedData['student_number'];
+                        $classRecordOne->school_year = $validatedData['school_year'];
+                        $classRecordOne->last_name = $validatedData['lastName'] ? ucwords(strtolower($validatedData['lastName'])) : null;
+                        $classRecordOne->first_name = $validatedData['firstName'] ? ucwords(strtolower($validatedData['firstName'])) : null;
+                        $classRecordOne->middle_name = $validatedData['middleName'] ? ucwords(strtolower($validatedData['middleName'])) : null;
+                        $classRecordOne->suffix = $validatedData['suffixName'] ? ucwords(strtolower($validatedData['suffixName'])) : null;
+                        $classRecordOne->gender = $validatedData['gender'];
+                        $classRecordOne->quarter = $quarter;
+                        $classRecordOne->grade = $validatedData['grade'];
+                        $classRecordOne->section = $validatedData['section'];
+                        $classRecordOne->subject = $subject->subject;
+
+                        // You can assign other dynamic fields, like written scores or performance scores, if needed
+                        $classRecordOne->save();
                     }
                 }
             } else if (in_array($validatedData['grade'], ['Grade Six'])) {
@@ -276,17 +295,22 @@ class Cstudentinfo extends Controller
 
                 foreach ($quarters as $quarter) {
                     foreach ($subjects as $subject) {
-                        $classRecordSix = new GradeSixClassRecord();
-                        $classRecordSix->lrn = $validatedData['lrn'];
-                        $classRecordSix->student_number = $validatedData['student_number'];
-                        $classRecordSix->school_year = $validatedData['school_year'];
-                        $classRecordSix->quarter = $quarter;
-                        $classRecordSix->grade = $validatedData['grade'];
-                        $classRecordSix->section = $validatedData['section'];
-                        $subjectField = strtolower(str_replace(' ', '_', $subject->subject));
-                        $classRecordSix->$subjectField = $validatedData[$subjectField] ?? null;
-                        $classRecordSix->subject = $subject->subject;
-                        $classRecordSix->save();
+                        $classRecordOne = new GradeSixClassRecord();
+                        $classRecordOne->lrn = $validatedData['lrn'];
+                        $classRecordOne->student_number = $validatedData['student_number'];
+                        $classRecordOne->school_year = $validatedData['school_year'];
+                        $classRecordOne->last_name = $validatedData['lastName'] ? ucwords(strtolower($validatedData['lastName'])) : null;
+                        $classRecordOne->first_name = $validatedData['firstName'] ? ucwords(strtolower($validatedData['firstName'])) : null;
+                        $classRecordOne->middle_name = $validatedData['middleName'] ? ucwords(strtolower($validatedData['middleName'])) : null;
+                        $classRecordOne->suffix = $validatedData['suffixName'] ? ucwords(strtolower($validatedData['suffixName'])) : null;
+                        $classRecordOne->gender = $validatedData['gender'];
+                        $classRecordOne->quarter = $quarter;
+                        $classRecordOne->grade = $validatedData['grade'];
+                        $classRecordOne->section = $validatedData['section'];
+                        $classRecordOne->subject = $subject->subject;
+
+                        // You can assign other dynamic fields, like written scores or performance scores, if needed
+                        $classRecordOne->save();
                     }
                 }
             }
@@ -670,20 +694,19 @@ class Cstudentinfo extends Controller
 
     public function showGradeOneData()
     {
-        // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
-        $students = StudentInfo::with('student') // Only eager load 'student' relationship
-            ->where('status', 'Active') // Active students only
-            ->get();
+       // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+       $students = StudentInfo::with('student') // Only eager load 'student' relationship
+       ->where('status', 'Active') // Active students only
+       ->get();
 
-        // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
-        $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
-            ->where('grade', 'Grade One') // Filter for Grade One
-            ->where('status', 'Enrolled') // Ensure students are enrolled
-            ->get()->keyBy('studentnumber');
+   // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
+   $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
+       ->where('status', 'Enrolled') // Ensure students are enrolled
+       ->get()->keyBy('studentnumber');
 
-        $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
-        $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
-        $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+   $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+   $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+   $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
         $myTeacher = TeacherUser::whereIn('teacher_number', $studentsPrimary->pluck('adviser'))->get()->keyBy('teacher_number');
 
         // Check if there are no students found in Grade One
@@ -712,7 +735,6 @@ class Cstudentinfo extends Controller
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
         $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
-            ->where('grade', 'Grade One') // Filter for Grade One
             ->where('status', 'Enrolled') // Ensure students are enrolled
             ->get()->keyBy('studentnumber');
 
@@ -738,7 +760,6 @@ class Cstudentinfo extends Controller
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
         $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
-            ->where('grade', 'Grade One') // Filter for Grade One
             ->where('status', 'Enrolled') // Ensure students are enrolled
             ->get()->keyBy('studentnumber');
 
@@ -765,7 +786,6 @@ class Cstudentinfo extends Controller
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
         $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
-            ->where('grade', 'Grade One') // Filter for Grade One
             ->where('status', 'Enrolled') // Ensure students are enrolled
             ->get()->keyBy('studentnumber');
 
@@ -791,7 +811,6 @@ class Cstudentinfo extends Controller
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
         $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
-            ->where('grade', 'Grade One') // Filter for Grade One
             ->where('status', 'Enrolled') // Ensure students are enrolled
             ->get()->keyBy('studentnumber');
 
@@ -817,7 +836,6 @@ class Cstudentinfo extends Controller
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
         $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
-            ->where('grade', 'Grade One') // Filter for Grade One
             ->where('status', 'Enrolled') // Ensure students are enrolled
             ->get()->keyBy('studentnumber');
 
@@ -831,7 +849,6 @@ class Cstudentinfo extends Controller
 
         // Pass the data to the view
         return view('admin.admin_student_management_gradesix', compact('students', 'noGradeTwoMessage', 'myTeacher', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
-
     }
 
     //_________________________________________________________________

@@ -235,13 +235,18 @@
                 Class Record
             </p>
 
-            <a href="/StEmelieLearningCenter.HopeSci66/teacher/class-record"
-                class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
-                title="Class Record">
-                <i class="fa-solid fa-users"></i>
-                <span class="sidebar-text ml-2">Class Record</span>
+            <button
+        class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip"
+        id="studentManagementButton6" aria-expanded="false" aria-controls="classrecord" title="classrecord">
+        <i class="fa-solid fa-table-columns"><span class="sidebar-text ml-2">Class Record</span></i>
+        <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
+    </button>
 
-            </a>
+    <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="classrecord">
+        <!-- The list of subjects will be inserted here dynamically -->
+    </div>
+
+
 
             <br /><br />
 
@@ -269,6 +274,58 @@
     </nav>
 
     <script>
+        function getJwtToken() {
+            // Replace with actual method to retrieve token, like localStorage or cookies
+            return localStorage.getItem('jwt_token'); 
+        }
+
+        // Fetching teacher's subjects from the API
+        function fetchTeacherSubjects() {
+            const token = getJwtToken();
+
+            fetch('/api/teacher/subjects', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,  // Send JWT token in Authorization header
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const classRecordDiv = document.getElementById('classrecord');
+                classRecordDiv.innerHTML = ''; // Clear any previous content
+
+                if (data.length > 0) {
+                    data.forEach(subject => {
+                        const subjectElement = document.createElement('a');
+                        subjectElement.href = `/StEmelieLearningCenter.HopeSci66/teacher/class-record/${subject.subject}`;
+                        subjectElement.classList.add('flex', 'justify-start', 'items-center', 'sidebar-link', 'hover:bg-teal-700', 'rounded-md', 'mb-2', 'ml-0', 'mt-2', 'tooltip');
+                        subjectElement.title = 'Class Record';
+
+                        const iconElement = document.createElement('i');
+                        iconElement.classList.add('fa-solid', 'fa-users');
+                        subjectElement.appendChild(iconElement);
+
+                        const subjectText = document.createElement('span');
+                        subjectText.classList.add('sidebar-text', 'ml-2');
+                        subjectText.textContent = `${subject.subject} (${subject.school_year})`;
+                        subjectElement.appendChild(subjectText);
+
+                        classRecordDiv.appendChild(subjectElement);
+                    });
+                } else {
+                    classRecordDiv.innerHTML = '<p>No subjects found for this teacher.</p>';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching subjects:', error);
+                document.getElementById('classrecord').innerHTML = '<p>An error occurred while fetching subjects.</p>';
+            });
+        }
+
+        // Call the function to fetch subjects on page load
+        fetchTeacherSubjects();
+        
         // Check if the user is logged in
         const adminUsername = "{{ session('teacher_fname') }}"; // Get the admin username from the session
 
@@ -291,6 +348,8 @@
                 });
             });
         });
+
+        
 
         // Highlight the current path on load
         const currentPath = window.location.pathname;

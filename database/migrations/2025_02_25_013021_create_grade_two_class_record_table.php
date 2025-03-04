@@ -133,16 +133,16 @@ return new class extends Migration
             $table->integer('performance_total_score')
                 ->nullable()
                 ->virtualAs(
-                    'IFNULL(written_one_score, 0) +
-                IFNULL(written_two_score, 0) +
-                IFNULL(written_three_score, 0) +
-                IFNULL(written_four_score, 0) +
-                IFNULL(written_five_score, 0) +
-                IFNULL(written_six_score, 0) +
-                IFNULL(written_seven_score, 0) +
-                IFNULL(written_eight_score, 0) +
-                IFNULL(written_nine_score, 0) +
-                IFNULL(written_ten_score, 0)'
+                    'IFNULL(performance_one_score, 0) +
+                IFNULL(performance_two_score, 0) +
+                IFNULL(performance_three_score, 0) +
+                IFNULL(performance_four_score, 0) +
+                IFNULL(performance_five_score, 0) +
+                IFNULL(performance_six_score, 0) +
+                IFNULL(performance_seven_score, 0) +
+                IFNULL(performance_eight_score, 0) +
+                IFNULL(performance_nine_score, 0) +
+                IFNULL(performance_ten_score, 0)'
                 ); // Total score from written assessments
             $table->decimal('performance_ps_score', 5, 2)
                 ->nullable()

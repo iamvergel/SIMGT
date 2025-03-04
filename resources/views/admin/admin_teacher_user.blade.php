@@ -402,7 +402,7 @@
                                             <select name="school_year" id="schoolYear" required
                                                 class="form-select block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
                                                 <option value="" disabled selected>Select School Year</option>
-                                                <option value="{{ date('Y') - 1 }}-{{ date('Y') }}">
+                                                <option value="{{ date('Y')}}-{{ date('Y') + 1}}">
                                                     {{ date('Y')}}-{{ date('Y') + 1 }}
                                                 </option>
                                             </select>
@@ -525,7 +525,7 @@
                                             <select name="school_year" id="schoolYear" required
                                                 class="form-select block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
                                                 <option value="" disabled selected>Select School Year</option>
-                                                <option value="{{ date('Y') - 1 }}-{{ date('Y') }}">
+                                                <option value="{{ date('Y')}}-{{ date('Y') + 1 }}">
                                                     {{ date('Y')}}-{{ date('Y') + 1 }}
                                                 </option>
                                             </select>

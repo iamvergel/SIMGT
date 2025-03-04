@@ -93,7 +93,6 @@
                                         </tr>
                                     </thead>
                                     <tbody class="" id="tableBody">
-
                                             @foreach ($students as $student)
                                                 @php
                                                     $account = $studentAccount[$student->student_number] ?? null;

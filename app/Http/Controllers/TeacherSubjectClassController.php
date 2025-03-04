@@ -1,49 +1,80 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\TeacherSubjectClass;
-use App\Models\TeacherUser;
-use App\Models\StudentInfo;
-use App\Models\TeacherAdvisory;
-use App\Models\StudentPrimaryInfo;
-use App\Models\StudentAdditionalInfo;
-use App\Models\StudentDocuments;
-use App\Models\Mstudentaccount;
-use App\Models\Subject;
-use App\Models\GradeOneClassRecord;
-use App\Models\GradeTwoClassRecord;
-use App\Models\GradeThreeClassRecord;
-use App\Models\GradeFourClassRecord;
 use App\Models\GradeFiveClassRecord;
+use App\Models\GradeFourClassRecord;
+use App\Models\GradeOneClassRecord;
 use App\Models\GradeSixClassRecord;
-use Illuminate\Support\Facades\Auth;
+use App\Models\GradeThreeClassRecord;
+use App\Models\GradeTwoClassRecord;
+use App\Models\Subject;
+use App\Models\TeacherSubjectClass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeacherSubjectClassController extends Controller
 {
     public function store(Request $request)
     {
         // Validate the incoming request
-        $request->validate([
-            'grade' => 'required|string',
-            'section' => 'required|string',
-            'subject' => 'required|string',
-            'school_year' => 'required|string',
+        $validatedData = $request->validate([
+            'grade'          => 'required|string',
+            'section'        => 'required|string',
+            'subject'        => 'required|string',
+            'school_year'    => 'required|string',
+            'teacher_number' => 'required|string', // Ensuring teacher_number is provided
         ]);
 
         $quarters = ['1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter'];
 
-        // Create the new teacher user
+        // Create TeacherSubjectClass records for each quarter
         foreach ($quarters as $quarter) {
-            $teacherUser = TeacherSubjectClass::create([
-                'teacher_number' => $request->teacher_number,
-                'grade' => $request->grade ? ucwords(strtolower($request['grade'])) : null,
-                'section' => $request->section ? ucwords(strtolower($request['section'])) : null,
-                'subject' => $request->subject ? ucwords(strtolower($request['subject'])) : null,
-                'school_year' => $request->school_year,
-                'quarter' => $quarter,
-            ]);
+            TeacherSubjectClass::updateOrCreate(
+                [
+                    'teacher_number' => $validatedData['teacher_number'],
+                    'grade'          => ucwords(strtolower($validatedData['grade'])),
+                    'section'        => ucwords(strtolower($validatedData['section'])),
+                    'subject'        => ucwords(strtolower($validatedData['subject'])),
+                    'school_year'    => $validatedData['school_year'],
+                    'quarter'        => $quarter,
+                ],
+                [
+                    'teacher_number' => $validatedData['teacher_number'],
+                ]
+            );
+        }
+
+        // Determine the correct model based on the grade
+        $gradeClassRecordModel = [
+            'Grade One'   => GradeOneClassRecord::class,
+            'Grade Two'   => GradeTwoClassRecord::class,
+            'Grade Three' => GradeThreeClassRecord::class,
+            'Grade Four'  => GradeFourClassRecord::class,
+            'Grade Five'  => GradeFiveClassRecord::class,
+            'Grade Six'   => GradeSixClassRecord::class,
+        ][$validatedData['grade']] ?? null;
+
+        if ($gradeClassRecordModel) {
+            foreach ($quarters as $quarter) {
+                // Check if the record already exists for the same grade, section, subject, and quarter
+                $existingRecord = $gradeClassRecordModel::where([
+                    'grade'   => $validatedData['grade'],
+                    'section' => $validatedData['section'],
+                    'subject' => $validatedData['subject'],
+                    'school_year' => $validatedData['school_year'],
+                    'quarter' => $quarter,
+                ])->first();
+
+                if ($existingRecord) {
+                    // Update the teacher number if the record already exists
+                    $existingRecord->update(['teacher_number' => $validatedData['teacher_number']]);
+                } else {
+                    // Create a new record only if it does not exist
+                    $gradeClassRecordModel::create([
+                        'teacher_number' => $validatedData['teacher_number'], // Adding teacher number dynamically
+                    ]);
+                }
+            }
         }
 
         // Return success response
@@ -54,19 +85,19 @@ class TeacherSubjectClassController extends Controller
     {
         // Validate the incoming request
         $request->validate([
-            'grade' => 'required|string',
+            'grade'   => 'required|string',
             'section' => 'required|string',
             'subject' => 'required|string',
         ]);
 
         // Find the teacher user
         $user = TeacherSubjectClass::find($id);
-        if (!$user) {
+        if (! $user) {
             return response()->json(['error' => 'teacher user not found.'], 404);
         }
 
         // Update the other fields
-        $user->grade = $request->grade ? ucfirst(strtolower($request['grade'])) : null;
+        $user->grade   = $request->grade ? ucfirst(strtolower($request['grade'])) : null;
         $user->section = $request->section ? ucfirst(strtolower($request['section'])) : null;
         $user->subject = $request->subject ? ucfirst(strtolower($request['subject'])) : null;
 
@@ -79,18 +110,32 @@ class TeacherSubjectClassController extends Controller
 
     public function getClassSubject()
     {
-        // Get the teacher number of the currently logged in user
         $teacherNumber = Auth::guard('teacher')->user()->teacher_number;
 
-        // Fetch all distinct sections from the TeacherSubjectClass model where section is not null or empty
-        $Subject = TeacherSubjectClass::whereNotNull('subject') // Ensure section is not null
-            ->where('subject', '!=', '') // Ensure section is not an empty string
-            ->where('teacher_number', $teacherNumber) // Filter by the teacher number
-            ->distinct() // Get only distinct sections
-            ->pluck('subject'); // Get only the 'section' column
+        // Fetch distinct subjects and their corresponding school years
+        $subjects = TeacherSubjectClass::whereNotNull('subject')
+            ->where('subject', '!=', '')
+            ->where('teacher_number', $teacherNumber)
+            ->where('school_year', '!=', '')
+            ->distinct()
+            ->get(['subject', 'school_year']); 
 
-        // Return sections as a JSON response
-        return response()->json($Subject);
+        return response()->json($subjects);
+    }
+
+    public function getTeacherClassSubject()
+    {
+        $teacherNumber = Auth::guard('teacher')->user()->teacher_number;
+
+        // Fetch distinct subjects and their corresponding school years
+        $subjects = TeacherSubjectClass::whereNotNull('subject')
+            ->where('subject', '!=', '')
+            ->where('teacher_number', $teacherNumber)
+            ->where('school_year', '!=', '')
+            ->distinct()
+            ->get(['subject', 'school_year']); 
+
+        return response()->json($subjects);
     }
 
     public function getAllSubjectsByGrade(Request $request)
@@ -104,34 +149,21 @@ class TeacherSubjectClassController extends Controller
 
     public function showclasssubjectadvisory()
     {
-        // Assuming the teacher is authenticated and their teacher_number is in the session
-        $teacherNumber = auth('teacher')->user()->teacher_number; // Fetch teacher number from authenticated user
+        $teacherNumber = auth('teacher')->user()->teacher_number;
 
-        // Query each grade class model for matching teacher_number
-        $gradeOneRecords = GradeOneClassRecord::where('teacher_number', $teacherNumber)->get();
-        $gradeTwoRecords = GradeTwoClassRecord::where('teacher_number', $teacherNumber)->get();
-        $gradeThreeRecords = GradeThreeClassRecord::where('teacher_number', $teacherNumber)->get();
-        $gradeFourRecords = GradeFourClassRecord::where('teacher_number', $teacherNumber)->get();
-        $gradeFiveRecords = GradeFiveClassRecord::where('teacher_number', $teacherNumber)->get();
-        $gradeSixRecords = GradeSixClassRecord::where('teacher_number', $teacherNumber)->get();
+        $TeacherSubject = TeacherSubjectClass::where('teacher_number', $teacherNumber)->get();
 
-        // Combine all results into one collection
-        $allRecords = $gradeOneRecords->merge($gradeTwoRecords)
-            ->merge($gradeThreeRecords)
-            ->merge($gradeFourRecords)
-            ->merge($gradeFiveRecords)
-            ->merge($gradeSixRecords);
+        $allRecords = GradeOneClassRecord::where('teacher_number', $teacherNumber)
+            ->orWhere('teacher_number', $teacherNumber)
+            ->get()
+            ->merge(GradeTwoClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeThreeClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFourClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFiveClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeSixClassRecord::where('teacher_number', $teacherNumber)->get());
 
-        // Additional variables you may want to pass to the view
-        $students = $allRecords; // Adjust accordingly if you need separate collections for students
-        $noGradeOneMessage = $gradeOneRecords->isEmpty() ? 'No records found for Grade One' : null;
-        $studentsPrimary = $allRecords;  // You can filter if needed based on primary/secondary
-        $studentsAdditional = $allRecords; // Similar to above
-        $studentDocuments = $allRecords; // Adjust as per your logic
-        $studentAccount = $allRecords; // Adjust as per your logic
+        $students = $allRecords;
 
-        // Pass the data to the view
-        return view('teacher.teacher_classsubject', compact('students', 'noGradeOneMessage', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
+        return view('teacher.teacher_classsubject', compact('TeacherSubject', 'students'));
     }
 }
-

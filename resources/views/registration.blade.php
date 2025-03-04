@@ -123,7 +123,7 @@
                                         <select name="school_year" id="schoolYear" required
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
                                             <option value="" disabled selected>Select School Year</option>
-                                            <option value="{{ date('Y') - 1 }}-{{ date('Y') }}">
+                                            <option value="{{ date('Y') }}-{{ date('Y') + 1}}">
                                                 {{ date('Y')}}-{{ date('Y') + 1 }}
                                             </option>
                                         </select>

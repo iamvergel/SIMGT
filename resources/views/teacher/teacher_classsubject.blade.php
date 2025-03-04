@@ -44,7 +44,7 @@
 
                     <div class="mr-10">
                         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                            class="text-white bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            class="flex justify-between text-white w-72 bg-sky-700 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
                             type="button">Select Section <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -54,7 +54,7 @@
 
                         <!-- Dropdown menu -->
                         <div id="dropdown"
-                            class="z-10 fixed hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                            class="z-10 fixed hidden bg-white divide-y divide-gray-100 rounded-lg shadow  w-72">
                             <ul class="p-2 text-md text-gray-700 dark:text-gray-200 shadow-lg"
                                 aria-labelledby="dropdownDefaultButton">
                                 <!-- Default placeholder value (empty or custom message) -->
@@ -75,10 +75,24 @@
                 </script>
             @endif
 
+            <div class="mt-5 text-[14px] font-semibold w-full px-5">
+                <ul
+                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-0 xl:gap-0 bg-gray-50 p-0 m-0">
+                    <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 active1 rounded-lg m-1 xl:rounded-lg xl:m-1"
+                        data-target="#Information">First Quarter</li>
+                    <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 rounded-lg m-1 xl:rounded-lg xl:m-1"
+                        data-target="#documents">Second Quarter</li>
+                    <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 rounded-lg m-1 xl:rounded-lg xl:m-1"
+                        data-target="#gradeOne">Third Quater</li>
+                    <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 rounded-lg m-1 xl:rounded-lg xl:m-1"
+                        data-target="#gradeTwo">Fourth Quarter</li>
+
+                </ul>
+            </div>
+
             <!-- component -->
             <section class="mx-auto p-6 mt-5 rounded-lg shadow-lg bg-gray-200">
                 <div class="w-full bg-white overflow-hidden rounded-lg shadow-lg text-[12px]">
-
                     <div class="p-5 overflow-x-scroll">
                         <table id="gradetable" class="bg-white overflow-x-scroll">
                             <thead>
@@ -120,11 +134,13 @@
 
                             </thead>
                             <tbody id="tableBody">
+                            @foreach ($TeacherSubject as $index => $teachersubject)
+                            @if ($TeacherSubject && $teachersubject->quarter == "1st Quarter")
                                 <tr class="text-[14px] font-normal uppercase text-left text-black">
-                                    <td class="export border-2 border-gray-900 py-2" colspan="2">QUARTER</td>
-                                    <td class="export border-2 border-gray-900" colspan="11">GRADE AND SECTION :</td>
-                                    <td class="export border-2 border-gray-900" colspan="13">TECHER :</td>
-                                    <td class="export border-2 border-gray-900" colspan="8">SUBJECT :</td>
+                                    <td class="export border-2 border-gray-900 py-2" colspan="2">QUARTER : {{ $teachersubject->quarter }}</td>
+                                    <td class="export border-2 border-gray-900" colspan="11">GRADE AND SECTION : {{ $teachersubject->grade . '- ' . $teachersubject->section}}</td>
+                                    <td class="export border-2 border-gray-900" colspan="13">TECHER :  {{ session ('teacher_fname') . ' ' . session ('teacher_mname') .' ' .session ('teacher_lname')}}</td>
+                                    <td class="export border-2 border-gray-900" colspan="8" id="subject">SUBJECT : {{ $teachersubject->subject }}</td>
                                 </tr>
                                 <tr class="text-[14px] font-normal uppercase text-left text-black">
                                     <td class="export border-2 border-gray-900 py-5" colspan="1"></td>
@@ -174,77 +190,75 @@
                                     <td class="export border-2 text-center border-gray-900">PS</td>
                                     <td class="export border-2 text-center border-gray-900">WS</td>
                                 </tr>
+                                       
                                         <tr class="hover:bg-gray-100">
                                             <td class="export border-2 text-center border-gray-900">
-                                            
+                                                {{ $index + 1 }}
                                             </td>
                                             <td class="export border-2  border-gray-900">
-<<<<<<< Updated upstream
-                                                Posible Highest Grade</td>
-                                            <td class="export border-2 text-center border-gray-900"></td>
-                                                <td class="export border-2 text-center border-gray-900">
-                                                </td>
-=======
-                                                Highest Possible Score</td>
+                                                Possible Highest Score</td>
                                             <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_written_one }}</td>
->>>>>>> Stashed changes
+                                                {{ $teachersubject->hps_written_one }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_written_two }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_written_three }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_written_four }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_written_five }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_written_six }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_written_seven }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_written_eight }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_written_nine }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_written_ten }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                100.00</td>
+                                                {{ $teachersubject->hps_written_total }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                30%</td>
+                                                {{ $teachersubject->written_ps }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->written_ws }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_performance_one }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_performance_two }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_performance_three }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_performance_four }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_performance_five }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_performance_six }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_performance_seven }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_performance_eight }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_performance_nine }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->hps_performance_ten }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                100.00</td>
+                                                {{ $teachersubject->hps_performance_total }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                50%</td>
+                                                {{ $teachersubject->performance_ps }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                </td>
+                                                {{ $teachersubject->performance_ws }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                100.00</td>
+                                                {{ $teachersubject->hps_q_assessment_one }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                20%</td>
+                                                {{ $teachersubject->hps_q_assessment_ps }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $teachersubject->hps_q_assessment_ws }}</td>
+                                                
                                         </tr>
-                                  
+                                   
+
                                 <tr class="text-[14px] font-normal uppercase text-left text-black">
                                     <td class="export border-2 text-center border-gray-900">#</td>
                                     <td class="export border-2 text-center border-gray-900 w-[100px] text-start">
@@ -281,14 +295,11 @@
                                     <td class="export border-2 text-center border-gray-900"></td>
                                     <td class="export border-2 text-center border-gray-900"></td>
                                 </tr>
-                                @foreach ($students as $student)
-                                    @php
-                                        $i = 1;
-                                    @endphp
-                                    @if ($student && $student->gender == "Male")
+                                 @foreach ($students as $index => $student)
+                                    @if ($student && $student->gender == "Male" && $student->quarter == $teachersubject->quarter && $student->subject == $teachersubject->subject)
                                         <tr class="hover:bg-gray-100">
                                             <td class="export border-2 text-center border-gray-900">
-                                                {{ $i++ }}
+                                                {{ $index + 1 }}
                                             </td>
                                             <td class="export border-2  border-gray-900">
                                                 {{ $student->first_name }} {{ $student->middle_name }}
@@ -358,6 +369,120 @@
                                         </tr>
                                     @endif
                                 @endforeach
+
+                                <tr class="text-[14px] font-normal uppercase text-left text-black">
+                                    <td class="export border-2 text-center border-gray-900">#</td>
+                                    <td class="export border-2 text-center border-gray-900 w-[100px] text-start">
+                                        Female</td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                </tr>
+
+                                @foreach ($students as $index => $student)
+                                    @if ($student && $student->gender == "Female" && $student->quarter == $teachersubject->quarter && $student->subject == $teachersubject->subject)
+                                        <tr class="hover:bg-gray-100">
+                                            <td class="export border-2 text-center border-gray-900">
+                                                {{ $index + 1 }}
+                                            </td>
+                                            <td class="export border-2  border-gray-900">
+                                                {{ $student->first_name }} {{ $student->middle_name }}
+                                                {{ $student->last_name }} {{ $student->suffix }}</td>
+                                            <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_one_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_two_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_three_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_four_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_five_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_six_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_seven_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_eight_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_nine_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_ten_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_total_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_ps_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_ws_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_one_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_two_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_three_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_four_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_five_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_six_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_seven_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_eight_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_nine_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_ten_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_total_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_ps_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_ws_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->q_assessment_one_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->q_assessment_ps_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->q_assessment_ws_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->initial_grade }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->quarterly_grade }}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                                @endif
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -370,97 +495,6 @@
 
     @include('admin.includes.js-link')
     <script type="text/javascript">
-        var table = $("#studentTable").DataTable({
-            dom:
-                ` <'flex justify-center items-center mb-4'<><'block xl:hidden'B><>>` +
-                `<tr>` +
-                `<'flex justify-center items-center mb-4'<'flex-3'l><'flex-1 xl:block hidden'B><'flex-1'f>>` +
-                `<tr>` +
-                `<'flex justify-between items-center'<'flex-1'i><'flex-1'p>>`,
-            paging: true,
-            searching: true,
-            ordering: true,
-            info: true,
-            lengthChange: true,
-            responsive: true,
-            scrollX: true,
-            scrollCollapse: true,
-            buttons: [
-                {
-                    extend: "copyHtml5",
-                    className:
-                        "!bg-sky-800 !text-[12px] !text-white !border-none !hover:bg-sky-700 !px-4 !py-2 !rounded !flex !items-center !justify-center",
-                    text: '<i class="fas fa-clipboard"></i> Copy',
-                    titleAttr: "Click to copy data",
-                    exportOptions: {
-                        columns: ".export",
-                    },
-                },
-                {
-                    extend: "excelHtml5",
-                    text: '<i class="fas fa-file-excel mr-2"></i> Excel',
-                    className:
-                        "!bg-teal-700 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !important !flex !items-center !justify-center",
-                    titleAttr: "Export to Excel",
-                    exportOptions: {
-                        columns: ".export",
-                    },
-                },
-                {
-                    extend: "csvHtml5",
-                    text: '<i class="fas fa-file-csv mr-2"></i> CSV',
-                    className:
-                        "!bg-yellow-500 !text-[12px] !text-white !border-none !hover:bg-yellow-400 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
-                    titleAttr: "Export to CSV",
-                    exportOptions: {
-                        columns: ".export",
-                    },
-                },
-                {
-                    extend: "pdfHtml5",
-                    text: '<i class="fas fa-file-pdf mr-2"></i> PDF',
-                    className:
-                        "!bg-green-600 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
-                    orientation: "landscape",
-                    pageSize: "A4",
-                    titleAttr: "Export to PDF",
-                    exportOptions: {
-                        columns: ".export",
-                    },
-                    customize: function (doc) {
-                        doc.content[1].table.widths = Array(
-                            doc.content[1].table.body[0].length + 1
-                        )
-                            .join("*")
-                            .split("");
-                    },
-                },
-                {
-                    extend: "print",
-                    text: '<i class="fas fa-print mr-2"></i> Print',
-                    className:
-                        "!bg-blue-600 !text-[12px] !text-white !border-none !hover:bg-blue-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
-                    orientation: "landscape",
-                    autoPrint: true,
-                    titleAttr: "Print Table",
-                    exportOptions: {
-                        columns: ".export",
-                    },
-                    customize: function (win) {
-                        $(win.document.body).find("table").css("width", "100%");
-                        $(win.document.body).find("table").css("font-size", "10px");
-                    },
-                },
-            ],
-            initComplete: function () {
-                $(".dt-buttons").css({
-                    display: "flex",
-                    "justify-content": "flex-end",
-                    width: "100%",
-                });
-            },
-        });
-
         $(document).ready(function () {
             // When the dropdown button is clicked, make an AJAX call
             $("#dropdownDefaultButton").click(function () {
@@ -473,30 +507,33 @@
                     type: "GET",
                     success: function (data) {
                         console.log(data); // Debug: Check the data received
+
                         if (data.length > 0) {
                             $("#dropdown ul").empty();
                             $("#dropdown ul").append(
-                                '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="">Select a Section</a></li>'
+                                '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg">' +
+                                '<a href="#" class="dropdown-item" data-section="">Select a Subject - School Year</a></li>'
                             );
-                            data.forEach(function (section) {
+
+                            data.forEach(function (item) {
                                 $("#dropdown ul").append(
-                                    '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="' +
-                                    section +
-                                    '">' +
-                                    section +
-                                    "</a></li>"
+                                    '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg">' +
+                                    '<a href="#" class="dropdown-item" data-section="' + item.subject + '">' +
+                                    item.subject + ' - ' + item.school_year +
+                                    '</a></li>'
                                 );
                             });
                         } else {
                             $("#dropdown ul").html(
-                                '<li><a href="#" class="dropdown-item text-gray-500">No Sections Available</a></li>'
+                                '<li><a href="#" class="dropdown-item text-gray-500">No Subjects Available</a></li>'
                             );
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log("Error fetching sections: " + error);
+                        console.log("Error fetching subjects: " + error);
                     },
                 });
+
             });
 
             // Handle section click to filter table
@@ -505,21 +542,50 @@
 
                 const selectedSection = $(this).data("section");
                 let section = document.getElementById('section');
-                let gradetable = $('#gradetable').DataTable();
+                let gradetable = document.getElementById('gradetable');
 
                 if (selectedSection) {
-                    gradetable.column(5).search(selectedSection).draw(); // Filter the table based on the clicked section
+                    let trs = gradetable.tBodies[0].rows;
+                    let filteredRows = [];
+                    for (let i = 0; i < trs.length; i++) {
+                        let tr = trs[i];
+                        let subjectCell = tr.querySelector('td[id="subject"]');
+                        if (subjectCell && subjectCell.textContent.includes(selectedSection)) {
+                            filteredRows.push(tr);
+                        }
+                    }
+                    gradetable.tBodies[0].innerHTML = '';
+                    filteredRows.forEach(row => gradetable.tBodies[0].appendChild(row));
                     section.innerHTML = 'Section : ' + selectedSection;
                 } else {
-                    gradetable.column(5).search("").draw(); // Clear the filter to show all
-                    section.innerHTML = 'Section : ';
+                    $.ajax({
+                        url: "/get-classsubject-table",
+                        type: "GET",
+                        success: function (data) {
+                            gradetable.tBodies[0].innerHTML = '';
+                            data.forEach(function (item) {
+                                let row = document.createElement('tr');
+                                Object.keys(item).forEach(key => {
+                                    let cell = document.createElement('td');
+                                    cell.setAttribute('id', key);
+                                    cell.textContent = item[key];
+                                    row.appendChild(cell);
+                                });
+                                gradetable.tBodies[0].appendChild(row);
+                            });
+                            section.innerHTML = 'Section : ';
+                        },
+                        error: function (xhr, status, error) {
+                            console.log("Error fetching subjects table: " + error);
+                        },
+                    });
                 }
 
                 $("#dropdown").addClass("hidden"); // Close the dropdown
             });
         });
-
     </script>
 </body>
 
 </html>
+
