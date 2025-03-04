@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Section;
+use App\Models\GradeOneClassRecord;
+use App\Models\GradeTwoClassRecord;
+use App\Models\GradeThreeClassRecord;
+use App\Models\GradeFourClassRecord;
+use App\Models\GradeFiveClassRecord;
+use App\Models\GradeSixClassRecord;
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
@@ -23,12 +29,43 @@ class SectionController extends Controller
     // Method to fetch sections by grade
     public function getAllSectionsByGrade(Request $request)
     {
-        // Fetch sections based on the selected grade
-        $sections = Section::where('grade', $request->grade)->get();
+        $grade = $request->grade;
+        \Log::info('Requested grade:', ['grade' => $grade]);
 
-        // Return the sections as a JSON response
+        // Fetch sections based on the selected grade dynamically
+        switch ($grade) {
+            case 'Grade One':
+                $sections = GradeOneClassRecord::distinct()->pluck('section');
+                break;
+            case 'Grade Two':
+                $sections = GradeTwoClassRecord::distinct()->pluck('section');
+                break;
+            case 'Grade Three':
+                $sections = GradeThreeClassRecord::distinct()->pluck('section');
+                break;
+            case 'Grade Four':
+                $sections = GradeFourClassRecord::distinct()->pluck('section');
+                break;
+            case 'Grade Five':
+                $sections = GradeFiveClassRecord::distinct()->pluck('section');
+                break;
+            case 'Grade Six':
+                $sections = GradeSixClassRecord::distinct()->pluck('section');
+                break;
+            default:
+                return response()->json(['message' => 'Invalid grade.'], 400);
+        }
+
+        \Log::info('Sections found:', ['sections' => $sections]);
+
+        // Check if sections are found
+        if ($sections->isEmpty()) {
+            return response()->json(['message' => 'No sections found for the selected grade.'], 404);
+        }
+
         return response()->json($sections);
     }
+
     // Store a new Section
     public function store(Request $request)
     {

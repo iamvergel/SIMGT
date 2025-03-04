@@ -11,6 +11,12 @@ use App\Models\StudentAdditionalInfo;
 use App\Models\StudentDocuments;
 use App\Models\Mstudentaccount;
 use App\Models\Subject;
+use App\Models\GradeOneClassRecord;
+use App\Models\GradeTwoClassRecord;
+use App\Models\GradeThreeClassRecord;
+use App\Models\GradeFourClassRecord;
+use App\Models\GradeFiveClassRecord;
+use App\Models\GradeSixClassRecord;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -83,36 +89,44 @@ class TeacherSubjectClassController extends Controller
     }
 
     public function getAllSubjectsByGrade(Request $request)
-     {
-         // Fetch sections based on the selected grade
-         $sections = TeacherSubjectClass::where('teacher_number', $request->grade)->get();
- 
-         // Return the sections as a JSON response
-         return response()->json($sections);
-     }
+    {
+        // Fetch sections based on the selected grade
+        $sections = TeacherSubjectClass::where('teacher_number', $request->grade)->get();
 
-     public function showclasssubjectadvisory()
-     {
-         // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
-         $students = StudentInfo::with('student') // Only eager load 'student' relationship
-             ->where('status', 'Active') // Active students only
-             ->get();
- 
-         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
-         $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
-             ->where('status', 'Enrolled') // Ensure students are enrolled
-             ->get()->keyBy('studentnumber');
- 
-         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
-         $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
-         $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
- 
-         // Check if there are no students found in Grade One
-         $noGradeOneMessage = $studentsPrimary->isEmpty() ? "No students found in Grade One." : null;
- 
-         // Pass the data to the view
-         return view('teacher.teacher_classsubject', compact('students', 'noGradeOneMessage', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
- 
-     }
+        // Return the sections as a JSON response
+        return response()->json($sections);
+    }
+
+    public function showclasssubjectadvisory()
+    {
+        // Assuming the teacher is authenticated and their teacher_number is in the session
+        $teacherNumber = auth('teacher')->user()->teacher_number; // Fetch teacher number from authenticated user
+
+        // Query each grade class model for matching teacher_number
+        $gradeOneRecords = GradeOneClassRecord::where('teacher_number', $teacherNumber)->get();
+        $gradeTwoRecords = GradeTwoClassRecord::where('teacher_number', $teacherNumber)->get();
+        $gradeThreeRecords = GradeThreeClassRecord::where('teacher_number', $teacherNumber)->get();
+        $gradeFourRecords = GradeFourClassRecord::where('teacher_number', $teacherNumber)->get();
+        $gradeFiveRecords = GradeFiveClassRecord::where('teacher_number', $teacherNumber)->get();
+        $gradeSixRecords = GradeSixClassRecord::where('teacher_number', $teacherNumber)->get();
+
+        // Combine all results into one collection
+        $allRecords = $gradeOneRecords->merge($gradeTwoRecords)
+            ->merge($gradeThreeRecords)
+            ->merge($gradeFourRecords)
+            ->merge($gradeFiveRecords)
+            ->merge($gradeSixRecords);
+
+        // Additional variables you may want to pass to the view
+        $students = $allRecords; // Adjust accordingly if you need separate collections for students
+        $noGradeOneMessage = $gradeOneRecords->isEmpty() ? 'No records found for Grade One' : null;
+        $studentsPrimary = $allRecords;  // You can filter if needed based on primary/secondary
+        $studentsAdditional = $allRecords; // Similar to above
+        $studentDocuments = $allRecords; // Adjust as per your logic
+        $studentAccount = $allRecords; // Adjust as per your logic
+
+        // Pass the data to the view
+        return view('teacher.teacher_classsubject', compact('students', 'noGradeOneMessage', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
+    }
 }
 

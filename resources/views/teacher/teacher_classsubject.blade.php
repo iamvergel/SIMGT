@@ -74,86 +74,295 @@
                     alert("{{ session('success') }}");
                 </script>
             @endif
+
             <!-- component -->
             <section class="mx-auto p-6 mt-5 rounded-lg shadow-lg bg-gray-200">
                 <div class="w-full bg-white overflow-hidden rounded-lg shadow-lg text-[12px]">
 
-                    <div class="p-5">
-                        <table id="studentTable" class="p-3">
-                            <thead class="bg-gray-200">
-                                <tr class="text-[14px] font-normal uppercase text-left text-black">
-                                    <th class="export">lrn</th>
-                                    <th class="export">Student Number</th>
-                                    <th class="export">Status</th>
-                                    <th class="export">Profile</th>
-                                    <th class="export">Grade</th>
-                                    <th class="export">Section</th>
-                                    <th class="">Action</th>
+                    <div class="p-5 overflow-x-scroll">
+                        <table id="gradetable" class="bg-white overflow-x-scroll">
+                            <thead>
+                                <tr class="text-[8px] font-normal uppercase text-left text-black">
+                                    <th class="export"></th>
+                                    <th class="export" width="10%"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
+                                    <th class="export"></th>
                                 </tr>
-                            </thead>
-                            <tbody class="" id="tableBody">
 
+                            </thead>
+                            <tbody id="tableBody">
+                                <tr class="text-[14px] font-normal uppercase text-left text-black">
+                                    <td class="export border-2 border-gray-900 py-2" colspan="2">QUARTER</td>
+                                    <td class="export border-2 border-gray-900" colspan="11">GRADE AND SECTION :</td>
+                                    <td class="export border-2 border-gray-900" colspan="13">TECHER :</td>
+                                    <td class="export border-2 border-gray-900" colspan="8">SUBJECT :</td>
+                                </tr>
+                                <tr class="text-[14px] font-normal uppercase text-left text-black">
+                                    <td class="export border-2 border-gray-900 py-5" colspan="1"></td>
+                                    <td class="export border-2 border-gray-900 py-5" colspan="1">Learner's Name</td>
+                                    <td class="export border-2 border-gray-900" colspan="13">Written Works (30%)</td>
+                                    <td class="export border-2 border-gray-900" colspan="13">Performance Works (50%)
+                                    </td>
+                                    <td class="export border-2 border-gray-900" colspan="3">Quarterly Assessment (20%)
+                                    </td>
+                                    <td class="export border-2 border-gray-900" colspan="1" rowspan="3">Initial Grade
+                                    </td>
+                                    <td class="export border-2 border-gray-900" colspan="1" rowspan="3">Quarterly Grade
+                                    </td>
+                                </tr>
+                                <tr class="text-[14px] font-normal uppercase text-left text-black">
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td
+                                        class="export border-2 text-center border-gray-900 w-[100px] pe-[15rem] text-start">
+                                    </td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">1</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">2</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">3</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">4</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">5</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">6</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">7</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">8</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">9</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">10</td>
+                                    <td class="export border-2 text-center border-gray-900">Total</td>
+                                    <td class="export border-2 text-center border-gray-900">PS</td>
+                                    <td class="export border-2 text-center border-gray-900">WS</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">1</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">2</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">3</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">4</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">5</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">6</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">7</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">8</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">9</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">10</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">Total</td>
+                                    <td class="export border-2 text-center border-gray-900">PS</td>
+                                    <td class="export border-2 text-center border-gray-900">WS</td>
+                                    <td class="export border-2 text-center border-gray-900 px-2">1</td>
+                                    <td class="export border-2 text-center border-gray-900">PS</td>
+                                    <td class="export border-2 text-center border-gray-900">WS</td>
+                                </tr>
                                 @foreach ($students as $student)
-                                                                @php
-                                                                    $account = $studentAccount[$student->student_number] ?? null;
-                                                                    $avatar = $account && $account->avatar ? asset('storage/' . $account->avatar) : null;
-                                                                    $initials = strtoupper(substr($student->student_last_name, 0, 1) . substr($student->student_first_name, 0, 1));
-                                                                    $primaryInfo = $studentsPrimary[$student->student_number] ?? null;
-                                                                @endphp
-                                                                @if ($primaryInfo && $primaryInfo->status == 'Enrolled')
-                                                                    <tr class="hover:bg-gray-100">
-                                                                        <td>
-                                                                            <span class="ml-2">{{ $student->lrn }}</span>
-                                                                        </td>
-                                                                        <td>
-                                                                            <span class="ml-2">{{ $student->student_number }}</span>
-                                                                        </td>
-                                                                        <td>
-                                                                            <span
-                                                                                class="px-2 py-1 uppercase font-semibold text-[10px] rounded-lg leading-tight text-green-800 bg-green-200">
-                                                                                {{ $student->status }} | {{ $primaryInfo->status }}
-                                                                            </span>
-                                                                        </td>
-                                                                        <td class="flex justify-start items-center">
-                                                                            <div
-                                                                                class="w-12 h-12 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold mx-2">
-                                                                                @if ($avatar)
-                                                                                    <img src="{{ $avatar }}" alt="Student Avatar"
-                                                                                        class="w-12 h-12 rounded-full object-cover">
-                                                                                @else
-                                                                                    {{ $initials }}
-                                                                                @endif
-                                                                            </div>
-                                                                            <div>
-                                                                                <span class="text-sm font-semibold">{{ $student->student_last_name }},
-                                                                                    {{ $student->student_first_name }} {{ $student->student_suffix_name }}
-                                                                                    {{ $student->student_middle_name }}</span>
-                                                                                <br><span
-                                                                                    class="text-xs text-gray-500">{{ $student->email_address_send }}</span>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>{{ $primaryInfo->grade }}</td>
-                                                                        <td>{{ $primaryInfo->section }}</td>
-                                                                        <td>
-                                                                            <!-- View Student Information Button -->
-                                                                            <button
-                                                                                class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-blue-700 rounded-full hover:bg-blue-600"
-                                                                                type="button"
-                                                                                onclick="window.location.href = '{{ route('student.show', ['id' => $student->id]) }}'"
-                                                                                title="Show Student Information">
-                                                                                <i class="fa-solid fa-eye"></i>
-                                                                            </button>
-                                                                        </td>
-                                                                    </tr>
-                                                                @endif
+                                @if ($student && $student->gender == "Male")
+                                        <tr class="hover:bg-gray-100">
+                                            <td class="export border-2 text-center border-gray-900">
+                                            
+                                            </td>
+                                            <td class="export border-2  border-gray-900">
+                                                </td>
+                                            <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_written_one }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_written_two }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_written_three }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_written_four }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_written_five }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_written_six }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_written_seven }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_written_eight }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_written_nine }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_written_ten }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_written_total }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_ps }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                30%%</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_performance_one }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_performance_two }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_performance_three }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_performance_four }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_performance_five }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_performance_six }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_performance_seven }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_performance_eight }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_performance_nine }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_performance_ten }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_performance_total }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_ps }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                50%</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_q_assessment_one }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->hps_q_assessment_ps }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                20%</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                                <tr class="text-[14px] font-normal uppercase text-left text-black">
+                                    <td class="export border-2 text-center border-gray-900">#</td>
+                                    <td class="export border-2 text-center border-gray-900 w-[100px] text-start">
+                                        Male</td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                    <td class="export border-2 text-center border-gray-900"></td>
+                                </tr>
+                                @foreach ($students as $student)
+                                    @php
+                                        $i = 1;
+                                    @endphp
+                                    @if ($student && $student->gender == "Male")
+                                        <tr class="hover:bg-gray-100">
+                                            <td class="export border-2 text-center border-gray-900">
+                                                {{ $i++ }}
+                                            </td>
+                                            <td class="export border-2  border-gray-900">
+                                                {{ $student->first_name }} {{ $student->middle_name }}
+                                                {{ $student->last_name }} {{ $student->suffix }}</td>
+                                            <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_one_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_two_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_three_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_four_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_five_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_six_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_seven_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_eight_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_nine_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_ten_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_total_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_ps_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->written_ws_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_one_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_two_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_three_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_four_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_five_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_six_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_seven_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_eight_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_nine_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_ten_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_total_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_ps_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->performance_ws_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->q_assessment_one_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->q_assessment_ps_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->q_assessment_ws_score }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->initial_grade }}</td>
+                                                <td class="export border-2 text-center border-gray-900">
+                                                {{ $student->quarterly_grade }}</td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </section>
-    </div>
-    </main>
+
+        </main>
     </div>
 
 
@@ -172,6 +381,7 @@
             info: true,
             lengthChange: true,
             responsive: true,
+            scrollX: true,
             scrollCollapse: true,
             buttons: [
                 {
@@ -293,12 +503,13 @@
 
                 const selectedSection = $(this).data("section");
                 let section = document.getElementById('section');
+                let gradetable = $('#gradetable').DataTable();
 
                 if (selectedSection) {
-                    table.column(5).search(selectedSection).draw(); // Filter the table based on the clicked section
+                    gradetable.column(5).search(selectedSection).draw(); // Filter the table based on the clicked section
                     section.innerHTML = 'Section : ' + selectedSection;
                 } else {
-                    table.column(5).search("").draw(); // Clear the filter to show all
+                    gradetable.column(5).search("").draw(); // Clear the filter to show all
                     section.innerHTML = 'Section : ';
                 }
 

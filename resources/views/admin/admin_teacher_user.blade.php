@@ -269,8 +269,8 @@
                                                 <span class="ml-2">{{ $teachers->teacher_number }}</span>
                                             </td>
                                             <!-- <td>
-                                                                                                            <span class="ml-2">{{ $teachers->department }}</span>
-                                                                                                        </td> -->
+                                                                                                                <span class="ml-2">{{ $teachers->department }}</span>
+                                                                                                            </td> -->
                                             <td class="{{ $teachers->status == "Inactive" ? "bg-red-100" : "" }}">
                                                 <span class="ml-2">{{ $teachers->position }}</span>
                                             </td>
@@ -586,11 +586,12 @@
                                                 fetch(`/api/allsections?grade=${grade}`)
                                                     .then(response => response.json())
                                                     .then(data => {
+                                                        console.log(data);  // Check the output here
                                                         if (data.length) {
                                                             data.forEach(section => {
                                                                 const option = document.createElement("option");
-                                                                option.value = section.section;
-                                                                option.textContent = section.section;
+                                                                option.value = section;
+                                                                option.textContent = section;
                                                                 sectionSelect.appendChild(option);
                                                             });
                                                         } else {
@@ -607,6 +608,7 @@
                                                         option.textContent = "Error loading sections";
                                                         sectionSelect.appendChild(option);
                                                     });
+
 
                                                 // Fetch subjects
                                                 fetch(`/api/allsubjects?grade=${grade}`)

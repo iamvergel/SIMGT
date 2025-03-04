@@ -13,6 +13,16 @@ use App\Models\Mstudentgradefour;
 use App\Models\Mstudentgradefive;
 use App\Models\Mstudentgradesix;
 use App\Models\StudentPrimaryInfo;
+use App\Models\TeacherAdvisory;
+use App\Models\TeacherUser;
+use App\Models\Section;
+use App\Models\Subject;
+use App\Models\GradeOneClassRecord;
+use App\Models\GradeTwoClassRecord;
+use App\Models\GradeThreeClassRecord;
+use App\Models\GradeFourClassRecord;
+use App\Models\GradeFiveClassRecord;
+use App\Models\GradeSixClassRecord;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\Madminaccount;
@@ -156,6 +166,130 @@ class Cstudentinfo extends Controller
             $studentprimary->status = $validatedData['status'] ? ucwords(strtolower($validatedData['status'])) : null;
             $studentprimary->adviser = $validatedData['adviser'] ? ucwords(strtolower($validatedData['adviser'])) : null;
             $studentprimary->save();
+
+
+            if (in_array($validatedData['grade'], ['Grade One'])) {
+                // Fetch all subjects for Grade One
+                $subjects = Subject::where('grade', 'Grade One')->get();
+                $quarters = ['1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter'];
+
+                foreach ($quarters as $quarter) {
+                    foreach ($subjects as $subject) {
+                        $classRecordOne = new GradeOneClassRecord();
+                        $classRecordOne->lrn = $validatedData['lrn'];
+                        $classRecordOne->student_number = $validatedData['student_number'];
+                        $classRecordOne->school_year = $validatedData['school_year'];
+                        $classRecordOne->last_name = $validatedData['lastName'] ? ucwords(strtolower($validatedData['lastName'])) : null;
+                        $classRecordOne->first_name = $validatedData['firstName'] ? ucwords(strtolower($validatedData['firstName'])) : null;
+                        $classRecordOne->middle_name = $validatedData['middleName'] ? ucwords(strtolower($validatedData['middleName'])) : null;
+                        $classRecordOne->suffix = $validatedData['suffixName'] ? ucwords(strtolower($validatedData['suffixName'])) : null;
+                        $classRecordOne->gender = $validatedData['gender'];
+                        $classRecordOne->quarter = $quarter;
+                        $classRecordOne->grade = $validatedData['grade'];
+                        $classRecordOne->section = $validatedData['section'];
+                        $classRecordOne->subject = $subject->subject; 
+
+                        // You can assign other dynamic fields, like written scores or performance scores, if needed
+                        $classRecordOne->save();
+                    }
+                }
+            } else if (in_array($validatedData['grade'], ['Grade Two'])) {
+                $subjects = Subject::where('grade', 'Grade Two')->get();
+                $quarters = ['1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter'];
+
+                foreach ($quarters as $quarter) {
+                    foreach ($subjects as $subject) {
+                        $classRecordTwo = new GradeTwoClassRecord();
+                        $classRecordTwo->lrn = $validatedData['lrn'];
+                        $classRecordTwo->student_number = $validatedData['student_number'];
+
+                        $classRecordTwo->school_year = $validatedData['school_year'];
+                        $classRecordTwo->quarter = $quarter;
+                        $classRecordTwo->grade = $validatedData['grade'];
+                        $classRecordTwo->section = $validatedData['section'];
+                        $subjectField = strtolower(str_replace(' ', '_', $subject->subject));
+                        $classRecordTwo->$subjectField = $validatedData[$subjectField] ?? null;
+                        $classRecordTwo->subject = $subject->subject;
+                        $classRecordTwo->save();
+                    }
+                }
+            } else if (in_array($validatedData['grade'], ['Grade Three'])) {
+                $subjects = Subject::where('grade', 'Grade Three')->get();
+                $quarters = ['1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter'];
+
+                foreach ($quarters as $quarter) {
+                    foreach ($subjects as $subject) {
+                        $classRecordThree = new GradeThreeClassRecord();
+                        $classRecordThree->lrn = $validatedData['lrn'];
+                        $classRecordThree->student_number = $validatedData['student_number'];
+                        $classRecordThree->school_year = $validatedData['school_year'];
+                        $classRecordThree->quarter = $quarter;
+                        $classRecordThree->grade = $validatedData['grade'];
+                        $classRecordThree->section = $validatedData['section'];
+                        $subjectField = strtolower(str_replace(' ', '_', $subject->subject));
+                        $classRecordThree->$subjectField = $validatedData[$subjectField] ?? null;
+                        $classRecordThree->subject = $subject->subject;
+                        $classRecordThree->save();
+                    }
+                }
+            } else if (in_array($validatedData['grade'], ['Grade Four'])) {
+                $subjects = Subject::where('grade', 'Grade Four')->get();
+                $quarters = ['1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter'];
+
+                foreach ($quarters as $quarter) {
+                    foreach ($subjects as $subject) {
+                        $classRecordFour = new GradeFourClassRecord();
+                        $classRecordFour->lrn = $validatedData['lrn'];
+                        $classRecordFour->student_number = $validatedData['student_number'];
+                        $classRecordFour->school_year = $validatedData['school_year'];
+                        $classRecordFour->quarter = $quarter;
+                        $classRecordFour->grade = $validatedData['grade'];
+                        $classRecordFour->section = $validatedData['section'];
+                        $subjectField = strtolower(str_replace(' ', '_', $subject->subject));
+                        $classRecordFour->$subjectField = $validatedData[$subjectField] ?? null;
+                        $classRecordFour->subject = $subject->subject;
+                        $classRecordFour->save();
+                    }
+                }
+            } else if (in_array($validatedData['grade'], ['Grade Five'])) {
+                $subjects = Subject::where('grade', 'Grade Five')->get();
+                $quarters = ['1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter'];
+
+                foreach ($quarters as $quarter) {
+                    foreach ($subjects as $subject) {
+                        $classRecordFive = new GradeFiveClassRecord();
+                        $classRecordFive->lrn = $validatedData['lrn'];
+                        $classRecordFive->student_number = $validatedData['student_number'];
+                        $classRecordFive->school_year = $validatedData['school_year'];
+                        $classRecordFive->quarter = $quarter;
+                        $classRecordFive->grade = $validatedData['grade'];
+                        $classRecordFive->section = $validatedData['section'];
+                        $subjectField = strtolower(str_replace(' ', '_', $subject->subject));
+                        $classRecordFive->$subjectField = $validatedData[$subjectField] ?? null;
+                        $classRecordFive->subject = $subject->subject;
+                        $classRecordFive->save();
+                    }
+                }
+            } else if (in_array($validatedData['grade'], ['Grade Six'])) {
+                $subjects = Subject::where('grade', 'Grade Six')->get();
+                $quarters = ['1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter'];
+
+                foreach ($quarters as $quarter) {
+                    foreach ($subjects as $subject) {
+                        $classRecordSix = new GradeSixClassRecord();
+                        $classRecordSix->lrn = $validatedData['lrn'];
+                        $classRecordSix->student_number = $validatedData['student_number'];
+                        $classRecordSix->school_year = $validatedData['school_year'];
+                        $classRecordSix->quarter = $quarter;
+                        $classRecordSix->grade = $validatedData['grade'];
+                        $classRecordSix->section = $validatedData['section'];
+                        $subjectField = strtolower(str_replace(' ', '_', $subject->subject));
+                        $classRecordSix->$subjectField = $validatedData[$subjectField] ?? null;
+                        $classRecordSix->subject = $subject->subject;
+                        $classRecordSix->save();
+                    }
+                }
+            }
 
             // Redirect or return response
             return back()->with('success', 'Student added successfully!');
@@ -388,7 +522,7 @@ class Cstudentinfo extends Controller
         $student->save();
 
         StudentPrimaryInfo::where('studentnumber', $student->student_number)
-        ->update(['status' => 'Enrolled']);
+            ->update(['status' => 'Enrolled']);
 
         // Redirect or return response
         return back()->with('success', 'Student retrieve successfully!');
