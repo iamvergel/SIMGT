@@ -32,14 +32,19 @@ class TeacherSubjectClassController extends Controller
             'school_year' => 'required|string',
         ]);
 
+        $quarters = ['1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter'];
+
         // Create the new teacher user
-        $teacherUser = TeacherSubjectClass::create([
-            'teacher_number' => $request->teacher_number,
-            'grade' => $request->grade ? ucwords(strtolower($request['grade'])) : null,
-            'section' => $request->section ? ucwords(strtolower($request['section'])) : null,
-            'subject' => $request->subject ? ucwords(strtolower($request['subject'])) : null,
-            'school_year' => $request->school_year,
-        ]);
+        foreach ($quarters as $quarter) {
+            $teacherUser = TeacherSubjectClass::create([
+                'teacher_number' => $request->teacher_number,
+                'grade' => $request->grade ? ucwords(strtolower($request['grade'])) : null,
+                'section' => $request->section ? ucwords(strtolower($request['section'])) : null,
+                'subject' => $request->subject ? ucwords(strtolower($request['subject'])) : null,
+                'school_year' => $request->school_year,
+                'quarter' => $quarter,
+            ]);
+        }
 
         // Return success response
         return redirect()->route('teacher.user')->with('success', 'Subject Class added successfully!');

@@ -174,75 +174,71 @@
                                     <td class="export border-2 text-center border-gray-900">PS</td>
                                     <td class="export border-2 text-center border-gray-900">WS</td>
                                 </tr>
-                                @foreach ($students as $student)
-                                @if ($student && $student->gender == "Male")
                                         <tr class="hover:bg-gray-100">
                                             <td class="export border-2 text-center border-gray-900">
                                             
                                             </td>
                                             <td class="export border-2  border-gray-900">
+                                                Posible Highest Grade</td>
+                                            <td class="export border-2 text-center border-gray-900"></td>
+                                                <td class="export border-2 text-center border-gray-900">
                                                 </td>
-                                            <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_written_one }}</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_written_two }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_written_three }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_written_four }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_written_five }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_written_six }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_written_seven }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_written_eight }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_written_nine }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_written_ten }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_written_total }}</td>
+                                                100.00</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_ps }}</td>
+                                                30%</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                30%%</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_performance_one }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_performance_two }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_performance_three }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_performance_four }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_performance_five }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_performance_six }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_performance_seven }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_performance_eight }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_performance_nine }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_performance_ten }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_performance_total }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->performance_ps }}</td>
+                                                100.00</td>
                                                 <td class="export border-2 text-center border-gray-900">
                                                 50%</td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_q_assessment_one }}</td>
+                                                </td>
                                                 <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->hps_q_assessment_ps }}</td>
+                                                100.00</td>
                                                 <td class="export border-2 text-center border-gray-900">
                                                 20%</td>
                                         </tr>
-                                    @endif
-                                @endforeach
+                                  
                                 <tr class="text-[14px] font-normal uppercase text-left text-black">
                                     <td class="export border-2 text-center border-gray-900">#</td>
                                     <td class="export border-2 text-center border-gray-900 w-[100px] text-start">
