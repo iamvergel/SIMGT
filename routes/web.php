@@ -195,6 +195,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::delete('/announcements/{id}', [Cevent::class, 'deleteAnnouncement'])->name('announcements.delete');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/announcement', [PictureAnnouncementController::class, 'showAnnouncements'])->name('announcements.show');
+    
     Route::delete('/StEmelieLearningCenter.HopeSci66/admin/announcement/{id}', [PictureAnnouncementController::class, 'deleteAnnouncement'])->name('pictureannouncements.delete');
     // Route::post('/admin/announcement/{id}', [PictureAnnouncementController::class, 'updateAnnouncement'])->name('announcements.update');
     Route::post('/StEmelieLearningCenter.HopeSci66/admin/announcement', [PictureAnnouncementController::class, 'store'])->name('announcementspicture.store');
@@ -216,7 +217,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     });
 
     // Student Dashboard Route with Latest Announcements
-    Route::get('/StEmelieLearningCenter.HopeSci66/student/dashboard', [Cevent::class, 'showDashboardstudent']);
+    Route::get('/StEmelieLearningCenter.HopeSci66/student/dashboard', [Cevent::class, 'showDashboardstudent'])->name('student.dashboard');
     Route::get('/StEmelieLearningCenter.HopeSci66/student/calendar', [Cevent::class, 'showCalendar'])->name('student.calendar');
     Route::get('/api/events', [Cevent::class, 'getEvents']);
 

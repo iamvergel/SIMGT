@@ -1,5 +1,12 @@
 <!-- Update Student Modal -->
 @foreach ($students as $student)
+    @php
+        $account = $studentAccount[$student->student_number] ?? null;
+        $avatar = $account && $account->avatar ? asset('storage/' . $account->avatar) : null;
+        $initials = strtoupper(substr($student->student_last_name, 0, 1) . substr($student->student_first_name, 0, 1));
+        $primaryInfo = $studentsPrimary[$student->student_number] ?? null;
+        $teacherInfo = $myTeacher[$primaryInfo->adviser] ?? null;
+    @endphp
     <div id="updatetudentinfo{{ $student->id }}" tabindex="-1" aria-hidden="true"
         class="hidden fixed top-0 right-0 left-0 z-10 flex justify-center items-center w-screen h-screen bg-black bg-opacity-50 overflow-y-scroll"
         style="scrollbar-width: none;">
@@ -36,21 +43,35 @@
                     @csrf
                     @method('PUT')
                     <div class="grid grid-cols-3 xl:grid=cols=4 gap-4 mb-4 text-[13px] text-gray-900">
-                        <div class="col-span-2 2xl:col-span-1 p-10 bg-gray-200 flex justify-center items-center">
+                        <div class="col-span-2 2xl:col-span-1 p-10 bg-gray-200">
                             @php
                                 $account = $studentAccount[$student->student_number] ?? null;
                                 $avatar = $account && $account->avatar ? asset('storage/' . $account->avatar) : null;
                                 $initials = strtoupper(substr($student->student_last_name, 0, 1) . substr($student->student_first_name, 0, 1));
                             @endphp
-
-                            <div
-                                class="w-48 h-48 text-[50px] rounded-full bg-teal-700 text-white flex items-center justify-center font-bold mx-2 border-4 border-white">
-                                @if ($avatar)
-                                    <img src="{{ $avatar }}" alt="Student Avatar"
-                                        class="w-full h-full rounded-full object-cover">
-                                @else
-                                    {{ $initials }}
-                                @endif
+                            <div class="w-full  flex items-center justify-center">
+                                <div
+                                    class="w-48 h-48 text-[50px] rounded-full bg-teal-700 text-white flex items-center justify-center font-bold mx-2 border-4 border-white">
+                                    @if ($avatar)
+                                        <img src="{{ $avatar }}" alt="Student Avatar"
+                                            class="w-full h-full rounded-full object-cover">
+                                    @else
+                                        {{ $initials }}
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="text-center mt-5 text-teal-800 ">
+                                <p class="text-md tracking-widest font-semibold  shadow-text-lg mt-2 leading-3">
+                                    {{ $student->student_last_name }},
+                                    {{ $student->student_first_name }}
+                                    {{ $student->student_suffix_name }}
+                                    {{ $student->student_middle_name }}
+                                </p>
+                                <span
+                                    class="text-xs tracking-widest font-normal shadow-text-lg mt-0">{{ $account->username ?? 'no username'}}</span>
+                                <p class="text-xs">
+                                    Student
+                                </p>
                             </div>
                         </div>
                         <div class="col-span-2 2xl:col-span-3">
@@ -58,18 +79,21 @@
                                 <div>
                                     <label for="lrn" class="block mb-2 text-[12px] font-bold text-gray-900">
                                         <span class="text-red-600 mr-1">*</span>Learner Reference Number (LRN) :</label>
-                                    <input type="text" name="lrn" id="lrn" class="input-field"
+                                    <input type="text" name="lrn" id="lrn"
+                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                         value="{{ old('lrn', $student->lrn) }}"
-                                        placeholder="Enter Learner Reference Number (LRN)" required>
+                                        placeholder="Enter Learner Reference Number (LRN)" required readonly>
                                 </div>
 
                                 <div>
                                     <label for="status" class="block mb-2 text-sm font-bold text-gray-900">
                                         <span class="text-red-600 mr-1">*</span>Status :</label>
-                                    <select id="status" name="status" class="select-field" required>
+                                    <select id="status" name="status"
+                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                        required disabled>
                                         <option value="">Select Status</option>
                                         <option value="Active" {{ old('status', $student->status) == 'Active' ? 'selected' : '' }}>
-                                            Active</option>
+                                            Active | Erolled</option>
                                         <option value="Graduated" {{ old('status', $student->status) == 'Graduated' ? 'selected' : '' }}>Graduated</option>
                                         <option value="Dropped" {{ old('status', $student->status) == 'Dropped' ? 'selected' : '' }}>
                                             Dropped</option>
@@ -81,17 +105,19 @@
                                 <div class="mb-5">
                                     <label for="studentNumber" class="block mb-2 text-sm font-bold text-gray-900">
                                         <span class="text-red-600 mr-1">*</span>Student No. :</label>
-                                    <input type="text" name="student_number" id="studentNumber" class="input-field"
+                                    <input type="text" name="student_number" id="studentNumber"
+                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                         value="{{ old('student_number', $student->student_number) }}"
-                                        placeholder="0000-0000" required>
+                                        placeholder="0000-0000" required readonly>
                                 </div>
 
                                 <div>
                                     <label for="schoolYear" class="block mb-2 text-sm font-bold text-gray-900">
                                         <span class="text-red-600 mr-1">*</span>School Year :</label>
-                                    <input type="text" name="school_year" id="schoolYear" class="input-field"
-                                        value="{{ old('school_year', $student->school_year) }}" placeholder="0000-0000"
-                                        required>
+                                    <input type="text" name="school_year" id="schoolYear"
+                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                        value="{{ old('school_year', $primaryInfo->school_year) }}" placeholder="0000-0000"
+                                        required readonly>
                                 </div>
 
                                 <!-- <label for="school" class="block mb-2 text-sm font-bold text-gray-900">School :</label> -->
@@ -103,50 +129,53 @@
                                 <div>
                                     <label for="grade" class="block mb-2 text-sm font-bold text-gray-900">
                                         <span class="text-red-600 mr-1">*</span>Select Grade :</label>
-                                    <select id="grade" name="grade" class="select-field" required>
+                                    <input type="hidden" name="grade" id="grade"
+                                        value="{{ old('grade', $primaryInfo->grade) }}">
+                                    <select id="grade"
+                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                        required disabled>
                                         <!-- Default Grade One Option (shown only if no specific grade selected) -->
                                         @if(request()->is('*/GradeOne') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
-                                            <option value="Grade One" {{ old('grade', $student->grade) == 'Grade One' ? 'selected' : '' }}>Grade One</option>
-                                            <option value="Grade Two" {{ old('grade', $student->grade) == 'Grade Two' ? 'selected' : '' }}>Grade Two</option>
-                                            <option value="Grade Three" {{ old('grade', $student->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
-                                            <option value="Grade Four" {{ old('grade', $student->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
-                                            <option value="Grade Five" {{ old('grade', $student->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
-                                            <option value="Grade Six" {{ old('grade', $student->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+                                            <option value="Grade One" {{ old('grade', $primaryInfo->grade) == 'Grade One' ? 'selected' : '' }}>Grade One</option>
+                                            <option value="Grade Two" {{ old('grade', $primaryInfo->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
+                                            <option value="Grade Four" {{ old('grade', $primaryInfo->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
+                                            <option value="Grade Five" {{ old('grade', $primaryInfo->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
+                                            <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
                                         @endif
 
                                         <!-- Show Grade Two and above (Grade Two to Grade Six) -->
                                         @if(request()->is('*/GradeTwo') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
-                                            <option value="Grade Two" {{ old('grade', $student->grade) == 'Grade Two' ? 'selected' : '' }}>Grade Two</option>
-                                            <option value="Grade Three" {{ old('grade', $student->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
-                                            <option value="Grade Four" {{ old('grade', $student->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
-                                            <option value="Grade Five" {{ old('grade', $student->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
-                                            <option value="Grade Six" {{ old('grade', $student->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+                                            <option value="Grade Two" {{ old('grade', $primaryInfo->grade) == 'Grade Two' ? 'selected' : '' }}>Grade Two</option>
+                                            <option value="Grade Three" {{ old('grade', $primaryInfo->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
+                                            <option value="Grade Four" {{ old('grade', $primaryInfo->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
+                                            <option value="Grade Five" {{ old('grade', $primaryInfo->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
+                                            <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
                                         @endif
 
                                         <!-- Show Grade Three and above (Grade Three to Grade Six) -->
                                         @if(request()->is('*/GradeThree') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
-                                            <option value="Grade Three" {{ old('grade', $student->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
-                                            <option value="Grade Four" {{ old('grade', $student->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
-                                            <option value="Grade Five" {{ old('grade', $student->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
-                                            <option value="Grade Six" {{ old('grade', $student->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+                                            <option value="Grade Three" {{ old('grade', $primaryInfo->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
+                                            <option value="Grade Four" {{ old('grade', $primaryInfo->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
+                                            <option value="Grade Five" {{ old('grade', $primaryInfo->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
+                                            <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
                                         @endif
 
                                         <!-- Show Grade Four and above (Grade Four to Grade Six) -->
                                         @if(request()->is('*/GradeFour') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
-                                            <option value="Grade Four" {{ old('grade', $student->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
-                                            <option value="Grade Five" {{ old('grade', $student->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
-                                            <option value="Grade Six" {{ old('grade', $student->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+                                            <option value="Grade Four" {{ old('grade', $primaryInfo->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
+                                            <option value="Grade Five" {{ old('grade', $primaryInfo->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
+                                            <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
                                         @endif
 
                                         <!-- Show Grade Five and above (Grade Five to Grade Six) -->
                                         @if(request()->is('*/GradeFive') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
-                                            <option value="Grade Five" {{ old('grade', $student->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
-                                            <option value="Grade Six" {{ old('grade', $student->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+                                            <option value="Grade Five" {{ old('grade', $primaryInfo->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
+                                            <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
                                         @endif
 
                                         <!-- Show Grade Six only (if on Grade Six page) -->
                                         @if(request()->is('*/GradeSix') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
-                                            <option value="Grade Six" {{ old('grade', $student->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+                                            <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
                                         @endif
                                     </select>
                                 </div>
@@ -157,8 +186,19 @@
                                         <span class="text-red-600 mr-1">*</span>Section :</label>
                                     <input type="text" name="section" id="section"
                                         class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                        value="{{ old('section', $student->section) }}" placeholder="Enter Section"
-                                        required>
+                                        value="{{ old('section', $primaryInfo->section) }}" placeholder="Enter Section"
+                                        required readonly>
+                                </div>
+
+                                <div>
+                                    <label for="adviser" class="block mb-2 text-sm font-bold text-gray-900">
+                                        <span class="text-red-600 mr-1">*</span>Adviser :</label>
+                                    <input type="hidden" name="adviser" id="adviser"
+                                        value="{{ old('adviser', $primaryInfo->adviser) }}">
+                                    <input type="text"
+                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                        value="{{ $teacherInfo->first_name . ' ' . $teacherInfo->last_name . ' ' . $teacherInfo->middle_name . ' ' . $teacherInfo->suffix }}"
+                                        placeholder="Enter Adviser" required readonly>
                                 </div>
                             </div>
                         </div>
@@ -174,7 +214,8 @@
                             <label for="lastName" class="block mb-2 text-sm font-bold text-gray-900"><span
                                     class="text-red-600 mr-1">*</span>Last Name:
                             </label>
-                            <input type="text" name="lastName" id="lastName" class="input-field"
+                            <input type="text" name="lastName" id="lastName"
+                                class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                 value="{{ old('lastName', $student->student_last_name) }}" required>
                         </div>
 
@@ -182,14 +223,16 @@
                             <label for="firstName" class="block mb-2 text-sm font-bold text-gray-900"><span
                                     class="text-red-600 mr-1">*</span>First Name:
                             </label>
-                            <input type="text" name="firstName" id="firstName" class="input-field"
+                            <input type="text" name="firstName" id="firstName"
+                                class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                 value="{{ old('firstName', $student->student_first_name) }}" required>
                         </div>
 
 
                         <div class="mb-5">
                             <label for="middleName" class="block mb-2 text-sm font-bold text-gray-900">Middle Name:</label>
-                            <input type="text" name="middleName" id="middleName" class="input-field"
+                            <input type="text" name="middleName" id="middleName"
+                                class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                 value="{{ old('middleName', $student->student_middle_name) }}">
                         </div>
 
@@ -252,7 +295,8 @@
                             <label for="email" class="block mb-2 text-sm font-bold text-gray-900">
                                 <span class="text-red-600 mr-1">*</span>Email: <small>(Parents or Student Email)</small>
                             </label>
-                            <input type="email" name="email" id="email" class="input-field"
+                            <input type="email" name="email" id="email"
+                                class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                 value="{{ old('email', $student->email_address_send) }}" placeholder="example@gmail.com"
                                 required>
                         </div>
@@ -641,8 +685,8 @@
                                 class="w-full p-3 border-2 uppercase rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-700 text-[15px] file:mr-4 file:rounded-full file:border-0 file:bg-teal-100 file:px-4 file:py-2 file:text-md file:font-semibold file:text-teal-800 hover:file:bg-teal-200">
                             @if($student->documents && $student->documents->birth_certificate)
                                 <div class="mt-2 text-gray-800">
-                                    <a href="{{ asset('storage/' . $student->documents->birth_certificate) }}"
-                                        target="_blank" class="text-blue-600 font-semibold hover:text-blue-700">Current File:
+                                    <a href="{{ asset('storage/' . $student->documents->birth_certificate) }}" target="_blank"
+                                        class="text-blue-600 font-semibold hover:text-blue-700">Current File:
                                         Click To Open Current Birth Certificate</a>
                                 </div>
                             @endif

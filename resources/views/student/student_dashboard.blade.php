@@ -18,6 +18,17 @@
   <script src="https://kit.fontawesome.com/20a0e1e87d.js" crossorigin="anonymous"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.0/css/buttons.dataTables.min.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.0.5/dist/css/glightbox.min.css" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -26,6 +37,88 @@
       font-family: "Poppins", sans-serif;
       scroll-behavior: smooth;
       scrollbar-width: thin;
+    }
+
+
+    .fc-toolbar {
+      font-size: 9px;
+      font-weight: 700;
+      color: #134e4a;
+    }
+
+    .fc-daygrid-day {
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+    }
+
+    .fc-daygrid-event {
+      background-color: #0f766e;
+      color: #134e4a;
+      border-radius: 4px;
+      border: none;
+      padding: 5px;
+    }
+
+    .fc-daygrid-event:hover {
+      background-color: #115e59;
+    }
+
+    @media (min-width: 1024px) {
+      .fc-toolbar {
+        font-size: 15px;
+      }
+    }
+
+    /* Change background and text color of FullCalendar buttons */
+    .fc-button {
+      background-color: #4CAF50;
+      /* Green background */
+      color: white;
+      /* White text */
+      border-radius: 5px;
+      /* Optional: rounded corners */
+      padding: 10px 20px;
+      /* Optional: padding */
+    }
+
+    /* Change hover state of buttons */
+    .fc-button:hover {
+      background-color: #45a049;
+      /* Darker green */
+      color: white;
+    }
+
+    /* Optionally, you can change specific buttons */
+    .fc-prev-button {
+      background-color: #FF5722;
+      /* Example: orange for prev button */
+    }
+
+    .fc-next-button {
+      background-color: #2196F3;
+      /* Example: blue for next button */
+    }
+
+    .dataTables_filter input {
+      width: 200px;
+      font-size: 14px;
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+
+    .dataTables_filter label {
+      font-size: 14px;
+      margin-right: 10px;
+    }
+
+    .dropdown {
+      display: none;
+    }
+
+    .dropdown-active {
+      display: block;
     }
   </style>
 </head>
@@ -37,8 +130,7 @@
     @include('student.includes.sidebar')
 
     <!-- Main Content -->
-    <main
-      class="flex-grow bg-white shadow-lg overflow-x-hidden overflow-y-scroll w-full bg-zinc-50">
+    <main class="flex-grow bg-white shadow-lg overflow-x-hidden overflow-y-scroll w-full bg-zinc-50">
       @include('student.includes.header')
 
       <div class="p-5 py-3">
@@ -106,55 +198,114 @@
                 </div>
               </div>
             </div>
-
-            <div class="bg-white py-5 px-3 text-teal-800 rounded-lg shadow-lg text-start mt-5">
-              <p class="font-bold text-[15px]">
-                @php
-          $middleName = session('student_middle_name', '');
-        @endphp
-                {{ session('student_last_name') . ', ' . session('student_first_name') . ' ' . strtoupper(substr($middleName, 0, 1)) . '.'}}
-              </p>
-              <p class="font-normal text-[12px]">{{ session('gradea') . ' - ' . session('sectiona') }} | {{ session('school_yeara') }}</p>
-              <p>Adviser: {{ session('adviser_first_name'). ' '.  session('adviser_middle_name'). ' ' . session('adviser_last_name') }}</p>
-
-            </div>
           </div>
         </div>
-        <div class="col-span-2 lg:col-span-1">
-          <div class="p-5">
-            <p class="text-[15px] font-normal text-teal-900 my-5"><i
-                class="fas fa-bullhorn text-teal-900 mr-2"></i>Announcement</p>
-            <div class="bg-gray-200 p-2 lg:py-5 text-white rounded-lg shadow-lg text-start announcement">
+      
 
-              @if($latestAnnouncements->isEmpty())
+        <div class="col-span-2 lg:col-span-1 px-5 lg:px-20 relative overflow-hidden">
+          <div class="bg-white text-teal-800 rounded-lg shadow-lg text-start mt-5 p-10 border">
+            <p class="font-bold text-[15px]">
+              Name :
+              {{ session('student_first_name') . ' ' . session('student_middle_name') . ' ' . session('student_last_name') }}
+            </p>
+            <p class="font-bold text-[15px] mt-5">Adviser:
+              {{ session('adviser_first_name') . ' ' . session('adviser_middle_name') . ' ' . session('adviser_last_name') }}
+            </p>
+            <p class="font-normal text-[12px]">Grade : {{ session('gradea') . ' | Section : ' . session('sectiona') }}
+            </p>
+            <p class="font-normal text-[12px]">School Year: {{ session('school_yeara') }}</p>
+          </div>
+          <i class="fa-solid fa-school text-[100px] text-teal-700/20 absolute top-20 right-10 lg:right-24"></i>
+          </div>
+          <div class="col-span-2 lg:col-span-1 px-5 lg:px-20">
+            <div class="p-0">
+              <p class="text-[25px] font-semibold text-teal-900 my-5"><i
+                  class="fas fa-bullhorn text-teal-900 mr-2 text-bold text-[40px]"></i>Announcement</p>
+              <div class="bg-gray-200 p-2 lg:py-1 text-white rounded-lg shadow-lg text-start announcement bg-teal-700">
+
+                @if($latestAnnouncements->isEmpty())
           <p class="text-red-500 text-[14px] text-center">No announcements available.</p>
         @else
-        @foreach($latestAnnouncements as $announcement)
+      @foreach($latestAnnouncements as $announcement)
       <div x-data="{ open: false }"
-      class="announcement my-3 p-5 bg-white border rounded-lg text-teal-700 leading-4">
-      <div class="py-3 px-2 bg-teal-700 rounded-lg text-white" id="announcementa">
-        <div class="flex justify-between items-center">
+      class="announcement my-1 p-2 bg-teal-700 border rounded-lg text-teal-700 leading-4">
+      <div class="py-1 px-2 bg-teal-700 rounded-lg text-white" id="announcementa">
+      <div class="flex justify-between items-center">
         <h5 class="font-bold mb-0 text-[15px]">{{ $announcement->announcements_head }}</h5>
         <button @click="open = !open" class="bg-transparent text-white rounded px-2 py-1 text-sm">
         <span x-show="!open"><i class="fas fa-angle-right"></i></span>
         <span x-show="open"><i class="fas fa-angle-down"></i></span>
         </button>
-        </div>
-        <small class="text-muted text-[12px]">{{ $announcement->created_at->format('F j, Y, g:i a') }}</small>
       </div>
-
-      <div x-show="open" x-transition class="mt-3 px-2 py-2 text-[15px]">
-        <textarea name="announcements_body" id="announcements_body" required
-        class="w-full p-3 rounded-md focus:outline-none focus:ring-none focus:ring-teal-500 text-[13px]"
+      </div>
+      <div x-show="open" x-transition class="mt-1 px-2 py-2 text-[15px]">
+      <textarea name="announcements_body" id="announcements_body_{{ $announcement->id }}" required
+        class="w-full p-5 rounded-md focus:outline-none focus:ring-none focus:ring-teal-500 text-[13px]"
         style="resize: none;" rows="20" readonly>{{ $announcement->announcements_body }}</textarea>
       </div>
+      <small
+      class="text-muted text-[12px] text-white">{{ $announcement->created_at->format('F j, Y, g:i a') }}</small>
       </div>
     @endforeach
-      @endif
+    @endif
+              </div>
+            </div>
+          </div>
+        
 
+        <div class="col-span-2 lg:col-span-1 p-5 mt-0 lg:mt-16">
+          <div class="bg-white h-96 xl:h-[700px] shadow-lg border-t-4 border-b-4 border-teal-700"
+            id="announcementPicture">
+            <div class="w-full h-full border-4 border-teal-50 rounded-lg">
+              <div class="table-responsive">
+                @if($pictureAnnouncements->isEmpty())
+          <div class="text-center text-lg text-gray-600">
+            <table id="announcementTable" class="display">
+            <thead class="table-header bg-gray-100">
+              <tr class="text-sm tracking-wide text-left uppercase">
+              <th class="">Announcement</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white" id="tableBody">
+              <tr class="text-gray-700 table-row">
+              <td class="px-4 py-3 border text-sm"> No Announcements Available.</td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
+        @else
+      <table id="announcementTable" class="display">
+        <thead class="table-header bg-gray-100">
+        <tr class="text-sm tracking-wide text-left uppercase">
+          <th class="">Announcement</th>
+        </tr>
+        </thead>
+        <tbody class="bg-white" id="tableBody">
+        @foreach ($pictureAnnouncements as $announcement)
+      <tr class="text-gray-700 table-row">
+        <td class="px-4 py-3 border" width="90%">
+        <div class="w-full bg-gray-100 p-2">
+        <div class="w-full flex justify-center items-center">
+        <img src="/storage/announcements/{{ $announcement->image }}" alt="Image"
+          class="w-full h-full object-cover">
+        </div>
+        <div class="flex justify-between align-end px-10 text-sm bg-gray-200 py-5">
+        <p class="text-center">{{ $announcement->date }}</p>
+        <p class="text-center">{{ $announcement->updated_at }}</p>
+        </div>
+        </div>
+        </td>
+      </tr>
+    @endforeach
+        </tbody>
+      </table>
+    @endif
+              </div>
             </div>
           </div>
         </div>
+
+
         <div class="col-span-2 lg:col-span-1 p-5">
           <div class="bg-white rounded-lg col-span-4 lg:col-span-4 xl:col-span-4 border-2 shadow-lg"></div>
         </div>
@@ -163,8 +314,60 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <script src="https://cdn.datatables.net/buttons/2.2.0/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.print.min.js"></script>
+
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.plugin.autotable.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.2.0/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.print.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.18/jspdf.plugin.autotable.min.js"></script>
   <script src="{{ asset('../js/admin/admin.js') }}" type="text/javascript"></script>
   <script>
+    var table = $("#announcementTable").DataTable({
+      dom:
+        ` 
+            <'flex justify-between items-center hidden'>` +
+        `<tr>` +
+        `<'flex justify-between items-center'<'flex-1'l><'flex-1'p>>`,
+      paging: true,
+      searching: false,
+      ordering: true,
+      info: true,
+      scrollY: "600px",
+    });
+
+    @foreach ($latestAnnouncements as $announcement)
+    $("#announcements_body_{{ $announcement->id }}").summernote({
+      placeholder: "Enter Announcement...",
+      tabsize: 2,
+      height: 200,
+      zIndex: 500,
+      toolbar: [],
+      editable: false, // Disable editing
+      callbacks: {
+      onInit: function () {
+        $(".note-editor").css("background-color", "white");
+      }
+      },
+    });
+  @endforeach
+
+
     document.addEventListener('DOMContentLoaded', () => {
       const dashboard = document.getElementById('dashboard');
 

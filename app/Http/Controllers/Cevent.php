@@ -13,6 +13,7 @@ use App\Models\StudentPrimaryInfo;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\Madminaccount;
+use App\Models\PictureAnnouncement;
 use App\Mail\MLsendemail;
 use Illuminate\Routing\Controller as BaseController; // Correct import
 
@@ -182,8 +183,10 @@ class Cevent extends BaseController // Extend the correct base controller
         // Check if there are any announcements
         $newAnnouncements = $latestAnnouncements->count() > 0;
 
+        $pictureAnnouncements = PictureAnnouncement::orderBy('created_at', 'desc')->get();
+
         // Return the view with announcements data
-        return view('student.student_dashboard', compact('latestAnnouncements', 'newAnnouncements'));
+        return view('student.student_dashboard', compact('latestAnnouncements', 'newAnnouncements', 'pictureAnnouncements'));
     }
 
     public function showCalendar()

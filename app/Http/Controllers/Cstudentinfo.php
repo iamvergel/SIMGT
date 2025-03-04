@@ -187,7 +187,7 @@ class Cstudentinfo extends Controller
                         $classRecordOne->quarter = $quarter;
                         $classRecordOne->grade = $validatedData['grade'];
                         $classRecordOne->section = $validatedData['section'];
-                        $classRecordOne->subject = $subject->subject; 
+                        $classRecordOne->subject = $subject->subject;
 
                         // You can assign other dynamic fields, like written scores or performance scores, if needed
                         $classRecordOne->save();
@@ -684,12 +684,13 @@ class Cstudentinfo extends Controller
         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
         $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
         $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $myTeacher = TeacherUser::whereIn('teacher_number', $studentsPrimary->pluck('adviser'))->get()->keyBy('teacher_number');
 
         // Check if there are no students found in Grade One
         $noGradeOneMessage = $studentsPrimary->isEmpty() ? "No students found in Grade One." : null;
 
         // Pass the data to the view
-        return view('admin.admin_student_management_gradeone', compact('students', 'noGradeOneMessage', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
+        return view('admin.admin_student_management_gradeone', compact('students', 'noGradeOneMessage', 'myTeacher', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
     }
 
     public function additionalInfo()
@@ -704,57 +705,133 @@ class Cstudentinfo extends Controller
 
     public function showGradeTwoData()
     {
-        // Fetch all Grade Two student records
-        $students = StudentInfo::where('status', 'Active')->get();
+        // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+        $students = StudentInfo::with('student') // Only eager load 'student' relationship
+            ->where('status', 'Active') // Active students only
+            ->get();
 
-        // Check if there are no students in Grade Two
-        $noGradeTwoMessage = $students->isEmpty() ? "No students found in Grade Two." : null;
+        // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
+        $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
+            ->where('grade', 'Grade One') // Filter for Grade One
+            ->where('status', 'Enrolled') // Ensure students are enrolled
+            ->get()->keyBy('studentnumber');
 
-        return view('admin.admin_student_management_gradetwo', compact('students', 'noGradeTwoMessage'));
+        $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $myTeacher = TeacherUser::whereIn('teacher_number', $studentsPrimary->pluck('adviser'))->get()->keyBy('teacher_number');
+
+        // Check if there are no students found in Grade One
+        $noGradeTwoMessage = $studentsPrimary->isEmpty() ? "No students found in Grade One." : null;
+
+        // Pass the data to the view
+        return view('admin.admin_student_management_gradetwo', compact('students', 'noGradeTwoMessage', 'myTeacher', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
+
     }
 
     public function showGradeThreeData()
     {
-        // Fetch all Grade Three student records
-        $students = StudentInfo::where('grade', 'Grade Three')->where('status', 'Active')->get();
+        // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+        $students = StudentInfo::with('student') // Only eager load 'student' relationship
+            ->where('status', 'Active') // Active students only
+            ->get();
 
-        // Check if there are no students in Grade Three
-        $noGradeThreeMessage = $students->isEmpty() ? "No students found in Grade Three." : null;
+        // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
+        $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
+            ->where('grade', 'Grade One') // Filter for Grade One
+            ->where('status', 'Enrolled') // Ensure students are enrolled
+            ->get()->keyBy('studentnumber');
 
-        return view('admin.admin_student_management_gradethree', compact('students', 'noGradeThreeMessage'));
+        $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $myTeacher = TeacherUser::whereIn('teacher_number', $studentsPrimary->pluck('adviser'))->get()->keyBy('teacher_number');
+
+        // Check if there are no students found in Grade One
+        $noGradeTwoMessage = $studentsPrimary->isEmpty() ? "No students found in Grade One." : null;
+
+        // Pass the data to the view
+        return view('admin.admin_student_management_gradethree', compact('students', 'noGradeTwoMessage', 'myTeacher', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
+
     }
 
     public function showGradeFourData()
     {
         // Fetch all Grade Four student records
-        $students = StudentInfo::where('grade', 'Grade Four')->where('status', 'Active')->get();
+        // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+        $students = StudentInfo::with('student') // Only eager load 'student' relationship
+            ->where('status', 'Active') // Active students only
+            ->get();
 
-        // Check if there are no students in Grade Four
-        $noGradeFourMessage = $students->isEmpty() ? "No students found in Grade Four." : null;
+        // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
+        $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
+            ->where('grade', 'Grade One') // Filter for Grade One
+            ->where('status', 'Enrolled') // Ensure students are enrolled
+            ->get()->keyBy('studentnumber');
 
-        return view('admin.admin_student_management_gradefour', compact('students', 'noGradeFourMessage'));
+        $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $myTeacher = TeacherUser::whereIn('teacher_number', $studentsPrimary->pluck('adviser'))->get()->keyBy('teacher_number');
+
+        // Check if there are no students found in Grade One
+        $noGradeTwoMessage = $studentsPrimary->isEmpty() ? "No students found in Grade One." : null;
+
+        // Pass the data to the view
+        return view('admin.admin_student_management_gradefour', compact('students', 'noGradeTwoMessage', 'myTeacher', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
+
     }
 
     public function showGradeFiveData()
     {
-        // Fetch all Grade Five student records
-        $students = StudentInfo::where('grade', 'Grade Five')->where('status', 'Active')->get();
+        // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+        $students = StudentInfo::with('student') // Only eager load 'student' relationship
+            ->where('status', 'Active') // Active students only
+            ->get();
 
-        // Check if there are no students in Grade Five
-        $noGradeFiveMessage = $students->isEmpty() ? "No students found in Grade Five." : null;
+        // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
+        $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
+            ->where('grade', 'Grade One') // Filter for Grade One
+            ->where('status', 'Enrolled') // Ensure students are enrolled
+            ->get()->keyBy('studentnumber');
 
-        return view('admin.admin_student_management_gradefive', compact('students', 'noGradeFiveMessage'));
+        $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $myTeacher = TeacherUser::whereIn('teacher_number', $studentsPrimary->pluck('adviser'))->get()->keyBy('teacher_number');
+
+        // Check if there are no students found in Grade One
+        $noGradeTwoMessage = $studentsPrimary->isEmpty() ? "No students found in Grade One." : null;
+
+        // Pass the data to the view
+        return view('admin.admin_student_management_gradefive', compact('students', 'noGradeTwoMessage', 'myTeacher', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
+
     }
 
     public function showGradeSixData()
     {
-        // Fetch all Grade Six student records
-        $students = StudentInfo::where('grade', 'Grade Six')->where('status', 'Active')->get();
+        // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+        $students = StudentInfo::with('student') // Only eager load 'student' relationship
+            ->where('status', 'Active') // Active students only
+            ->get();
 
-        // Check if there are no students in Grade Six
-        $noGradeSixMessage = $students->isEmpty() ? "No students found in Grade Six." : null;
+        // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
+        $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
+            ->where('grade', 'Grade One') // Filter for Grade One
+            ->where('status', 'Enrolled') // Ensure students are enrolled
+            ->get()->keyBy('studentnumber');
 
-        return view('admin.admin_student_management_gradesix', compact('students', 'noGradeSixMessage'));
+        $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $myTeacher = TeacherUser::whereIn('teacher_number', $studentsPrimary->pluck('adviser'))->get()->keyBy('teacher_number');
+
+        // Check if there are no students found in Grade One
+        $noGradeTwoMessage = $studentsPrimary->isEmpty() ? "No students found in Grade One." : null;
+
+        // Pass the data to the view
+        return view('admin.admin_student_management_gradesix', compact('students', 'noGradeTwoMessage', 'myTeacher', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
+
     }
 
     //_________________________________________________________________

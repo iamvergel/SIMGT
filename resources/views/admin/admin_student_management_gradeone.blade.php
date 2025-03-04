@@ -82,6 +82,7 @@
                                 <table id="studentTable" class="p-3">
                                     <thead class="bg-gray-200">
                                         <tr class="text-[14px] font-normal uppercase text-left text-black">
+                                            <th class="hidden">Id</th>
                                             <th class="export">lrn</th>
                                             <th class="export">Student Number</th>
                                             <th class="export">Status</th>
@@ -102,6 +103,9 @@
                                                 @endphp
                                                 @if ($primaryInfo && $primaryInfo->grade == 'Grade One' && $primaryInfo->status == 'Enrolled')
                                                     <tr class="hover:bg-gray-100">
+                                                        <td class="hidden">
+                                                            <span class="ml-2">{{ $student->id }}</span>
+                                                        </td>
                                                         <td>
                                                             <span class="ml-2">{{ $student->lrn }}</span>
                                                         </td>
@@ -143,7 +147,7 @@
                                                             <!-- Update Student Info Button -->
                                                             <button data-modal-toggle="updatetudentinfo{{ $student->id }}" data-modal-target="updatetudentinfo{{ $student->id }}"
                                                                     class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-teal-700 rounded-full hover:bg-teal-600"
-                                                                    type="button" aria-label="Update Student" title="Update Student Info">
+                                                                    type="button" aria-label="Update Student" title="Update Student Info" id="openUpdateStudentInfo{{ $student->id }}">
                                                                 <i class="fa-solid fa-square-pen"></i>
                                                             </button>
 
@@ -189,6 +193,30 @@
     
     @include('admin.includes.js-link')
     <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+         @foreach ($students as $student)
+                const updateModal{{ $student->id }} = document.getElementById("updatetudentinfo{{ $student->id }}");
+                const openUpdateModalButton{{ $student->id }} = document.getElementById("openUpdateStudentInfo{{ $student->id }}");
+                const closeUpdateModalButton{{ $student->id }} = document.getElementById("updatetudentinfoClose{{ $student->id }}");
+
+                // Ensure the elements exist before adding event listeners
+                if (openUpdateModalButton{{ $student->id }}) {
+                    openUpdateModalButton{{ $student->id }}.addEventListener("click", () => {
+                        if (updateModal{{ $student->id }}) {
+                            updateModal{{ $student->id }}.classList.remove("hidden");
+                        }
+                    });
+                }
+
+                if (closeUpdateModalButton{{ $student->id }}) {
+                    closeUpdateModalButton{{ $student->id }}.addEventListener("click", () => {
+                        if (updateModal{{ $student->id }}) {
+                            updateModal{{ $student->id }}.classList.add("hidden");
+                        }
+                    });
+                }
+            @endforeach
+    </script>
 </body>
 
 </html>
