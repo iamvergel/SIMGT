@@ -181,57 +181,61 @@ return new class extends Migration
         });
 
         DB::unprepared('
-        CREATE TRIGGER update_quarterly_grade6 BEFORE INSERT ON grade_six_class_record
+        CREATE TRIGGER update_quarterly_grade6 
+        BEFORE INSERT ON grade_six_class_record
         FOR EACH ROW
         BEGIN
             DECLARE transmuted_grade INT;
-
+        
+            -- Ensure that initial_grade is always a numeric value
+            SET @initial_grade = COALESCE(NEW.initial_grade, 0);
+        
             -- Calculate transmuted grade based on initial grade
             SET transmuted_grade = 
                 CASE
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 100 THEN 100
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 98.40 THEN 99
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 96.80 THEN 98
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 95.20 THEN 97
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 93.60 THEN 96
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 92.00 THEN 95
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 90.40 THEN 94
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 88.80 THEN 93
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 87.20 THEN 92
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 85.60 THEN 91
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 84.00 THEN 90
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 82.40 THEN 89
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 80.80 THEN 88
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 79.20 THEN 87
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 77.60 THEN 86
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 76.00 THEN 85
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 74.40 THEN 84
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 72.80 THEN 83
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 71.20 THEN 82
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 69.60 THEN 81
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 68.00 THEN 80
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 66.40 THEN 79
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 64.80 THEN 78
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 63.20 THEN 77
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 61.60 THEN 76
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 60.00 THEN 75
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 56.00 THEN 74
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 52.00 THEN 73
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 48.00 THEN 72
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 44.00 THEN 71
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 40.00 THEN 70
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 36.00 THEN 69
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 32.00 THEN 68
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 28.00 THEN 67
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 24.00 THEN 66
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 20.00 THEN 65
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 16.00 THEN 64
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 12.00 THEN 63
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 8.00 THEN 62
-                    WHEN COALESCE(NEW.initial_grade, 0) >= 4.00 THEN 61
+                    WHEN @initial_grade >= 100 THEN 100
+                    WHEN @initial_grade >= 98.40 THEN 99
+                    WHEN @initial_grade >= 96.80 THEN 98
+                    WHEN @initial_grade >= 95.20 THEN 97
+                    WHEN @initial_grade >= 93.60 THEN 96
+                    WHEN @initial_grade >= 92.00 THEN 95
+                    WHEN @initial_grade >= 90.40 THEN 94
+                    WHEN @initial_grade >= 88.80 THEN 93
+                    WHEN @initial_grade >= 87.20 THEN 92
+                    WHEN @initial_grade >= 85.60 THEN 91
+                    WHEN @initial_grade >= 84.00 THEN 90
+                    WHEN @initial_grade >= 82.40 THEN 89
+                    WHEN @initial_grade >= 80.80 THEN 88
+                    WHEN @initial_grade >= 79.20 THEN 87
+                    WHEN @initial_grade >= 77.60 THEN 86
+                    WHEN @initial_grade >= 76.00 THEN 85
+                    WHEN @initial_grade >= 74.40 THEN 84
+                    WHEN @initial_grade >= 72.80 THEN 83
+                    WHEN @initial_grade >= 71.20 THEN 82
+                    WHEN @initial_grade >= 69.60 THEN 81
+                    WHEN @initial_grade >= 68.00 THEN 80
+                    WHEN @initial_grade >= 66.40 THEN 79
+                    WHEN @initial_grade >= 64.80 THEN 78
+                    WHEN @initial_grade >= 63.20 THEN 77
+                    WHEN @initial_grade >= 61.60 THEN 76
+                    WHEN @initial_grade >= 60.00 THEN 75
+                    WHEN @initial_grade >= 56.00 THEN 74
+                    WHEN @initial_grade >= 52.00 THEN 73
+                    WHEN @initial_grade >= 48.00 THEN 72
+                    WHEN @initial_grade >= 44.00 THEN 71
+                    WHEN @initial_grade >= 40.00 THEN 70
+                    WHEN @initial_grade >= 36.00 THEN 69
+                    WHEN @initial_grade >= 32.00 THEN 68
+                    WHEN @initial_grade >= 28.00 THEN 67
+                    WHEN @initial_grade >= 24.00 THEN 66
+                    WHEN @initial_grade >= 20.00 THEN 65
+                    WHEN @initial_grade >= 16.00 THEN 64
+                    WHEN @initial_grade >= 12.00 THEN 63
+                    WHEN @initial_grade >= 8.00 THEN 62
+                    WHEN @initial_grade >= 4.00 THEN 61
                     ELSE 60
                 END;
-
+        
             -- Set the quarterly_grade
             SET NEW.quarterly_grade = transmuted_grade;
         END

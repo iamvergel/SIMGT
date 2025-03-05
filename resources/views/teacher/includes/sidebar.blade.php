@@ -325,7 +325,7 @@
                             classRecordDiv.append(subjectElement);
                         });
                     } else {
-                        classRecordDiv.html('<p>No subjects found for this teacher.</p>');
+                        classRecordDiv.html('<p class="text-[12px]">No subjects found for this teacher.</p>');
                     }
                 },
                 error: function (xhr, status, error) {

@@ -163,4 +163,113 @@ class TeacherSubjectClassController extends Controller
 
         return view('teacher.teacher_classsubject', compact('TeacherSubject', 'students'));
     }
+
+    public function updateInline(Request $request)
+    {
+        // Validate incoming request data
+        $validated = $request->validate([
+            'id' => 'required|exists:teacher_subject_class,id', // Ensure the teacher record exists
+            'column' => 'required|string', // The column to update
+            'value' => 'required|numeric', // Assuming all columns are numeric (adjust as necessary)
+        ]);
+    
+        // Find the TeacherSubjectClass record by ID
+        $teacherSubjectClass = TeacherSubjectClass::findOrFail($request->id);
+    
+        // Dynamically update the specified column in the teacher's record
+        $teacherSubjectClass->{$request->column} = $request->value;
+    
+        // If the column being updated is related to performance (e.g., hps_written_one, hps_performance_one, etc.)
+        $performanceColumns = [
+            'hps_written_one', 'hps_written_two', 'hps_written_three', 'hps_written_four', 'hps_written_five',
+            'hps_written_six', 'hps_written_seven', 'hps_written_eight', 'hps_written_nine', 'hps_written_ten',
+            'hps_performance_one', 'hps_performance_two', 'hps_performance_three', 'hps_performance_four',
+            'hps_performance_five', 'hps_performance_six', 'hps_performance_seven', 'hps_performance_eight',
+            'hps_performance_nine', 'hps_performance_ten', 'hps_q_assessment_one'
+        ];
+    
+        // If the updated column is one of the performance-related columns, update student records
+        if (in_array($request->column, $performanceColumns)) {
+            $grades = ['Grade One', 'Grade Two', 'Grade Three', 'Grade Four', 'Grade Five', 'Grade Six'];
+    
+            foreach ($grades as $grade) {
+                // Get the appropriate student model for each grade
+                $studentRecords = $this->getGradeModel($grade);
+    
+                // Update the student records with the same value for the given column
+                $studentRecords::where([
+                    'teacher_number' => $teacherSubjectClass->teacher_number,
+                    'grade' => $teacherSubjectClass->grade,
+                    'section' => $teacherSubjectClass->section,
+                    'quarter' => $teacherSubjectClass->quarter,
+                ])->update([$request->column => $request->value]);
+            }
+        }
+    
+        // Save the teacher's record after updating the column
+        $teacherSubjectClass->save();
+    
+        // Return a success response
+        return response()->json(['success' => true]);
+    }
+    
+    private function getGradeModel($grade)
+    {
+        // Map the grade to the corresponding model class
+        $gradeClassMap = [
+            'Grade One' => GradeOneClassRecord::class,
+            'Grade Two' => GradeTwoClassRecord::class,
+            'Grade Three' => GradeThreeClassRecord::class,
+            'Grade Four' => GradeFourClassRecord::class,
+            'Grade Five' => GradeFiveClassRecord::class,
+            'Grade Six' => GradeSixClassRecord::class,
+        ];
+    
+        // Return the corresponding model class for the given grade
+        return $gradeClassMap[$grade] ?? null;
+    }
+    
+    public function updateInlinestudent(Request $request)
+{
+    // Validate incoming request data
+    $validated = $request->validate([
+        'id' => 'required|integer', // Ensure it's a valid integer ID
+        'grade' => 'required|string|in:Grade One,Grade Two,Grade Three,Grade Four,Grade Five,Grade Six', // Ensure the grade is valid
+        'column' => 'required|string', // The column to update
+        'value' => 'required', // Assuming value can be any type (numeric or string)
+    ]);
+
+    // Grade class mapping
+    $gradeClassMap = [
+        'Grade One' => GradeOneClassRecord::class,
+        'Grade Two' => GradeTwoClassRecord::class,
+        'Grade Three' => GradeThreeClassRecord::class,
+        'Grade Four' => GradeFourClassRecord::class,
+        'Grade Five' => GradeFiveClassRecord::class,
+        'Grade Six' => GradeSixClassRecord::class,
+    ];
+
+    // Check if the grade is valid
+    if (!isset($gradeClassMap[$request->grade])) {
+        return response()->json(['error' => 'Invalid grade.'], 400);
+    }
+
+    // Get the model class based on grade
+    $modelClass = $gradeClassMap[$request->grade];
+
+    // Find the student record using the model for the specific grade
+    $student = $modelClass::find($request->id);
+
+    if (!$student) {
+        return response()->json(['error' => 'Student record not found.'], 404);
+    }
+
+    // Dynamically update the specified column in the student record
+    $student->{$request->column} = $request->value;
+    $student->save();
+
+    // Return a success response
+    return response()->json(['success' => true]);
+}
+
 }

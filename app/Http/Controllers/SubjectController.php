@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subject;
+use App\Models\GradeFourClassRecord;
+use App\Models\GradeFiveClassRecord;
+use App\Models\GradeSixClassRecord;
+use App\Models\GradeThreeClassRecord;
+use App\Models\GradeTwoClassRecord;
+use App\Models\GradeOneClassRecord;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -89,4 +95,6 @@ class SubjectController extends Controller
         // Redirect back to the subjects list
         return redirect()->route('admin.subject');
     }
+
+   
 }

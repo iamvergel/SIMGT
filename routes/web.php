@@ -283,3 +283,6 @@ Route::get('/get-fivesections', [Cstudentgrades::class, 'getGradeFiveSections'])
 Route::get('/get-sixsections', [Cstudentgrades::class, 'getGradeSixSections'])->name('get.sixsections');
 Route::get('/get-grade', [Cstudentgrades::class, 'getAllGrade'])->name('get.allgrade');
 Route::get('/get-Section', [Cstudentgrades::class, 'getxSections'])->name('get.allsection');
+
+Route::post('/teacher-subject-class/update-inline', [TeacherSubjectClassController::class, 'updateInline'])->name('teacher-subject-class.update-inline');
+Route::post('/student/update-inline', [TeacherSubjectClassController::class, 'updateInlinestudent'])->name('student.update-inline');
