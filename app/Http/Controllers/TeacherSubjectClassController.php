@@ -202,6 +202,7 @@ class TeacherSubjectClassController extends Controller
                     'grade' => $teacherSubjectClass->grade,
                     'section' => $teacherSubjectClass->section,
                     'quarter' => $teacherSubjectClass->quarter,
+                    'subject' => $teacherSubjectClass->subject,
                 ])->update([$request->column => $request->value]);
             }
         }

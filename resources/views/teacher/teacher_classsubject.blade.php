@@ -884,74 +884,77 @@
                                 @php $iteration = 1; @endphp
                                     @foreach ($students as $student)
                                         @if ($student && $student->gender == "Female" && $student->scholl_year == $teachersubject->scholl_year && $student->quarter == $teachersubject->quarter && $student->subject == $teachersubject->subject)
-                                            <tr class="hover:bg-gray-100">
+                                        <tr class="hover:bg-gray-100">
                                                 <td class="export border-2 text-center border-gray-900">
                                                     {{ $iteration++ }}
                                                 </td>
-                                            <td class="export border-2  border-gray-900">
-                                                {{ $student->first_name }} {{ $student->middle_name }}
-                                                {{ $student->last_name }} {{ $student->suffix }}</td>
-                                            <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_two_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_three_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2  border-gray-900">
+                                                    {{ $student->first_name }} {{ $student->middle_name }}
+                                                    {{ $student->last_name }} {{ $student->suffix }} </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_one_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_two_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_two_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_three_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_three_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_four_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_four_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_five_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_five_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_six_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_six_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_seven_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_seven_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_eight_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_eight_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_nine_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_nine_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ten_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ten_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_total_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_total_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_two_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_two_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_three_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_three_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_four_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_four_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_five_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_five_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_six_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_six_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_seven_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_seven_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_eight_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_eight_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_nine_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_nine_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ten_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ten_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_total_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_total_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="initial_grade" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->initial_grade }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="quarterly_grade" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->quarterly_grade }}</td>
                                         </tr>
                                     @endif
@@ -1204,74 +1207,77 @@
                                     @php $iteration = 1; @endphp
                                     @foreach ($students as $student)
                                         @if ($student && $student->gender == "Male" && $student->scholl_year == $teachersubject->scholl_year && $student->quarter == $teachersubject->quarter && $student->subject == $teachersubject->subject)
-                                            <tr class="hover:bg-gray-100">
+                                           <tr class="hover:bg-gray-100">
                                                 <td class="export border-2 text-center border-gray-900">
                                                     {{ $iteration++ }}
                                                 </td>
-                                            <td class="export border-2  border-gray-900">
-                                                {{ $student->first_name }} {{ $student->middle_name }}
-                                                {{ $student->last_name }} {{ $student->suffix }}</td>
-                                            <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_two_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_three_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2  border-gray-900">
+                                                    {{ $student->first_name }} {{ $student->middle_name }}
+                                                    {{ $student->last_name }} {{ $student->suffix }} </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_one_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_two_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_two_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_three_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_three_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_four_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_four_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_five_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_five_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_six_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_six_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_seven_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_seven_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_eight_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_eight_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_nine_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_nine_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ten_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ten_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_total_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_total_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_two_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_two_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_three_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_three_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_four_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_four_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_five_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_five_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_six_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_six_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_seven_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_seven_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_eight_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_eight_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_nine_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_nine_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ten_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ten_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_total_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_total_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="initial_grade" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->initial_grade }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="quarterly_grade" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->quarterly_grade }}</td>
                                         </tr>
                                     @endif
@@ -1316,74 +1322,77 @@
                                 @php $iteration = 1; @endphp
                                     @foreach ($students as $student)
                                         @if ($student && $student->gender == "Female" && $student->scholl_year == $teachersubject->scholl_year && $student->quarter == $teachersubject->quarter && $student->subject == $teachersubject->subject)
-                                            <tr class="hover:bg-gray-100">
+                                             <tr class="hover:bg-gray-100">
                                                 <td class="export border-2 text-center border-gray-900">
                                                     {{ $iteration++ }}
                                                 </td>
-                                            <td class="export border-2  border-gray-900">
-                                                {{ $student->first_name }} {{ $student->middle_name }}
-                                                {{ $student->last_name }} {{ $student->suffix }}</td>
-                                            <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_two_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_three_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2  border-gray-900">
+                                                    {{ $student->first_name }} {{ $student->middle_name }}
+                                                    {{ $student->last_name }} {{ $student->suffix }} </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_one_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_two_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_two_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_three_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_three_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_four_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_four_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_five_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_five_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_six_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_six_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_seven_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_seven_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_eight_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_eight_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_nine_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_nine_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ten_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ten_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_total_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_total_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_two_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_two_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_three_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_three_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_four_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_four_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_five_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_five_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_six_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_six_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_seven_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_seven_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_eight_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_eight_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_nine_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_nine_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ten_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ten_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_total_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_total_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="initial_grade" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->initial_grade }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="quarterly_grade" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->quarterly_grade }}</td>
                                         </tr>
                                     @endif
@@ -1545,7 +1554,7 @@
                                                 {{ $teachersubject->written_ps }}
                                             </td>
                                             <td class="export border-2 text-center border-gray-900">
-                                                {{ $teachersubject->written_ws }}
+                                                {{ $teachersubject->written_ws }}%
                                             </td>
                                             <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="hps_performance_one" data-id="{{ $teachersubject->id }}">
                                                 {{ $teachersubject->hps_performance_one }}
@@ -1584,7 +1593,7 @@
                                                 {{ $teachersubject->performance_ps }}
                                             </td>
                                             <td class="export border-2 text-center border-gray-900">
-                                                {{ $teachersubject->performance_ws }}
+                                                {{ $teachersubject->performance_ws }}%
                                             </td>
                                             <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="hps_q_assessment_one" data-id="{{ $teachersubject->id }}">
                                                 {{ $teachersubject->hps_q_assessment_one }}
@@ -1593,7 +1602,7 @@
                                                 {{ $teachersubject->hps_q_assessment_ps }}
                                             </td>
                                             <td class="export border-2 text-center border-gray-900">
-                                                {{ $teachersubject->hps_q_assessment_ws }}
+                                                {{ $teachersubject->hps_q_assessment_ws }}%
                                             </td>
                                         </tr>
 
@@ -1640,70 +1649,73 @@
                                                 <td class="export border-2 text-center border-gray-900">
                                                     {{ $iteration++ }}
                                                 </td>
-                                            <td class="export border-2  border-gray-900">
-                                                {{ $student->first_name }} {{ $student->middle_name }}
-                                                {{ $student->last_name }} {{ $student->suffix }}</td>
-                                            <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_two_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_three_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2  border-gray-900">
+                                                    {{ $student->first_name }} {{ $student->middle_name }}
+                                                    {{ $student->last_name }} {{ $student->suffix }} </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_one_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_two_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_two_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_three_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_three_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_four_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_four_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_five_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_five_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_six_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_six_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_seven_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_seven_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_eight_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_eight_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_nine_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_nine_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ten_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ten_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_total_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_total_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_two_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_two_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_three_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_three_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_four_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_four_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_five_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_five_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_six_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_six_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_seven_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_seven_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_eight_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_eight_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_nine_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_nine_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ten_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ten_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_total_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_total_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="initial_grade" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->initial_grade }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="quarterly_grade" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->quarterly_grade }}</td>
                                         </tr>
                                     @endif
@@ -1748,74 +1760,77 @@
                                 @php $iteration = 1; @endphp
                                     @foreach ($students as $student)
                                         @if ($student && $student->gender == "Female" && $student->scholl_year == $teachersubject->scholl_year && $student->quarter == $teachersubject->quarter && $student->subject == $teachersubject->subject)
-                                            <tr class="hover:bg-gray-100">
+                                             <tr class="hover:bg-gray-100">
                                                 <td class="export border-2 text-center border-gray-900">
                                                     {{ $iteration++ }}
                                                 </td>
-                                            <td class="export border-2  border-gray-900">
-                                                {{ $student->first_name }} {{ $student->middle_name }}
-                                                {{ $student->last_name }} {{ $student->suffix }}</td>
-                                            <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_two_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
-                                                {{ $student->written_three_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2  border-gray-900">
+                                                    {{ $student->first_name }} {{ $student->middle_name }}
+                                                    {{ $student->last_name }} {{ $student->suffix }} </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_one_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_two_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_two_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_three_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
+                                                    {{ $student->written_three_score }}
+                                                </td>
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_four_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_four_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_five_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_five_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_six_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_six_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_seven_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_seven_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_eight_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_eight_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_nine_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_nine_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ten_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ten_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_total_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_total_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="written_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->written_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_two_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_two_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_three_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_three_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_four_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_four_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_five_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_five_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_six_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_six_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_seven_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_seven_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_eight_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_eight_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_nine_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_nine_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ten_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ten_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_total_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_total_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="performance_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->performance_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_one_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_one_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_ps_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_ps_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="q_assessment_ws_score" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->q_assessment_ws_score }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="initial_grade" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->initial_grade }}</td>
-                                                <td class="export border-2 text-center border-gray-900">
+                                                <td class="export border-2 text-center border-gray-900" contenteditable="true" data-column="quarterly_grade" data-id="{{ $student->id }}" data-grade="{{ $student->grade }}">
                                                 {{ $student->quarterly_grade }}</td>
                                         </tr>
                                     @endif
@@ -1849,22 +1864,48 @@
                         <td class="export border-2 text-center border-gray-900"></td>
                         <td class="export border-2 text-center border-gray-900"></td>
                     </tr>
+                    <tr class="hover:bg-gray-100"></tr>
                 @foreach ($students as $student)
-                    @if ($student && $student->gender == "Male" && $student->scholl_year == $teachersubject->scholl_year && $student->quarter == $teachersubject->quarter && $student->subject == $teachersubject->subject)
-                    <tr class="hover:bg-gray-100">
+                @if ($student && $student->gender == "Male" && $student->scholl_year == $teachersubject->scholl_year  && $student->subject == $subjectName && $student->quarter == "1st Quarter")
+                    
                             <td class="export border-2 text-center border-gray-900">
                                 {{ $student->first_name }} {{ $student->middle_name }} {{ $student->last_name }} {{ $student->suffix }}
                             </td>
-
                             <!-- Displaying grades for each quarter -->
-                            @foreach (range(1, 4) as $quarter)
                                 <td class="export border-2 text-center border-gray-900">
                                     {{ $student->quarterly_grade }}
                                 </td>
-                            @endforeach
-                        </tr>
-                    @endif
+                       
+                        @endif
                 @endforeach
+                @foreach ($students as $student)
+                @if ($student && $student->gender == "Male" && $student->scholl_year == $teachersubject->scholl_year  && $student->subject == $subjectName && $student->quarter == "2nd Quarter")
+                            <!-- Displaying grades for each quarter -->
+                                <td class="export border-2 text-center border-gray-900">
+                                    {{ $student->quarterly_grade }}
+                                </td>
+                       
+                        @endif
+                @endforeach
+                @foreach ($students as $student)
+                @if ($student && $student->gender == "Male" && $student->scholl_year == $teachersubject->scholl_year  && $student->subject == $subjectName && $student->quarter == "3rd Quarter")
+                            <!-- Displaying grades for each quarter -->
+                                <td class="export border-2 text-center border-gray-900">
+                                    {{ $student->quarterly_grade }} 
+                                </td>
+                       
+                        @endif
+                @endforeach
+                @foreach ($students as $student)
+                @if ($student && $student->gender == "Male" && $student->scholl_year == $teachersubject->scholl_year  && $student->subject == $subjectName && $student->quarter == "4th Quarter")
+                            <!-- Displaying grades for each quarter -->
+                                <td class="export border-2 text-center border-gray-900">
+                                    {{ $student->quarterly_grade }} 
+                                </td>
+                       
+                        @endif
+                @endforeach
+                </tr>
                 <tr>
                         <td class="export border-2 text-center border-gray-900">
                             Female
@@ -1874,23 +1915,49 @@
                         <td class="export border-2 text-center border-gray-900"></td>
                         <td class="export border-2 text-center border-gray-900"></td>
                     </tr>
-                @foreach ($students as $student)
-                    @if ($student && $student->gender == "Female" && $student->scholl_year == $teachersubject->scholl_year && $student->quarter == $teachersubject->quarter && $student->subject == $teachersubject->subject)
 
                     <tr class="hover:bg-gray-100">
+                    @foreach ($students as $student)
+                @if ($student && $student->gender == "Female" && $student->scholl_year == $teachersubject->scholl_year  && $student->subject == $subjectName && $student->quarter == "1st Quarter")
+                    
                             <td class="export border-2 text-center border-gray-900">
                                 {{ $student->first_name }} {{ $student->middle_name }} {{ $student->last_name }} {{ $student->suffix }}
                             </td>
-
                             <!-- Displaying grades for each quarter -->
-                            @foreach (range(1, 4) as $quarter)
                                 <td class="export border-2 text-center border-gray-900">
                                     {{ $student->quarterly_grade }}
                                 </td>
-                            @endforeach
-                        </tr>
-                    @endif
+                       
+                        @endif
                 @endforeach
+                @foreach ($students as $student)
+                @if ($student && $student->gender == "Female" && $student->scholl_year == $teachersubject->scholl_year  && $student->subject == $subjectName && $student->quarter == "2nd Quarter")
+                            <!-- Displaying grades for each quarter -->
+                                <td class="export border-2 text-center border-gray-900">
+                                    {{ $student->quarterly_grade }}
+                                </td>
+                       
+                        @endif
+                @endforeach
+                @foreach ($students as $student)
+                @if ($student && $student->gender == "Female" && $student->scholl_year == $teachersubject->scholl_year  && $student->subject == $subjectName && $student->quarter == "3rd Quarter")
+                            <!-- Displaying grades for each quarter -->
+                                <td class="export border-2 text-center border-gray-900">
+                                    {{ $student->quarterly_grade }} 
+                                </td>
+                       
+                        @endif
+                @endforeach
+                @foreach ($students as $student)
+                @if ($student && $student->gender == "Female" && $student->scholl_year == $teachersubject->scholl_year  && $student->subject == $subjectName && $student->quarter == "4th Quarter")
+                            <!-- Displaying grades for each quarter -->
+                                <td class="export border-2 text-center border-gray-900">
+                                    {{ $student->quarterly_grade }} 
+                                </td>
+                       
+                        @endif
+                @endforeach
+                        </tr>
             </tbody>
         </table>
     </div>
