@@ -36,4 +36,4 @@ Route::get('/allsubjects', [SubjectController::class, 'getAllSubjectsByGrade']);
 Route::get('/allteachers', [TeacherAdvisoryController::class, 'getAllAdviserByGrade']);
 
 // routes/api.php
-Route::middleware('auth:teacher')->get('/teacher/subjects', [TeacherAdvisoryController::class, 'getTeacherClassSubject']);
+// Route::get('/teacher/subjects', [TeacherAdvisoryController::class, 'getTeacherClassSubject']);

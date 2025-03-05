@@ -97,6 +97,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
 
     Route::get('/StEmelieLearningCenter.HopeSci66/teacher/myadvisory', [TeacherClassAdvisory::class, 'showMyadvisory'])->name('teacher.advisory');
     Route::get('/StEmelieLearningCenter.HopeSci66/teacher/class-record', [TeacherSubjectClassController::class, 'showclasssubjectadvisory'])->name('teacher.class-record');
+    Route::get('/StEmelieLearningCenter.HopeSci66/teacher/class-record/{subject}', [TeacherSubjectClassController::class, 'showclasssubjectadvisory'])->name('teacher.class-record');
 
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/manage-accounts/admin-users', [Cadmininfo::class, 'showAllAdmin'])->name('admin.user');

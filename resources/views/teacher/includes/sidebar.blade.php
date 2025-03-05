@@ -94,6 +94,10 @@
             /* border: solid 1px rgba(255, 255, 255, 0.3); */
         }
 
+        .active2 {
+            background-color: #0f766e;
+        }
+
         .collapse-content {
             max-height: 0;
             overflow: hidden;
@@ -235,18 +239,23 @@
                 Class Record
             </p>
 
+            <!-- <a href="/StEmelieLearningCenter.HopeSci66/teacher/class-record"
+                class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip {{ request()->is('teacher/class-record') ? 'bg-teal-700' : '' }}"
+                title="Class Record">
+                <i class="fa-solid fa-book-open"></i>
+                <span class="sidebar-text ml-2">Class Record</span>
+            </a> -->
+
             <button
-        class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip"
-        id="studentManagementButton6" aria-expanded="false" aria-controls="classrecord" title="classrecord">
-        <i class="fa-solid fa-table-columns"><span class="sidebar-text ml-2">Class Record</span></i>
-        <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
-    </button>
+                class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip"
+                id="studentManagementButton9" aria-expanded="false" aria-controls="classrecord" title="Class Record">
+                <i class="fa-solid fa-book"><span class="sidebar-text ml-2">Class Record</span></i>
+                <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
+            </button>
 
-    <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="classrecord">
-        <!-- The list of subjects will be inserted here dynamically -->
-    </div>
-
-
+            <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-0" id="classrecord">
+                <!-- The list of subjects will be inserted here dynamically -->
+            </div>
 
             <br /><br />
 
@@ -268,64 +277,83 @@
         <footer class="relative h-28 mt-[8rem] px-5">
             <img src="{{ asset('../assets/images/grouplogo.png') }}" alt="grouplogo" width="200"
                 class="opacity-25 absolute bottom-[-2.5rem] left-[-0.1rem]">
-            <p class="text-[10px] absolute bottom-0 mb-1">@ Copyright &copy; {{ date('Y') }} St Emelie Learning Center HopeSci66.
+            <p class="text-[10px] absolute bottom-0 mb-1">@ Copyright &copy; {{ date('Y') }} St Emelie Learning Center
+                HopeSci66.
                 All Rights Reserved</p>
         </footer>
     </nav>
 
     <script>
+        // Function to get the JWT token from localStorage (or cookies)
         function getJwtToken() {
-            // Replace with actual method to retrieve token, like localStorage or cookies
-            return localStorage.getItem('jwt_token'); 
+            return localStorage.getItem('jwt_token'); // You can also use cookies or another storage method if needed
         }
 
-        // Fetching teacher's subjects from the API
+        // Function to fetch teacher's subjects using AJAX
         function fetchTeacherSubjects() {
             const token = getJwtToken();
 
-            fetch('/api/teacher/subjects', {
+            $.ajax({
+                url: '/get-classsubject',
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${token}`,  // Send JWT token in Authorization header
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
+                },
+                success: function (data) {
+                    const classRecordDiv = $('#classrecord');
+                    const subjectCode = document.getElementById('subjectCode');
+                    classRecordDiv.empty(); // Clear any previous content
+
+                    if (data.length > 0) {
+                        // Update the subject name in the header based on the first subject from the fetched data
+                        const subject = data[0]; // Assuming the first subject is the one to display
+                        const subjectName = document.getElementById('subjectName');
+
+                        // Now append the subject items to the sidebar
+                        data.forEach(function (subject) {
+                            const currentUrl = window.location.pathname;
+                            const subjectElement = $('<a>', {
+                                href: `/StEmelieLearningCenter.HopeSci66/teacher/class-record/${subject.subject}`,
+                                class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
+                                title: 'Class Record'
+                            });
+
+                            const subjectText = $('<span>', { class: 'sidebar-text' }).html(`${subject.subject}<br>${subject.grade} | ${subject.section}`);
+                            subjectElement.append(subjectText);
+
+                            classRecordDiv.append(subjectElement);
+                        });
+                    } else {
+                        classRecordDiv.html('<p>No subjects found for this teacher.</p>');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching subjects:', error);
+                    $('#classrecord').html('<p>An error occurred while fetching subjects.</p>');
                 }
-            })
-            .then(response => response.json())
-            .then(data => {
-                const classRecordDiv = document.getElementById('classrecord');
-                classRecordDiv.innerHTML = ''; // Clear any previous content
-
-                if (data.length > 0) {
-                    data.forEach(subject => {
-                        const subjectElement = document.createElement('a');
-                        subjectElement.href = `/StEmelieLearningCenter.HopeSci66/teacher/class-record/${subject.subject}`;
-                        subjectElement.classList.add('flex', 'justify-start', 'items-center', 'sidebar-link', 'hover:bg-teal-700', 'rounded-md', 'mb-2', 'ml-0', 'mt-2', 'tooltip');
-                        subjectElement.title = 'Class Record';
-
-                        const iconElement = document.createElement('i');
-                        iconElement.classList.add('fa-solid', 'fa-users');
-                        subjectElement.appendChild(iconElement);
-
-                        const subjectText = document.createElement('span');
-                        subjectText.classList.add('sidebar-text', 'ml-2');
-                        subjectText.textContent = `${subject.subject} (${subject.school_year})`;
-                        subjectElement.appendChild(subjectText);
-
-                        classRecordDiv.appendChild(subjectElement);
-                    });
-                } else {
-                    classRecordDiv.innerHTML = '<p>No subjects found for this teacher.</p>';
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching subjects:', error);
-                document.getElementById('classrecord').innerHTML = '<p>An error occurred while fetching subjects.</p>';
             });
         }
 
+        // Function to update the subject header from the URL (when navigating directly to a specific subject page)
+        function updateSubjectHeader() {
+            const path = window.location.pathname;
+            const urlParts = path.split('/');
+            const subjectName = urlParts[urlParts.length - 1]; // Get the last part (subject name)
+            const formattedSubjectName = decodeURIComponent(subjectName.replace('%20', ' ')); // Decode the subject name and replace '%20' with space
+
+            const subjectText = `${formattedSubjectName}`;
+            document.getElementById('subjectName').innerText = formattedSubjectName;
+            document.querySelector('p span').innerText = `Class Record`;
+        }
+
         // Call the function to fetch subjects on page load
-        fetchTeacherSubjects();
-        
+        $(document).ready(function () {
+            fetchTeacherSubjects();
+            updateSubjectHeader(); // Call to update the header with the current subject
+        });
+
+
         // Check if the user is logged in
         const adminUsername = "{{ session('teacher_fname') }}"; // Get the admin username from the session
 
@@ -348,8 +376,6 @@
                 });
             });
         });
-
-        
 
         // Highlight the current path on load
         const currentPath = window.location.pathname;
