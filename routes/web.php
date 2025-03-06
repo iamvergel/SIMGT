@@ -22,6 +22,12 @@ use App\Http\Controllers\Registration;
 use App\Http\Controllers\TeacherClassAdvisory;
 use App\Http\Controllers\RegisterStudent;
 
+
+Route::get('/', function () {
+    // Redirect to the desired URL
+    return redirect('/StEmelieLearningCenter.HopeSci66/Admission');
+});
+
 // Landing Page
 Route::get('/StEmelieLearningCenter.HopeSci66/Admission', function () {
     return view('landing_page');
@@ -242,6 +248,22 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
 
     Route::post('/update-avatar', [TeacherProfile::class, 'updateprofile'])->name('teacher.update-avatar');
     Route::post('/student/update-avatar', [CStudentProfile::class, 'update'])->name('student.update-avatar');
+
+    //REGISTRAR________________________________________________________________
+    //________________________________________________________________
+     Route::get('/StEmelieLearningCenter.HopeSci66/registrar/dashboard', function () {
+        return view('registrar.registrar_dashboard');
+    });
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/registrar/dashboard', [Cevent::class, 'showAllRegistrar'])->name('registrar.registrar_dashboard');
+
+    //REGISTRAR________________________________________________________________
+    //________________________________________________________________
+    Route::get('/StEmelieLearningCenter.HopeSci66/admission/dashboard', function () {
+        return view('admission.admission_dashboard');
+    });
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/admission/dashboard', [Cevent::class, 'showAllAdmission'])->name('admission.admission_dashboard');
 });
 
 Route::get('/caloocan_barangay', function () {

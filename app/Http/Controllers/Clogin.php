@@ -91,6 +91,50 @@ class Clogin extends Controller
             return view('includes.admin_loader');
         }
 
+        if (Auth::guard('registrar')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
+            $this->clearLoginAttempts($request);
+
+            // Get the authenticated admin user
+            $registrarUser = Auth::guard('registrar')->user();
+
+            // Store admin's data in the session
+            $request->session()->put('registrar_username', $registrarUser->username);
+            $request->session()->put('registrar_id', $registrarUser->id);
+            $request->session()->put('registrar_fname', $registrarUser->first_name);
+            $request->session()->put('registrar_mname', $registrarUser->middle_name);
+            $request->session()->put('registrar_lname', $registrarUser->last_name);
+            $request->session()->put('registrar_role', $registrarUser->role);  // Store the role
+            $request->session()->put('registrar_number', $registrarUser->registrar_number);
+
+            // Flash a success message
+            $request->session()->flash('success', 'Welcome, ' . $registrarUser->username . '! You are now logged in as registrar.');
+
+            // Redirect to the admin dashboard or admin loader
+            return view('includes.registrar_loader');
+        }
+
+        if (Auth::guard('admission')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
+            $this->clearLoginAttempts($request);
+
+            // Get the authenticated admin user
+            $admissionUser = Auth::guard('admission')->user();
+
+            // Store admin's data in the session
+            $request->session()->put('admission_username', $admissionUser->username);
+            $request->session()->put('admission_id', $admissionUser->id);
+            $request->session()->put('admission_fname', $admissionUser->first_name);
+            $request->session()->put('admission_mname', $admissionUser->middle_name);
+            $request->session()->put('admission_lname', $admissionUser->last_name);
+            $request->session()->put('admission_role', $admissionUser->role);  // Store the role
+            $request->session()->put('admission_number', $admissionUser->admission_number);
+
+            // Flash a success message
+            $request->session()->flash('success', 'Welcome, ' . $admissionUser->username . '! You are now logged in as admission.');
+
+            // Redirect to the admin dashboard or admin loader
+            return view('includes.admission_loader');
+        }
+
         // Attempt to log the user in as admin
         if (Auth::guard('teacher')->attempt(['username' => $request->username, 'password' => $request->password], $request->remember)) {
             $this->clearLoginAttempts($request);

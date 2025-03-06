@@ -51,6 +51,16 @@ return [
             'provider' => 'teachers',
         ],
 
+        'admission' => [
+            'driver' => 'session',
+            'provider' => 'admissions',
+        ],
+
+        'registrar' => [
+            'driver' => 'session',
+            'provider' => 'registrars',
+        ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -91,6 +101,16 @@ return [
         'teachers' => [
             'driver' => 'eloquent',
             'model' => App\Models\TeacherUser::class,
+        ],
+
+        'admissions' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AdmissionUser::class,
+        ],
+
+        'registrars' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\RegistrarUser::class,
         ],
 
         'admins' => [

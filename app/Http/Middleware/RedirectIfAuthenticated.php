@@ -23,6 +23,14 @@ class RedirectIfAuthenticated
         if (Auth::guard('teacher')->check() && $request->is($loginPath)) {
             return view('teacher.teacher_dashboard');
         }
+        
+        if (Auth::guard('admission')->check() && $request->is($loginPath)) {
+            return view('admission.admission_dashboard');
+        }
+
+        if (Auth::guard('registrar')->check() && $request->is($loginPath)) {
+            return view('registrar.registrar_dashboard');
+        }
 
         // if (Auth::guard('student')->check() && $request->is($loginPath)) {
         //     return redirect()->route('includes.student_dashboard');
@@ -34,7 +42,7 @@ class RedirectIfAuthenticated
         }
 
         // If not logged in and trying to access a protected route
-        if (!Auth::guard('admin')->check() && !Auth::guard('student')->check() && !Auth::guard('teacher')->check()) {
+        if (!Auth::guard('admin')->check() && !Auth::guard('student')->check() && !Auth::guard('teacher')->check() && !Auth::guard('admission')->check() && !Auth::guard('registrar')->check()) {
             return redirect($loginPath)->withErrors(['error' => 'You must be logged in to access this page.']);
         }
 
