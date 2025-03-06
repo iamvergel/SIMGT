@@ -27,7 +27,7 @@ return new class extends Migration
             $table->timestamp('last_avatar_change')->nullable(); // Timestamp for when avatar was last changed
             $table->timestamp('last_password_change')->nullable(); // Timestamp for when password was last changed
             $table->rememberToken(); // Adds a column for the remember token, which is used for login sessions
-            $table->timestamps();
+            $table->timestamps(); 
         });
 
         // Array of default data to insert with hashed passwords
