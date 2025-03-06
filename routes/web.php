@@ -286,3 +286,4 @@ Route::get('/get-Section', [Cstudentgrades::class, 'getxSections'])->name('get.a
 
 Route::post('/teacher-subject-class/update-inline', [TeacherSubjectClassController::class, 'updateInline'])->name('teacher-subject-class.update-inline');
 Route::post('/student/update-inline', [TeacherSubjectClassController::class, 'updateInlinestudent'])->name('student.update-inline');
+Route::post('/student/update-inlin/final', [TeacherSubjectClassController::class, 'updateInlinestudentfinal'])->name('student.update-final');
