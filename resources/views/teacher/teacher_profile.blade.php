@@ -431,13 +431,13 @@
 
                 const formData = new FormData(form);
 
-                fetch('{{ route('teacher.update-avatar') }}', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
+                fetch('{{ route('teacher.update-avatar', [], false) }}', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    })
                     .then(response => response.json())
                     .then(data => {
                         if (data.avatar) {

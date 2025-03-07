@@ -242,8 +242,12 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         return view('student.student_profile_information');
     });
 
-    Route::get('/StEmelieLearningCenter.HopeSci66/student/student-profile/grades', function () {
+    Route::get('/StEmelieLearningCenter.HopeSci66/student/grades', function () {
         return view('student.student_grades');
+    });
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/student/gradesnew', function () {
+        return view('student.student_grades_new');
     });
 
     Route::post('/update-avatar', [TeacherProfile::class, 'updateprofile'])->name('teacher.update-avatar');
@@ -288,6 +292,8 @@ Route::post('/teachersend-email/{id}', [TeacherUserController::class, 'sendEmail
 
 Route::post('/student/change-password/{studentId}', [CStudentProfile::class, 'changePassword'])->name('student.changePassword');
 Route::post('/show-grades', [CStudentProfile::class, 'showGrades'])->name('showGrades');
+
+Route::post('/show-quarterly-grades', [CStudentProfile::class, 'showStudentGrades'])->name(name: 'showquarterlyGrades');
 
 Route::post('/profile/update-avatar', [Cadmininfo::class, 'updateProfile'])->name('profile.update-avatar');
 Route::put('/admin/{id}/update', [Cadmininfo::class, 'update'])->name('admin.update');

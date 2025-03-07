@@ -1,18 +1,17 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Mstudentaccount;
-use App\Models\StudentInfo;
-use App\Models\Mstudentgradeone;
-use App\Models\Mstudentgradetwo;
-use App\Models\Mstudentgradethree;
-use App\Models\Mstudentgradefour;
 use App\Models\Mstudentgradefive;
+use App\Models\Mstudentgradefour;
+use App\Models\Mstudentgradeone;
 use App\Models\Mstudentgradesix;
+use App\Models\Mstudentgradethree;
+use App\Models\Mstudentgradetwo;
+use App\Models\StudentFinalGrade;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon; // Make sure to import Carbon
+use Illuminate\Support\Facades\Auth; // Make sure to import Carbon
 use Illuminate\Support\Facades\Hash;
 
 class CStudentProfile extends Controller
@@ -21,11 +20,11 @@ class CStudentProfile extends Controller
     {
         // Validate the incoming request
         $request->validate([
-            'avatar' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'student_number' => 'required|string'
+            'avatar'         => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'student_number' => 'required|string',
         ]);
 
-        $student = Auth::guard('student')->user();
+        $student        = Auth::guard('student')->user();
         $studentAccount = Mstudentaccount::find($student->id);
 
         // Check if the student number matches
@@ -36,7 +35,7 @@ class CStudentProfile extends Controller
         // Check if the user has changed their avatar recently
         if ($studentAccount->last_avatar_change) {
             $lastChange = Carbon::parse($studentAccount->last_avatar_change);
-            $now = Carbon::now();
+            $now        = Carbon::now();
 
             if ($now->diffInDays($lastChange) < 10) {
                 return response()->json(['error' => 'You can only change your avatar every 10 days.'], 400);
@@ -45,8 +44,8 @@ class CStudentProfile extends Controller
 
         // Handle avatar upload
         if ($request->hasFile('avatar')) {
-            $path = $request->file('avatar')->store('avatars', 'public');
-            $studentAccount->avatar = $path;
+            $path                               = $request->file('avatar')->store('avatars', 'public');
+            $studentAccount->avatar             = $path;
             $studentAccount->last_avatar_change = now(); // Update the timestamp
             $studentAccount->save();
 
@@ -60,18 +59,18 @@ class CStudentProfile extends Controller
     {
         $student = Mstudentaccount::find($studentId);
 
-        if (!$student) {
+        if (! $student) {
             return back()->withErrors('Student not found.');
         }
 
         // Validate the request
         $request->validate([
             'currentPassword' => 'required|string',
-            'newPassword' => 'required|string|min:8',
+            'newPassword'     => 'required|string|min:8',
         ]);
 
         // Track password attempts
-        $attempts = session('current_password_attempts', 0);
+        $attempts    = session('current_password_attempts', 0);
         $lockoutTime = session('current_password_lockout_time');
 
         // Check if the user is locked out
@@ -88,7 +87,7 @@ class CStudentProfile extends Controller
         }
 
         // Check if the current password is correct
-        if (!Hash::check($request->currentPassword, $student->password)) {
+        if (! Hash::check($request->currentPassword, $student->password)) {
             // Increment the attempt count
             $attempts++;
             session(['current_password_attempts' => $attempts]);
@@ -108,7 +107,7 @@ class CStudentProfile extends Controller
         }
 
         // Update the password with hashing
-        $student->password = $request->newPassword;
+        $student->password             = $request->newPassword;
         $student->last_password_change = now();
         $student->save();
 
@@ -143,7 +142,7 @@ class CStudentProfile extends Controller
         // Fetch the student account based on the provided student number
         $student = Mstudentaccount::where('student_number', $request->student_number)->first();
 
-        if (!$student) {
+        if (! $student) {
             return response()->json(['error' => 'Student not found.'], 404);
         }
 
@@ -151,12 +150,12 @@ class CStudentProfile extends Controller
         $grades = [];
 
         // Fetch grades from each grade model
-        $grades['grade_one'] = Mstudentgradeone::where('student_id', $student->id)->get();
-        $grades['grade_two'] = Mstudentgradetwo::where('student_id', $student->id)->get();
+        $grades['grade_one']   = Mstudentgradeone::where('student_id', $student->id)->get();
+        $grades['grade_two']   = Mstudentgradetwo::where('student_id', $student->id)->get();
         $grades['grade_three'] = Mstudentgradethree::where('student_id', $student->id)->get();
-        $grades['grade_four'] = Mstudentgradefour::where('student_id', $student->id)->get();
-        $grades['grade_five'] = Mstudentgradefive::where('student_id', $student->id)->get();
-        $grades['grade_six'] = Mstudentgradesix::where('student_id', $student->id)->get();
+        $grades['grade_four']  = Mstudentgradefour::where('student_id', $student->id)->get();
+        $grades['grade_five']  = Mstudentgradefive::where('student_id', $student->id)->get();
+        $grades['grade_six']   = Mstudentgradesix::where('student_id', $student->id)->get();
 
         // You can also include quarter information if needed
         // Assuming each grade model has quarter fields (quarter1, quarter2, quarter3, quarter4)
@@ -170,14 +169,58 @@ class CStudentProfile extends Controller
 
         // Fetch grades based on student number
         $grades = [
-            'grade_one' => Mstudentgradeone::where('student_number', $student->student_number)->get(),
-            'grade_two' => Mstudentgradetwo::where('student_number', $student->student_number)->get(),
+            'grade_one'   => Mstudentgradeone::where('student_number', $student->student_number)->get(),
+            'grade_two'   => Mstudentgradetwo::where('student_number', $student->student_number)->get(),
             'grade_three' => Mstudentgradethree::where('student_number', $student->student_number)->get(),
-            'grade_four' => Mstudentgradefour::where('student_number', $student->student_number)->get(),
-            'grade_five' => Mstudentgradefive::where('student_number', $student->student_number)->get(),
-            'grade_six' => Mstudentgradesix::where('student_number', $student->student_number)->get(),
+            'grade_four'  => Mstudentgradefour::where('student_number', $student->student_number)->get(),
+            'grade_five'  => Mstudentgradefive::where('student_number', $student->student_number)->get(),
+            'grade_six'   => Mstudentgradesix::where('student_number', $student->student_number)->get(),
         ];
 
         return response()->json($grades);
+    }
+
+    public function showStudentGrades(Request $request)
+    {
+        // Ensure the student is authenticated
+        $student = Auth::guard('student')->user();
+        if (!$student) {
+            return response()->json(['error' => 'Student not authenticated.'], 401);
+        }
+
+        // Fetch student grades based on student_number
+        $grades = StudentFinalGrade::where('student_number', $student->student_number)->get();
+
+        // Organize grades by quarter
+        $formattedGrades = [];
+
+        foreach ($grades as $record) {
+            $gradeLevel = "Grade {$record->grade}";
+
+            $quarters = [
+                '1st Quarter' => $record->first_quarter_grade,
+                '2nd Quarter' => $record->second_quarter_grade,
+                '3rd Quarter' => $record->third_quarter_grade,
+                '4th Quarter' => $record->fourth_quarter_grade,
+                'Final Grade' => $record->final_grade
+            ];
+
+            foreach ($quarters as $quarter => $grade) {
+                if (!is_null($grade)) {
+                    $key = "{$gradeLevel} = {$quarter}";
+                    if (!isset($formattedGrades[$key])) {
+                        $formattedGrades[$key] = [];
+                    }
+                    $formattedGrades[$key][$record->subject] = $grade;
+                }
+            }
+        }
+
+        // If no grades found, return an empty response
+        if (empty($formattedGrades)) {
+            return response()->json(['error' => 'No grades available for this student.']);
+        }
+
+        return response()->json($formattedGrades);
     }
 }
