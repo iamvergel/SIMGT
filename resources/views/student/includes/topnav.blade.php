@@ -36,8 +36,7 @@
     }
 </style>
 
-<nav class="bg-teal-800 flex items-center justify-between flex-wrap p-3 pb-5 lg:pb-5 shadow-lg z-[2]"
-    id="header">
+<nav class="bg-teal-800 flex items-center justify-between flex-wrap p-3 pb-5 lg:pb-5 shadow-lg z-[2]" id="header">
     <div class="flex items-center justify-end w-full">
         <div class="flex text-right mr-2 mb-2 text-white ml-auto text-[12px] font-normal lg:hidden">
             <div id="currentDate" class="dateMobile mr-3"></div>
@@ -45,48 +44,91 @@
         </div>
     </div>
 
-    <div class="flex items-center text-white">
+    <div class="flex items-center justify-between bg-red-500 w-full text-white">
         <div id="btn-toggle"
             class="text-2xl bg-teal-700 text-white shadow-lg ml-0 py-1 px-3 transition-all duration-300 hover:bg-teal-600 rounded-full hidden lg:block">
             <i class="fas fa-bars text-lg text-normal"></i>
         </div>
-        <button id="toggleSidebarButton"
-            class="text-2xl bg-teal-700 text-white shadow-lg ml-0 py-1 px-3 transition-all duration-300 hover:bg-teal-600 rounded-full lg:hidden mr-2"><i
-                class="fas fa-bars text-lg text-normal"></i></button>
-        <div class="ml-0 mr-0 w-auto lg:ml-10 lg:mr-20 lg:w-96 relative">
-            <input type="text" id="search-bar" placeholder="Search..."
-                class="w-48 md:w-96 px-0 indent-3 text-sm text-teal-900 py-2 rounded-lg shadow-lg focus:outline-none focus:rounded-b-none" />
-            <div id="suggestions"
-                class="absolute text-teal-900 left-0 py-5 text-[12px] right-0 shadow-lg bg-white rounded-lg rounded-t-none z-10 max-h-96 overflow-y-scroll hidden">
+        <div class="flex gap-5">
+            <button id="toggleSidebarButton"
+                class="text-2xl bg-teal-700 text-white shadow-lg ml-0 py-1 px-3 transition-all duration-300 hover:bg-teal-600 rounded-full lg:hidden mr-2"><i
+                    class="fas fa-bars text-lg text-normal"></i></button>
+            <div class="ml-0 mr-0 w-auto lg:ml-10 lg:mr-20 lg:w-96 relative">
+                <input type="text" id="search-bar" placeholder="Search..."
+                    class="w-48 md:w-96 px-0 indent-3 text-sm text-teal-900 py-2 rounded-lg shadow-lg focus:outline-none focus:rounded-b-none" />
+                <div id="suggestions"
+                    class="absolute text-teal-900 left-0 py-5 text-[12px] right-0 shadow-lg bg-white rounded-lg rounded-t-none z-10 max-h-96 overflow-y-scroll hidden">
+                </div>
             </div>
         </div>
-        <div class="ml-7 lg:hidden border-2 border-teal-100 w-[40px] h-[40px] bg-teal-600 rounded-full flex items-center justify-center text-white text-md font-semibold transition-all duration-300 shadow-lg"
-            id="profile">
+        <div class="ml-7 lg:hidden border-2 w-[50px] h-[50px] bg-teal-700 hover:bg-gray-600 rounded-full flex items-center justify-center text-white text-2xl font-semibold transition-all duration-300 shadow-lg cursor-pointer"
+            id="profileAvatar">
             @if ($avatarPath !== null)
-        <img id="avatar-img4" src="{{ $avatarPath }}" alt="{{ $firstName }}'s Profile Picture"
-             class="rounded-full w-full h-full object-cover">
-    @else
-        <div class="flex items-center justify-center w-full h-full bg-teal-600 rounded-full">
-            <span class="text-white">{{ $initials }}</span> <!-- Display initials if avatar is null -->
-        </div>
-    @endif
+                <img id="avatar-img4" src="{{ $avatarPath }}" alt="{{ $firstName }}'s Profile Picture"
+                    class="rounded-full w-full h-full object-cover">
+            @else
+                <div class="flex items-center justify-center w-full h-full bg-teal-600 rounded-full">
+                    <span class="text-white">{{ $initials }}</span> <!-- Display initials if avatar is null -->
+                </div>
+            @endif
+
+            <!-- Dropdown Menu -->
+            <div class="absolute text-gray-900 right-0 mt-[12rem] w-56 bg-gray-100 border-t-4 border border-teal-700 rounded-lg shadow-lg hidden mt-4 z-[49]"
+                id="dropdownMenuMobile">
+                <ul class="text-gray-1=800">
+                    <li class="px-4 py-2 hover:bg-gray-300 bg-gray-100 cursor-pointer text-[14px] mt-5"
+                        onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/student/student-profile/account'">
+                        <i class="fa-solid fa-user mr-3"></i>SIMGT Profile
+                    </li>
+
+                    <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <li class="px-4 py-2 hover:bg-gray-300 rounded-b-lg cursor-pointer text-[14px]"
+                            onclick="confirmLogout(event)">
+                            <i class="fa-solid fa-arrow-right-from-bracket mr-3"></i>Logout
+                        </li>
+                    </form>
+                </ul>
+            </div>
         </div>
     </div>
+
     <div class="text-white ml-auto text-[12px] text-right hidden lg:block">
         <div class="time"></div>
         <div class="currentDate"></div>
     </div>
-    <div class="hidden lg:block px-0">
-        <div class="ml-5 border-2 border-teal-100 w-[50px] h-[50px] bg-teal-600 rounded-full flex items-center justify-center text-white text-2xl font-semibold transition-all duration-300 shadow-lg"
-            id="profile">
+
+    <div class="hidden lg:block px-0 relative ml-5">
+        <div class="border-2 float-right w-[50px] h-[50px] bg-teal-700 hover:bg-gray-600 rounded-full flex items-center justify-center text-white text-2xl font-semibold transition-all duration-300 shadow-lg cursor-pointer"
+            id="profileTop">
             @if ($avatarPath !== null)
-        <img id="avatar-img5" src="{{ $avatarPath }}" alt="{{ $firstName }}'s Profile Picture"
-             class="rounded-full w-full h-full object-cover">
-    @else
-        <div class="flex items-center justify-center w-full h-full bg-teal-600 rounded-full">
-            <span class="text-white">{{ $initials }}</span> <!-- Display initials if avatar is null -->
+                <img id="avatar-img5" src="{{ $avatarPath }}" alt="{{ $firstName }}'s Profile Picture"
+                    class="rounded-full w-full h-full object-cover">
+            @else
+                <div
+                    class="flex items-center justify-center border-2 border-teal-800 w-full h-full bg-teal-600  rounded-full">
+                    <span class="text-white">{{ $initials }}</span>
+                </div>
+            @endif
         </div>
-    @endif
+
+        <!-- Dropdown Menu -->
+        <div class="absolute right-0 mt-2 w-56 bg-gray-100 border-t-4 border border-teal-700 rounded-lg shadow-lg hidden mt-4 z-[49]"
+            id="dropdownMenu">
+            <ul class="text-gray-1=800">
+                <li class="px-4 py-2 hover:bg-gray-300 bg-gray-100 cursor-pointer text-[14px] mt-5"
+                    onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/student/student-profile/account'">
+                    <i class="fa-solid fa-user mr-3"></i>SIMGT Profile
+                </li>
+
+                <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline">
+                    @csrf
+                    <li class="px-4 py-2 hover:bg-gray-300 rounded-b-lg cursor-pointer text-[14px]"
+                        onclick="confirmLogout(event)">
+                        <i class="fa-solid fa-arrow-right-from-bracket mr-3"></i>Logout
+                    </li>
+                </form>
+            </ul>
         </div>
     </div>
 </nav>
@@ -194,6 +236,34 @@
                 }
             });
         });
+    });
+
+    const profileButton = document.getElementById('profileTop');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    profileButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!profileButton.contains(e.target)) {
+            dropdownMenu.classList.add('hidden');
+        }
+    });
+
+    const profileButton1 = document.getElementById('profileAvatar');
+    const dropdownMenu1 = document.getElementById('dropdownMenuMobile');
+
+    profileButton1.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdownMenu1.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!profileButton1.contains(e.target)) {
+            dropdownMenu1.classList.add('hidden');
+        }
     });
 
     const sidebar = document.getElementById('offcanvasSidebar');

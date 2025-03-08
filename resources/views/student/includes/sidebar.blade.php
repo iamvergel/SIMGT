@@ -239,18 +239,22 @@
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>
 
+            <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">SIMGT PROFILE</p>
+
             <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/account"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
                 id="dashboardLink">
                 <i class="fas fa-user"></i>
                 <span class="sidebar-text ml-2">
-                    Student Profile</span>
+                    SIMGT PROFILE</span>
                 <span
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>
 
+            <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">STUDENT GRADES</p>
+
             <a href="/StEmelieLearningCenter.HopeSci66/student/gradesnew"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip mt-2"
                 id="dashboardLink">
                 <i class="fa-solid fa-file"></i>
                 <span class="sidebar-text ml-2">
@@ -269,8 +273,9 @@
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>
 
-            <p class="text-[14px] mt-5 ml-7 text-teal-100 font-semibold">ENROLLMENT</p>
-            <button class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md tooltip mt-2"
+            <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">ENROLLMENT</p>
+            <button
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md tooltip mt-2"
                 id="studentManagementButton3" aria-expanded="false" aria-controls="collapse3">
                 <i class="fa-solid fa-file"></i>
                 <span class="sidebar-text ml-2">Enrollment</span>
@@ -297,7 +302,7 @@
                 </a>
             </div><br /><br /><br />
 
-            <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline">
+            <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline hidden">
                 @csrf
                 <a href="#"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
@@ -321,7 +326,7 @@
     </nav>
 
     <nav id="offcanvasSidebar"
-        class="bg-teal-700 text-teal-50 h-full max-w-64 w-64 absolute top-0 left-0 transition-transform duration-300 ease-in-out transform -translate-x-full rounded-l-lg overflow-y-auto z-[20] block lg:hidden addmobile">
+        class="bg-teal-800 text-teal-50 h-full max-w-64 w-64 absolute top-0 left-0 transition-transform duration-300 ease-in-out transform -translate-x-full overflow-y-auto z-[20] block lg:hidden addmobile">
         <div class="flex justify-start items-center text-center">
             <img class="rounded-full logo border-2 mt-5 ml-2 border-teal-700"
                 src="{{ asset('assets/images/SELC.png') }}" alt="logo" width="40" id="logo">
@@ -329,15 +334,15 @@
         </div>
 
         <div class="flex items-center justify-center max-h-1/4 p-4 border-b border-b-teal-600 mt-10">
-            <div class="flex flex-col items-center justify-center h-full p-4 bg-teal-600 rounded-xl w-56 shadow-lg"
+            <div class="flex flex-col items-center justify-center h-full p-4 bg-teal-700 rounded-xl w-56 shadow-lg"
                 id="account">
-                <div class="mt-5 w-20 h-20 border-4 border-white bg-teal-700 rounded-full flex items-center justify-center text-white text-4xl font-semibold transition-all duration-300 shadow-lg"
+                <div class="mt-5 w-20 h-20 border-4 border-white bg-teal-600 rounded-full flex items-center justify-center text-white text-4xl font-semibold transition-all duration-300 shadow-lg"
                     id="profile">
                     @if ($avatarPath !== null)
                         <img id="avatar-img3" src="{{ $avatarPath }}" alt="{{ $firstName }}'s Profile Picture"
                             class="rounded-full w-full h-full object-cover">
                     @else
-                        <div class="flex items-center justify-center w-full h-full bg-gray-500 rounded-full">
+                        <div class="flex items-center justify-center w-full h-full bg-teal-600 rounded-full">
                             <span class="text-white">{{ $initials }}</span> <!-- Display initials if avatar is null -->
                         </div>
                     @endif
@@ -353,8 +358,9 @@
         </div>
 
         <div class="mt-10 mx-1">
+            <p class="text-[14px] mt-5 ml-7 text-teal-100 font-semibold">STUDENT DASHBOARD</p>
             <a href="/StEmelieLearningCenter.HopeSci66/student/dashboard"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip mt-2"
                 id="dashboardLink">
                 <i class="fa-solid fa-table-columns"></i>
                 <span class="sidebar-text ml-2">Dashboard</span>
@@ -372,8 +378,9 @@
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>
 
+            <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">SIMGT PROFILE</p>
             <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/account"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip mt-2"
                 id="dashboardLink">
                 <i class="fas fa-user"></i>
                 <span class="sidebar-text ml-2">
@@ -382,8 +389,9 @@
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>
 
+            <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">STUDENT GRADES</p>
             <a href="/StEmelieLearningCenter.HopeSci66/student/gradesnew"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip mt-2"
                 id="dashboardLink">
                 <i class="fa-solid fa-file"></i>
                 <span class="sidebar-text ml-2">
@@ -401,9 +409,10 @@
                 <span
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>
-            
-            <p class="text-[14px] mt-5 ml-7 text-teal-100 font-semibold">ENROLLMENT</p>
-            <button class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md tooltip mt-2"
+
+            <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">ENROLLMENT</p>
+            <button
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md tooltip mt-2"
                 id="studentManagementButton3" aria-expanded="false" aria-controls="collapse3">
                 <i class="fa-solid fa-file"></i>
                 <span class="sidebar-text ml-2">Enrollment</span>
@@ -430,7 +439,7 @@
                 </a>
             </div><br /><br /><br />
 
-            <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline">
+            <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline hidden">
                 @csrf
                 <a href="#"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
@@ -446,7 +455,8 @@
         <footer class="relative h-28 mt-[8rem] px-5">
             <img src="{{ asset('../assets/images/grouplogo.png') }}" alt="grouplogo" width="200"
                 class="opacity-25 absolute bottom-[-2.5rem] left-[-0.1rem]">
-            <p class="text-[10px] absolute bottom-0 mb-1">@ Copyright &copy; {{ date('Y') }} St Emelie Learning Center HopeSci66.
+            <p class="text-[10px] absolute bottom-0 mb-1">@ Copyright &copy; {{ date('Y') }} St Emelie Learning Center
+                HopeSci66.
                 All Rights Reserved</p>
         </footer>
     </nav>

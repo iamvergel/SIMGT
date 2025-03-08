@@ -20,7 +20,7 @@
             <p>Display Profile</p>
             <div class="block lg:w-96">
                 <div class="flex justify-center items-center lg:justify-center">
-                    <div class="mt-10 w-32 h-32 border-4 border-white bg-gray-600 rounded-full flex items-center justify-center text-white text-4xl font-semibold transition-all duration-300 shadow-lg"
+                    <div class="mt-10 w-32 h-32 border-4 border-white bg-teal-600 rounded-full flex items-center justify-center text-white text-4xl font-semibold transition-all duration-300 shadow-lg"
                         id="profile">
                         @if ($avatarPath !== null)
                             <div class="relative">
@@ -39,7 +39,7 @@
 
                         @else
                             <div id="avatar-div"
-                                class="flex items-center justify-center w-full h-full rounded-full @if ($avatarPath !== null) bg-cover @else bg-gray-500 @endif"
+                                class="flex items-center justify-center w-full h-full rounded-full @if ($avatarPath !== null) bg-cover @else bg-teal-600 @endif"
                                 style="@if ($avatarPath !== null) background-image: url('{{ $avatarPath }}'); background-size: cover; background-position: center; @endif">
                                 <span class="text-white">{{ $initials }}</span> <!-- Display initials if avatar is null -->
                             </div>
