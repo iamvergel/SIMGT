@@ -7,7 +7,7 @@
 <nav class="bg-white">
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-2">
     <div class="flex justify-between h-16">
-      <div class="flex justify-center items-center md:hidden">
+      <div class="flex justify-center items-center lg:hidden">
         <span onclick="toggleMobileMenu()"
           class="items-center justify-center p-2 px-3 rounded-full text-gray-900 hover:bg-gray-200"
           aria-controls="mobile-menu" aria-expanded="false">
@@ -15,7 +15,7 @@
         </span>
       </div>
       <div class="flex">
-        <div class="hidden mx-2 md:flex space-x-4">
+        <div class="hidden mx-2 lg:flex space-x-4">
           <div class="px-0 pt-2 pb-3 space-y-1 text-[15px]">
             <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/account"
               class="nav-link w-full text-teal-900 hover:bg-teal-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium py-5"><i

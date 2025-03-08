@@ -81,9 +81,9 @@
             const studentNumber = '{{ session("student_id") }}';
             const studentName = '{{ session("student_last_name") . ' ' . session("student_first_name") . ' ' . session("student_middle_name") }}';
             const gender = '{{ session("sex") }}';
-            const grade = '{{ session("grade")  }}';
-            const section = '{{ session("section")}}';
-            const schoolYear = '{{ session("school_year")  }}';
+            const grade = '{{ session("gradea")  }}';
+            const section = '{{ session("sectiona")}}';
+            const schoolYear = '{{ session("school_yeara")  }}';
             const status = '{{ session("status") }}';
             const currentDate = new Date().toLocaleDateString();
 

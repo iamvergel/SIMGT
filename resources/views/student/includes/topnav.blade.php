@@ -25,15 +25,6 @@
         top: 0;
         /* Stick to the top */
     }
-
-    @media (min-width: 1024px) {
-
-        /* Adjust the breakpoint as needed */
-        #header {
-            position: static;
-            /* Remove sticky behavior on large screens */
-        }
-    }
 </style>
 
 <nav class="bg-teal-800 flex items-center justify-between flex-wrap p-3 pb-5 lg:pb-5 shadow-lg z-[2]" id="header">
@@ -44,12 +35,12 @@
         </div>
     </div>
 
-    <div class="flex items-center justify-between bg-red-500 w-full text-white">
+    <div class="flex items-center justify-between w-full lg:w-auto text-white">
         <div id="btn-toggle"
             class="text-2xl bg-teal-700 text-white shadow-lg ml-0 py-1 px-3 transition-all duration-300 hover:bg-teal-600 rounded-full hidden lg:block">
             <i class="fas fa-bars text-lg text-normal"></i>
         </div>
-        <div class="flex gap-5">
+        <div class="flex items-center justify-center">
             <button id="toggleSidebarButton"
                 class="text-2xl bg-teal-700 text-white shadow-lg ml-0 py-1 px-3 transition-all duration-300 hover:bg-teal-600 rounded-full lg:hidden mr-2"><i
                     class="fas fa-bars text-lg text-normal"></i></button>
@@ -113,7 +104,7 @@
         </div>
 
         <!-- Dropdown Menu -->
-        <div class="absolute right-0 mt-2 w-56 bg-gray-100 border-t-4 border border-teal-700 rounded-lg shadow-lg hidden mt-4 z-[49]"
+        <div class="absolute right-0 mt-14 w-56 bg-gray-100 border-t-4 border border-teal-700 rounded-lg shadow-lg hidden  z-[49]"
             id="dropdownMenu">
             <ul class="text-gray-1=800">
                 <li class="px-4 py-2 hover:bg-gray-300 bg-gray-100 cursor-pointer text-[14px] mt-5"
@@ -289,4 +280,11 @@
 
     setInterval(updateDateTime, 1000);
     updateDateTime(); // Initial call to display immediately on load
+
+    function confirmLogout(event) {
+        event.preventDefault(); // Prevent form submission immediately
+        if (confirm('Are you sure you want to log out?')) {
+            document.getElementById('logoutForm').submit(); // Submit the form if confirmed
+        }
+    }
 </script>

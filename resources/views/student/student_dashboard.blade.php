@@ -7,7 +7,8 @@
     @include('student.includes.sidebar')
 
     <!-- Main Content -->
-    <main class="flex-grow bg-white shadow-lg overflow-x-hidden overflow-y-scroll w-full bg-zinc-50">
+    <main
+      class="flex-grow rounded-none  lg:rounded-l-none bg-white shadow-lg overflow-hidden overflow-y-scroll">
       @include('student.includes.topnav')
 
       <div class="p-5 py-3">
@@ -82,12 +83,14 @@
         <div class="col-span-2 lg:col-span-1 px-5 lg:px-20 relative overflow-hidden">
           <div class="bg-white text-teal-800 rounded-lg shadow-lg text-start mt-5 p-10 border">
             <p class="font-bold text-[20px] leading-5 mb-3">
-              <span class="text-[12px] font-normal">Name :</span> <br/>
+              <span class="text-[12px] font-normal">Name :</span> <br />
               {{ session('student_first_name') . ' ' . session('student_middle_name') . ' ' . session('student_last_name') }}
             </p>
-            <p class="font-normal text-[15px] mb-3"><span class="text-[12px]">Grade :</span> <br/> {{ session('gradea') . ' | Section : ' . session('sectiona') }}
+            <p class="font-normal text-[15px] mb-3"><span class="text-[12px]">Grade :</span> <br />
+              {{ session('gradea') . ' | Section : ' . session('sectiona') }}
             </p>
-            <p class="font-normal text-[15px]"><span class="text-[12px]">School Year:</span> <br/> {{ session('school_yeara') }}</p>
+            <p class="font-normal text-[15px]"><span class="text-[12px]">School Year:</span> <br />
+              {{ session('school_yeara') }}</p>
           </div>
           <i class="fa-solid fa-school text-[100px] text-teal-700/20 absolute top-20 right-10 lg:right-24"></i>
 
@@ -100,7 +103,7 @@
       $avatarPathTeacher = session('avatarAdviser') ? asset('storage/' . session('avatarAdviser')) : null;
       @endphp
 
-          <div class="flex items-end justify-center">
+          <div class="sm:flex md:flex lg:block xl:flex items-end justify-center">
             <div
               class="mt-10 w-48 h-48 border-4 border-white bg-teal-600 rounded-full flex items-center justify-center text-white text-4xl font-semibold transition-all duration-300 shadow-lg"
               id="profile">

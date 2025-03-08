@@ -10,7 +10,7 @@
 @endphp
 
 <div class="p-2 shadow-lg">
-    <div class="header py-5 bg-teal-700 mt-2 px-5 text-white font-bold text-[15px] rounded-lg shadow-lg">
+    <div class="header py-5 bg-teal-800 mt-2 px-5 text-white font-bold text-[15px] rounded-lg shadow-lg">
         <p><i class="fas fa-user mr-2"></i>Additional Information</p>
     </div>
 
@@ -19,17 +19,16 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div>
                     <p class="mb-3">Student Number: <strong>{{ session('student_id') }}</strong></p>
-                    <p class="mb-3">School Year: <strong>{{ session('school_year') }}</strong></p>
-                    <p class="mb-3">Status: <span class="text-green-500 font-bold">{{ session('status') }}</span></p>
+                    <p class="mb-3">School Year: <strong>{{ session('school_yeara') }}</strong></p>
+                    <p class="mb-3">Status: <span class="text-green-500 font-bold">{{ session('status') }} | {{ session('statusa') }}</span></p>
                 </div>
 
                 <div>
                     <p class="mb-3">Name: <strong>{{ $firstName . ' ' . $middleName . ' ' . $lastName }}</strong></p>
-                    <p class="mb-3">Grade: <strong>{{ session('grade') }}</strong></p>
-                    <p class="mb-3">Section: <strong>{{ session('section') }}</strong></p>
+                    <p class="mb-3">Grade: <strong>{{ session('gradea') }}</strong></p>
+                    <p class="mb-3">Section: <strong>{{ session('sectiona') }}</strong></p>
                 </div>
             </div>
-
         </div>
 
         <div class="form text-[15px] text-teal-900 mt-10">

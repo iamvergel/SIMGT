@@ -218,7 +218,7 @@ class Cstudentinfo extends Controller
 
                 foreach ($subjects as $subject) {
                     foreach ($quarters as $quarter) {
-                        $classRecord = new GradeOneClassRecord();
+                        $classRecord = new GradeTwoClassRecord();
                         $classRecord->lrn = $validatedData['lrn'];
                         $classRecord->student_number = $validatedData['student_number'];
                         $classRecord->school_year = $validatedData['school_year'];
@@ -259,7 +259,7 @@ class Cstudentinfo extends Controller
 
                 foreach ($subjects as $subject) {
                     foreach ($quarters as $quarter) {
-                        $classRecord = new GradeOneClassRecord();
+                        $classRecord = new GradeThreeClassRecord();
                         $classRecord->lrn = $validatedData['lrn'];
                         $classRecord->student_number = $validatedData['student_number'];
                         $classRecord->school_year = $validatedData['school_year'];
@@ -300,7 +300,7 @@ class Cstudentinfo extends Controller
 
                 foreach ($subjects as $subject) {
                     foreach ($quarters as $quarter) {
-                        $classRecord = new GradeOneClassRecord();
+                        $classRecord = new GradeFourClassRecord();
                         $classRecord->lrn = $validatedData['lrn'];
                         $classRecord->student_number = $validatedData['student_number'];
                         $classRecord->school_year = $validatedData['school_year'];
@@ -341,7 +341,7 @@ class Cstudentinfo extends Controller
 
                 foreach ($subjects as $subject) {
                     foreach ($quarters as $quarter) {
-                        $classRecord = new GradeOneClassRecord();
+                        $classRecord = new GradeFiveClassRecord();
                         $classRecord->lrn = $validatedData['lrn'];
                         $classRecord->student_number = $validatedData['student_number'];
                         $classRecord->school_year = $validatedData['school_year'];
@@ -382,7 +382,7 @@ class Cstudentinfo extends Controller
 
                 foreach ($subjects as $subject) {
                     foreach ($quarters as $quarter) {
-                        $classRecord = new GradeOneClassRecord();
+                        $classRecord = new GradeSixClassRecord();
                         $classRecord->lrn = $validatedData['lrn'];
                         $classRecord->student_number = $validatedData['student_number'];
                         $classRecord->school_year = $validatedData['school_year'];

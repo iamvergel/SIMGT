@@ -10,7 +10,7 @@
 @endphp
 
 <div class="p-2">
-    <div class="header py-5 bg-teal-700 mt-2 px-5 text-white font-bold text-[15px] rounded-lg">
+    <div class="header py-5 bg-teal-800 mt-2 px-5 text-white font-bold text-[15px] rounded-lg">
         <p><i class="fas fa-user mr-2"></i>Security</p>
     </div>
 

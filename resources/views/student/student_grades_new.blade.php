@@ -1,561 +1,858 @@
-<!DOCTYPE html>
-<html lang="en">
+@include('student.includes.header')
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>St. Emilie Learning Center</title>
-    <link rel="shortcut icon" href="{{ asset('../assets/images/SELC.png') }}" type="image/x-icon">
+<body class="font-poppins bg-gray-200">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <script src="https://kit.fontawesome.com/20a0e1e87d.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Poppins", sans-serif;
-        }
-
-        body {
-            background-color: #f3f4f6;
-            /* Tailwind gray-200 */
-        }
-    </style>
-</head>
-
-<body>
-    <div class="flex flex-col lg:flex-row lg:p-2 w-full h-screen">
+    <div class="flex w-full h-screen">
         <!-- Sidebar -->
         @include('student.includes.sidebar')
 
         <!-- Main Content -->
         <main
             class="flex-grow rounded-none lg:rounded-r-lg lg:rounded-l-none bg-white shadow-lg overflow-hidden overflow-y-scroll">
-            @include('student.includes.header')
+            @include('student.includes.topnav')
 
             <div class="p-5 py-3">
                 <p class="text-[15px] font-normal text-teal-900 mt-5">Student</p>
-                <h1 class="text-xl font-bold text-teal-900">Your Grades</h1>
+                <h1 class="text-xl font-bold text-teal-900">Student Grades </h1>
             </div>
 
-            <div class="p-2 lg:p-10">
-                <div class="p-2 lg:p-10 bg-gray-100 rounded-lg shadow-lg">
-                    <div class="my-3">
-                        <label for="gradesSelect" class="text-gray-900 text-[15px] font-semibold">Select Your Quarterly
-                            Grade:</label>
-                        <div class="mt-3">
-                            <select id="gradesSelect"
-                                class="border text-gray-900 text-[15px] p-2 px-5 border-gray-500 rounded-md mb-4 w-full lg:w-1/2">
-                                <option value="">Select Your Quarterly Grade</option>
-                            </select>
+            <input type="hidden" id="studentNumber" value="{{ session('student_id') }}">
+            <input type="hidden" id="studentName" value="{{ session('student_last_name') . ' ' . session('student_first_name') . ' ' . session('student_middle_name') }}">
+            <input type="hidden" id="gender" value="{{ session('sex') }}">
+            <input type="hidden" id="grade" value="{{ session('gradea') }}">
+            <input type="hidden" id="section" value="{{ session('sectiona') }}">
+            <input type="hidden" id="schoolYear" value="{{ session('school_yeara') }}">
+            <input type="hidden" id="status" value="{{ session('statusa') }}">
+            <input type="hidden" id="lrn" value="{{ session('lrna') }}">
+
+
+            <div class="grid grid-cols-2">
+                <div class="col-span-2 lg:col-span-2">
+                    <div class="lg:p-5">
+                        <div id="studentModal" class="p-3 lg:p-10 relative w-full min-h-screen bg-gray-100">
+                            <div class="relative">
+                                <div class="mt-5 text-[14px] font-semibold w-full">
+                                    <ul
+                                        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-0 xl:gap-0 bg-gray-50 p-0 m-0">
+                                        <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 rounded-lg m-1 xl:rounded-lg xl:m-1 active1"
+                                            data-target="#gradeOne">Grade One</li>
+                                        <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 rounded-lg m-1 xl:rounded-lg xl:m-1"
+                                            data-target="#gradeTwo">Grade Two</li>
+                                        <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 rounded-lg m-1 xl:rounded-lg xl:m-1"
+                                            data-target="#gradeThree">Grade Three</li>
+                                        <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 rounded-lg m-1 xl:rounded-lg xl:m-1"
+                                            data-target="#gradeFour">Grade Four</li>
+                                        <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 rounded-lg m-1 xl:rounded-lg xl:m-1"
+                                            data-target="#gradeFive">Grade Five</li>
+                                        <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 rounded-lg m-1 xl:rounded-lg xl:m-1"
+                                            data-target="#gradeSix">Grade Six</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Student Details -->
+                                <div class=" border-0 border-t-4 border-teal-800 h-full pt-5">
+                                    <div class="px-2">
+                                        <div>
+                                            <div class="table-container w-full" id="gradeOne">
+                                                <div class="bg-white p-3 lg:p-5 rounded-lg shadow-lg overflow-x-scroll">
+                                                    <table
+                                                        class="p-3 display border overflow-x-scroll lg:p-5" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Learning Areas
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    colspan="4">
+                                                                    Periodic Rating
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Final Grade
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Remarks
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="border border-gray-600 export">1</th>
+                                                                <th class="border border-gray-600 export">2</th>
+                                                                <th class="border border-gray-600 export">3</th>
+                                                                <th class="border border-gray-600 export">4</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @php
+                                                                $gradeOneExists = false;
+                                                                $totalFinalGrade = 0;
+                                                                $count = 0;
+                                                                $allGradesAvailable = true; // Variable to check if all grades are available
+                                                            @endphp
+
+                                                            @foreach ($grades as $grade)
+                                                                @if ($grade->grade == "Grade One")
+                                                                    @php
+                                                                        $gradeOneExists = true;
+                                                                        $totalFinalGrade += $grade->final_grade;
+                                                                        $count++;
+
+                                                                        // Check if all quarterly grades are available
+                                                                        if (
+                                                                            empty($grade->first_quarter_grade) || empty($grade->second_quarter_grade) ||
+                                                                            empty($grade->third_quarter_grade) || empty($grade->fourth_quarter_grade) ||
+                                                                            empty($grade->final_grade)
+                                                                        ) {
+                                                                            $allGradesAvailable = false;
+                                                                        }
+                                                                    @endphp
+                                                                    <tr class="subject-row">
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->subject }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->first_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->second_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->third_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->fourth_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->final_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">
+                                                                            @if (empty($grade->final_grade))
+                                                                                <!-- No final grade available -->
+                                                                            @elseif ($grade->final_grade < 75)
+                                                                                Failed
+                                                                            @else
+                                                                                Passed
+                                                                            @endif
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endforeach
+
+                                                            @if (!$gradeOneExists)
+                                                                <tr>
+                                                                    <td colspan="7" class="text-center border-2 px-4 py-2">No Data Available</td>
+                                                                </tr>
+                                                            @endif
+                                                        </tbody>
+
+                                                        @if ($allGradesAvailable && $count > 0)
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        General Average</td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        {{ round($totalFinalGrade / $count, 2) }}
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        @if (round($totalFinalGrade / $count, 2) < 75)
+                                                                            Failed
+                                                                        @else
+
+
+
+                                                                            Passed
+                                                                        @endif
+
+
+
+                                                                    </td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        @endif
+                                                    </table>
+                                                </div>
+                                                <div id="gradesContainer" class="my-10 flex justify-end gap-5">
+                                                    @if ($allGradesAvailable && $gradeOneExists)
+                                                        <button id="downloadHtmlButton"
+                                                            class="bg-teal-700 hover:bg-teal-800 text-lg font-semibold text-white py-2 px-4 rounded mt-4"><i class="fa-solid fa-file-pdf me-2"></i>Download
+                                                            As
+                                                            PDF</button>
+                                                        <button id="printHtmlButton" class="bg-sky-700 text-lg font-semibold hover:bg-sky-800 text-white py-2 px-4 rounded mt-4"><i class="fa-solid fa-print me-2"></i>Print Report</button>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="table-container w-full" id="gradeTwo"
+                                                style="display: none;">
+                                                <div class="bg-white p-3 lg:p-5 rounded-lg shadow-lg overflow-x-scroll">
+                                                    <table
+                                                        class="p-3 display border overflow-x-scroll lg:p-5" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Learning Areas
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    colspan="4">
+                                                                    Periodic Rating
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Final Grade
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Remarks
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="border border-gray-600 export">1</th>
+                                                                <th class="border border-gray-600 export">2</th>
+                                                                <th class="border border-gray-600 export">3</th>
+                                                                <th class="border border-gray-600 export">4</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @php
+                                                                $gradeTwoExists = false;
+                                                                $totalFinalGrade = 0;
+                                                                $count = 0;
+                                                                $allGradesAvailable = true; // Variable to check if all grades are available
+                                                            @endphp
+
+                                                            @foreach ($grades as $grade)
+                                                                @if ($grade->grade == "Grade Two")
+                                                                    @php
+                                                                        $gradeTwoExists = true;
+                                                                        $totalFinalGrade += $grade->final_grade;
+                                                                        $count++;
+
+                                                                        // Check if all quarterly grades are available
+                                                                        if (
+                                                                            empty($grade->first_quarter_grade) || empty($grade->second_quarter_grade) ||
+                                                                            empty($grade->third_quarter_grade) || empty($grade->fourth_quarter_grade) ||
+                                                                            empty($grade->final_grade)
+                                                                        ) {
+                                                                            $allGradesAvailable = false;
+                                                                        }
+                                                                    @endphp
+                                                                    <tr class="subject-row">
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->subject }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->first_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->second_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->third_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->fourth_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->final_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">
+                                                                            @if (empty($grade->final_grade))
+                                                                                <!-- No final grade available -->
+                                                                            @elseif ($grade->final_grade < 75)
+                                                                                Failed
+                                                                            @else
+                                                                                Passed
+                                                                            @endif
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endforeach
+
+                                                            @if (!$gradeTwoExists)
+                                                                <tr>
+                                                                    <td colspan="7" class="text-center border-2 px-4 py-2">No Grades Available</td>
+                                                                </tr>
+                                                            @endif
+                                                        </tbody>
+
+                                                        @if ($allGradesAvailable && $count > 0)
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        General Average</td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        {{ round($totalFinalGrade / $count, 2) }}
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        @if (round($totalFinalGrade / $count, 2) < 75)
+                                                                            Failed
+                                                                        @else
+                                                                            Passed
+                                                                        @endif
+
+                                                                    </td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        @endif
+                                                    </table>
+                                                </div>
+                                                <div id="gradesContainerTwo" class="my-10 flex justify-end gap-5">
+                                                    @if ($allGradesAvailable && $gradeTwoExists)
+                                                        <button id="downloadHtmlButtonTwo"
+                                                            class="bg-teal-700 hover:bg-teal-800 text-lg font-semibold text-white py-2 px-4 rounded mt-4"><i class="fa-solid fa-file-pdf me-2"></i>Download
+                                                            As
+                                                            PDF</button>
+                                                        <button id="printHtmlButtonTwo" class="bg-sky-700 text-lg font-semibold hover:bg-sky-800 text-white py-2 px-4 rounded mt-4"><i class="fa-solid fa-print me-2"></i>Print Report</button>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="table-container w-full mt-10 pb-10" id="gradeThree"
+                                                style="display: none;">
+                                                <div class="bg-white p-3 lg:p-5 rounded-lg shadow-lg overflow-x-scroll">
+                                                    <table
+                                                        class="p-3 display border overflow-x-scroll lg:p-5" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Learning Areas
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    colspan="4">
+                                                                    Periodic Rating
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Final Grade
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Remarks
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="border border-gray-600 export">1</th>
+                                                                <th class="border border-gray-600 export">2</th>
+                                                                <th class="border border-gray-600 export">3</th>
+                                                                <th class="border border-gray-600 export">4</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @php
+                                                                $gradeThreeExists = false;
+                                                                $totalFinalGrade = 0;
+                                                                $count = 0;
+                                                                $allGradesAvailable = true; // Variable to check if all grades are available
+                                                            @endphp
+
+                                                            @foreach ($grades as $grade)
+                                                                @if ($grade->grade == "Grade Three")
+                                                                    @php
+                                                                        $gradeThreeExists = true;
+                                                                        $totalFinalGrade += $grade->final_grade;
+                                                                        $count++;
+
+                                                                        // Check if all quarterly grades are available
+                                                                        if (
+                                                                            empty($grade->first_quarter_grade) || empty($grade->second_quarter_grade) ||
+                                                                            empty($grade->third_quarter_grade) || empty($grade->fourth_quarter_grade) ||
+                                                                            empty($grade->final_grade)
+                                                                        ) {
+                                                                            $allGradesAvailable = false;
+                                                                        }
+                                                                    @endphp
+                                                                    <tr class="subject-row">
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->subject }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->first_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->second_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->third_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->fourth_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->final_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">
+                                                                            @if (empty($grade->final_grade))
+                                                                                <!-- No final grade available -->
+                                                                            @elseif ($grade->final_grade < 75)
+                                                                                Failed
+                                                                            @else
+                                                                                Passed
+                                                                            @endif
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endforeach
+
+                                                            @if (!$gradeThreeExists)
+                                                                <tr>
+                                                                    <td colspan="7" class="text-center border-2 px-4 py-2">No Grades Available</td>
+                                                                </tr>
+                                                            @endif
+                                                        </tbody>
+
+                                                        @if ($allGradesAvailable && $count > 0)
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        General Average</td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        {{ round($totalFinalGrade / $count, 2) }}
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        @if (round($totalFinalGrade / $count, 2) < 75)
+                                                                            Failed
+                                                                        @else
+                                                                            Passed
+                                                                        @endif
+
+                                                                    </td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        @endif
+                                                    </table>
+                                                </div>
+                                                <div id="gradesContainerThree" class="my-10 flex justify-end gap-5">
+                                                    @if ($allGradesAvailable && $gradeThreeExists)
+                                                        <button id="downloadHtmlButtonThree"
+                                                            class="bg-teal-700 hover:bg-teal-800 text-lg font-semibold text-white py-2 px-4 rounded mt-4"><i class="fa-solid fa-file-pdf me-2"></i>Download
+                                                            As
+                                                            PDF</button>
+                                                        <button id="printHtmlButtonThree" class="bg-sky-700 text-lg font-semibold hover:bg-sky-800 text-white py-2 px-4 rounded mt-4"><i class="fa-solid fa-print me-2"></i>Print Report</button>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="table-container w-full mt-10 pb-10" id="gradeFour"
+                                                style="display: none;">
+                                                <div class="bg-white p-3 lg:p-5 rounded-lg shadow-lg overflow-x-scroll">
+                                                    <table
+                                                        class="p-3 display border overflow-x-scroll lg:p-5" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Learning Areas
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    colspan="4">
+                                                                    Periodic Rating
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Final Grade
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Remarks
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="border border-gray-600 export">1</th>
+                                                                <th class="border border-gray-600 export">2</th>
+                                                                <th class="border border-gray-600 export">3</th>
+                                                                <th class="border border-gray-600 export">4</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @php
+                                                                $gradeFourExists = false;
+                                                                $totalFinalGrade = 0;
+                                                                $count = 0;
+                                                                $allGradesAvailable = true; // Variable to check if all grades are available
+                                                            @endphp
+
+                                                            @foreach ($grades as $grade)
+                                                                @if ($grade->grade == "Grade Four")
+                                                                    @php
+                                                                        $gradeFourExists = true;
+                                                                        $totalFinalGrade += $grade->final_grade;
+                                                                        $count++;
+
+                                                                        // Check if all quarterly grades are available
+                                                                        if (
+                                                                            empty($grade->first_quarter_grade) || empty($grade->second_quarter_grade) ||
+                                                                            empty($grade->third_quarter_grade) || empty($grade->fourth_quarter_grade) ||
+                                                                            empty($grade->final_grade)
+                                                                        ) {
+                                                                            $allGradesAvailable = false;
+                                                                        }
+                                                                    @endphp
+                                                                    <tr class="subject-row">
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->subject }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->first_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->second_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->third_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->fourth_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->final_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">
+                                                                            @if (empty($grade->final_grade))
+                                                                                <!-- No final grade available -->
+                                                                            @elseif ($grade->final_grade < 75)
+                                                                                Failed
+                                                                            @else
+                                                                                Passed
+                                                                            @endif
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endforeach
+
+                                                            @if (!$gradeFourExists)
+                                                                <tr>
+                                                                    <td colspan="7" class="text-center border-2 px-4 py-2">No Grades Available</td>
+                                                                </tr>
+                                                            @endif
+                                                        </tbody>
+
+                                                        @if ($allGradesAvailable && $count > 0)
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        General Average</td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        {{ round($totalFinalGrade / $count, 2) }}
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        @if (round($totalFinalGrade / $count, 2) < 75)
+                                                                            Failed
+                                                                        @else
+                                                                            Passed
+                                                                        @endif
+
+                                                                    </td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        @endif
+                                                    </table>
+                                                </div>
+                                                <div id="gradesContainerFour" class="my-10 flex justify-end gap-5">
+                                                    @if ($allGradesAvailable && $gradeFourExists)
+                                                        <button id="downloadHtmlButtonFour"
+                                                            class="bg-teal-700 hover:bg-teal-800 text-lg font-semibold text-white py-2 px-4 rounded mt-4"><i class="fa-solid fa-file-pdf me-2"></i>Download
+                                                            As
+                                                            PDF</button>
+                                                        <button id="printHtmlButtonFour" class="bg-sky-700 text-lg font-semibold hover:bg-sky-800 text-white py-2 px-4 rounded mt-4"><i class="fa-solid fa-print me-2"></i>Print Report</button>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="table-container w-full mt-10 pb-10" id="gradeFive"
+                                                style="display: none;">
+                                                <div class="bg-white p-3 lg:p-5 rounded-lg shadow-lg overflow-x-scroll">
+                                                    <table
+                                                        class="p-3 display border overflow-x-scroll lg:p-5" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Learning Areas
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    colspan="4">
+                                                                    Periodic Rating
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Final Grade
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Remarks
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="border border-gray-600 export">1</th>
+                                                                <th class="border border-gray-600 export">2</th>
+                                                                <th class="border border-gray-600 export">3</th>
+                                                                <th class="border border-gray-600 export">4</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @php
+                                                                $gradeFiveExists = false;
+                                                                $totalFinalGrade = 0;
+                                                                $count = 0;
+                                                                $allGradesAvailable = true; // Variable to check if all grades are available
+                                                            @endphp
+
+                                                            @foreach ($grades as $grade)
+                                                                @if ($grade->grade == "Grade Five")
+                                                                    @php
+                                                                        $gradeFiveExists = true;
+                                                                        $totalFinalGrade += $grade->final_grade;
+                                                                        $count++;
+
+                                                                        // Check if all quarterly grades are available
+                                                                        if (
+                                                                            empty($grade->first_quarter_grade) || empty($grade->second_quarter_grade) ||
+                                                                            empty($grade->third_quarter_grade) || empty($grade->fourth_quarter_grade) ||
+                                                                            empty($grade->final_grade)
+                                                                        ) {
+                                                                            $allGradesAvailable = false;
+                                                                        }
+                                                                    @endphp
+                                                                    <tr class="subject-row">
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->subject }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->first_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->second_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->third_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->fourth_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->final_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">
+                                                                            @if (empty($grade->final_grade))
+                                                                                <!-- No final grade available -->
+                                                                            @elseif ($grade->final_grade < 75)
+                                                                                Failed
+                                                                            @else
+                                                                                Passed
+                                                                            @endif
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endforeach
+
+                                                            @if (!$gradeFiveExists)
+                                                                <tr>
+                                                                    <td colspan="7" class="text-center border-2 px-4 py-2">No Grades Available</td>
+                                                                </tr>
+                                                            @endif
+                                                        </tbody>
+
+                                                        @if ($allGradesAvailable && $count > 0)
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        General Average</td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        {{ round($totalFinalGrade / $count, 2) }}
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        @if (round($totalFinalGrade / $count, 2) < 75)
+                                                                            Failed
+                                                                        @else
+                                                                            Passed
+                                                                        @endif
+
+                                                                    </td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        @endif
+                                                    </table>
+                                                </div>
+                                                <div id="gradesContainerFive" class="my-10 flex justify-end gap-5">
+                                                    @if ($allGradesAvailable && $gradeFiveExists)
+                                                        <button id="downloadHtmlButtonFive"
+                                                            class="bg-teal-700 hover:bg-teal-800 text-lg font-semibold text-white py-2 px-4 rounded mt-4"><i class="fa-solid fa-file-pdf me-2"></i>Download
+                                                            As
+                                                            PDF</button>
+                                                        <button id="printHtmlButtonFive" class="bg-sky-700 text-lg font-semibold hover:bg-sky-800 text-white py-2 px-4 rounded mt-4"><i class="fa-solid fa-print me-2"></i>Print Report</button>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <div class="table-container w-full mt-10 pb-10" id="gradeSix"
+                                                style="display: none;">
+                                                <div class="bg-white p-3 lg:p-5 rounded-lg shadow-lg overflow-x-scroll">
+                                                    <table
+                                                        class="p-3 display border overflow-x-scroll lg:p-5" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Learning Areas
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    colspan="4">
+                                                                    Periodic Rating
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Final Grade
+                                                                </th>
+                                                                <th class="px-4 py-2 border border-gray-600 export"
+                                                                    rowspan="2">
+                                                                    Remarks
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="border border-gray-600 export">1</th>
+                                                                <th class="border border-gray-600 export">2</th>
+                                                                <th class="border border-gray-600 export">3</th>
+                                                                <th class="border border-gray-600 export">4</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @php
+                                                                $gradeSixExists = false;
+                                                                $totalFinalGrade = 0;
+                                                                $count = 0;
+                                                                $allGradesAvailable = true; // Variable to check if all grades are available
+                                                            @endphp
+
+                                                            @foreach ($grades as $grade)
+                                                                @if ($grade->grade == "Grade Six")
+                                                                    @php
+                                                                        $gradeSixExists = true;
+                                                                        $totalFinalGrade += $grade->final_grade;
+                                                                        $count++;
+
+                                                                        // Check if all quarterly grades are available
+                                                                        if (
+                                                                            empty($grade->first_quarter_grade) || empty($grade->second_quarter_grade) ||
+                                                                            empty($grade->third_quarter_grade) || empty($grade->fourth_quarter_grade) ||
+                                                                            empty($grade->final_grade)
+                                                                        ) {
+                                                                            $allGradesAvailable = false;
+                                                                        }
+                                                                    @endphp
+                                                                    <tr class="subject-row">
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->subject }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->first_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->second_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->third_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->fourth_quarter_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">{{ $grade->final_grade }}</td>
+                                                                        <td class="border border-gray-600 text-center px-4 py-2">
+                                                                            @if (empty($grade->final_grade))
+                                                                                <!-- No final grade available -->
+                                                                            @elseif ($grade->final_grade < 75)
+                                                                                Failed
+                                                                            @else
+                                                                                Passed
+                                                                            @endif
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endforeach
+
+                                                            @if (!$gradeSixExists)
+                                                                <tr>
+                                                                    <td colspan="7" class="text-center border-2 px-4 py-2">No Grades Available</td>
+                                                                </tr>
+                                                            @endif
+                                                        </tbody>
+
+                                                        @if ($allGradesAvailable && $count > 0)
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        General Average</td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        {{ round($totalFinalGrade / $count, 2) }}
+                                                                    </td>
+                                                                    <td
+                                                                        class="border border-gray-600 text-center px-4 py-2">
+                                                                        @if (round($totalFinalGrade / $count, 2) < 75)
+                                                                            Failed
+                                                                        @else
+                                                                            Passed
+                                                                        @endif
+
+                                                                    </td>
+                                                                </tr>
+                                                            </tfoot>
+                                                        @endif
+                                                    </table>
+                                                </div>
+                                                <div id="gradesContainerSix" class="my-10 flex justify-end gap-5">
+                                                    @if ($allGradesAvailable && $gradeSixExists)
+                                                        <button id="downloadHtmlButtonSix"
+                                                            class="bg-teal-700 hover:bg-teal-800 text-lg font-semibold text-white py-2 px-4 rounded mt-4"><i class="fa-solid fa-file-pdf me-2"></i>Download
+                                                            As
+                                                            PDF</button>
+                                                        <button id="printHtmlButtonSix" class="bg-sky-700 text-lg font-semibold hover:bg-sky-800 text-white py-2 px-4 rounded mt-4"><i class="fa-solid fa-print me-2"></i>Print Report</button>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div>
-                    <div id="gradesContainer" class="mt-4 hidden">
-                        <div id="grades" class="space-y-4"></div>
-                        <button id="downloadHtmlButton" class="bg-teal-700 hover:bg-teal-800 text-white py-2 px-4 rounded mt-4">Download
-                            As
-                            PDF</button>
-                    </div>
-
-                    <p class="text-red-900 text-[14px] mt-5 bg-red-300 rounded-md" id="alert"></p>
                 </div>
             </div>
         </main>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            const studentNumber = '{{ session("student_id") }}';
-            const studentName = '{{ session("student_last_name") . ' ' . session("student_first_name") . ' ' . session("student_middle_name") }}';
-            const gender = '{{ session("sex") }}';
-            const grade = '{{ session("grade")  }}';
-            const section = '{{ session("section")}}';
-            const schoolYear = '{{ session("school_year")  }}';
-            const status = '{{ session("status") }}';
-            const currentDate = new Date().toLocaleDateString();
-
-            fetchGrades();
-
-            $('#gradesSelect').on('change', function () {
-                const selectedValue = $(this).val();
-                if (selectedValue) {
-                    const [gradeKey, quarter] = selectedValue.split('|');
-                    displayGradeDetails(window.gradeData[gradeKey][quarter]);
-                } else {
-                    $('#gradesContainer').hide();
-                }
-            });
-
-            $('#downloadHtmlButton').on('click', function () {
-                const selectedValue = $('#gradesSelect').val();
-                if (selectedValue) {
-                    const [gradeKey, quarter] = selectedValue.split('|');
-                    const gradeRecord = window.gradeData[gradeKey][quarter];
-
-                    if (gradeRecord) {
-                        const { jsPDF } = window.jspdf;
-                        const doc = new jsPDF();
-                        const logoUrl = '{{ asset("../assets/images/SELC.png") }}';
-                        const topMargin = 5;
-
-                        // Add logo and name to the PDF
-                        const logoWidth = 15; // width of the logo
-                        const logoHeight = 15; // height of the logo
-                        doc.addImage(logoUrl, 'PNG', 10, 10, logoWidth, logoHeight);
-
-                        // Center the title
-                        const title = "St. Emilie Learning Center";
-                        doc.setFontSize(20);
-                        doc.setTextColor(40, 40, 40);
-                        const titleWidth = doc.getTextWidth(title);
-                        const titleX = (doc.internal.pageSize.width - titleWidth) / 2;
-                        doc.text(title, titleX, 18);
-
-                        // Center the address
-                        const address = "Amparo Village, 18 Bangkal, Caloocan, Metro Manila";
-                        doc.setFontSize(10);
-                        doc.setTextColor(0, 0, 0);
-                        const addressWidth = doc.getTextWidth(address);
-                        const addressX = (doc.internal.pageSize.width - addressWidth) / 2;
-                        doc.text(address, addressX, 23);
-
-                        // Center the address
-                        const quarterschoolYear = `${quarter}, School Year ${schoolYear}`;
-                        doc.setFontSize(10);
-                        doc.setTextColor(0, 0, 0);
-                        const quarterschoolYearWidth = doc.getTextWidth(quarterschoolYear);
-                        const quarterschoolYearX = (doc.internal.pageSize.width - quarterschoolYearWidth) / 2;
-                        doc.text(quarterschoolYear, quarterschoolYearX, 28);
-
-                        // Center the address
-                        const report = "UNOFFICIAL REPORT OF GRADES";
-                        doc.setFontSize(22);
-                        doc.setTextColor(0, 0, 0);
-                        const reportWidth = doc.getTextWidth(report);
-                        const reportX = (doc.internal.pageSize.width - reportWidth) / 2;
-                        doc.text(report, reportX, 43);
-
-                        const leftColumnX = 10;
-                        const rightColumnX = 150; // Adjust this value as needed for spacing
-                        const astartY = 55; // Fixed starting Y position
-
-                        doc.setFontSize(10);
-
-                        // Left column
-                        doc.text(`Fullname       :  ${studentName}`, leftColumnX, astartY);
-                        doc.text(`Gender          :  ${gender}`, leftColumnX, astartY + 5);
-                        doc.text(`Grade            :  ${grade}`, leftColumnX, astartY + 10);
-                        doc.text(`Section          :  ${section}`, leftColumnX, astartY + 15);
-
-                        // Right column
-                        doc.text(`Student No        :  ${studentNumber}`, rightColumnX, astartY);
-                        doc.text(`Academic Year  :  ${schoolYear}`, rightColumnX, astartY + 5);
-                        doc.text(`Date                   :  ${currentDate}`, rightColumnX, astartY + 10);
-                        doc.text(`Status                :  ${status}`, rightColumnX, astartY + 15);
-
-                        // Create a new Date object
-                        const currentDateTime = new Date();
-
-                        // Format the date and time (e.g., "YYYY-MM-DD HH:mm:ss")
-                        const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-                        const datePrinted = currentDateTime.toLocaleString('en-GB', options).replace(',', '');
-
-                        doc.text(`Grade for ${gradeKey}, ${quarter}`, leftColumnX, astartY + 23);
-                        doc.text(`Date Printed : ${datePrinted} [${studentName}]`, leftColumnX, astartY + 155);
-
-                        // Function to get subjects based on grade key
-                        function getSubjectsForGrade(gradeKey, gradeRecord) {
-                            const gradeLevels = {
-                                'grade_one': [
-                                    { name: 'Reading and Literacy', grade: gradeRecord.subject_one || 'N/A' },
-                                    { name: 'Language', grade: gradeRecord.subject_two || 'N/A' },
-                                    { name: 'Mathematics', grade: gradeRecord.subject_three || 'N/A' },
-                                    { name: 'GMRC', grade: gradeRecord.subject_four || 'N/A' },
-                                    { name: 'Makabansa', grade: gradeRecord.subject_five || 'N/A' },
-                                ],
-                                'grade_two': [
-                                    { name: 'Addition and Subtraction', grade: gradeRecord.subject_one || 'N/A' },
-                                    { name: 'Reading Comprehension', grade: gradeRecord.subject_two || 'N/A' },
-                                    { name: 'Introduction to Science', grade: gradeRecord.subject_three || 'N/A' },
-                                    { name: 'Creative Writing', grade: gradeRecord.subject_four || 'N/A' },
-                                    { name: 'Community Helpers', grade: gradeRecord.subject_five || 'N/A' },
-                                    { name: 'Basic Geography', grade: gradeRecord.subject_six || 'N/A' },
-                                    { name: 'Art Techniques', grade: gradeRecord.subject_seven || 'N/A' },
-                                    { name: 'Music Appreciation', grade: gradeRecord.subject_eight || 'N/A' },
-                                    { name: 'Physical Fitness', grade: gradeRecord.subject_nine || 'N/A' },
-                                ],
-                                'grade_three': [
-                                    { name: 'Multiplication and Division', grade: gradeRecord.subject_one || 'N/A' },
-                                    { name: 'Reading Fluency', grade: gradeRecord.subject_two || 'N/A' },
-                                    { name: 'Life Science', grade: gradeRecord.subject_three || 'N/A' },
-                                    { name: 'Creative Writing', grade: gradeRecord.subject_four || 'N/A' },
-                                    { name: 'History Basics', grade: gradeRecord.subject_five || 'N/A' },
-                                    { name: 'Geometry', grade: gradeRecord.subject_six || 'N/A' },
-                                    { name: 'Art History', grade: gradeRecord.subject_seven || 'N/A' },
-                                    { name: 'Music Theory', grade: gradeRecord.subject_eight || 'N/A' },
-                                    { name: 'Team Sports', grade: gradeRecord.subject_nine || 'N/A' },
-                                ],
-                                'grade_four': [
-                                    { name: 'Fractions and Decimals', grade: gradeRecord.subject_one || 'N/A' },
-                                    { name: 'Reading Analysis', grade: gradeRecord.subject_two || 'N/A' },
-                                    { name: 'Physical Science', grade: gradeRecord.subject_three || 'N/A' },
-                                    { name: 'Research Skills', grade: gradeRecord.subject_four || 'N/A' },
-                                    { name: 'World Geography', grade: gradeRecord.subject_five || 'N/A' },
-                                    { name: 'Civics', grade: gradeRecord.subject_six || 'N/A' },
-                                    { name: 'Art Projects', grade: gradeRecord.subject_seven || 'N/A' },
-                                    { name: 'Music Composition', grade: gradeRecord.subject_eight || 'N/A' },
-                                    { name: 'Fitness and Health', grade: gradeRecord.subject_nine || 'N/A' },
-                                ],
-                                'grade_five': [
-                                    { name: 'Advanced Math', grade: gradeRecord.subject_one || 'N/A' },
-                                    { name: 'Literature Study', grade: gradeRecord.subject_two || 'N/A' },
-                                    { name: 'Earth Science', grade: gradeRecord.subject_three || 'N/A' },
-                                    { name: 'Writing Essays', grade: gradeRecord.subject_four || 'N/A' },
-                                    { name: 'U.S. History', grade: gradeRecord.subject_five || 'N/A' },
-                                    { name: 'Map Skills', grade: gradeRecord.subject_six || 'N/A' },
-                                    { name: 'Art Critique', grade: gradeRecord.subject_seven || 'N/A' },
-                                    { name: 'Cultural Music', grade: gradeRecord.subject_eight || 'N/A' },
-                                    { name: 'Sports Science', grade: gradeRecord.subject_nine || 'N/A' },
-                                ],
-                                'grade_six': [
-                                    { name: 'Pre-Algebra', grade: gradeRecord.subject_one || 'N/A' },
-                                    { name: 'Advanced Literature', grade: gradeRecord.subject_two || 'N/A' },
-                                    { name: 'Biology', grade: gradeRecord.subject_three || 'N/A' },
-                                    { name: 'Creative Non-Fiction', grade: gradeRecord.subject_four || 'N/A' },
-                                    { name: 'World History', grade: gradeRecord.subject_five || 'N/A' },
-                                    { name: 'Geography Skills', grade: gradeRecord.subject_six || 'N/A' },
-                                    { name: 'Art Techniques', grade: gradeRecord.subject_seven || 'N/A' },
-                                    { name: 'Music History', grade: gradeRecord.subject_eight || 'N/A' },
-                                    { name: 'Health Education', grade: gradeRecord.subject_nine || 'N/A' },
-                                ],
-                            };
-
-                            return gradeLevels[gradeKey] || [];
-                        }
-
-                        // Use the function to get subjects based on gradeKey
-                        const subjects = getSubjectsForGrade(gradeKey, gradeRecord);
-
-
-                        const margin = 10;
-                        const bstartX = 10;
-                        const bstartY = 80;
-                        const bcellHeight = 10;
-                        const bcolumnWidth = (doc.internal.pageSize.width - (margin * 2)) / 3;
-
-                        // Define table headers and positions
-                        const headers = ['Subject', 'Grade', 'Remarks'];
-                        const headerHeight = 10; // Height for header row
-                        const startY = bstartY; // Starting Y position for the table
-                        const cellHeight = 5; // Height for each cell
-                        const columnWidth = (doc.internal.pageSize.width - (margin * 2)) / headers.length; // Adjusted width based on headers
-
-                        // Draw table header background
-                        doc.setFontSize(10);
-                        doc.setTextColor(0, 0, 0); // Black text for header
-                        doc.setFillColor(255, 255, 255); // White fill for header background
-                        doc.rect(bstartX, startY, columnWidth * headers.length, headerHeight, 'F'); // Draw header rectangle
-
-                        // Draw header border
-                        doc.setTextColor(0, 0, 0); // Reset text color for headers
-                        doc.setLineWidth(0.5);
-                        doc.rect(bstartX, startY, columnWidth * headers.length, headerHeight); // Draw border around header
-
-                        headers.forEach((header, index) => {
-                            doc.text(header, bstartX + index * columnWidth + margin, startY + 8); // Center the header text
-                        });
-
-                        // Reset color for content
-                        doc.setTextColor(0, 0, 0); // Black text for body
-                        doc.setLineWidth(0.1);
-
-                        // Add subjects and grades to the table
-                        let totalGrades = 0; // Initialize total grades
-                        subjects.forEach((subject, index) => {
-                            const yPosition = startY + headerHeight + (index + 1) * cellHeight;
-
-                            // Subject
-                            doc.text(subject.name, bstartX + margin, yPosition);
-
-                            // Grade
-                            const gradeValue = parseFloat(subject.grade);
-                            doc.text(isNaN(gradeValue) ? 'N/A' : gradeValue.toString(), bstartX + columnWidth + margin, yPosition);
-
-                            // Add to total grades if valid
-                            if (!isNaN(gradeValue)) {
-                                totalGrades += gradeValue;
-                            }
-
-                            // Remarks based on grade
-                            const remarks = (gradeValue >= 75) ? 'Passed' : 'Failed';
-                            doc.text(remarks, bstartX + 2 * columnWidth + margin, yPosition);
-                        });
-
-                        // Define the grading system as an array
-                        const gradingSystem = [
-                            { range: '98.00 - 100.00', remark: 'With High Honor' },
-                            { range: '95.00 - 97.99', remark: 'With Honor' },
-                            { range: '75.00 - 94.99', remark: 'Passed' },
-                            { range: '0.00 - 74.99', remark: 'Failed' },
-                        ];
-
-                        // Starting position for the grading system table
-                        const gradingSystemStartY = startY + 10 + headerHeight + (subjects.length + 3) * cellHeight;
-
-                        // Draw Grading System Header
-                        doc.setFontSize(10);
-                        doc.setTextColor(0, 0, 0);
-                        doc.text("Grading System : ", bstartX - 10 + margin, gradingSystemStartY + 3);
-
-                        // Define header for grading system
-                        const gradingHeaders = ['Grade Range', 'Remarks'];
-                        const gradingHeaderHeight = 10;
-                        const gradingColumnWidth = (doc.internal.pageSize.width - (margin * 2)) / gradingHeaders.length;
-
-                        // Draw grading system header background
-                        doc.setFillColor(255, 255, 255);
-                        doc.rect(bstartX, gradingSystemStartY + 5, gradingColumnWidth * gradingHeaders.length, gradingHeaderHeight, 'F'); // Background
-                        doc.rect(bstartX, gradingSystemStartY + 5, gradingColumnWidth * gradingHeaders.length, gradingHeaderHeight); // Border
-
-                        gradingHeaders.forEach((header, index) => {
-                            doc.text(header, bstartX + index * gradingColumnWidth + margin, gradingSystemStartY + 13); // Center header text
-                        });
-
-                        // Draw the grading system content
-                        gradingSystem.forEach((gradeInfo, index) => {
-                            const yPosition = gradingSystemStartY + 15 + (index + 1) * cellHeight;
-
-                            // Grade Range
-                            doc.text(gradeInfo.range, bstartX + margin, yPosition);
-
-                            // Remarks
-                            doc.text(gradeInfo.remark, bstartX + gradingColumnWidth + margin, yPosition);
-                        });
-
-                        // Optional: Draw a border around the grading system table
-                        const gradingBottomY = gradingSystemStartY + 15 + (gradingSystem.length + 1) * cellHeight;
-                        doc.setLineWidth(0.5);
-                        doc.rect(bstartX, gradingSystemStartY + 5, gradingColumnWidth * gradingHeaders.length, gradingBottomY - (gradingSystemStartY + 5));
-
-
-                        // Calculate average and remark
-                        const average = (totalGrades / subjects.length).toFixed(2);
-                        const remark = (average >= 75) ? 'Passed' : 'Failed';
-
-                        // Add average and remark to the PDF
-                        const averageStartY = startY + headerHeight + (subjects.length + 2) * cellHeight; // Position below the table
-                        doc.setFontSize(10);
-                        doc.text(`${gradeKey}, ${quarter} Average: ${average}`, leftColumnX, astartY + 75);
-                        doc.text(`Remark: ${remark}`, rightColumnX, astartY + 75); // Positioned 10 units below the average
-
-                        // Draw the bottom border of the table
-                        const bottomY = startY + headerHeight + (subjects.length + 1) * cellHeight;
-                        doc.setLineWidth(0.5);
-                        doc.rect(bstartX, startY, columnWidth * headers.length, bottomY - startY);
-
-                        // Save the PDF
-                        doc.save(`grades_report-${gradeKey}-${quarter}.pdf`);
-                    } else {
-                        alert('No grade record found for this selection.');
-                    }
-                } else {
-                    const alert = document.getElementById('alert');
-
-                    alert.classList.add('p-3');
-                    alert.classList.add('border');
-                    alert.classList.add('border-red-500');
-                    alert.innerHTML = 'Please select a grade and quarter before downloading.';
-
-                    setTimeout(function () {
-                        alert.innerHTML = '';
-                        alert.classList.remove('p-3');
-                        alert.classList.remove('border');
-                        alert.classList.remove('border-red-500');
-                    }, 3000);
-                }
-            });
-        });
-
-        function fetchGrades() {
-    $.ajax({
-        url: '{{ route("showquarterlyGrades") }}',
-        type: 'POST',
-        data: { _token: '{{ csrf_token() }}' },
-        success: function (response) {
-            console.log("API Response:", response); // Debugging log
-
-            const gradesSelect = $('#gradesSelect');
-            gradesSelect.empty().append('<option value="">Select Your Quarterly Grade</option>');
-
-            if (!response || Object.keys(response).length === 0 || response.error) {
-                alert("No grades available for this student.");
-                return;
-            }
-
-            window.gradeData = {};
-
-            $.each(response, function (quarterKey, subjects) {
-                if ($.isEmptyObject(subjects)) return; // Skip empty quarters
-
-                window.gradeData[quarterKey] = subjects;
-
-                gradesSelect.append(`<option value="${quarterKey}">${quarterKey.replace('_', ' ')}</option>`);
-            });
-
-            $('#gradesContainer').show();
-        },
-        error: function (xhr) {
-            console.log("XHR Error:", xhr); // Debugging log
-            const error = xhr.responseJSON?.error || 'An error occurred. Please try again.';
-            alert(error);
-        }
-    });
-}
-
-// Display selected grade details
-$('#gradesSelect').change(function () {
-    const selectedQuarter = $(this).val();
-    const subjects = window.gradeData[selectedQuarter] || {};
-
-    let detailsHtml = `<h4>${selectedQuarter}</h4><ul>`;
-    $.each(subjects, function (subject, grade) {
-        detailsHtml += `<li>${subject}: ${grade}</li>`;
-    });
-    detailsHtml += `</ul>`;
-
-    $('#gradeDetails').html(detailsHtml);
-});
-
-
-        function displayGradeDetails(gradeRecord) {
-            let gradesHtml = '';
-
-            if (!gradeRecord) {
-                gradesHtml += '<p class="text-red-500 text-[15px]">No grades found for this grade and quarter.</p>';
-            } else {
-                // Get the cgradeKey (e.g., 'grade_one', 'grade_two')
-                const cgradeKey = gradeRecord.cgradeKey;
-
-                // Map of subjects for each grade
-                // Map of subjects for each grade
-                const subjectsMap = {
-                    'grade_one': [
-                        { name: 'Reading and Literacy', grade: gradeRecord.subject_one || 'N/A' },
-                        { name: 'Language', grade: gradeRecord.subject_two || 'N/A' },
-                        { name: 'Mathematics', grade: gradeRecord.subject_three || 'N/A' },
-                        { name: 'GMRC', grade: gradeRecord.subject_four || 'N/A' },
-                        { name: 'Makabansa', grade: gradeRecord.subject_five || 'N/A' },
-                    ],
-                    'grade_two': [
-                        { name: 'Addition and Subtraction', grade: gradeRecord.subject_one || 'N/A' },
-                        { name: 'Reading Comprehension', grade: gradeRecord.subject_two || 'N/A' },
-                        { name: 'Introduction to Science', grade: gradeRecord.subject_three || 'N/A' },
-                        { name: 'Creative Writing', grade: gradeRecord.subject_four || 'N/A' },
-                        { name: 'Community Helpers', grade: gradeRecord.subject_five || 'N/A' },
-                        { name: 'Basic Geography', grade: gradeRecord.subject_six || 'N/A' },
-                        { name: 'Art Techniques', grade: gradeRecord.subject_seven || 'N/A' },
-                        { name: 'Music Appreciation', grade: gradeRecord.subject_eight || 'N/A' },
-                        { name: 'Physical Fitness', grade: gradeRecord.subject_nine || 'N/A' },
-                    ],
-                    'grade_three': [
-                        { name: 'Multiplication and Division', grade: gradeRecord.subject_one || 'N/A' },
-                        { name: 'Reading Fluency', grade: gradeRecord.subject_two || 'N/A' },
-                        { name: 'Life Science', grade: gradeRecord.subject_three || 'N/A' },
-                        { name: 'Creative Writing', grade: gradeRecord.subject_four || 'N/A' },
-                        { name: 'History Basics', grade: gradeRecord.subject_five || 'N/A' },
-                        { name: 'Geometry', grade: gradeRecord.subject_six || 'N/A' },
-                        { name: 'Art History', grade: gradeRecord.subject_seven || 'N/A' },
-                        { name: 'Music Theory', grade: gradeRecord.subject_eight || 'N/A' },
-                        { name: 'Team Sports', grade: gradeRecord.subject_nine || 'N/A' },
-                    ],
-                    'grade_four': [
-                        { name: 'Fractions and Decimals', grade: gradeRecord.subject_one || 'N/A' },
-                        { name: 'Reading Analysis', grade: gradeRecord.subject_two || 'N/A' },
-                        { name: 'Physical Science', grade: gradeRecord.subject_three || 'N/A' },
-                        { name: 'Research Skills', grade: gradeRecord.subject_four || 'N/A' },
-                        { name: 'World Geography', grade: gradeRecord.subject_five || 'N/A' },
-                        { name: 'Civics', grade: gradeRecord.subject_six || 'N/A' },
-                        { name: 'Art Projects', grade: gradeRecord.subject_seven || 'N/A' },
-                        { name: 'Music Composition', grade: gradeRecord.subject_eight || 'N/A' },
-                        { name: 'Fitness and Health', grade: gradeRecord.subject_nine || 'N/A' },
-                    ],
-                    'grade_five': [
-                        { name: 'Advanced Math', grade: gradeRecord.subject_one || 'N/A' },
-                        { name: 'Literature Study', grade: gradeRecord.subject_two || 'N/A' },
-                        { name: 'Earth Science', grade: gradeRecord.subject_three || 'N/A' },
-                        { name: 'Writing Essays', grade: gradeRecord.subject_four || 'N/A' },
-                        { name: 'U.S. History', grade: gradeRecord.subject_five || 'N/A' },
-                        { name: 'Map Skills', grade: gradeRecord.subject_six || 'N/A' },
-                        { name: 'Art Critique', grade: gradeRecord.subject_seven || 'N/A' },
-                        { name: 'Cultural Music', grade: gradeRecord.subject_eight || 'N/A' },
-                        { name: 'Sports Science', grade: gradeRecord.subject_nine || 'N/A' },
-                    ],
-                    'grade_six': [
-                        { name: 'Pre-Algebra', grade: gradeRecord.subject_one || 'N/A' },
-                        { name: 'Advanced Literature', grade: gradeRecord.subject_two || 'N/A' },
-                        { name: 'Biology', grade: gradeRecord.subject_three || 'N/A' },
-                        { name: 'Creative Non-Fiction', grade: gradeRecord.subject_four || 'N/A' },
-                        { name: 'World History', grade: gradeRecord.subject_five || 'N/A' },
-                        { name: 'Geography Skills', grade: gradeRecord.subject_six || 'N/A' },
-                        { name: 'Art Techniques', grade: gradeRecord.subject_seven || 'N/A' },
-                        { name: 'Music History', grade: gradeRecord.subject_eight || 'N/A' },
-                        { name: 'Health Education', grade: gradeRecord.subject_nine || 'N/A' },
-                    ],
-                };
-
-
-                // Fetch subjects based on cgradeKey
-                const subjects = subjectsMap[cgradeKey] || [];
-
-                gradesHtml += `
-                    <div class="rounded-lg p-4 bg-white">
-                        <p class="text-gray-900 font-semibold text-[14px]">Quarter: (${cgradeKey} ${gradeRecord.quarter})</p>
-                        <table class="min-w-full mt-2 border-collapse text-gray-900 text-[13px] shadow-lg">
-                            <thead class="text-start">
-                                <tr class="bg-gray-100">
-                                <th class="border px-4 py-2 text-start ">Subject</th>
-                                <th class="border px-4 py-2 text-start ">Grade</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-        `;
-
-                subjects.forEach(({ name, grade }) => {
-                    gradesHtml += `
-                <tr>
-                    <td class="border px-4 py-2">${name}</td>
-                    <td class="border px-4 py-2">${grade || 'N/A'}</td>
-                </tr>
-            `;
-                });
-
-                gradesHtml += `
-                </tbody>    
-            </table>
-        </div>
-        `;
-            }
-
-            $('#grades').html(gradesHtml);
-            $('#gradesContainer').show();
-        }
-
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="{{ asset('../js/admin/admin.js') }}" type="text/javascript"></script>
+    @include('admin.includes.js-link')
+    <script src="{{ asset('../js/student/studentgrade.js') }}" type="text/javascript"></script>
 </body>
+
+<style>
+    .active1 {
+        background-color: #115e59;
+        color: white;
+        font-weight: bold;
+        transform: scale(1.030);
+    }
+</style>
 
 </html>

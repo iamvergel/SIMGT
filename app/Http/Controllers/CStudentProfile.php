@@ -191,36 +191,7 @@ class CStudentProfile extends Controller
         // Fetch student grades based on student_number
         $grades = StudentFinalGrade::where('student_number', $student->student_number)->get();
 
-        // Organize grades by quarter
-        $formattedGrades = [];
 
-        foreach ($grades as $record) {
-            $gradeLevel = "Grade {$record->grade}";
-
-            $quarters = [
-                '1st Quarter' => $record->first_quarter_grade,
-                '2nd Quarter' => $record->second_quarter_grade,
-                '3rd Quarter' => $record->third_quarter_grade,
-                '4th Quarter' => $record->fourth_quarter_grade,
-                'Final Grade' => $record->final_grade
-            ];
-
-            foreach ($quarters as $quarter => $grade) {
-                if (!is_null($grade)) {
-                    $key = "{$gradeLevel} = {$quarter}";
-                    if (!isset($formattedGrades[$key])) {
-                        $formattedGrades[$key] = [];
-                    }
-                    $formattedGrades[$key][$record->subject] = $grade;
-                }
-            }
-        }
-
-        // If no grades found, return an empty response
-        if (empty($formattedGrades)) {
-            return response()->json(['error' => 'No grades available for this student.']);
-        }
-
-        return response()->json($formattedGrades);
+        return view('student.student_grades_new', compact('grades'));
     }
 }

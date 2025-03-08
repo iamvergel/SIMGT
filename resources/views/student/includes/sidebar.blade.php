@@ -66,7 +66,7 @@
         }
 
         #sidebar {
-            scrollbar-width: none;
+            scrollbar-width: thin;
             scrollbar-color: #4b8b8a #2d7a7a;
             overflow-x: hidden;
         }
@@ -253,18 +253,8 @@
 
             <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">STUDENT GRADES</p>
 
-            <a href="/StEmelieLearningCenter.HopeSci66/student/gradesnew"
+            <a href="/StEmelieLearningCenter.HopeSci66/student/student-grade"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip mt-2"
-                id="dashboardLink">
-                <i class="fa-solid fa-file"></i>
-                <span class="sidebar-text ml-2">
-                    Student Grades New</span>
-                <span
-                    class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
-            </a>
-
-            <a href="/StEmelieLearningCenter.HopeSci66/student/grades"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
                 id="dashboardLink">
                 <i class="fa-solid fa-file"></i>
                 <span class="sidebar-text ml-2">
@@ -273,32 +263,27 @@
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>
 
-            <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">ENROLLMENT</p>
-            <button
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md tooltip mt-2"
-                id="studentManagementButton3" aria-expanded="false" aria-controls="collapse3">
+            <a href="/StEmelieLearningCenter.HopeSci66/student/grades"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip hidden"
+                id="dashboardLink">
                 <i class="fa-solid fa-file"></i>
-                <span class="sidebar-text ml-2">Enrollment</span>
-                <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px]"></i></p>
+                <span class="sidebar-text ml-2">
+                    Student Grades</span>
                 <span
-                    class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[8px] p-1 font-bold">Enrollment</span>
-            </button>
-            <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-2 px-2" id="collapse3">
-                <a href="#"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-5 tooltip">
+                    class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
+            </a>
+
+            <div id="registrationLink" class="block" style="display: none;">
+                <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">Registration</p>
+                <a href="/StEmelieLearningCenter.HopeSci66/student/registration"
+                    class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip MT-2"
+                    id="dashboardLink">
                     <i class="fa-solid fa-file"></i>
-                    <span class="sidebar-text ml-2">Current Enrollment</span>
+                    <span class="sidebar-text ml-2">
+                        Registration
+                    </span>
                     <span
-                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Current
-                        <br /> Enrollment</span>
-                </a>
-                <a href="#"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip">
-                    <i class="fa-solid fa-file"></i>
-                    <span class="sidebar-text ml-2">Dropped Student</span>
-                    <span
-                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Upcomming
-                        <br /> Enrollment</span>
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
                 </a>
             </div><br /><br /><br />
 
@@ -390,18 +375,18 @@
             </a>
 
             <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">STUDENT GRADES</p>
-            <a href="/StEmelieLearningCenter.HopeSci66/student/gradesnew"
+            <a href="/StEmelieLearningCenter.HopeSci66/student/student-grade"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip mt-2"
                 id="dashboardLink">
                 <i class="fa-solid fa-file"></i>
                 <span class="sidebar-text ml-2">
-                    Student Grades New</span>
+                    Student Grades</span>
                 <span
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>
 
             <a href="/StEmelieLearningCenter.HopeSci66/student/grades"
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
+                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip hidden"
                 id="dashboardLink">
                 <i class="fa-solid fa-file"></i>
                 <span class="sidebar-text ml-2">
@@ -551,6 +536,19 @@
                 }
             });
         });
+
+        fetch('/api/registration-button')
+            .then(response => response.json())
+            .then(data => {
+                // Check if the registration status is 'Active'
+                if (data[0] && data[0].status === 'Active') {
+                    // Display the registration link if Active
+                    document.getElementById('registrationLink').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching registration status:', error);
+            });
     </script>
 
 </html>

@@ -356,7 +356,7 @@
         background-color: #115e59;
         color: white;
         font-weight: bold;
-        transform: scale(1.1);
+        transform: scale(1.030);
     }
 
     /* Ensure the table container takes full width */

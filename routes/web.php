@@ -246,9 +246,11 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         return view('student.student_grades');
     });
 
-    Route::get('/StEmelieLearningCenter.HopeSci66/student/gradesnew', function () {
+    Route::get('/StEmelieLearningCenter.HopeSci66/student/student-grade', function () {
         return view('student.student_grades_new');
     });
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/student/student-grade', [CStudentProfile::class, 'showStudentGrades'])->name('student.gradesnew');
 
     Route::post('/update-avatar', [TeacherProfile::class, 'updateprofile'])->name('teacher.update-avatar');
     Route::post('/student/update-avatar', [CStudentProfile::class, 'update'])->name('student.update-avatar');

@@ -43,7 +43,7 @@
                                             <div class="mt-5 text-[12px] w-full">
                                                 <ul
                                                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-8 gap-1 xl:gap-1 bg-gray-50 p-0 m-0">
-                                                    <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 active1"
+                                                    <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5 active1 rounded-lg m-1 xl:rounded-lg xl:m-1"
                                                         data-target="#Information"> Information</li>
                                                     <!-- <li class="cursor-pointer text-white bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 rounded-t-lg px-5"
                                                                                                                         data-target="#documents">Documents</li> -->
@@ -663,6 +663,8 @@
     .active1 {
         background-color: #115e59;
         color: white;
+        font-weight: bold;
+        transform: scale(1.030);
     }
 
     /* Ensure the table container takes full width */

@@ -252,7 +252,7 @@ class Clogin extends Controller
 
             $documents = StudentDocuments::where('student_number', $student->student_number)->first();
 
-            $primary = StudentPrimaryInfo::where('studentnumber', $student->student_number)->first();
+            $primary = StudentPrimaryInfo::where('studentnumber', $student->student_number)->where('status', 'Enrolled')->first();
 
             if ($primary) {
                 $request->session()->put('student_numbera', $primary->studentnumber);

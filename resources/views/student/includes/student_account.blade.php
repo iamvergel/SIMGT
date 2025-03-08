@@ -10,7 +10,7 @@
 @endphp
 
 <div class="p-2 shadow-lg">
-    <div class="header py-5 bg-teal-700 mt-2 px-5 text-white font-bold text-[15px] rounded-lg shadow-lg">
+    <div class="header py-5 bg-teal-800 mt-2 px-5 text-white font-bold text-[15px] rounded-lg shadow-lg">
         <p><i class="fas fa-user mr-2"></i>Account</p>
     </div>
 
@@ -20,7 +20,7 @@
             <p>Display Profile</p>
             <div class="block lg:w-96">
                 <div class="flex justify-center items-center lg:justify-center">
-                    <div class="mt-10 w-32 h-32 border-4 border-white bg-teal-600 rounded-full flex items-center justify-center text-white text-4xl font-semibold transition-all duration-300 shadow-lg"
+                    <div class="mt-10 w-32 h-32 border-4 border-white bg-teal-700 rounded-full flex items-center justify-center text-white text-4xl font-semibold transition-all duration-300 shadow-lg"
                         id="profile">
                         @if ($avatarPath !== null)
                             <div class="relative">
@@ -39,7 +39,7 @@
 
                         @else
                             <div id="avatar-div"
-                                class="flex items-center justify-center w-full h-full rounded-full @if ($avatarPath !== null) bg-cover @else bg-teal-600 @endif"
+                                class="flex items-center justify-center w-full h-full rounded-full @if ($avatarPath !== null) bg-cover @else bg-teal-700 @endif"
                                 style="@if ($avatarPath !== null) background-image: url('{{ $avatarPath }}'); background-size: cover; background-position: center; @endif">
                                 <span class="text-white">{{ $initials }}</span> <!-- Display initials if avatar is null -->
                             </div>
@@ -56,16 +56,20 @@
                     <input type="file" name="avatar" accept="image/*" id="avatar-input"
                         onchange="handleFileInput(event)" class="sr-only">
 
-                    <button type="button" onclick="document.getElementById('avatar-input').click()"
-                        class="bg-teal-600 mt-10 w-full py-3 text-center rounded-full text-white hover:bg-teal-800 focus:outline-none"
-                        id="buttonClick">
-                        Choose Image
-                    </button>
-                    <button type="submit"
-                        class="bg-teal-600 mt-2 w-full py-3 text-center rounded-full text-white hover:bg-teal-800"
-                        id="buttonClick">
-                        Update Avatar
-                    </button>
+                    <div class="flex justify-center align-center">
+                        <div class=" mt-10 grid grid-cols-1 w-96 md:grid-cols-2 xl:px-2">
+                            <button type="button" onclick="document.getElementById('avatar-input').click()"
+                                class="text-[12px] text-white shadow-lg bg-sky-700 rounded-full shadow hover:bg-sky-600 px-3 mt-3 me-2"
+                                id="buttonClick">
+                                <i class="fa-solid fa-image me-1"></i> Choose Image
+                            </button>
+                            <button type="submit"
+                                class="text-[12px] text-white shadow-lg bg-teal-700 rounded-full shadow hover:bg-teal-600 px-3 mt-3 me-2"
+                                id="buttonClick">
+                                <i class="fa-solid fa-pen-to-square me-1"></i> Update Avatar
+                            </button>
+                        </div>
+                    </div>
 
                     <p class="rounded-md mt-5" id="alert"></p>
                 </form>
@@ -75,7 +79,7 @@
         <div class="accountInfo mt-10 text-[15px] text-teal-900 p-5 shadow-lg font-semibold">
             <p class="mb-3"> {{ session('student_id') }}</p>
             <p class="mb-3"> {{ $firstName . ' ' . $middleName . ' ' . $lastName }}</p>
-            <p class="mb-3">{{ session('grade') . ' - ' . session('section')}}</p>
+            <p class="mb-3">{{ session('gradea') . ' - ' . session('sectiona')}}</p>
         </div>
 
         <div class="form text-[15px] text-teal-900 mt-10">
@@ -329,13 +333,13 @@
             const formData = new FormData(form);
 
 
-                fetch('{{ route('student.update-avatar', [], false) }}', {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        }
-                })
+            fetch('{{ route('student.update-avatar', [], false) }}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
                 .then(response => response.json())
                 .then(data => {
                     if (data.avatar) {

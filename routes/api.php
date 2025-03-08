@@ -9,6 +9,7 @@ use App\Http\Controllers\Cevent;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherAdvisoryController;
+use App\Http\Controllers\RegistrationButtonController;
 
 Route::prefix('images')->group(function () {
     Route::get('/', [ImageController::class, 'index']);         // Get all images
@@ -37,3 +38,5 @@ Route::get('/allteachers', [TeacherAdvisoryController::class, 'getAllAdviserByGr
 
 // routes/api.php
 // Route::get('/teacher/subjects', [TeacherAdvisoryController::class, 'getTeacherClassSubject']);
+
+Route::apiResource('registration-button', RegistrationButtonController::class);
