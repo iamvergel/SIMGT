@@ -23,7 +23,7 @@
 </head>
 
 <body class="bg-teal-700 flex items-center justify-center min-h-screen">
-    @yield('content');
+    @yield('content')
 
     <img class="rounded-full logo mt-3 w-[150px] lg:w-[200px]" src="{{ asset('../assets/images/SELC.png') }}"
         alt="logo">

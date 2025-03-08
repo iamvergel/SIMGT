@@ -331,7 +331,7 @@
         <div class="flex items-center justify-center max-h-1/4 p-4 border-b border-b-teal-600 mt-10">
             <div class="flex flex-col items-center justify-center h-full p-4 bg-teal-600 rounded-xl w-56 shadow-lg"
                 id="account">
-                <div class="mt-5 w-20 h-20 border-4 border-white bg-gray-600 rounded-full flex items-center justify-center text-white text-4xl font-semibold transition-all duration-300 shadow-lg"
+                <div class="mt-5 w-20 h-20 border-4 border-white bg-teal-700 rounded-full flex items-center justify-center text-white text-4xl font-semibold transition-all duration-300 shadow-lg"
                     id="profile">
                     @if ($avatarPath !== null)
                         <img id="avatar-img3" src="{{ $avatarPath }}" alt="{{ $firstName }}'s Profile Picture"

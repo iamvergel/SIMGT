@@ -79,7 +79,7 @@
                                 <p class="text-red-600 text-center text-md">{{ $noDroppedMessage }}</p>
                             @else
                                 <div class="table-responsive p-5">
-                                <table id="studentTable" class="display w-full p-5">
+                                <table id="studentTable" class="p-3 display responsive nowrap" width="100%">
                                     <thead class="table-header bg-gray-100">
                                         <tr class="text-md font-semibold tracking-wide text-left uppercase border">
                                             <th class="px-4 py-3">Student Number</th>

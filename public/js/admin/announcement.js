@@ -13,7 +13,7 @@ $(document).ready(function () {
         searching: false,
         ordering: true,
         info: true,
-        scrollY: "600px",
+        scrollY: 600,
     });
 
     $("#announcements_body").summernote({

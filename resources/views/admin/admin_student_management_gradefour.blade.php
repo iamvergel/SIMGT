@@ -79,7 +79,7 @@
                     <div class="w-full bg-white overflow-hidden rounded-lg shadow-lg text-[12px]">
 
                             <div class="p-5">
-                                <table id="studentTable" class="p-3">
+                                <table id="studentTable" class="p-3 display responsive nowrap" width="100%">
                                     <thead class="bg-gray-200">
                                         <tr class="text-[14px] font-normal uppercase text-left text-black">
                                             <th class="hidden">Id</th>

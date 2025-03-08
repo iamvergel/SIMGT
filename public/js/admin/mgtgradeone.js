@@ -1,17 +1,22 @@
 var table = $("#studentTable").DataTable({
     dom:
-        ` <'flex justify-center items-center mb-4'<><'block xl:hidden'B><>>` +
+        `<'grid grid-cols-12 gap-4 mb-4'<><'col-span-12 md:col-span-10 lg:col-span-8 xl:col-span-6 block xl:hidden'B><>>` +
         `<tr>` +
-        `<'flex justify-center items-center mb-4'<'flex-3'l><'flex-1 xl:block hidden'B><'flex-1'f>>` +
+        `<'grid grid-cols-12 gap-4 mb-4'<'col-span-12 xl:col-span-3 xl:block hidden'l><'col-span-0 xl:col-span-6 xl:block 2xl:me-[15rem] hidden'B><'col-span-12 xl:col-span-3 xl:block hidden'f>>` +
         `<tr>` +
-        `<'flex justify-between items-center'<'flex-1'i><'flex-1'p>>`,
+        `<'grid grid-cols-12 gap-4 mb-4'<'col-span-12 md:col-span-6 md:block flex items-center justify-center xl:hidden'l><'col-span-12 md:col-span-6 md:block flex items-center justify-center xl:hidden'f>>` +
+        `<tr>` +
+        `<'grid grid-cols-12 gap-4'<'col-span-12 lg:block flex items-center justify-center lg:col-span-6'i><'col-span-12 lg:block flex items-center justify-center lg:col-span-6'p>>`,
     paging: true,
     searching: true,
     ordering: true,
     info: true,
     lengthChange: true,
     responsive: true,
-    scrollCollapse: true,
+    language: {
+        search: "_INPUT_",
+        searchPlaceholder: "Search",
+    },
     buttons: [
         {
             extend: "copyHtml5",

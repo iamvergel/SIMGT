@@ -99,34 +99,6 @@
     scrollbar-width: thin;
 }
 
-.fc .fc-daygrid-day.fc-day-today {
-    background-color: oklch(0.511 0.096 186.391 / 40%);
-}
-
-.fc-view-harness .fc-view-harness-active{
-    background-color: red;
-}
-
-.fc .fc-button-primary {
-    color: #fff;
-    color: var(--fc-button-text-color, #fff);
-    background-color: oklch(0.511 0.096 186.391);
-    border-color: oklch(0.437 0.078 188.216);
-}
-
-.fc .fc-button-primary:hover {
-    color: #fff;
-    color: var(--fc-button-text-color, #fff);
-    background-color: oklch(0.437 0.078 188.216);
-    border-color: oklch(0.437 0.078 188.216);
-}
-
-.fc .fc-button-primary:disabled {
-    color: #fff;
-    background-color: oklch(0.6 0.118 184.704);
-    border-color: oklch(0.6 0.118 184.704);
-}
-
 .fc-toolbar {
     font-size: 9px;
     font-weight: 700;
@@ -173,6 +145,36 @@
 /* Optionally, you can change specific buttons */
 .fc-prev-button {
     background-color: #ff5722; /* Example: orange for prev button */
+}
+
+.dataTables_length select {
+    font-size: 14px;
+}
+.dataTables_paginate {
+    font-size: 14px;
+}
+.dataTables_filter {
+    font-size: 14px;
+}
+.dataTables_length {
+    font-size: 14px;
+}
+.dataTables_info {
+    font-size: 14px;
+}
+
+.dataTables_filter input {
+    width: 200px;
+    font-size: 14px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.dataTables_filter label {
+    font-size: 14px;
+    margin-right: 10px;
 }
 
 .dropdown {
@@ -242,97 +244,96 @@
     /* Example: blue for next button */
 }
 
-.dataTables_wrapper .dataTables_paginate {
-    margin-top: 0.5rem;
-}
-
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-    border-radius: 10%;
-    color: white !important;
-    background: oklch(0.6 0.118 184.704);
-    line-height: 1.5;
-}
-
-.dataTables_wrapper .dataTables_length {
-    color: oklch(0.437 0.078 188.216) !important;
-    font-size: 12px;
-}
-
-.dataTables_wrapper .dataTables_length select{
-    border: solid 1px oklch(0.437 0.078 188.216) !important;
-}
-
-.dataTables_wrapper .dataTables_filter input {
-    border: 1px solid oklch(0.437 0.078 188.216) !important;
-    border-radius: 3px;
-    padding: 5px;
-    background-color: transparent;
-    margin-left: 3px;
-    color: oklch(0.437 0.078 188.216) !important;
-}
-
-.dataTables_wrapper .dataTables_info {
-    color: oklch(0.437 0.078 188.216) !important;
+.dataTables_filter input {
+    width: 200px;
     font-size: 14px;
-    margin-top: 0.5rem;
-    font-weight: 500;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
 }
 
-.dataTables_wrapper .dataTables_paginate #studentTable_next.disabled {
+.dataTables_filter label {
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.dropdown {
+    display: none;
+}
+
+.dropdown-active {
+    display: block;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .dataTables_wrapper .dataTables_paginate .paginate_button {
     border-radius: 10%;
-    color: oklch(0.511 0.096 186.391) !important;
+    color: white  !important;
+    background: oklch(0.6 0.118 184.704);
+  }   
+
+  .dataTables_wrapper .dataTables_paginate #studentTable_next.disabled {
+    border-radius: 10%;
+    color: oklch(0.511 0.096 186.391)  !important;
     background: transparent;
-}
+  }
 
-.dataTables_wrapper .dataTables_paginate #studentTable_next.disabled:hover {
+  .dataTables_wrapper .dataTables_paginate #studentTable_next.disabled:hover {
     border-radius: 10%;
-    color: oklch(0.511 0.096 186.391) !important;
+    color: oklch(0.511 0.096 186.391)  !important;
     background: transparent;
-}
+  }
 
-.dataTables_wrapper .dataTables_paginate #studentTable_next {
+  .dataTables_wrapper .dataTables_paginate #studentTable_next{
     border-radius: 10%;
-    color: white !important;
+    color: white  !important;
     background: oklch(0.511 0.096 186.391);
-}
+  }  
 
-.dataTables_wrapper .dataTables_paginate #studentTable_next:hover {
+  .dataTables_wrapper .dataTables_paginate #studentTable_next:hover{
     border-radius: 10%;
-    color: white !important;
+    color: white  !important;
     background: oklch(0.437 0.078 188.216);
-}
+  } 
 
-.dataTables_wrapper .dataTables_paginate #studentTable_previous.disabled {
+  .dataTables_wrapper .dataTables_paginate #studentTable_previous.disabled {
     border-radius: 10%;
-    color: oklch(0.511 0.096 186.391) !important;
+    color: oklch(0.511 0.096 186.391)  !important;
     background: transparent;
-}
+  }  
 
-.dataTables_wrapper .dataTables_paginate #studentTable_previous.disabled:hover {
+  .dataTables_wrapper .dataTables_paginate #studentTable_previous.disabled:hover {
     border-radius: 10%;
-    color: oklch(0.511 0.096 186.391) !important;
+    color: oklch(0.511 0.096 186.391)  !important;
     background: transparent;
-}
+  }
 
-.dataTables_wrapper .dataTables_paginate #studentTable_previous:hover {
+  .dataTables_wrapper .dataTables_paginate #studentTable_previous:hover{
     border-radius: 10%;
-    color: white !important;
+    color: white  !important;
     background: oklch(0.437 0.078 188.216);
-}
+  } 
 
-.dataTables_wrapper .dataTables_paginate #studentTable_previous {
+  .dataTables_wrapper .dataTables_paginate #studentTable_previous{
     border-radius: 10%;
-    color: white !important;
+    color: white  !important;
     background: oklch(0.511 0.096 186.391);
-}
-
-.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  }  
+  
+  .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
     border-radius: 10%;
-    color: white !important;
+    color: white  !important;
     background: oklch(0.511 0.096 186.391);
-}
+  }   
 
-.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  .dataTables_wrapper .dataTables_paginate .paginate_button.current {
     height: 30px;
     width: 30px;
     text-align: center;
@@ -340,65 +341,61 @@
     font-weight: 500;
     border: none;
     background: oklch(0.511 0.096 186.391);
-}
+  }
 
-.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
     height: 30px;
     width: 30px;
     text-align: center;
     color: white !important;
     background: oklch(0.437 0.078 188.216);
     font-weight: bold;
-}
+  }
 
-.dataTables_wrapper .dataTables_paginate #announcementTable_next.disabled {
+  .dataTables_wrapper .dataTables_paginate #announcementTable_next.disabled {
     border-radius: 10%;
-    color: oklch(0.511 0.096 186.391) !important;
+    color: oklch(0.511 0.096 186.391)  !important;
     background: transparent;
-}
+  }
 
-.dataTables_wrapper
-    .dataTables_paginate
-    #announcementTable_next.disabled:hover {
+  .dataTables_wrapper .dataTables_paginate #announcementTable_next.disabled:hover {
     border-radius: 10%;
-    color: oklch(0.511 0.096 186.391) !important;
+    color: oklch(0.511 0.096 186.391)  !important;
     background: transparent;
-}
+  }
 
-.dataTables_wrapper .dataTables_paginate #announcementTable_next {
+  .dataTables_wrapper .dataTables_paginate #announcementTable_next{
     border-radius: 10%;
-    color: white !important;
+    color: white  !important;
     background: oklch(0.511 0.096 186.391);
-}
+  }  
 
-.dataTables_wrapper .dataTables_paginate #announcementTable_next:hover {
+  .dataTables_wrapper .dataTables_paginate #announcementTable_next:hover{
     border-radius: 10%;
-    color: white !important;
+    color: white  !important;
     background: oklch(0.437 0.078 188.216);
-}
+  } 
 
-.dataTables_wrapper .dataTables_paginate #announcementTable_previous.disabled {
+  .dataTables_wrapper .dataTables_paginate #announcementTable_previous.disabled {
     border-radius: 10%;
-    color: oklch(0.511 0.096 186.391) !important;
+    color: oklch(0.511 0.096 186.391)  !important;
     background: transparent;
-}
+  }  
 
-.dataTables_wrapper
-    .dataTables_paginate
-    #announcementTable_previous.disabled:hover {
+  .dataTables_wrapper .dataTables_paginate #announcementTable_previous.disabled:hover {
     border-radius: 10%;
-    color: oklch(0.511 0.096 186.391) !important;
+    color: oklch(0.511 0.096 186.391)  !important;
     background: transparent;
-}
+  }
 
-.dataTables_wrapper .dataTables_paginate #announcementTable_previous:hover {
+  .dataTables_wrapper .dataTables_paginate #announcementTable_previous:hover{
     border-radius: 10%;
-    color: white !important;
+    color: white  !important;
     background: oklch(0.437 0.078 188.216);
-}
+  } 
 
-.dataTables_wrapper .dataTables_paginate #announcementTable_previous {
+  .dataTables_wrapper .dataTables_paginate #announcementTable_previous{
     border-radius: 10%;
-    color: white !important;
+    color: white  !important;
     background: oklch(0.511 0.096 186.391);
-}
+  }  

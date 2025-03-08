@@ -86,7 +86,7 @@
                 </button>
               </div>
 
-              <div class="bg-white h-96 xl:h-[700px] shadow-lg border-t-4 border-b-4 border-teal-700" id="announcementPicture">
+              <div class="bg-white h-[730px] xl:h-[730px] shadow-lg border-t-4 border-b-4 border-teal-700" id="announcementPicture">
                 <div class="w-full h-full border-4 border-teal-50 rounded-lg">
                     <div class="table-responsive">
                         @if($announcements->isEmpty())
@@ -105,7 +105,7 @@
                               </table>
                             </div>
                         @else
-                            <table id="announcementTable" class="display">
+                            <table id="announcementTable" class="p-3 display responsive nowrap" width="100%">
                                 <thead class="table-header bg-gray-100">
                                     <tr class="text-sm tracking-wide text-left uppercase">
                                         <th class="">Announcement</th>
@@ -332,7 +332,7 @@
             </div>
 
 
-            <div class="bg-white col-span-3 lg:col-span-1">
+            <div class="bg-white col-span-3 mt-[2rem] lg:mt-0 lg:col-span-1">
               <!-- <div class="bg-yellow-100 p-2 rounded-lg shadow-lg text-center mb-5">
                 <h2 class="text-md font-bold text-yellow-900">
                   <i class="fas fa-bullhorn text-yellow-900 mr-2"></i>Announcements <br /> History

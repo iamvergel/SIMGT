@@ -36,7 +36,7 @@
     }
 </style>
 
-<nav class="bg-teal-700 flex items-center justify-between flex-wrap p-3 pb-5 lg:pb-5 lg:rounded-tr-lg shadow-lg z-[2]"
+<nav class="bg-teal-800 flex items-center justify-between flex-wrap p-3 pb-5 lg:pb-5 shadow-lg z-[2]"
     id="header">
     <div class="flex items-center justify-end w-full">
         <div class="flex text-right mr-2 mb-2 text-white ml-auto text-[12px] font-normal lg:hidden">
@@ -60,13 +60,13 @@
                 class="absolute text-teal-900 left-0 py-5 text-[12px] right-0 shadow-lg bg-white rounded-lg rounded-t-none z-10 max-h-96 overflow-y-scroll hidden">
             </div>
         </div>
-        <div class="ml-7 lg:hidden border-2 border-teal-100 w-[40px] h-[40px] bg-gray-600 rounded-full flex items-center justify-center text-white text-md font-semibold transition-all duration-300 shadow-lg"
+        <div class="ml-7 lg:hidden border-2 border-teal-100 w-[40px] h-[40px] bg-teal-600 rounded-full flex items-center justify-center text-white text-md font-semibold transition-all duration-300 shadow-lg"
             id="profile">
             @if ($avatarPath !== null)
         <img id="avatar-img4" src="{{ $avatarPath }}" alt="{{ $firstName }}'s Profile Picture"
              class="rounded-full w-full h-full object-cover">
     @else
-        <div class="flex items-center justify-center w-full h-full bg-gray-500 rounded-full">
+        <div class="flex items-center justify-center w-full h-full bg-teal-600 rounded-full">
             <span class="text-white">{{ $initials }}</span> <!-- Display initials if avatar is null -->
         </div>
     @endif
@@ -77,13 +77,13 @@
         <div class="currentDate"></div>
     </div>
     <div class="hidden lg:block px-0">
-        <div class="ml-5 border-2 border-teal-100 w-[50px] h-[50px] bg-gray-600 rounded-full flex items-center justify-center text-white text-2xl font-semibold transition-all duration-300 shadow-lg"
+        <div class="ml-5 border-2 border-teal-100 w-[50px] h-[50px] bg-teal-600 rounded-full flex items-center justify-center text-white text-2xl font-semibold transition-all duration-300 shadow-lg"
             id="profile">
             @if ($avatarPath !== null)
         <img id="avatar-img5" src="{{ $avatarPath }}" alt="{{ $firstName }}'s Profile Picture"
              class="rounded-full w-full h-full object-cover">
     @else
-        <div class="flex items-center justify-center w-full h-full bg-gray-500 rounded-full">
+        <div class="flex items-center justify-center w-full h-full bg-teal-600 rounded-full">
             <span class="text-white">{{ $initials }}</span> <!-- Display initials if avatar is null -->
         </div>
     @endif
