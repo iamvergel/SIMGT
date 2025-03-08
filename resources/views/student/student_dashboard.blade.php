@@ -1,127 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>St. Emilie Learning Center</title>
-  <link rel="shortcut icon" href="{{ asset('../assets/images/SELC.png') }}" type="image/x-icon"
-    style="border-radius: 50%;">
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-
-  <script src="https://kit.fontawesome.com/20a0e1e87d.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
-
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-
-  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.0/css/buttons.dataTables.min.css">
-
-  <link href="https://cdn.jsdelivr.net/npm/glightbox@3.0.5/dist/css/glightbox.min.css" rel="stylesheet">
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-      scroll-behavior: smooth;
-      scrollbar-width: thin;
-    }
-
-
-    .fc-toolbar {
-      font-size: 9px;
-      font-weight: 700;
-      color: #134e4a;
-    }
-
-    .fc-daygrid-day {
-      background-color: #f9f9f9;
-      border: 1px solid #ddd;
-    }
-
-    .fc-daygrid-event {
-      background-color: #0f766e;
-      color: #134e4a;
-      border-radius: 4px;
-      border: none;
-      padding: 5px;
-    }
-
-    .fc-daygrid-event:hover {
-      background-color: #115e59;
-    }
-
-    @media (min-width: 1024px) {
-      .fc-toolbar {
-        font-size: 15px;
-      }
-    }
-
-    /* Change background and text color of FullCalendar buttons */
-    .fc-button {
-      background-color: #4CAF50;
-      /* Green background */
-      color: white;
-      /* White text */
-      border-radius: 5px;
-      /* Optional: rounded corners */
-      padding: 10px 20px;
-      /* Optional: padding */
-    }
-
-    /* Change hover state of buttons */
-    .fc-button:hover {
-      background-color: #45a049;
-      /* Darker green */
-      color: white;
-    }
-
-    /* Optionally, you can change specific buttons */
-    .fc-prev-button {
-      background-color: #FF5722;
-      /* Example: orange for prev button */
-    }
-
-    .fc-next-button {
-      background-color: #2196F3;
-      /* Example: blue for next button */
-    }
-
-    .dataTables_filter input {
-      width: 200px;
-      font-size: 14px;
-      padding: 5px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      outline: none;
-    }
-
-    .dataTables_filter label {
-      font-size: 14px;
-      margin-right: 10px;
-    }
-
-    .dropdown {
-      display: none;
-    }
-
-    .dropdown-active {
-      display: block;
-    }
-  </style>
-</head>
+@include('student.includes.header')
 
 <body class="font-poppins bg-gray-200">
 
@@ -131,7 +8,7 @@
 
     <!-- Main Content -->
     <main class="flex-grow bg-white shadow-lg overflow-x-hidden overflow-y-scroll w-full bg-zinc-50">
-      @include('student.includes.header')
+      @include('student.includes.topnav')
 
       <div class="p-5 py-3">
         <p class="text-[15px] font-normal text-teal-900 mt-5">Student</p>
@@ -200,60 +77,85 @@
             </div>
           </div>
         </div>
-      
+
 
         <div class="col-span-2 lg:col-span-1 px-5 lg:px-20 relative overflow-hidden">
           <div class="bg-white text-teal-800 rounded-lg shadow-lg text-start mt-5 p-10 border">
-            <p class="font-bold text-[15px]">
-              Name :
+            <p class="font-bold text-[20px] leading-5 mb-3">
+              <span class="text-[12px] font-normal">Name :</span> <br/>
               {{ session('student_first_name') . ' ' . session('student_middle_name') . ' ' . session('student_last_name') }}
             </p>
-            <p class="font-bold text-[15px] mt-5">Adviser:
-              {{ session('adviser_first_name') . ' ' . session('adviser_middle_name') . ' ' . session('adviser_last_name') }}
+            <p class="font-normal text-[15px] mb-3"><span class="text-[12px]">Grade :</span> <br/> {{ session('gradea') . ' | Section : ' . session('sectiona') }}
             </p>
-            <p class="font-normal text-[12px]">Grade : {{ session('gradea') . ' | Section : ' . session('sectiona') }}
-            </p>
-            <p class="font-normal text-[12px]">School Year: {{ session('school_yeara') }}</p>
+            <p class="font-normal text-[15px]"><span class="text-[12px]">School Year:</span> <br/> {{ session('school_yeara') }}</p>
           </div>
           <i class="fa-solid fa-school text-[100px] text-teal-700/20 absolute top-20 right-10 lg:right-24"></i>
-          </div>
-          <div class="col-span-2 lg:col-span-1 px-5 lg:px-20">
-            <div class="p-0">
-              <p class="text-[25px] font-semibold text-teal-900 my-5"><i
-                  class="fas fa-bullhorn text-teal-900 mr-2 text-bold text-[40px]"></i>Announcement</p>
-              <div class="bg-gray-200 p-2 lg:py-1 text-white rounded-lg shadow-lg text-start announcement bg-teal-700">
 
-                @if($latestAnnouncements->isEmpty())
-          <p class="text-red-500 text-[14px] text-center">No announcements available.</p>
+          @php
+      $firstNameTeacher = session('adviser_first_name', '');
+      $middleNameTeacher = session('adviser_middle_name', '');
+      $lastNameTeacher = session('adviser_last_name', '');
+      $initialsTeacher = strtoupper(substr($firstNameTeacher, 0, 1) . substr($lastNameTeacher, 0, 1));
+
+      $avatarPathTeacher = session('avatarAdviser') ? asset('storage/' . session('avatarAdviser')) : null;
+      @endphp
+
+          <div class="flex items-end justify-center">
+            <div
+              class="mt-10 w-48 h-48 border-4 border-white bg-teal-600 rounded-full flex items-center justify-center text-white text-4xl font-semibold transition-all duration-300 shadow-lg"
+              id="profile">
+              @if ($avatarPathTeacher !== null)
+          <img id="avatar-img2" src="{{ $avatarPathTeacher }}" alt="{{ $firstNameTeacher }}'s Profile Picture"
+          class="rounded-full w-full h-full object-cover">
         @else
-      @foreach($latestAnnouncements as $announcement)
+        <div class="flex items-center justify-center w-full h-full bg-teal-600 rounded-full">
+        <span class="text-white">{{ $initialsTeacher }}</span>
+        </div>
+      @endif
+
+            </div>
+            <p class="font-bold text-[20px] mb-10 text-teal-800 ml-5"><span class="text-[15px]"> Adviser :</span> <br />
+              {{ session('adviser_first_name') . ' ' . session('adviser_middle_name') . ' ' . session('adviser_last_name') }}
+            </p>
+          </div>
+        </div>
+
+        <div class="col-span-2 lg:col-span-1 px-5 lg:px-20 mt-10">
+          <div class="p-0">
+            <p class="text-[25px] font-semibold text-teal-900 my-5"><i
+                class="fas fa-bullhorn text-teal-900 mr-2 text-bold text-[40px]"></i>Announcement</p>
+            <div class="bg-gray-200 p-2 lg:py-1 text-white rounded-lg shadow-lg text-start announcement bg-teal-700">
+
+              @if($latestAnnouncements->isEmpty())
+          <p class="text-white text-[14px] text-center">No announcements available.</p>
+        @else
+        @foreach($latestAnnouncements as $announcement)
       <div x-data="{ open: false }"
       class="announcement my-1 p-2 bg-teal-700 border rounded-lg text-teal-700 leading-4">
       <div class="py-1 px-2 bg-teal-700 rounded-lg text-white" id="announcementa">
-      <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center">
         <h5 class="font-bold mb-0 text-[15px]">{{ $announcement->announcements_head }}</h5>
         <button @click="open = !open" class="bg-transparent text-white rounded px-2 py-1 text-sm">
         <span x-show="!open"><i class="fas fa-angle-right"></i></span>
         <span x-show="open"><i class="fas fa-angle-down"></i></span>
         </button>
-      </div>
+        </div>
       </div>
       <div x-show="open" x-transition class="mt-1 px-2 py-2 text-[15px]">
-      <textarea name="announcements_body" id="announcements_body_{{ $announcement->id }}" required
+        <textarea name="announcements_body" id="announcements_body_{{ $announcement->id }}" required
         class="w-full p-5 rounded-md focus:outline-none focus:ring-none focus:ring-teal-500 text-[13px]"
         style="resize: none;" rows="20" readonly>{{ $announcement->announcements_body }}</textarea>
       </div>
       <small
-      class="text-muted text-[12px] text-white">{{ $announcement->created_at->format('F j, Y, g:i a') }}</small>
+        class="text-muted text-[12px] text-white">{{ $announcement->created_at->format('F j, Y, g:i a') }}</small>
       </div>
     @endforeach
-    @endif
-              </div>
+      @endif
             </div>
           </div>
-        
+        </div>
 
-        <div class="col-span-2 lg:col-span-1 p-5 mt-0 lg:mt-16">
+        <div class="col-span-2 lg:col-span-1 p-5 mt-0 lg:mt-[7.5rem]">
           <div class="bg-white h-96 xl:h-[700px] shadow-lg border-t-4 border-b-4 border-teal-700"
             id="announcementPicture">
             <div class="w-full h-full border-4 border-teal-50 rounded-lg">
@@ -313,42 +215,19 @@
     </main>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-  <script src="https://cdn.datatables.net/buttons/2.2.0/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-  <script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.html5.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.print.min.js"></script>
-
-  <link rel="stylesheet" type="text/css"
-    href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
-  <script type="text/javascript" charset="utf8"
-    src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.plugin.autotable.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/2.2.0/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-  <script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.html5.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/2.2.0/js/buttons.print.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.18/jspdf.plugin.autotable.min.js"></script>
-  <script src="{{ asset('../js/admin/admin.js') }}" type="text/javascript"></script>
+  @include('admin.includes.js-link')
+  <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
   <script>
     var table = $("#announcementTable").DataTable({
       dom:
-        ` 
-            <'flex justify-between items-center hidden'>` +
+        `<'flex justify-between items-center hidden'>` +
         `<tr>` +
         `<'flex justify-between items-center'<'flex-1'l><'flex-1'p>>`,
       paging: true,
       searching: false,
       ordering: true,
       info: true,
-      scrollY: "600px",
+      scroller: true,
     });
 
     @foreach ($latestAnnouncements as $announcement)

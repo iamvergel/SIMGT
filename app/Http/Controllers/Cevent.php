@@ -265,6 +265,7 @@ class Cevent extends BaseController // Extend the correct base controller
     {
         // Retrieve the latest announcements (Ensure 'Mannouncement' is your model)
         $latestAnnouncements = Mannouncement::latest()->take(5)->get();
+        
 
         // Check if there are any announcements
         $newAnnouncements = $latestAnnouncements->count() > 0;

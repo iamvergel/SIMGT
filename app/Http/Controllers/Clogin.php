@@ -266,6 +266,7 @@ class Clogin extends Controller
 
                 if ($adviser) {
                     // Store the adviser's information in session
+                    $request->session()->put('avatarAdviser', $adviser->avatar);
                     $request->session()->put('adviser_employee_number', $adviser->teacher_number);
                     $request->session()->put('adviser_last_name', $adviser->last_name);
                     $request->session()->put('adviser_first_name', $adviser->first_name);
