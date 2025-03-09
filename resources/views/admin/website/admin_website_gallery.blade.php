@@ -1,7 +1,5 @@
 @include('admin.includes.header')
 
-
-
 <body class="font-poppins bg-gray-200 overflow-hidden">
 
     <div class="flex w-full h-screen">
@@ -19,7 +17,7 @@
                     <header class="p-5">
                         <p class="text-2xl font-bold text-teal-900 ml-5">School Gallery</p>
                         <section class="mx-auto p-6 mt-5 rounded-lg shadow-lg bg-gray-200">
-                            <table id="imageGalleryTable" class="display">
+                            <table id="studentTable" class="display">
                                 <thead>
                                     <tr>
                                         <th>Image</th>
@@ -104,6 +102,9 @@
         </main>
     </div>
 
+    @include('admin.includes.js-link')
+    <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
+    
     <script>
         $(document).ready(function () {
             const table = $('#imageGalleryTable').DataTable({

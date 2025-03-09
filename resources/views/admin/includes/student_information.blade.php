@@ -367,10 +367,10 @@
 
                                                     <div class="table-container w-full" id="gradeOne">
                                                         <div class="my-10">
-                                                            @if (isset($finalGrade[0]->grade) && $finalGrade[0]->grade == "Grade One")
-                                                                <h2 class="text-lg font-semibold">{{ $finalGrade[0]->grade }} ||
-                                                                    {{ $finalGrade[0]->school_year }} || Section :
-                                                                    {{ $finalGrade[0]->section }}
+                                                            @if (isset($finalGradeOne[0]->grade) && $finalGradeOne[0]->grade == "Grade One")
+                                                                <h2 class="text-lg font-semibold">{{ $finalGradeOne[0]->grade }} ||
+                                                                    {{ $finalGradeOne[0]->school_year }} || Section :
+                                                                    {{ $finalGradeOne[0]->section }}
                                                                 </h2>
                                                             @endif
                                                         </div>
@@ -407,7 +407,7 @@
                                                                         $allGradesAvailable = true; // Variable to check if all grades are available
                                                                     @endphp
 
-                                                                    @foreach ($finalGrade as $grades)
+                                                                    @foreach ($finalGradeOne as $grades)
                                                                                                                 @if ($grades->grade == "Grade One")
                                                                                                                                                             @php
                                                                                                                                                                 $gradeOneExists = true;
@@ -602,10 +602,10 @@
 
                                                     <div class="table-container w-full" id="gradeTwo" style="display: none;">
                                                         <div class="my-10">
-                                                            @if (isset($finalGrade[0]->grade) && $finalGrade[0]->grade == "Grade Two")
-                                                                <h2 class="text-lg font-semibold">{{ $finalGrade[0]->grade }} ||
-                                                                    {{ $finalGrade[0]->school_year }} || Section :
-                                                                    {{ $finalGrade[0]->section }}
+                                                            @if (isset($finalGradeTwo[0]->grade) && $finalGradeTwo[0]->grade == "Grade Two")
+                                                                <h2 class="text-lg font-semibold">{{ $finalGradeTwo[0]->grade }} ||
+                                                                    {{ $finalGradeTwo[0]->school_year }} || Section :
+                                                                    {{ $finalGradeTwo[0]->section }}
                                                                 </h2>
                                                             @endif
 
@@ -642,7 +642,7 @@
                                                                         $allGradesAvailable = true; // Variable to check if all grades are available
                                                                     @endphp
 
-                                                                    @foreach ($finalGrade as $gradeTwo)
+                                                                    @foreach ($finalGradeTwo as $gradeTwo)
                                                                                                                 @if ($gradeTwo && $gradeTwo->grade == "Grade Two")
                                                                                                                                                             @php
                                                                                                                                                                 $gradeTwoExists = true;
@@ -828,10 +828,10 @@
                                                     <div class="table-container w-full mt-10 pb-10" id="gradeThree"
                                                         style="display: none;">
                                                         <div class="my-10">
-                                                            @if (isset($finalGrade[0]->grade) && $finalGrade[0]->grade == "Grade Three")
-                                                                <h2 class="text-lg font-semibold">{{ $finalGrade[0]->grade }} ||
-                                                                    {{ $finalGrade[0]->school_year }} || Section :
-                                                                    {{ $finalGrade[0]->section }}
+                                                            @if (isset($finalGradeThree[0]->grade) && $finalGradeThree[0]->grade == "Grade Three")
+                                                                <h2 class="text-lg font-semibold">{{ $finalGradeThree[0]->grade }} ||
+                                                                    {{ $finalGradeThree[0]->school_year }} || Section :
+                                                                    {{ $finalGradeThree[0]->section }}
                                                                 </h2>
                                                             @endif
                                                         </div>
@@ -867,7 +867,7 @@
                                                                         $allGradesAvailable = true; // Variable to check if all grades are available
                                                                     @endphp
 
-                                                                    @foreach ($finalGrade as $gradeThree)
+                                                                    @foreach ($finalGradeThree as $gradeThree)
                                                                                                                 @if (is_object($gradeThree) && $gradeThree->grade == "Grade Three")
                                                                                                                                                             @php
                                                                                                                                                                 $gradeThreeExists = true;
@@ -1044,10 +1044,10 @@
                                                     <div class="table-container w-full mt-10 pb-10" id="gradeFour"
                                                         style="display: none;">
                                                         <div class="my-10">
-                                                            @if (isset($finalGrade[0]->grade) && $finalGrade[0]->grade == "Grade Four")
-                                                                <h2 class="text-lg font-semibold">{{ $finalGrade[0]->grade }} ||
-                                                                    {{ $finalGrade[0]->school_year }} || Section :
-                                                                    {{ $finalGrade[0]->section }}
+                                                            @if (isset($finalGradeFour[0]->grade) && $finalGradeFour[0]->grade == "Grade Four")
+                                                                <h2 class="text-lg font-semibold">{{ $finalGradeFour[0]->grade }} ||
+                                                                    {{ $finalGradeFour[0]->school_year }} || Section :
+                                                                    {{ $finalGradeFour[0]->section }}
                                                                 </h2>
                                                             @endif
                                                         </div>
@@ -1083,7 +1083,7 @@
                                                                         $allGradesAvailable = true; // Variable to check if all grades are available
                                                                     @endphp
 
-                                                                    @foreach ($finalGrade as $grade)
+                                                                    @foreach ($finalGradeFour as $grade)
                                                                                                                 @if (is_object($grade) && $grade->grade == "Grade Four")
                                                                                                                                                             @php
                                                                                                                                                                 $gradeFourExists = true;
@@ -1272,10 +1272,10 @@
                                                     <div class="table-container w-full mt-10 pb-10" id="gradeFive"
                                                         style="display: none;">
                                                         <div class="my-10">
-                                                            @if (isset($finalGrade[0]->grade) && $finalGrade[0]->grade == "Grade Five")
-                                                                <h2 class="text-lg font-semibold">{{ $finalGrade[0]->grade }} ||
-                                                                    {{ $finalGrade[0]->school_year }} || Section :
-                                                                    {{ $finalGrade[0]->section }}
+                                                            @if (isset($finalGradeFive[0]->grade) && $finalGradeFive[0]->grade == "Grade Five")
+                                                                <h2 class="text-lg font-semibold">{{ $finalGradeFive[0]->grade }} ||
+                                                                    {{ $finalGradeFive[0]->school_year }} || Section :
+                                                                    {{ $finalGradeFive[0]->section }}
                                                                 </h2>
                                                             @endif
                                                         </div>
@@ -1311,7 +1311,7 @@
                                                                         $allGradesAvailable = true; // Variable to check if all grades are available
                                                                     @endphp
 
-                                                                    @foreach ($finalGrade as $grade)
+                                                                    @foreach ($finalGradeFive as $grade)
                                                                                                                 @if (is_object($grade) && $grade->grade == "Grade Five")
                                                                                                                                                             @php
                                                                                                                                                                 $gradeFiveExists = true;
@@ -1500,10 +1500,10 @@
                                                     <div class="table-container w-full mt-10 pb-10" id="gradeSix"
                                                         style="display: none;">
                                                         <div class="my-10">
-                                                            @if (isset($finalGrade[0]->grade) && $finalGrade[0]->grade == "Grade Six")
-                                                                <h2 class="text-lg font-semibold">{{ $finalGrade[0]->grade }} ||
-                                                                    {{ $finalGrade[0]->school_year }} || Section :
-                                                                    {{ $finalGrade[0]->section }}
+                                                            @if (isset($finalGradeSix[0]->grade) && $finalGradeSix[0]->grade == "Grade Six")
+                                                                <h2 class="text-lg font-semibold">{{ $finalGradeSix[0]->grade }} ||
+                                                                    {{ $finalGradeSix[0]->school_year }} || Section :
+                                                                    {{ $finalGradeSix[0]->section }}
                                                                 </h2>
                                                             @endif
                                                         </div>
@@ -1539,7 +1539,7 @@
                                                                         $allGradesAvailable = true; // Variable to check if all grades are available
                                                                     @endphp
 
-                                                                    @foreach ($finalGrade as $grade)
+                                                                    @foreach ($finalGradeSix as $grade)
                                                                                                                 @if (is_object($grade) && $grade->grade == "Grade Six")
                                                                                                                                                             @php
                                                                                                                                                                 $gradeSixExists = true;

@@ -603,11 +603,16 @@ class Cstudentinfo extends Controller
         $studentsAdditional = StudentAdditionalInfo::where('student_number', $students->student_number)->first();
         $studentDocuments = StudentDocuments::where('student_number', $students->student_number)->first();
         $studentAccount = Mstudentaccount::where('student_number', $students->student_number)->first();
-        $finalGrade = StudentFinalGrade::where('student_number', $students->student_number)->get();
+        $finalGradeOne = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade One')->get();
+        $finalGradeTwo = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Two')->get();
+        $finalGradeThree = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Three')->get();
+        $finalGradeFour = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Four')->get();
+        $finalGradeFive = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Five')->get();
+        $finalGradeSix = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Six')->get();
         $teachers = TeacherUser::where('teacher_number', $studentsPrimaryOne->adviser)->first();
 
         // You can pass other data here as needed
-        return view('admin.includes.student_information', compact('students', 'studentsPrimary', 'teachers', 'studentsAdditional', 'studentsPrimaryOne', 'studentDocuments', 'studentAccount', 'finalGrade'));
+        return view('admin.includes.student_information', compact('students', 'studentsPrimary', 'teachers', 'studentsAdditional', 'studentsPrimaryOne', 'studentDocuments', 'studentAccount', 'finalGradeOne', 'finalGradeTwo', 'finalGradeThree', 'finalGradeFour', 'finalGradeFive', 'finalGradeSix'));
     }
 
     public function dropStudent(Request $request, $studentId)
