@@ -32,17 +32,18 @@
     </div>
 
     <!-- Modal -->
-    <div id="activityModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-[20]">
-        <div class="bg-white rounded-lg shadow-lg p-5 w-11/12 max-w-md">
-            <div class="flex justify-between items-center p-5 shadow-lg">
-                <h2 class="text-lg font-bold text-teal-900">Activity and Events Details</h2>
-                <span id="closeModal"
-                    class="py-1 px-2 text-[12px] bg-teal-700 hover:bg-teal-800 font-semibold text-white rounded"><i
-                        class="fas fa-times fa-lg"></i></span>
+    <div id="activityModal"
+          class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-[20]">
+          <div class="bg-gray-100 rounded-lg shadow-lg p-5 w-11/12 max-w-md">
+            <div class="flex justify-between items-center p-2 px-4 bg-white  shadow-lg">
+              <p id="dateEvent" class="font-bold text-teal-900"></p>
+              <span id="closeModal"
+                class="py-1 px-2 text-[12px] bg-teal-700 hover:bg-teal-800 font-semibold text-white rounded-full float-right"><i
+                  class="fas fa-times fa-lg"></i></span>
             </div>
-            <div class="activityEventContent mt-5 p-5 shadow-lg"></div>
+            <div class="activityEventContent mt-1 p-3 rounded shadow-lg border border-gray-100 bg-white"></div>
+          </div>
         </div>
-    </div>
 
 
     @include('admin.includes.js-link')
@@ -69,23 +70,34 @@
                     fetch(`/api/events?date=${info.dateStr}`)
                         .then(response => response.json())
                         .then(events => {
-                            const activityEventContent = document.querySelector('.activityEventContent');
-                            activityEventContent.innerHTML = `<p class="text-teal-900 font-semibold">${info.dateStr}</p><br/>`;
+                            document.querySelector("#dateEvent").innerHTML =
+                            new Date(info.dateStr).toLocaleDateString("en-US", {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                            });
 
-                            activityEventContent.innerHTML += `<ul class="text-[12px] text-teal-900">`;
+                        const activityEventContent = document.querySelector(
+                            ".activityEventContent"
+                        );
 
-                            if (events.length > 0) {
-                                events.forEach(event => {
-                                    activityEventContent.innerHTML += `<li class="text-[12px] text-teal-900">${event.activity_name}</li>`;
-                                });
-                            } else {
-                                activityEventContent.innerHTML += `<p class="text-[12px] text-teal-900">No events for this date.</p>`;
-                            }
+                        activityEventContent.innerHTML = `<div class="bg-teal-500 text-white font-semibold hidden">${info.dateStr}</div><br/>`;
 
-                            // Close the unordered list
-                            activityEventContent.innerHTML += `</ul>`;
-                            // Show the modal
-                            document.getElementById('activityModal').classList.remove('hidden');
+                        activityEventContent.innerHTML += `<ul class="text-[14px] text-teal-900">`;
+
+                        if (events.length > 0) {
+                            events.forEach((event) => {
+                                activityEventContent.innerHTML += `<li class="text-md text-teal-900">${event.activity_name}</li> <br/>`;
+                            });
+                        } else {
+                            activityEventContent.innerHTML += `<p class="text-md text-teal-900">No events or activity for this date.</p>`;
+                        }
+
+                        activityEventContent.innerHTML += `</ul>`;
+
+                        document
+                            .getElementById("activityModal")
+                            .classList.remove("hidden");
                         })
                         .catch(error => {
                             console.error('Error fetching events:', error);

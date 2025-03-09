@@ -190,7 +190,6 @@
         </main>
     </div>
 
-    
     @include('admin.includes.js-link')
     <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
     <script type="text/javascript">

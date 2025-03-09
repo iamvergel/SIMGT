@@ -32,7 +32,7 @@
 
           <div class="grid grid-cols-4 gap-4">
             <div class="col-span-4 lg:col-span-3">
-              <div id='calendar' class="mt-5 bg-white rounded-lg shadow-lg h-auto"></div>
+              <div id='calendar' class="mt-5 bg-white rounded-lg h-auto"></div>
             </div>
 
 
