@@ -150,6 +150,291 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    // When the dropdown button is clicked, make an AJAX call
+    $("#dropdownDefaultButtonTwo").click(function () {
+        // Toggle the dropdown visibility
+        $("#dropdownTwo").toggleClass("hidden");
+
+        // Make an AJAX request to get the sections
+        $.ajax({
+            url: "/get-twosections",
+            type: "GET",
+            success: function (data) {
+                console.log(data); // Debug: Check the data received
+                if (data.length > 0) {
+                    $("#dropdownTwo ul").empty();
+                    $("#dropdownTwo ul").append(
+                        '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="">Select a Section</a></li>'
+                    );
+                    data.forEach(function (section) {
+                        $("#dropdownTwo ul").append(
+                            '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="' +
+                                section +
+                                '">' +
+                                section +
+                                "</a></li>"
+                        );
+                    });
+                } else {
+                    $("#dropdownTwo ul").html(
+                        '<li><a href="#" class="dropdown-item text-gray-500">No Sections Available</a></li>'
+                    );
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Error fetching sections: " + error);
+            },
+        });
+    });
+
+    // Handle section click to filter table
+    $(document).on("click", ".dropdown-item", function (event) {
+        event.preventDefault();
+
+        const selectedSection = $(this).data("section");
+        let section = document.getElementById('section');
+
+        if (selectedSection) {
+            table.column(6).search(selectedSection).draw(); // Filter the table based on the clicked section
+            section.innerHTML = 'Section : ' + selectedSection;
+        } else {
+            table.column(6).search("").draw(); // Clear the filter to show all
+            section.innerHTML = 'Section : ';
+        }
+
+        $("#dropdown").addClass("hidden"); // Close the dropdown
+    });
+});
+
+$(document).ready(function () {
+    // When the dropdown button is clicked, make an AJAX call
+    $("#dropdownDefaultButtonThree").click(function () {
+        // Toggle the dropdown visibility
+        $("#dropdownThree").toggleClass("hidden");
+
+        // Make an AJAX request to get the sections
+        $.ajax({
+            url: "/get-threesections",
+            type: "GET",
+            success: function (data) {
+                console.log(data); // Debug: Check the data received
+                if (data.length > 0) {
+                    $("#dropdownThree ul").empty();
+                    $("#dropdownThree ul").append(
+                        '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="">Select a Section</a></li>'
+                    );
+                    data.forEach(function (section) {
+                        $("#dropdownThree ul").append(
+                            '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="' +
+                                section +
+                                '">' +
+                                section +
+                                "</a></li>"
+                        );
+                    });
+                } else {
+                    $("#dropdownThree ul").html(
+                        '<li><a href="#" class="dropdown-item text-gray-500">No Sections Available</a></li>'
+                    );
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Error fetching sections: " + error);
+            },
+        });
+    });
+
+    // Handle section click to filter table
+    $(document).on("click", ".dropdown-item", function (event) {
+        event.preventDefault();
+
+        const selectedSection = $(this).data("section");
+        let section = document.getElementById('section');
+
+        if (selectedSection) {
+            table.column(6).search(selectedSection).draw(); // Filter the table based on the clicked section
+            section.innerHTML = 'Section : ' + selectedSection;
+        } else {
+            table.column(6).search("").draw(); // Clear the filter to show all
+            section.innerHTML = 'Section : ';
+        }
+
+        $("#dropdown").addClass("hidden"); // Close the dropdown
+    });
+});
+
+$(document).ready(function () {
+    // When the dropdown button is clicked, make an AJAX call
+    $("#dropdownDefaultButtonFour").click(function () {
+        // Toggle the dropdown visibility
+        $("#dropdownFour").toggleClass("hidden");
+
+        // Make an AJAX request to get the sections
+        $.ajax({
+            url: "/get-foursections",
+            type: "GET",
+            success: function (data) {
+                console.log(data); // Debug: Check the data received
+                if (data.length > 0) {
+                    $("#dropdownFour ul").empty();
+                    $("#dropdownFour ul").append(
+                        '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="">Select a Section</a></li>'
+                    );
+                    data.forEach(function (section) {
+                        $("#dropdownFour ul").append(
+                            '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="' +
+                                section +
+                                '">' +
+                                section +
+                                "</a></li>"
+                        );
+                    });
+                } else {
+                    $("#dropdownFour ul").html(
+                        '<li><a href="#" class="dropdown-item text-gray-500">No Sections Available</a></li>'
+                    );
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Error fetching sections: " + error);
+            },
+        });
+    });
+
+    // Handle section click to filter table
+    $(document).on("click", ".dropdown-item", function (event) {
+        event.preventDefault();
+
+        const selectedSection = $(this).data("section");
+        let section = document.getElementById('section');
+
+        if (selectedSection) {
+            table.column(6).search(selectedSection).draw(); // Filter the table based on the clicked section
+            section.innerHTML = 'Section : ' + selectedSection;
+        } else {
+            table.column(6).search("").draw(); // Clear the filter to show all
+            section.innerHTML = 'Section : ';
+        }
+
+        $("#dropdown").addClass("hidden"); // Close the dropdown
+    });
+});
+
+$(document).ready(function () {
+    // When the dropdown button is clicked, make an AJAX call
+    $("#dropdownDefaultButtonFive").click(function () {
+        // Toggle the dropdown visibility
+        $("#dropdownFive").toggleClass("hidden");
+
+        // Make an AJAX request to get the sections
+        $.ajax({
+            url: "/get-fivesections",
+            type: "GET",
+            success: function (data) {
+                console.log(data); // Debug: Check the data received
+                if (data.length > 0) {
+                    $("#dropdownFive ul").empty();
+                    $("#dropdownFive ul").append(
+                        '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="">Select a Section</a></li>'
+                    );
+                    data.forEach(function (section) {
+                        $("#dropdownFive ul").append(
+                            '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="' +
+                                section +
+                                '">' +
+                                section +
+                                "</a></li>"
+                        );
+                    });
+                } else {
+                    $("#dropdownFive ul").html(
+                        '<li><a href="#" class="dropdown-item text-gray-500">No Sections Available</a></li>'
+                    );
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Error fetching sections: " + error);
+            },
+        });
+    });
+
+    // Handle section click to filter table
+    $(document).on("click", ".dropdown-item", function (event) {
+        event.preventDefault();
+
+        const selectedSection = $(this).data("section");
+        let section = document.getElementById('section');
+
+        if (selectedSection) {
+            table.column(6).search(selectedSection).draw(); // Filter the table based on the clicked section
+            section.innerHTML = 'Section : ' + selectedSection;
+        } else {
+            table.column(6).search("").draw(); // Clear the filter to show all
+            section.innerHTML = 'Section : ';
+        }
+
+        $("#dropdown").addClass("hidden"); // Close the dropdown
+    });
+});
+
+$(document).ready(function () {
+    // When the dropdown button is clicked, make an AJAX call
+    $("#dropdownDefaultButtonSix").click(function () {
+        // Toggle the dropdown visibility
+        $("#dropdownSix").toggleClass("hidden");
+
+        // Make an AJAX request to get the sections
+        $.ajax({
+            url: "/get-sixsections",
+            type: "GET",
+            success: function (data) {
+                console.log(data); // Debug: Check the data received
+                if (data.length > 0) {
+                    $("#dropdownSix ul").empty();
+                    $("#dropdownSix ul").append(
+                        '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="">Select a Section</a></li>'
+                    );
+                    data.forEach(function (section) {
+                        $("#dropdownSix ul").append(
+                            '<li class="text-gray-500 hover:text-white hover:bg-teal-600 py-2 rounded-lg"><a href="#" class="dropdown-item" data-section="' +
+                                section +
+                                '">' +
+                                section +
+                                "</a></li>"
+                        );
+                    });
+                } else {
+                    $("#dropdownSix ul").html(
+                        '<li><a href="#" class="dropdown-item text-gray-500">No Sections Available</a></li>'
+                    );
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("Error fetching sections: " + error);
+            },
+        });
+    });
+
+    // Handle section click to filter table
+    $(document).on("click", ".dropdown-item", function (event) {
+        event.preventDefault();
+
+        const selectedSection = $(this).data("section");
+        let section = document.getElementById('section');
+
+        if (selectedSection) {
+            table.column(6).search(selectedSection).draw(); // Filter the table based on the clicked section
+            section.innerHTML = 'Section : ' + selectedSection;
+        } else {
+            table.column(6).search("").draw(); // Clear the filter to show all
+            section.innerHTML = 'Section : ';
+        }
+
+        $("#dropdown").addClass("hidden"); // Close the dropdown
+    });
+});
+
     // $(document).on("click", ".dropdown-item", function (event) {
     //     event.preventDefault(); // Prevent default anchor click behavior
 

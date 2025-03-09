@@ -598,19 +598,16 @@ class Cstudentinfo extends Controller
         }
 
         // Fetch related data for the specific student
-        $studentsPrimary = StudentPrimaryInfo::where('lrn', $students->lrn)->first();
+        $studentsPrimary = StudentPrimaryInfo::where('lrn', $students->lrn)->where('status', 'Enrolled')->first();
+        $studentsPrimaryOne = StudentPrimaryInfo::where('lrn', $students->lrn)->first();
         $studentsAdditional = StudentAdditionalInfo::where('student_number', $students->student_number)->first();
         $studentDocuments = StudentDocuments::where('student_number', $students->student_number)->first();
         $studentAccount = Mstudentaccount::where('student_number', $students->student_number)->first();
-        $studentGradeOne = Mstudentgradeone::where('student_number', $students->student_number)->first();
-        $studentGradeTwo = Mstudentgradetwo::where('student_number', $students->student_number)->first();
-        $studentGradeThree = Mstudentgradethree::where('student_number', $students->student_number)->first();
-        $studentGradeFour = Mstudentgradefour::where('student_number', $students->student_number)->first();
-        $studentGradeFive = Mstudentgradefive::where('student_number', $students->student_number)->first();
-        $studentGradeSix = Mstudentgradesix::where('student_number', $students->student_number)->first();
+        $finalGrade = StudentFinalGrade::where('student_number', $students->student_number)->get();
+        $teachers = TeacherUser::where('teacher_number', $studentsPrimaryOne->adviser)->first();
 
         // You can pass other data here as needed
-        return view('admin.includes.student_information', compact('students', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount', 'studentGradeOne', 'studentGradeTwo', 'studentGradeThree', 'studentGradeFour', 'studentGradeFive', 'studentGradeSix'));
+        return view('admin.includes.student_information', compact('students', 'studentsPrimary', 'teachers', 'studentsAdditional', 'studentsPrimaryOne', 'studentDocuments', 'studentAccount', 'finalGrade'));
     }
 
     public function dropStudent(Request $request, $studentId)

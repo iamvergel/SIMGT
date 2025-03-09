@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('registrationbutton', function (Blueprint $table) {
             $table->id();
-            $table->string(column: 'status');
+            $table->string( 'status');
             $table->timestamps();
         });
     }

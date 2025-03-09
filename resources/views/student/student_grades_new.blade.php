@@ -152,13 +152,99 @@
                                                                     <td
                                                                         class="border border-gray-600 text-center px-4 py-2">
                                                                     </td>
+                                                                    <td class="border border-gray-600 text-center px-4 py-2">
+                                                                                                                            @php
+                                                                                                                                $finalGrade = round($totalFinalGrade / $count, 2);
+                                                                                                                                if ($finalGrade >= 100) {
+                                                                                                                                    $grade = 100;
+                                                                                                                                } elseif ($finalGrade >= 98.40) {
+                                                                                                                                    $grade = 99;
+                                                                                                                                } elseif ($finalGrade >= 96.80) {
+                                                                                                                                    $grade = 98;
+                                                                                                                                } elseif ($finalGrade >= 95.20) {
+                                                                                                                                    $grade = 97;
+                                                                                                                                } elseif ($finalGrade >= 93.60) {
+                                                                                                                                    $grade = 96;
+                                                                                                                                } elseif ($finalGrade >= 92.00) {
+                                                                                                                                    $grade = 95;
+                                                                                                                                } elseif ($finalGrade >= 90.40) {
+                                                                                                                                    $grade = 94;
+                                                                                                                                } elseif ($finalGrade >= 88.80) {
+                                                                                                                                    $grade = 93;
+                                                                                                                                } elseif ($finalGrade >= 87.20) {
+                                                                                                                                    $grade = 92;
+                                                                                                                                } elseif ($finalGrade >= 85.60) {
+                                                                                                                                    $grade = 91;
+                                                                                                                                } elseif ($finalGrade >= 84.00) {
+                                                                                                                                    $grade = 90;
+                                                                                                                                } elseif ($finalGrade >= 82.40) {
+                                                                                                                                    $grade = 89;
+                                                                                                                                } elseif ($finalGrade >= 80.80) {
+                                                                                                                                    $grade = 88;
+                                                                                                                                } elseif ($finalGrade >= 79.20) {
+                                                                                                                                    $grade = 87;
+                                                                                                                                } elseif ($finalGrade >= 77.60) {
+                                                                                                                                    $grade = 86;
+                                                                                                                                } elseif ($finalGrade >= 76.00) {
+                                                                                                                                    $grade = 85;
+                                                                                                                                } elseif ($finalGrade >= 74.40) {
+                                                                                                                                    $grade = 84;
+                                                                                                                                } elseif ($finalGrade >= 72.80) {
+                                                                                                                                    $grade = 83;
+                                                                                                                                } elseif ($finalGrade >= 71.20) {
+                                                                                                                                    $grade = 82;
+                                                                                                                                } elseif ($finalGrade >= 69.60) {
+                                                                                                                                    $grade = 81;
+                                                                                                                                } elseif ($finalGrade >= 68.00) {
+                                                                                                                                    $grade = 80;
+                                                                                                                                } elseif ($finalGrade >= 66.40) {
+                                                                                                                                    $grade = 79;
+                                                                                                                                } elseif ($finalGrade >= 64.80) {
+                                                                                                                                    $grade = 78;
+                                                                                                                                } elseif ($finalGrade >= 63.20) {
+                                                                                                                                    $grade = 77;
+                                                                                                                                } elseif ($finalGrade >= 61.60) {
+                                                                                                                                    $grade = 76;
+                                                                                                                                } elseif ($finalGrade >= 60.00) {
+                                                                                                                                    $grade = 75;
+                                                                                                                                } elseif ($finalGrade >= 56.00) {
+                                                                                                                                    $grade = 74;
+                                                                                                                                } elseif ($finalGrade >= 52.00) {
+                                                                                                                                    $grade = 73;
+                                                                                                                                } elseif ($finalGrade >= 48.00) {
+                                                                                                                                    $grade = 72;
+                                                                                                                                } elseif ($finalGrade >= 44.00) {
+                                                                                                                                    $grade = 71;
+                                                                                                                                } elseif ($finalGrade >= 40.00) {
+                                                                                                                                    $grade = 70;
+                                                                                                                                } elseif ($finalGrade >= 36.00) {
+                                                                                                                                    $grade = 69;
+                                                                                                                                } elseif ($finalGrade >= 32.00) {
+                                                                                                                                    $grade = 68;
+                                                                                                                                } elseif ($finalGrade >= 28.00) {
+                                                                                                                                    $grade = 67;
+                                                                                                                                } elseif ($finalGrade >= 24.00) {
+                                                                                                                                    $grade = 66;
+                                                                                                                                } elseif ($finalGrade >= 20.00) {
+                                                                                                                                    $grade = 65;
+                                                                                                                                } elseif ($finalGrade >= 16.00) {
+                                                                                                                                    $grade = 64;
+                                                                                                                                } elseif ($finalGrade >= 12.00) {
+                                                                                                                                    $grade = 63;
+                                                                                                                                } elseif ($finalGrade >= 8.00) {
+                                                                                                                                    $grade = 62;
+                                                                                                                                } elseif ($finalGrade >= 4.00) {
+                                                                                                                                    $grade = 61;
+                                                                                                                                } else {
+                                                                                                                                    $grade = 60;
+                                                                                                                                }
+                                                                                                                            @endphp
+
+                                                                                                                            {{ $grade }}
+                                                                                                                        </td>
                                                                     <td
                                                                         class="border border-gray-600 text-center px-4 py-2">
-                                                                        {{ round($totalFinalGrade / $count, 2) }}
-                                                                    </td>
-                                                                    <td
-                                                                        class="border border-gray-600 text-center px-4 py-2">
-                                                                        @if (round($totalFinalGrade / $count, 2) < 75)
+                                                                        @if (round($grade, 2) < 75)
                                                                             Failed
                                                                         @else
 
@@ -286,13 +372,99 @@
                                                                     <td
                                                                         class="border border-gray-600 text-center px-4 py-2">
                                                                     </td>
+                                                                    <td class="border border-gray-600 text-center px-4 py-2">
+                                                                                                                            @php
+                                                                                                                                $finalGrade = round($totalFinalGrade / $count, 2);
+                                                                                                                                if ($finalGrade >= 100) {
+                                                                                                                                    $grade = 100;
+                                                                                                                                } elseif ($finalGrade >= 98.40) {
+                                                                                                                                    $grade = 99;
+                                                                                                                                } elseif ($finalGrade >= 96.80) {
+                                                                                                                                    $grade = 98;
+                                                                                                                                } elseif ($finalGrade >= 95.20) {
+                                                                                                                                    $grade = 97;
+                                                                                                                                } elseif ($finalGrade >= 93.60) {
+                                                                                                                                    $grade = 96;
+                                                                                                                                } elseif ($finalGrade >= 92.00) {
+                                                                                                                                    $grade = 95;
+                                                                                                                                } elseif ($finalGrade >= 90.40) {
+                                                                                                                                    $grade = 94;
+                                                                                                                                } elseif ($finalGrade >= 88.80) {
+                                                                                                                                    $grade = 93;
+                                                                                                                                } elseif ($finalGrade >= 87.20) {
+                                                                                                                                    $grade = 92;
+                                                                                                                                } elseif ($finalGrade >= 85.60) {
+                                                                                                                                    $grade = 91;
+                                                                                                                                } elseif ($finalGrade >= 84.00) {
+                                                                                                                                    $grade = 90;
+                                                                                                                                } elseif ($finalGrade >= 82.40) {
+                                                                                                                                    $grade = 89;
+                                                                                                                                } elseif ($finalGrade >= 80.80) {
+                                                                                                                                    $grade = 88;
+                                                                                                                                } elseif ($finalGrade >= 79.20) {
+                                                                                                                                    $grade = 87;
+                                                                                                                                } elseif ($finalGrade >= 77.60) {
+                                                                                                                                    $grade = 86;
+                                                                                                                                } elseif ($finalGrade >= 76.00) {
+                                                                                                                                    $grade = 85;
+                                                                                                                                } elseif ($finalGrade >= 74.40) {
+                                                                                                                                    $grade = 84;
+                                                                                                                                } elseif ($finalGrade >= 72.80) {
+                                                                                                                                    $grade = 83;
+                                                                                                                                } elseif ($finalGrade >= 71.20) {
+                                                                                                                                    $grade = 82;
+                                                                                                                                } elseif ($finalGrade >= 69.60) {
+                                                                                                                                    $grade = 81;
+                                                                                                                                } elseif ($finalGrade >= 68.00) {
+                                                                                                                                    $grade = 80;
+                                                                                                                                } elseif ($finalGrade >= 66.40) {
+                                                                                                                                    $grade = 79;
+                                                                                                                                } elseif ($finalGrade >= 64.80) {
+                                                                                                                                    $grade = 78;
+                                                                                                                                } elseif ($finalGrade >= 63.20) {
+                                                                                                                                    $grade = 77;
+                                                                                                                                } elseif ($finalGrade >= 61.60) {
+                                                                                                                                    $grade = 76;
+                                                                                                                                } elseif ($finalGrade >= 60.00) {
+                                                                                                                                    $grade = 75;
+                                                                                                                                } elseif ($finalGrade >= 56.00) {
+                                                                                                                                    $grade = 74;
+                                                                                                                                } elseif ($finalGrade >= 52.00) {
+                                                                                                                                    $grade = 73;
+                                                                                                                                } elseif ($finalGrade >= 48.00) {
+                                                                                                                                    $grade = 72;
+                                                                                                                                } elseif ($finalGrade >= 44.00) {
+                                                                                                                                    $grade = 71;
+                                                                                                                                } elseif ($finalGrade >= 40.00) {
+                                                                                                                                    $grade = 70;
+                                                                                                                                } elseif ($finalGrade >= 36.00) {
+                                                                                                                                    $grade = 69;
+                                                                                                                                } elseif ($finalGrade >= 32.00) {
+                                                                                                                                    $grade = 68;
+                                                                                                                                } elseif ($finalGrade >= 28.00) {
+                                                                                                                                    $grade = 67;
+                                                                                                                                } elseif ($finalGrade >= 24.00) {
+                                                                                                                                    $grade = 66;
+                                                                                                                                } elseif ($finalGrade >= 20.00) {
+                                                                                                                                    $grade = 65;
+                                                                                                                                } elseif ($finalGrade >= 16.00) {
+                                                                                                                                    $grade = 64;
+                                                                                                                                } elseif ($finalGrade >= 12.00) {
+                                                                                                                                    $grade = 63;
+                                                                                                                                } elseif ($finalGrade >= 8.00) {
+                                                                                                                                    $grade = 62;
+                                                                                                                                } elseif ($finalGrade >= 4.00) {
+                                                                                                                                    $grade = 61;
+                                                                                                                                } else {
+                                                                                                                                    $grade = 60;
+                                                                                                                                }
+                                                                                                                            @endphp
+
+                                                                                                                            {{ $grade }}
+                                                                                                                        </td>
                                                                     <td
                                                                         class="border border-gray-600 text-center px-4 py-2">
-                                                                        {{ round($totalFinalGrade / $count, 2) }}
-                                                                    </td>
-                                                                    <td
-                                                                        class="border border-gray-600 text-center px-4 py-2">
-                                                                        @if (round($totalFinalGrade / $count, 2) < 75)
+                                                                        @if (round($grade, 2) < 75)
                                                                             Failed
                                                                         @else
                                                                             Passed
@@ -415,13 +587,99 @@
                                                                     <td
                                                                         class="border border-gray-600 text-center px-4 py-2">
                                                                     </td>
+                                                                    <td class="border border-gray-600 text-center px-4 py-2">
+                                                                                                                            @php
+                                                                                                                                $finalGrade = round($totalFinalGrade / $count, 2);
+                                                                                                                                if ($finalGrade >= 100) {
+                                                                                                                                    $grade = 100;
+                                                                                                                                } elseif ($finalGrade >= 98.40) {
+                                                                                                                                    $grade = 99;
+                                                                                                                                } elseif ($finalGrade >= 96.80) {
+                                                                                                                                    $grade = 98;
+                                                                                                                                } elseif ($finalGrade >= 95.20) {
+                                                                                                                                    $grade = 97;
+                                                                                                                                } elseif ($finalGrade >= 93.60) {
+                                                                                                                                    $grade = 96;
+                                                                                                                                } elseif ($finalGrade >= 92.00) {
+                                                                                                                                    $grade = 95;
+                                                                                                                                } elseif ($finalGrade >= 90.40) {
+                                                                                                                                    $grade = 94;
+                                                                                                                                } elseif ($finalGrade >= 88.80) {
+                                                                                                                                    $grade = 93;
+                                                                                                                                } elseif ($finalGrade >= 87.20) {
+                                                                                                                                    $grade = 92;
+                                                                                                                                } elseif ($finalGrade >= 85.60) {
+                                                                                                                                    $grade = 91;
+                                                                                                                                } elseif ($finalGrade >= 84.00) {
+                                                                                                                                    $grade = 90;
+                                                                                                                                } elseif ($finalGrade >= 82.40) {
+                                                                                                                                    $grade = 89;
+                                                                                                                                } elseif ($finalGrade >= 80.80) {
+                                                                                                                                    $grade = 88;
+                                                                                                                                } elseif ($finalGrade >= 79.20) {
+                                                                                                                                    $grade = 87;
+                                                                                                                                } elseif ($finalGrade >= 77.60) {
+                                                                                                                                    $grade = 86;
+                                                                                                                                } elseif ($finalGrade >= 76.00) {
+                                                                                                                                    $grade = 85;
+                                                                                                                                } elseif ($finalGrade >= 74.40) {
+                                                                                                                                    $grade = 84;
+                                                                                                                                } elseif ($finalGrade >= 72.80) {
+                                                                                                                                    $grade = 83;
+                                                                                                                                } elseif ($finalGrade >= 71.20) {
+                                                                                                                                    $grade = 82;
+                                                                                                                                } elseif ($finalGrade >= 69.60) {
+                                                                                                                                    $grade = 81;
+                                                                                                                                } elseif ($finalGrade >= 68.00) {
+                                                                                                                                    $grade = 80;
+                                                                                                                                } elseif ($finalGrade >= 66.40) {
+                                                                                                                                    $grade = 79;
+                                                                                                                                } elseif ($finalGrade >= 64.80) {
+                                                                                                                                    $grade = 78;
+                                                                                                                                } elseif ($finalGrade >= 63.20) {
+                                                                                                                                    $grade = 77;
+                                                                                                                                } elseif ($finalGrade >= 61.60) {
+                                                                                                                                    $grade = 76;
+                                                                                                                                } elseif ($finalGrade >= 60.00) {
+                                                                                                                                    $grade = 75;
+                                                                                                                                } elseif ($finalGrade >= 56.00) {
+                                                                                                                                    $grade = 74;
+                                                                                                                                } elseif ($finalGrade >= 52.00) {
+                                                                                                                                    $grade = 73;
+                                                                                                                                } elseif ($finalGrade >= 48.00) {
+                                                                                                                                    $grade = 72;
+                                                                                                                                } elseif ($finalGrade >= 44.00) {
+                                                                                                                                    $grade = 71;
+                                                                                                                                } elseif ($finalGrade >= 40.00) {
+                                                                                                                                    $grade = 70;
+                                                                                                                                } elseif ($finalGrade >= 36.00) {
+                                                                                                                                    $grade = 69;
+                                                                                                                                } elseif ($finalGrade >= 32.00) {
+                                                                                                                                    $grade = 68;
+                                                                                                                                } elseif ($finalGrade >= 28.00) {
+                                                                                                                                    $grade = 67;
+                                                                                                                                } elseif ($finalGrade >= 24.00) {
+                                                                                                                                    $grade = 66;
+                                                                                                                                } elseif ($finalGrade >= 20.00) {
+                                                                                                                                    $grade = 65;
+                                                                                                                                } elseif ($finalGrade >= 16.00) {
+                                                                                                                                    $grade = 64;
+                                                                                                                                } elseif ($finalGrade >= 12.00) {
+                                                                                                                                    $grade = 63;
+                                                                                                                                } elseif ($finalGrade >= 8.00) {
+                                                                                                                                    $grade = 62;
+                                                                                                                                } elseif ($finalGrade >= 4.00) {
+                                                                                                                                    $grade = 61;
+                                                                                                                                } else {
+                                                                                                                                    $grade = 60;
+                                                                                                                                }
+                                                                                                                            @endphp
+
+                                                                                                                            {{ $grade }}
+                                                                                                                        </td>
                                                                     <td
                                                                         class="border border-gray-600 text-center px-4 py-2">
-                                                                        {{ round($totalFinalGrade / $count, 2) }}
-                                                                    </td>
-                                                                    <td
-                                                                        class="border border-gray-600 text-center px-4 py-2">
-                                                                        @if (round($totalFinalGrade / $count, 2) < 75)
+                                                                        @if (round($grade, 2) < 75)
                                                                             Failed
                                                                         @else
                                                                             Passed
@@ -544,13 +802,99 @@
                                                                     <td
                                                                         class="border border-gray-600 text-center px-4 py-2">
                                                                     </td>
+                                                                    <td class="border border-gray-600 text-center px-4 py-2">
+                                                                                                                            @php
+                                                                                                                                $finalGrade = round($totalFinalGrade / $count, 2);
+                                                                                                                                if ($finalGrade >= 100) {
+                                                                                                                                    $grade = 100;
+                                                                                                                                } elseif ($finalGrade >= 98.40) {
+                                                                                                                                    $grade = 99;
+                                                                                                                                } elseif ($finalGrade >= 96.80) {
+                                                                                                                                    $grade = 98;
+                                                                                                                                } elseif ($finalGrade >= 95.20) {
+                                                                                                                                    $grade = 97;
+                                                                                                                                } elseif ($finalGrade >= 93.60) {
+                                                                                                                                    $grade = 96;
+                                                                                                                                } elseif ($finalGrade >= 92.00) {
+                                                                                                                                    $grade = 95;
+                                                                                                                                } elseif ($finalGrade >= 90.40) {
+                                                                                                                                    $grade = 94;
+                                                                                                                                } elseif ($finalGrade >= 88.80) {
+                                                                                                                                    $grade = 93;
+                                                                                                                                } elseif ($finalGrade >= 87.20) {
+                                                                                                                                    $grade = 92;
+                                                                                                                                } elseif ($finalGrade >= 85.60) {
+                                                                                                                                    $grade = 91;
+                                                                                                                                } elseif ($finalGrade >= 84.00) {
+                                                                                                                                    $grade = 90;
+                                                                                                                                } elseif ($finalGrade >= 82.40) {
+                                                                                                                                    $grade = 89;
+                                                                                                                                } elseif ($finalGrade >= 80.80) {
+                                                                                                                                    $grade = 88;
+                                                                                                                                } elseif ($finalGrade >= 79.20) {
+                                                                                                                                    $grade = 87;
+                                                                                                                                } elseif ($finalGrade >= 77.60) {
+                                                                                                                                    $grade = 86;
+                                                                                                                                } elseif ($finalGrade >= 76.00) {
+                                                                                                                                    $grade = 85;
+                                                                                                                                } elseif ($finalGrade >= 74.40) {
+                                                                                                                                    $grade = 84;
+                                                                                                                                } elseif ($finalGrade >= 72.80) {
+                                                                                                                                    $grade = 83;
+                                                                                                                                } elseif ($finalGrade >= 71.20) {
+                                                                                                                                    $grade = 82;
+                                                                                                                                } elseif ($finalGrade >= 69.60) {
+                                                                                                                                    $grade = 81;
+                                                                                                                                } elseif ($finalGrade >= 68.00) {
+                                                                                                                                    $grade = 80;
+                                                                                                                                } elseif ($finalGrade >= 66.40) {
+                                                                                                                                    $grade = 79;
+                                                                                                                                } elseif ($finalGrade >= 64.80) {
+                                                                                                                                    $grade = 78;
+                                                                                                                                } elseif ($finalGrade >= 63.20) {
+                                                                                                                                    $grade = 77;
+                                                                                                                                } elseif ($finalGrade >= 61.60) {
+                                                                                                                                    $grade = 76;
+                                                                                                                                } elseif ($finalGrade >= 60.00) {
+                                                                                                                                    $grade = 75;
+                                                                                                                                } elseif ($finalGrade >= 56.00) {
+                                                                                                                                    $grade = 74;
+                                                                                                                                } elseif ($finalGrade >= 52.00) {
+                                                                                                                                    $grade = 73;
+                                                                                                                                } elseif ($finalGrade >= 48.00) {
+                                                                                                                                    $grade = 72;
+                                                                                                                                } elseif ($finalGrade >= 44.00) {
+                                                                                                                                    $grade = 71;
+                                                                                                                                } elseif ($finalGrade >= 40.00) {
+                                                                                                                                    $grade = 70;
+                                                                                                                                } elseif ($finalGrade >= 36.00) {
+                                                                                                                                    $grade = 69;
+                                                                                                                                } elseif ($finalGrade >= 32.00) {
+                                                                                                                                    $grade = 68;
+                                                                                                                                } elseif ($finalGrade >= 28.00) {
+                                                                                                                                    $grade = 67;
+                                                                                                                                } elseif ($finalGrade >= 24.00) {
+                                                                                                                                    $grade = 66;
+                                                                                                                                } elseif ($finalGrade >= 20.00) {
+                                                                                                                                    $grade = 65;
+                                                                                                                                } elseif ($finalGrade >= 16.00) {
+                                                                                                                                    $grade = 64;
+                                                                                                                                } elseif ($finalGrade >= 12.00) {
+                                                                                                                                    $grade = 63;
+                                                                                                                                } elseif ($finalGrade >= 8.00) {
+                                                                                                                                    $grade = 62;
+                                                                                                                                } elseif ($finalGrade >= 4.00) {
+                                                                                                                                    $grade = 61;
+                                                                                                                                } else {
+                                                                                                                                    $grade = 60;
+                                                                                                                                }
+                                                                                                                            @endphp
+
+                                                                                                                            {{ $grade }}
+                                                                                                                        </td>
                                                                     <td
                                                                         class="border border-gray-600 text-center px-4 py-2">
-                                                                        {{ round($totalFinalGrade / $count, 2) }}
-                                                                    </td>
-                                                                    <td
-                                                                        class="border border-gray-600 text-center px-4 py-2">
-                                                                        @if (round($totalFinalGrade / $count, 2) < 75)
+                                                                        @if (round($grade, 2) < 75)
                                                                             Failed
                                                                         @else
                                                                             Passed
@@ -673,13 +1017,99 @@
                                                                     <td
                                                                         class="border border-gray-600 text-center px-4 py-2">
                                                                     </td>
+                                                                    <td class="border border-gray-600 text-center px-4 py-2">
+                                                                                                                            @php
+                                                                                                                                $finalGrade = round($totalFinalGrade / $count, 2);
+                                                                                                                                if ($finalGrade >= 100) {
+                                                                                                                                    $grade = 100;
+                                                                                                                                } elseif ($finalGrade >= 98.40) {
+                                                                                                                                    $grade = 99;
+                                                                                                                                } elseif ($finalGrade >= 96.80) {
+                                                                                                                                    $grade = 98;
+                                                                                                                                } elseif ($finalGrade >= 95.20) {
+                                                                                                                                    $grade = 97;
+                                                                                                                                } elseif ($finalGrade >= 93.60) {
+                                                                                                                                    $grade = 96;
+                                                                                                                                } elseif ($finalGrade >= 92.00) {
+                                                                                                                                    $grade = 95;
+                                                                                                                                } elseif ($finalGrade >= 90.40) {
+                                                                                                                                    $grade = 94;
+                                                                                                                                } elseif ($finalGrade >= 88.80) {
+                                                                                                                                    $grade = 93;
+                                                                                                                                } elseif ($finalGrade >= 87.20) {
+                                                                                                                                    $grade = 92;
+                                                                                                                                } elseif ($finalGrade >= 85.60) {
+                                                                                                                                    $grade = 91;
+                                                                                                                                } elseif ($finalGrade >= 84.00) {
+                                                                                                                                    $grade = 90;
+                                                                                                                                } elseif ($finalGrade >= 82.40) {
+                                                                                                                                    $grade = 89;
+                                                                                                                                } elseif ($finalGrade >= 80.80) {
+                                                                                                                                    $grade = 88;
+                                                                                                                                } elseif ($finalGrade >= 79.20) {
+                                                                                                                                    $grade = 87;
+                                                                                                                                } elseif ($finalGrade >= 77.60) {
+                                                                                                                                    $grade = 86;
+                                                                                                                                } elseif ($finalGrade >= 76.00) {
+                                                                                                                                    $grade = 85;
+                                                                                                                                } elseif ($finalGrade >= 74.40) {
+                                                                                                                                    $grade = 84;
+                                                                                                                                } elseif ($finalGrade >= 72.80) {
+                                                                                                                                    $grade = 83;
+                                                                                                                                } elseif ($finalGrade >= 71.20) {
+                                                                                                                                    $grade = 82;
+                                                                                                                                } elseif ($finalGrade >= 69.60) {
+                                                                                                                                    $grade = 81;
+                                                                                                                                } elseif ($finalGrade >= 68.00) {
+                                                                                                                                    $grade = 80;
+                                                                                                                                } elseif ($finalGrade >= 66.40) {
+                                                                                                                                    $grade = 79;
+                                                                                                                                } elseif ($finalGrade >= 64.80) {
+                                                                                                                                    $grade = 78;
+                                                                                                                                } elseif ($finalGrade >= 63.20) {
+                                                                                                                                    $grade = 77;
+                                                                                                                                } elseif ($finalGrade >= 61.60) {
+                                                                                                                                    $grade = 76;
+                                                                                                                                } elseif ($finalGrade >= 60.00) {
+                                                                                                                                    $grade = 75;
+                                                                                                                                } elseif ($finalGrade >= 56.00) {
+                                                                                                                                    $grade = 74;
+                                                                                                                                } elseif ($finalGrade >= 52.00) {
+                                                                                                                                    $grade = 73;
+                                                                                                                                } elseif ($finalGrade >= 48.00) {
+                                                                                                                                    $grade = 72;
+                                                                                                                                } elseif ($finalGrade >= 44.00) {
+                                                                                                                                    $grade = 71;
+                                                                                                                                } elseif ($finalGrade >= 40.00) {
+                                                                                                                                    $grade = 70;
+                                                                                                                                } elseif ($finalGrade >= 36.00) {
+                                                                                                                                    $grade = 69;
+                                                                                                                                } elseif ($finalGrade >= 32.00) {
+                                                                                                                                    $grade = 68;
+                                                                                                                                } elseif ($finalGrade >= 28.00) {
+                                                                                                                                    $grade = 67;
+                                                                                                                                } elseif ($finalGrade >= 24.00) {
+                                                                                                                                    $grade = 66;
+                                                                                                                                } elseif ($finalGrade >= 20.00) {
+                                                                                                                                    $grade = 65;
+                                                                                                                                } elseif ($finalGrade >= 16.00) {
+                                                                                                                                    $grade = 64;
+                                                                                                                                } elseif ($finalGrade >= 12.00) {
+                                                                                                                                    $grade = 63;
+                                                                                                                                } elseif ($finalGrade >= 8.00) {
+                                                                                                                                    $grade = 62;
+                                                                                                                                } elseif ($finalGrade >= 4.00) {
+                                                                                                                                    $grade = 61;
+                                                                                                                                } else {
+                                                                                                                                    $grade = 60;
+                                                                                                                                }
+                                                                                                                            @endphp
+
+                                                                                                                            {{ $grade }}
+                                                                                                                        </td>
                                                                     <td
                                                                         class="border border-gray-600 text-center px-4 py-2">
-                                                                        {{ round($totalFinalGrade / $count, 2) }}
-                                                                    </td>
-                                                                    <td
-                                                                        class="border border-gray-600 text-center px-4 py-2">
-                                                                        @if (round($totalFinalGrade / $count, 2) < 75)
+                                                                        @if (round($grade, 2) < 75)
                                                                             Failed
                                                                         @else
                                                                             Passed
@@ -802,10 +1232,96 @@
                                                                     <td
                                                                         class="border border-gray-600 text-center px-4 py-2">
                                                                     </td>
-                                                                    <td
-                                                                        class="border border-gray-600 text-center px-4 py-2">
-                                                                        {{ round($totalFinalGrade / $count, 2) }}
-                                                                    </td>
+                                                                    <td class="border border-gray-600 text-center px-4 py-2">
+                                                                                                                            @php
+                                                                                                                                $finalGrade = round($totalFinalGrade / $count, 2);
+                                                                                                                                if ($finalGrade >= 100) {
+                                                                                                                                    $grade = 100;
+                                                                                                                                } elseif ($finalGrade >= 98.40) {
+                                                                                                                                    $grade = 99;
+                                                                                                                                } elseif ($finalGrade >= 96.80) {
+                                                                                                                                    $grade = 98;
+                                                                                                                                } elseif ($finalGrade >= 95.20) {
+                                                                                                                                    $grade = 97;
+                                                                                                                                } elseif ($finalGrade >= 93.60) {
+                                                                                                                                    $grade = 96;
+                                                                                                                                } elseif ($finalGrade >= 92.00) {
+                                                                                                                                    $grade = 95;
+                                                                                                                                } elseif ($finalGrade >= 90.40) {
+                                                                                                                                    $grade = 94;
+                                                                                                                                } elseif ($finalGrade >= 88.80) {
+                                                                                                                                    $grade = 93;
+                                                                                                                                } elseif ($finalGrade >= 87.20) {
+                                                                                                                                    $grade = 92;
+                                                                                                                                } elseif ($finalGrade >= 85.60) {
+                                                                                                                                    $grade = 91;
+                                                                                                                                } elseif ($finalGrade >= 84.00) {
+                                                                                                                                    $grade = 90;
+                                                                                                                                } elseif ($finalGrade >= 82.40) {
+                                                                                                                                    $grade = 89;
+                                                                                                                                } elseif ($finalGrade >= 80.80) {
+                                                                                                                                    $grade = 88;
+                                                                                                                                } elseif ($finalGrade >= 79.20) {
+                                                                                                                                    $grade = 87;
+                                                                                                                                } elseif ($finalGrade >= 77.60) {
+                                                                                                                                    $grade = 86;
+                                                                                                                                } elseif ($finalGrade >= 76.00) {
+                                                                                                                                    $grade = 85;
+                                                                                                                                } elseif ($finalGrade >= 74.40) {
+                                                                                                                                    $grade = 84;
+                                                                                                                                } elseif ($finalGrade >= 72.80) {
+                                                                                                                                    $grade = 83;
+                                                                                                                                } elseif ($finalGrade >= 71.20) {
+                                                                                                                                    $grade = 82;
+                                                                                                                                } elseif ($finalGrade >= 69.60) {
+                                                                                                                                    $grade = 81;
+                                                                                                                                } elseif ($finalGrade >= 68.00) {
+                                                                                                                                    $grade = 80;
+                                                                                                                                } elseif ($finalGrade >= 66.40) {
+                                                                                                                                    $grade = 79;
+                                                                                                                                } elseif ($finalGrade >= 64.80) {
+                                                                                                                                    $grade = 78;
+                                                                                                                                } elseif ($finalGrade >= 63.20) {
+                                                                                                                                    $grade = 77;
+                                                                                                                                } elseif ($finalGrade >= 61.60) {
+                                                                                                                                    $grade = 76;
+                                                                                                                                } elseif ($finalGrade >= 60.00) {
+                                                                                                                                    $grade = 75;
+                                                                                                                                } elseif ($finalGrade >= 56.00) {
+                                                                                                                                    $grade = 74;
+                                                                                                                                } elseif ($finalGrade >= 52.00) {
+                                                                                                                                    $grade = 73;
+                                                                                                                                } elseif ($finalGrade >= 48.00) {
+                                                                                                                                    $grade = 72;
+                                                                                                                                } elseif ($finalGrade >= 44.00) {
+                                                                                                                                    $grade = 71;
+                                                                                                                                } elseif ($finalGrade >= 40.00) {
+                                                                                                                                    $grade = 70;
+                                                                                                                                } elseif ($finalGrade >= 36.00) {
+                                                                                                                                    $grade = 69;
+                                                                                                                                } elseif ($finalGrade >= 32.00) {
+                                                                                                                                    $grade = 68;
+                                                                                                                                } elseif ($finalGrade >= 28.00) {
+                                                                                                                                    $grade = 67;
+                                                                                                                                } elseif ($finalGrade >= 24.00) {
+                                                                                                                                    $grade = 66;
+                                                                                                                                } elseif ($finalGrade >= 20.00) {
+                                                                                                                                    $grade = 65;
+                                                                                                                                } elseif ($finalGrade >= 16.00) {
+                                                                                                                                    $grade = 64;
+                                                                                                                                } elseif ($finalGrade >= 12.00) {
+                                                                                                                                    $grade = 63;
+                                                                                                                                } elseif ($finalGrade >= 8.00) {
+                                                                                                                                    $grade = 62;
+                                                                                                                                } elseif ($finalGrade >= 4.00) {
+                                                                                                                                    $grade = 61;
+                                                                                                                                } else {
+                                                                                                                                    $grade = 60;
+                                                                                                                                }
+                                                                                                                            @endphp
+
+                                                                                                                            {{ $grade }}
+                                                                                                                        </td>
                                                                     <td
                                                                         class="border border-gray-600 text-center px-4 py-2">
                                                                         @if (round($totalFinalGrade / $count, 2) < 75)

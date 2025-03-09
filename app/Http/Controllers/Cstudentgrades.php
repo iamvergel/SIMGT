@@ -633,7 +633,7 @@ class Cstudentgrades extends Controller
     public function getGradeFiveSections()
     {
         // Fetch all distinct sections from the StudentInfo model where section is not null or empty
-        $sections = StuSectiondentInfo::whereNotNull('section')  // Ensure section is not null
+        $sections = Section::whereNotNull('section')  // Ensure section is not null
             ->where('section', '!=', '') // Ensure section is not an empty string
             ->where('grade', 'Grade Five')
             ->distinct()  // Get only distinct sections

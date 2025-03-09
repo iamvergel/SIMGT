@@ -11,7 +11,7 @@ const currentDate = new Date().toLocaleDateString();
 $("#downloadHtmlButton").on("click", function () {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    const logoUrl = '/assets/images/SELC.png';
+    const logoUrl = "/assets/images/SELC.png";
     const topMargin = 5;
 
     const logoWidth = 15;
@@ -156,10 +156,96 @@ $("#downloadHtmlButton").on("click", function () {
 
     // Add average and remarks at the bottom
     const average = (totalGrades / subjects.length).toFixed(2);
-    const remark = average >= 75 ? "Passed" : "Failed";
+    let finalGrade;
+
+    if (average >= 100) {
+        finalGrade = 100;
+    } else if (average >= 98.4) {
+        finalGrade = 99;
+    } else if (average >= 96.8) {
+        finalGrade = 98;
+    } else if (average >= 95.2) {
+        finalGrade = 97;
+    } else if (average >= 93.6) {
+        finalGrade = 96;
+    } else if (average >= 92.0) {
+        finalGrade = 95;
+    } else if (average >= 90.4) {
+        finalGrade = 94;
+    } else if (average >= 88.8) {
+        finalGrade = 93;
+    } else if (average >= 87.2) {
+        finalGrade = 92;
+    } else if (average >= 85.6) {
+        finalGrade = 91;
+    } else if (average >= 84.0) {
+        finalGrade = 90;
+    } else if (average >= 82.4) {
+        finalGrade = 89;
+    } else if (average >= 80.8) {
+        finalGrade = 88;
+    } else if (average >= 79.2) {
+        finalGrade = 87;
+    } else if (average >= 77.6) {
+        finalGrade = 86;
+    } else if (average >= 76.0) {
+        finalGrade = 85;
+    } else if (average >= 74.4) {
+        finalGrade = 84;
+    } else if (average >= 72.8) {
+        finalGrade = 83;
+    } else if (average >= 71.2) {
+        finalGrade = 82;
+    } else if (average >= 69.6) {
+        finalGrade = 81;
+    } else if (average >= 68.0) {
+        finalGrade = 80;
+    } else if (average >= 66.4) {
+        finalGrade = 79;
+    } else if (average >= 64.8) {
+        finalGrade = 78;
+    } else if (average >= 63.2) {
+        finalGrade = 77;
+    } else if (average >= 61.6) {
+        finalGrade = 76;
+    } else if (average >= 60.0) {
+        finalGrade = 75;
+    } else if (average >= 56.0) {
+        finalGrade = 74;
+    } else if (average >= 52.0) {
+        finalGrade = 73;
+    } else if (average >= 48.0) {
+        finalGrade = 72;
+    } else if (average >= 44.0) {
+        finalGrade = 71;
+    } else if (average >= 40.0) {
+        finalGrade = 70;
+    } else if (average >= 36.0) {
+        finalGrade = 69;
+    } else if (average >= 32.0) {
+        finalGrade = 68;
+    } else if (average >= 28.0) {
+        finalGrade = 67;
+    } else if (average >= 24.0) {
+        finalGrade = 66;
+    } else if (average >= 20.0) {
+        finalGrade = 65;
+    } else if (average >= 16.0) {
+        finalGrade = 64;
+    } else if (average >= 12.0) {
+        finalGrade = 63;
+    } else if (average >= 8.0) {
+        finalGrade = 62;
+    } else if (average >= 4.0) {
+        finalGrade = 61;
+    } else {
+        finalGrade = 60;
+    }
+
+    const remark = finalGrade >= 75 ? "Passed" : "Failed";
 
     doc.text(
-        `General Average: ${average}`,
+        `General Average: ${finalGrade}`,
         bstartX,
         startY + headerHeight + (subjects.length + 2) * cellHeight
     );
@@ -304,12 +390,99 @@ $("#printHtmlButton").on("click", function () {
             subjectsCount++;
         }
     });
+
     const average = (totalGrades / subjectsCount).toFixed(2);
-    const remark = average >= 75 ? "Passed" : "Failed";
+    let finalGrade;
+
+    if (average >= 100) {
+        finalGrade = 100;
+    } else if (average >= 98.4) {
+        finalGrade = 99;
+    } else if (average >= 96.8) {
+        finalGrade = 98;
+    } else if (average >= 95.2) {
+        finalGrade = 97;
+    } else if (average >= 93.6) {
+        finalGrade = 96;
+    } else if (average >= 92.0) {
+        finalGrade = 95;
+    } else if (average >= 90.4) {
+        finalGrade = 94;
+    } else if (average >= 88.8) {
+        finalGrade = 93;
+    } else if (average >= 87.2) {
+        finalGrade = 92;
+    } else if (average >= 85.6) {
+        finalGrade = 91;
+    } else if (average >= 84.0) {
+        finalGrade = 90;
+    } else if (average >= 82.4) {
+        finalGrade = 89;
+    } else if (average >= 80.8) {
+        finalGrade = 88;
+    } else if (average >= 79.2) {
+        finalGrade = 87;
+    } else if (average >= 77.6) {
+        finalGrade = 86;
+    } else if (average >= 76.0) {
+        finalGrade = 85;
+    } else if (average >= 74.4) {
+        finalGrade = 84;
+    } else if (average >= 72.8) {
+        finalGrade = 83;
+    } else if (average >= 71.2) {
+        finalGrade = 82;
+    } else if (average >= 69.6) {
+        finalGrade = 81;
+    } else if (average >= 68.0) {
+        finalGrade = 80;
+    } else if (average >= 66.4) {
+        finalGrade = 79;
+    } else if (average >= 64.8) {
+        finalGrade = 78;
+    } else if (average >= 63.2) {
+        finalGrade = 77;
+    } else if (average >= 61.6) {
+        finalGrade = 76;
+    } else if (average >= 60.0) {
+        finalGrade = 75;
+    } else if (average >= 56.0) {
+        finalGrade = 74;
+    } else if (average >= 52.0) {
+        finalGrade = 73;
+    } else if (average >= 48.0) {
+        finalGrade = 72;
+    } else if (average >= 44.0) {
+        finalGrade = 71;
+    } else if (average >= 40.0) {
+        finalGrade = 70;
+    } else if (average >= 36.0) {
+        finalGrade = 69;
+    } else if (average >= 32.0) {
+        finalGrade = 68;
+    } else if (average >= 28.0) {
+        finalGrade = 67;
+    } else if (average >= 24.0) {
+        finalGrade = 66;
+    } else if (average >= 20.0) {
+        finalGrade = 65;
+    } else if (average >= 16.0) {
+        finalGrade = 64;
+    } else if (average >= 12.0) {
+        finalGrade = 63;
+    } else if (average >= 8.0) {
+        finalGrade = 62;
+    } else if (average >= 4.0) {
+        finalGrade = 61;
+    } else {
+        finalGrade = 60;
+    }
+
+    const remark = finalGrade >= 75 ? "Passed" : "Failed";
 
     printWindow.document.write(
         '<tr><td colspan="5"><strong>General Average: ' +
-            average +
+            finalGrade +
             '</strong></td><td colspan="2"><strong>Remark: ' +
             remark +
             "</strong></td></tr>"
@@ -325,7 +498,7 @@ $("#printHtmlButton").on("click", function () {
 $("#downloadHtmlButtonTwo").on("click", function () {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    const logoUrl = '/assets/images/SELC.png';
+    const logoUrl = "/assets/images/SELC.png";
     const topMargin = 5;
 
     const logoWidth = 15;
@@ -470,17 +643,103 @@ $("#downloadHtmlButtonTwo").on("click", function () {
 
     // Add average and remarks at the bottom
     const average = (totalGrades / subjects.length).toFixed(2);
-    const remark = average >= 75 ? "Passed" : "Failed";
+    let finalGrade;
+
+    if (average >= 100) {
+        finalGrade = 100;
+    } else if (average >= 98.4) {
+        finalGrade = 99;
+    } else if (average >= 96.8) {
+        finalGrade = 98;
+    } else if (average >= 95.2) {
+        finalGrade = 97;
+    } else if (average >= 93.6) {
+        finalGrade = 96;
+    } else if (average >= 92.0) {
+        finalGrade = 95;
+    } else if (average >= 90.4) {
+        finalGrade = 94;
+    } else if (average >= 88.8) {
+        finalGrade = 93;
+    } else if (average >= 87.2) {
+        finalGrade = 92;
+    } else if (average >= 85.6) {
+        finalGrade = 91;
+    } else if (average >= 84.0) {
+        finalGrade = 90;
+    } else if (average >= 82.4) {
+        finalGrade = 89;
+    } else if (average >= 80.8) {
+        finalGrade = 88;
+    } else if (average >= 79.2) {
+        finalGrade = 87;
+    } else if (average >= 77.6) {
+        finalGrade = 86;
+    } else if (average >= 76.0) {
+        finalGrade = 85;
+    } else if (average >= 74.4) {
+        finalGrade = 84;
+    } else if (average >= 72.8) {
+        finalGrade = 83;
+    } else if (average >= 71.2) {
+        finalGrade = 82;
+    } else if (average >= 69.6) {
+        finalGrade = 81;
+    } else if (average >= 68.0) {
+        finalGrade = 80;
+    } else if (average >= 66.4) {
+        finalGrade = 79;
+    } else if (average >= 64.8) {
+        finalGrade = 78;
+    } else if (average >= 63.2) {
+        finalGrade = 77;
+    } else if (average >= 61.6) {
+        finalGrade = 76;
+    } else if (average >= 60.0) {
+        finalGrade = 75;
+    } else if (average >= 56.0) {
+        finalGrade = 74;
+    } else if (average >= 52.0) {
+        finalGrade = 73;
+    } else if (average >= 48.0) {
+        finalGrade = 72;
+    } else if (average >= 44.0) {
+        finalGrade = 71;
+    } else if (average >= 40.0) {
+        finalGrade = 70;
+    } else if (average >= 36.0) {
+        finalGrade = 69;
+    } else if (average >= 32.0) {
+        finalGrade = 68;
+    } else if (average >= 28.0) {
+        finalGrade = 67;
+    } else if (average >= 24.0) {
+        finalGrade = 66;
+    } else if (average >= 20.0) {
+        finalGrade = 65;
+    } else if (average >= 16.0) {
+        finalGrade = 64;
+    } else if (average >= 12.0) {
+        finalGrade = 63;
+    } else if (average >= 8.0) {
+        finalGrade = 62;
+    } else if (average >= 4.0) {
+        finalGrade = 61;
+    } else {
+        finalGrade = 60;
+    }
+
+    const remark = finalGrade >= 75 ? "Passed" : "Failed";
 
     doc.text(
-        `General Average: ${average}`,
+        `General Average: ${finalGrade}`,
         bstartX,
-        startY + headerHeight + (subjects.length + 4) * cellHeight
+        startY + headerHeight + (subjects.length + 2) * cellHeight
     );
     doc.text(
         `Remark: ${remark}`,
         bstartX + bcolumnWidth * 6 - margin,
-        startY + headerHeight + (subjects.length + 4) * cellHeight
+        startY + headerHeight + (subjects.length + 2) * cellHeight
     );
 
     // Create a new Date object
@@ -619,11 +878,97 @@ $("#printHtmlButtonTwo").on("click", function () {
         }
     });
     const average = (totalGrades / subjectsCount).toFixed(2);
-    const remark = average >= 75 ? "Passed" : "Failed";
+    let finalGrade;
+
+    if (average >= 100) {
+        finalGrade = 100;
+    } else if (average >= 98.4) {
+        finalGrade = 99;
+    } else if (average >= 96.8) {
+        finalGrade = 98;
+    } else if (average >= 95.2) {
+        finalGrade = 97;
+    } else if (average >= 93.6) {
+        finalGrade = 96;
+    } else if (average >= 92.0) {
+        finalGrade = 95;
+    } else if (average >= 90.4) {
+        finalGrade = 94;
+    } else if (average >= 88.8) {
+        finalGrade = 93;
+    } else if (average >= 87.2) {
+        finalGrade = 92;
+    } else if (average >= 85.6) {
+        finalGrade = 91;
+    } else if (average >= 84.0) {
+        finalGrade = 90;
+    } else if (average >= 82.4) {
+        finalGrade = 89;
+    } else if (average >= 80.8) {
+        finalGrade = 88;
+    } else if (average >= 79.2) {
+        finalGrade = 87;
+    } else if (average >= 77.6) {
+        finalGrade = 86;
+    } else if (average >= 76.0) {
+        finalGrade = 85;
+    } else if (average >= 74.4) {
+        finalGrade = 84;
+    } else if (average >= 72.8) {
+        finalGrade = 83;
+    } else if (average >= 71.2) {
+        finalGrade = 82;
+    } else if (average >= 69.6) {
+        finalGrade = 81;
+    } else if (average >= 68.0) {
+        finalGrade = 80;
+    } else if (average >= 66.4) {
+        finalGrade = 79;
+    } else if (average >= 64.8) {
+        finalGrade = 78;
+    } else if (average >= 63.2) {
+        finalGrade = 77;
+    } else if (average >= 61.6) {
+        finalGrade = 76;
+    } else if (average >= 60.0) {
+        finalGrade = 75;
+    } else if (average >= 56.0) {
+        finalGrade = 74;
+    } else if (average >= 52.0) {
+        finalGrade = 73;
+    } else if (average >= 48.0) {
+        finalGrade = 72;
+    } else if (average >= 44.0) {
+        finalGrade = 71;
+    } else if (average >= 40.0) {
+        finalGrade = 70;
+    } else if (average >= 36.0) {
+        finalGrade = 69;
+    } else if (average >= 32.0) {
+        finalGrade = 68;
+    } else if (average >= 28.0) {
+        finalGrade = 67;
+    } else if (average >= 24.0) {
+        finalGrade = 66;
+    } else if (average >= 20.0) {
+        finalGrade = 65;
+    } else if (average >= 16.0) {
+        finalGrade = 64;
+    } else if (average >= 12.0) {
+        finalGrade = 63;
+    } else if (average >= 8.0) {
+        finalGrade = 62;
+    } else if (average >= 4.0) {
+        finalGrade = 61;
+    } else {
+        finalGrade = 60;
+    }
+
+    const remark = finalGrade >= 75 ? "Passed" : "Failed";
 
     printWindow.document.write(
         '<tr><td colspan="5"><strong>General Average: ' +
-            average +
+            finalGrade +
             '</strong></td><td colspan="2"><strong>Remark: ' +
             remark +
             "</strong></td></tr>"
@@ -639,7 +984,7 @@ $("#printHtmlButtonTwo").on("click", function () {
 $("#downloadHtmlButtonThree").on("click", function () {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    const logoUrl = '/assets/images/SELC.png';
+    const logoUrl = "/assets/images/SELC.png";
     const topMargin = 5;
 
     const logoWidth = 15;
@@ -784,17 +1129,103 @@ $("#downloadHtmlButtonThree").on("click", function () {
 
     // Add average and remarks at the bottom
     const average = (totalGrades / subjects.length).toFixed(2);
-    const remark = average >= 75 ? "Passed" : "Failed";
+    let finalGrade;
+
+    if (average >= 100) {
+        finalGrade = 100;
+    } else if (average >= 98.4) {
+        finalGrade = 99;
+    } else if (average >= 96.8) {
+        finalGrade = 98;
+    } else if (average >= 95.2) {
+        finalGrade = 97;
+    } else if (average >= 93.6) {
+        finalGrade = 96;
+    } else if (average >= 92.0) {
+        finalGrade = 95;
+    } else if (average >= 90.4) {
+        finalGrade = 94;
+    } else if (average >= 88.8) {
+        finalGrade = 93;
+    } else if (average >= 87.2) {
+        finalGrade = 92;
+    } else if (average >= 85.6) {
+        finalGrade = 91;
+    } else if (average >= 84.0) {
+        finalGrade = 90;
+    } else if (average >= 82.4) {
+        finalGrade = 89;
+    } else if (average >= 80.8) {
+        finalGrade = 88;
+    } else if (average >= 79.2) {
+        finalGrade = 87;
+    } else if (average >= 77.6) {
+        finalGrade = 86;
+    } else if (average >= 76.0) {
+        finalGrade = 85;
+    } else if (average >= 74.4) {
+        finalGrade = 84;
+    } else if (average >= 72.8) {
+        finalGrade = 83;
+    } else if (average >= 71.2) {
+        finalGrade = 82;
+    } else if (average >= 69.6) {
+        finalGrade = 81;
+    } else if (average >= 68.0) {
+        finalGrade = 80;
+    } else if (average >= 66.4) {
+        finalGrade = 79;
+    } else if (average >= 64.8) {
+        finalGrade = 78;
+    } else if (average >= 63.2) {
+        finalGrade = 77;
+    } else if (average >= 61.6) {
+        finalGrade = 76;
+    } else if (average >= 60.0) {
+        finalGrade = 75;
+    } else if (average >= 56.0) {
+        finalGrade = 74;
+    } else if (average >= 52.0) {
+        finalGrade = 73;
+    } else if (average >= 48.0) {
+        finalGrade = 72;
+    } else if (average >= 44.0) {
+        finalGrade = 71;
+    } else if (average >= 40.0) {
+        finalGrade = 70;
+    } else if (average >= 36.0) {
+        finalGrade = 69;
+    } else if (average >= 32.0) {
+        finalGrade = 68;
+    } else if (average >= 28.0) {
+        finalGrade = 67;
+    } else if (average >= 24.0) {
+        finalGrade = 66;
+    } else if (average >= 20.0) {
+        finalGrade = 65;
+    } else if (average >= 16.0) {
+        finalGrade = 64;
+    } else if (average >= 12.0) {
+        finalGrade = 63;
+    } else if (average >= 8.0) {
+        finalGrade = 62;
+    } else if (average >= 4.0) {
+        finalGrade = 61;
+    } else {
+        finalGrade = 60;
+    }
+
+    const remark = finalGrade >= 75 ? "Passed" : "Failed";
 
     doc.text(
-        `General Average: ${average}`,
+        `General Average: ${finalGrade}`,
         bstartX,
-        startY + headerHeight + (subjects.length + 4) * cellHeight
+        startY + headerHeight + (subjects.length + 2) * cellHeight
     );
     doc.text(
         `Remark: ${remark}`,
         bstartX + bcolumnWidth * 6 - margin,
-        startY + headerHeight + (subjects.length + 4) * cellHeight
+        startY + headerHeight + (subjects.length + 2) * cellHeight
     );
 
     // Create a new Date object
@@ -933,11 +1364,97 @@ $("#printHtmlButtonThree").on("click", function () {
         }
     });
     const average = (totalGrades / subjectsCount).toFixed(2);
-    const remark = average >= 75 ? "Passed" : "Failed";
+    let finalGrade;
+
+    if (average >= 100) {
+        finalGrade = 100;
+    } else if (average >= 98.4) {
+        finalGrade = 99;
+    } else if (average >= 96.8) {
+        finalGrade = 98;
+    } else if (average >= 95.2) {
+        finalGrade = 97;
+    } else if (average >= 93.6) {
+        finalGrade = 96;
+    } else if (average >= 92.0) {
+        finalGrade = 95;
+    } else if (average >= 90.4) {
+        finalGrade = 94;
+    } else if (average >= 88.8) {
+        finalGrade = 93;
+    } else if (average >= 87.2) {
+        finalGrade = 92;
+    } else if (average >= 85.6) {
+        finalGrade = 91;
+    } else if (average >= 84.0) {
+        finalGrade = 90;
+    } else if (average >= 82.4) {
+        finalGrade = 89;
+    } else if (average >= 80.8) {
+        finalGrade = 88;
+    } else if (average >= 79.2) {
+        finalGrade = 87;
+    } else if (average >= 77.6) {
+        finalGrade = 86;
+    } else if (average >= 76.0) {
+        finalGrade = 85;
+    } else if (average >= 74.4) {
+        finalGrade = 84;
+    } else if (average >= 72.8) {
+        finalGrade = 83;
+    } else if (average >= 71.2) {
+        finalGrade = 82;
+    } else if (average >= 69.6) {
+        finalGrade = 81;
+    } else if (average >= 68.0) {
+        finalGrade = 80;
+    } else if (average >= 66.4) {
+        finalGrade = 79;
+    } else if (average >= 64.8) {
+        finalGrade = 78;
+    } else if (average >= 63.2) {
+        finalGrade = 77;
+    } else if (average >= 61.6) {
+        finalGrade = 76;
+    } else if (average >= 60.0) {
+        finalGrade = 75;
+    } else if (average >= 56.0) {
+        finalGrade = 74;
+    } else if (average >= 52.0) {
+        finalGrade = 73;
+    } else if (average >= 48.0) {
+        finalGrade = 72;
+    } else if (average >= 44.0) {
+        finalGrade = 71;
+    } else if (average >= 40.0) {
+        finalGrade = 70;
+    } else if (average >= 36.0) {
+        finalGrade = 69;
+    } else if (average >= 32.0) {
+        finalGrade = 68;
+    } else if (average >= 28.0) {
+        finalGrade = 67;
+    } else if (average >= 24.0) {
+        finalGrade = 66;
+    } else if (average >= 20.0) {
+        finalGrade = 65;
+    } else if (average >= 16.0) {
+        finalGrade = 64;
+    } else if (average >= 12.0) {
+        finalGrade = 63;
+    } else if (average >= 8.0) {
+        finalGrade = 62;
+    } else if (average >= 4.0) {
+        finalGrade = 61;
+    } else {
+        finalGrade = 60;
+    }
+
+    const remark = finalGrade >= 75 ? "Passed" : "Failed";
 
     printWindow.document.write(
         '<tr><td colspan="5"><strong>General Average: ' +
-            average +
+            finalGrade +
             '</strong></td><td colspan="2"><strong>Remark: ' +
             remark +
             "</strong></td></tr>"
@@ -953,7 +1470,7 @@ $("#printHtmlButtonThree").on("click", function () {
 $("#downloadHtmlButtonFour").on("click", function () {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    const logoUrl = '/assets/images/SELC.png';
+    const logoUrl = "/assets/images/SELC.png";
     const topMargin = 5;
 
     const logoWidth = 15;
@@ -1098,17 +1615,103 @@ $("#downloadHtmlButtonFour").on("click", function () {
 
     // Add average and remarks at the bottom
     const average = (totalGrades / subjects.length).toFixed(2);
-    const remark = average >= 75 ? "Passed" : "Failed";
+    let finalGrade;
+
+    if (average >= 100) {
+        finalGrade = 100;
+    } else if (average >= 98.4) {
+        finalGrade = 99;
+    } else if (average >= 96.8) {
+        finalGrade = 98;
+    } else if (average >= 95.2) {
+        finalGrade = 97;
+    } else if (average >= 93.6) {
+        finalGrade = 96;
+    } else if (average >= 92.0) {
+        finalGrade = 95;
+    } else if (average >= 90.4) {
+        finalGrade = 94;
+    } else if (average >= 88.8) {
+        finalGrade = 93;
+    } else if (average >= 87.2) {
+        finalGrade = 92;
+    } else if (average >= 85.6) {
+        finalGrade = 91;
+    } else if (average >= 84.0) {
+        finalGrade = 90;
+    } else if (average >= 82.4) {
+        finalGrade = 89;
+    } else if (average >= 80.8) {
+        finalGrade = 88;
+    } else if (average >= 79.2) {
+        finalGrade = 87;
+    } else if (average >= 77.6) {
+        finalGrade = 86;
+    } else if (average >= 76.0) {
+        finalGrade = 85;
+    } else if (average >= 74.4) {
+        finalGrade = 84;
+    } else if (average >= 72.8) {
+        finalGrade = 83;
+    } else if (average >= 71.2) {
+        finalGrade = 82;
+    } else if (average >= 69.6) {
+        finalGrade = 81;
+    } else if (average >= 68.0) {
+        finalGrade = 80;
+    } else if (average >= 66.4) {
+        finalGrade = 79;
+    } else if (average >= 64.8) {
+        finalGrade = 78;
+    } else if (average >= 63.2) {
+        finalGrade = 77;
+    } else if (average >= 61.6) {
+        finalGrade = 76;
+    } else if (average >= 60.0) {
+        finalGrade = 75;
+    } else if (average >= 56.0) {
+        finalGrade = 74;
+    } else if (average >= 52.0) {
+        finalGrade = 73;
+    } else if (average >= 48.0) {
+        finalGrade = 72;
+    } else if (average >= 44.0) {
+        finalGrade = 71;
+    } else if (average >= 40.0) {
+        finalGrade = 70;
+    } else if (average >= 36.0) {
+        finalGrade = 69;
+    } else if (average >= 32.0) {
+        finalGrade = 68;
+    } else if (average >= 28.0) {
+        finalGrade = 67;
+    } else if (average >= 24.0) {
+        finalGrade = 66;
+    } else if (average >= 20.0) {
+        finalGrade = 65;
+    } else if (average >= 16.0) {
+        finalGrade = 64;
+    } else if (average >= 12.0) {
+        finalGrade = 63;
+    } else if (average >= 8.0) {
+        finalGrade = 62;
+    } else if (average >= 4.0) {
+        finalGrade = 61;
+    } else {
+        finalGrade = 60;
+    }
+
+    const remark = finalGrade >= 75 ? "Passed" : "Failed";
 
     doc.text(
-        `General Average: ${average}`,
+        `General Average: ${finalGrade}`,
         bstartX,
-        startY + headerHeight + (subjects.length + 6) * cellHeight
+        startY + headerHeight + (subjects.length + 2) * cellHeight
     );
     doc.text(
         `Remark: ${remark}`,
         bstartX + bcolumnWidth * 6 - margin,
-        startY + headerHeight + (subjects.length + 6) * cellHeight
+        startY + headerHeight + (subjects.length + 2) * cellHeight
     );
 
     // Create a new Date object
@@ -1247,11 +1850,97 @@ $("#printHtmlButtonFour").on("click", function () {
         }
     });
     const average = (totalGrades / subjectsCount).toFixed(2);
-    const remark = average >= 75 ? "Passed" : "Failed";
+    let finalGrade;
+
+    if (average >= 100) {
+        finalGrade = 100;
+    } else if (average >= 98.4) {
+        finalGrade = 99;
+    } else if (average >= 96.8) {
+        finalGrade = 98;
+    } else if (average >= 95.2) {
+        finalGrade = 97;
+    } else if (average >= 93.6) {
+        finalGrade = 96;
+    } else if (average >= 92.0) {
+        finalGrade = 95;
+    } else if (average >= 90.4) {
+        finalGrade = 94;
+    } else if (average >= 88.8) {
+        finalGrade = 93;
+    } else if (average >= 87.2) {
+        finalGrade = 92;
+    } else if (average >= 85.6) {
+        finalGrade = 91;
+    } else if (average >= 84.0) {
+        finalGrade = 90;
+    } else if (average >= 82.4) {
+        finalGrade = 89;
+    } else if (average >= 80.8) {
+        finalGrade = 88;
+    } else if (average >= 79.2) {
+        finalGrade = 87;
+    } else if (average >= 77.6) {
+        finalGrade = 86;
+    } else if (average >= 76.0) {
+        finalGrade = 85;
+    } else if (average >= 74.4) {
+        finalGrade = 84;
+    } else if (average >= 72.8) {
+        finalGrade = 83;
+    } else if (average >= 71.2) {
+        finalGrade = 82;
+    } else if (average >= 69.6) {
+        finalGrade = 81;
+    } else if (average >= 68.0) {
+        finalGrade = 80;
+    } else if (average >= 66.4) {
+        finalGrade = 79;
+    } else if (average >= 64.8) {
+        finalGrade = 78;
+    } else if (average >= 63.2) {
+        finalGrade = 77;
+    } else if (average >= 61.6) {
+        finalGrade = 76;
+    } else if (average >= 60.0) {
+        finalGrade = 75;
+    } else if (average >= 56.0) {
+        finalGrade = 74;
+    } else if (average >= 52.0) {
+        finalGrade = 73;
+    } else if (average >= 48.0) {
+        finalGrade = 72;
+    } else if (average >= 44.0) {
+        finalGrade = 71;
+    } else if (average >= 40.0) {
+        finalGrade = 70;
+    } else if (average >= 36.0) {
+        finalGrade = 69;
+    } else if (average >= 32.0) {
+        finalGrade = 68;
+    } else if (average >= 28.0) {
+        finalGrade = 67;
+    } else if (average >= 24.0) {
+        finalGrade = 66;
+    } else if (average >= 20.0) {
+        finalGrade = 65;
+    } else if (average >= 16.0) {
+        finalGrade = 64;
+    } else if (average >= 12.0) {
+        finalGrade = 63;
+    } else if (average >= 8.0) {
+        finalGrade = 62;
+    } else if (average >= 4.0) {
+        finalGrade = 61;
+    } else {
+        finalGrade = 60;
+    }
+
+    const remark = finalGrade >= 75 ? "Passed" : "Failed";
 
     printWindow.document.write(
         '<tr><td colspan="5"><strong>General Average: ' +
-            average +
+            finalGrade +
             '</strong></td><td colspan="2"><strong>Remark: ' +
             remark +
             "</strong></td></tr>"
@@ -1267,7 +1956,7 @@ $("#printHtmlButtonFour").on("click", function () {
 $("#downloadHtmlButtonFive").on("click", function () {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    const logoUrl = '/assets/images/SELC.png';
+    const logoUrl = "/assets/images/SELC.png";
     const topMargin = 5;
 
     const logoWidth = 15;
@@ -1412,17 +2101,103 @@ $("#downloadHtmlButtonFive").on("click", function () {
 
     // Add average and remarks at the bottom
     const average = (totalGrades / subjects.length).toFixed(2);
-    const remark = average >= 75 ? "Passed" : "Failed";
+    let finalGrade;
+
+    if (average >= 100) {
+        finalGrade = 100;
+    } else if (average >= 98.4) {
+        finalGrade = 99;
+    } else if (average >= 96.8) {
+        finalGrade = 98;
+    } else if (average >= 95.2) {
+        finalGrade = 97;
+    } else if (average >= 93.6) {
+        finalGrade = 96;
+    } else if (average >= 92.0) {
+        finalGrade = 95;
+    } else if (average >= 90.4) {
+        finalGrade = 94;
+    } else if (average >= 88.8) {
+        finalGrade = 93;
+    } else if (average >= 87.2) {
+        finalGrade = 92;
+    } else if (average >= 85.6) {
+        finalGrade = 91;
+    } else if (average >= 84.0) {
+        finalGrade = 90;
+    } else if (average >= 82.4) {
+        finalGrade = 89;
+    } else if (average >= 80.8) {
+        finalGrade = 88;
+    } else if (average >= 79.2) {
+        finalGrade = 87;
+    } else if (average >= 77.6) {
+        finalGrade = 86;
+    } else if (average >= 76.0) {
+        finalGrade = 85;
+    } else if (average >= 74.4) {
+        finalGrade = 84;
+    } else if (average >= 72.8) {
+        finalGrade = 83;
+    } else if (average >= 71.2) {
+        finalGrade = 82;
+    } else if (average >= 69.6) {
+        finalGrade = 81;
+    } else if (average >= 68.0) {
+        finalGrade = 80;
+    } else if (average >= 66.4) {
+        finalGrade = 79;
+    } else if (average >= 64.8) {
+        finalGrade = 78;
+    } else if (average >= 63.2) {
+        finalGrade = 77;
+    } else if (average >= 61.6) {
+        finalGrade = 76;
+    } else if (average >= 60.0) {
+        finalGrade = 75;
+    } else if (average >= 56.0) {
+        finalGrade = 74;
+    } else if (average >= 52.0) {
+        finalGrade = 73;
+    } else if (average >= 48.0) {
+        finalGrade = 72;
+    } else if (average >= 44.0) {
+        finalGrade = 71;
+    } else if (average >= 40.0) {
+        finalGrade = 70;
+    } else if (average >= 36.0) {
+        finalGrade = 69;
+    } else if (average >= 32.0) {
+        finalGrade = 68;
+    } else if (average >= 28.0) {
+        finalGrade = 67;
+    } else if (average >= 24.0) {
+        finalGrade = 66;
+    } else if (average >= 20.0) {
+        finalGrade = 65;
+    } else if (average >= 16.0) {
+        finalGrade = 64;
+    } else if (average >= 12.0) {
+        finalGrade = 63;
+    } else if (average >= 8.0) {
+        finalGrade = 62;
+    } else if (average >= 4.0) {
+        finalGrade = 61;
+    } else {
+        finalGrade = 60;
+    }
+
+    const remark = finalGrade >= 75 ? "Passed" : "Failed";
 
     doc.text(
-        `General Average: ${average}`,
+        `General Average: ${finalGrade}`,
         bstartX,
-        startY + headerHeight + (subjects.length + 6) * cellHeight
+        startY + headerHeight + (subjects.length + 2) * cellHeight
     );
     doc.text(
         `Remark: ${remark}`,
         bstartX + bcolumnWidth * 6 - margin,
-        startY + headerHeight + (subjects.length + 6) * cellHeight
+        startY + headerHeight + (subjects.length + 2) * cellHeight
     );
 
     // Create a new Date object
@@ -1561,11 +2336,97 @@ $("#printHtmlButtonFive").on("click", function () {
         }
     });
     const average = (totalGrades / subjectsCount).toFixed(2);
-    const remark = average >= 75 ? "Passed" : "Failed";
+    let finalGrade;
+
+    if (average >= 100) {
+        finalGrade = 100;
+    } else if (average >= 98.4) {
+        finalGrade = 99;
+    } else if (average >= 96.8) {
+        finalGrade = 98;
+    } else if (average >= 95.2) {
+        finalGrade = 97;
+    } else if (average >= 93.6) {
+        finalGrade = 96;
+    } else if (average >= 92.0) {
+        finalGrade = 95;
+    } else if (average >= 90.4) {
+        finalGrade = 94;
+    } else if (average >= 88.8) {
+        finalGrade = 93;
+    } else if (average >= 87.2) {
+        finalGrade = 92;
+    } else if (average >= 85.6) {
+        finalGrade = 91;
+    } else if (average >= 84.0) {
+        finalGrade = 90;
+    } else if (average >= 82.4) {
+        finalGrade = 89;
+    } else if (average >= 80.8) {
+        finalGrade = 88;
+    } else if (average >= 79.2) {
+        finalGrade = 87;
+    } else if (average >= 77.6) {
+        finalGrade = 86;
+    } else if (average >= 76.0) {
+        finalGrade = 85;
+    } else if (average >= 74.4) {
+        finalGrade = 84;
+    } else if (average >= 72.8) {
+        finalGrade = 83;
+    } else if (average >= 71.2) {
+        finalGrade = 82;
+    } else if (average >= 69.6) {
+        finalGrade = 81;
+    } else if (average >= 68.0) {
+        finalGrade = 80;
+    } else if (average >= 66.4) {
+        finalGrade = 79;
+    } else if (average >= 64.8) {
+        finalGrade = 78;
+    } else if (average >= 63.2) {
+        finalGrade = 77;
+    } else if (average >= 61.6) {
+        finalGrade = 76;
+    } else if (average >= 60.0) {
+        finalGrade = 75;
+    } else if (average >= 56.0) {
+        finalGrade = 74;
+    } else if (average >= 52.0) {
+        finalGrade = 73;
+    } else if (average >= 48.0) {
+        finalGrade = 72;
+    } else if (average >= 44.0) {
+        finalGrade = 71;
+    } else if (average >= 40.0) {
+        finalGrade = 70;
+    } else if (average >= 36.0) {
+        finalGrade = 69;
+    } else if (average >= 32.0) {
+        finalGrade = 68;
+    } else if (average >= 28.0) {
+        finalGrade = 67;
+    } else if (average >= 24.0) {
+        finalGrade = 66;
+    } else if (average >= 20.0) {
+        finalGrade = 65;
+    } else if (average >= 16.0) {
+        finalGrade = 64;
+    } else if (average >= 12.0) {
+        finalGrade = 63;
+    } else if (average >= 8.0) {
+        finalGrade = 62;
+    } else if (average >= 4.0) {
+        finalGrade = 61;
+    } else {
+        finalGrade = 60;
+    }
+
+    const remark = finalGrade >= 75 ? "Passed" : "Failed";
 
     printWindow.document.write(
         '<tr><td colspan="5"><strong>General Average: ' +
-            average +
+            finalGrade +
             '</strong></td><td colspan="2"><strong>Remark: ' +
             remark +
             "</strong></td></tr>"
@@ -1581,7 +2442,7 @@ $("#printHtmlButtonFive").on("click", function () {
 $("#downloadHtmlButtonSix").on("click", function () {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
-    const logoUrl = '/assets/images/SELC.png';
+    const logoUrl = "/assets/images/SELC.png";
     const topMargin = 5;
 
     const logoWidth = 15;
@@ -1726,17 +2587,103 @@ $("#downloadHtmlButtonSix").on("click", function () {
 
     // Add average and remarks at the bottom
     const average = (totalGrades / subjects.length).toFixed(2);
-    const remark = average >= 75 ? "Passed" : "Failed";
+    let finalGrade;
+
+    if (average >= 100) {
+        finalGrade = 100;
+    } else if (average >= 98.4) {
+        finalGrade = 99;
+    } else if (average >= 96.8) {
+        finalGrade = 98;
+    } else if (average >= 95.2) {
+        finalGrade = 97;
+    } else if (average >= 93.6) {
+        finalGrade = 96;
+    } else if (average >= 92.0) {
+        finalGrade = 95;
+    } else if (average >= 90.4) {
+        finalGrade = 94;
+    } else if (average >= 88.8) {
+        finalGrade = 93;
+    } else if (average >= 87.2) {
+        finalGrade = 92;
+    } else if (average >= 85.6) {
+        finalGrade = 91;
+    } else if (average >= 84.0) {
+        finalGrade = 90;
+    } else if (average >= 82.4) {
+        finalGrade = 89;
+    } else if (average >= 80.8) {
+        finalGrade = 88;
+    } else if (average >= 79.2) {
+        finalGrade = 87;
+    } else if (average >= 77.6) {
+        finalGrade = 86;
+    } else if (average >= 76.0) {
+        finalGrade = 85;
+    } else if (average >= 74.4) {
+        finalGrade = 84;
+    } else if (average >= 72.8) {
+        finalGrade = 83;
+    } else if (average >= 71.2) {
+        finalGrade = 82;
+    } else if (average >= 69.6) {
+        finalGrade = 81;
+    } else if (average >= 68.0) {
+        finalGrade = 80;
+    } else if (average >= 66.4) {
+        finalGrade = 79;
+    } else if (average >= 64.8) {
+        finalGrade = 78;
+    } else if (average >= 63.2) {
+        finalGrade = 77;
+    } else if (average >= 61.6) {
+        finalGrade = 76;
+    } else if (average >= 60.0) {
+        finalGrade = 75;
+    } else if (average >= 56.0) {
+        finalGrade = 74;
+    } else if (average >= 52.0) {
+        finalGrade = 73;
+    } else if (average >= 48.0) {
+        finalGrade = 72;
+    } else if (average >= 44.0) {
+        finalGrade = 71;
+    } else if (average >= 40.0) {
+        finalGrade = 70;
+    } else if (average >= 36.0) {
+        finalGrade = 69;
+    } else if (average >= 32.0) {
+        finalGrade = 68;
+    } else if (average >= 28.0) {
+        finalGrade = 67;
+    } else if (average >= 24.0) {
+        finalGrade = 66;
+    } else if (average >= 20.0) {
+        finalGrade = 65;
+    } else if (average >= 16.0) {
+        finalGrade = 64;
+    } else if (average >= 12.0) {
+        finalGrade = 63;
+    } else if (average >= 8.0) {
+        finalGrade = 62;
+    } else if (average >= 4.0) {
+        finalGrade = 61;
+    } else {
+        finalGrade = 60;
+    }
+
+    const remark = finalGrade >= 75 ? "Passed" : "Failed";
 
     doc.text(
-        `General Average: ${average}`,
+        `General Average: ${finalGrade}`,
         bstartX,
-        startY + headerHeight + (subjects.length + 6) * cellHeight
+        startY + headerHeight + (subjects.length + 2) * cellHeight
     );
     doc.text(
         `Remark: ${remark}`,
         bstartX + bcolumnWidth * 6 - margin,
-        startY + headerHeight + (subjects.length + 6) * cellHeight
+        startY + headerHeight + (subjects.length + 2) * cellHeight
     );
 
     // Create a new Date object
@@ -1875,11 +2822,97 @@ $("#printHtmlButtonSix").on("click", function () {
         }
     });
     const average = (totalGrades / subjectsCount).toFixed(2);
-    const remark = average >= 75 ? "Passed" : "Failed";
+    let finalGrade;
+
+    if (average >= 100) {
+        finalGrade = 100;
+    } else if (average >= 98.4) {
+        finalGrade = 99;
+    } else if (average >= 96.8) {
+        finalGrade = 98;
+    } else if (average >= 95.2) {
+        finalGrade = 97;
+    } else if (average >= 93.6) {
+        finalGrade = 96;
+    } else if (average >= 92.0) {
+        finalGrade = 95;
+    } else if (average >= 90.4) {
+        finalGrade = 94;
+    } else if (average >= 88.8) {
+        finalGrade = 93;
+    } else if (average >= 87.2) {
+        finalGrade = 92;
+    } else if (average >= 85.6) {
+        finalGrade = 91;
+    } else if (average >= 84.0) {
+        finalGrade = 90;
+    } else if (average >= 82.4) {
+        finalGrade = 89;
+    } else if (average >= 80.8) {
+        finalGrade = 88;
+    } else if (average >= 79.2) {
+        finalGrade = 87;
+    } else if (average >= 77.6) {
+        finalGrade = 86;
+    } else if (average >= 76.0) {
+        finalGrade = 85;
+    } else if (average >= 74.4) {
+        finalGrade = 84;
+    } else if (average >= 72.8) {
+        finalGrade = 83;
+    } else if (average >= 71.2) {
+        finalGrade = 82;
+    } else if (average >= 69.6) {
+        finalGrade = 81;
+    } else if (average >= 68.0) {
+        finalGrade = 80;
+    } else if (average >= 66.4) {
+        finalGrade = 79;
+    } else if (average >= 64.8) {
+        finalGrade = 78;
+    } else if (average >= 63.2) {
+        finalGrade = 77;
+    } else if (average >= 61.6) {
+        finalGrade = 76;
+    } else if (average >= 60.0) {
+        finalGrade = 75;
+    } else if (average >= 56.0) {
+        finalGrade = 74;
+    } else if (average >= 52.0) {
+        finalGrade = 73;
+    } else if (average >= 48.0) {
+        finalGrade = 72;
+    } else if (average >= 44.0) {
+        finalGrade = 71;
+    } else if (average >= 40.0) {
+        finalGrade = 70;
+    } else if (average >= 36.0) {
+        finalGrade = 69;
+    } else if (average >= 32.0) {
+        finalGrade = 68;
+    } else if (average >= 28.0) {
+        finalGrade = 67;
+    } else if (average >= 24.0) {
+        finalGrade = 66;
+    } else if (average >= 20.0) {
+        finalGrade = 65;
+    } else if (average >= 16.0) {
+        finalGrade = 64;
+    } else if (average >= 12.0) {
+        finalGrade = 63;
+    } else if (average >= 8.0) {
+        finalGrade = 62;
+    } else if (average >= 4.0) {
+        finalGrade = 61;
+    } else {
+        finalGrade = 60;
+    }
+
+    const remark = finalGrade >= 75 ? "Passed" : "Failed";
 
     printWindow.document.write(
         '<tr><td colspan="5"><strong>General Average: ' +
-            average +
+            finalGrade +
             '</strong></td><td colspan="2"><strong>Remark: ' +
             remark +
             "</strong></td></tr>"

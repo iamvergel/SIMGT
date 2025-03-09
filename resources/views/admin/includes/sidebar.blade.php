@@ -240,31 +240,31 @@
                     <span class="sidebar-text ml-2">Grade Two</span>
                 </a>
                 <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/GradeThree"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Grade Three">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Three</span>
                 </a>
                 <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/GradeFour"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Grade Four">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Four</span>
                 </a>
                 <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/GradeFive"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Grade Five">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Five</span>
                 </a>
                 <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/GradeSix"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Grade Six">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Six</span>
                 </a>
                 <a href="/StEmelieLearningCenter.HopeSci66/admin/student-management/AddStudent"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
+                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="All New Student">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Add New Student</span>
