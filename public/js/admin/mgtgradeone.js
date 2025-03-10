@@ -30,7 +30,7 @@ var table = $("#studentTable").DataTable({
         },
         {
             extend: "excelHtml5",
-            text: '<i class="fas fa-file-excel mr-2"></i> Excel',
+            text: '<i class="fas fa-file-excel"></i> Excel',
             className:
                 "!bg-teal-700 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !important !flex !items-center !justify-center",
             titleAttr: "Export to Excel",
@@ -40,7 +40,7 @@ var table = $("#studentTable").DataTable({
         },
         {
             extend: "csvHtml5",
-            text: '<i class="fas fa-file-csv mr-2"></i> CSV',
+            text: '<i class="fas fa-file-csv"></i> CSV',
             className:
                 "!bg-yellow-500 !text-[12px] !text-white !border-none !hover:bg-yellow-400 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
             titleAttr: "Export to CSV",
@@ -50,7 +50,7 @@ var table = $("#studentTable").DataTable({
         },
         {
             extend: "pdfHtml5",
-            text: '<i class="fas fa-file-pdf mr-2"></i> PDF',
+            text: '<i class="fas fa-file-pdf"></i> PDF',
             className:
                 "!bg-green-600 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
             orientation: "landscape",
@@ -69,7 +69,7 @@ var table = $("#studentTable").DataTable({
         },
         {
             extend: "print",
-            text: '<i class="fas fa-print mr-2"></i> Print',
+            text: '<i class="fas fa-print"></i> Print',
             className:
                 "!bg-blue-600 !text-[12px] !text-white !border-none !hover:bg-blue-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
             orientation: "landscape",

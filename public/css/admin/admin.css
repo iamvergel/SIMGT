@@ -271,6 +271,10 @@
     color: oklch(0.437 0.078 188.216) !important;
 }
 
+.dataTables_wrapper .dataTables_filter input:focus {
+    outline: none !important;
+}
+
 .dataTables_wrapper .dataTables_info {
     color: oklch(0.437 0.078 188.216) !important;
     font-size: 14px;
