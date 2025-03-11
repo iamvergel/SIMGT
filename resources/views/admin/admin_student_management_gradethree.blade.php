@@ -82,7 +82,6 @@
                                 <table id="studentTable" class="p-3 display responsive nowrap" width="100%">
                                     <thead class="bg-gray-200">
                                         <tr class="text-[14px] font-normal uppercase text-left text-black">
-                                            <th class="hidden">Id</th>
                                             <th class="export">lrn</th>
                                             <th class="export">Student Number</th>
                                             <th class="export">Status</th>
@@ -103,10 +102,8 @@
                                                 @endphp
                                                 @if ($primaryInfo && $primaryInfo->grade == 'Grade Three' && $primaryInfo->status == 'Enrolled')
                                                     <tr class="hover:bg-gray-100">
-                                                        <td class="hidden">
-                                                            <span class="ml-2">{{ $student->id }}</span>
-                                                        </td>
                                                         <td>
+                                                            <span class="hidden">{{ $student->id }}</span>
                                                             <span class="ml-2">{{ $student->lrn }}</span>
                                                         </td>
                                                         <td>

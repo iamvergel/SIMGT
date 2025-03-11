@@ -66,14 +66,12 @@
                         </div>
                     </div>
                 </div>
-
-                @include('admin.includes.update_student_form') 
-
                 @if (session('success'))
                     <script>
                         alert("{{ session('success') }}");
                     </script>
                 @endif
+                
                 <!-- component -->
                 <section class="mx-auto p-6 mt-5 rounded-lg shadow-lg bg-gray-200">
                     <div class="w-full bg-white overflow-hidden rounded-lg shadow-lg text-[12px]">
@@ -82,7 +80,6 @@
                                 <table id="studentTable" class="p-3 display responsive nowrap" width="100%">
                                     <thead class="bg-gray-200">
                                         <tr class="text-[14px] font-normal uppercase text-left text-black">
-                                            <th class="hidden">Id</th>
                                             <th class="export">lrn</th>
                                             <th class="export">Student Number</th>
                                             <th class="export">Status</th>
@@ -103,10 +100,8 @@
                                                 @endphp
                                                 @if ($primaryInfo && $primaryInfo->grade == 'Grade One' && $primaryInfo->status == 'Enrolled')
                                                     <tr class="hover:bg-gray-100">
-                                                        <td class="hidden">
-                                                            <span class="ml-2">{{ $student->id }}</span>
-                                                        </td>
                                                         <td>
+                                                            <span class="hidden">{{ $student->id }}</span>
                                                             <span class="ml-2">{{ $student->lrn }}</span>
                                                         </td>
                                                         <td>
@@ -190,9 +185,12 @@
         </main>
     </div>
 
-    @include('admin.includes.js-link')
-    <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
-    <script type="text/javascript">
+    @include('admin.includes.update_student_form') 
+
+@include('admin.includes.js-link')
+<script src="{{ asset('../js/admin/gradeone.js') }}" type="text/javascript"></script>
+
+    <script>
          @foreach ($students as $student)
                 const updateModal{{ $student->id }} = document.getElementById("updatetudentinfo{{ $student->id }}");
                 const openUpdateModalButton{{ $student->id }} = document.getElementById("openUpdateStudentInfo{{ $student->id }}");
