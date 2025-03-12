@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TeacherAdvisory;
 use App\Models\TeacherUser;
 use Illuminate\Http\Request;
+use App\Models\TeacherSubjectClass;
 
 class TeacherAdvisoryController extends Controller
 {
@@ -75,7 +76,7 @@ class TeacherAdvisoryController extends Controller
         return response()->json($teachers);
     }
 
-    public function getTeacher(Request $request)
+    public function getTeachersAndSubjects(Request $request)
     {
         // Fetch sections based on the selected grade, section, and school year
         $sections = TeacherAdvisory::where('grade', $request->grade)
@@ -83,14 +84,29 @@ class TeacherAdvisoryController extends Controller
             ->get();
 
         // Fetch teachers who belong to those sections
-        $teachers = TeacherUser::whereIn('teacher_number', $sections->pluck('teacher_number'))->get()->map(function ($teacher) {
+        $teachers = TeacherUser::whereIn('teacher_number', $sections->pluck('teacher_number'))->get();
+
+        $teachersWithSubjects = $teachers->map(function ($teacher) use ($request) {
+            // Fetch subjects for each teacher based on their teacher_number and school_year
+            $subjects = TeacherSubjectClass::select('subject', 'grade', 'section')
+                ->where('teacher_number', $teacher->teacher_number)
+                ->where('school_year', $request->school_year)
+                ->whereNotNull('subject')
+                ->where('subject', '!=', '')
+                ->where('grade', '!=', '')
+                ->where('section', '!=', '')
+                ->distinct()
+                ->get();
+
+            // Add teacher's name and their subjects to the result
             return [
                 'teacher_number' => $teacher->teacher_number,
-                'name' => $teacher->first_name . ' ' . $teacher->last_name
+                'name' => $teacher->first_name . ' ' . $teacher->last_name,
+                'subjects' => $subjects
             ];
         });
 
-        // Return the teachers as a JSON response
-        return response()->json($teachers);
+        // Return the combined data as a JSON response
+        return response()->json($teachersWithSubjects);
     }
 }

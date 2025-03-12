@@ -345,7 +345,7 @@
             <br /><br />
 
 
-            <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline hidden">
+            <form id="logoutForm1" action="{{ route('logout') }}" method="POST" class="inline hidden">
                 @csrf
                 <a href="#"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
@@ -375,7 +375,7 @@
         // If the admin username is not set, perform logout
         if (!adminUsername) {
             alert('Too many session');
-            document.getElementById('logoutForm').submit(); // Automatically log out
+            document.getElementById('logoutForm1').submit(); // Automatically log out
         }
 
         // Existing code...

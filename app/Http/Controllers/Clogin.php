@@ -28,11 +28,11 @@ class Clogin extends Controller
 
         }  elseif (Auth::guard('admission')->check()) {
 
-            return view('admission.admission_dashboard');
+            return redirect()->route('admission.admission_dashboard');
 
         }  elseif (Auth::guard('registrar')->check()) { 
             
-            return view('registrar.registrar_dashboard');
+            return redirect()->route('registrar.registrar_dashboard');
 
         } elseif (Auth::guard('teacher')->check()) {
             $latestAnnouncements = Mannouncement::latest()->take(5)->get();
@@ -362,6 +362,12 @@ class Clogin extends Controller
         } elseif (Auth::guard('teacher')->check()) {
             Auth::guard('teacher')->logout();
             $request->session()->flash('success', 'You have been logged out successfully as Teacher.');
+        } elseif (Auth::guard('registrar')->check()) {
+            Auth::guard('registrar')->logout();
+            $request->session()->flash('success', 'You have been logged out successfully as Registrar.');
+        } elseif (Auth::guard('admission')->check()) {
+            Auth::guard('admission')->logout();
+            $request->session()->flash('success', 'You have been logged out successfully as Admission.');
         }
 
         // Invalidate the session
@@ -381,6 +387,18 @@ class Clogin extends Controller
 
         if (Auth::guard('student')->check()) {
             return view('includes.student_loader'); // Student view
+        }
+
+        if (Auth::guard('teacher')->check()) {
+            return view('includes.teacher_loader'); // Teacher view
+        }
+
+        if (Auth::guard('registrar')->check()) {
+            return view('includes.registrar_loader'); // Registrar view
+        }
+
+        if (Auth::guard('admission')->check()) {
+            return view('includes.admission_loader'); // Admission view
         }
 
         return redirect()->route('login')->withErrors(['error' => 'You must be logged in to access this page.']);

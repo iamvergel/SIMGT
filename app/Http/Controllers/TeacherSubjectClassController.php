@@ -124,24 +124,28 @@ class TeacherSubjectClassController extends Controller
 
         return response()->json($subjects);
     }
+    
     public function getTeacherSubject(Request $request)
-    {
-        $teacherNumber = Auth::guard('teacher')->user()->teacher_number;
-        $schoolYear = $request->input('school_year');
+{
+    // Get the teacher number from the request
+    $teacherNumber = $request->teacher_number;
 
-        // Fetch distinct subjects based on teacher_number and school_year
-        $subjects = TeacherSubjectClass::select('subject', 'school_year', 'grade', 'section')
-            ->whereNotNull('subject')
-            ->where('subject', '!=', '')
-            ->where('teacher_number', $teacherNumber)
-            ->where('school_year', $schoolYear)  // Filter by school_year
-            ->where('grade', '!=', '')
-            ->where('section', '!=', '')
-            ->distinct()
-            ->get();
+    // Fetch distinct subjects based on teacher_number and school_year
+    $subjects = TeacherSubjectClass::select('subject', 'school_year', 'grade', 'section')
+        ->whereNotNull('subject')
+        ->where('subject', '!=', '')
+        ->where('teacher_number', $teacherNumber)
+        ->where('school_year', $request->school_year)  // Filter by school_year
+        ->where('grade', '!=', '')
+        ->where('section', '!=', '')
+        ->distinct()
+        ->get();
 
-        return response()->json($subjects);
-    }
+    // Add logging for debugging
+    \Log::info('Fetched Subjects:', $subjects->toArray());
+
+    return response()->json($subjects);
+}
 
     public function getTeacherClassSubject()
     {
