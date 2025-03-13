@@ -24,11 +24,15 @@ $(document).ready(function () {
         toolbar: [
             ["style", ["style"]],
             ["font", ["bold", "underline", "clear"]],
+            ["fontname", ["fontname"]],
             ["color", ["color"]],
             ["para", ["ul", "ol", "paragraph"]],
-            ["view", ["fullscreen"]],
+            ["table", ["table"]],
+            ["insert", ['link', 'picture', 'video', 'file']],
+            ["view", ["fullscreen", "codeview", "help"]],
         ],
         callbacks: {
+
             onInit: function () {
                 $(".note-editor").css("background-color", "#fff");
             },
@@ -49,7 +53,7 @@ $(document).ready(function () {
                 const announcementHistory = document.getElementById(
                     "announcementHistory"
                 );
-                announcementHistory.innerHTML = ""; 
+                announcementHistory.innerHTML = "";
 
                 if (announcements.length === 0) {
                     const noAnnouncementMessage = document.createElement("div");
@@ -58,7 +62,7 @@ $(document).ready(function () {
                     noAnnouncementMessage.innerHTML =
                         "No Announcements Available";
                     announcementHistory.appendChild(noAnnouncementMessage);
-                    return; 
+                    return;
                 }
 
                 announcements.forEach((announcement) => {

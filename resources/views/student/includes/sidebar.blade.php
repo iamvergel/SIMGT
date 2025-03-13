@@ -274,7 +274,7 @@
             </a>
 
             <div id="registrationLink" class="block" style="display: none;">
-                <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">Registration</p>
+                <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold uppercase">Registration</p>
                 <a href="/StEmelieLearningCenter.HopeSci66/student/registration"
                     class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip MT-2"
                     id="dashboardLink">
@@ -395,32 +395,17 @@
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>
 
-            <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">ENROLLMENT</p>
-            <button
-                class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md tooltip mt-2"
-                id="studentManagementButton3" aria-expanded="false" aria-controls="collapse3">
-                <i class="fa-solid fa-file"></i>
-                <span class="sidebar-text ml-2">Enrollment</span>
-                <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px]"></i></p>
-                <span
-                    class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[8px] p-1 font-bold">Enrollment</span>
-            </button>
-            <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-2 px-2" id="collapse3">
-                <a href="#"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-5 tooltip">
+            <div id="registrationLinkMobile" class="block" style="display: none;">
+                <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold uppercase">Registration</p>
+                <a href="/StEmelieLearningCenter.HopeSci66/student/registration"
+                    class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip MT-2"
+                    id="dashboardLink">
                     <i class="fa-solid fa-file"></i>
-                    <span class="sidebar-text ml-2">Current Enrollment</span>
+                    <span class="sidebar-text ml-2">
+                        Registration
+                    </span>
                     <span
-                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Current
-                        <br /> Enrollment</span>
-                </a>
-                <a href="#"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip">
-                    <i class="fa-solid fa-file"></i>
-                    <span class="sidebar-text ml-2">Dropped Student</span>
-                    <span
-                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Upcomming
-                        <br /> Enrollment</span>
+                        class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
                 </a>
             </div><br /><br /><br />
 
@@ -544,6 +529,7 @@
                 if (data[0] && data[0].status === 'Active') {
                     // Display the registration link if Active
                     document.getElementById('registrationLink').style.display = 'block';
+                    document.getElementById('registrationLinkMobile').style.display = 'block';
                 }
             })
             .catch(error => {

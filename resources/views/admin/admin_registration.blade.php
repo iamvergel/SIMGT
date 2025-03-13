@@ -65,7 +65,6 @@
                                         <th class="export">Admission Type</th>
                                         <th class="export">Name</th>
                                         <th class="export">Grade</th>
-                                        <th class="">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="" id="tableBody">
@@ -92,7 +91,6 @@
                                                 {{ $student->student_suffix_name }}
                                             </td>
                                             <td class="px-4 py-3">{{ $student->grade }}</td>
-                                            <td>sadfsa</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

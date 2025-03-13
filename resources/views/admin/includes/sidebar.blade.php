@@ -462,6 +462,12 @@
                         <i class="fa-regular fa-circle"></i>
                         <span class="sidebar-text ml-2">Gallery</span>
                     </a>
+                    <a href="/StEmelieLearningCenter.HopeSci66/admin/manage-registration"
+                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
+                        title="Gallery">
+                        <i class="fa-regular fa-circle"></i>
+                        <span class="sidebar-text ml-2">Manage Registration</span>
+                    </a>
                 </div>
             @endif
 

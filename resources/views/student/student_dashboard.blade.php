@@ -7,8 +7,7 @@
     @include('student.includes.sidebar')
 
     <!-- Main Content -->
-    <main
-      class="flex-grow rounded-none  lg:rounded-l-none bg-white shadow-lg overflow-hidden overflow-y-scroll">
+    <main class="flex-grow rounded-none  lg:rounded-l-none bg-white shadow-lg overflow-hidden overflow-y-scroll">
       @include('student.includes.topnav')
 
       <div class="p-5 py-3">
@@ -123,7 +122,7 @@
           </div>
         </div>
 
-        <div class="col-span-2 lg:col-span-1 px-5 lg:px-20 mt-10">
+        <div class="col-span-2 lg:col-span-1 px-4 lg:px-5 mt-10">
           <div class="p-0">
             <p class="text-[25px] font-semibold text-teal-900 my-5"><i
                 class="fas fa-bullhorn text-teal-900 mr-2 text-bold text-[40px]"></i>Announcement</p>
@@ -135,20 +134,16 @@
         @foreach($latestAnnouncements as $announcement)
       <div x-data="{ open: false }"
       class="announcement my-1 p-2 bg-teal-700 border rounded-lg text-teal-700 leading-4">
-      <div class="py-1 px-2 bg-teal-700 rounded-lg text-white" id="announcementa">
-        <div class="flex justify-between items-center">
-        <h5 class="font-bold mb-0 text-[15px]">{{ $announcement->announcements_head }}</h5>
+      <div class="py-1 bg-teal-700 rounded-lg text-white" id="announcementa">
+        <div class="flex justify-between items-center bg-teal-800 px-5 py-2 rounded-full mb-2">
+        <h5 class="font-bold mb-0 text-[15px] ">{{ $announcement->announcements_head }}</h5>
         <button @click="open = !open" class="bg-transparent text-white rounded px-2 py-1 text-sm">
         <span x-show="!open"><i class="fas fa-angle-right"></i></span>
         <span x-show="open"><i class="fas fa-angle-down"></i></span>
         </button>
         </div>
       </div>
-      <div x-show="open" x-transition class="mt-1 px-2 py-2 text-[15px]">
-        <textarea name="announcements_body" id="announcements_body_{{ $announcement->id }}" required
-        class="w-full p-5 rounded-md focus:outline-none focus:ring-none focus:ring-teal-500 text-[13px]"
-        style="resize: none;" rows="20" readonly>{{ $announcement->announcements_body }}</textarea>
-      </div>
+      <div x-show="open"  class="text-[15px] bg-white p-5 text-gray-800 rounded-md overflow-scroll">{!! $announcement->announcements_body !!}</div>
       <small
         class="text-muted text-[12px] text-white">{{ $announcement->created_at->format('F j, Y, g:i a') }}</small>
       </div>
@@ -165,7 +160,7 @@
               <div class="table-responsive">
                 @if($pictureAnnouncements->isEmpty())
           <div class="text-center text-lg text-gray-600">
-            <table id="announcementTable" class="display">
+            <table id="announcementTable" class="p-3 display responsive nowrap" width="100%">
             <thead class="table-header bg-gray-100">
               <tr class="text-sm tracking-wide text-left uppercase">
               <th class="">Announcement</th>
@@ -232,24 +227,8 @@
       info: true,
       scrollY: 600,
       scroller: true,
+      responsive: true,
     });
-
-    @foreach ($latestAnnouncements as $announcement)
-    $("#announcements_body_{{ $announcement->id }}").summernote({
-      placeholder: "Enter Announcement...",
-      tabsize: 2,
-      height: 200,
-      zIndex: 500,
-      toolbar: [],
-      editable: false, // Disable editing
-      callbacks: {
-      onInit: function () {
-        $(".note-editor").css("background-color", "white");
-      }
-      },
-    });
-  @endforeach
-
 
     document.addEventListener('DOMContentLoaded', () => {
       const dashboard = document.getElementById('dashboard');

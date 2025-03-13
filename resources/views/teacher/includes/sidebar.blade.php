@@ -211,12 +211,12 @@
                     <i class="fa-solid fa-calendar"></i>
                     <span class="sidebar-text ml-2">Calendar</span>
                 </a>
-                <a href="#"
+                <!-- <a href="#"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0 tooltip"
                     title="Announcement">
                     <i class="fa-solid fa-bullhorn"></i>
                     <span class="sidebar-text ml-2">Announcement</span>
-                </a>
+                </a> -->
             </div>
 
             <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">

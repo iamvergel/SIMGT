@@ -167,7 +167,7 @@
                                 <div class="mb-4">
                                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                         for="section">
-                                        <span class="text-red-600 mr-1">*</span>Section
+                                        <span class="text-red-600 mr-1">*</span>Subject
                                     </label>
                                     <input type="text" name="subject" placeholder="Input Section Name.." id="section"
                                         required

@@ -139,10 +139,10 @@ $(document).ready(function () {
         let section = document.getElementById('section');
 
         if (selectedSection) {
-            table.column(6).search(selectedSection).draw(); // Filter the table based on the clicked section
+            table.column(5).search(selectedSection).draw(); // Filter the table based on the clicked section
             section.innerHTML = 'Section : ' + selectedSection;
         } else {
-            table.column(6).search("").draw(); // Clear the filter to show all
+            table.column(5).search("").draw(); // Clear the filter to show all
             section.innerHTML = 'Section : ';
         }
 
@@ -196,10 +196,10 @@ $(document).ready(function () {
         let section = document.getElementById('section');
 
         if (selectedSection) {
-            table.column(6).search(selectedSection).draw(); // Filter the table based on the clicked section
+            table.column(5).search(selectedSection).draw(); // Filter the table based on the clicked section
             section.innerHTML = 'Section : ' + selectedSection;
         } else {
-            table.column(6).search("").draw(); // Clear the filter to show all
+            table.column(5).search("").draw(); // Clear the filter to show all
             section.innerHTML = 'Section : ';
         }
 
@@ -253,10 +253,10 @@ $(document).ready(function () {
         let section = document.getElementById('section');
 
         if (selectedSection) {
-            table.column(6).search(selectedSection).draw(); // Filter the table based on the clicked section
+            table.column(5).search(selectedSection).draw(); // Filter the table based on the clicked section
             section.innerHTML = 'Section : ' + selectedSection;
         } else {
-            table.column(6).search("").draw(); // Clear the filter to show all
+            table.column(5).search("").draw(); // Clear the filter to show all
             section.innerHTML = 'Section : ';
         }
 
@@ -310,10 +310,10 @@ $(document).ready(function () {
         let section = document.getElementById('section');
 
         if (selectedSection) {
-            table.column(6).search(selectedSection).draw(); // Filter the table based on the clicked section
+            table.column(5).search(selectedSection).draw(); // Filter the table based on the clicked section
             section.innerHTML = 'Section : ' + selectedSection;
         } else {
-            table.column(6).search("").draw(); // Clear the filter to show all
+            table.column(5).search("").draw(); // Clear the filter to show all
             section.innerHTML = 'Section : ';
         }
 
@@ -367,10 +367,10 @@ $(document).ready(function () {
         let section = document.getElementById('section');
 
         if (selectedSection) {
-            table.column(6).search(selectedSection).draw(); // Filter the table based on the clicked section
+            table.column(5).search(selectedSection).draw(); // Filter the table based on the clicked section
             section.innerHTML = 'Section : ' + selectedSection;
         } else {
-            table.column(6).search("").draw(); // Clear the filter to show all
+            table.column(5).search("").draw(); // Clear the filter to show all
             section.innerHTML = 'Section : ';
         }
 
@@ -424,10 +424,10 @@ $(document).ready(function () {
         let section = document.getElementById('section');
 
         if (selectedSection) {
-            table.column(6).search(selectedSection).draw(); // Filter the table based on the clicked section
+            table.column(5).search(selectedSection).draw(); // Filter the table based on the clicked section
             section.innerHTML = 'Section : ' + selectedSection;
         } else {
-            table.column(6).search("").draw(); // Clear the filter to show all
+            table.column(5).search("").draw(); // Clear the filter to show all
             section.innerHTML = 'Section : ';
         }
 

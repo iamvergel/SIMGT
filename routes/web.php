@@ -180,6 +180,9 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/website-gallery', function () {
         return view('admin.website.admin_website_gallery');
     });
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/manage-registration', function () {
+        return view('admin.website.admin_registration');
+    });
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/SIMGT-Profile', function () {
         return view('admin.admin_profile');
@@ -211,10 +214,6 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::post('/announcements/{id}', [PictureAnnouncementController::class, 'update'])->name('announcements.update');
 
 
-    Route::get('/StEmelieLearningCenter.HopeSci66/student/dashboard', function () {
-        return view('student.student_dashboard');
-    });
-
     Route::get('grades/upload', [GradeController::class, 'index'])->name('grades.upload');
     Route::post('grades/upload', [GradeController::class, 'store'])->name('grades.store');
 
@@ -222,8 +221,12 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/StEmelieLearningCenter.HopeSci66/teacher/dashboard', function () {
         return view('teacher.teacher_dashboard');
     });
+    Route::get('/StEmelieLearningCenter.HopeSci66/teacher/dashboard', [Cevent::class, 'showDashboardteacher'])->name('teacher.dashboard');
 
     // Student Dashboard Route with Latest Announcements
+    Route::get('/StEmelieLearningCenter.HopeSci66/student/dashboard', function () {
+        return view('student.student_dashboard');
+    });
     Route::get('/StEmelieLearningCenter.HopeSci66/student/dashboard', [Cevent::class, 'showDashboardstudent'])->name('student.dashboard');
     Route::get('/StEmelieLearningCenter.HopeSci66/student/calendar', [Cevent::class, 'showCalendar'])->name('student.calendar');
     Route::get('/api/events', [Cevent::class, 'getEvents']);
@@ -254,6 +257,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
 
     Route::post('/update-avatar', [TeacherProfile::class, 'updateprofile'])->name('teacher.update-avatar');
     Route::post('/student/update-avatar', [CStudentProfile::class, 'update'])->name('student.update-avatar');
+    Route::post('/teacher/change-password/{studentId}', [TeacherProfile::class, 'changePassword'])->name('teacher.changePassword');
 
     //REGISTRAR________________________________________________________________
     //________________________________________________________________
@@ -317,3 +321,11 @@ Route::get('/get-Section', [Cstudentgrades::class, 'getxSections'])->name('get.a
 Route::post('/teacher-subject-class/update-inline', [TeacherSubjectClassController::class, 'updateInline'])->name('teacher-subject-class.update-inline');
 Route::post('/student/update-inline', [TeacherSubjectClassController::class, 'updateInlinestudent'])->name('student.update-inline');
 Route::post('/student/update-inlin/final', [TeacherSubjectClassController::class, 'updateInlinestudentfinal'])->name('student.update-final');
+
+use App\Http\Controllers\RegistrationButtonController;
+
+// Route to toggle the status of the first registration button
+Route::patch('/registration-button/toggle', [RegistrationButtonController::class, 'toggleStatus']);
+
+// Route to get the current status of the first registration button
+Route::get('/registration-button/status', [RegistrationButtonController::class, 'currentStatus']);

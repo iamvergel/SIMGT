@@ -14,6 +14,8 @@ use App\Models\Mannouncement;
 use App\Models\TeacherAdvisory;
 use App\Models\TeacherUser;
 use App\Models\TeacherSubjectClass;
+use App\Models\TeacherProfile;
+use App\Models\PictureAnnouncement;
 
 class Clogin extends Controller
 {
@@ -24,9 +26,24 @@ class Clogin extends Controller
 
             return redirect()->route('admin.admin_dashboard'); // Ensure this route is correct
 
-        } elseif (Auth::guard('teacher')->check()) {
+        }  elseif (Auth::guard('admission')->check()) {
 
-            return view('teacher.teacher_dashboard');
+            return view('admission.admission_dashboard');
+
+        }  elseif (Auth::guard('registrar')->check()) { 
+            
+            return view('registrar.registrar_dashboard');
+
+        } elseif (Auth::guard('teacher')->check()) {
+            $latestAnnouncements = Mannouncement::latest()->take(5)->get();
+
+            // Check if there are any announcements
+            $newAnnouncements = $latestAnnouncements->count() > 0;
+
+            $pictureAnnouncements = PictureAnnouncement::orderBy('created_at', 'desc')->get();
+
+            // Return the view with announcements data
+            return view('teacher.teacher_dashboard', compact('latestAnnouncements', 'newAnnouncements', 'pictureAnnouncements'));
 
         } elseif (Auth::guard('student')->check()) {
             $latestAnnouncements = Mannouncement::latest()->take(5)->get();
@@ -34,8 +51,10 @@ class Clogin extends Controller
             // Check if there are any announcements
             $newAnnouncements = $latestAnnouncements->count() > 0;
 
+            $pictureAnnouncements = PictureAnnouncement::orderBy('created_at', 'desc')->get();
+
             // Return the view with announcements data
-            return view('student.student_dashboard', compact('latestAnnouncements', 'newAnnouncements'));
+            return view('student.student_dashboard', compact('latestAnnouncements', 'newAnnouncements', 'pictureAnnouncements'));
         }
 
         // Check if the user is locked out

@@ -406,3 +406,16 @@
     color: white !important;
     background: oklch(0.511 0.096 186.391);
 }
+
+.note-modal-backdrop {
+    display: block;
+    z-index: -1;
+}
+
+.note-modal .open {
+    background-color: red;
+}
+
+.note-modal-content {
+    z-index: 500;
+}

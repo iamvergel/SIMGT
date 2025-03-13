@@ -276,6 +276,21 @@ class Cevent extends BaseController // Extend the correct base controller
         return view('student.student_dashboard', compact('latestAnnouncements', 'newAnnouncements', 'pictureAnnouncements'));
     }
 
+    public function showDashboardteacher()
+    {
+        // Retrieve the latest announcements (Ensure 'Mannouncement' is your model)
+        $latestAnnouncements = Mannouncement::latest()->take(5)->get();
+        
+
+        // Check if there are any announcements
+        $newAnnouncements = $latestAnnouncements->count() > 0;
+
+        $pictureAnnouncements = PictureAnnouncement::orderBy('created_at', 'desc')->get();
+
+        // Return the view with announcements data
+        return view('teacher.teacher_dashboard', compact('latestAnnouncements', 'newAnnouncements', 'pictureAnnouncements'));
+    }
+
     public function showCalendar()
     {
         return view('student.student_calendar'); // Ensure this view file exists

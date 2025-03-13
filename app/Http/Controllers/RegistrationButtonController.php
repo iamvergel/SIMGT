@@ -79,4 +79,33 @@ class RegistrationButtonController extends Controller
         $registrationButton->delete();
         return response()->json(null, 204);
     }
+
+    public function toggleStatus()
+    {
+        // Get the first RegistrationButton
+        $registrationButton = RegistrationButton::first();
+
+        if ($registrationButton) {
+            // Toggle the status between 'active' and 'inactive'
+            $registrationButton->status = ($registrationButton->status === 'Active') ? 'Inactive' : 'Active';
+            $registrationButton->save();
+
+            return response()->json(['status' => $registrationButton->status]);
+        }
+
+        return response()->json(['message' => 'No registration button found'], 404);
+    }
+
+    // Get current status of the first registration button
+    public function currentStatus()
+    {
+        // Fetch the first registration button's status
+        $registrationButton = RegistrationButton::first();
+
+        if ($registrationButton) {
+            return response()->json(['status' => $registrationButton->status]);
+        }
+
+        return response()->json(['message' => 'No registration button found'], 404);
+    }
 }

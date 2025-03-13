@@ -148,22 +148,22 @@
 
 
 
-                            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 p-10">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 p-10">
                                 <div>
                                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                         for="">
-                                        <span class="text-red-600 mr-1">*</span>First Name
+                                        First Name
                                     </label>
-                                    <input type="text" name="first_name" placeholder="" value="{{ $user->first_name }}"
+                                    <input type="text" name="first_name" placeholder="" value="{{ $user->first_name }}" disabled    
                                         class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
                                 </div>
 
                                 <div>
                                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                         for="">
-                                        <span class="text-red-600 mr-1">*</span>Middle Name
+                                        Middle Name
                                     </label>
-                                    <input type="text" name="middle_name" placeholder=""
+                                    <input type="text" name="middle_name" placeholder="" disabled   
                                         value="{{ $user->middle_name }}"
                                         class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
                                 </div>
@@ -171,9 +171,27 @@
                                 <div>
                                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                                         for="">
-                                        <span class="text-red-600 mr-1">*</span>Last Name
+                                        Last Name
                                     </label>
-                                    <input type="text" name="last_name" placeholder="" value="{{ $user->last_name }}"
+                                    <input type="text" name="last_name" placeholder="" value="{{ $user->last_name }}" disabled  
+                                        class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
+                                </div>
+
+                                <div>
+                                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        for="">
+                                        Last Name
+                                    </label>
+                                    <input type="text" name="last_name" placeholder="" value="{{ $user->suffix }}" disabled  
+                                        class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
+                                </div>
+
+                                <div class="col-span-1 lg:col-span-2 xl:col-span-2">
+                                    <label class=" block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                                        for="">
+                                        Address
+                                    </label>
+                                    <input type="text" name="last_name" placeholder="" value="{{ $user->address }}" disabled  
                                         class="appearance-none block w-full bg-gray-100 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" />
                                 </div>
                             </div>
@@ -198,7 +216,7 @@
                             @endif
 
                             <div class="p-10">
-                                <form action="{{ route('admin.changePassword', $user->id) }}" method="POST"
+                                <form action="{{ route('teacher.changePassword', $user->id) }}" method="POST"
                                     id="change-password-form">
                                     @csrf
                                     <div class="mb-4">
