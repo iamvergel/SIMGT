@@ -77,6 +77,7 @@
         </div>
 
         <div class="accountInfo mt-10 text-[15px] text-teal-900 p-5 shadow-lg font-semibold">
+        <p class="mb-3"> {{ session('lrna') }}</p>
             <p class="mb-3"> {{ session('student_id') }}</p>
             <p class="mb-3"> {{ $firstName . ' ' . $middleName . ' ' . $lastName }}</p>
             <p class="mb-3">{{ session('gradea') . ' - ' . session('sectiona')}}</p>

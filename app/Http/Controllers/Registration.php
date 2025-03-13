@@ -130,4 +130,7 @@ class Registration extends Controller
             return back()->withErrors('An error occurred while adding the student: ' . $e->getMessage());
         }
     }
+
+    //current Student
+    
 }

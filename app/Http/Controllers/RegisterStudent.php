@@ -23,6 +23,6 @@ class RegisterStudent extends Controller
         // Check if there are no active students
         $noActiveMessage = $students->isEmpty() ? "No active students found." : null;
 
-        return view('admin.admin_registration', compact('students', 'studentsAdditional', 'studentDocuments', 'noActiveMessage'));
+        return view('admin.admin_online_aplication', compact('students', 'studentsAdditional', 'studentDocuments', 'noActiveMessage'));
     }
 }

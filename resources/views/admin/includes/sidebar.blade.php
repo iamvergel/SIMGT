@@ -94,6 +94,10 @@
             /* border: solid 1px rgba(255, 255, 255, 0.3); */
         }
 
+        .active2 {
+            background-color: #0f766e;
+        }
+
         .collapse-content {
             max-height: 0;
             overflow: hidden;
@@ -101,7 +105,7 @@
         }
 
         .collapse-content.show {
-            max-height: 500px;
+            max-height: 3000px;
             transition: max-height 0.3s ease-out;
         }
 
@@ -291,7 +295,7 @@
                         <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
                     </button>
 
-                    <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-0" id="teachersList">
+                    <div class="collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0" id="teachersList">
                         <!-- The list of teachers will be inserted here dynamically -->
                     </div>
 
@@ -299,50 +303,61 @@
                         class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip"
                         id="studentManagementButton16" aria-expanded="false" aria-controls="teachersListTwo"
                         title="Grade Two">
-                        <i class="fa-solid fa-book"><span class="sidebar-text ml-2">Grade two</span></i>
+                        <i class="fa-solid fa-book"><span class="sidebar-text ml-2">Grade Two</span></i>
                         <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
                     </button>
 
-                    <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-0" id="teachersListTwo">
+                    <div class="collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0" id="teachersListTwo">
                         <!-- The list of teachers will be inserted here dynamically -->
                     </div>
 
-                    <!-- <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeOne"
-                                                                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
-                                                                        title="Grade One">
-                                                                        <i class="fa-regular fa-circle"></i>
-                                                                        <span class="sidebar-text ml-2">Grade One</span>
-                                                                    </a> -->
-                    <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeTwo"
-                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
-                        title="Grade Two">
-                        <i class="fa-regular fa-circle"></i>
-                        <span class="sidebar-text ml-2">Grade Two</span>
-                    </a>
-                    <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeThree"
-                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
+                    <button
+                        class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip"
+                        id="studentManagementButton17" aria-expanded="false" aria-controls="teachersListThree"
                         title="Grade Three">
-                        <i class="fa-regular fa-circle"></i>
-                        <span class="sidebar-text ml-2">Grade Three</span>
-                    </a>
-                    <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeFour"
-                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
+                        <i class="fa-solid fa-book"><span class="sidebar-text ml-2">Grade Three</span></i>
+                        <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
+                    </button>
+
+                    <div class="collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0" id="teachersListThree">
+                        <!-- The list of teachers will be inserted here dynamically -->
+                    </div>
+
+                    <button
+                        class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip"
+                        id="studentManagementButton18" aria-expanded="false" aria-controls="teachersListFour"
                         title="Grade Four">
-                        <i class="fa-regular fa-circle"></i>
-                        <span class="sidebar-text ml-2">Grade Four</span>
-                    </a>
-                    <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeFive"
-                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
+                        <i class="fa-solid fa-book"><span class="sidebar-text ml-2">Grade Four</span></i>
+                        <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
+                    </button>
+
+                    <div class="collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0" id="teachersListFour">
+                        <!-- The list of teachers will be inserted here dynamically -->
+                    </div>
+
+                    <button
+                        class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip"
+                        id="studentManagementButton19" aria-expanded="false" aria-controls="teachersListFive"
                         title="Grade Five">
-                        <i class="fa-regular fa-circle"></i>
-                        <span class="sidebar-text ml-2">Grade Five</span>
-                    </a>
-                    <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeSix"
-                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
+                        <i class="fa-solid fa-book"><span class="sidebar-text ml-2">Grade Five</span></i>
+                        <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
+                    </button>
+
+                    <div class="collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0" id="teachersListFive">
+                        <!-- The list of teachers will be inserted here dynamically -->
+                    </div>
+
+                    <button
+                        class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip"
+                        id="studentManagementButton20" aria-expanded="false" aria-controls="teachersListSix"
                         title="Grade Six">
-                        <i class="fa-regular fa-circle"></i>
-                        <span class="sidebar-text ml-2">Grade Six</span>
-                    </a>
+                        <i class="fa-solid fa-book"><span class="sidebar-text ml-2">Grade Six</span></i>
+                        <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
+                    </button>
+
+                    <div class="collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0" id="teachersListSix">
+                        <!-- The list of teachers will be inserted here dynamically -->
+                    </div>
                 </div>
             @endif
 
@@ -357,25 +372,31 @@
             </button>
             <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="reportsection">
                 <a href="/StEmelieLearningCenter.HopeSci66/admin/online-application"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
+                    class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
                     title="Online Application">
                     <i class="fa-solid fa-folder-open"></i>
                     <span class="sidebar-text ml-2">Online Application</span>
                 </a>
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/student-registration"
+                    class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
+                    title="Student Registration">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <span class="sidebar-text ml-2">Student Registration</span>
+                </a>
                 <a href="/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Graduate-Student"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
+                    class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Graduate Student">
                     <i class="fa-solid fa-user-graduate"></i>
                     <span class="sidebar-text ml-2">Graduate Student</span>
                 </a>
                 <a href="/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Drop-Student"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
+                    class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Dropped Student">
                     <i class="fa-solid fa-user-xmark"></i>
                     <span class="sidebar-text ml-2">Dropped Student</span>
                 </a>
                 <a href="/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Archive-Student"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
+                    class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
                     title="Archive Student">
                     <i class="fa-solid fa-box-archive"></i>
                     <span class="sidebar-text ml-2">Archive Student</span>
@@ -416,11 +437,11 @@
                         <span class="sidebar-text ml-2">Teachers</span>
                     </a>
                     <!-- <a href="#"
-                                                                                class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-0"
-                                                                                title="Students">
-                                                                                <i class="fa-solid fa-user"></i>
-                                                                                <span class="sidebar-text ml-2">Students</span>
-                                                                            </a> -->
+                                                                                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-0"
+                                                                                        title="Students">
+                                                                                        <i class="fa-solid fa-user"></i>
+                                                                                        <span class="sidebar-text ml-2">Students</span>
+                                                                                    </a> -->
                 </div>
 
                 <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">
@@ -578,33 +599,45 @@
                             const teacherButton = $('<button>', {
                                 class: `flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip ${currentUrl.includes(teacher.name.replace(/\s/g, '%20')) ? 'active2' : ''}`,
                                 id: `studentManagementButton${teacher.teacher_number}`,
-                                'aria-expanded': 'false',
+                                'aria-expanded': 'false',  // Initially collapsed
                                 'aria-controls': `teachersList${teacher.teacher_number}`,
                                 title: teacher.name,
                             });
 
                             const icon = $('<i>', { class: 'fa-solid fa-chalkboard-teacher' });
-                            const teacherText = $('<span>', { class: 'sidebar-text ml-2' }).html(`${teacher.name}`);
+                            const teacherText = $('<span>', { class: 'sidebar-text ml-0' }).html(`${teacher.name}`);
                             const chevronIcon = $('<p>', { html: `<i class="fa-solid fa-chevron-right text-[8px] me-5"></i>` });
 
                             teacherButton.append(icon, teacherText, chevronIcon);
 
                             // Create the collapse content (dropdown) div
                             const teacherDropdown = $('<div>', {
-                                class: 'collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-0 p-20 hidden',
+                                class: 'collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0 hidden', // hidden by default
                                 id: `teachersList${teacher.teacher_number}`,
+                                style: 'max-height: 1000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
                             });
 
-                            // Add teacher's subjects to the dropdown
+                            // Add teacher's subjects to the dropdown as clickable links
                             if (teacher.subjects.length > 0) {
                                 teacher.subjects.forEach(function (subject) {
-                                    const subjectItem = $('<div>', { class: 'subject-item' })
-                                        .html(`${subject.subject} - ${subject.grade} ${subject.section}`);
+                                    const currentUrl = window.location.pathname;
 
-                                    teacherDropdown.append(subjectItem);
+                                    // Create the subject link with the updated URL
+                                    const subjectLink = $('<a>', {
+                                        href: `/StEmelieLearningCenter.HopeSci66/admin/Grade-book/class-record/GradeOne/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
+                                        title: `${subject.subject} - ${subject.grade} ${subject.section}`,
+                                    });
+
+                                    // Create the subject text inside the link
+                                    const subjectText = $('<span>', { class: 'sidebar-text' }).html(`${subject.subject}<br>${subject.grade} | ${subject.section}`);
+                                    subjectLink.append(subjectText);
+
+                                    // Append the subject link to the teacher's dropdown
+                                    teacherDropdown.append(subjectLink);
                                 });
                             } else {
-                                teacherDropdown.html('<p>No subjects found for this teacher.</p>');
+                                teacherDropdown.html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">No subjects found for this teacher.</p>');
                             }
 
                             teachersDiv.append(teacherButton);
@@ -612,22 +645,466 @@
 
                             // Toggle dropdown visibility on button click
                             teacherButton.on('click', function () {
-                                teacherDropdown.toggleClass('hidden');
+                                const isVisible = teacherDropdown.hasClass('hidden');
+                                teacherDropdown.toggleClass('hidden', !isVisible); // Show/hide dropdown
+                                teacherButton.attr('aria-expanded', isVisible);  // Update aria-expanded based on visibility
                             });
                         });
                     } else {
-                        teachersDiv.html('<p class="text-[12px]">No teachers found for Grade One.</p>');
+                        teachersDiv.html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">No teachers found for Grade One.</p>');
                     }
                 },
                 error: function (xhr, status, error) {
                     console.error('Error fetching teachers and subjects:', error);
-                    $('#teachersList').html('<p>An error occurred while fetching teachers.</p>');
+                    $('#teachersList').html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">An error occurred while fetching teachers.</p>');
                 }
             });
         }
 
+        function fetchTeachersTwo() {
+            const grade = 'Grade Two';
+            const currentYear = new Date().getFullYear();
+            const schoolYear = `${currentYear}-${currentYear + 1}`;  // Construct school year
+
+            $.ajax({
+                url: `/api/teachers-and-subjects?grade=${grade}&school_year=${schoolYear}`,
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                success: function (data) {
+                    const teachersDiv = $('#teachersListTwo');
+                    teachersDiv.empty();
+
+                    if (data.length > 0) {
+                        data.forEach(function (teacher) {
+                            const currentUrl = window.location.pathname;
+
+                            // Create the button element with updated structure
+                            const teacherButton = $('<button>', {
+                                class: `flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip ${currentUrl.includes(teacher.name.replace(/\s/g, '%20')) ? 'active2' : ''}`,
+                                id: `studentManagementButton${teacher.teacher_number}`,
+                                'aria-expanded': 'false',  // Initially collapsed
+                                'aria-controls': `teachersList${teacher.teacher_number}`,
+                                title: teacher.name,
+                            });
+
+                            const icon = $('<i>', { class: 'fa-solid fa-chalkboard-teacher' });
+                            const teacherText = $('<span>', { class: 'sidebar-text ml-0' }).html(`${teacher.name}`);
+                            const chevronIcon = $('<p>', { html: `<i class="fa-solid fa-chevron-right text-[8px] me-5"></i>` });
+
+                            teacherButton.append(icon, teacherText, chevronIcon);
+
+                            // Create the collapse content (dropdown) div
+                            const teacherDropdown = $('<div>', {
+                                class: 'collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0 hidden', // hidden by default
+                                id: `teachersList${teacher.teacher_number}`,
+                                style: 'max-height: 1000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
+                            });
+
+                            // Add teacher's subjects to the dropdown as clickable links
+                            if (teacher.subjects.length > 0) {
+                                teacher.subjects.forEach(function (subject) {
+                                    const currentUrl = window.location.pathname;
+
+                                    // Create the subject link with the updated URL
+                                    const subjectLink = $('<a>', {
+                                        href: `/StEmelieLearningCenter.HopeSci66/admin/Grade-book/class-record/GradeTwo/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
+                                        title: `${subject.subject} - ${subject.grade} ${subject.section}`,
+                                    });
+
+                                    // Create the subject text inside the link
+                                    const subjectText = $('<span>', { class: 'sidebar-text' }).html(`${subject.subject}<br>${subject.grade} | ${subject.section}`);
+                                    subjectLink.append(subjectText);
+
+                                    // Append the subject link to the teacher's dropdown
+                                    teacherDropdown.append(subjectLink);
+                                });
+                            } else {
+                                teacherDropdown.html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">No subjects found for this teacher.</p>');
+                            }
+
+                            teachersDiv.append(teacherButton);
+                            teachersDiv.append(teacherDropdown);
+
+                            // Toggle dropdown visibility on button click
+                            teacherButton.on('click', function () {
+                                const isVisible = teacherDropdown.hasClass('hidden');
+                                teacherDropdown.toggleClass('hidden', !isVisible); // Show/hide dropdown
+                                teacherButton.attr('aria-expanded', isVisible);  // Update aria-expanded based on visibility
+                            });
+                        });
+                    } else {
+                        teachersDiv.html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">No teachers found for Grade Two.</p>');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching teachers and subjects:', error);
+                    $('#teachersList').html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">An error occurred while fetching teachers.</p>');
+                }
+            });
+        }
+
+        function fetchTeachersThree() {
+            const grade = 'Grade Three';
+            const currentYear = new Date().getFullYear();
+            const schoolYear = `${currentYear}-${currentYear + 1}`;  // Construct school year
+
+            $.ajax({
+                url: `/api/teachers-and-subjects?grade=${grade}&school_year=${schoolYear}`,
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                success: function (data) {
+                    const teachersDiv = $('#teachersListThree');
+                    teachersDiv.empty();
+
+                    if (data.length > 0) {
+                        data.forEach(function (teacher) {
+                            const currentUrl = window.location.pathname;
+
+                            // Create the button element with updated structure
+                            const teacherButton = $('<button>', {
+                                class: `flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip ${currentUrl.includes(teacher.name.replace(/\s/g, '%20')) ? 'active2' : ''}`,
+                                id: `studentManagementButton${teacher.teacher_number}`,
+                                'aria-expanded': 'false',  // Initially collapsed
+                                'aria-controls': `teachersList${teacher.teacher_number}`,
+                                title: teacher.name,
+                            });
+
+                            const icon = $('<i>', { class: 'fa-solid fa-chalkboard-teacher' });
+                            const teacherText = $('<span>', { class: 'sidebar-text ml-0' }).html(`${teacher.name}`);
+                            const chevronIcon = $('<p>', { html: `<i class="fa-solid fa-chevron-right text-[8px] me-5"></i>` });
+
+                            teacherButton.append(icon, teacherText, chevronIcon);
+
+                            // Create the collapse content (dropdown) div
+                            const teacherDropdown = $('<div>', {
+                                class: 'collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0 hidden', // hidden by default
+                                id: `teachersList${teacher.teacher_number}`,
+                                style: 'max-height: 1000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
+                            });
+
+                            // Add teacher's subjects to the dropdown as clickable links
+                            if (teacher.subjects.length > 0) {
+                                teacher.subjects.forEach(function (subject) {
+                                    const currentUrl = window.location.pathname;
+
+                                    // Create the subject link with the updated URL
+                                    const subjectLink = $('<a>', {
+                                        href: `/StEmelieLearningCenter.HopeSci66/admin/Grade-book/class-record/GradeThree/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
+                                        title: `${subject.subject} - ${subject.grade} ${subject.section}`,
+                                    });
+
+                                    // Create the subject text inside the link
+                                    const subjectText = $('<span>', { class: 'sidebar-text' }).html(`${subject.subject}<br>${subject.grade} | ${subject.section}`);
+                                    subjectLink.append(subjectText);
+
+                                    // Append the subject link to the teacher's dropdown
+                                    teacherDropdown.append(subjectLink);
+                                });
+                            } else {
+                                teacherDropdown.html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">No subjects found for this teacher.</p>');
+                            }
+
+                            teachersDiv.append(teacherButton);
+                            teachersDiv.append(teacherDropdown);
+
+                            // Toggle dropdown visibility on button click
+                            teacherButton.on('click', function () {
+                                const isVisible = teacherDropdown.hasClass('hidden');
+                                teacherDropdown.toggleClass('hidden', !isVisible); // Show/hide dropdown
+                                teacherButton.attr('aria-expanded', isVisible);  // Update aria-expanded based on visibility
+                            });
+                        });
+                    } else {
+                        teachersDiv.html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">No teachers found for Grade Three.</p>');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching teachers and subjects:', error);
+                    $('#teachersList').html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">An error occurred while fetching teachers.</p>');
+                }
+            });
+        }
+
+        function fetchTeachersFour() {
+            const grade = 'Grade Four';
+            const currentYear = new Date().getFullYear();
+            const schoolYear = `${currentYear}-${currentYear + 1}`;  // Construct school year
+
+            $.ajax({
+                url: `/api/teachers-and-subjects?grade=${grade}&school_year=${schoolYear}`,
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                success: function (data) {
+                    const teachersDiv = $('#teachersListFour');
+                    teachersDiv.empty();
+
+                    if (data.length > 0) {
+                        data.forEach(function (teacher) {
+                            const currentUrl = window.location.pathname;
+
+                            // Create the button element with updated structure
+                            const teacherButton = $('<button>', {
+                                class: `flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip ${currentUrl.includes(teacher.name.replace(/\s/g, '%20')) ? 'active2' : ''}`,
+                                id: `studentManagementButton${teacher.teacher_number}`,
+                                'aria-expanded': 'false',  // Initially collapsed
+                                'aria-controls': `teachersList${teacher.teacher_number}`,
+                                title: teacher.name,
+                            });
+
+                            const icon = $('<i>', { class: 'fa-solid fa-chalkboard-teacher' });
+                            const teacherText = $('<span>', { class: 'sidebar-text ml-0' }).html(`${teacher.name}`);
+                            const chevronIcon = $('<p>', { html: `<i class="fa-solid fa-chevron-right text-[8px] me-5"></i>` });
+
+                            teacherButton.append(icon, teacherText, chevronIcon);
+
+                            // Create the collapse content (dropdown) div
+                            const teacherDropdown = $('<div>', {
+                                class: 'collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0 hidden', // hidden by default
+                                id: `teachersList${teacher.teacher_number}`,
+                                style: 'max-height: 1000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
+                            });
+
+                            // Add teacher's subjects to the dropdown as clickable links
+                            if (teacher.subjects.length > 0) {
+                                teacher.subjects.forEach(function (subject) {
+                                    const currentUrl = window.location.pathname;
+
+                                    // Create the subject link with the updated URL
+                                    const subjectLink = $('<a>', {
+                                        href: `/StEmelieLearningCenter.HopeSci66/admin/Grade-book/class-record/GradeFour/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
+                                        title: `${subject.subject} - ${subject.grade} ${subject.section}`,
+                                    });
+
+                                    // Create the subject text inside the link
+                                    const subjectText = $('<span>', { class: 'sidebar-text' }).html(`${subject.subject}<br>${subject.grade} | ${subject.section}`);
+                                    subjectLink.append(subjectText);
+
+                                    // Append the subject link to the teacher's dropdown
+                                    teacherDropdown.append(subjectLink);
+                                });
+                            } else {
+                                teacherDropdown.html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">No subjects found for this teacher.</p>');
+                            }
+
+                            teachersDiv.append(teacherButton);
+                            teachersDiv.append(teacherDropdown);
+
+                            // Toggle dropdown visibility on button click
+                            teacherButton.on('click', function () {
+                                const isVisible = teacherDropdown.hasClass('hidden');
+                                teacherDropdown.toggleClass('hidden', !isVisible); // Show/hide dropdown
+                                teacherButton.attr('aria-expanded', isVisible);  // Update aria-expanded based on visibility
+                            });
+                        });
+                    } else {
+                        teachersDiv.html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">No teachers found for Grade Four.</p>');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching teachers and subjects:', error);
+                    $('#teachersList').html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">An error occurred while fetching teachers.</p>');
+                }
+            });
+        }
+
+        function fetchTeachersFive() {
+            const grade = 'Grade Five';
+            const currentYear = new Date().getFullYear();
+            const schoolYear = `${currentYear}-${currentYear + 1}`;  // Construct school year
+
+            $.ajax({
+                url: `/api/teachers-and-subjects?grade=${grade}&school_year=${schoolYear}`,
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                success: function (data) {
+                    const teachersDiv = $('#teachersListFive');
+                    teachersDiv.empty();
+
+                    if (data.length > 0) {
+                        data.forEach(function (teacher) {
+                            const currentUrl = window.location.pathname;
+
+                            // Create the button element with updated structure
+                            const teacherButton = $('<button>', {
+                                class: `flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip ${currentUrl.includes(teacher.name.replace(/\s/g, '%20')) ? 'active2' : ''}`,
+                                id: `studentManagementButton${teacher.teacher_number}`,
+                                'aria-expanded': 'false',  // Initially collapsed
+                                'aria-controls': `teachersList${teacher.teacher_number}`,
+                                title: teacher.name,
+                            });
+
+                            const icon = $('<i>', { class: 'fa-solid fa-chalkboard-teacher' });
+                            const teacherText = $('<span>', { class: 'sidebar-text ml-0' }).html(`${teacher.name}`);
+                            const chevronIcon = $('<p>', { html: `<i class="fa-solid fa-chevron-right text-[8px] me-5"></i>` });
+
+                            teacherButton.append(icon, teacherText, chevronIcon);
+
+                            // Create the collapse content (dropdown) div
+                            const teacherDropdown = $('<div>', {
+                                class: 'collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0 hidden', // hidden by default
+                                id: `teachersList${teacher.teacher_number}`,
+                                style: 'max-height: 1000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
+                            });
+
+                            // Add teacher's subjects to the dropdown as clickable links
+                            if (teacher.subjects.length > 0) {
+                                teacher.subjects.forEach(function (subject) {
+                                    const currentUrl = window.location.pathname;
+
+                                    // Create the subject link with the updated URL
+                                    const subjectLink = $('<a>', {
+                                        href: `/StEmelieLearningCenter.HopeSci66/admin/Grade-book/class-record/GradeFive/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
+                                        title: `${subject.subject} - ${subject.grade} ${subject.section}`,
+                                    });
+
+                                    // Create the subject text inside the link
+                                    const subjectText = $('<span>', { class: 'sidebar-text' }).html(`${subject.subject}<br>${subject.grade} | ${subject.section}`);
+                                    subjectLink.append(subjectText);
+
+                                    // Append the subject link to the teacher's dropdown
+                                    teacherDropdown.append(subjectLink);
+                                });
+                            } else {
+                                teacherDropdown.html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">No subjects found for this teacher.</p>');
+                            }
+
+                            teachersDiv.append(teacherButton);
+                            teachersDiv.append(teacherDropdown);
+
+                            // Toggle dropdown visibility on button click
+                            teacherButton.on('click', function () {
+                                const isVisible = teacherDropdown.hasClass('hidden');
+                                teacherDropdown.toggleClass('hidden', !isVisible); // Show/hide dropdown
+                                teacherButton.attr('aria-expanded', isVisible);  // Update aria-expanded based on visibility
+                            });
+                        });
+                    } else {
+                        teachersDiv.html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">No teachers found for Grade Five.</p>');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching teachers and subjects:', error);
+                    $('#teachersList').html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">An error occurred while fetching teachers.</p>');
+                }
+            });
+        }
+
+        function fetchTeachersSix() {
+            const grade = 'Grade Six';
+            const currentYear = new Date().getFullYear();
+            const schoolYear = `${currentYear}-${currentYear + 1}`;  // Construct school year
+
+            $.ajax({
+                url: `/api/teachers-and-subjects?grade=${grade}&school_year=${schoolYear}`,
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                success: function (data) {
+                    const teachersDiv = $('#teachersListSix');
+                    teachersDiv.empty();
+
+                    if (data.length > 0) {
+                        data.forEach(function (teacher) {
+                            const currentUrl = window.location.pathname;
+
+                            // Create the button element with updated structure
+                            const teacherButton = $('<button>', {
+                                class: `flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip ${currentUrl.includes(teacher.name.replace(/\s/g, '%20')) ? 'active2' : ''}`,
+                                id: `studentManagementButton${teacher.teacher_number}`,
+                                'aria-expanded': 'false',  // Initially collapsed
+                                'aria-controls': `teachersList${teacher.teacher_number}`,
+                                title: teacher.name,
+                            });
+
+                            const icon = $('<i>', { class: 'fa-solid fa-chalkboard-teacher' });
+                            const teacherText = $('<span>', { class: 'sidebar-text ml-0' }).html(`${teacher.name}`);
+                            const chevronIcon = $('<p>', { html: `<i class="fa-solid fa-chevron-right text-[8px] me-5"></i>` });
+
+                            teacherButton.append(icon, teacherText, chevronIcon);
+
+                            // Create the collapse content (dropdown) div
+                            const teacherDropdown = $('<div>', {
+                                class: 'collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0 hidden', // hidden by default
+                                id: `teachersList${teacher.teacher_number}`,
+                                style: 'max-height: 1000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
+                            });
+
+                            // Add teacher's subjects to the dropdown as clickable links
+                            if (teacher.subjects.length > 0) {
+                                teacher.subjects.forEach(function (subject) {
+                                    const currentUrl = window.location.pathname;
+
+                                    // Create the subject link with the updated URL
+                                    const subjectLink = $('<a>', {
+                                        href: `/StEmelieLearningCenter.HopeSci66/admin/Grade-book/class-record/GradeSix/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
+                                        title: `${subject.subject} - ${subject.grade} ${subject.section}`,
+                                    });
+
+                                    // Create the subject text inside the link
+                                    const subjectText = $('<span>', { class: 'sidebar-text' }).html(`${subject.subject}<br>${subject.grade} | ${subject.section}`);
+                                    subjectLink.append(subjectText);
+
+                                    // Append the subject link to the teacher's dropdown
+                                    teacherDropdown.append(subjectLink);
+                                });
+                            } else {
+                                teacherDropdown.html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">No subjects found for this teacher.</p>');
+                            }
+
+                            teachersDiv.append(teacherButton);
+                            teachersDiv.append(teacherDropdown);
+
+                            // Toggle dropdown visibility on button click
+                            teacherButton.on('click', function () {
+                                const isVisible = teacherDropdown.hasClass('hidden');
+                                teacherDropdown.toggleClass('hidden', !isVisible); // Show/hide dropdown
+                                teacherButton.attr('aria-expanded', isVisible);  // Update aria-expanded based on visibility
+                            });
+                        });
+                    } else {
+                        teachersDiv.html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">No teachers found for Grade Six.</p>');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching teachers and subjects:', error);
+                    $('#teachersList').html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">An error occurred while fetching teachers.</p>');
+                }
+            });
+        }
+
+        // Function to update the subject header from the URL (when navigating directly to a specific subject page)
+        function updateSubjectHeader() {
+            const path = window.location.pathname;
+            const urlParts = path.split('/');
+            const subjectName = urlParts[urlParts.length - 1]; // Get the last part (subject name)
+            const formattedSubjectName = decodeURIComponent(subjectName.replace('%20', ' ')); // Decode the subject name and replace '%20' with space
+
+            const subjectText = `${formattedSubjectName}`;
+            document.getElementById('subjectName').innerText = formattedSubjectName;
+        }
+
         $(document).ready(function () {
-            fetchTeachers();  // Fetch and display teachers and their subjects for Grade One
+            fetchTeachers(); 
+            fetchTeachersTwo();
+            fetchTeachersThree();
+            fetchTeachersFour();
+            fetchTeachersFive();
+            fetchTeachersSix();
+            updateSubjectHeader();
         });
 
         // Handle collapse for all student management buttons

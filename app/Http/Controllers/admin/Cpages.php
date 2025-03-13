@@ -73,7 +73,7 @@ class Cpages extends Controller
 
     }
 
-    public function showGradeBookGradeone($teacherNumber)
+    public function showGradeBookGradeone($teacherNumber, $subject)
     {
         $TeacherInfo = TeacherUser::where('teacher_number', $teacherNumber)->first();
         $TeacherSubject = TeacherSubjectClass::where('teacher_number', $teacherNumber)->get();
@@ -95,40 +95,121 @@ class Cpages extends Controller
         return view('admin.admin_gradebook_gradeone', compact('students', 'TeacherInfo', 'TeacherSubject', 'StudentFinals'));
     }
 
-    public function showGradeBookGradetwo()
+    public function showGradeBookGradetwo($teacherNumber, $subject)
+    {
+        $TeacherInfo = TeacherUser::where('teacher_number', $teacherNumber)->first();
+        $TeacherSubject = TeacherSubjectClass::where('teacher_number', $teacherNumber)->get();
+
+        $StudentFinals = StudentFinalGrade::where('teacher_number', $teacherNumber)->get();
+
+        $allRecords = GradeOneClassRecord::where('teacher_number', $teacherNumber)
+            ->orWhere('teacher_number', $teacherNumber)
+            ->get()
+            ->merge(GradeTwoClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeThreeClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFourClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFiveClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeSixClassRecord::where('teacher_number', $teacherNumber)->get());
+
+        $students = $allRecords;
+
+        // Pass the data to the view
+        return view('admin.admin_gradebook_gradetwo', compact('students', 'TeacherInfo', 'TeacherSubject', 'StudentFinals'));
+    
+    }
+
+    public function showGradeBookGradethree($teacherNumber, $subject)
     {
 
-        return view('admin.admin_gradebook_gradetwo');
+        $TeacherInfo = TeacherUser::where('teacher_number', $teacherNumber)->first();
+        $TeacherSubject = TeacherSubjectClass::where('teacher_number', $teacherNumber)->get();
+
+        $StudentFinals = StudentFinalGrade::where('teacher_number', $teacherNumber)->get();
+
+        $allRecords = GradeOneClassRecord::where('teacher_number', $teacherNumber)
+            ->orWhere('teacher_number', $teacherNumber)
+            ->get()
+            ->merge(GradeTwoClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeThreeClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFourClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFiveClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeSixClassRecord::where('teacher_number', $teacherNumber)->get());
+
+        $students = $allRecords;
+
+        // Pass the data to the view
+        return view('admin.admin_gradebook_gradethree', compact('students', 'TeacherInfo', 'TeacherSubject', 'StudentFinals'));
+    
 
     }
 
-    public function showGradeBookGradethree()
+    public function showGradeBookGradefour($teacherNumber, $subject)
     {
+        $TeacherInfo = TeacherUser::where('teacher_number', $teacherNumber)->first();
+        $TeacherSubject = TeacherSubjectClass::where('teacher_number', $teacherNumber)->get();
 
-        return view('admin.admin_gradebook_gradethree');
+        $StudentFinals = StudentFinalGrade::where('teacher_number', $teacherNumber)->get();
 
+        $allRecords = GradeOneClassRecord::where('teacher_number', $teacherNumber)
+            ->orWhere('teacher_number', $teacherNumber)
+            ->get()
+            ->merge(GradeTwoClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeThreeClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFourClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFiveClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeSixClassRecord::where('teacher_number', $teacherNumber)->get());
+
+        $students = $allRecords;
+
+        // Pass the data to the view
+        return view('admin.admin_gradebook_gradefour', compact('students', 'TeacherInfo', 'TeacherSubject', 'StudentFinals'));
+    
     }
 
-    public function showGradeBookGradefour()
+    public function showGradeBookGradefive($teacherNumber, $subject)
     {
+        $TeacherInfo = TeacherUser::where('teacher_number', $teacherNumber)->first();
+        $TeacherSubject = TeacherSubjectClass::where('teacher_number', $teacherNumber)->get();
 
-        return view('admin.admin_gradebook_gradefour');
+        $StudentFinals = StudentFinalGrade::where('teacher_number', $teacherNumber)->get();
 
+        $allRecords = GradeOneClassRecord::where('teacher_number', $teacherNumber)
+            ->orWhere('teacher_number', $teacherNumber)
+            ->get()
+            ->merge(GradeTwoClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeThreeClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFourClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFiveClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeSixClassRecord::where('teacher_number', $teacherNumber)->get());
+
+        $students = $allRecords;
+
+        // Pass the data to the view
+        return view('admin.admin_gradebook_gradefive', compact('students', 'TeacherInfo', 'TeacherSubject', 'StudentFinals'));
+    
     }
 
-    public function showGradeBookGradefive()
+    public function showGradeBookGradesix($teacherNumber, $subject)
     {
+        $TeacherInfo = TeacherUser::where('teacher_number', $teacherNumber)->first();
+        $TeacherSubject = TeacherSubjectClass::where('teacher_number', $teacherNumber)->get();
 
+        $StudentFinals = StudentFinalGrade::where('teacher_number', $teacherNumber)->get();
 
-        return view('admin.admin_gradebook_gradefive');
+        $allRecords = GradeOneClassRecord::where('teacher_number', $teacherNumber)
+            ->orWhere('teacher_number', $teacherNumber)
+            ->get()
+            ->merge(GradeTwoClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeThreeClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFourClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFiveClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeSixClassRecord::where('teacher_number', $teacherNumber)->get());
 
-    }
+        $students = $allRecords;
 
-    public function showGradeBookGradesix()
-    {
-
-        return view('admin.admin_gradebook_gradesix');
-
+        // Pass the data to the view
+        return view('admin.admin_gradebook_gradesix', compact('students', 'TeacherInfo', 'TeacherSubject', 'StudentFinals'));
+    
     }
 
     public function showgraduateStudent()

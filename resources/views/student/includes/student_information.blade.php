@@ -18,6 +18,7 @@
         <div class="accountInfo bg-white mt-10 text-[15px] text-teal-900 p-5 shadow-lg font-semibold">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div>
+                    <p class="mb-3">LRN : <strong>{{ session('lrna') }}</strong></p>
                     <p class="mb-3">Student Number: <strong>{{ session('student_id') }}</strong></p>
                     <p class="mb-3">School Year: <strong>{{ session('school_yeara') }}</strong></p>
                     <p class="mb-3">Status: <span class="text-green-500 font-bold">{{ session('status') }} | {{ session('statusa') }}</span></p>

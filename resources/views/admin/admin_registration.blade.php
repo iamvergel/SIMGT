@@ -18,7 +18,7 @@
                     <p class="text-2xl font-bold text-teal-900 ml-5">
                         <span
                             onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/admin/student-management'"
-                            class="hover:text-teal-700">Report Section</span> / Online Application
+                            class="hover:text-teal-700">Report Section</span> / Student Registration
                     </p>
                 </div>
                 <div class="flex justify-between items-center gap-4 mt-10">
@@ -61,6 +61,7 @@
                                 <thead class="bg-gray-200">
                                     <tr class="text-[14px] font-normal uppercase text-left text-black">
                                         <th class="export">lrn</th>
+                                        <th class="export">Student Number</th>
                                         <th class="export">School Year</th>
                                         <th class="export">Admission Type</th>
                                         <th class="export">Name</th>
@@ -69,29 +70,42 @@
                                 </thead>
                                 <tbody class="" id="tableBody">
                                     @foreach ($students as $student)
-                                        <tr class="hover:bg-gray-100 h-12">
-                                            <td class="px-4 py-3">{{ $student->lrn }}</td>
-
-                                            <td class="px-4 py-3 ">{{ $student->school_year }}</td>
-                                            <td class="px-4 py-3 text-xs">
-                                                @if ($student->status == 'transferee')
-                                                    <span
-                                                        class="px-2 py-1 uppercase font-semibold text-[10px] rounded-lg leading-tight text-blue-800 bg-blue-200">
-                                                        {{ $student->status }}
-                                                    </span>
-                                                @else
-                                                    <span
-                                                        class="px-2 py-1 uppercase font-semibold text-[10px] rounded-lg leading-tight text-teal-800 bg-teal-200">
-                                                        {{ $student->status }}
-                                                    </span>
-                                                @endif
-                                            </td>
-                                            <td class="px-4 py-3">{{ $student->student_last_name }}
-                                                {{ $student->student_first_name }} {{ $student->student_middle_name }}
-                                                {{ $student->student_suffix_name }}
-                                            </td>
-                                            <td class="px-4 py-3">{{ $student->grade }}</td>
-                                        </tr>
+                                                                        @php
+                                                                            $account = $studentAccount[$student->studentnumber] ?? null;
+                                                                            $avatar = $account && $account->avatar ? asset('storage/' . $account->avatar) : null;
+                                                                            $primaryInfo = $studentInfo[$student->lrn] ?? null;
+                                                                            $initials = strtoupper(substr($primaryInfo->student_last_name, 0, 1) . substr($primaryInfo->student_first_name, 0, 1));
+                                                                        @endphp
+                                                                        <tr class="hover:bg-gray-100 h-12">
+                                                                            <td class="px-4 py-3">{{ $student->lrn }}</td>
+                                                                            <td class="px-4 py-3 ">{{ $student->studentnumber }}</td>
+                                                                            <td class="px-4 py-3 text-xs">
+                                                                                {{ $student->school_year }}
+                                                                            </td>
+                                                                            <td class="px-4 py-3 text-xs">
+                                                                                <span class="bg-yellow-300 text-yellow-800 px-2 py-1 font-semibold rounded-full">{{ $student->status }}</span>
+                                                                            </td>
+                                                                            <td class="flex justify-start items-center">
+                                                                                <div
+                                                                                    class="w-12 h-12 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold mx-2">
+                                                                                    @if ($avatar)
+                                                                                        <img src="{{ $avatar }}" alt="Student Avatar"
+                                                                                            class="w-12 h-12 rounded-full object-cover">
+                                                                                    @else
+                                                                                        {{ $initials }}
+                                                                                    @endif
+                                                                                </div>
+                                                                                <div>
+                                                                                    <span class="text-sm font-semibold">{{ $primaryInfo->student_last_name }}
+                                                                                {{ $primaryInfo->student_first_name }}
+                                                                                {{ $primaryInfo->student_middle_name }}
+                                                                                {{ $primaryInfo->student_suffix_name }}</span>
+                                                                                    <br><span
+                                                                                        class="text-xs text-gray-500">{{ $primaryInfo->email_address_send }}</span>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td class="px-4 py-3">{{ $student->grade }}</td>
+                                                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

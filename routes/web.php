@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Student;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Clogin;
 use App\Http\Controllers\Admin\Cpages;
@@ -21,6 +22,8 @@ use App\Http\Controllers\TeacherProfile;
 use App\Http\Controllers\Registration;
 use App\Http\Controllers\TeacherClassAdvisory;
 use App\Http\Controllers\RegisterStudent;
+use App\Http\Controllers\StudentPrimaryInfoController;
+use App\Http\Controllers\StudentRegistrationController;
 
 
 Route::get('/', function () {
@@ -68,14 +71,14 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     });
 
     // Grade Book Routes
-    Route::prefix('/StEmelieLearningCenter.HopeSci66/admin/Grade-book')->group(function () {
+    Route::prefix('/StEmelieLearningCenter.HopeSci66/admin/Grade-book/class-record')->group(function () {
         Route::get('/', [Cpages::class, 'showGradeBook'])->name('admin.admin_gradebook');
-        Route::get('/GradeOne/{teacher_number}', [Cpages::class, 'showGradeBookGradeone'])->name('admin.admin_gradebook_gradeone');
-        Route::get('/GradeTwo', [Cpages::class, 'showGradeBookGradetwo'])->name('admin.admin_gradebook_gradetwo');
-        Route::get('/GradeThree', [Cpages::class, 'showGradeBookGradethree'])->name('admin.admin_gradebook_gradethree');
-        Route::get('/GradeFour', [Cpages::class, 'showGradeBookGradefour'])->name('admin.admin_gradebook_gradefour');
-        Route::get('/GradeFive', [Cpages::class, 'showGradeBookGradefive'])->name('admin.admin_gradebook_gradefive');
-        Route::get('/GradeSix', [Cpages::class, 'showGradeBookGradesix'])->name('admin.admin_gradebook_gradesix');
+        Route::get('/GradeOne/{teachernumber}/{subject}', [Cpages::class, 'showGradeBookGradeone'])->name('admin.admin_gradebook_gradeone');
+        Route::get('/GradeTwo/{teachernumber}/{subject}', [Cpages::class, 'showGradeBookGradetwo'])->name('admin.admin_gradebook_gradetwo');
+        Route::get('/GradeThree/{teachernumber}/{subject}', [Cpages::class, 'showGradeBookGradethree'])->name('admin.admin_gradebook_gradethree');
+        Route::get('/GradeFour/{teachernumber}/{subject}', [Cpages::class, 'showGradeBookGradefour'])->name('admin.admin_gradebook_gradefour');
+        Route::get('/GradeFive/{teachernumber}/{subject}', [Cpages::class, 'showGradeBookGradefive'])->name('admin.admin_gradebook_gradefive');
+        Route::get('/GradeSix/{teachernumber}/{subject}', [Cpages::class, 'showGradeBookGradesix'])->name('admin.admin_gradebook_gradesix');
     });
 
     // Report Section Routes
@@ -100,6 +103,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     });
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/online-application', [RegisterStudent::class, 'showAllRegister'])->name('register.student');
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-registration', [StudentRegistrationController::class, 'showAllRegister'])->name('register.new.student');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/teacher/myadvisory', [TeacherClassAdvisory::class, 'showMyadvisory'])->name('teacher.advisory');
     Route::get('/StEmelieLearningCenter.HopeSci66/teacher/class-record', [TeacherSubjectClassController::class, 'showclasssubjectadvisory'])->name('teacher.class-record');
@@ -171,8 +175,6 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         return view('admin.admin_calendar');
     });
 
-    Route::post('/students', [Cstudentinfo::class, 'store'])->name('includes.add_student_form.store');
-
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/announcement', function () {
         return view('admin.admin_announcement');
     });
@@ -205,7 +207,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::delete('/announcements/{id}', [Cevent::class, 'deleteAnnouncement'])->name('announcements.delete');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/announcement', [PictureAnnouncementController::class, 'showAnnouncements'])->name('announcements.show');
-    
+
     Route::delete('/StEmelieLearningCenter.HopeSci66/admin/announcement/{id}', [PictureAnnouncementController::class, 'deleteAnnouncement'])->name('pictureannouncements.delete');
     // Route::post('/admin/announcement/{id}', [PictureAnnouncementController::class, 'updateAnnouncement'])->name('announcements.update');
     Route::post('/StEmelieLearningCenter.HopeSci66/admin/announcement', [PictureAnnouncementController::class, 'store'])->name('announcementspicture.store');
@@ -227,9 +229,17 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/StEmelieLearningCenter.HopeSci66/student/dashboard', function () {
         return view('student.student_dashboard');
     });
+
     Route::get('/StEmelieLearningCenter.HopeSci66/student/dashboard', [Cevent::class, 'showDashboardstudent'])->name('student.dashboard');
     Route::get('/StEmelieLearningCenter.HopeSci66/student/calendar', [Cevent::class, 'showCalendar'])->name('student.calendar');
     Route::get('/api/events', [Cevent::class, 'getEvents']);
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/student/registration', function () {
+        return view('student.registration');
+    });
+
+    Route::get('students/register', [StudentRegistrationController::class, 'showRegistrationForm'])->name('students.registration');
+    Route::post('students/registers', [StudentRegistrationController::class, 'register'])->name('students.register');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/teacher/calendar', [Cevent::class, 'showteacherCalendar'])->name('teacher.calendar');
 
@@ -261,7 +271,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
 
     //REGISTRAR________________________________________________________________
     //________________________________________________________________
-     Route::get('/StEmelieLearningCenter.HopeSci66/registrar/dashboard', function () {
+    Route::get('/StEmelieLearningCenter.HopeSci66/registrar/dashboard', function () {
         return view('registrar.registrar_dashboard');
     });
 
