@@ -4,7 +4,7 @@
         <canvas id="canvas" class="w-screen h-screen absolute bg-transparent z-[11] left-0 top-0 "></canvas>
         <!-- @include("main.topbar") -->
         <div class=" w-full h-full relative top-0">
-            <div class="pl-[1rem] lg:pl-[5rem] text-start z-[10] w-full text-white relative mt-[10rem]">
+            <div class="pl-[1rem] lg:pl-[5rem] text-start z-[10] w-full text-white relative mt-[2rem]">
                 <p class="text-sm lg:text-[1.5rem] leading-8">Welcome To Our Website</p>
                 <h1 class="text-[3rem] lg:text-[5rem] 2xl:text-[5rem] font-bold uppercase leading-none">Primary
                     School
@@ -13,6 +13,7 @@
                     Emilie Learning
                     Center
                 </h1>
+                <p class="my-5">St. Emilie Learning Center is committed to empower the love of God to become a responsible citizen</p>
             </div>
 
             <div class="pl-[1rem] lg:pl-[5rem] text-start z-[12] relative ">
@@ -24,7 +25,7 @@
             </div>
 
             <div
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  xl:grid-cols-4 gap-4 px-[0rem] lg:px-[6rem] relative lg:absolute items-center w-full z-[13] mt-[30rem] md:mt-[20rem] lg:mt-[15rem]">
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  xl:grid-cols-4 gap-4 px-[0rem] lg:px-[6rem] relative lg:absolute items-center w-full z-[13] mt-[30rem] md:mt-[20rem] lg:mt-[6rem]">
                 <!-- Course Card -->
                 <div
                     class="card bg-yellow-400 py-8 rounded-lg mt-10 lg:mt-0 mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform" onclick="window.location.href = '#courses'">
