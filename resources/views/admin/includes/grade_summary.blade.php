@@ -26,7 +26,7 @@
                                                                             {{ $teachersubject->grade . ' - ' . $teachersubject->section}}
                                                                         </td>
                                                                         <td class="export border-2 border-gray-900 px-2 py-5" colspan="2">TECHER :
-                                                                            {{ session('teacher_fname') . ' ' . session('teacher_mname') . ' ' . session('teacher_lname')}}
+                                                                        {{ $TeacherInfo->first_name }} {{ $TeacherInfo->middle_name }} {{ $TeacherInfo->last_name }}
                                                                         </td>
                                                                         <td class="export border-2 border-gray-900 px-2 py-5" colspan="2" id="subject">SUBJECT :
                                                                             {{ $teachersubject->subject }}
