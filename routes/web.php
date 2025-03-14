@@ -24,7 +24,7 @@ use App\Http\Controllers\TeacherClassAdvisory;
 use App\Http\Controllers\RegisterStudent;
 use App\Http\Controllers\StudentPrimaryInfoController;
 use App\Http\Controllers\StudentRegistrationController;
-
+use App\Http\Controllers\RegistrationButtonController;
 
 Route::get('/', function () {
     // Redirect to the desired URL
@@ -331,8 +331,6 @@ Route::get('/get-Section', [Cstudentgrades::class, 'getxSections'])->name('get.a
 Route::post('/teacher-subject-class/update-inline', [TeacherSubjectClassController::class, 'updateInline'])->name('teacher-subject-class.update-inline');
 Route::post('/student/update-inline', [TeacherSubjectClassController::class, 'updateInlinestudent'])->name('student.update-inline');
 Route::post('/student/update-inlin/final', [TeacherSubjectClassController::class, 'updateInlinestudentfinal'])->name('student.update-final');
-
-use App\Http\Controllers\RegistrationButtonController;
 
 // Route to toggle the status of the first registration button
 Route::patch('/registration-button/toggle', [RegistrationButtonController::class, 'toggleStatus'])->name('registration-button.toggle');

@@ -92,30 +92,29 @@
                                 console.error('Error:', error);
                             }
                         });
-
-
-                        // Function to toggle the registration status
-                        function toggleRegistrationStatus() {
-                            $.ajax({
-                                url: '/registration-button/toggle', // Ensure this is correct
-                                method: 'PATCH',
-                                dataType: 'json',
-                                headers: {
-                                    "X-CSRF-TOKEN": '{{ csrf_token() }}',  // Add CSRF token for security
-                                },
-                                success: function (data) {
-                                    if (data.status === 'Active') {
-                                        $('#statusMessage').text('Registration is Active');
-                                    } else {
-                                        $('#statusMessage').text('Registration is Inactive');
-                                    }
-                                },
-                                error: function (error) {
-                                    console.error('Error:', error);
-                                }
-                            });
-                        }
                     });
+
+                    // Function to toggle the registration status
+                    function toggleRegistrationStatus() {
+                        $.ajax({
+                            url: '/registration-button/toggle', // Ensure this is correct
+                            method: 'PATCH',
+                            dataType: 'json',
+                            headers: {
+                                "X-CSRF-TOKEN": '{{ csrf_token() }}',  // Add CSRF token for security
+                            },
+                            success: function (data) {
+                                if (data.status === 'Active') {
+                                    $('#statusMessage').text('Registration is Active');
+                                } else {
+                                    $('#statusMessage').text('Registration is Inactive');
+                                }
+                            },
+                            error: function (error) {
+                                console.error('Error:', error);
+                            }
+                        });
+                    }
                 </script>
             </div>
         </main>
@@ -126,3 +125,4 @@
 </body>
 
 </html>
+
