@@ -4,6 +4,22 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\StudentInfo;
+use App\Models\Section;
+use App\Models\StudentAdditionalInfo;
+use App\Models\StudentDocuments;
+use App\Models\Mstudentaccount;
+use App\Models\StudentPrimaryInfo;
+use App\Models\TeacherUser;
+use App\Models\TeacherSubjectClass;
+use App\Models\TeacherAdvisory;
+use App\Models\GradeOneClassRecord;
+use App\Models\GradeTwoClassRecord;
+use App\Models\GradeThreeClassRecord;
+use App\Models\GradeFourClassRecord;
+use App\Models\GradeFiveClassRecord;
+use App\Models\GradeSixClassRecord;
+use App\Models\StudentFinalGrade;
 
 class Cpages extends Controller
 {
@@ -57,11 +73,26 @@ class Cpages extends Controller
 
     }
 
-    public function showGradeBookGradeone()
+    public function showGradeBookGradeone($teacherNumber)
     {
+        $TeacherInfo = TeacherUser::where('teacher_number', $teacherNumber)->first();
+        $TeacherSubject = TeacherSubjectClass::where('teacher_number', $teacherNumber)->get();
 
-        return view('admin.admin_gradebook_gradeone');
+        $StudentFinals = StudentFinalGrade::where('teacher_number', $teacherNumber)->get();
 
+        $allRecords = GradeOneClassRecord::where('teacher_number', $teacherNumber)
+            ->orWhere('teacher_number', $teacherNumber)
+            ->get()
+            ->merge(GradeTwoClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeThreeClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFourClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFiveClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeSixClassRecord::where('teacher_number', $teacherNumber)->get());
+
+        $students = $allRecords;
+
+        // Pass the data to the view
+        return view('admin.admin_gradebook_gradeone', compact('students', 'TeacherInfo', 'TeacherSubject', 'StudentFinals'));
     }
 
     public function showGradeBookGradetwo()

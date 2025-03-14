@@ -16,7 +16,17 @@ use App\Models\Section;
 use App\Models\StudentAdditionalInfo;
 use App\Models\StudentDocuments;
 use App\Models\Mstudentaccount;
-
+use App\Models\StudentPrimaryInfo;
+use App\Models\TeacherUser;
+use App\Models\TeacherSubjectClass;
+use App\Models\TeacherAdvisory;
+use App\Models\GradeOneClassRecord;
+use App\Models\GradeTwoClassRecord;
+use App\Models\GradeThreeClassRecord;
+use App\Models\GradeFourClassRecord;
+use App\Models\GradeFiveClassRecord;
+use App\Models\GradeSixClassRecord;
+use App\Models\StudentFinalGrade;
 
 class Cstudentgrades extends Controller
 {
@@ -213,62 +223,26 @@ class Cstudentgrades extends Controller
         return response()->json($grades);
     }
 
-    public function showGradebookOneData()
+    public function showGradebookOneData($teacherNumber)
     {
-        // Fetch all active student records with additional info and documents using eager loading
-        $students = StudentInfo::with(['additionalInfo', 'documents', 'gradebookOne'])
-            ->where('status', 'Active')
-            ->get();
+        $TeacherInfo = TeacherUser::where('teacher_number', $teacherNumber)->get();
+        $TeacherSubject = TeacherSubjectClass::where('teacher_number', $teacherNumber)->get();
 
-        // Check if there are no active students
-        $noGradeOneMessage = $students->isEmpty() ? "No students found in Grade One." : null;
+        $StudentFinals = StudentFinalGrade::where('teacher_number', $teacherNumber)->get();
 
-        // Calculate average grades for each student
-        foreach ($students as $student) {
-            $quarterAverages = [];
+        $allRecords = GradeOneClassRecord::where('teacher_number', $teacherNumber)
+            ->orWhere('teacher_number', $teacherNumber)
+            ->get()
+            ->merge(GradeTwoClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeThreeClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFourClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeFiveClassRecord::where('teacher_number', $teacherNumber)->get())
+            ->merge(GradeSixClassRecord::where('teacher_number', $teacherNumber)->get());
 
-            foreach ($student->gradebookOne as $grade) {
-                // Collect subject grades for all quarters
-                $subjectGrades = [
-                    $grade->subject_one,
-                    $grade->subject_two,
-                    $grade->subject_three,
-                    $grade->subject_four,
-                    $grade->subject_five,
-                    $grade->subject_six,
-                    $grade->subject_seven,
-                    $grade->subject_eight,
-                    $grade->subject_nine,
-                ];
-
-                // Filter out null or empty grades
-                $validGrades = array_filter($subjectGrades, fn($value) => !is_null($value) && $value !== '');
-
-                // Calculate average if there are valid grades
-                $averageGrade = count($validGrades) > 0 ? array_sum($validGrades) / count($validGrades) : null;
-
-                // Store the average for the specific quarter
-                if (in_array($grade->quarter, ['1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter'])) {
-                    $quarterAverages[$grade->quarter] = $averageGrade;
-                }
-
-                $grade->average = $averageGrade;
-            }
-
-            // Store quarterly averages in the student object
-            $student->quarter_averages = $quarterAverages;
-
-            // Calculate final grade for the student
-            if (count($quarterAverages) === 4) { // Ensure all quarters are present
-                $finalGrade = array_sum($quarterAverages) / count($quarterAverages); // Average of all four quarters
-                $student->final_grade = $finalGrade; // Add to student object
-            } else {
-                $student->final_grade = null; // No final grade if any average is missing
-            }
-        }
-
+        $students = $allRecords;
+       
         // Pass the data to the view
-        return view('admin.admin_gradebook_gradeone', compact('students', 'noGradeOneMessage'));
+        return view('admin.admin_gradebook_gradeone{{$teacherNumber}}', compact('students', 'noGradeOneMessage', 'TeacherInfo', 'TeacherSubject', 'StudentFinals'));
     }
 
     public function showGradebookTwoData()

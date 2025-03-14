@@ -75,4 +75,22 @@ class TeacherAdvisoryController extends Controller
         return response()->json($teachers);
     }
 
+    public function getTeacher(Request $request)
+    {
+        // Fetch sections based on the selected grade, section, and school year
+        $sections = TeacherAdvisory::where('grade', $request->grade)
+            ->where('school_year', $request->school_year)
+            ->get();
+
+        // Fetch teachers who belong to those sections
+        $teachers = TeacherUser::whereIn('teacher_number', $sections->pluck('teacher_number'))->get()->map(function ($teacher) {
+            return [
+                'teacher_number' => $teacher->teacher_number,
+                'name' => $teacher->first_name . ' ' . $teacher->last_name
+            ];
+        });
+
+        // Return the teachers as a JSON response
+        return response()->json($teachers);
+    }
 }

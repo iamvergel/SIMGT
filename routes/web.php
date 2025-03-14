@@ -70,7 +70,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     // Grade Book Routes
     Route::prefix('/StEmelieLearningCenter.HopeSci66/admin/Grade-book')->group(function () {
         Route::get('/', [Cpages::class, 'showGradeBook'])->name('admin.admin_gradebook');
-        Route::get('/GradeOne', [Cpages::class, 'showGradeBookGradeone'])->name('admin.admin_gradebook_gradeone');
+        Route::get('/GradeOne/{teacher_number}', [Cpages::class, 'showGradeBookGradeone'])->name('admin.admin_gradebook_gradeone');
         Route::get('/GradeTwo', [Cpages::class, 'showGradeBookGradetwo'])->name('admin.admin_gradebook_gradetwo');
         Route::get('/GradeThree', [Cpages::class, 'showGradeBookGradethree'])->name('admin.admin_gradebook_gradethree');
         Route::get('/GradeFour', [Cpages::class, 'showGradeBookGradefour'])->name('admin.admin_gradebook_gradefour');
@@ -308,7 +308,7 @@ Route::post('/admin/change-password/{studentId}', [Cadmininfo::class, 'changePas
 Route::post('/teacher/change-password/{studentId}', [TeacherProfile::class, 'changePassword'])->name('teacher.changePassword');
 
 Route::get('/get-classsubject', [TeacherSubjectClassController::class, 'getClassSubject'])->name('get.classsubject');
-
+Route::get('/get-teacherclasssubject', [TeacherSubjectClassController::class, 'getTeacherSubject'])->name('get.teacherclasssubject');
 Route::get('/get-onesections', [Cstudentgrades::class, 'getGradeOneSections'])->name('get.sections');
 Route::get('/get-twosections', [Cstudentgrades::class, 'getGradeTwoSections'])->name('get.twosections');
 Route::get('/get-threesections', [Cstudentgrades::class, 'getGradeThreeSections'])->name('get.threesections');
@@ -325,7 +325,7 @@ Route::post('/student/update-inlin/final', [TeacherSubjectClassController::class
 use App\Http\Controllers\RegistrationButtonController;
 
 // Route to toggle the status of the first registration button
-Route::patch('/registration-button/toggle', [RegistrationButtonController::class, 'toggleStatus']);
+Route::patch('/registration-button/toggle', [RegistrationButtonController::class, 'toggleStatus'])->name('registration-button.toggle');
 
 // Route to get the current status of the first registration button
-Route::get('/registration-button/status', [RegistrationButtonController::class, 'currentStatus']);
+Route::get('/registration-button/status', [RegistrationButtonController::class, 'currentStatus'])->name('registration-button.status');

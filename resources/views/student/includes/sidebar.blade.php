@@ -311,7 +311,7 @@
     </nav>
 
     <nav id="offcanvasSidebar"
-        class="bg-teal-800 text-teal-50 h-full max-w-64 w-64 absolute top-0 left-0 transition-transform duration-300 ease-in-out transform -translate-x-full overflow-y-auto z-[20] block lg:hidden addmobile">
+        class="bg-teal-800 text-teal-50 h-screen max-w-64 w-64 absolute top-0 left-0 transition-transform duration-300 ease-in-out transform -translate-x-full overflow-y-auto z-[20] block lg:hidden addmobile">
         <div class="flex justify-start items-center text-center">
             <img class="rounded-full logo border-2 mt-5 ml-2 border-teal-700"
                 src="{{ asset('assets/images/SELC.png') }}" alt="logo" width="40" id="logo">

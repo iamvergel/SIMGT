@@ -283,13 +283,36 @@
                     <i class="fa-solid fa-book"><span class="sidebar-text ml-2">Grade Book</span></i>
                     <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
                 </button>
-                <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="gradebook">
-                    <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeOne"
-                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
-                        title="Grade One">
-                        <i class="fa-regular fa-circle"></i>
-                        <span class="sidebar-text ml-2">Grade One</span>
-                    </a>
+                <div class="collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0" id="gradebook">
+                    <button
+                        class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip"
+                        id="studentManagementButton15" aria-expanded="false" aria-controls="teachersList" title="Grade One">
+                        <i class="fa-solid fa-book"><span class="sidebar-text ml-2">Grade One</span></i>
+                        <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
+                    </button>
+
+                    <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-0" id="teachersList">
+                        <!-- The list of teachers will be inserted here dynamically -->
+                    </div>
+
+                    <button
+                        class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip"
+                        id="studentManagementButton16" aria-expanded="false" aria-controls="teachersListTwo"
+                        title="Grade Two">
+                        <i class="fa-solid fa-book"><span class="sidebar-text ml-2">Grade two</span></i>
+                        <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
+                    </button>
+
+                    <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-0" id="teachersListTwo">
+                        <!-- The list of teachers will be inserted here dynamically -->
+                    </div>
+
+                    <!-- <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeOne"
+                                                                class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
+                                                                title="Grade One">
+                                                                <i class="fa-regular fa-circle"></i>
+                                                                <span class="sidebar-text ml-2">Grade One</span>
+                                                            </a> -->
                     <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeTwo"
                         class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Grade Two">
@@ -393,11 +416,11 @@
                         <span class="sidebar-text ml-2">Teachers</span>
                     </a>
                     <!-- <a href="#"
-                            class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-0"
-                            title="Students">
-                            <i class="fa-solid fa-user"></i>
-                            <span class="sidebar-text ml-2">Students</span>
-                        </a> -->
+                                                                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-0"
+                                                                        title="Students">
+                                                                        <i class="fa-solid fa-user"></i>
+                                                                        <span class="sidebar-text ml-2">Students</span>
+                                                                    </a> -->
                 </div>
 
                 <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">
@@ -493,7 +516,8 @@
         <footer class="relative h-28 mt-[8rem] px-5">
             <img src="{{ asset('../assets/images/grouplogo.png') }}" alt="grouplogo" width="200"
                 class="opacity-25 absolute bottom-[-2.5rem] left-[-0.1rem]">
-            <p class="text-[10px] absolute bottom-0 mb-1">@ Copyright &copy; {{ date('Y') }} St Emelie Learning Center HopeSci66.
+            <p class="text-[10px] absolute bottom-0 mb-1">@ Copyright &copy; {{ date('Y') }} St Emelie Learning Center
+                HopeSci66.
                 All Rights Reserved</p>
         </footer>
     </nav>
@@ -528,6 +552,109 @@
             if (item.getAttribute('href') === currentPath) {
                 item.classList.add('active'); // Add active class to the current path
             }
+        });
+
+        // Function to fetch teachers for Grade One
+        function fetchTeachers() {
+            const grade = 'Grade One';
+            const currentYear = new Date().getFullYear();
+            const schoolYear = `${currentYear}-${currentYear + 1}`;  // Construct school year
+
+            $.ajax({
+                url: `/api/teachers?grade=${grade}&school_year=${schoolYear}`,
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                success: function (data) {
+                    const teachersDiv = $('#teachersList');
+                    teachersDiv.empty();
+
+                    if (data.length > 0) {
+                        data.forEach(function (teacher) {
+                            const currentUrl = window.location.pathname;
+
+                            // Create the button element with updated structure
+                            const teacherButton = $('<button>', {
+                                class: `flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip ${currentUrl.includes(teacher.name.replace(/\s/g, '%20')) ? 'active2' : ''}`,
+                                id: `studentManagementButton${teacher.id}`,
+                                'aria-expanded': 'false',
+                                'aria-controls': `teachersList${teacher.id}`,
+                                title: teacher.name,
+                            });
+
+                            const icon = $('<i>', { class: 'fa-solid fa-chalkboard-teacher' });
+                            const teacherText = $('<span>', { class: 'sidebar-text ml-2' }).html(`${teacher.name}`);
+                            const chevronIcon = $('<i>', { class: 'fa-solid fa-chevron-right text-[8px] me-5' });
+
+                            teacherButton.append(icon, teacherText, chevronIcon);
+
+                            // Create the collapse content (dropdown) div
+                            const teacherDropdown = $('<div>', {
+                                class: 'collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-0 p-20 hidden',
+                                id: `teachersList${teacher.id}`,
+                            });
+
+                            // Add hidden input for teacher number and school year
+                            const hiddenInputs = $('<div>', {
+                                html: `<input type="hidden" name="teacher_number" value="${teacher.id}">
+                                       <input type="hidden" name="school_year" value="${schoolYear}">`
+                            });
+
+                            // Add the teacher details (dynamic content) in the dropdown
+                            teacherDropdown.append(hiddenInputs);
+                            teacherDropdown.append('<div id="teacherSubjects' + teacher.id + '" class="teacher-subjects">Loading subjects...</div>');
+
+                            // Fetch subjects for the teacher by passing teacher.id and schoolYear
+                            fetchTeacherSubjects(teacher.id, schoolYear);
+
+                            teachersDiv.append(teacherButton);
+                            teachersDiv.append(teacherDropdown);
+
+                            // Toggle dropdown visibility on button click
+                            teacherButton.on('click', function () {
+                                teacherDropdown.toggleClass('hidden');
+                            });
+                        });
+                    } else {
+                        teachersDiv.html('<p class="text-[12px]">No teachers found for Grade One.</p>');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching teachers:', error);
+                    $('#teachersList').html('<p>An error occurred while fetching teachers.</p>');
+                }
+            });
+        }
+
+        // Function to fetch teacher's subjects based on teacher_number and school_year
+        function fetchTeacherSubjects(teacherId, schoolYear) {
+            $.ajax({
+                url: '/get-teacherclasssubject',
+                method: 'GET',
+                data: {
+                    teacher_number: teacherId,  // Pass the teacher's ID (teacher_number) here
+                    school_year: schoolYear     // Pass the school year here
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                success: function (data) {
+                    // Handle successful response
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching subjects:', error);
+                    // Handle the error and display the response
+                    if (xhr.status === 422) {
+                        const errors = xhr.responseText;
+                        alert('Validation failed: \n' + Object.keys(errors.errors).map(key => `${key}: ${errors.errors[key]}`).join('\n'));
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            fetchTeachers();  // Fetch and display teachers for Grade One
         });
 
         // Handle collapse for all student management buttons

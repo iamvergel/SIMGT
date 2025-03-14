@@ -65,7 +65,7 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div x-show="open" class="text-[15px] bg-white p-5 text-gray-800 rounded-md">
+                                            <div x-show="open" class="text-[15px] bg-white p-5 text-gray-800 rounded-md overflow-scroll">
                                                 {!! $announcement->announcements_body !!}</div>
                                             <small
                                                 class="text-muted text-[12px] text-white">{{ $announcement->created_at->format('F j, Y, g:i a') }}</small>

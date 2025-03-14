@@ -25,10 +25,10 @@ class TeacherSubjectClassController extends Controller
             'school_year' => 'required|string',
             'teacher_number' => 'required|string', // Ensuring teacher_number is provided
         ]);
-    
+
         // List of quarters
         $quarters = ['1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter'];
-    
+
         // Create TeacherSubjectClass records for each quarter
         foreach ($quarters as $quarter) {
             TeacherSubjectClass::updateOrCreate(
@@ -45,7 +45,7 @@ class TeacherSubjectClassController extends Controller
                 ]
             );
         }
-    
+
         // Determine the correct model based on the grade
         $gradeClassRecordModel = [
             'Grade One' => GradeOneClassRecord::class,
@@ -55,7 +55,7 @@ class TeacherSubjectClassController extends Controller
             'Grade Five' => GradeFiveClassRecord::class,
             'Grade Six' => GradeSixClassRecord::class,
         ][$validatedData['grade']] ?? null;
-    
+
         if ($gradeClassRecordModel) {
             foreach ($quarters as $quarter) {
                 // Update the teacher number for all records with the same grade, section, subject, school year, and quarter
@@ -68,7 +68,7 @@ class TeacherSubjectClassController extends Controller
                 ])->update(['teacher_number' => $validatedData['teacher_number']]);
             }
         }
-    
+
         // Update teacher_number in StudentFinalGrade
         StudentFinalGrade::where([
             'grade' => $validatedData['grade'],
@@ -76,10 +76,10 @@ class TeacherSubjectClassController extends Controller
             'subject' => $validatedData['subject'],
             'school_year' => $validatedData['school_year'],
         ])->update(['teacher_number' => $validatedData['teacher_number']]);
-    
+
         // Return success response
         return redirect()->route('teacher.user')->with('success', 'Subject Class added successfully!');
-    }    
+    }
 
     public function update(Request $request, $id)
     {
@@ -121,6 +121,24 @@ class TeacherSubjectClassController extends Controller
             ->where('section', '!=', '')
             ->distinct()
             ->get(['subject', 'school_year', 'grade', 'section']);
+
+        return response()->json($subjects);
+    }
+    public function getTeacherSubject(Request $request)
+    {
+        $teacherNumber = Auth::guard('teacher')->user()->teacher_number;
+        $schoolYear = $request->input('school_year');
+
+        // Fetch distinct subjects based on teacher_number and school_year
+        $subjects = TeacherSubjectClass::select('subject', 'school_year', 'grade', 'section')
+            ->whereNotNull('subject')
+            ->where('subject', '!=', '')
+            ->where('teacher_number', $teacherNumber)
+            ->where('school_year', $schoolYear)  // Filter by school_year
+            ->where('grade', '!=', '')
+            ->where('section', '!=', '')
+            ->distinct()
+            ->get();
 
         return response()->json($subjects);
     }
