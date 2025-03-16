@@ -225,6 +225,7 @@ class TeacherSubjectClassController extends Controller
             'hps_written_eight',
             'hps_written_nine',
             'hps_written_ten',
+            'written_ws',
             'hps_performance_one',
             'hps_performance_two',
             'hps_performance_three',
@@ -235,7 +236,9 @@ class TeacherSubjectClassController extends Controller
             'hps_performance_eight',
             'hps_performance_nine',
             'hps_performance_ten',
-            'hps_q_assessment_one'
+            'performance_ws',
+            'hps_q_assessment_one',
+            'hps_q_assessment_ws',
         ];
 
         // If the updated column is one of the performance-related columns, update student records

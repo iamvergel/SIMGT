@@ -1,5 +1,5 @@
 <div class="p-5 overflow-x-scroll">
-                        <table id="gradetable" class="bg-white overflow-x-scroll">
+                        <table id="" class="bg-white overflow-x-scroll">
                             <thead>
                                 <tr class="text-[8px] font-normal uppercase text-left text-black">
                                     <th class="export"></th>
@@ -66,7 +66,7 @@
                                                                     <tr class="text-[14px] font-normal uppercase text-left text-black">
                                                                         <td class="export border-2 border-gray-900 py-5 px-2" colspan="1"></td>
                                                                         <td class="export border-2 border-gray-900 py-5 px-2" colspan="1">Learner's Name</td>
-                                                                        <td class="export border-2 border-gray-900 px-2" colspan="13">Written Works (30%)</td>
+                                                                        <td class="export border-2 border-gray-900 px-2" colspan="13">Written Works ({{ $teachersubject->written_ws }}%)</td>
                                                                         <td class="export border-2 border-gray-900 px-2" colspan="13">Performance Works (50%)
                                                                         </td>
                                                                         <td class="export border-2 border-gray-900 px-2" colspan="3">Quarterly Assessment (20%)
@@ -164,7 +164,8 @@
                                                                         <td class="export border-2 text-center border-gray-900">
                                                                             {{ $teachersubject->written_ps }}
                                                                         </td>
-                                                                        <td class="export border-2 text-center border-gray-900">
+                                                                        <td class="export border-2 text-center border-gray-900" contenteditable="true"
+                                                                        data-column="written_ws" data-id="{{ $teachersubject->id }}">
                                                                             {{ $teachersubject->written_ws }}%
                                                                         </td>
                                                                         <td class="export border-2 text-center border-gray-900" contenteditable="true"
