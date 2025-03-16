@@ -56,7 +56,7 @@ return new class extends Migration
                     IFNULL(hps_written_ten, 0)'
                 );
             $table->decimal('written_ps', 5, 2)->default(100.00)->nullable(); // Performance score for written assessments
-            $table->integer('written_ws')->default(30)->nullable(); // Weighted score (30% of total written score)
+            $table->integer('written_ws')->nullable(); // Weighted score (30% of total written score)
 
             $table->integer('written_one_score')->nullable(); // Written assessment 1 score
             $table->integer('written_two_score')->nullable(); // Written assessment 2 score

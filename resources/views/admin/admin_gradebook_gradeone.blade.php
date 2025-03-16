@@ -88,9 +88,9 @@
                         data-target="#summary">Grade Summary</li>
                 </ul>
 
-                <!-- <button
+                <button
                     class="float-right text-white font-semibold text-md bg-teal-600 hover:bg-teal-700 transition-all duration-300 p-2 px-10 rounded-lg mr-10"
-                    id="save"><i class="fa-solid fa-floppy-disk me-2"></i>Save<button> -->
+                    id="save"><i class="fa-solid fa-floppy-disk me-2"></i>Save<button>
             </div>
             <!-- component -->
             <div class="mx-auto p-2 mt-5 rounded-lg shadow-lg bg-gray-50">
@@ -131,7 +131,68 @@
 
 </body>
 
+<script>
+        $(document).ready(function () {
+            $('td[contenteditable="true"]').on('blur', function () {
+                var updatedValue = $(this).text();
+                var column = $(this).data('column');
+                var id = $(this).data('id');
+                var grade = $(this).data('grade'); // This will be undefined for Teacher
+                var subject = $(this).data('subject');
+
+                // Determine which URL and grade to use
+                var url = '';
+                var data = {
+                    id: id,
+                    column: column,
+                    value: updatedValue,
+                    _token: '{{ csrf_token() }}'
+                };
+
+                if (grade) {
+                    // This is for student
+                    url = '/student/update-inline';
+                    data.grade = grade; // Only add grade for students
+                } else if (subject) {
+                    url = '/student/update-inlin/final';
+                } else {
+                    // This is for teacher
+                    url = '/teacher-subject-class/update-inline';
+                }
+
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: data,
+                    success: function (response) {
+                        if (response.success) {
+                           
+                        } else {
+                            alert('Failed to update data!');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error details:', error);
+
+                    }
+                });
+            });
+
+            $('#save').on('click', function () {
+                alert('Data has been saved successfully!');
+
+                window.location.reload();
+            });
+        });
+    </script>
+
+</body>
+
 <style>
+    td[contenteditable="true"] {
+        background-color:rgb(243, 255, 236);
+    }
+
     .active1 {
         background-color: #115e59;
         color: white;

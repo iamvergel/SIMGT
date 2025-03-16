@@ -32,7 +32,7 @@ return new class extends Migration
 
         // Array of default data to insert with hashed passwords
         $defaultUsers = [
-            ['registrar_number' => '1000-0000', 'username' => 'registrar@school.edu.ph', 'password' => 'Registrar2024', 'role' => 'Registrar', 'first_name' => 'Registrar', 'last_name' => 'Registrar', 'middle_name' => 'Registrar'],
+            ['registrar_number' => '1000-0000', 'username' => 'registrar@stemilie.edu.ph', 'password' => 'Registrar2024', 'role' => 'Registrar', 'first_name' => 'Registrar', 'last_name' => 'Registrar', 'middle_name' => 'Registrar'],
         ];
 
         // Insert each user with hashed password if it doesn't already exist

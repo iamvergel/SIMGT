@@ -86,6 +86,13 @@ class Cevent extends BaseController // Extend the correct base controller
         return response()->json($announcements, 200);
     }
 
+     // Show all announcements
+     public function showAnnouncementsAdmission()
+     {
+         $announcements = Mannouncement::orderBy('created_at', 'desc')->get(); // Retrieve all announcements, ordered by created_at descending
+         return response()->json($announcements, 200);
+     }
+
     // Store a new announcement
     public function storeAnnouncement(Request $request)
     {

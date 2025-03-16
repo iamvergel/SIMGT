@@ -13,22 +13,30 @@
                     Emilie Learning
                     Center
                 </h1>
-                <p class="my-5">St. Emilie Learning Center is committed to empower the love of God to become a responsible citizen</p>
+                <p class="my-5">St. Emilie Learning Center is committed to empower the love of God to become a
+                    responsible citizen</p>
             </div>
 
             <div class="pl-[1rem] lg:pl-[5rem] text-start z-[12] relative ">
-                <a href="#missionvission">
-                    <button
-                        class="z-[700] bg-transparent border-4 border-yellow-300 py-4 px-10 text-white rounded-full font-bold text-lg uppercase mt-5 text-center transform duration-500 hover:scale-110 hover:z-[10] hover:bg-yellow-100 hover:border-yellow-700 hover:text-yellow-500 transition-transform">About
-                        Our School <i class="fa-solid fa-location-arrow ml-3 text-2xl"></i></button>
-                </a>
+                <button onclick="document.getElementById('modalprivacy').classList.remove('hidden')"
+                    class="z-[700] bg-transparent border-4 border-yellow-300 py-4 px-10 text-white rounded-full font-bold text-lg uppercase mt-5 text-center transform transition-all duration-300 hover:scale-110 hover:z-[10] hover:bg-yellow-100 hover:border-yellow-700 hover:text-yellow-500 transition-transform">register
+                    Now <i class="fa-solid fa-location-arrow ml-3 text-2xl"></i></button>
             </div>
+
+            <script>
+                document.getElementById('checkprivacy').addEventListener('change', function () {
+                    const nextbtnprivacy = document.getElementById('nextbtnprivacy');
+                    nextbtnprivacy.disabled = !this.checked;
+                    nextbtnprivacy.classList.toggle('bg-yellow-500', !this.checked);
+                    nextbtnprivacy.classList.toggle('bg-yellow-700', this.checked);
+                });
+            </script>
 
             <div
                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  xl:grid-cols-4 gap-4 px-[0rem] lg:px-[6rem] relative lg:absolute items-center w-full z-[13] mt-[30rem] md:mt-[20rem] lg:mt-[6rem]">
                 <!-- Course Card -->
-                <div
-                    class="card bg-yellow-400 py-8 rounded-lg mt-10 lg:mt-0 mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform" onclick="window.location.href = '#courses'">
+                <div class="card bg-yellow-400 py-8 rounded-lg mt-10 lg:mt-0 mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform"
+                    onclick="window.location.href = '#courses'">
                     <div class="text-center text-white px-5">
                         <i
                             class="fas fa-book fa-3x mb-4 text-yellow-500 p-4 px-5 bg-white rounded-full border-[5px] border-yellow-400 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
@@ -49,13 +57,13 @@
                 </div>
 
                 <!-- Gallery Card -->
-                <div
-                    class="card bg-sky-500 py-8 mt-10 lg:mt-0 rounded-lg mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform" onclick="window.open('/StEmelieLearningCenter.HopeSci66/Registration', '_blank')">
+                <div class="card bg-sky-500 py-8 mt-10 lg:mt-0 rounded-lg mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform"
+                    onclick="window.location.href = '#missionvission'">
                     <div class="text-center text-white px-5">
                         <i
                             class="fas fa-image fa-3x mb-4 text-sky-500 p-4 bg-white rounded-full border-[5px] border-sky-500 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
-                        <h2 class="text-lg font-bold mb-2 mt-10 bg-sky-700 rounded-full shadow-lg">Admission</h2>
-                        <p>Online Application</p>
+                        <h2 class="text-lg font-bold mb-2 mt-10 bg-sky-700 rounded-full shadow-lg">Our School</h2>
+                        <p>Browse our School</p>
                     </div>
                 </div>
 
@@ -71,6 +79,29 @@
                         <p>Sign-in to Portal </p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalprivacy" class="fixed z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 hidden p-2">
+        <div class="bg-white rounded-lg shadow-lg p-5 max-w-xl mx-auto mt-12">
+            <p class="text-lg font-bold">Data Privacy Agreement</p>
+            <p class="text-sm">Please read the following statement carefully.</p>
+            <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor,
+                vestibulum magna sed, convallis ex. Cum sociis natoque penatibus et magnis dis parturient montes,
+                nascetur ridiculus mus. Nullam eget nibh eu lectus consequat vehicula. Integer sed nisi sed augue
+                convallis porta. Quisque quis nunc vitae libero fermentum eleifend. Nullam quis nunc vitae libero
+                fermentum eleifend. Nulla facilisi. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
+            <div class="flex justify-center items-center">
+                <input type="checkbox" id="checkprivacy" class="mr-2">
+                <label for="checkprivacy" class="text-sm">I agree</label>
+            </div>
+            <div class="flex justify-center items-center mt-5">
+                <button onclick="document.getElementById('modalprivacy').classList.add('hidden')"
+                    class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full">Disagree</button>
+                <button onclick="window.location.href = '/StEmelieLearningCenter.HopeSci66/Registration'"
+                    id="nextbtnprivacy" disabled
+                    class="ml-3 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full">Next</button>
             </div>
         </div>
     </div>

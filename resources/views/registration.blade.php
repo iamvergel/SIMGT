@@ -18,8 +18,10 @@
                         </span>
                         <ul class="list-disc pl-5 mt-5">
                             <li class="list-item">Birth Certificate (PSA/NSO Copy)</li>
-                            <li class="list-item">Form 137 (SPF 10)</li>
+                            <li class="list-item">Form 137 (SF10)</li>
+                            <li class="list-item">Form 138 (SF9) - (For Transferees)</li>
                         </ul>
+
                         <span class="block mt-5 bg-gray-200 p-2">
                             <i class="fa-solid fa-circle-exclamation me-2 text-green-700"></i><span
                                 class="font-bold">Important:</span> Your registration will only be processed once all
@@ -68,22 +70,28 @@
                 Learning Center</p>
         </div>
 
+        <div class="flex justify-center items-center my-5">
+            <p class="text-[15px] leading-[1.5rem] text-center md:text-[15px] lg:text-[20px] xl:text-[30px] font-bold text-teal-900">
+                Registration <br /><span class="text-[15px]">For School Year {{ date('Y') }}-{{ date('Y') + 1 }}</span>
+            </p>
+        </div>
+
         <div class="bg-gray-100">
             <!-- Modal body -->
             <form class="p-5 lg:p-10 " onsubmit="return validateForm()" id="myform"
                 action="{{ route('student.register') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                <div class="grid grid-cols-4 gap-4 mb-4 text-[13px] text-gray-900">
+                <div class="grid grid-cols-4 gap-4 mb-4 text-[13px] text-gray-900 lh:hidden">
                     <ol class="col-span-4 relative border-s border-teal-800" id="steps">
-                        <li class="mb-10 ms-6">
+                        <li class="mb-10 ms-2">
                             <span
                                 class="absolute flex items-center justify-center w-6 h-6 bg-teal-100 rounded-full -start-3 ring-8 ring-white">
                                 <i class="fa-solid fa-file text-teal-700"></i>
                             </span>
-                            <h1>Primary Information</h1>
+                            <h1 class="ml-5">Primary Information</h1>
                             <div
-                                class=" col-span-4 p-5 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
+                                class=" col-span-4 p-2 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
                                 <div
                                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-5 px-5">
                                     <div
@@ -93,16 +101,25 @@
                                         </p>
                                     </div>
 
-                                    <div class="mb-5">
+                                    <div class="mb-5 hidden">
                                         <label for="lrn" class="block mb-2 text-[12px] font-bold text-gray-900">
                                             <span class="text-red-600 mr-1">*</span>LRN
                                             :</label>
-                                        <input type="text" name="lrn" id="lrn" required
+                                        <input type="text" name="lrn" id="lrn"
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                             placeholder="Enter Learner Reference Number (LRN)">
                                         <div class="text-red-600 text-x hidden" id="alert">This field is required</div>
                                     </div>
 
+                                    <div class="mb-5">
+                                        <label for="schoolYear" class="block mb-2 text-sm font-bold text-gray-900">
+                                            <span class="text-red-600 mr-1">*</span>School Year :
+                                        </label>
+                                        <input type="text" name="school_year" id="schoolYear" readonly
+                                            value="{{ date('Y') }}-{{ date('Y') + 1}}"
+                                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
+                                        <div class="text-red-600 text-xs hidden" id="alert">This field is required</div>
+                                    </div>
 
                                     <div class="mb-5">
                                         <label for="status" class="block mb-2 text-sm font-bold text-gray-900">
@@ -112,20 +129,6 @@
                                             <option value="" disabled selected>Select Admission Type</option>
                                             <option value="new regular">New Regular</option>
                                             <option value="transferee">Transferee</option>
-                                        </select>
-                                        <div class="text-red-600 text-xs hidden" id="alert">This field is required</div>
-                                    </div>
-
-                                    <div class="mb-5">
-                                        <label for="schoolYear" class="block mb-2 text-sm font-bold text-gray-900">
-                                            <span class="text-red-600 mr-1">*</span>School Year :
-                                        </label>
-                                        <select name="school_year" id="schoolYear" required
-                                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
-                                            <option value="" disabled selected>Select School Year</option>
-                                            <option value="{{ date('Y') }}-{{ date('Y') + 1}}">
-                                                {{ date('Y')}}-{{ date('Y') + 1 }}
-                                            </option>
                                         </select>
                                         <div class="text-red-600 text-xs hidden" id="alert">This field is required</div>
                                     </div>
@@ -163,10 +166,10 @@
                             <h1 class="ml-5">Personal Information</h1>
                         </div>
 
-                        <li class="hidden mb-10 ms-6">
+                        <li class="hidden mb-10 ms-2">
 
                             <div
-                                class=" col-span-4 p-5 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
+                                class=" col-span-4 p-2 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
 
                                 <div
                                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-5 px-5">
@@ -369,9 +372,9 @@
                             </span>
                             <h1 class="ml-5">Parents Information</h1>
                         </div>
-                        <li class="hidden mb-10 ms-6">
+                        <li class="hidden mb-10 ms-2">
                             <div
-                                class=" col-span-4 p-5 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
+                                class=" col-span-4 p-2 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
                                 <div
                                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-5 px-5">
 
@@ -503,9 +506,9 @@
                             </span>
                             <h1 class="ml-5">Guardian Information</h1>
                         </div>
-                        <li class="hidden mb-10 ms-6">
+                        <li class="hidden mb-10 ms-2">
                             <div
-                                class="col-span-4 p-5 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
+                                class="col-span-4 p-2 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
                                 <div
                                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-5 px-5">
 
@@ -626,9 +629,9 @@
                             </span>
                             <h1 class="ml-5">Emergency Contact Information</h1>
                         </div>
-                        <li class="hidden mb-10 ms-6">
+                        <li class="hidden mb-10 ms-2">
                             <div
-                                class=" col-span-4 p-5 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
+                                class=" col-span-4 p-2 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
                                 <div
                                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-5 px-5">
 
@@ -680,65 +683,13 @@
                                     </div>
 
                                 </div>
-                                <div class="flex justify-end">
-                                    <button
-                                        class="bg-teal-700 text-white hover:bg-teal-800 hover:text-white font-bold rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center"
-                                        onclick="showNextStep()" type="button">Next</button>
-                                </div>
-                            </div>
-                        </li>
-
-                        <div class="mt-5">
-                            <span
-                                class="absolute flex items-center justify-center w-6 h-6 bg-teal-100 rounded-full -start-3 ring-8 ring-white">
-                                <i class="fa-solid fa-file text-teal-700"></i>
-                            </span>
-                            <h1 class="ml-5">Student Documents</h1>
-                        </div>
-                        <li class="hidden mb-10 ms-6">
-                            <div
-                                class=" col-span-4 p-5 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
-                                <div
-                                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 pb-5 px-5">
-
-                                    <!-- Personal Information -->
-                                    <div
-                                        class="col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-2 w-86 border-b border-b-gray-300 my-5">
-                                        <p class="text-[20px] font-bold"><i class="fa-solid fa-folder mr-2 mb-5"></i>
-                                            Student Documents</p>
-                                    </div>
-                                    <div class="mb-5 ">
-                                        <label for="birth_certificate"
-                                            class="block font-semibold text-gray-700 mb-2">Birth
-                                            Certificate:</label>
-                                        <label
-                                            class="inline-block bg-sky-800 text-white px-4 py-2 rounded cursor-pointer hover:bg-sky-700">
-                                            Choose file
-                                            <input type="file" id="birth_certificate" name="birth_certificate"
-                                                accept=".pdf,.jpg,.jpeg,.png" required class="hidden">
-                                        </label>
-                                        <div class="mt-2 text-gray-600" id="birthFileName">No file chosen</div>
-                                    </div>
-
-                                    <div class="mb-5">
-                                        <label for="proof_of_residency"
-                                            class="block font-semibold text-gray-700 mb-2">Form
-                                            137:</label>
-                                        <label
-                                            class="inline-block bg-sky-800 text-white px-4 py-2 rounded cursor-pointer hover:bg-sky-700">
-                                            Choose file
-                                            <input type="file" id="proof_of_residency" name="proof_of_residency"
-                                                accept=".pdf,.jpg,.jpeg,.png" required class="hidden">
-                                        </label>
-                                        <div class="mt-2 text-gray-600" id="residencyFileName">No file chosen
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-span-4 flex justify-center mt-10">
                                     <label class="flex items-center space-x-2 text-center">
                                         <span class="text-gray-600 font-semibold text-lg">Double check your information
-                                            before you proceed <br/> <span onclick="window.location.href = '#top';" class="cursor-pointer p-2 px-3 mt-10 rounded-full text-xl text-white bg-teal-700 hover:bg-teal-800"><i class="fa-solid fa-chevron-up"></i></span></span>
-                                            
+                                            before you proceed <br /> <span onclick="window.location.href = '#top';"
+                                                class="cursor-pointer p-2 px-3 mt-10 rounded-full text-xl text-white bg-teal-700 hover:bg-teal-800"><i
+                                                    class="fa-solid fa-chevron-up"></i></span></span>
+
                                     </label>
                                 </div>
                                 <div class="col-span-4 flex  justify-center lg:justify-end mt-20 lg:me-20">
@@ -746,7 +697,7 @@
                                         <input type="checkbox" id="confirmCheck"
                                             class="form-checkbox h-5 w-5 text-teal-600">
                                         <span>I double-checked my information</span>
-                                        
+
                                     </label>
                                 </div>
                                 <div class="col-span-4 flex justify-end mt-5">
@@ -762,7 +713,7 @@
                                         submitButton.disabled = !this.checked;
                                         submitButton.classList.toggle('bg-gray-400', !this.checked);
                                         submitButton.classList.toggle('bg-sky-800', this.checked);
-                                        submitButton.classList.toggle('hover:bg-sky-700',this.checked);
+                                        submitButton.classList.toggle('hover:bg-sky-700', this.checked);
                                     });
                                 </script>
                             </div>
@@ -779,9 +730,8 @@
     let step = 0;  // Start from step 0 since the first step is visible
     const steps = document.querySelectorAll('#steps li');
     const nextButton = document.querySelectorAll('button');
-    const alert = document.querySelectorAll('#alert');
 
-    function showNextStep() {
+    function showNextStep(event) {
         const currentStep = steps[step];  // Get the current step
         const inputs = currentStep.querySelectorAll('input, select'); // Select all input and select elements
         let allFilled = true; // Flag to track if all fields are filled
@@ -806,6 +756,7 @@
             if (step + 1 < steps.length) {
                 step++;  // Increment the step
                 steps[step].classList.remove('hidden');  // Show the next step
+                event.target.classList.add('hidden');  // Hide the next button of the previous step
             }
         }
     }
@@ -813,9 +764,6 @@
     // Add event listeners to each "Next" button to trigger the showNextStep function
     nextButton.forEach(button => {
         button.addEventListener('click', showNextStep);
-    });
-    document.addEventListener("DOMContentLoaded", function () {
-
     });
 
     function calculateAge() {

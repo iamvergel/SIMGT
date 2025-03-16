@@ -41,7 +41,7 @@ class Cstudentinfo extends Controller
             'student_number' => '|unique:student_info,student_number',
             'grade' => 'required',
             'school_year' => 'required',
-            'section' => 'required',
+            'section' => 'nullable',
             'adviser' => 'nullable',
             'status' => 'required',
 
@@ -83,8 +83,9 @@ class Cstudentinfo extends Controller
             'email_address' => 'nullable|email',
             'messenger_account' => 'nullable',
             // File upload validations
-            'birth_certificate' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'proof_of_residency' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'birth_certificate' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'sf10' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'sf9' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
             //usewraccount
             'password' => 'required',
         ]);
@@ -150,13 +151,16 @@ class Cstudentinfo extends Controller
 
             // Handle file uploads
             $birthCertificatePath = $request->file('birth_certificate')->store('documents', 'public');
-            $proofOfResidencyPath = $request->file('proof_of_residency')->store('documents', 'public');
+            $proofOfResidencyPath = $request->file('sf10')->store('documents', 'public');
+            $sf9 = $request->file('sf9')->store('documents', 'public');
 
             // Create student documents record
             $studentDocuments = new StudentDocuments();
             $studentDocuments->student_number = $validatedData['student_number']; // Link to student
             $studentDocuments->birth_certificate = $birthCertificatePath;
-            $studentDocuments->proof_of_residency = $proofOfResidencyPath;
+            $studentDocuments->sf10 = $proofOfResidencyPath;
+            $studentDocuments->sf9 = $sf9;
+
             $studentDocuments->save();
 
             $studentprimary = new StudentPrimaryInfo();
@@ -516,7 +520,8 @@ class Cstudentinfo extends Controller
             'email_address' => 'required|email',
             'messenger_account' => 'nullable',
             'birth_certificate' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'proof_of_residency' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'sf10' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'sf9' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
 
         // Find student record
@@ -578,9 +583,12 @@ class Cstudentinfo extends Controller
                 'birth_certificate' => $request->hasFile('birth_certificate')
                     ? $request->file('birth_certificate')->store('documents', 'public')
                     : ($student->documents->birth_certificate ?? null),
-                'proof_of_residency' => $request->hasFile('proof_of_residency')
-                    ? $request->file('proof_of_residency')->store('documents', 'public')
-                    : ($student->documents->proof_of_residency ?? null),
+                'sf10' => $request->hasFile('sf10')
+                    ? $request->file('sf10')->store('documents', 'public')
+                    : ($student->documents->sf10 ?? null),
+                'sf9' => $request->hasFile('sf9')
+                    ? $request->file('sf9')->store('documents', 'public')
+                    : ($student->documents->sf9 ?? null), 
             ]
         );
 
@@ -809,7 +817,9 @@ class Cstudentinfo extends Controller
         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
         $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
         $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
-        $myTeacher = TeacherUser::whereIn('teacher_number', $studentsPrimary->pluck('adviser'))->get()->keyBy('teacher_number');
+        $myTeacher = TeacherUser::whereIn('teacher_number', $studentsPrimary->pluck('adviser')->map(function ($value) {
+            return $value === null ? null : $value;
+        })->toArray())->get()->keyBy('teacher_number');
 
         // Check if there are no students found in Grade One
         $noGradeOneMessage = $studentsPrimary->isEmpty() ? "No students found in Grade One." : null;

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\RegisterStudentInfo;
 use App\Models\RegisterAdditionalInfo;
-use App\Models\RegisterDocuments;
 
 class Registration extends Controller
 {
@@ -14,7 +13,6 @@ class Registration extends Controller
     {
         // Validate incoming request
         $validatedData = $request->validate([
-            'lrn' => 'required|unique:register_student_info,lrn',
             'school_year' => 'required',
             'grade' => 'required',
             'status' => 'required',
@@ -55,15 +53,11 @@ class Registration extends Controller
             'emergency_contact_number' => 'required',
             'email_address' => 'nullable|email',
             'messenger_account' => 'nullable',
-            // File upload validations
-            'birth_certificate' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
-            'proof_of_residency' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
 
         try {
             // Create student record
             $student = new RegisterStudentInfo();
-            $student->lrn = $validatedData['lrn'];
             $student->school_year = $validatedData['school_year'];
             $student->grade = $validatedData['grade'];
             $student->status = $validatedData['status'];
@@ -87,7 +81,6 @@ class Registration extends Controller
 
             // Create additional info record
             $additionalInfo = new RegisterAdditionalInfo();
-            $additionalInfo->lrn = $validatedData['lrn']; // Link to student
             $additionalInfo->father_last_name = $validatedData['father_last_name'] ? ucwords(strtolower($validatedData['father_last_name'])) : null;
             $additionalInfo->father_first_name = $validatedData['father_first_name'] ? ucwords(strtolower($validatedData['father_first_name'])) : null;
             $additionalInfo->father_middle_name = $validatedData['father_middle_name'] ? ucwords(strtolower($validatedData['father_middle_name'])) : null;
@@ -109,18 +102,6 @@ class Registration extends Controller
             $additionalInfo->email_address = $validatedData['email_address'];
             $additionalInfo->messenger_account = $validatedData['messenger_account'];
             $additionalInfo->save();
-
-            // Handle file uploads
-            $birthCertificatePath = $request->file('birth_certificate')->store('register', 'public');
-            $proofOfResidencyPath = $request->file('proof_of_residency')->store('register', 'public');
-
-            // Create student documents record
-            $studentDocuments = new RegisterDocuments();
-            $studentDocuments->lrn = $validatedData['lrn']; // Link to student
-            $studentDocuments->birth_certificate = $birthCertificatePath;
-            $studentDocuments->proof_of_residency = $proofOfResidencyPath;
-            $studentDocuments->save();
-
 
             // Redirect or return response
             return back()->with('success', 'Registration Submitted Successfully!');

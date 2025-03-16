@@ -144,7 +144,7 @@
                                             <span class="text-red-600 mr-1">*</span>Section :</label>
                                         <select id="section" name="section"
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                            required>
+                                            >
                                             <option value="">Select Section</option>
                                         </select>
                                     </div>
@@ -765,13 +765,27 @@
                                     </div>
 
                                     <div class="mb-6">
-                                        <label for="proof_of_residency"
-                                            class="block font-semibold text-gray-700 mb-2">Form
-                                            137:</label>
+                                        <label for="sf10"
+                                            class="block font-semibold text-gray-700 mb-2">SF10(Form
+                                            137):</label>
                                         <label
                                             class="inline-block bg-sky-800 text-white px-4 py-2 rounded cursor-pointer hover:bg-sky-700">
                                             Choose file
-                                            <input type="file" id="proof_of_residency" name="proof_of_residency"
+                                            <input type="file" id="sf10" name="sf10"
+                                                accept=".pdf,.jpg,.jpeg,.png" required class="hidden">
+                                        </label>
+                                        <div class="mt-2 text-gray-600" id="residencyFileName">No file chosen
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-6">
+                                        <label for="sf9"
+                                            class="block font-semibold text-gray-700 mb-2">SF9(Form
+                                            138):</label>
+                                        <label
+                                            class="inline-block bg-sky-800 text-white px-4 py-2 rounded cursor-pointer hover:bg-sky-700">
+                                            Choose file
+                                            <input type="file" id="sf10" name="sf9"
                                                 accept=".pdf,.jpg,.jpeg,.png" required class="hidden">
                                         </label>
                                         <div class="mt-2 text-gray-600" id="residencyFileName">No file chosen
@@ -880,7 +894,7 @@
                         });
 
                     document
-                        .querySelector("#proof_of_residency")
+                        .querySelector("#sf10")
                         .addEventListener("change", function () {
                             document.querySelector("#residencyFileName").textContent = this
                                 .files[0]

@@ -201,13 +201,13 @@
                     <span class="sidebar-text ml-2">Dashboard</span>
 
                 </a>
-                <a href="#"
+                <a href="/StEmelieLearningCenter.HopeSci66/admission/calendar"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
                     title="Calendar">
                     <i class="fa-solid fa-calendar"></i>
                     <span class="sidebar-text ml-2">Calendar</span>
                 </a>
-                <a href="#"
+                <a href="/StEmelieLearningCenter.HopeSci66/admission/announcement"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0 tooltip"
                     title="Announcement">
                     <i class="fa-solid fa-bullhorn"></i>
@@ -263,12 +263,12 @@
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Six</span>
                 </a>
-                <a href="#"
+                <!-- <a href="#"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
                     title="All New Student">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Add New Student</span>
-                </a>
+                </a> -->
             </div>
 
             <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">
@@ -281,7 +281,7 @@
                 <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
             </button>
             <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="reportsection">
-                <a href="#"
+                <a href="/StEmelieLearningCenter.HopeSci66/admission/online-application"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
                     title="Online Application">
                     <i class="fa-solid fa-folder-open"></i>
@@ -306,30 +306,6 @@
                     <span class="sidebar-text ml-2">Archive Student</span>
                 </a>
             </div>
-
-                <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">
-
-                <p class="text-[14px] mt-10 ml-7 text-white font-normal uppercase tracking-wider">MANAGE SYSTEM
-                </p>
-                <button class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2"
-                    id="studentManagementButton4" aria-expanded="false" aria-controls="managesystem" title="Manage System">
-                    <i class="fa-solid fa-globe"><span class="sidebar-text ml-2">Manage System</span></i>
-                    <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
-                </button>
-                <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="managesystem">
-                    <a href="/StEmelieLearningCenter.HopeSci66/admin/manage-system/section"
-                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
-                        title="Section">
-                        <i class="fa-regular fa-circle"></i>
-                        <span class="sidebar-text ml-2">Section</span>
-                    </a>
-                    <a href="/StEmelieLearningCenter.HopeSci66/admin/manage-system/subject"
-                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
-                        title="Subject">
-                        <i class="fa-regular fa-circle"></i>
-                        <span class="sidebar-text ml-2">Subject</span>
-                    </a>
-                </div>
 
                 <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">
 
@@ -363,11 +339,17 @@
                         <i class="fa-regular fa-circle"></i>
                         <span class="sidebar-text ml-2">School Admission</span>
                     </a>
-                    <a href="#"
+                    <a href="/StEmelieLearningCenter.HopeSci66/admission/website-gallery"
                         class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Gallery">
                         <i class="fa-regular fa-circle"></i>
                         <span class="sidebar-text ml-2">Gallery</span>
+                    </a>
+                    <a href="/StEmelieLearningCenter.HopeSci66/admission/manage-registration"
+                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
+                        title="Gallery">
+                        <i class="fa-regular fa-circle"></i>
+                        <span class="sidebar-text ml-2">Manage Registration</span>
                     </a>
                 </div>
 

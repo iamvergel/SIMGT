@@ -1,15 +1,15 @@
-@include('admin.includes.header')
+@include('admission.includes.header')
 
 <body class="font-poppins bg-gray-200 overflow-hidden">
 
     <div class="flex w-full h-screen">
         <!-- Sidebar -->
-        @include('admin.includes.sidebar')
+        @include('admission.includes.sidebar')
 
         <!-- Main Content -->
         <main class="flex-grow rounded-r-lg bg-white shadow-lg overflow-y-scroll w-full bg-zinc-50" id="content">
             <header class="sticky top-0 z-[10]">
-                @include('admin.includes.topnav')
+                @include('admission.includes.topnav')
             </header>
 
             <div class="p-5">
@@ -47,6 +47,8 @@
                     </div>
                 </div>
 
+                @include('admission.includes.update_student_form') 
+
                 @if (session('success'))
                     <script>
                         alert("{{ session('success') }}");
@@ -64,6 +66,7 @@
                                         <th class="export">Admission Type</th>
                                         <th class="export">Name</th>
                                         <th class="export">Grade</th>
+                                        <th class="export">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="" id="tableBody">
@@ -88,6 +91,16 @@
                                                 {{ $student->student_suffix_name }}
                                             </td>
                                             <td class="px-4 py-3">{{ $student->grade }}</td>
+                                            <td class="px-4 py-3">
+                                                <!-- Update Student Info Button -->
+                                                <button data-modal-toggle="updatetudentinfo{{ $student->id }}"
+                                                    data-modal-target="updatetudentinfo{{ $student->id }}"
+                                                    class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-blue-700 rounded-full hover:bg-blue-600"
+                                                    type="button" aria-label="Update Student" title="Update Student Info"
+                                                    id="openUpdateStudentInfo{{ $student->id }}">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                </button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -102,6 +115,30 @@
 
     @include('admin.includes.js-link')
     <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
+    <script>
+         @foreach ($students as $student)
+                const updateModal{{ $student->id }} = document.getElementById("updatetudentinfo{{ $student->id }}");
+                const openUpdateModalButton{{ $student->id }} = document.getElementById("openUpdateStudentInfo{{ $student->id }}");
+                const closeUpdateModalButton{{ $student->id }} = document.getElementById("updatetudentinfoClose{{ $student->id }}");
+
+                // Ensure the elements exist before adding event listeners
+                if (openUpdateModalButton{{ $student->id }}) {
+                    openUpdateModalButton{{ $student->id }}.addEventListener("click", () => {
+                        if (updateModal{{ $student->id }}) {
+                            updateModal{{ $student->id }}.classList.remove("hidden");
+                        }
+                    });
+                }
+
+                if (closeUpdateModalButton{{ $student->id }}) {
+                    closeUpdateModalButton{{ $student->id }}.addEventListener("click", () => {
+                        if (updateModal{{ $student->id }}) {
+                            updateModal{{ $student->id }}.classList.add("hidden");
+                        }
+                    });
+                }
+            @endforeach
+    </script>
 </body>
 
 </html>

@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('student_primary_info', function (Blueprint $table) {
             $table->id(); // Creates an auto-incrementing id
-            $table->string( 'lrn'); // Unique learning reference number
             $table->string( 'studentnumber'); // Unique student number
             $table->string('status'); // Student status (e.g., active, graduated, etc.)
             $table->string('grade'); // Student's grade level
-            $table->string('section'); // Section or class group
+            $table->string('section')->nullable(); // Section or class group
             $table->string('adviser')->nullable(); // Name of the student's adviser
             $table->string('school_year'); // School year
             $table->timestamps(); // Created and updated timestamps

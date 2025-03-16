@@ -5,7 +5,7 @@
         $avatar = $account && $account->avatar ? asset('storage/' . $account->avatar) : null;
         $initials = strtoupper(substr($student->student_last_name, 0, 1) . substr($student->student_first_name, 0, 1));
         $primaryInfo = $studentsPrimary[$student->student_number] ?? null;
-        $teacherInfo = $myTeacher[$primaryInfo->adviser] ?? null;
+        $teacherInfo = $myTeacher[$primaryInfo->adviser ?? null] ?? null;
     @endphp
     <div id="updatetudentinfo{{ $student->id }}" tabindex="-1" aria-hidden="true"
         class="hidden fixed top-0 right-0 left-0 z-10 flex justify-center items-center w-screen h-screen bg-black bg-opacity-50 overflow-y-scroll"
@@ -194,11 +194,11 @@
                                     <label for="adviser" class="block mb-2 text-sm font-bold text-gray-900">
                                         <span class="text-red-600 mr-1">*</span>Adviser :</label>
                                     <input type="hidden" name="adviser" id="adviser"
-                                        value="{{ old('adviser', $primaryInfo->adviser) }}">
+                                        value="{{ old('adviser', $primaryInfo->adviser ?? 'No Adviser') }}">
                                     <input type="text"
                                         class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                        value="{{ $teacherInfo->first_name . ' ' . $teacherInfo->last_name . ' ' . $teacherInfo->middle_name . ' ' . $teacherInfo->suffix ?? 'No Adviser'}}"
-                                        placeholder="Enter Adviser" required readonly>
+                                        value="{{ $teacherInfo ? $teacherInfo->first_name . ' ' . $teacherInfo->last_name . ' ' . $teacherInfo->middle_name . ' ' . $teacherInfo->suffix : '' }}"
+                                        placeholder="No Adviser" required readonly>
                                 </div>
                             </div>
                         </div>
@@ -693,17 +693,33 @@
                         </div>
 
                         <div class="mb-6">
-                            <label for="proof_of_residency" class="block font-semibold text-gray-700 mb-2">Form 137:</label>
+                            <label for="sf10" class="block font-semibold text-gray-700 mb-2">SF10(Form 137):</label>
 
-                            <input type="file" id="proof_of_residency" name="proof_of_residency"
+                            <input type="file" id="sf10" name="sf10"
                                 accept=".pdf,.jpg,.jpeg,.png"
                                 class="w-full p-3 border-2 uppercase rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-700 text-[15px] file:mr-4 file:rounded-full file:border-0 file:bg-teal-100 file:px-4 file:py-2 file:text-md file:font-semibold file:text-teal-800 hover:file:bg-teal-200">
                             <!-- <div class="mt-2 text-gray-600" id="residencyFileName">No file chosen</div> -->
-                            @if($student->documents && $student->documents->proof_of_residency)
+                            @if($student->documents && $student->documents->sf10)
                                 <div class="mt-2 text-gray-800 flex">
-                                    <a href="{{ asset('storage/' . $student->documents->proof_of_residency) }}" target="_blank"
+                                    <a href="{{ asset('storage/' . $student->documents->sf10) }}" target="_blank"
                                         class="text-blue-600 font-semibold hover:text-blue-700">Current File: Click To Open
-                                        Current Form 137</a>
+                                        Current SF10</a>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="sf9" class="block font-semibold text-gray-700 mb-2">SF9(Form 138):</label>
+
+                            <input type="file" id="sf10" name="sf9"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                                class="w-full p-3 border-2 uppercase rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-700 text-[15px] file:mr-4 file:rounded-full file:border-0 file:bg-teal-100 file:px-4 file:py-2 file:text-md file:font-semibold file:text-teal-800 hover:file:bg-teal-200">
+                            <!-- <div class="mt-2 text-gray-600" id="residencyFileName">No file chosen</div> -->
+                            @if($student->documents && $student->documents->sf9)
+                                <div class="mt-2 text-gray-800 flex">
+                                    <a href="{{ asset('storage/' . $student->documents->sf9) }}" target="_blank"
+                                        class="text-blue-600 font-semibold hover:text-blue-700">Current File: Click To Open
+                                        Current SF9</a>
                                 </div>
                             @endif
                         </div>

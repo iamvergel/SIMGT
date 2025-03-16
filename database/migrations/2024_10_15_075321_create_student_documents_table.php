@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('student_documents', function (Blueprint $table) {
             $table->id();
             $table->string('student_number')->unique();
-            $table->string('birth_certificate');
-            $table->string('proof_of_residency');
+            $table->string('birth_certificate')->nullable();
+            $table->string('sf10')->nullable();
+            $table->string('sf9')->nullable();
             $table->timestamps();
         });
     }

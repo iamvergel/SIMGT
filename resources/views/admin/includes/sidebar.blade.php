@@ -420,12 +420,12 @@
                         <i class="fa-solid fa-user"></i>
                         <span class="sidebar-text ml-2">Admin</span>
                     </a>
-                    <a href="#" class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
+                    <a href="/StEmelieLearningCenter.HopeSci66/admin/manage-accounts/admission-users" class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Admission">
                         <i class="fa-solid fa-user"></i>
                         <span class="sidebar-text ml-2">Admission</span>
                     </a>
-                    <a href="#" class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
+                    <a href="/StEmelieLearningCenter.HopeSci66/admin/manage-accounts/registrar-users" class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Registrar">
                         <i class="fa-solid fa-user"></i>
                         <span class="sidebar-text ml-2">Registrar</span>
@@ -821,7 +821,7 @@
                             });
                         });
                     } else {
-                        teachersDiv.html('<p class="text-[12px] mt-2 rounded-lg text-center bg-teal-700 p-2">No teachers found for Grade Three.</p>');
+                        teachersDiv.html('<p class="text-[11px] mt-2 rounded-lg text-center bg-teal-700 p-2">No teachers found for Grade Three.</p>');
                     }
                 },
                 error: function (xhr, status, error) {

@@ -19,31 +19,11 @@ var table = $("#studentTable").DataTable({
     },
     buttons: [
         {
-            extend: "copyHtml5",
-            className:
-                "!bg-sky-800 !text-[12px] !text-white !border-none !hover:bg-sky-700 !px-4 !py-2 !rounded !flex !items-center !justify-center",
-            text: '<i class="fas fa-clipboard"></i> Copy',
-            titleAttr: "Click to copy data",
-            exportOptions: {
-                columns: ".export",
-            },
-        },
-        {
             extend: "excelHtml5",
             text: '<i class="fas fa-file-excel"></i> Excel',
             className:
                 "!bg-teal-700 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !important !flex !items-center !justify-center",
             titleAttr: "Export to Excel",
-            exportOptions: {
-                columns: ".export",
-            },
-        },
-        {
-            extend: "csvHtml5",
-            text: '<i class="fas fa-file-csv"></i> CSV',
-            className:
-                "!bg-yellow-500 !text-[12px] !text-white !border-none !hover:bg-yellow-400 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
-            titleAttr: "Export to CSV",
             exportOptions: {
                 columns: ".export",
             },

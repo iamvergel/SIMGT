@@ -64,12 +64,12 @@
                                                                         </td>
                                                                     </tr>
                                                                     <tr class="text-[14px] font-normal uppercase text-left text-black">
-                                                                        <td class="export border-2 border-gray-900 py-5 px-2" colspan="1"></td>
+                                                                    <td class="export border-2 border-gray-900 py-5 px-2" colspan="1"></td>
                                                                         <td class="export border-2 border-gray-900 py-5 px-2" colspan="1">Learner's Name</td>
-                                                                        <td class="export border-2 border-gray-900 px-2" colspan="13">Written Works (30%)</td>
-                                                                        <td class="export border-2 border-gray-900 px-2" colspan="13">Performance Works (50%)
+                                                                        <td class="export border-2 border-gray-900 px-2" colspan="13">Written Works ({{ $teachersubject->written_ws }}%)</td>
+                                                                        <td class="export border-2 border-gray-900 px-2" colspan="13">Performance Works ({{ $teachersubject->performance_ws }}%)
                                                                         </td>
-                                                                        <td class="export border-2 border-gray-900 px-2" colspan="3">Quarterly Assessment (20%)
+                                                                        <td class="export border-2 border-gray-900 px-2" colspan="3">Quarterly Assessment ({{ $teachersubject->hps_q_assessment_ws }}%)
                                                                         </td>
                                                                         <td class="export border-2 border-gray-900 px-2" colspan="1" rowspan="3">Initial Grade
                                                                         </td>
@@ -154,8 +154,9 @@
                                                                         <td class="export border-2 text-center border-gray-900">
                                                                             {{ $teachersubject->written_ps }}
                                                                         </td>
-                                                                        <td class="export border-2 text-center border-gray-900">
-                                                                            {{ $teachersubject->written_ws }}%
+                                                                        <td class="export border-2 text-center border-gray-900" contenteditable="true"
+                                                                        data-column="written_ws" data-id="{{ $teachersubject->id }}">
+                                                                            {{ $teachersubject->written_ws }}
                                                                         </td>
                                                                         <td class="export border-2 text-center border-gray-900">
                                                                             {{ $teachersubject->hps_performance_one }}
@@ -193,8 +194,9 @@
                                                                         <td class="export border-2 text-center border-gray-900">
                                                                             {{ $teachersubject->performance_ps }}
                                                                         </td>
-                                                                        <td class="export border-2 text-center border-gray-900">
-                                                                            {{ $teachersubject->performance_ws }}%
+                                                                        <td class="export border-2 text-center border-gray-900" contenteditable="true"
+                                                                        data-column="performance_ws" data-id="{{ $teachersubject->id }}">
+                                                                            {{ $teachersubject->performance_ws }}
                                                                         </td>
                                                                         <td class="export border-2 text-center border-gray-900">
                                                                             {{ $teachersubject->hps_q_assessment_one }}
@@ -202,8 +204,9 @@
                                                                         <td class="export border-2 text-center border-gray-900">
                                                                             {{ $teachersubject->hps_q_assessment_ps }}
                                                                         </td>
-                                                                        <td class="export border-2 text-center border-gray-900">
-                                                                            {{ $teachersubject->hps_q_assessment_ws }}%
+                                                                        <td class="export border-2 text-center border-gray-900" contenteditable="true"
+                                                                        data-column="hps_q_assessment_ws" data-id="{{ $teachersubject->id }}">
+                                                                            {{ $teachersubject->hps_q_assessment_ws }}
                                                                         </td>
                                                                     </tr>
 

@@ -344,17 +344,17 @@
 
                                                             <div class="col-span-1 my-5 flex justify-startt">
                                                                 <button
-                                                                    onclick="window.open('{{ asset('storage/' . $studentDocuments->proof_of_residency) }}')"
+                                                                    onclick="window.open('{{ asset('storage/' . $studentDocuments->sf10) }}')"
                                                                     class="w-full text-[12px] text-start px-5 text-white shadow-lg bg-sky-700 rounded-lg hover:bg-sky-600 px-3 mt-3 group relative"><i
-                                                                        class="fa-solid fa-file me-2 text-sm"></i>Form 137
+                                                                        class="fa-solid fa-file me-2 text-sm"></i>SCHOOL FORM 10 (SF10)
                                                                     <div
                                                                         class="absolute w-full opacity-0 -top-[-2.8rem] rounded-md py-2 px-2 bg-sky-700 bg-opacity-70 left-1/2 -translate-x-1/2 group-hover:opacity-100 transition-opacity shadow-lg">
-                                                                        @if (pathinfo($studentDocuments->proof_of_residency, PATHINFO_EXTENSION) === 'pdf')
+                                                                        @if (pathinfo($studentDocuments->sf10, PATHINFO_EXTENSION) === 'pdf')
                                                                             <i class="fa-solid fa-file-pdf text-white me-2"></i> PDF
                                                                         @else
 
 
-                                                                            <img src="{{ asset('storage/' . $studentDocuments->proof_of_residency) }}"
+                                                                            <img src="{{ asset('storage/' . $studentDocuments->sf10) }}"
                                                                                 alt="{{ $students->student_first_name }}" width="500">
                                                                         @endif
 
@@ -362,10 +362,29 @@
                                                                     </div>
                                                                 </button>
                                                             </div>
+
+                                                            @if($studentDocuments && $studentDocuments->sf9)
+                                                                <div class="col-span-1 my-5 flex justify-start">
+                                                                    <button
+                                                                        onclick="window.open('{{ asset('storage/' . $studentDocuments->sf9) }}')"
+                                                                        class="w-full text-[12px] text-start px-5 text-white shadow-lg bg-sky-700 rounded-lg hover:bg-sky-600 px-3 mt-3 group relative"><i
+                                                                            class="fa-solid fa-file me-2 text-sm"></i>SCHOOL FORM 9 (SF9)
+                                                                        <div
+                                                                            class="absolute w-full opacity-0 -top-[-2.8rem] rounded-md py-2 px-2 bg-sky-700 bg-opacity-70 left-1/2 -translate-x-1/2 group-hover:opacity-100 transition-opacity shadow-lg">
+                                                                            @if (pathinfo($studentDocuments->sf9, PATHINFO_EXTENSION) === 'pdf')
+                                                                                <i class="fa-solid fa-file-pdf text-white me-2"></i> PDF
+                                                                            @else
+                                                                                <img src="{{ asset('storage/' . $studentDocuments->sf9) }}"
+                                                                                    alt="{{ $students->student_first_name }}" width="500">
+                                                                            @endif
+                                                                        </div>
+                                                                    </button>
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
 
-                                                    <div class="table-container w-full" id="gradeOne">
+                                                    <div class="table-container w-full" id="gradeOne" style="display: none;">
                                                         <div class="my-10">
                                                             @if (isset($finalGradeOne[0]->grade) && $finalGradeOne[0]->grade == "Grade One")
                                                                 <h2 class="text-lg font-semibold">{{ $finalGradeOne[0]->grade }} ||

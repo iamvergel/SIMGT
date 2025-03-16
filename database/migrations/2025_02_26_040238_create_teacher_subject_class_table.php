@@ -43,7 +43,7 @@ return new class extends Migration
                     IFNULL(hps_written_ten, 0)'
                 );
             $table->decimal('written_ps', 5, 2)->default(100.00)->nullable(); // Performance score for written assessments
-            $table->integer('written_ws')->default(30)->nullable(); 
+            $table->integer('written_ws')->nullable(); 
 
             $table->integer('hps_performance_one')->nullable(); // Written assessment 1 score
             $table->integer('hps_performance_two')->nullable(); // Written assessment 2 score
@@ -70,11 +70,11 @@ return new class extends Migration
                         IFNULL(hps_performance_ten, 0)'
                 );
             $table->decimal('performance_ps', 5, 2)->default(100.00)->nullable(); // Performance score for written assessments
-            $table->integer('performance_ws')->default(50)->nullable();
+            $table->integer('performance_ws')->nullable();
 
             $table->integer('hps_q_assessment_one')->nullable(); // Quarter 1 assessment score
             $table->decimal('hps_q_assessment_ps', 5, 2)->default(100.00)->nullable(); // Performance score for written assessments
-            $table->integer('hps_q_assessment_ws', )->default(20)->nullable();
+            $table->integer('hps_q_assessment_ws', )->nullable();
 
             $table->timestamps();
         });
