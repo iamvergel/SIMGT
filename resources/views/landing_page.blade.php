@@ -22,94 +22,146 @@
                     class="z-[700] bg-transparent border-4 border-yellow-300 py-4 px-10 text-white rounded-full font-bold text-lg uppercase mt-5 text-center transform transition-all duration-300 hover:scale-110 hover:z-[10] hover:bg-yellow-100 hover:border-yellow-700 hover:text-yellow-500 transition-transform">register
                     Now <i class="fa-solid fa-location-arrow ml-3 text-2xl"></i></button>
             </div>
+        </div>
+    </div>
 
-            <script>
-                document.getElementById('checkprivacy').addEventListener('change', function () {
-                    const nextbtnprivacy = document.getElementById('nextbtnprivacy');
-                    nextbtnprivacy.disabled = !this.checked;
-                    nextbtnprivacy.classList.toggle('bg-yellow-500', !this.checked);
-                    nextbtnprivacy.classList.toggle('bg-yellow-700', this.checked);
-                });
-            </script>
+    <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  xl:grid-cols-4 gap-4 px-[0rem] lg:px-[6rem] relative items-center w-full z-[13] mt-[15rem] md:mt-[20rem] lg:mt-[6rem] hidden lg:grid">
+        <!-- Course Card -->
+        <div class="card bg-yellow-400 py-8 rounded-lg mt-10 lg:mt-0 mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform"
+            onclick="window.location.href = '#courses'">
+            <div class="text-center text-white px-5">
+                <i
+                    class="fas fa-book fa-3x mb-4 text-yellow-500 p-4 px-5 bg-white rounded-full border-[5px] border-yellow-400 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
+                <h2 class="text-lg font-bold mb-2 mt-10 bg-yellow-600 rounded-full shadow-lg">Courses</h2>
+                <p>Browse our courses</p>
+            </div>
+        </div>
 
-            <div
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2  xl:grid-cols-4 gap-4 px-[0rem] lg:px-[6rem] relative lg:absolute items-center w-full z-[13] mt-[30rem] md:mt-[20rem] lg:mt-[6rem]">
-                <!-- Course Card -->
-                <div class="card bg-yellow-400 py-8 rounded-lg mt-10 lg:mt-0 mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform"
-                    onclick="window.location.href = '#courses'">
-                    <div class="text-center text-white px-5">
-                        <i
-                            class="fas fa-book fa-3x mb-4 text-yellow-500 p-4 px-5 bg-white rounded-full border-[5px] border-yellow-400 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
-                        <h2 class="text-lg font-bold mb-2 mt-10 bg-yellow-600 rounded-full shadow-lg">Courses</h2>
-                        <p>Browse our courses</p>
-                    </div>
-                </div>
+        <!-- Teachers Card -->
+        <div
+            class="card bg-green-500 py-8 rounded-lg mt-10 lg:mt-0 mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform">
+            <div class="text-center text-white px-5" onclick="window.location.href = '#gallery'">
+                <i
+                    class="fas fa-image  fa-3x mb-4 text-green-500 p-3 py-4 bg-white rounded-full border-[5px] border-green-500 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
+                <h2 class="text-lg font-bold mb-2 mt-10 bg-green-700 rounded-full shadow-lg">Gallery</h2>
+                <p>Explore our institute</p>
+            </div>
+        </div>
 
-                <!-- Teachers Card -->
-                <div
-                    class="card bg-green-500 py-8 rounded-lg mt-10 lg:mt-0 mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform">
-                    <div class="text-center text-white px-5" onclick="window.location.href = '#gallery'">
-                        <i
-                            class="fas fa-chalkboard-teacher fa-3x mb-4 text-green-500 p-3 py-4 bg-white rounded-full border-[5px] border-green-500 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
-                        <h2 class="text-lg font-bold mb-2 mt-10 bg-green-700 rounded-full shadow-lg">Gallery</h2>
-                        <p>Explore our institute</p>
-                    </div>
-                </div>
+        <!-- Gallery Card -->
+        <div class="card bg-sky-500 py-8 mt-10 lg:mt-0 rounded-lg mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform"
+            onclick="window.location.href = '#missionvission'">
+            <div class="text-center text-white px-5">
+                <i
+                    class="fas fa-chalkboard-teacher fa-3x mb-4 text-sky-500 p-4 bg-white rounded-full border-[5px] border-sky-500 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
+                <h2 class="text-lg font-bold mb-2 mt-10 bg-sky-700 rounded-full shadow-lg">Our School</h2>
+                <p>Browse our School</p>
+            </div>
+        </div>
 
-                <!-- Gallery Card -->
-                <div class="card bg-sky-500 py-8 mt-10 lg:mt-0 rounded-lg mx-4 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform"
-                    onclick="window.location.href = '#missionvission'">
-                    <div class="text-center text-white px-5">
-                        <i
-                            class="fas fa-image fa-3x mb-4 text-sky-500 p-4 bg-white rounded-full border-[5px] border-sky-500 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
-                        <h2 class="text-lg font-bold mb-2 mt-10 bg-sky-700 rounded-full shadow-lg">Our School</h2>
-                        <p>Browse our School</p>
-                    </div>
-                </div>
-
-                <!-- Portal Card -->
-                <div class="card bg-teal-500 py-8 rounded-lg mx-4 mt-10 lg:mt-0 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform"
-                    id="loginPage" onclick="window.open('/StEmelieLearningCenter.HopeSci66/sign-in', '_blank')">
-                    <div class="text-center text-white px-5">
-                        <i
-                            class="fa-solid fa-box fa-3x mb-4 text-teal-400 p-4 bg-white rounded-full border-[5px] border-teal-300 absolute left-[4.3rem] top-[-2rem] shadow-l"></i>
-                        <!-- <i
+        <!-- Portal Card -->
+        <div class="card bg-teal-500 py-8 rounded-lg mx-4 mt-10 lg:mt-0 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform"
+            id="loginPage" onclick="window.open('/StEmelieLearningCenter.HopeSci66/sign-in', '_blank')">
+            <div class="text-center text-white px-5">
+                <i
+                    class="fa-solid fa-box fa-3x mb-4 text-teal-400 p-4 bg-white rounded-full border-[5px] border-teal-300 absolute left-[4.3rem] top-[-2rem] shadow-l"></i>
+                <!-- <i
                         class="fas fa-newspaper g"></i> -->
-                        <h2 class="text-lg font-bold mb-2 mt-10 bg-teal-700 rounded-full shadow-lg">School Portal</h2>
-                        <p>Sign-in to Portal </p>
-                    </div>
-                </div>
+                <h2 class="text-lg font-bold mb-2 mt-10 bg-teal-700 rounded-full shadow-lg">School Portal</h2>
+                <p>Sign-in to Portal </p>
             </div>
         </div>
     </div>
 
-    <div id="modalprivacy" class="fixed z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 hidden p-2">
-        <div class="bg-white rounded-lg shadow-lg p-5 max-w-xl mx-auto mt-12">
-            <p class="text-lg font-bold">Data Privacy Agreement</p>
-            <p class="text-sm">Please read the following statement carefully.</p>
-            <p class="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet nulla auctor,
-                vestibulum magna sed, convallis ex. Cum sociis natoque penatibus et magnis dis parturient montes,
-                nascetur ridiculus mus. Nullam eget nibh eu lectus consequat vehicula. Integer sed nisi sed augue
-                convallis porta. Quisque quis nunc vitae libero fermentum eleifend. Nullam quis nunc vitae libero
-                fermentum eleifend. Nulla facilisi. Sed sit amet nulla auctor, vestibulum magna sed, convallis ex.</p>
-            <div class="flex justify-center items-center">
-                <input type="checkbox" id="checkprivacy" class="mr-2">
-                <label for="checkprivacy" class="text-sm">I agree</label>
+    
+    @include("includes.chatbot")
+
+    <div id="modalprivacy"
+        class="fixed hidden z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 px-2 flex justify-center items-center items-center">
+        <img src="{{ asset('../assets/images/data-privacy-avatar.png') }}"
+            class="w-96 h-auto absolute top-1/6 right-1/8 transform -translate-x-1/2 -translate-y-1/2 z-10 hidden lg:block"
+            alt="">
+        <div class="bg-white rounded-lg shadow-lg p-5 max-w-xl mx-auto z-20">
+            <p class="text-lg font-bold text-teal-800">Data Privacy Agreement</p>
+            <div class="overflow-y-scroll h-[20rem] scrollbar-width-thin my-3 px-3 py-1">
+                <p class="text-sm">
+                    We at <strong>St. Emilie Learning Center</strong> are committed to protecting the privacy and
+                    security of your
+                    personal information. Please carefully read this agreement before proceeding with the
+                    registration process. <br /><br />
+                    <strong>Collection of Personal Information</strong> <br />
+                    By proceeding with the registration, you agree to provide personal information including but not
+                    limited to your full name, date of birth, address, contact details, educational background, and
+                    any other information required for the admission process.
+                    <br /><br />
+                    <strong>Use of Personal Information</strong> <br />
+                    The personal information you provide will be used exclusively for the purpose of admission at
+                    <strong>St. Emilie Learning Center</strong>.
+                    <br /><br />
+                    The personal information collected will be used solely for the following purposes: <br /><br />
+                </p>
+                <ul class="list-disc text-sm">
+                    <li class="my-2">
+                        <p> -Processing and managing student admissions</p>
+                    </li>
+                    <li class="my-2">
+                        <p>-Maintaining accurate student records</p>
+                    </li>
+                    <li class="my-2">
+                        <p>-Communicating with parents and guardians regarding school-related matters</p>
+                    </li>
+                    <li class="my-2">
+                        <p>-Generating reports and statistical data for internal use</p>
+                    </li>
+                </ul>
+                <p class="text-sm">
+                    <br />
+                    <strong>Disclosure of Personal Information</strong> <br />
+                    We will not disclose your personal information to third parties without your consent, except when
+                    required by law or when necessary to protect the rights and safety of the school and its
+                    students.
+                    <br /><br />
+                    <strong>Data Security</strong> <br />
+                    We have implemented appropriate technical and organizational measures to safeguard your
+                    personal data against unauthorized access, loss, or misuse.
+                    <br /><br />
+                    <strong> Retention of Information</strong> <br />
+                    Your personal information will be retained only for as long as necessary to fulfill the purposes
+                    outlined in this agreement, unless a longer retention period is required by law.
+                    <br /><br />
+                    By proceeding with the registration, you confirm that you have read and understood this Data
+                    Privacy Agreement and consent to the collection, use, and disclosure of your personal
+                    information as described above.
+                </p>
             </div>
-            <div class="flex justify-center items-center mt-5">
+            <div class="flex justify-start items-center">
+                <input type="checkbox" id="checkprivacy"
+                    class="mr-2 appearance-none rounded-sm bg-white checked:bg-teal-600 checked:border-teal-600 focus:outline-none">
+                <label for="checkprivacy" class="text-sm">I have read and agree to the Data Privacy Agreement.</label>
+            </div>
+            <div class="flex justify-end items-center mt-5">
                 <button onclick="document.getElementById('modalprivacy').classList.add('hidden')"
-                    class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full">Disagree</button>
+                    class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300">Disagree</button>
                 <button onclick="window.location.href = '/StEmelieLearningCenter.HopeSci66/Registration'"
                     id="nextbtnprivacy" disabled
-                    class="ml-3 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-full">Next</button>
+                    class="ml-3 bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300">Next</button>
             </div>
         </div>
     </div>
 
-    <div class="h-[550px] hidden lg:block"></div>
-    <div class="w-full px-2 mt-20 md:px-[8rem] xl:px-[15rem] 2xl:px-[20rem] py-10 relative grid grid-cols-1 md  :grid-cols-2 lg:grid-cols-2 gap-8"
-        id="missionvission">
+    <script>
+        document.getElementById('checkprivacy').addEventListener('change', function () {
+            const nextbtnprivacy = document.getElementById('nextbtnprivacy');
+            nextbtnprivacy.disabled = !this.checked;
+            nextbtnprivacy.classList.toggle('bg-gray-500', !this.checked);
+            nextbtnprivacy.classList.toggle('bg-teal-600', this.checked);
+            nextbtnprivacy.classList.toggle('hover:bg-teal-700', this.checked);
+        });
+    </script>
 
+    <div class="w-full px-2 mt-[20rem] lg:mt-[5rem] md:px-[8rem] xl:px-[15rem] 2xl:px-[20rem] py-10 relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
+        id="missionvission">
         <!-- Mission Card -->
         <div
             class="block p-6 bg-white border border-gray-200 rounded-lg rounded-t-none shadow-lg hover:bg-white bg-gradient-to-tr from-teal-50 via-teal-50 to-white border-0 border-t-4 border-teal-700">
