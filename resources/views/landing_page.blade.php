@@ -85,7 +85,7 @@
         <div class="bg-white rounded-lg shadow-lg p-5 max-w-xl mx-auto z-20">
             <p class="text-lg font-bold text-teal-800">Data Privacy Agreement</p>
             <div class="overflow-y-scroll h-[20rem] scrollbar-width-thin my-3 px-3 py-1">
-                <p class="text-sm">
+                <p class="text-[12px] text-justify">
                     We at <strong>St. Emilie Learning Center</strong> are committed to protecting the privacy and
                     security of your
                     personal information. Please carefully read this agreement before proceeding with the
@@ -101,21 +101,21 @@
                     <br /><br />
                     The personal information collected will be used solely for the following purposes: <br /><br />
                 </p>
-                <ul class="list-disc text-sm">
+                <ul class=" text-[12px] text-justify">
                     <li class="my-2">
-                        <p> -Processing and managing student admissions</p>
+                        <p>- Processing and managing student admissions</p>
                     </li>
                     <li class="my-2">
-                        <p>-Maintaining accurate student records</p>
+                        <p>- Maintaining accurate student records</p>
                     </li>
                     <li class="my-2">
-                        <p>-Communicating with parents and guardians regarding school-related matters</p>
+                        <p>- Communicating with parents and guardians regarding school-related matters</p>
                     </li>
                     <li class="my-2">
-                        <p>-Generating reports and statistical data for internal use</p>
+                        <p>- Generating reports and statistical data for internal use</p>
                     </li>
                 </ul>
-                <p class="text-sm">
+                <p class="text-[12px] text-justify">
                     <br />
                     <strong>Disclosure of Personal Information</strong> <br />
                     We will not disclose your personal information to third parties without your consent, except when
@@ -138,7 +138,7 @@
             <div class="flex justify-start items-center">
                 <input type="checkbox" id="checkprivacy"
                     class="mr-2 appearance-none rounded-sm bg-white checked:bg-teal-600 checked:border-teal-600 focus:outline-none">
-                <label for="checkprivacy" class="text-sm">I have read and agree to the Data Privacy Agreement.</label>
+                <label for="checkprivacy" class="text-[12px]">I have read and agree to the Data Privacy Agreement.</label>
             </div>
             <div class="flex justify-end items-center mt-5">
                 <button onclick="document.getElementById('modalprivacy').classList.add('hidden')"
