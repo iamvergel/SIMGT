@@ -86,7 +86,7 @@
     <!-- Chat Toggle Button -->
     <button
         class="fixed z-[14] bottom-[1.5rem] right-[1.5rem] lg:bottom-[2.5rem] lg:right-[3.5rem] inline-flex items-center justify-center w-14 h-14 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg transition-all duration-300"
-        type="button" onclick="window.open('//www.facebook.com/messages/t/343328209464206', '_blank')" id="chatToggle">
+        type="button" onclick="window.open('https://m.me/StEmilieLC', '_blank')" id="chatToggle">
         <span class="hidden text-sm me-2" id="chatToggleText">Open Chat</span><i
             class="fa-brands fa-facebook-messenger text-2xl"></i>
     </button>
