@@ -32,7 +32,7 @@ $("#downloadHtmlButton").on("click", function () {
     const addressX = (doc.internal.pageSize.width - addressWidth) / 2;
     doc.text(address, addressX, 23);
 
-    const reportTitle = "UNOFFICIAL REPORT OF GRADES";
+    const reportTitle = "REPORT OF GRADES";
     doc.setFontSize(22);
     doc.setTextColor(0, 0, 0);
     const reportWidth = doc.getTextWidth(reportTitle);
@@ -287,7 +287,7 @@ $("#printHtmlButton").on("click", function () {
 
     // Add content for printing
     printWindow.document.write(
-        "<html><head><title>UNOFFICIAL REPORT OF GRADES</title>"
+        "<html><head><title>REPORT OF GRADES</title>"
     );
     printWindow.document.write("<style>");
     printWindow.document.write(
@@ -313,7 +313,7 @@ $("#printHtmlButton").on("click", function () {
         '<p style="text-align:center;">Amparo Village, 18 Bangkal, Caloocan, Metro Manila</p>'
     );
     printWindow.document.write(
-        '<h2 style="text-align:center;">UNOFFICIAL REPORT OF GRADES</h2>'
+        '<h2 style="text-align:center;">REPORT OF GRADES</h2>'
     );
 
     // Add student information
@@ -519,7 +519,7 @@ $("#downloadHtmlButtonTwo").on("click", function () {
     const addressX = (doc.internal.pageSize.width - addressWidth) / 2;
     doc.text(address, addressX, 23);
 
-    const reportTitle = "UNOFFICIAL REPORT OF GRADES";
+    const reportTitle = "REPORT OF GRADES";
     doc.setFontSize(22);
     doc.setTextColor(0, 0, 0);
     const reportWidth = doc.getTextWidth(reportTitle);
@@ -774,7 +774,7 @@ $("#printHtmlButtonTwo").on("click", function () {
 
     // Add content for printing
     printWindow.document.write(
-        "<html><head><title>UNOFFICIAL REPORT OF GRADES</title>"
+        "<html><head><title>REPORT OF GRADES</title>"
     );
     printWindow.document.write("<style>");
     printWindow.document.write(
@@ -800,7 +800,7 @@ $("#printHtmlButtonTwo").on("click", function () {
         '<p style="text-align:center;">Amparo Village, 18 Bangkal, Caloocan, Metro Manila</p>'
     );
     printWindow.document.write(
-        '<h2 style="text-align:center;">UNOFFICIAL REPORT OF GRADES</h2>'
+        '<h2 style="text-align:center;">REPORT OF GRADES</h2>'
     );
 
     // Add student information
@@ -1005,7 +1005,7 @@ $("#downloadHtmlButtonThree").on("click", function () {
     const addressX = (doc.internal.pageSize.width - addressWidth) / 2;
     doc.text(address, addressX, 23);
 
-    const reportTitle = "UNOFFICIAL REPORT OF GRADES";
+    const reportTitle = "REPORT OF GRADES";
     doc.setFontSize(22);
     doc.setTextColor(0, 0, 0);
     const reportWidth = doc.getTextWidth(reportTitle);
@@ -1260,7 +1260,7 @@ $("#printHtmlButtonThree").on("click", function () {
 
     // Add content for printing
     printWindow.document.write(
-        "<html><head><title>UNOFFICIAL REPORT OF GRADES</title>"
+        "<html><head><title>REPORT OF GRADES</title>"
     );
     printWindow.document.write("<style>");
     printWindow.document.write(
@@ -1286,7 +1286,7 @@ $("#printHtmlButtonThree").on("click", function () {
         '<p style="text-align:center;">Amparo Village, 18 Bangkal, Caloocan, Metro Manila</p>'
     );
     printWindow.document.write(
-        '<h2 style="text-align:center;">UNOFFICIAL REPORT OF GRADES</h2>'
+        '<h2 style="text-align:center;">REPORT OF GRADES</h2>'
     );
 
     // Add student information
@@ -1491,7 +1491,7 @@ $("#downloadHtmlButtonFour").on("click", function () {
     const addressX = (doc.internal.pageSize.width - addressWidth) / 2;
     doc.text(address, addressX, 23);
 
-    const reportTitle = "UNOFFICIAL REPORT OF GRADES";
+    const reportTitle = "REPORT OF GRADES";
     doc.setFontSize(22);
     doc.setTextColor(0, 0, 0);
     const reportWidth = doc.getTextWidth(reportTitle);
@@ -1746,7 +1746,7 @@ $("#printHtmlButtonFour").on("click", function () {
 
     // Add content for printing
     printWindow.document.write(
-        "<html><head><title>UNOFFICIAL REPORT OF GRADES</title>"
+        "<html><head><title>REPORT OF GRADES</title>"
     );
     printWindow.document.write("<style>");
     printWindow.document.write(
@@ -1772,7 +1772,7 @@ $("#printHtmlButtonFour").on("click", function () {
         '<p style="text-align:center;">Amparo Village, 18 Bangkal, Caloocan, Metro Manila</p>'
     );
     printWindow.document.write(
-        '<h2 style="text-align:center;">UNOFFICIAL REPORT OF GRADES</h2>'
+        '<h2 style="text-align:center;">REPORT OF GRADES</h2>'
     );
 
     // Add student information
@@ -1977,7 +1977,7 @@ $("#downloadHtmlButtonFive").on("click", function () {
     const addressX = (doc.internal.pageSize.width - addressWidth) / 2;
     doc.text(address, addressX, 23);
 
-    const reportTitle = "UNOFFICIAL REPORT OF GRADES";
+    const reportTitle = "REPORT OF GRADES";
     doc.setFontSize(22);
     doc.setTextColor(0, 0, 0);
     const reportWidth = doc.getTextWidth(reportTitle);
@@ -2232,7 +2232,7 @@ $("#printHtmlButtonFive").on("click", function () {
 
     // Add content for printing
     printWindow.document.write(
-        "<html><head><title>UNOFFICIAL REPORT OF GRADES</title>"
+        "<html><head><title>REPORT OF GRADES</title>"
     );
     printWindow.document.write("<style>");
     printWindow.document.write(
@@ -2258,7 +2258,7 @@ $("#printHtmlButtonFive").on("click", function () {
         '<p style="text-align:center;">Amparo Village, 18 Bangkal, Caloocan, Metro Manila</p>'
     );
     printWindow.document.write(
-        '<h2 style="text-align:center;">UNOFFICIAL REPORT OF GRADES</h2>'
+        '<h2 style="text-align:center;">REPORT OF GRADES</h2>'
     );
 
     // Add student information
@@ -2463,7 +2463,7 @@ $("#downloadHtmlButtonSix").on("click", function () {
     const addressX = (doc.internal.pageSize.width - addressWidth) / 2;
     doc.text(address, addressX, 23);
 
-    const reportTitle = "UNOFFICIAL REPORT OF GRADES";
+    const reportTitle = "REPORT OF GRADES";
     doc.setFontSize(22);
     doc.setTextColor(0, 0, 0);
     const reportWidth = doc.getTextWidth(reportTitle);
@@ -2718,7 +2718,7 @@ $("#printHtmlButtonSix").on("click", function () {
 
     // Add content for printing
     printWindow.document.write(
-        "<html><head><title>UNOFFICIAL REPORT OF GRADES</title>"
+        "<html><head><title>REPORT OF GRADES</title>"
     );
     printWindow.document.write("<style>");
     printWindow.document.write(
@@ -2744,7 +2744,7 @@ $("#printHtmlButtonSix").on("click", function () {
         '<p style="text-align:center;">Amparo Village, 18 Bangkal, Caloocan, Metro Manila</p>'
     );
     printWindow.document.write(
-        '<h2 style="text-align:center;">UNOFFICIAL REPORT OF GRADES</h2>'
+        '<h2 style="text-align:center;">REPORT OF GRADES</h2>'
     );
 
     // Add student information

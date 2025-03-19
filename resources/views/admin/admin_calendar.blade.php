@@ -82,7 +82,7 @@
                   Date</label>
                 <input type="date" name="event_date" id="event_date" required
                   class="w-full p-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-700 font-normal text-md"
-                  aria-describedby="eventDateHelp">
+                  aria-describedby="eventDateHelp" min="{{ date('Y-m-d') }}">
                 <small id="eventDateHelp" class="text-gray-500">Please select a date for the event.</small>
                 <br /><br />
 

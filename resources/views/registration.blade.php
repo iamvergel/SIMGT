@@ -10,7 +10,7 @@
                     </div>
                     <hr class="border-1 border-teal-700 mt-5">
                     <div class="mt-5 text-sm">
-                        <span>
+                        <span class="text-justify">
                             Please proceed to the Registrar's Office to submit the original copies of the following
                             required documents: <br /><br />
 
@@ -23,7 +23,7 @@
                         </ul>
 
                         <span class="block mt-5 bg-gray-200 p-2">
-                            <i class="fa-solid fa-circle-exclamation me-2 text-green-700"></i><span
+                            <i class="fa-solid fa-circle-exclamation me-2 text-green-700 text-justify"></i><span
                                 class="font-bold">Important:</span> Your registration will only be processed once all
                             required documents have been
                             submitted.
