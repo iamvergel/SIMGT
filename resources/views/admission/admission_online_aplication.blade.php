@@ -137,7 +137,7 @@
                         }
                     });
                 }
-
+            @endforeach
 
 function printRegistrationForm() {
     // Get the selected grade from the input field
@@ -495,7 +495,6 @@ function fetchSubjectsTable(grade) {
             return '<p>Unable to fetch subjects.</p>';
         });
 }
-@endforeach
 </script>
 </body>
 
