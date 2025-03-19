@@ -53,7 +53,7 @@
                     <script>
                         setTimeout(function() {
                             document.getElementById("error-alert").remove();
-                        }, 5000);
+                        }, 1000000);
                     </script>
                 @endif
 
@@ -785,10 +785,10 @@
                                         <label
                                             class="inline-block bg-sky-800 text-white px-4 py-2 rounded cursor-pointer hover:bg-sky-700">
                                             Choose file
-                                            <input type="file" id="sf10" name="sf9"
+                                            <input type="file" id="sf9" name="sf9"
                                                 accept=".pdf,.jpg,.jpeg,.png" required class="hidden">
                                         </label>
-                                        <div class="mt-2 text-gray-600" id="residencyFileName">No file chosen
+                                        <div class="mt-2 text-gray-600" id="sf9">No file chosen
                                         </div>
                                     </div>
                                 </div>
@@ -897,6 +897,15 @@
                         .querySelector("#sf10")
                         .addEventListener("change", function () {
                             document.querySelector("#residencyFileName").textContent = this
+                                .files[0]
+                                ? this.files[0].name
+                                : "No file chosen";
+                        });
+
+                        document
+                        .querySelector("#sf9")
+                        .addEventListener("change", function () {
+                            document.querySelector("#sf9").textContent = this
                                 .files[0]
                                 ? this.files[0].name
                                 : "No file chosen";

@@ -282,25 +282,31 @@
             </button>
             <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="reportsection">
                 <a href="/StEmelieLearningCenter.HopeSci66/admission/online-application"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
+                    class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
                     title="Online Application">
                     <i class="fa-solid fa-folder-open"></i>
                     <span class="sidebar-text ml-2">Online Application</span>
                 </a>
                 <a href="#"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
+                    class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
+                    title="Student Registration">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <span class="sidebar-text ml-2">Student Registration</span>
+                </a>
+                <a href="#"
+                    class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Graduate Student">
                     <i class="fa-solid fa-user-graduate"></i>
                     <span class="sidebar-text ml-2">Graduate Student</span>
                 </a>
                 <a href="#"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
+                    class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Dropped Student">
                     <i class="fa-solid fa-user-xmark"></i>
                     <span class="sidebar-text ml-2">Dropped Student</span>
                 </a>
                 <a href="#"
-                    class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
+                    class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
                     title="Archive Student">
                     <i class="fa-solid fa-box-archive"></i>
                     <span class="sidebar-text ml-2">Archive Student</span>
