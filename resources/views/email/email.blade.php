@@ -75,7 +75,7 @@
                 Password: SELC{{ $student->student_last_name }}{{ substr($student->student_number, -4) }}<br>
             </p>
             <p style="margin-bottom: 1rem;">
-                You can log in to the portal by visiting the following link: [http://ec2-3-107-99-186.ap-southeast-2.compute.amazonaws.com:8000/]
+                You can log in to the portal by visiting the following link: [https://www.simgt66.com]
             </p>
             <p style="margin-bottom: 1rem;">
                 <strong>Important Notes:</strong><br>
