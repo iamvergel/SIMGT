@@ -72,4 +72,21 @@ class StudentRegistrationController extends Controller
 
         return view('admin.admin_registration', compact('students', 'studentInfo', 'studentsAdditional', 'studentDocuments', 'studentAccount', 'noActiveMessage'));
     }
+
+    public function showAllRegisterAdmission()
+    {
+        // Fetch all active student records with pagination
+        $students = StudentPrimaryInfo::where('status', 'Registered')->get();
+
+        // Fetch additional student information for each student
+        $studentInfo = StudentInfo::whereIn('lrn', $students->pluck('lrn'))->get()->keyBy('lrn');
+        $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('studentnumber'))->get()->keyBy('student_number');
+        $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('studentnumber'))->get()->keyBy('student_number');
+        $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('studentnumber'))->get()->keyBy('student_number');
+
+        // Check if there are no active students
+        $noActiveMessage = $students->isEmpty() ? "No active students found." : null;
+
+        return view('admission.admission_registration', compact('students', 'studentInfo', 'studentsAdditional', 'studentDocuments', 'studentAccount', 'noActiveMessage'));
+    }
 }

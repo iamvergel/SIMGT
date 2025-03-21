@@ -27,6 +27,7 @@ use App\Http\Controllers\StudentRegistrationController;
 use App\Http\Controllers\RegistrationButtonController;
 use App\Http\Controllers\AdmissionUserController;
 use App\Http\Controllers\RegistrarUserController;
+use App\Http\Controllers\AdmissionStudent;
 
 Route::get('/', function () {
     // Redirect to the desired URL
@@ -70,13 +71,13 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
 
     // Student Management Routes admission
     Route::prefix('/StEmelieLearningCenter.HopeSci66/admission/student-management')->group(function () {
-        Route::get('/', [Cpages::class, 'showStudentManagement'])->name('adadmissionmin.admission_student_management');
-        Route::get('/GradeOne', [Cpages::class, 'showStudentManagementGradeone'])->name('admission.admission_student_management_gradeone');
-        Route::get('/GradeTwo', [Cpages::class, 'showStudentManagementGradetwo'])->name('admission.admission_student_management_gradetwo');
-        Route::get('/GradeThree', [Cpages::class, 'showStudentManagementGradethree'])->name('admission.admission_student_management_gradethree');
-        Route::get('/GradeFour', [Cpages::class, 'showStudentManagementGradefour'])->name('admission.admission_student_management_gradefour');
-        Route::get('/GradeFive', [Cpages::class, 'showStudentManagementGradefive'])->name('admission.admission_student_management_gradefive');
-        Route::get('/GradeSix', [Cpages::class, 'showStudentManagementGradesix'])->name('admission.admission_student_management_gradesix');
+        Route::get('/', [Cpages::class, 'showStudentManagement'])->name('admissionmin.admission_student_management');
+        Route::get('/GradeOne', [Cpages::class, 'showStudentManagementGradeoneAdmission'])->name('admission.admission_student_management_gradeone');
+        Route::get('/GradeTwo', [Cpages::class, 'showStudentManagementGradetwoAdmission'])->name('admission.admission_student_management_gradetwo');
+        Route::get('/GradeThree', [Cpages::class, 'showStudentManagementGradethreeAdmission'])->name('admission.admission_student_management_gradethree');
+        Route::get('/GradeFour', [Cpages::class, 'showStudentManagementGradefourAdmission'])->name('admission.admission_student_management_gradefour');
+        Route::get('/GradeFive', [Cpages::class, 'showStudentManagementGradefiveAdmission'])->name('admission.admission_student_management_gradefive');
+        Route::get('/GradeSix', [Cpages::class, 'showStudentManagementGradesixAdmission'])->name('admission.admission_student_management_gradesix');
         Route::get('/AllStudentData', [Cpages::class, 'showAllStudent'])->name('admission.admission_show_all_data');
         Route::get('/StudentProfile', function () {
             return view('admission.includes.show_student_profile');
@@ -134,8 +135,19 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         Route::get('/AllStudentData', [Cstudentinfo::class, 'showAllStudentData'])->name('admin.admin_show_all_data');
     });
 
+    Route::prefix('StEmelieLearningCenter.HopeSci66/admission/student-management')->group(function () {
+        Route::get('/GradeOne', [AdmissionStudent::class, 'showGradeOneData'])->name('admission.grade.one');
+        Route::get('/GradeTwo', [AdmissionStudent::class, 'showGradeTwoData'])->name('admission.grade.two');
+        Route::get('/GradeThree', [AdmissionStudent::class, 'showGradeThreeData'])->name('admission.grade.three');
+        Route::get('/GradeFour', [AdmissionStudent::class, 'showGradeFourData'])->name('admission.grade.four');
+        Route::get('/GradeFive', [AdmissionStudent::class, 'showGradeFiveData'])->name('admission.grade.five');
+        Route::get('/GradeSix', [AdmissionStudent::class, 'showGradeSixData'])->name('admission.grade.six');
+        Route::get('/AllStudentData', [AdmissionStudent::class, 'showAllStudentData'])->name('admin.admin_show_all_data');
+    });
+
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/online-application', [RegisterStudent::class, 'showAllRegister'])->name('register.student');
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-registration', [StudentRegistrationController::class, 'showAllRegister'])->name('register.new.student');
+    Route::get('/StEmelieLearningCenter.HopeSci66/admission/student-registration', [StudentRegistrationController::class, 'showAllRegisterAdmission'])->name('admission.new.student');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/teacher/myadvisory', [TeacherClassAdvisory::class, 'showMyadvisory'])->name('teacher.advisory');
     Route::get('/StEmelieLearningCenter.HopeSci66/teacher/class-record', [TeacherSubjectClassController::class, 'showclasssubjectadvisory'])->name('teacher.class-record');
@@ -181,8 +193,8 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::delete('admin/section/{id}', [SectionController::class, 'destroy'])->name('section.destroy'); // Delete subject route
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management/{id}', [Cstudentinfo::class, 'showStudentInfotmation'])->name('student.show');
-    Route::get('/StEmelieLearningCenter.HopeSci66/admission/student-management/{id}', [Cstudentinfo::class, 'showAdmissionInfotmation'])->name('student.show');
-    Route::get('/StEmelieLearningCenter.HopeSci66/registrar/student-management/{id}', [Cstudentinfo::class, 'showregistrarInfotmation'])->name('student.show');
+    Route::get('/StEmelieLearningCenter.HopeSci66/admission/student-management/{id}', [AdmissionStudent::class, 'showAdmissionInfotmation'])->name('admission.student.show');
+    Route::get('/StEmelieLearningCenter.HopeSci66/registrar/student-management/{id}', [Cstudentinfo::class, 'showregistrarInfotmation'])->name('registar.student.show');
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/teacher-management/{id}', [TeacherUserController::class, 'showTeacherInfotmation'])->name('teacher.show');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/taecher/myadvisory/{id}', [TeacherClassAdvisory::class, 'showStudentInfotmation'])->name('mystudent.show');
@@ -361,20 +373,6 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
 
     Route::post('/announcements/admission/{id}', [PictureAnnouncementController::class, 'updateAnnouncementAdmission'])->name('admission.announcements.update');
     Route::get('/StEmelieLearningCenter.HopeSci66/admission/online-application', [RegisterStudent::class, 'showAllRegisterAdmission'])->name('admission.register.student');
-
-    Route::prefix('/StEmelieLearningCenter.HopeSci66/admin/student-management')->group(function () {
-        Route::get('/', [Cpages::class, 'showStudentManagement'])->name('admin.admin_student_management');
-        Route::get('/GradeOne', [Cpages::class, 'showStudentManagementGradeone'])->name('admin.admin_student_management_gradeone');
-        Route::get('/GradeTwo', [Cpages::class, 'showStudentManagementGradetwo'])->name('admin.admin_student_management_gradetwo');
-        Route::get('/GradeThree', [Cpages::class, 'showStudentManagementGradethree'])->name('admin.admin_student_management_gradethree');
-        Route::get('/GradeFour', [Cpages::class, 'showStudentManagementGradefour'])->name('admin.admin_student_management_gradefour');
-        Route::get('/GradeFive', [Cpages::class, 'showStudentManagementGradefive'])->name('admin.admin_student_management_gradefive');
-        Route::get('/GradeSix', [Cpages::class, 'showStudentManagementGradesix'])->name('admin.admin_student_management_gradesix');
-        Route::get('/AllStudentData', [Cpages::class, 'showAllStudent'])->name('admin.admin_show_all_data');
-        Route::get('/StudentProfile', function () {
-            return view('admin.includes.show_student_profile');
-        });
-    });
 });
 
 Route::get('/caloocan_barangay', function () {

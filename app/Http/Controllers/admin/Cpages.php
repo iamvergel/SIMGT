@@ -66,6 +66,42 @@ class Cpages extends Controller
         return view('admin.admin_student_management_gradesix'); // Adjust according to your view structure
     }
 
+    public function showStudentManagementGradeoneAdmission()
+    {
+        // Logic to retrieve student data (if any)
+        return view('admission.admission_student_management_gradeone'); // Adjust according to your view structure
+    }
+
+    public function showStudentManagementGradetwoAdmission()
+    {
+        // Logic to retrieve student data (if any)
+        return view('admission.admission_student_management_gradetwo'); // Adjust according to your view structure
+    }
+
+    public function showStudentManagementGradethreeAdmission()
+    {
+        // Logic to retrieve student data (if any)
+        return view('admission.admission_student_management_gradethree'); // Adjust according to your view structure
+    }
+
+    public function showStudentManagementGradefourAdmission()
+    {
+        // Logic to retrieve student data (if any)
+        return view('admission.admission_student_management_gradefour'); // Adjust according to your view structure
+    }
+
+    public function showStudentManagementGradefiveAdmission()
+    {
+        // Logic to retrieve student data (if any)
+        return view('admission.admission_student_management_gradefive'); // Adjust according to your view structure
+    }
+
+    public function showStudentManagementGradesixAdmission()
+    {
+        // Logic to retrieve student data (if any)
+        return view('admission.admission_student_management_gradesix'); // Adjust according to your view structure
+    }
+
     public function showGradeBook()
     {
 

@@ -227,37 +227,37 @@
                 <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
             </button>
             <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="studentmanagement">
-                <a href="#"
+                <a href="/StEmelieLearningCenter.HopeSci66/admission/student-management/GradeOne"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
                     title="Grade One">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade One</span>
                 </a>
-                <a href="#"
+                <a href="/StEmelieLearningCenter.HopeSci66/admission/student-management/GradeTwo"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Grade Two">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Two</span>
                 </a>
-                <a href="#"
+                <a href="/StEmelieLearningCenter.HopeSci66/admission/student-management/GradeThree"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
                     title="Grade Three">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Three</span>
                 </a>
-                <a href="#"
+                <a href="/StEmelieLearningCenter.HopeSci66/admission/student-management/GradeFour"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
                     title="Grade Four">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Four</span>
                 </a>
-                <a href="#"
+                <a href="/StEmelieLearningCenter.HopeSci66/admission/student-management/GradeFive"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
                     title="Grade Five">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Five</span>
                 </a>
-                <a href="#"
+                <a href="/StEmelieLearningCenter.HopeSci66/admission/student-management/GradeSix"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
                     title="Grade Six">
                     <i class="fa-regular fa-circle"></i>
@@ -287,29 +287,11 @@
                     <i class="fa-solid fa-folder-open"></i>
                     <span class="sidebar-text ml-2">Online Application</span>
                 </a>
-                <a href="#"
+                <a href="/StEmelieLearningCenter.HopeSci66/admission/student-registration"
                     class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
                     title="Student Registration">
                     <i class="fa-solid fa-folder-open"></i>
                     <span class="sidebar-text ml-2">Student Registration</span>
-                </a>
-                <a href="#"
-                    class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
-                    title="Graduate Student">
-                    <i class="fa-solid fa-user-graduate"></i>
-                    <span class="sidebar-text ml-2">Graduate Student</span>
-                </a>
-                <a href="#"
-                    class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
-                    title="Dropped Student">
-                    <i class="fa-solid fa-user-xmark"></i>
-                    <span class="sidebar-text ml-2">Dropped Student</span>
-                </a>
-                <a href="#"
-                    class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
-                    title="Archive Student">
-                    <i class="fa-solid fa-box-archive"></i>
-                    <span class="sidebar-text ml-2">Archive Student</span>
                 </a>
             </div>
 

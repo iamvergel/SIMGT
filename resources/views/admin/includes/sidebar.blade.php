@@ -391,15 +391,15 @@
                 </a>
                 <a href="/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Drop-Student"
                     class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
-                    title="Dropped Student">
+                    title="Manage Registration">
                     <i class="fa-solid fa-user-xmark"></i>
-                    <span class="sidebar-text ml-2">Dropped Student</span>
+                    <span class="sidebar-text ml-2">Manage Registration</span>
                 </a>
                 <a href="/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Archive-Student"
                     class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
-                    title="Archive Student">
+                    title="Transfer Student">
                     <i class="fa-solid fa-box-archive"></i>
-                    <span class="sidebar-text ml-2">Archive Student</span>
+                    <span class="sidebar-text ml-2">Transfer Student</span>
                 </a>
             </div>
 
@@ -508,7 +508,7 @@
                     </a>
                     <a href="/StEmelieLearningCenter.HopeSci66/admin/manage-registration"
                         class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
-                        title="Gallery">
+                        title="Manage Registration">
                         <i class="fa-regular fa-circle"></i>
                         <span class="sidebar-text ml-2">Manage Registration</span>
                     </a>

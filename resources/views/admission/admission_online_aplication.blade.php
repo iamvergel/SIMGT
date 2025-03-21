@@ -14,7 +14,7 @@
 
             <div class="p-5">
                 <div>
-                    <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
+                    <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admission</p>
                     <p class="text-2xl font-bold text-teal-900 ml-5">
                         <span
                             onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/admin/student-management'"
@@ -281,7 +281,7 @@
                                 </li>
                                 <li class="text-center">
                                     <div class="w-36 border-b border-gray-900 text-start py-3"></div>
-                                    <label class="w-24">Caschier</label>
+                                    <label class="w-24">Cashier</label>
                                 </li>
                                 <li class="text-center">
                                     <div class="border-b border-gray-900 py-3"></div>
@@ -367,7 +367,7 @@
                                 </li>
                                 <li class="text-center">
                                     <div class="w-36 border-b border-gray-900 text-start py-3"></div>
-                                    <label class="w-24">Caschier</label>
+                                    <label class="w-24">Cashier</label>
                                 </li>
                                 <li class="text-center">
                                     <div class="border-b border-gray-900 py-3"></div>
@@ -453,7 +453,7 @@
                                 </li>
                                 <li class="text-center">
                                     <div class="w-36 border-b border-gray-900 text-start py-3"></div>
-                                    <label class="w-24">Caschier</label>
+                                    <label class="w-24">Cashier</label>
                                 </li>
                                 <li class="text-center">
                                     <div class="border-b border-gray-900 py-3"></div>

@@ -13,7 +13,7 @@
       </header>
 
       <div class="p-5">
-        <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
+        <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admission</p>
         <h1 class="text-2xl font-bold text-teal-900 ml-5">Dashboard</h1>
 
         <div class="flex justify-between items-center bg-teal-700 p-5 shadow-lg mt-10 rounded-t-lg">
