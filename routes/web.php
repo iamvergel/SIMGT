@@ -181,6 +181,8 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::delete('admin/section/{id}', [SectionController::class, 'destroy'])->name('section.destroy'); // Delete subject route
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management/{id}', [Cstudentinfo::class, 'showStudentInfotmation'])->name('student.show');
+    Route::get('/StEmelieLearningCenter.HopeSci66/admission/student-management/{id}', [Cstudentinfo::class, 'showAdmissionInfotmation'])->name('student.show');
+    Route::get('/StEmelieLearningCenter.HopeSci66/registrar/student-management/{id}', [Cstudentinfo::class, 'showregistrarInfotmation'])->name('student.show');
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/teacher-management/{id}', [TeacherUserController::class, 'showTeacherInfotmation'])->name('teacher.show');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/taecher/myadvisory/{id}', [TeacherClassAdvisory::class, 'showStudentInfotmation'])->name('mystudent.show');
@@ -355,12 +357,24 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admission/announcement', [PictureAnnouncementController::class, 'showAnnouncementsAdmission'])->name('admission.announcements.show');
     Route::delete('/StEmelieLearningCenter.HopeSci66/admission/announcement/{id}', [PictureAnnouncementController::class, 'deleteAnnouncementAdmission'])->name('pictureannouncementsAdmission.delete');
-    // Route::post('/admin/announcement/{id}', [PictureAnnouncementController::class, 'updateAnnouncement'])->name('announcements.update');
     Route::post('/StEmelieLearningCenter.HopeSci66/admission/announcement', [PictureAnnouncementController::class, 'storeAdmission'])->name('admission.announcementspicture.store');
-    // Route::get('/announcements', [PictureAnnouncementController::class, 'index'])->name('announcements.index');
-    // Update announcement route
+
     Route::post('/announcements/admission/{id}', [PictureAnnouncementController::class, 'updateAnnouncementAdmission'])->name('admission.announcements.update');
     Route::get('/StEmelieLearningCenter.HopeSci66/admission/online-application', [RegisterStudent::class, 'showAllRegisterAdmission'])->name('admission.register.student');
+
+    Route::prefix('/StEmelieLearningCenter.HopeSci66/admin/student-management')->group(function () {
+        Route::get('/', [Cpages::class, 'showStudentManagement'])->name('admin.admin_student_management');
+        Route::get('/GradeOne', [Cpages::class, 'showStudentManagementGradeone'])->name('admin.admin_student_management_gradeone');
+        Route::get('/GradeTwo', [Cpages::class, 'showStudentManagementGradetwo'])->name('admin.admin_student_management_gradetwo');
+        Route::get('/GradeThree', [Cpages::class, 'showStudentManagementGradethree'])->name('admin.admin_student_management_gradethree');
+        Route::get('/GradeFour', [Cpages::class, 'showStudentManagementGradefour'])->name('admin.admin_student_management_gradefour');
+        Route::get('/GradeFive', [Cpages::class, 'showStudentManagementGradefive'])->name('admin.admin_student_management_gradefive');
+        Route::get('/GradeSix', [Cpages::class, 'showStudentManagementGradesix'])->name('admin.admin_student_management_gradesix');
+        Route::get('/AllStudentData', [Cpages::class, 'showAllStudent'])->name('admin.admin_show_all_data');
+        Route::get('/StudentProfile', function () {
+            return view('admin.includes.show_student_profile');
+        });
+    });
 });
 
 Route::get('/caloocan_barangay', function () {

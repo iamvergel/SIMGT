@@ -180,18 +180,32 @@ class TeacherSubjectClassController extends Controller
     {
         $teacherNumber = auth('teacher')->user()->teacher_number;
 
-        $TeacherSubject = TeacherSubjectClass::where('teacher_number', $teacherNumber)->get();
+        $TeacherSubject = TeacherSubjectClass::where('teacher_number', $teacherNumber)
+            ->where('school_year', now()->format('Y') . '-' . (now()->format('Y') + 1))
+            ->get();
 
-        $StudentFinals = StudentFinalGrade::where('teacher_number', $teacherNumber)->get();
+        $StudentFinals = StudentFinalGrade::where('teacher_number', $teacherNumber)
+            ->where('school_year', now()->format('Y') . '-' . (now()->format('Y') + 1))
+            ->get();
 
         $allRecords = GradeOneClassRecord::where('teacher_number', $teacherNumber)
-            ->orWhere('teacher_number', $teacherNumber)
+            ->where('school_year', now()->format('Y') . '-' . (now()->format('Y') + 1))
             ->get()
-            ->merge(GradeTwoClassRecord::where('teacher_number', $teacherNumber)->get())
-            ->merge(GradeThreeClassRecord::where('teacher_number', $teacherNumber)->get())
-            ->merge(GradeFourClassRecord::where('teacher_number', $teacherNumber)->get())
-            ->merge(GradeFiveClassRecord::where('teacher_number', $teacherNumber)->get())
-            ->merge(GradeSixClassRecord::where('teacher_number', $teacherNumber)->get());
+            ->merge(GradeTwoClassRecord::where('teacher_number', $teacherNumber)
+                ->where('school_year', now()->format('Y') . '-' . (now()->format('Y') + 1))
+                ->get())
+            ->merge(GradeThreeClassRecord::where('teacher_number', $teacherNumber)
+                ->where('school_year', now()->format('Y') . '-' . (now()->format('Y') + 1))
+                ->get())
+            ->merge(GradeFourClassRecord::where('teacher_number', $teacherNumber)
+                ->where('school_year', now()->format('Y') . '-' . (now()->format('Y') + 1))
+                ->get())
+            ->merge(GradeFiveClassRecord::where('teacher_number', $teacherNumber)
+                ->where('school_year', now()->format('Y') . '-' . (now()->format('Y') + 1))
+                ->get())
+            ->merge(GradeSixClassRecord::where('teacher_number', $teacherNumber)
+                ->where('school_year', now()->format('Y') . '-' . (now()->format('Y') + 1))
+                ->get());
 
         $students = $allRecords;
 

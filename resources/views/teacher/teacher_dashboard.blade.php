@@ -77,8 +77,8 @@
                     </div>
 
                     <div
-                        class="col-span-2 bg-white text-teal-800 rounded-lg shadow-lg text-start mt-5 p-5 flex justify-center items-center">
-                        <div class="p-5 bg-gray-100 shadow-lg rounded-lg">
+                        class="col-span-2 bg-white text-teal-800 rounded-lg shadow-lg text-start mt-5 p-5 flex justify-center items-center ">
+                        <div class="p-5 bg-gray-100 shadow-lg rounded-lg w-full">
                             @if($pictureAnnouncements->isEmpty())
                                 <div class="text-center text-lg text-gray-600">
                                     <table id="announcementTable" class="display">
@@ -104,7 +104,7 @@
                                     <tbody class="bg-white" id="tableBody">
                                         @foreach ($pictureAnnouncements as $announcement)
                                             <tr class="text-gray-700 table-row">
-                                                <td class="px-4 py-3 border" width="90%">
+                                                <td class="px-4 py-3 border" width="100%">
                                                     <div class="w-full bg-gray-100 p-2">
                                                         <div class="w-full flex justify-center items-center">
                                                             <img src="/storage/announcements/{{ $announcement->image }}"

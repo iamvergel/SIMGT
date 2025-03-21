@@ -29,7 +29,7 @@ class CreateSubjectTable extends Migration
             ['grade' => 'Grade One', 'subject' => 'GMRC'],
             ['grade' => 'Grade One', 'subject' => 'Makabansa'],
 
-            ['grade' => 'Grade Two', 'subject' => 'Filipino / Mother Tongue'],
+            ['grade' => 'Grade Two', 'subject' => 'Mother Tongue'],
             ['grade' => 'Grade Two', 'subject' => 'English'],
             ['grade' => 'Grade Two', 'subject' => 'Mathematics'],
             ['grade' => 'Grade Two', 'subject' => 'Science and Health'],

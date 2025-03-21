@@ -182,7 +182,11 @@ class Clogin extends Controller
             $request->session()->put('teacher_last_avatar_change', $teacherUser->last_avatar_change);
             $request->session()->put('teacher_last_password_change', $teacherUser->last_password_change);
 
-            $teacheradvisory = TeacherAdvisory::where('teacher_number', $teacherUser->teacher_number)->first();
+            $currentYear = date('Y');
+            $schoolYear = $currentYear . '-' . ($currentYear + 1);
+            $teacheradvisory = TeacherAdvisory::where('teacher_number', $teacherUser->teacher_number)
+                ->where('school_year', $schoolYear)
+                ->first();
 
             // Store the names in the session from StudentInfo if teacher advisory exists
             if ($teacheradvisory) {
