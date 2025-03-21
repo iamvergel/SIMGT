@@ -120,102 +120,89 @@
     @include('admin.includes.js-link')
     <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
     <script>
-        @foreach ($students as $student)
-            const updateModal{{ $student->id }} = document.getElementById("updatetudentinfo{{ $student->id }}");
-            const openUpdateModalButton{{ $student->id }} = document.getElementById("openUpdateStudentInfo{{ $student->id }}");
-            const closeUpdateModalButton{{ $student->id }} = document.getElementById("updatetudentinfoClose{{ $student->id }}");
+    @foreach ($students as $student)
+        const updateModal{{ $student->id }} = document.getElementById("updatetudentinfo{{ $student->id }}");
+        const openUpdateModalButton{{ $student->id }} = document.getElementById("openUpdateStudentInfo{{ $student->id }}");
+        const closeUpdateModalButton{{ $student->id }} = document.getElementById("updatetudentinfoClose{{ $student->id }}");
 
-            // Ensure the elements exist before adding event listeners
-            if (openUpdateModalButton{{ $student->id }}) {
-                openUpdateModalButton{{ $student->id }}.addEventListener("click", () => {
-                    if (updateModal{{ $student->id }}) {
-                        updateModal{{ $student->id }}.classList.remove("hidden");
+        // Ensure the elements exist before adding event listeners
+        if (openUpdateModalButton{{ $student->id }}) {
+            openUpdateModalButton{{ $student->id }}.addEventListener("click", () => {
+                if (updateModal{{ $student->id }}) {
+                    updateModal{{ $student->id }}.classList.remove("hidden");
 
-                        var fullName = "{{ $student->student_last_name }} {{ $student->student_first_name }} {{ $student->student_middle_name }} {{ $student->student_suffix_name }}";
-                        var gender = "{{ $student->sex }}";
-                        var grade = "{{ $student->grade }}";
-                        var birthdate = "{{ $student->birth_date }}";
-
-
-                        console.log(`FullName: ${fullName}`);
-                        console.log(`Gender: ${gender}`);
-                        console.log(`Grade: ${grade}`);
-                        console.log(`Birthdate: ${birthdate}`);
-                    }
-                });
-
-                function printRegistrationForm() {
-                    // Get the selected grade from the input field
-                    var grade = "{{ $student->grade }}";
-
-                    
                     var fullName = "{{ $student->student_last_name }} {{ $student->student_first_name }} {{ $student->student_middle_name }} {{ $student->student_suffix_name }}";
-                        var gender = "{{ $student->sex }}";
-                        var birthdate = "{{ $student->birth_date }}";
+                    var gender = "{{ $student->sex }}";
+                    var grade = "{{ $student->grade }}";
+                    var birthdate = "{{ $student->birth_date }}";
 
-                    // Open a new window with about:blank (empty content)
-                    var printWindow = window.open('about:blank', '', 'height=800, width=800');
-
-                    // Generate the content for the registration form, passing the grade value
-                    generateModalContent(grade, fullName, gender, birthdate).then(modalContent => {
-                        // Write the content into the new window
-                        printWindow.document.write('<html><head><title>Print Registration Form</title>');
-
-                        // Include the TailwindCSS link (use a CDN to ensure it's loaded properly)
-                        printWindow.document.write('<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">');
-
-                        // Close head tag
-                        printWindow.document.write('</head><body>');
-
-                        // Write the generated content into the body
-                        printWindow.document.write(modalContent);
-
-                        // Close the body and html tags
-                        printWindow.document.write('</body></html>');
-
-                        // Close the document (important to fully render content)
-                        printWindow.document.close();
-
-                        // Wait until the content is fully loaded, then trigger the print dialog
-                        printWindow.onload = function () {
-                            printWindow.print(); // Trigger the print dialog after the window is fully loaded
-
-                            let lastName = document.getElementById("lastName").value;
-                            let firstName = document.getElementById("firstName").value;
-                            let middleName = document.getElementById("middleName").value;
-                            let suffixName = document.getElementById("suffixName").value;
-                            let gender1 = document.getElementById("gender").value;
-
-                            let birthDate1 = document.getElementById("birthDate").value;
-                        };
-                    }).catch(error => {
-                        console.error('Error generating content:', error);
-                        alert('There was an error generating the content.');
-                    });
+                    console.log(`FullName: ${fullName}`);
+                    console.log(`Gender: ${gender}`);
+                    console.log(`Grade: ${grade}`);
+                    console.log(`Birthdate: ${birthdate}`);
                 }
+            });
 
-                function generateModalContent(grade, fullName, gender, birthdat) {
-                    return new Promise((resolve, reject) => {
-                        // Use absolute URL for images
+            function printRegistrationForm(fullName, gender, grade, birthdate) {
+                // Open a new window with about:blank (empty content)
+                var printWindow = window.open('about:blank', '', 'height=800, width=800');
 
-                        let logoUrlAdmin = "{{ asset('assets/images/SELC.png') }}"; // Absolute URL for the logo image
-                        let logoUrlregistrar = "{{ asset('assets/images/SELC.png') }}";
-                        let logoUrlstudent = "{{ asset('assets/images/SELC.png') }}";
+                // Generate the content for the registration form, passing the grade value
+                generateModalContent(grade, fullName, gender, birthdate).then(modalContent => {
+                    // Write the content into the new window
+                    printWindow.document.write('<html><head><title>Print Registration Form</title>');
 
-                        var fullName = "{{ $student->student_last_name }} {{ $student->student_first_name }} {{ $student->student_middle_name }} {{ $student->student_suffix_name }}";
-                        var gender = "{{ $student->sex }}";
-                        var grade = "{{ $student->grade }}";
-                        var birthdate = "{{ $student->birth_date }}";
+                    // Include the TailwindCSS link (use a CDN to ensure it's loaded properly)
+                    printWindow.document.write('<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">');
 
-                        console.log(`FullName: ${fullName}`);
-                        console.log(`Gender: ${gender}`);
-                        console.log(`Grade: ${grade}`);
-                        console.log(`Birthdate: ${birthdate}`);
+                    printWindow.document.write(`
+                        <style>
+                            @page { size: 8.5in 13in; margin: 0.5in; }
+                            body { font-size: 14px; }
+                            .copy { page-break-after: always; }
+                            .header { text-align: center; margin-bottom: 5px; }
+                            .body { margin-bottom: 15px; }
+                            .footer { text-align: center; margin-top: 0px; font-size: 14px; }
+                            .section { margin-bottom: 20px; }
+                            @page :first { }
+                            @page :right { }
+                            @page :left { }
+                        </style>
+                    `);
 
-                        // Fetch subjects from the API based on the grade value
-                        fetchSubjectsTable(grade).then(subjectsTable => {
-                            const content = `
-                        <div>
+                    // Close head tag
+                    printWindow.document.write('</head><body>');
+
+                    // Write the generated content into the body
+                    printWindow.document.write(modalContent);
+
+                    // Close the body and html tags
+                    printWindow.document.write('</body></html>');
+
+                    // Close the document (important to fully render content)
+                    printWindow.document.close();
+
+                    // Wait until the content is fully loaded, then trigger the print dialog
+                    printWindow.onload = function () {
+                        printWindow.print(); // Trigger the print dialog after the window is fully loaded
+                    };
+                }).catch(error => {
+                    console.error('Error generating content:', error);
+                    alert('There was an error generating the content.');
+                });
+            }
+
+            function generateModalContent(grade, fullName, gender, birthdate) {
+                return new Promise((resolve, reject) => {
+                    // Use absolute URL for images
+                    let logoUrlAdmin = "{{ asset('assets/images/SELC.png') }}"; // Absolute URL for the logo image
+                    let logoUrlregistrar = "{{ asset('assets/images/SELC.png') }}";
+                    let logoUrlstudent = "{{ asset('assets/images/SELC.png') }}";
+
+                    // Fetch subjects from the API based on the grade value
+                    fetchSubjectsTable(grade).then(subjectsTable => {
+                        const content = `
+                                                <div>
                             <div class="header px-3 my-3">
                                 <div class="flex justify-end items-center" style="width: 100%;">
                                     <div class="flex items-center mx-5">
@@ -263,7 +250,7 @@
                                     </li>
                                     <li class="flex items-center mb-0 px-0">
                                         <label class="w-24">Name:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">${fullName}</div>
+                                        <div class="flex-1 border-b border-gray-900 text-start px-2 text-[10px]">${fullName}</div>
                                     </li>
                                     <li class="flex items-center mb-0 px-0">
                                         <label class="w-24">Date:</label>
@@ -385,14 +372,15 @@
                             </div>
                         </div>
 
-                        <hr class="border border-gray-900 border-dashed mt-10">
+                        <hr class="border border-gray-900 border-dashed">
 
-                        <div class="">
-                            <div class="header px-3 my-3">
+                        <div class="" style="page-break-inside: avoid; margin-top: 1.5rem;">
+                        <div class="pt-1"></div>
+                            <div class="header px-3 my-3" style="margin-top: 1.5rem;">
                                 <div class="flex justify-end items-center" style="width: 100%;">
                                     <div class="flex items-center mx-5">
                                         <input type="checkbox" class="mr-2 text-white bg-black checked:bg-white checked:border-black focus:outline-none" name="new" value="1" checked>
-                                        <label for="new" class="text-[12px] text-start">New Student</label>
+                                        <label for="new" class="text-[1 2px] text-start">New Student</label>
                                     </div>
                                     <div class="flex items-center">
                                         <input type="checkbox" class="mr-2" name="old" value="0">
@@ -473,63 +461,61 @@
 
                         <hr class="border border-gray-900 border-dashed mt-3">
                     `;
-                            resolve(content);
-                        }).catch(reject);
-
-                    });
-                }
-            }
-
-            if (closeUpdateModalButton{{ $student->id }}) {
-                closeUpdateModalButton{{ $student->id }}.addEventListener("click", () => {
-                    if (updateModal{{ $student->id }}) {
-                        updateModal{{ $student->id }}.classList.add("hidden");
-                    }
+                        resolve(content);
+                    }).catch(reject);
                 });
             }
-        @endforeach
-
-        function fetchSubjectsTable(grade) {
-            // Make an API call to get the subjects based on the selected grade
-            const apiUrl = `/api/allsubjects?grade=${encodeURIComponent(grade)}`;
-
-            return fetch(apiUrl)
-                .then(response => response.json())
-                .then(subjects => {
-                    // Build the HTML table for the subjects
-                    const table = `
-                <div class="mt-5">
-                    <table class="w-full border border-gray-900">
-                        <thead>
-                            <tr class="border border-gray-900 text-left">
-                                <th class="px-4 py-1 text-left">Subject</th>
-                                <th class="px-4 py-1 text-left">Time Schedule</th>
-                                <th class="px-4 py-1 text-left">Teacher</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${subjects.map(subject => `
-                                <tr class="">
-                                    <td class="px-4 py-1">${subject.subject}</td>
-                                    <td class="px-4 py-1"></td>
-                                    <td class="px-4 py-1"></td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                </div>
-                
-            `;
-
-                    return table;
-                })
-                .catch(error => {
-                    console.error('Error fetching subjects:', error);
-                    return '<p>Unable to fetch subjects.</p>';
-                });
 
         }
-    </script>
+
+        if (closeUpdateModalButton{{ $student->id }}) {
+            closeUpdateModalButton{{ $student->id }}.addEventListener("click", () => {
+                if (updateModal{{ $student->id }}) {
+                    updateModal{{ $student->id }}.classList.add("hidden");
+                }
+            });
+        }
+    @endforeach
+
+    function fetchSubjectsTable(grade) {
+        // Make an API call to get the subjects based on the selected grade
+        const apiUrl = `/api/allsubjects?grade=${encodeURIComponent(grade)}`;
+
+        return fetch(apiUrl)
+            .then(response => response.json())
+            .then(subjects => {
+                // Build the HTML table for the subjects
+                const table = `
+                    <div class="mt-5">
+                        <table class="w-full border border-gray-900">
+                            <thead>
+                                <tr class="border border-gray-900 text-left" style="font-size: 14px;">
+                                    <th class="px-4 py-1 text-left text-[12px]">Subject</th>
+                                    <th class="px-4 py-1 text-left text-[12px]">Time Schedule</th>
+                                    <th class="px-4 py-1 text-left text-[12px]">Teacher</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${subjects.map(subject => `
+                                    <tr style="font-size: 14px;">
+                                        <td class="px-4 py-1 text-[12px]">${subject.subject}</td>
+                                        <td class="px-4 py-1 text-[12px]"></td>
+                                        <td class="px-4 py-1 text-[12px]"></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+                return table;
+            })
+            .catch(error => {
+                console.error('Error fetching subjects:', error);
+                return '<p>Unable to fetch subjects.</p>';
+            });
+    }
+</script>
+
 </body>
 
 </html>

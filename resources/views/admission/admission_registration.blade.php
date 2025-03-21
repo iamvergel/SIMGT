@@ -196,6 +196,21 @@
                     // Include the TailwindCSS link (use a CDN to ensure it's loaded properly)
                     printWindow.document.write('<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">');
 
+                    printWindow.document.write(`
+                        <style>
+                            @page { size: 8.5in 13in; margin: 0.5in; }
+                            body { font-size: 14px; }
+                            .copy { page-break-after: always; }
+                            .header { text-align: center; margin-bottom: 5px; }
+                            .body { margin-bottom: 15px; }
+                            .footer { text-align: center; margin-top: 0px; font-size: 14px; }
+                            .section { margin-bottom: 20px; }
+                            @page :first { }
+                            @page :right { }
+                            @page :left { }
+                        </style>
+                    `);
+
                     // Close head tag
                     printWindow.document.write('</head><body>');
 
@@ -406,11 +421,12 @@
 
                     <hr class="border border-gray-900 border-dashed mt-10">
 
-                    <div class="">
+                    <div class=""style="page-break-inside: avoid; margin-top: 1.5rem;">
+                        <div class="pt-1"></div>
                         <div class="header px-3 my-3">
                             <div class="flex justify-end items-center" style="width: 100%;">
                                 <div class="flex items-center mx-5">
-                                    <input type="checkbox" class="mr-2 text-white bg-black checked:bg-white checked:border-black focus:outline-none" name="new" value="1" checked>
+                                    <input type="checkbox" class="mr-2 text-white bg-black checked:bg-white checked:border-black focus:outline-none" name="new" value="1">
                                     <label for="new" class="text-[12px] text-start">New Student</label>
                                 </div>
                                 <div class="flex items-center">

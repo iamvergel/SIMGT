@@ -632,10 +632,15 @@
                             </li>
                         </ol>
                         <div class="col-span-4 flex justify-end mt-5">
-                            <button type="button" onclick="printRegistrationForm()"
-                                class="text-white w-96 text-center bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-bold rounded text-sm px-20 py-2.5 text-center">
-                                <i class="fa-solid fa-print me-2"></i>Print Registration Form
-                            </button>
+                        <button type="button" onclick="printRegistrationForm(
+                                '{{ $student->student_last_name }} {{ $student->student_first_name }} {{ $student->student_middle_name }} {{ $student->student_suffix_name }}', 
+                                '{{ $student->sex }}', 
+                                '{{ $student->grade }}', 
+                                '{{ $student->birth_date }}')"
+    class="text-white w-96 text-center bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-bold rounded text-sm px-20 py-2.5 text-center">
+    <i class="fa-solid fa-print me-2"></i>Print Registration Form
+</button>
+    
                         </div>
                     </div>
             </div>
