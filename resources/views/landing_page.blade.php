@@ -1,6 +1,6 @@
 @include("includes.header")
-<div class=" 2xl:max-w-[1500px] w-full h-full overflow-hidden overflow-y-scroll">
-    <div class="main1">
+<div class=" 2xl:max-w-[1500px] w-full h-full overflow-hidden overflow-y-scroll" >
+    <div class="main1" id="top">
         <canvas id="canvas" class="w-screen h-screen absolute bg-transparent z-[11] left-0 top-0 "></canvas>
         <!-- @include("main.topbar") -->
         <div class=" w-full h-full relative top-0">
@@ -74,7 +74,7 @@
         </div>
     </div>
 
-    
+
     @include("includes.chatbot")
 
     <div id="modalprivacy"
@@ -138,7 +138,8 @@
             <div class="flex justify-start items-center">
                 <input type="checkbox" id="checkprivacy"
                     class="mr-2 appearance-none rounded-sm bg-white checked:bg-teal-600 checked:border-teal-600 focus:outline-none">
-                <label for="checkprivacy" class="text-[12px]">I have read and agree to the Data Privacy Agreement.</label>
+                <label for="checkprivacy" class="text-[12px]">I have read and agree to the Data Privacy
+                    Agreement.</label>
             </div>
             <div class="flex justify-end items-center mt-5">
                 <button onclick="document.getElementById('modalprivacy').classList.add('hidden')"
@@ -183,37 +184,63 @@
 
     </div>
 
-    <div class="w-full px-10 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center" id="aboutSchool">
+    <div class="w-full px-5 lg:px-10 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center mt-[15rem] lg:mt-5"
+        id="aboutSchool">
         <div class="container mx-auto lg:px-4">
             <div class="grid grid-cols-1 lg:grid-cols-3 lg:p-5 border-lg relative shadow-lg">
                 <!-- Video Box -->
-                <div class="w-full h-full bg-cover bg-center flex justify-center items-stretch"
-                    style="background-image: url({{ asset('../assets/images/SELC.png') }}); min-height: 400px;">
+                <div class="w-full h-full bg-cover bg-center flex justify-center items-stretch rounded-lg" id="imageone"
+                    style="background-image: url({{ asset('../assets/images/imageonebg.png') }}); min-height: 400px;">
                 </div>
 
                 <!-- Icon Boxes -->
                 <div class="col-span-2 w-full flex flex-col justify-center  text-center py-5 px-4 lg:px-5">
-                    <h3 class="text-teal-900 text-3xl font-bold mb-4">Introduction</h3>
-                    <p class="text-teal-900 text-xl">St. Emilie Learning Center is committed to empower the love
-                        of God to become a responsible citizen.</p>
+                    <h3 class="text-teal-900 text-3xl font-bold mb-4">Welcome to St. Emilie Learning Center!</h3>
+                    <p class="text-teal-900 text-sm text-justify">At St. Emilie Learning Center, we are dedicated to
+                        providing a nurturing and engaging learning environment where students develop academically,
+                        socially, and emotionally. Our school upholds high standards of education, ensuring that each
+                        student receives the knowledge and skills necessary for lifelong success. Through a balanced
+                        curriculum and values-based learning, we aim to shape individuals who are not only intelligent
+                        but also compassionate and responsible members of society. <br /><br />
+
+                        Beyond academics, we emphasize the importance of co-curricular activities and character
+                        formation, allowing students to explore their talents, enhance their leadership skills, and
+                        build meaningful connections. Our educators are committed to fostering critical thinking,
+                        creativity, and resilience, preparing students to thrive in an ever-evolving world. We believe
+                        that a well-rounded education equips learners with the confidence and adaptability to face
+                        future challenges.<br /><br />
+
+                        This website serves as an informative platform for students, parents, and visitors, providing
+                        updates on school policies, activities, and events. We encourage everyone to stay engaged and
+                        connected as we work together to create an enriching educational experience. Welcome to St.
+                        Emilie Learning Center, where little learners become big achievers!</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="w-full px-10 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center" id="aboutSchool">
+    <div class="w-full px-5 lg:px-10 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center mt-[10rem] lg:mt-5" id="aboutSchool">
         <div class="container mx-auto lg:px-4">
             <div class="grid grid-cols-1 lg:grid-cols-3 lg:p-5 border-lg relative shadow-lg">
                 <!-- Video Box -->
-                <div class="w-full h-full bg-cover bg-center flex justify-center items-stretch"
-                    style="background-image: url({{ asset('../assets/images/SELC.png') }}); min-height: 400px;">
+                <div class="w-full h-full bg-cover bg-center flex justify-center items-stretch rounded-lg" id="imagetwo"
+                    style="background-image: url({{ asset('../assets/images/imagetwobg.png') }}); min-height: 400px;">
                 </div>
 
                 <!-- Icon Boxes -->
                 <div class="col-span-2 w-full flex flex-col justify-center  text-center py-5 px-4 lg:px-5">
-                    <h3 class="text-teal-900 text-3xl font-bold mb-4">Introduction</h3>
-                    <p class="text-teal-900 text-xl">St. Emilie Learning Center is committed to empower the love
-                        of God to become a responsible citizen.</p>
+                    <p class="text-teal-900 text-sm text-justify mt-5 lg:mt-0">"Discover, Learn, and Shine at St. Emelie Learning
+                        Center!
+                        Where young minds grow, friendships flourish, and dreams take flight. Join us for a journey of
+                        curiosity, creativity, and endless possibilities. Enroll now and be part of our vibrant learning
+                        community!" <br /><br />
+                        Would you like further tweaks or a different tone?</p>
+
+                    <div class="flex justify-center items-center mt-5">
+                    <a type="button"
+                        class="text-white w-80 text-center bg-teal-800 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-300 font-bold rounded-full text-lg px-20 py-2.5 text-center mt-20"
+                        href="#top">Enroll Now</a>
+                    </div>
                 </div>
             </div>
         </div>

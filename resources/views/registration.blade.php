@@ -6,28 +6,31 @@
                 <div class="bg-white rounded-lg shadow-lg p-5 max-w-sm">
                     <div class="flex items-center text-green-700 text-md font-bold">
                         <i class="fa-solid fa-check text-green-700 mr-2"></i>
-                        <span>{{ session('success') }}</span>
+                        <span>Registration Submitted Successfully!</span>
                     </div>
                     <hr class="border-1 border-teal-700 mt-5">
                     <div class="mt-5 text-sm">
                         <span class="text-justify">
-                            Please proceed to the Registrar's Office to submit the original copies of the following
-                            required documents: <br /><br />
-
-                            <span class="font-bold">Required Documents:</span>
+                            Please proceed to the Admissions Office to claim three (3) copies of your registration form.
+                            Next, submit them to the following offices:
                         </span>
-                        <ul class="list-disc pl-5 mt-5">
-                            <li class="list-item">Birth Certificate (PSA/NSO Copy)</li>
-                            <li class="list-item">Form 137 (SF10)</li>
-                            <li class="list-item">Form 138 (SF9) - (For Transferees)</li>
+                        <p class="font-semibold mt-3 pl-5">Next Steps:</p>
+                        <ul class="list-disc pl-5 mt-2">
+                            <li class="list-item">Registrar’s Office – Submit one copy along with the required documents.</li>
+                            <li class="list-item">Accounting Office – Submit one copy for payment and financial processing.</li>
+                            <li class="list-item">Student Copy – Keep one copy for your personal reference.</li>
                         </ul>
-
                         <span class="block mt-5 bg-gray-200 p-2">
                             <i class="fa-solid fa-circle-exclamation me-2 text-green-700 text-justify"></i><span
-                                class="font-bold">Important:</span> Your registration will only be processed once all
-                            required documents have been
-                            submitted.
+                                class="font-bold">Important:</span> Your registration will only be fully processed once
+                            all required documents have been submitted.
                         </span>
+                        <p class="font-semibold pl-5 mt-3">Required Documents to Submit to the Registrar:</p>
+                        <ul class="list-disc pl-5 mt-2">
+                            <li class="list-item">Birth Certificate (PSA/NSO Copy)</li>
+                            <li class="list-item">Form 137 (SF10)</li>
+                            <li class="list-item">Form 138 (SF9) – (For Transferees)</li>
+                        </ul>
                     </div>
                     <div class="flex justify-end mt-5">
                         <button class="cursor-pointer bg-teal-700 hover:bg-teal-800 px-5 py-1 rounded text-white"
@@ -140,12 +143,12 @@
                                         <select id="grade" name="grade" required
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
                                             <option value="">Select Grade</option>
-                                            <option value="Grade One">Grade One</option>
-                                            <option value="Grade Two">Grade Two</option>
-                                            <option value="Grade Three">Grade Three</option>
-                                            <option value="Grade Four">Grade Four</option>
-                                            <option value="Grade Five">Grade Five</option>
-                                            <option value="Grade Six">Grade Six</option>
+                                            <option value="Grade One">Grade I</option>
+                                            <option value="Grade Two">Grade II</option>
+                                            <option value="Grade Three">Grade III</option>
+                                            <option value="Grade Four">Grade IV</option>
+                                            <option value="Grade Five">Grade V</option>
+                                            <option value="Grade Six">Grade VI</option>
                                         </select>
                                         <div class="text-red-600 text-xs hidden" id="alert">This field is required</div>
                                     </div>

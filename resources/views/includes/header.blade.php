@@ -31,7 +31,38 @@
     <link href="https://cdn.jsdelivr.net/npm/glightbox@3.0.5/dist/css/glightbox.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('css/main.css')}}">
+    
+    <style>
+        #imageone {
+            position: relative;
+        }
 
+        #imageone::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color:rgba(0, 0, 0, 0.28);
+            z-index: 1;
+        }
+
+        #imagetwo {
+            position: relative;
+        }
+
+        #imagetwo::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color:rgba(0, 0, 0, 0.28);
+            z-index: 1;
+        }
+    </style>
 </head>
 
 <body class="bg-gradient-to-tr from-sky-50 via-white to-white h-screen w-screen flex items-center justify-center ">
