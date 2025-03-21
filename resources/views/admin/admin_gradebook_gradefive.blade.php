@@ -14,7 +14,7 @@
 
             <div class="p-5">
                 <div>
-                    <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Teacher</p>
+                    <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
                     <p class="text-2xl font-bold text-teal-900 ml-5">
                         <span class="hover:text-teal-700">Grade Book / Class Record / Grade Five / {{ $TeacherInfo->first_name }} {{ $TeacherInfo->last_name }}</span> / <span id="subjectName"></span>
                     </p>
