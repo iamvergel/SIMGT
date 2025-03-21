@@ -156,6 +156,8 @@
                         updateModal{{ $student->id }}.classList.remove("hidden");
                     }
 
+                    var lrn = "{{ $student->lrn }}";
+                    var studentNumber = "{{ $student->studentnumber }}";
                     var fullName = "{{ $primaryInfo->student_last_name }} {{ $primaryInfo->student_first_name }} {{ $primaryInfo->student_middle_name }} {{ $primaryInfo->student_suffix_name }}";
                     var gender = "{{ $primaryInfo->sex }}";
                     var grade = "{{ $student->grade }}";
@@ -165,6 +167,8 @@
                     console.log("Gender: " + gender);
                     console.log("Grade: " + grade);
                     console.log("Birthdate: " + birthdate);
+                    console.log("Lrn: " + lrn);
+                    console.log("Student Number: " + studentNumber);
                 });
             }
 
@@ -223,7 +227,8 @@
 
                     var studentName = "{{ $primaryInfo->student_last_name }} {{ $primaryInfo->student_first_name }} {{ $primaryInfo->student_middle_name }} {{ $primaryInfo->student_suffix_name }}";
                     var gender = "{{ $primaryInfo->sex }}";
-
+                    var lrn = "{{ $student->lrn }}";
+                    var studentNumber = "{{ $student->studentnumber }}";
                     var dateOfBirth = "{{ $primaryInfo->birth_date }}";
 
                     // Fetch subjects from the API based on the grade value
@@ -261,7 +266,7 @@
                             <ul class="grid grid-cols-2 gap-x-10 list-none">
                                 <li class="flex items-center mb-0 px-0">
                                     <label class="w-24">LRN:</label>
-                                    <div class="flex-1 border-b border-gray-900 py-3"></div>
+                                    <div class="flex-1 border-b border-gray-900 text-start px-2">${lrn}</div>
                                 </li>
                                 <li class="flex items-center mb-0 px-0">
                                     <label class="w-24">Grade:</label>
@@ -269,7 +274,7 @@
                                 </li>
                                 <li class="flex items-center mb-0 px-0">
                                     <label class="w-24">Student No.:</label>
-                                    <div class="flex-1 border-b border-gray-900 py-3"></div>
+                                    <div class="flex-1 border-b border-gray-900 text-start px-2">${studentNumber}</div>
                                 </li>
                                 <li class="flex items-center mb-0 px-0">
                                     <label class="w-24">Section:</label>
@@ -347,7 +352,7 @@
                             <ul class="grid grid-cols-2 gap-x-10 list-none">
                                 <li class="flex items-center mb-0 px-0">
                                     <label class="w-24">LRN:</label>
-                                    <div class="flex-1 border-b border-gray-900 py-3"></div>
+                                    <div class="flex-1 border-b border-gray-900 text-start px-2">${lrn}</div>
                                 </li>
                                 <li class="flex items-center mb-0 px-0">
                                     <label class="w-24">Grade:</label>
@@ -355,7 +360,7 @@
                                 </li>
                                 <li class="flex items-center mb-0 px-0">
                                     <label class="w-24">Student No.:</label>
-                                    <div class="flex-1 border-b border-gray-900 py-3"></div>
+                                    <div class="flex-1 border-b border-gray-900 text-start px-2">${studentNumber}</div>
                                 </li>
                                 <li class="flex items-center mb-0 px-0">
                                     <label class="w-24">Section:</label>
@@ -433,7 +438,7 @@
                             <ul class="grid grid-cols-2 gap-x-10 list-none">
                                 <li class="flex items-center mb-0 px-0">
                                     <label class="w-24">LRN:</label>
-                                    <div class="flex-1 border-b border-gray-900 py-3"></div>
+                                    <div class="flex-1 border-b border-gray-900 text-start px-2">${lrn}</div>
                                 </li>
                                 <li class="flex items-center mb-0 px-0">
                                     <label class="w-24">Grade:</label>
@@ -441,7 +446,7 @@
                                 </li>
                                 <li class="flex items-center mb-0 px-0">
                                     <label class="w-24">Student No.:</label>
-                                    <div class="flex-1 border-b border-gray-900 py-3"></div>
+                                    <div class="flex-1 border-b border-gray-900 text-start px-2">${studentNumber}</div>
                                 </li>
                                 <li class="flex items-center mb-0 px-0">
                                     <label class="w-24">Section:</label>
