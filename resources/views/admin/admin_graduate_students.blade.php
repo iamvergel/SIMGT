@@ -35,102 +35,65 @@
                 <section class="mx-auto p-6 mt-5 rounded-lg shadow-lg bg-gray-200">
                     <div class="w-full bg-white mb-8 rounded-lg shadow-lg text-[12px]">
                         <div class="w-full h-full overflow-auto border-4 border-teal-50 rounded-lg p-5">
-                            @if ($noGraduatesMessage)
-                                <p class="text-red-600 text-center text-md">{{ $noGraduatesMessage }}</p>
-                            @else
-                                                    <table id="studentTable" class="p-3 display responsive nowrap" width="100%">
-                                                        <thead class="table-header bg-gray-100">
-                                                            <tr class="text-md font-semibold tracking-wide text-left uppercase border">
-                                                                <th class="px-4 py-3">Student Number</th>
-                                                                <th class="px-4 py-3">LRN</th>
-                                                                <th class="px-4 py-3">School Year</th>
-                                                                <th class="px-4 py-3">Section</th>
-                                                                <th class="px-4 py-3">Status</th>
-                                                                <th class="px-4 py-3">Name</th>
-                                                                <th class="px-4 py-3">Grade</th>
-                                                                <th class="px-4 py-3">Email</th>
-                                                                <th class="px-4 py-3">Place of Birth</th>
-                                                                <th class="px-4 py-3">Date of Birth</th>
-                                                                <th class="px-4 py-3">Sex</th>
-                                                                <th class="px-4 py-3">Age</th>
-                                                                <th class="px-4 py-3">Contact Number</th>
-                                                                <th class="px-4 py-3">Religion</th>
-                                                                <th class="px-4 py-3">Address</th>
-                                                                <th class="px-4 py-3">Father's Name</th>
-                                                                <th class="px-4 py-3">Mother's Name</th>
-                                                                <th class="px-4 py-3">Guardian's Name</th>
-                                                                <th class="px-4 py-3">Emergency Contact</th>
-                                                                <th class="px-4 py-3">Contact Number</th>
-                                                                <th class="px-4 py-3">Messenger Account</th>
-                                                                <th class="px-4 py-3">PSA</th>
-                                                                <th class="px-4 py-3">Proof of Residency</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody class="bg-white" id="tableBody">
-                                                            @foreach ($students as $student)
-                                                                                            <tr class="text-gray-700 table-row">
-                                                                                                <td class="px-4 py-3 h-28 border flex items-center mt-2 w-40">
-                                                                                                    <div
-                                                                                                        class="w-10 h-10 rounded-full bg-gray-500 text-white flex items-center justify-center font-bold">
-                                                                                                        {{ strtoupper(substr($student->student_last_name, 0, 1) . substr($student->student_first_name, 0, 1)) }}
-                                                                                                    </div>
-                                                                                                    <span class="ml-2">{{ $student->student_number }}</span>
-                                                                                                </td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->lrn }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->school_year }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->section }}</td>
-                                                                                                <td class="px-4 py-3 text-xs border">
-                                                                                                    <span
-                                                                                                        class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
-                                                                                                        {{ $student->status }}
-                                                                                                    </span>
-                                                                                                </td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->student_last_name }}
-                                                                                                    {{ $student->student_first_name }} {{ $student->student_middle_name }}
-                                                                                                    {{ $student->student_suffix_name }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->grade }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->email_address_send }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->place_of_birth }}</td>
-                                                                                                <td class="px-4 py-3 border">
-                                                                                                    {{ \Carbon\Carbon::parse($student->birth_date)->format('Y-m-d') }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->sex }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->age }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->contact_number }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->religion }}</td>
-                                                                                                <td class="px-4 py-3 border">{{ $student->house_number }},
-                                                                                                    {{ $student->street }}, {{ $student->barangay }}, {{ $student->city }},
-                                                                                                    {{ $student->province }}</td>
-                                                                                                @php
-                                                                                                    $additionalInfo = $studentsAdditional[$student->student_number] ?? null;
-                                                                                                @endphp
-                                                                                                <td class="px-4 py-3 border">
-                                                                                                    {{ $additionalInfo ? $additionalInfo->father_last_name . ', ' . $additionalInfo->father_first_name . $additionalInfo->father_suffix_name : 'N/A' }}
-                                                                                                </td>
-                                                                                                <td class="px-4 py-3 border">
-                                                                                                    {{ $additionalInfo ? $additionalInfo->mother_last_name . ', ' . $additionalInfo->mother_first_name : 'N/A' }}
-                                                                                                </td>
-                                                                                                <td class="px-4 py-3 border">
-                                                                                                    {{ $additionalInfo ? $additionalInfo->guardian_last_name . ', ' . $additionalInfo->guardian_first_name . $additionalInfo->guardian_suffix_name : 'N/A' }}
-                                                                                                </td>
-                                                                                                <td class="px-4 py-3 border">
-                                                                                                    {{ $additionalInfo ? $additionalInfo->emergency_contact_person : 'N/A' }}
-                                                                                                </td>
-                                                                                                <td class="px-4 py-3 border">
-                                                                                                    {{ $additionalInfo ? $additionalInfo->emergency_contact_number : 'N/A' }}
-                                                                                                </td>
-                                                                                                <td class="px-4 py-3 border">
-                                                                                                    {{ $additionalInfo ? $additionalInfo->messenger_account : 'N/A' }}</td>
-                                                                                                <td class="px-4 py-3 border">
-                                                                                                    {{ isset($studentDocuments[$student->student_number]) ? $studentDocuments[$student->student_number]->birth_certificate : 'N/A' }}
-                                                                                                </td>
-                                                                                                <td class="px-4 py-3 border">
-                                                                                                    {{ isset($studentDocuments[$student->student_number]) ? $studentDocuments[$student->student_number]->proof_of_residency : 'N/A' }}
-                                                                                                </td>
-                                                                                            </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                            @endif
+                        <table id="studentTable" class="p-3 display responsive nowrap" width="100%">
+                                    <thead class="table-header bg-gray-100">
+                                        <tr class="text-md font-semibold tracking-wide text-left uppercase border">
+                                        <tr class="text-[14px] font-normal uppercase text-left text-black">
+                                            <th class="export">lrn</th>
+                                            <th class="export">Student Number</th>
+                                            <th class="export">Status</th>
+                                            <th class="export">Profile</th>
+                                            <th class="">Action</th>
+                                        </tr>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white" id="tableBody">
+                                    @foreach ($students as $student)
+                                                @php
+                                                    $account = $studentAccount[$student->student_number] ?? null;
+                                                    $avatar = $account && $account->avatar ? asset('storage/' . $account->avatar) : null;
+                                                    $initials = strtoupper(substr($student->student_last_name, 0, 1) . substr($student->student_first_name, 0, 1));
+                                                    $primaryInfo = $studentsPrimary[$student->student_number] ?? null;
+                                                @endphp
+
+                                                    <tr class="hover:bg-gray-100">
+                                                        <td>
+                                                            <span class="hidden">{{ $student->id }}</span>
+                                                            <span class="ml-2">{{ $student->lrn }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="ml-2">{{ $student->student_number }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="px-2 py-1 uppercase font-semibold text-[10px] rounded-lg leading-tight text-blue-800 bg-blue-200">
+                                                                {{ $student->status }}
+                                                            </span>
+                                                        </td>
+                                                        <td class="flex justify-start items-center">
+                                                            <div class="w-12 h-12 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold mx-2">
+                                                                @if ($avatar)
+                                                                    <img src="{{ $avatar }}" alt="Student Avatar" class="w-12 h-12 rounded-full object-cover">
+                                                                @else
+                                                                    {{ $initials }}
+                                                                @endif
+                                                            </div>
+                                                            <div>
+                                                                <span class="text-sm font-semibold">{{ $student->student_last_name }}, {{ $student->student_first_name }}  {{ $student->student_suffix_name }} {{ $student->student_middle_name }}</span>
+                                                                <br><span class="text-xs text-gray-500">{{ $student->email_address_send }}</span>
+                                                            </div>
+                                                        </td>
+                                                <td class="px-4 py-3 border">
+                                                    <!-- View Student Information Button -->
+                                                    <button class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-blue-700 rounded-full hover:bg-blue-600"
+                                                                    type="button" onclick="window.location.href = '{{ route('student.show.gradute', ['id' => $student->id]) }}'" title="Show Student Information">
+                                                                <i class="fa-solid fa-eye"></i>
+                                                            </button>
+                                                </td>
+                                            </tr>
+                                            
+                                        @endforeach
+                                    </tbody>
+                                </table>
                         </div>
                     </div>
                 </section>

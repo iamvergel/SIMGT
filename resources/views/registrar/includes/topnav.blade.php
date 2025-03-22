@@ -1,11 +1,11 @@
 @php
-    $firstName = session('admin_fname', 'Guest');
-    $lastName = session('admin_lname', '');
-    $middleName = session('admin_mname', '');
-    $suffixName = session('student_suffix_name', '');
+    $firstName = session('registrar_fname', 'Guest');
+    $lastName = session('registrar_lname', '');
+    $middleName = session('registrar_mname', '');
+    $suffixName = session('registrar_suffix_name', '');
     $initials = strtoupper(substr($firstName, 0, 1) . substr($lastName, 0, 1));
 
-    $user = Auth::guard('admin')->user();
+    $user = Auth::guard('registrar')->user();
     $avatarPath = $user && $user->avatar ? asset('storage/' . $user->avatar) : null;
 @endphp
 

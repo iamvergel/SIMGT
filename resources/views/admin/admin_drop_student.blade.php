@@ -20,64 +20,73 @@
 
                 <!-- Search Bar -->
                 <div class="mt-10 ml-5 flex justify-between items-center">
-                    <div class="flex items-center">
+                    <!-- <div class="flex items-center">
                         <i class="fas fa-search text-xl text-teal-700 px-3"></i>
                         <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search by name..."
                             class="text-sm px-4 py-3 text-teal-900 border border-gray-300 rounded-lg w-80 shadow-lg focus:outline-none" />
-                    </div>
+                    </div> -->
 
-                    <div class="flex">
+                    <!-- <div class="flex">
                         <button
                             class="block w-86 right-0 mr-10 text-[12px] text-white shadow-lg px-10 bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded py-2.5 text-center"
                             onclick="window.location.href = '/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Drop-Student/All-Drop-Data'">
                             Show student dropped data
                         </button>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- component -->
                 <section class="mx-auto p-6 mt-5 rounded-lg shadow-lg bg-gray-200">
                     <div class="w-full bg-white mb-8 rounded-lg shadow-lg text-[12px]">
                         <div class="w-full h-full overflow-x-scroll border-4 border-teal-50 rounded-lg">
-                            <!-- Enables horizontal scrolling -->
-                            @if ($noDroppedMessage)
-                                <p class="text-red-600 text-center text-md">{{ $noDroppedMessage }}</p>
-                            @else
                                 <div class="table-responsive p-5">
                                 <table id="studentTable" class="p-3 display responsive nowrap" width="100%">
                                     <thead class="table-header bg-gray-100">
                                         <tr class="text-md font-semibold tracking-wide text-left uppercase border">
-                                            <th class="px-4 py-3">Student Number</th>
-                                            <th class="px-4 py-3">Status</th>
-                                            <th class="px-4 py-3">Name</th>
-                                            <th class="px-4 py-3">Grade</th>
-                                            <th class="px-4 py-3">Section</th>
-                                            <th class="px-4 py-3">Email</th>
-                                            <th class="px-4 py-3">Action</th>
+                                        <tr class="text-[14px] font-normal uppercase text-left text-black">
+                                            <th class="export">lrn</th>
+                                            <th class="export">Student Number</th>
+                                            <th class="export">Status</th>
+                                            <th class="export">Profile</th>
+                                            <th class="">Action</th>
+                                        </tr>
                                         </tr>
                                     </thead>
                                     <tbody class="bg-white" id="tableBody">
-                                        @foreach ($students as $student)
-                                            <tr class="text-gray-700 table-row">
-                                                <td class="px-4 py-3 border flex items-center justify-center w-40">
-                                                    <div
-                                                        class="w-10 h-10 rounded-full bg-gray-500 text-white flex items-center justify-center font-bold mt-2">
-                                                        {{ strtoupper(substr($student->student_last_name, 0, 1) . substr($student->student_first_name, 0, 1)) }}
-                                                    </div>
-                                                    <span class="ml-2 mt-2">{{ $student->student_number }}</span>
-                                                </td>
-                                                <td class="px-4 py-3 text-xs border">
-                                                    <span
-                                                        class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
-                                                        {{ $student->status}}
-                                                    </span>
-                                                </td>
-                                                <td class="px-4 py-3 border">{{ $student->student_last_name }}
-                                                    {{ $student->student_first_name }}
-                                                </td>
-                                                <td class="px-4 py-3 border">{{ $student->grade }}</td>
-                                                <td class="px-4 py-3 border">{{ $student->section }}</td>
-                                                <td class="px-4 py-3 border">{{ $student->email_address_send }}</td>
+                                    @foreach ($students as $student)
+                                                @php
+                                                    $account = $studentAccount[$student->student_number] ?? null;
+                                                    $avatar = $account && $account->avatar ? asset('storage/' . $account->avatar) : null;
+                                                    $initials = strtoupper(substr($student->student_last_name, 0, 1) . substr($student->student_first_name, 0, 1));
+                                                    $primaryInfo = $studentsPrimary[$student->student_number] ?? null;
+                                                @endphp
+
+                                                    <tr class="hover:bg-gray-100">
+                                                        <td>
+                                                            <span class="hidden">{{ $student->id }}</span>
+                                                            <span class="ml-2">{{ $student->lrn }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="ml-2">{{ $student->student_number }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="px-2 py-1 uppercase font-semibold text-[10px] rounded-lg leading-tight text-red-800 bg-red-200">
+                                                                {{ $student->status }}
+                                                            </span>
+                                                        </td>
+                                                        <td class="flex justify-start items-center">
+                                                            <div class="w-12 h-12 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold mx-2">
+                                                                @if ($avatar)
+                                                                    <img src="{{ $avatar }}" alt="Student Avatar" class="w-12 h-12 rounded-full object-cover">
+                                                                @else
+                                                                    {{ $initials }}
+                                                                @endif
+                                                            </div>
+                                                            <div>
+                                                                <span class="text-sm font-semibold">{{ $student->student_last_name }}, {{ $student->student_first_name }}  {{ $student->student_suffix_name }} {{ $student->student_middle_name }}</span>
+                                                                <br><span class="text-xs text-gray-500">{{ $student->email_address_send }}</span>
+                                                            </div>
+                                                        </td>
                                                 <td class="px-4 py-3 border">
                                                     <form action="{{ route('students.retrieve', $student->id) }}" method="POST"
                                                         style="display:inline;">
@@ -85,17 +94,23 @@
                                                         @method('PUT') <!-- Use PUT for updates -->
                                                         <button type="submit"
                                                             onclick="return confirm('Are you sure you want to retrive this student?');"
-                                                            class="px-5 l-2 py-2 mb-1 text-[12px] text-white bg-teal-700 shadow rounded hover:bg-teal-600">
-                                                            Retrieve Student
+                                                            class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-teal-700 rounded-full hover:bg-teal-600" title="Retrieve Student">
+                                                            <i class="fa-solid fa-retweet"></i>
                                                         </button>
                                                     </form>
+                                                    <!-- View Student Information Button -->
+                                                    <button class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-blue-700 rounded-full hover:bg-blue-600"
+                                                                    type="button" onclick="window.location.href = '{{ route('student.show.dropped', ['id' => $student->id]) }}'" title="Show Student Information">
+                                                                <i class="fa-solid fa-eye"></i>
+                                                            </button>
                                                 </td>
                                             </tr>
+                                            
                                         @endforeach
                                     </tbody>
                                 </table>
                                 </div>
-                            @endif
+                            
                         </div>
                     </div>
                 </section>

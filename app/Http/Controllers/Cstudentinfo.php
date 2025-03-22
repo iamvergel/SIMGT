@@ -149,19 +149,6 @@ class Cstudentinfo extends Controller
             $additionalInfo->messenger_account = $validatedData['messenger_account'];
             $additionalInfo->save();
 
-            // Handle file uploads
-            $birthCertificatePath = $request->file('birth_certificate')->store('documents', 'public');
-            $proofOfResidencyPath = $request->file('sf10')->store('documents', 'public');
-            $sf9 = $request->file('sf9')->store('documents', 'public');
-
-            // Create student documents record
-            $studentDocuments = new StudentDocuments();
-            $studentDocuments->student_number = $validatedData['student_number']; // Link to student
-            $studentDocuments->birth_certificate = $birthCertificatePath;
-            $studentDocuments->sf10 = $proofOfResidencyPath;
-            $studentDocuments->sf9 = $sf9;
-
-            $studentDocuments->save();
 
             $studentprimary = new StudentPrimaryInfo();
             $studentprimary->lrn = $validatedData['lrn'];
@@ -215,7 +202,7 @@ class Cstudentinfo extends Controller
 
                     // Save the final grade record
                     $finalGrade->save();
-                } 
+                }
             } else if (in_array($validatedData['grade'], ['Grade Two'])) {
                 $subjects = Subject::where('grade', 'Grade Two')->get();
                 $quarters = ['1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter'];
@@ -423,6 +410,20 @@ class Cstudentinfo extends Controller
                 }
             }
 
+            // Handle file uploads
+            $birthCertificatePath = $request->hasFile('birth_certificate') ? $request->file('birth_certificate')->store('documents', 'public') : null;
+            $proofOfResidencyPath = $request->hasFile('sf10') ? $request->file('sf10')->store('documents', 'public') : null;
+            $sf9 = $request->hasFile('sf9') ? $request->file('sf9')->store('documents', 'public') : null;
+
+            // Create student documents record
+            $studentDocuments = new StudentDocuments();
+            $studentDocuments->student_number = $validatedData['student_number']; // Link to student
+            $studentDocuments->birth_certificate = $birthCertificatePath;
+            $studentDocuments->sf10 = $proofOfResidencyPath;
+            $studentDocuments->sf9 = $sf9;
+
+            $studentDocuments->save();
+
             // Redirect or return response
             return back()->with('success', 'Student added successfully!');
         } catch (\Exception $e) {
@@ -479,9 +480,10 @@ class Cstudentinfo extends Controller
 
     public function updateStudentInfo(Request $request, $id)
     {
-        // Validate request data
         $validatedData = $request->validate([
             'status' => 'required',
+            'section' => 'nullable',
+            'adviser' => 'nullable',
             'lrn' => 'required',
             'lastName' => 'required',
             'firstName' => 'required',
@@ -524,10 +526,8 @@ class Cstudentinfo extends Controller
             'sf9' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
 
-        // Find student record
         $student = StudentInfo::findOrFail($id);
 
-        // Update student info
         $student->update([
             'status' => $validatedData['status'],
             'lrn' => $validatedData['lrn'],
@@ -549,9 +549,8 @@ class Cstudentinfo extends Controller
             'province' => $validatedData['province'],
         ]);
 
-        // Update or create additional student info
         StudentAdditionalInfo::updateOrCreate(
-            ['student_number' => $validatedData['student_number']],
+            ['student_number' => $student->student_number],
             [
                 'father_last_name' => $validatedData['father_last_name'],
                 'father_first_name' => $validatedData['father_first_name'],
@@ -576,19 +575,27 @@ class Cstudentinfo extends Controller
             ]
         );
 
-        // Handle document uploads
-        $studentDocuments = StudentDocuments::updateOrCreate(
+        StudentDocuments::updateOrCreate(
             ['student_number' => $student->student_number],
             [
                 'birth_certificate' => $request->hasFile('birth_certificate')
                     ? $request->file('birth_certificate')->store('documents', 'public')
-                    : ($student->documents->birth_certificate ?? null),
+                    : optional($student->documents)->birth_certificate,
                 'sf10' => $request->hasFile('sf10')
                     ? $request->file('sf10')->store('documents', 'public')
-                    : ($student->documents->sf10 ?? null),
+                    : optional($student->documents)->sf10,
                 'sf9' => $request->hasFile('sf9')
                     ? $request->file('sf9')->store('documents', 'public')
-                    : ($student->documents->sf9 ?? null), 
+                    : optional($student->documents)->sf9,
+            ]
+        );
+
+        StudentPrimaryInfo::updateOrCreate(
+            ['studentnumber' => $student->student_number],
+            [
+                'status' => $validatedData['status'],
+                'section' => ucwords(strtolower($validatedData['section'] ?? '')),
+                'adviser' => ucwords(strtolower($validatedData['adviser'] ?? '')),
             ]
         );
 
@@ -598,7 +605,7 @@ class Cstudentinfo extends Controller
     public function showStudentInfotmation(Request $request, $id)
     {
         // Fetch the specific student based on the provided id
-        $students = StudentInfo::where('id', $id)->where('status', 'Active')->first();
+        $students = StudentInfo::where('id', $id)->where('status', 'Enrolled')->first();
 
         // If the student doesn't exist, you could redirect back or show an error message
         if (!$students) {
@@ -607,6 +614,90 @@ class Cstudentinfo extends Controller
 
         // Fetch related data for the specific student
         $studentsPrimary = StudentPrimaryInfo::where('lrn', $students->lrn)->where('status', 'Enrolled')->first();
+        $studentsPrimaryOne = StudentPrimaryInfo::where('lrn', $students->lrn)->first();
+        $studentsAdditional = StudentAdditionalInfo::where('student_number', $students->student_number)->first();
+        $studentDocuments = StudentDocuments::where('student_number', $students->student_number)->first();
+        $studentAccount = Mstudentaccount::where('student_number', $students->student_number)->first();
+        $finalGradeOne = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade One')->get();
+        $finalGradeTwo = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Two')->get();
+        $finalGradeThree = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Three')->get();
+        $finalGradeFour = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Four')->get();
+        $finalGradeFive = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Five')->get();
+        $finalGradeSix = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Six')->get();
+        $teachers = TeacherUser::where('teacher_number', $studentsPrimaryOne->adviser)->first();
+
+        // You can pass other data here as needed
+        return view('admin.includes.student_information', compact('students', 'studentsPrimary', 'teachers', 'studentsAdditional', 'studentsPrimaryOne', 'studentDocuments', 'studentAccount', 'finalGradeOne', 'finalGradeTwo', 'finalGradeThree', 'finalGradeFour', 'finalGradeFive', 'finalGradeSix'));
+    }
+
+    public function showDroppedStudentInfotmation(Request $request, $id)
+    {
+        // Fetch the specific student based on the provided id
+        $students = StudentInfo::where('id', $id)->where('status', 'Dropped')->first();
+
+        // If the student doesn't exist, you could redirect back or show an error message
+        if (!$students) {
+            return back()->withErrors('Student not found.');
+        }
+
+        // Fetch related data for the specific student
+        $studentsPrimary = StudentPrimaryInfo::where('lrn', $students->lrn)->where('status', 'Dropped')->first();
+        $studentsPrimaryOne = StudentPrimaryInfo::where('lrn', $students->lrn)->first();
+        $studentsAdditional = StudentAdditionalInfo::where('student_number', $students->student_number)->first();
+        $studentDocuments = StudentDocuments::where('student_number', $students->student_number)->first();
+        $studentAccount = Mstudentaccount::where('student_number', $students->student_number)->first();
+        $finalGradeOne = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade One')->get();
+        $finalGradeTwo = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Two')->get();
+        $finalGradeThree = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Three')->get();
+        $finalGradeFour = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Four')->get();
+        $finalGradeFive = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Five')->get();
+        $finalGradeSix = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Six')->get();
+        $teachers = TeacherUser::where('teacher_number', $studentsPrimaryOne->adviser)->first();
+
+        // You can pass other data here as needed
+        return view('admin.includes.student_information', compact('students', 'studentsPrimary', 'teachers', 'studentsAdditional', 'studentsPrimaryOne', 'studentDocuments', 'studentAccount', 'finalGradeOne', 'finalGradeTwo', 'finalGradeThree', 'finalGradeFour', 'finalGradeFive', 'finalGradeSix'));
+    }
+
+    public function showTransferStudentInfotmation(Request $request, $id)
+    {
+        // Fetch the specific student based on the provided id
+        $students = StudentInfo::where('id', $id)->where('status', 'Transfer')->first();
+
+        // If the student doesn't exist, you could redirect back or show an error message
+        if (!$students) {
+            return back()->withErrors('Student not found.');
+        }
+
+        // Fetch related data for the specific student
+        $studentsPrimary = StudentPrimaryInfo::where('lrn', $students->lrn)->where('status', 'Transfer')->first();
+        $studentsPrimaryOne = StudentPrimaryInfo::where('lrn', $students->lrn)->first();
+        $studentsAdditional = StudentAdditionalInfo::where('student_number', $students->student_number)->first();
+        $studentDocuments = StudentDocuments::where('student_number', $students->student_number)->first();
+        $studentAccount = Mstudentaccount::where('student_number', $students->student_number)->first();
+        $finalGradeOne = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade One')->get();
+        $finalGradeTwo = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Two')->get();
+        $finalGradeThree = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Three')->get();
+        $finalGradeFour = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Four')->get();
+        $finalGradeFive = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Five')->get();
+        $finalGradeSix = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade Six')->get();
+        $teachers = TeacherUser::where('teacher_number', $studentsPrimaryOne->adviser)->first();
+
+        // You can pass other data here as needed
+        return view('admin.includes.student_information', compact('students', 'studentsPrimary', 'teachers', 'studentsAdditional', 'studentsPrimaryOne', 'studentDocuments', 'studentAccount', 'finalGradeOne', 'finalGradeTwo', 'finalGradeThree', 'finalGradeFour', 'finalGradeFive', 'finalGradeSix'));
+    }
+
+    public function showGradutedStudentInfotmation(Request $request, $id)
+    {
+        // Fetch the specific student based on the provided id
+        $students = StudentInfo::where('id', $id)->where('status', 'Transfer')->first();
+
+        // If the student doesn't exist, you could redirect back or show an error message
+        if (!$students) {
+            return back()->withErrors('Student not found.');
+        }
+
+        // Fetch related data for the specific student
+        $studentsPrimary = StudentPrimaryInfo::where('lrn', $students->lrn)->where('status', 'Transfer')->first();
         $studentsPrimaryOne = StudentPrimaryInfo::where('lrn', $students->lrn)->first();
         $studentsAdditional = StudentAdditionalInfo::where('student_number', $students->student_number)->first();
         $studentDocuments = StudentDocuments::where('student_number', $students->student_number)->first();
@@ -656,7 +747,7 @@ class Cstudentinfo extends Controller
         }
 
         // Update the status to "Dropped"
-        $student->status = 'Active';
+        $student->status = 'Enrolled';
         $student->save();
 
         StudentPrimaryInfo::where('studentnumber', $student->student_number)
@@ -669,7 +760,7 @@ class Cstudentinfo extends Controller
     public function showAllStudentData()
     {
         // Fetch all active student records with pagination
-        $students = StudentInfo::where('status', 'Active')->get();
+        $students = StudentInfo::where('status', 'Enrolled')->get();
 
         // Fetch additional student information for each student
         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
@@ -739,16 +830,29 @@ class Cstudentinfo extends Controller
         // Fetch all dropped student records
         $students = StudentInfo::where('status', 'Dropped')->get();
 
+        // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
+        $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
+            ->where('status', 'Dropped') // Ensure students are enrolled
+            ->get()->keyBy('studentnumber');
+
         // Fetch additional student information for each student
         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
 
         // Fetch additional student information for each student
         $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
 
+        // Fetch teacher information for each student
+        $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+
+        // Fetch teacher information for each student
+        $myTeacher = TeacherUser::whereIn('teacher_number', $studentsPrimary->pluck('adviser')->map(function ($value) {
+            return $value === null ? null : $value;
+        })->toArray())->get()->keyBy('teacher_number');
+
         // Check if there are no dropped students
         $noDroppedMessage = $students->isEmpty() ? "No dropped students found." : null;
 
-        return view('admin.admin_drop_student', compact('students', 'studentsAdditional', 'studentDocuments', 'noDroppedMessage'));
+        return view('admin.admin_drop_student', compact('students', 'studentsAdditional', 'studentDocuments', 'noDroppedMessage', 'studentAccount', 'myTeacher'));
     }
 
     public function showAllStudentDroppedData()
@@ -756,22 +860,40 @@ class Cstudentinfo extends Controller
         // Fetch all dropped student records
         $students = StudentInfo::where('status', 'Dropped')->get();
 
+        // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
+        $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
+            ->where('status', 'Dropped') // Ensure students are enrolled
+            ->get()->keyBy('studentnumber');
+
         // Fetch additional student information for each student
         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
 
         // Fetch additional student information for each student
         $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+
+        // Fetch teacher information for each student
+        $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+
+        // Fetch teacher information for each student
+        $myTeacher = TeacherUser::whereIn('teacher_number', $studentsPrimary->pluck('adviser')->map(function ($value) {
+            return $value === null ? null : $value;
+        })->toArray())->get()->keyBy('teacher_number');
 
         // Check if there are no dropped students
         $noDroppedMessage = $students->isEmpty() ? "No dropped students found." : null;
 
-        return view('admin.admin_show_all_drop_data', compact('students', 'studentsAdditional', 'studentDocuments', 'noDroppedMessage'));
+        return view('admin.admin_show_all_drop_data', compact('students', 'studentsAdditional', 'studentDocuments', 'noDroppedMessage', 'studentAccount', 'myTeacher'));
     }
 
     public function showAllStudentArchiveData()
     {
-        // Fetch all graduated student records for the specified school years
-        $students = StudentInfo::where('status', 'graduated')->get();
+        // Fetch all dropped student records
+        $students = StudentInfo::where('status', 'Transfer')->get();
+
+        // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
+        $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
+            ->where('status', 'Transfer') // Ensure students are enrolled
+            ->get()->keyBy('studentnumber');
 
         // Fetch additional student information for each student
         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
@@ -779,10 +901,18 @@ class Cstudentinfo extends Controller
         // Fetch additional student information for each student
         $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
 
-        // Check if there are no archived students
-        $noArchiveMessage = $students->isEmpty() ? "No Archive students found." : null;
+        // Fetch teacher information for each student
+        $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
 
-        return view('admin.admin_archive_student', compact('students', 'studentsAdditional', 'studentDocuments', 'noArchiveMessage'));
+        // Fetch teacher information for each student
+        $myTeacher = TeacherUser::whereIn('teacher_number', $studentsPrimary->pluck('adviser')->map(function ($value) {
+            return $value === null ? null : $value;
+        })->toArray())->get()->keyBy('teacher_number');
+
+        // Check if there are no dropped students
+        $noDroppedMessage = $students->isEmpty() ? "No dropped students found." : null;
+
+        return view('admin.admin_archive_student', compact('students', 'studentsAdditional', 'studentDocuments', 'noDroppedMessage', 'studentAccount', 'myTeacher'));
     }
 
     public function showGradeData()
@@ -806,7 +936,7 @@ class Cstudentinfo extends Controller
     {
         // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
         $students = StudentInfo::with('student') // Only eager load 'student' relationship
-            ->where('status', 'Active') // Active students only
+            ->where('status', 'Enrolled') // Active students only
             ->get();
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
@@ -842,7 +972,7 @@ class Cstudentinfo extends Controller
     {
         // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
         $students = StudentInfo::with('student') // Only eager load 'student' relationship
-            ->where('status', 'Active') // Active students only
+            ->where('status', 'Enrolled') // Active students only
             ->get();
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
@@ -867,7 +997,7 @@ class Cstudentinfo extends Controller
     {
         // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
         $students = StudentInfo::with('student') // Only eager load 'student' relationship
-            ->where('status', 'Active') // Active students only
+            ->where('status', 'Enrolled') // Active students only
             ->get();
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
@@ -893,7 +1023,7 @@ class Cstudentinfo extends Controller
         // Fetch all Grade Four student records
         // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
         $students = StudentInfo::with('student') // Only eager load 'student' relationship
-            ->where('status', 'Active') // Active students only
+            ->where('status', 'Enrolled') // Active students only
             ->get();
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
@@ -918,7 +1048,7 @@ class Cstudentinfo extends Controller
     {
         // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
         $students = StudentInfo::with('student') // Only eager load 'student' relationship
-            ->where('status', 'Active') // Active students only
+            ->where('status', 'Enrolled') // Active students only
             ->get();
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
@@ -943,7 +1073,7 @@ class Cstudentinfo extends Controller
     {
         // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
         $students = StudentInfo::with('student') // Only eager load 'student' relationship
-            ->where('status', 'Active') // Active students only
+            ->where('status', 'Enrolled') // Active students only
             ->get();
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status

@@ -391,11 +391,11 @@
                 </a>
                 <a href="/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Drop-Student"
                     class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
-                    title="Manage Registration">
+                    title="Drop Student">
                     <i class="fa-solid fa-user-xmark"></i>
-                    <span class="sidebar-text ml-2">Manage Registration</span>
+                    <span class="sidebar-text ml-2">Drop Student</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Archive-Student"
+                <a href="/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Transfer-Student"
                     class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
                     title="Transfer Student">
                     <i class="fa-solid fa-box-archive"></i>

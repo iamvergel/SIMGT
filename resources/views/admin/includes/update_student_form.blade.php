@@ -42,7 +42,7 @@
                     action="{{ route('students.update', $student->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="grid grid-cols-3 xl:grid=cols=4 gap-4 mb-4 text-[13px] text-gray-900">
+                    <div class="grid grid-cols-3 xl:grid-cols=-4 gap-4 mb-4 text-[13px] text-gray-900">
                         <div class="col-span-2 2xl:col-span-1 p-10 bg-gray-200">
                             @php
                                 $account = $studentAccount[$student->student_number] ?? null;
@@ -90,13 +90,12 @@
                                         <span class="text-red-600 mr-1">*</span>Status :</label>
                                     <select id="status" name="status"
                                         class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                        required disabled>
+                                        required >
                                         <option value="">Select Status</option>
-                                        <option value="Active" {{ old('status', $student->status) == 'Active' ? 'selected' : '' }}>
-                                            Active | Erolled</option>
+                                        <option value="Enrolled" {{ old('status', $student->status) == 'Enrolled' ? 'selected' : '' }}>
+                                            Enrolled</option>
                                         <option value="Graduated" {{ old('status', $student->status) == 'Graduated' ? 'selected' : '' }}>Graduated</option>
-                                        <option value="Dropped" {{ old('status', $student->status) == 'Dropped' ? 'selected' : '' }}>
-                                            Dropped</option>
+                                        
                                         <option value="Transfer" {{ old('status', $student->status) == 'Transfer' ? 'selected' : '' }}>
                                             Transfer</option>
                                     </select>
@@ -112,13 +111,13 @@
                                 </div>
 
                                 <div>
-                                    <label for="schoolYear" class="block mb-2 text-sm font-bold text-gray-900">
-                                        <span class="text-red-600 mr-1">*</span>School Year :</label>
-                                    <input type="text" name="school_year" id="schoolYear"
-                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                        value="{{ old('school_year', $primaryInfo->school_year) }}" placeholder="0000-0000"
-                                        required readonly>
-                                </div>
+    <label for="schoolYear" class="block mb-2 text-sm font-bold text-gray-900">
+        <span class="text-red-600 mr-1">*</span>School Year :</label>
+    <input type="text" name="school_year" id="schoolYear"
+        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+        value="{{ old('school_year', $primaryInfo->school_year) }}" placeholder="0000-0000"
+        required readonly>
+</div>
 
                                 <!-- <label for="school" class="block mb-2 text-sm font-bold text-gray-900">School :</label> -->
                                 <input type="hidden" name="school" id="school"
@@ -126,81 +125,168 @@
                                     value="St. Emelie Learning Center" readonly>
 
 
-                                <div>
-                                    <label for="grade" class="block mb-2 text-sm font-bold text-gray-900">
-                                        <span class="text-red-600 mr-1">*</span>Select Grade :</label>
-                                    <input type="hidden" name="grade" id="grade"
-                                        value="{{ old('grade', $primaryInfo->grade) }}">
-                                    <select id="grade"
-                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                        required disabled>
-                                        <!-- Default Grade One Option (shown only if no specific grade selected) -->
-                                        @if(request()->is('*/GradeOne') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
-                                            <option value="Grade One" {{ old('grade', $primaryInfo->grade) == 'Grade One' ? 'selected' : '' }}>Grade One</option>
-                                            <option value="Grade Two" {{ old('grade', $primaryInfo->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
-                                            <option value="Grade Four" {{ old('grade', $primaryInfo->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
-                                            <option value="Grade Five" {{ old('grade', $primaryInfo->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
-                                            <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
-                                        @endif
+                                    <div>
+    <label for="grade" class="block mb-2 text-sm font-bold text-gray-900">
+        <span class="text-red-600 mr-1">*</span>Select Grade :</label>
+    <input type="hidden" name="grade" id="grade"
+        value="{{ old('grade', $primaryInfo->grade) }}">
+    <select id="gradeSelect"
+        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+        required>
+        <!-- Grades options to be dynamically handled -->
+        <option value="Grade One" {{ old('grade', $primaryInfo->grade) == 'Grade One' ? 'selected' : '' }}>Grade One</option>
+        <option value="Grade Two" {{ old('grade', $primaryInfo->grade) == 'Grade Two' ? 'selected' : '' }}>Grade Two</option>
+        <option value="Grade Three" {{ old('grade', $primaryInfo->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
+        <option value="Grade Four" {{ old('grade', $primaryInfo->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
+        <option value="Grade Five" {{ old('grade', $primaryInfo->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
+        <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+    </select>
+</div>
 
-                                        <!-- Show Grade Two and above (Grade Two to Grade Six) -->
-                                        @if(request()->is('*/GradeTwo') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
-                                            <option value="Grade Two" {{ old('grade', $primaryInfo->grade) == 'Grade Two' ? 'selected' : '' }}>Grade Two</option>
-                                            <option value="Grade Three" {{ old('grade', $primaryInfo->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
-                                            <option value="Grade Four" {{ old('grade', $primaryInfo->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
-                                            <option value="Grade Five" {{ old('grade', $primaryInfo->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
-                                            <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
-                                        @endif
+<div>
+    <label for="section" class="block mb-2 text-sm font-bold text-gray-900">
+        <span class="text-red-600 mr-1">*</span>Section :</label>
+    <select id="sectionSelect" name="section"
+        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+        required>
+        <!-- Sections will be populated dynamically -->
+    </select>
+</div>
 
-                                        <!-- Show Grade Three and above (Grade Three to Grade Six) -->
-                                        @if(request()->is('*/GradeThree') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
-                                            <option value="Grade Three" {{ old('grade', $primaryInfo->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
-                                            <option value="Grade Four" {{ old('grade', $primaryInfo->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
-                                            <option value="Grade Five" {{ old('grade', $primaryInfo->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
-                                            <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
-                                        @endif
+<div>
+    <label for="adviser" class="block mb-2 text-sm font-bold text-gray-900 mt-5">
+        <span class="text-red-600 mr-1">*</span>Select Adviser :</label>
+    <select id="teacherSelect" name="adviser"
+        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+        required>
+        <!-- Teachers will be populated dynamically -->
+    </select>
+</div>
 
-                                        <!-- Show Grade Four and above (Grade Four to Grade Six) -->
-                                        @if(request()->is('*/GradeFour') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
-                                            <option value="Grade Four" {{ old('grade', $primaryInfo->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
-                                            <option value="Grade Five" {{ old('grade', $primaryInfo->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
-                                            <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
-                                        @endif
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const gradeSelect = document.getElementById("gradeSelect");
+        const sectionSelect = document.getElementById("sectionSelect");
+        const teacherSelect = document.getElementById("teacherSelect");
+        const schoolYearSelect = document.getElementById("schoolYear");
 
-                                        <!-- Show Grade Five and above (Grade Five to Grade Six) -->
-                                        @if(request()->is('*/GradeFive') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
-                                            <option value="Grade Five" {{ old('grade', $primaryInfo->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
-                                            <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
-                                        @endif
+        const currentSection = "{{ old('section', $primaryInfo->section) }}"; // Get the current section value
+        const currentTeacher = "{{ old('adviser', $primaryInfo->adviser) }}"; // Get the current teacher value
 
-                                        <!-- Show Grade Six only (if on Grade Six page) -->
-                                        @if(request()->is('*/GradeSix') || request()->is('/StEmelieLearningCenter.HopeSci66/admin/student-management/*'))
-                                            <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
-                                        @endif
-                                    </select>
+        // Function to load sections based on selected grade and school year
+        function loadSections() {
+            const selectedGrade = gradeSelect.value;
+            const selectedSchoolYear = schoolYearSelect.value;
+
+            if (selectedGrade && selectedSchoolYear) {
+                fetch(`/api/sections?grade=${selectedGrade}&school_year=${selectedSchoolYear}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        sectionSelect.innerHTML = '<option value="">Select Section</option>';
+                        if (data.length) {
+                            data.forEach(section => {
+                                const option = document.createElement("option");
+                                option.value = section.section;
+                                option.textContent = section.section;
+                                sectionSelect.appendChild(option);
+                            });
+                        } else {
+                            const option = document.createElement("option");
+                            option.value = "";
+                            option.textContent = "No Sections Available";
+                            sectionSelect.appendChild(option);
+                        }
+
+                        // Set the current section value (if available)
+                        if (currentSection) {
+                            sectionSelect.value = currentSection;
+                        }
+                    })
+                    .catch(error => {
+                        const option = document.createElement("option");
+                        option.value = "";
+                        option.textContent = "Error loading sections";
+                        sectionSelect.appendChild(option);
+                    });
+            }
+        }
+
+        // Function to load teachers based on selected grade, section, and school year
+        function loadTeachers() {
+            const selectedGrade = gradeSelect.value;
+            const selectedSection = sectionSelect.value;
+            const selectedSchoolYear = schoolYearSelect.value;
+
+            if (selectedGrade && selectedSection && selectedSchoolYear) {
+                fetch(`/api/allteachers?grade=${selectedGrade}&section=${selectedSection}&school_year=${selectedSchoolYear}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
+                        if (data.length) {
+                            data.forEach(teacher => {
+                                const option = document.createElement("option");
+                                option.value = teacher.teacher_number;
+                                option.textContent = teacher.name;
+                                teacherSelect.appendChild(option);
+                            });
+                        } else {
+                            const option = document.createElement("option");
+                            option.value = "";
+                            option.textContent = "No Teachers Available";
+                            teacherSelect.appendChild(option);
+                        }
+
+                        // Set the current teacher value (if available)
+                        if (currentTeacher) {
+                            teacherSelect.value = currentTeacher;
+                        }
+                    })
+                    .catch(error => {
+                        const option = document.createElement("option");
+                        option.value = "";
+                        option.textContent = "Error loading teachers";
+                        teacherSelect.appendChild(option);
+                    });
+            }
+        }
+
+        // Function to update the sections and teachers when the page is loaded
+        function initialize() {
+            const selectedGrade = gradeSelect.value;
+            const selectedSchoolYear = schoolYearSelect.value;
+
+            // Load sections and teachers automatically based on current grade and school year
+            loadSections();
+            loadTeachers();
+        }
+
+        // Initialize the dropdowns when the page is loaded
+        initialize();
+
+        // Event listener for the grade selection
+        gradeSelect.addEventListener("change", function () {
+            // Hide all grades except the selected one
+            const selectedGrade = gradeSelect.value;
+            const allOptions = gradeSelect.querySelectorAll("option");
+
+            allOptions.forEach(option => {
+                option.style.display = option.value === selectedGrade ? "block" : "none";
+            });
+
+            // Load sections and teachers based on the selected grade
+            loadSections();
+            loadTeachers();
+        });
+
+        // Event listeners for the section and school year changes
+        sectionSelect.addEventListener("change", loadTeachers);
+        schoolYearSelect.addEventListener("change", function () {
+            loadSections();
+            loadTeachers();
+        });
+    });
+</script>
                                 </div>
-
-
-                                <div class="">
-                                    <label for="section" class="block mb-2 text-sm font-bold text-gray-900">
-                                        <span class="text-red-600 mr-1">*</span>Section :</label>
-                                    <input type="text" name="section" id="section"
-                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                        value="{{ old('section', $primaryInfo->section) }}" placeholder="Enter Section"
-                                        required readonly>
-                                </div>
-
-                                <div>
-                                    <label for="adviser" class="block mb-2 text-sm font-bold text-gray-900">
-                                        <span class="text-red-600 mr-1">*</span>Adviser :</label>
-                                    <input type="hidden" name="adviser" id="adviser"
-                                        value="{{ old('adviser', $primaryInfo->adviser ?? 'No Adviser') }}">
-                                    <input type="text"
-                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                        value="{{ $teacherInfo ? $teacherInfo->first_name . ' ' . $teacherInfo->last_name . ' ' . $teacherInfo->middle_name . ' ' . $teacherInfo->suffix : '' }}"
-                                        placeholder="No Adviser" required readonly>
-                                </div>
-                            </div>
                         </div>
 
                         <!-- Personal Information -->

@@ -110,7 +110,7 @@
                                                         </td>
                                                         <td>
                                                             <span class="px-2 py-1 uppercase font-semibold text-[10px] rounded-lg leading-tight text-green-800 bg-green-200">
-                                                                {{ $student->status }} | {{ $primaryInfo->status }}
+                                                                {{ $primaryInfo->status }}
                                                             </span>
                                                         </td>
                                                         <td class="flex justify-start items-center">
@@ -186,9 +186,6 @@
         </main>
     </div>
 
-    
-    @include('admin.includes.js-link')
-    <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
     <script type="text/javascript">
          @foreach ($students as $student)
                 const updateModal{{ $student->id }} = document.getElementById("updatetudentinfo{{ $student->id }}");
@@ -213,6 +210,9 @@
                 }
             @endforeach
     </script>
+        
+        @include('admin.includes.js-link')
+    <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
 </body>
 
 </html>

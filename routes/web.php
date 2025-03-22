@@ -148,6 +148,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/online-application', [RegisterStudent::class, 'showAllRegister'])->name('register.student');
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-registration', [StudentRegistrationController::class, 'showAllRegister'])->name('register.new.student');
     Route::get('/StEmelieLearningCenter.HopeSci66/admission/student-registration', [StudentRegistrationController::class, 'showAllRegisterAdmission'])->name('admission.new.student');
+    Route::get('/StEmelieLearningCenter.HopeSci66/registrar/student-registration', [StudentRegistrationController::class, 'showAllRegisterRegistrar'])->name('registrar.new.student');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/teacher/myadvisory', [TeacherClassAdvisory::class, 'showMyadvisory'])->name('teacher.advisory');
     Route::get('/StEmelieLearningCenter.HopeSci66/teacher/class-record', [TeacherSubjectClassController::class, 'showclasssubjectadvisory'])->name('teacher.class-record');
@@ -193,6 +194,9 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::delete('admin/section/{id}', [SectionController::class, 'destroy'])->name('section.destroy'); // Delete subject route
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management/{id}', [Cstudentinfo::class, 'showStudentInfotmation'])->name('student.show');
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management/dropped/{id}', [Cstudentinfo::class, 'showDroppedStudentInfotmation'])->name('student.show.dropped');
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management/gradute/{id}', [Cstudentinfo::class, 'showGradutedStudentInfotmation'])->name('student.show.gradute');
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/student-management/transfer/{id}', [Cstudentinfo::class, 'showTransferStudentInfotmation'])->name('student.show.transfer');
     Route::get('/StEmelieLearningCenter.HopeSci66/admission/student-management/{id}', [AdmissionStudent::class, 'showAdmissionInfotmation'])->name('admission.student.show');
     Route::get('/StEmelieLearningCenter.HopeSci66/registrar/student-management/{id}', [Cstudentinfo::class, 'showregistrarInfotmation'])->name('registar.student.show');
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/teacher-management/{id}', [TeacherUserController::class, 'showTeacherInfotmation'])->name('teacher.show');
@@ -221,7 +225,7 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Drop-Student', [Cstudentinfo::class, 'showAllStudentDropData'])->name('admin.admin_drop_students');
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Drop-Student/All-Drop-Data', [Cstudentinfo::class, 'showAllStudentDroppedData'])->name('admin.admin_show_all_drop_data');
 
-    Route::get('/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Archive-Student', [Cstudentinfo::class, 'showAllStudentArchiveData'])->name('admin.admin_archive_student');
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/Report-Section/Transfer-Student', [Cstudentinfo::class, 'showAllStudentArchiveData'])->name('admin.admin_archive_student');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/dashboard', [Cevent::class, 'showAllAdmin'])->name('admin.admin_dashboard');
 
@@ -330,7 +334,16 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         return view('registrar.registrar_dashboard');
     });
 
+    Route::post('/register/students', [StudentRegistrationController::class, 'newRegistered'])->name('includes.register_student_form.store');
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/registrar/student-management/Add-Student', function () {
+        return view('registrar.includes.add_student_form');
+    });
+    Route::get('/StEmelieLearningCenter.HopeSci66/admin/online-application/{id}', [RegisterStudent::class, 'showEnrolleesInformation'])->name('student.show.enrollees');
+    Route::get('/StEmelieLearningCenter.HopeSci66/registrar/Student-Registration/{id}', [StudentRegistrationController::class, 'getPrimaryInfo'])->name('student.show.enrollees.register');
     Route::get('/StEmelieLearningCenter.HopeSci66/registrar/dashboard', [Cevent::class, 'showAllRegistrar'])->name('registrar.registrar_dashboard');
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/registrar/online-application', [RegisterStudent::class, 'showAllRegisterRegistrar'])->name('registrar.register.student');
 
     //ADMISSION________________________________________________________________
     //________________________________________________________________
@@ -389,6 +402,7 @@ Route::get('/caloocan_barangay', function () {
 // In routes/api.php
 Route::post('/manage-account/{studentId}/reset', [Cstudentinfo::class, 'resetAccount'])->name('account.reset');
 Route::put('/students/{id}', [Cstudentinfo::class, 'updateStudentInfo'])->name('students.update');
+Route::put('/students/primary/{id}', [Cstudentinfo::class, 'updateStudentInfoPrimary'])->name('students.update.primary');
 Route::post('/send-email/{id}', [Cstudentinfo::class, 'sendEmail'])->name('send.email');
 Route::put('/students/drop/{id}', [Cstudentinfo::class, 'dropStudent'])->name('students.drop');
 Route::put('/students/retrive/{id}', [Cstudentinfo::class, 'retrieveStudent'])->name('students.retrieve');

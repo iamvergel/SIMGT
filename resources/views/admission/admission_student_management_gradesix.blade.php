@@ -110,7 +110,7 @@
                                                         </td>
                                                         <td>
                                                             <span class="px-2 py-1 uppercase font-semibold text-[10px] rounded-lg leading-tight text-green-800 bg-green-200">
-                                                                {{ $student->status }} | {{ $primaryInfo->status }}
+                                                                {{ $primaryInfo->status }}
                                                             </span>
                                                         </td>
                                                         <td class="flex justify-start items-center">

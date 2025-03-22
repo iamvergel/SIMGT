@@ -115,10 +115,12 @@
                                                                 {{ $students->student_number }}
                                                             </div>
 
-                                                            <div class="text-green-500 font-bold">
+                                                            <div
+                                                                class="font-bold
+                                                                {{ $studentsPrimary->status == 'Dropped' ? 'text-red-500' : ($studentsPrimary->status == 'Graduated' ? 'text-blue-500' : ($studentsPrimary->status == 'Enrolled' ? 'text-green-500' : 'text-violet-500')) }}">
                                                                 <label for="modalStatus"
                                                                     class="block text-[14px] font-bold text-gray-900">Status :</label>
-                                                                {{ $students->status }} | {{ $studentsPrimary->status }}
+                                                              {{ $studentsPrimary->status }}
                                                             </div>
 
                                                             <div>

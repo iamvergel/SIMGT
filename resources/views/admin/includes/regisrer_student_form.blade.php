@@ -59,7 +59,7 @@
 
                 <div class="bg-teal-800 p-5 shadow-lg mt-10 rounded-t-lg">
                     <h2 class="text-md font-semibold text-white">
-                        <i class="fa-solid fa-users mr-2"></i>Add New Student
+                        <i class="fa-solid fa-user mr-2"></i>
                     </h2>
                 </div>
 

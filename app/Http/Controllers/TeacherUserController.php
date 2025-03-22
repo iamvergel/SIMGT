@@ -11,6 +11,7 @@ use App\Mail\TeacherEmail;
 use Illuminate\Support\Facades\Mail;
 use App\Models\TeacherUser;
 use App\Models\TeacherAdvisory;
+use App\Models\TeacherSubjectClass;
 
 class TeacherUserController extends Controller
 {
@@ -121,6 +122,7 @@ class TeacherUserController extends Controller
 
         // Fetch related data for the specific teacher
         $teacherAdvisory = TeacherAdvisory::where('teacher_number', $teachers->teacher_number)->first();
+        $teacherSubjects = TeacherSubjectClass::where('teacher_number', $teachers->teacher_number)->get();
         // $teacherDocuments = teacherDocuments::where('teacher_number', $teachers->teacher_number)->first();
         // $teacherAccount = TeacherUser::where('teacher_number', $teachers->teacher_number)->first();
         // $teacherGradeOne = Mteachergradeone::where('teacher_number', $teachers->teacher_number)->first();
@@ -131,7 +133,7 @@ class TeacherUserController extends Controller
         // $teacherGradeSix = Mteachergradesix::where('teacher_number', $teachers->teacher_number)->first();
 
         // You can pass other data here as needed
-        return view('admin.includes.teacher_information', compact('teachers', 'teacherAdvisory'));
+        return view('admin.includes.teacher_information', compact('teachers', 'teacherAdvisory', 'teacherSubjects'));
     }
 
     public function resetAccount(Request $request, $teacherId)

@@ -233,10 +233,6 @@
         </main>
     </div>
 
-
-
-    @include('admin.includes.js-link')
-    <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
     <script>
         // Get modal and buttons
         const modal = document.getElementById("addAdminModal");
@@ -364,6 +360,9 @@
             });
         });
     </script>
+    
+    @include('admin.includes.js-link')
+    <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>    
 </body>
 
 </html>

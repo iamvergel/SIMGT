@@ -36,9 +36,9 @@ class AdmissionStudent extends Controller
 {
     public function showGradeOneData()
     {
-        // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+        // Fetch only Enrolled students and filter them by the status 'Enrolled' and grade 'Grade One'
         $students = StudentInfo::with('student') // Only eager load 'student' relationship
-            ->where('status', 'Active') // Active students only
+            ->where('status', 'Enrolled') // Enrolled students only
             ->get();
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
@@ -61,9 +61,9 @@ class AdmissionStudent extends Controller
     }
 public function showGradeTwoData()
     {
-        // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+        // Fetch only Enrolled students and filter them by the status 'Enrolled' and grade 'Grade One'
         $students = StudentInfo::with('student') // Only eager load 'student' relationship
-            ->where('status', 'Active') // Active students only
+            ->where('status', 'Enrolled') // Enrolled students only
             ->get();
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
@@ -86,9 +86,9 @@ public function showGradeTwoData()
 
     public function showGradeThreeData()
     {
-        // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+        // Fetch only Enrolled students and filter them by the status 'Enrolled' and grade 'Grade One'
         $students = StudentInfo::with('student') // Only eager load 'student' relationship
-            ->where('status', 'Active') // Active students only
+            ->where('status', 'Enrolled') // Enrolled students only
             ->get();
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
@@ -112,9 +112,9 @@ public function showGradeTwoData()
     public function showGradeFourData()
     {
         // Fetch all Grade Four student records
-        // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+        // Fetch only Enrolled students and filter them by the status 'Enrolled' and grade 'Grade One'
         $students = StudentInfo::with('student') // Only eager load 'student' relationship
-            ->where('status', 'Active') // Active students only
+            ->where('status', 'Enrolled') // Enrolled students only
             ->get();
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
@@ -137,9 +137,9 @@ public function showGradeTwoData()
 
     public function showGradeFiveData()
     {
-        // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+        // Fetch only Enrolled students and filter them by the status 'Enrolled' and grade 'Grade One'
         $students = StudentInfo::with('student') // Only eager load 'student' relationship
-            ->where('status', 'Active') // Active students only
+            ->where('status', 'Enrolled') // Enrolled students only
             ->get();
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
@@ -162,9 +162,9 @@ public function showGradeTwoData()
 
     public function showGradeSixData()
     {
-        // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+        // Fetch only Enrolled students and filter them by the status 'Enrolled' and grade 'Grade One'
         $students = StudentInfo::with('student') // Only eager load 'student' relationship
-            ->where('status', 'Active') // Active students only
+            ->where('status', 'Enrolled') // Enrolled students only
             ->get();
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
@@ -187,7 +187,7 @@ public function showGradeTwoData()
     public function showAdmissionInfotmation(Request $request, $id)
     {
         // Fetch the specific student based on the provided id
-        $students = StudentInfo::where('id', $id)->where('status', 'Active')->first();
+        $students = StudentInfo::where('id', $id)->where('status', 'Enrolled')->first();
 
         // If the student doesn't exist, you could redirect back or show an error message
         if (!$students) {

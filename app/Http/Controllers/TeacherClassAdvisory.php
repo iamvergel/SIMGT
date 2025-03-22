@@ -25,7 +25,7 @@ class TeacherClassAdvisory extends Controller
     {
         // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
         $students = StudentInfo::with('student') // Only eager load 'student' relationship
-            ->where('status', 'Active') // Active students only
+            ->where('status', 'Enrolled') // Active students only
             ->get();
 
         // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
