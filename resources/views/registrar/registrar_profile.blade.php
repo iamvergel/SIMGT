@@ -1,29 +1,29 @@
 @php
-    $firstName = session('admin_fname', 'Guest');
-    $lastName = session('admin_lname', '');
-    $middleName = session('admin_mname', '');
-    $suffixName = session('admin_sname', '');
+    $firstName = session('registrar_fname', 'Guest');
+    $lastName = session('registrar_lname', '');
+    $middleName = session('registrar_mname', '');
+    $suffixName = session('registrar_suffix_name', '');
     $initials = strtoupper(substr($firstName, 0, 1) . substr($lastName, 0, 1));
 
-    $user = Auth::guard('admin')->user();
+    $user = Auth::guard('registrar')->user();
     $avatarPath = $user && $user->avatar ? asset('storage/' . $user->avatar) : null;
 @endphp
 
-@include('admin.includes.header')
+@include('registrar.includes.header')
 
 <body class="font-poppins bg-gray-200">
     <div class="flex w-full h-screen">
         <!-- Sidebar -->
-        @include('admin.includes.sidebar')
+        @include('registrar.includes.sidebar')
 
         <!-- Main Content -->
         <main class="flex-grow bg-white shadow-lg overflow-x-hidden overflow-y-scroll w-full bg-zinc-50" id="content">
             <header class="sticky top-0 z-[10]">
-                @include('admin.includes.topnav')
+                @include('registrar.includes.topnav')
             </header>
 
             <div class="p-5">
-                <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
+                <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Registrar</p>
                 <h1 class="text-2xl font-bold text-teal-900 ml-5">SIMGT Profile /
                     {{ $firstName . ' ' . $middleName . ' ' . $lastName ?: 'Guest' }}
                 </h1>
@@ -83,10 +83,10 @@
                                                 {{ $firstName . ' ' . $middleName . ' ' . $lastName ?: 'Guest' }}
                                             </p>
                                             <span class="text-xs tracking-widest font-normal shadow-text-lg mt-0">
-                                                {{ session('admin_number') ?? 'Guest' }} |
-                                                {{ session('admin_username') ?? 'Guest' }}</span>
+                                                {{ session('registrar_number') ?? 'Guest' }} |
+                                                {{ session('registrar_username') ?? 'Guest' }}</span>
                                             <p class="text-xs">
-                                                {{ session('admin_role') ?? 'Guest' }}
+                                                {{ session('registrar_role') ?? 'Guest' }}
                                             </p>
                                         </div>
 
@@ -94,7 +94,7 @@
                                             class="lg:px-20 2xl:px-0" class="">
                                             @csrf
                                             <input type="hidden" name="id"
-                                                value="{{ Auth::guard('admin')->check() ? Auth::guard('admin')->user()->id : '' }}"
+                                                value="{{ Auth::guard('registrar')->check() ? Auth::guard('registrar')->user()->id : '' }}"
                                                 required class="mt-2" />
 
                                             <input type="file" name="avatar" accept="image/*" id="avatar-input"
@@ -146,7 +146,7 @@
                                 </div>
                             @endif
 
-                            <form id="update-form" action="{{ route('admin.update', $user->id) }}" method="POST"
+                            <form id="update-form" action="{{ route('admission.update', $user->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
@@ -212,7 +212,7 @@
                             @endif
 
                             <div class="p-10">
-                                <form action="{{ route('admin.changePassword', $user->id) }}" method="POST"
+                                <form action="{{ route('registrar.changePassword', $user->id) }}" method="POST"
                                     id="change-password-form">
                                     @csrf
                                     <div class="mb-4">
@@ -445,13 +445,16 @@
 
                 const formData = new FormData(form);
 
-                fetch('{{ route('profile.update-avatar') }}', {
+
+                fetch('{{ route('registrar.update-avatar', [], false) }}', {
+               
                     method: 'POST',
                     body: formData,
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     }
                 })
+
                     .then(response => response.json())
                     .then(data => {
                         if (data.avatar) {

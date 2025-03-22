@@ -28,6 +28,7 @@ use App\Http\Controllers\RegistrationButtonController;
 use App\Http\Controllers\AdmissionUserController;
 use App\Http\Controllers\RegistrarUserController;
 use App\Http\Controllers\AdmissionStudent;
+use App\Http\Controllers\RegistrarStudent;
 
 Route::get('/', function () {
     // Redirect to the desired URL
@@ -87,12 +88,12 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     // Student Management Routes registrar
     Route::prefix('/StEmelieLearningCenter.HopeSci66/registrar/student-management')->group(function () {
         Route::get('/', [Cpages::class, 'showStudentManagement'])->name('admin.admin_student_management');
-        Route::get('/GradeOne', [Cpages::class, 'showStudentManagementGradeone'])->name('registrar.registrar_student_management_gradeone');
-        Route::get('/GradeTwo', [Cpages::class, 'showStudentManagementGradetwo'])->name('registrar.registrar_student_management_gradetwo');
-        Route::get('/GradeThree', [Cpages::class, 'showStudentManagementGradethree'])->name('registrar.registrar_student_management_gradethree');
-        Route::get('/GradeFour', [Cpages::class, 'showStudentManagementGradefour'])->name('registrar.registrar_student_management_gradefour');
-        Route::get('/GradeFive', [Cpages::class, 'showStudentManagementGradefive'])->name('registrar.registrar_student_management_gradefive');
-        Route::get('/GradeSix', [Cpages::class, 'showStudentManagementGradesix'])->name('registrar.registrar_student_management_gradesix');
+        Route::get('/GradeOne', [Cpages::class, 'showStudentManagementGradeoneRegistrar'])->name('registrar.registrar_student_management_gradeone');
+        Route::get('/GradeTwo', [Cpages::class, 'showStudentManagementGradetwoRegistrar'])->name('registrar.registrar_student_management_gradetwo');
+        Route::get('/GradeThree', [Cpages::class, 'showStudentManagementGradethreeRegistrar'])->name('registrar.registrar_student_management_gradethree');
+        Route::get('/GradeFour', [Cpages::class, 'showStudentManagementGradefourRegistrar'])->name('registrar.registrar_student_management_gradefour');
+        Route::get('/GradeFive', [Cpages::class, 'showStudentManagementGradefiveRegistrar'])->name('registrar.registrar_student_management_gradefive');
+        Route::get('/GradeSix', [Cpages::class, 'showStudentManagementGradesixRegistrar'])->name('registrar.registrar_student_management_gradesix');
         Route::get('/AllStudentData', [Cpages::class, 'showAllStudent'])->name('registrar.registrar_show_all_data');
         Route::get('/StudentProfile', function () {
             return view('registrar.includes.show_student_profile');
@@ -143,6 +144,16 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         Route::get('/GradeFive', [AdmissionStudent::class, 'showGradeFiveData'])->name('admission.grade.five');
         Route::get('/GradeSix', [AdmissionStudent::class, 'showGradeSixData'])->name('admission.grade.six');
         Route::get('/AllStudentData', [AdmissionStudent::class, 'showAllStudentData'])->name('admin.admin_show_all_data');
+    });
+
+    Route::prefix('StEmelieLearningCenter.HopeSci66/registrar/student-management')->group(function () {
+        Route::get('/GradeOne', [RegistrarStudent::class, 'showGradeOneData'])->name('registrar.grade.one');
+        Route::get('/GradeTwo', [RegistrarStudent::class, 'showGradeTwoData'])->name('registrar.grade.two');
+        Route::get('/GradeThree', [RegistrarStudent::class, 'showGradeThreeData'])->name('registrar.grade.three');
+        Route::get('/GradeFour', [RegistrarStudent::class, 'showGradeFourData'])->name('aregistrargrade.four');
+        Route::get('/GradeFive', [RegistrarStudent::class, 'showGradeFiveData'])->name('registrar.grade.five');
+        Route::get('/GradeSix', [RegistrarStudent::class, 'showGradeSixData'])->name('registrar.grade.six');
+        Route::get('/AllStudentData', [RegistrarStudent::class, 'showAllStudentData'])->name('admin.admin_show_all_data');
     });
 
     Route::get('/StEmelieLearningCenter.HopeSci66/admin/online-application', [RegisterStudent::class, 'showAllRegister'])->name('register.student');
@@ -333,6 +344,16 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/StEmelieLearningCenter.HopeSci66/registrar/dashboard', function () {
         return view('registrar.registrar_dashboard');
     });
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/registrar/SIMGT-Profile', function () {
+        return view('registrar.registrar_profile');
+    });
+
+    Route::post('/registrar/update-avatar', [RegistrarUserController::class, 'updateProfile'])->name('registrar.update-avatar');
+    Route::put('/registrar/{id}/update', [RegistrarUserController::class, 'update'])->name('registrar.update');
+    Route::post('/registrar/change-password/{studentId}', [RegistrarUserController::class, 'changePassword'])->name('registrar.changePassword');
+
+    Route::get('/StEmelieLearningCenter.HopeSci66/registrar/student-management/{id}', [RegistrarStudent::class, 'showRegistrarInfotmation'])->name('student.show.registrar');
 
     Route::post('/register/students', [StudentRegistrationController::class, 'newRegistered'])->name('includes.register_student_form.store');
 

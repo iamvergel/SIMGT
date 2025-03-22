@@ -452,7 +452,7 @@
 
     <script>
         // Check if the user is logged in
-        const adminUsername = "{{ session('registrar_username') }}"; // Get the admin username from the session
+        const adminUsername = "{{ session('registrar_fname') }}"; // Get the admin username from the session
 
         // If the admin username is not set, perform logout
         if (!adminUsername) {

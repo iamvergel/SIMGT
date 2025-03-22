@@ -96,7 +96,7 @@ class RegistrarUserController extends Controller
 
         // Check if the admin user exists
         if (!$adminUser) {
-            return response()->json(['error' => 'Admin user not found.'], 404);
+            return response()->json(['error' => 'Admission user not found.'], 404);
         }
 
         // Check if the user has changed their avatar recently
@@ -113,7 +113,7 @@ class RegistrarUserController extends Controller
         // Handle avatar upload
         if ($request->hasFile('avatar')) {
             // Store the avatar in the 'avatars' directory inside the public storage
-            $path = $request->file('avatar')->store('admin', 'public');
+            $path = $request->file('avatar')->store('registrar', 'public');
 
             // Update the admin user's avatar field and the timestamp for the last avatar change
             $adminUser->avatar = $path;

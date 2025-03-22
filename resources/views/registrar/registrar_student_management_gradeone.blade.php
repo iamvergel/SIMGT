@@ -1,23 +1,23 @@
-@include('admission.includes.header')
+@include('registrar.includes.header')
 
 <body class="font-poppins bg-gray-200 overflow-hidden">
 
     <div class="flex w-full h-screen">
         <!-- Sidebar -->
-        @include('admission.includes.sidebar')
+        @include('registrar.includes.sidebar')
 
         <!-- Main Content -->
         <main class="flex-grow rounded-r-lg bg-white shadow-lg overflow-y-scroll w-full bg-zinc-50" id="content">
             <header class="sticky top-0 z-[10]">
-                @include('admission.includes.topnav')
+                @include('registrar.includes.topnav')
             </header>
 
             <div class="p-5">
                 <div>
-                    <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admission</p>
+                    <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Registrar</p>
                     <p class="text-2xl font-bold text-teal-900 ml-5">
                         <span
-                            onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/admission/student-management'"
+                            onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/registrar/student-management'"
                             class="hover:text-teal-700">Student Management</span> / Grade One
                     </p>
                 </div>
@@ -128,8 +128,8 @@
                                                         <td>{{ $primaryInfo->grade }}</td>
                                                         <td>{{ $primaryInfo->section }}</td>
                                                         <td>
-                                                            <!-- Reset Account Form -->
-                                                            <form action="{{ route('account.reset', $student->id) }}" method="POST" style="display:inline;">
+                                                             <!-- Reset Account Form -->
+                                                             <form action="{{ route('account.reset', $student->id) }}" method="POST" style="display:inline;">
                                                                 @csrf
                                                                 <input class="hidden" type="text" name="defaultPassword" value="{{ 'SELC' . $student->student_last_name . substr($student->student_number, -4) }}" required>
                                                                 <button type="submit" onclick="return confirm('Are you sure you want to reset this student\'s account?');"
@@ -138,6 +138,13 @@
                                                                     <i class="fa-solid fa-rotate-right"></i>
                                                                 </button>
                                                             </form>
+
+                                                            <!-- Update Student Info Button -->
+                                                            <button data-modal-toggle="updatetudentinfo{{ $student->id }}" data-modal-target="updatetudentinfo{{ $student->id }}"
+                                                                    class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-teal-700 rounded-full hover:bg-teal-600"
+                                                                    type="button" aria-label="Update Student" title="Update Student Info" id="openUpdateStudentInfo{{ $student->id }}">
+                                                                <i class="fa-solid fa-square-pen"></i>
+                                                            </button>
 
                                                             <!-- Send Email Form -->
                                                             <form action="{{ route('send.email', $student->id) }}" method="POST" style="display:inline;">
@@ -149,9 +156,20 @@
                                                                 </button>
                                                             </form>
 
+                                                            <!-- Drop Student Form -->
+                                                            <form action="{{ route('students.drop', $student->id) }}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <button type="submit" onclick="return confirm('Are you sure you want to drop this student?');"
+                                                                    class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-red-700 rounded-full hover:bg-red-600"
+                                                                    title="Drop Student">
+                                                                    <i class="fa-solid fa-user-xmark"></i>
+                                                                </button>
+                                                            </form>
+
                                                             <!-- View Student Information Button -->
                                                             <button class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-blue-700 rounded-full hover:bg-blue-600"
-                                                                    type="button" onclick="window.location.href = '{{ route('admission.student.show', ['id' => $student->id]) }}'" title="Show Student Information">
+                                                                    type="button" onclick="window.location.href = '{{ route('student.show.registrar', ['id' => $student->id]) }}'" title="Show Student Information">
                                                                 <i class="fa-solid fa-eye"></i>
                                                             </button>
                                                         </td>
@@ -167,7 +185,7 @@
         </main>
     </div>
 
-    @include('admin.includes.update_student_form') 
+    @include('registrar.includes.update_student_form')  
 
 @include('admin.includes.js-link')
 <script src="{{ asset('../js/admin/gradeone.js') }}" type="text/javascript"></script>

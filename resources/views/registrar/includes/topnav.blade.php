@@ -62,7 +62,7 @@
             id="dropdownMenu">
             <ul class="text-gray-800">
                 <li class="px-4 py-2 hover:bg-gray-300 bg-gray-100 text-[14px] mt-5"
-                    onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/admin/SIMGT-Profile'">
+                    onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/registrar/SIMGT-Profile'">
                     <i class="fa-solid fa-user mr-3"></i>SIMGT Profile
                 </li>
 
