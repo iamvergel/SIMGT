@@ -671,7 +671,7 @@ class Cstudentinfo extends Controller
         // Fetch related data for the specific student
         $studentsPrimary = StudentPrimaryInfo::where('lrn', $students->lrn)->where('status', 'Transfer')->first();
         $studentsPrimaryOne = StudentPrimaryInfo::where('lrn', $students->lrn)->first();
-        $studentsAdditional = StudentAdditionalInfo::where('student_number', $students->student_number)->first();
+        $studentsAdditional = StudentAdditionalInfo::where('student_number', $students->student_number)->first();   
         $studentDocuments = StudentDocuments::where('student_number', $students->student_number)->first();
         $studentAccount = Mstudentaccount::where('student_number', $students->student_number)->first();
         $finalGradeOne = StudentFinalGrade::where('student_number', $students->student_number)->where('grade', 'Grade One')->get();
@@ -689,7 +689,7 @@ class Cstudentinfo extends Controller
     public function showGradutedStudentInfotmation(Request $request, $id)
     {
         // Fetch the specific student based on the provided id
-        $students = StudentInfo::where('id', $id)->where('status', 'Transfer')->first();
+        $students = StudentInfo::where('id', $id)->where('status', 'Graduated')->first();
 
         // If the student doesn't exist, you could redirect back or show an error message
         if (!$students) {
@@ -697,7 +697,7 @@ class Cstudentinfo extends Controller
         }
 
         // Fetch related data for the specific student
-        $studentsPrimary = StudentPrimaryInfo::where('lrn', $students->lrn)->where('status', 'Transfer')->first();
+        $studentsPrimary = StudentPrimaryInfo::where('lrn', $students->lrn)->where('status', 'Graduated')->first();
         $studentsPrimaryOne = StudentPrimaryInfo::where('lrn', $students->lrn)->first();
         $studentsAdditional = StudentAdditionalInfo::where('student_number', $students->student_number)->first();
         $studentDocuments = StudentDocuments::where('student_number', $students->student_number)->first();

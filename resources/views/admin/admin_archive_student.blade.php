@@ -65,7 +65,7 @@
                                                             <span class="ml-2">{{ $student->student_number }}</span>
                                                         </td>
                                                         <td>
-                                                            <span class="px-2 py-1 uppercase font-semibold text-[10px] rounded-lg leading-tight text-blue-800 bg-blue-200">
+                                                            <span class="px-2 py-1 uppercase font-semibold text-[10px] rounded-lg leading-tight text-violet -800 bg-violet   -200">
                                                                 {{ $student->status }}
                                                             </span>
                                                         </td>

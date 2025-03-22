@@ -379,7 +379,7 @@ class StudentRegistrationController extends Controller
                 }
             }
             // Redirect or return response
-            return view('registrar.includes.register_student_form')->with('success', 'Student enrolled successfully!');
+            return redirect()->route('registrar.new.student')->with('success', 'Student enrolled successfully!');
         } catch (\Exception $e) {
             \Log::error('Error adding student: ' . $e->getMessage());
 
@@ -388,22 +388,19 @@ class StudentRegistrationController extends Controller
     }
 
     // Fetch the specific student based on the provided id
-    public function getPrimaryInfo(Request $request, $id)
+    public function getPrimaryInfo(request $request, $id)
     {
         $students = StudentPrimaryInfo::where('id', $id)->where('status', 'Registered')->first();
 
-        if ($students) {
-            $studentsInfo = StudentInfo::where('lrn', $students->lrn)->first();
-        } else {
-            $studentsInfo = null;
-        }
+        $studentsInfo = StudentInfo::where('lrn', $students->lrn)->first();
+
         // If the student doesn't exist, you could redirect back or show an error message
         if (!$students) {
             return back()->withErrors('Student not found.');
         }
 
         // You can pass other data here as needed
-        return view('registrar.registrar_registration', compact('students', 'studentsInfo'));
+        return view('registrar.includes.register_student_form', compact('students', 'studentsInfo'));
     }
 
 

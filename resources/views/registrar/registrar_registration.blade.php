@@ -72,7 +72,7 @@
                                 <tbody class="" id="tableBody">
                                     @foreach ($students as $student)
                                                                         @php
-                                                                            $account = $studentAccount[$student->studentnumber] ?? null;
+                                                                            $account = $studentAccount[$student->lrn] ?? null;
                                                                             $avatar = $account && $account->avatar ? asset('storage/' . $account->avatar) : null;
                                                                             $primaryInfo = $studentInfo[$student->lrn] ?? null;
                                                                             $initials = strtoupper(substr($primaryInfo->student_last_name, 0, 1) . substr($primaryInfo->student_first_name, 0, 1));
