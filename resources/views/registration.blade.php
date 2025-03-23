@@ -108,9 +108,9 @@
                                         <label for="lrn" class="block mb-2 text-[12px] font-bold text-gray-900">
                                             <span class="text-red-600 mr-1">*</span>LRN
                                             :</label>
-                                        <input type="text" name="lrn" id="lrn"
+                                        <input type="text" name="lrn" id="lrn" maxlength="12" inputmode="numeric"
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                            placeholder="Enter Learner Reference Number (LRN)">
+                                            placeholder="Enter Learner Reference Number (LRN)" onkeydown="return event.key != 'ArrowUp' && event.key != 'ArrowDown'">
                                         <div class="text-red-600 text-x hidden" id="alert">This field is required</div>
                                     </div>
 
