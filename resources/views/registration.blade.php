@@ -104,7 +104,7 @@
                                         </p>
                                     </div>
 
-                                    <div class="mb-5 hidden">
+                                    <div class="mb-5">
                                         <label for="lrn" class="block mb-2 text-[12px] font-bold text-gray-900">
                                             <span class="text-red-600 mr-1">*</span>LRN
                                             :</label>
@@ -704,7 +704,7 @@
                                     </label>
                                 </div>
                                 <div class="col-span-4 flex justify-end mt-5">
-                                    <button type="submit" id="submitButton" disabled
+                                    <button type="button" id="submitButton" disabled
                                         class="text-white w-96 text-center bg-gray-400 focus:ring-4 focus:outline-none focus:ring-teal-300 font-bold rounded text-sm px-20 py-2.5 text-center">
                                         Submit Registration
                                     </button>

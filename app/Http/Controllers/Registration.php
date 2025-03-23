@@ -13,6 +13,7 @@ class Registration extends Controller
     {
         // Validate incoming request
         $validatedData = $request->validate([
+            'lrn' => 'required',
             'school_year' => 'required',
             'grade' => 'required',
             'status' => 'required',
@@ -58,6 +59,7 @@ class Registration extends Controller
         try {
             // Create student record
             $student = new RegisterStudentInfo();
+            $student->lrn = $validatedData['lrn'];
             $student->school_year = $validatedData['school_year'];
             $student->grade = $validatedData['grade'];
             $student->status = $validatedData['status'];

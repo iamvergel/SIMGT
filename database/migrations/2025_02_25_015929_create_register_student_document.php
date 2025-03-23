@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('register_student_document', function (Blueprint $table) {
             $table->id();
+            $table->string('lrn')->unique();
             $table->string('birth_certificate')->nullable();
             $table->string('sf10')->nullable();
             $table->string('sf9')->nullable();

@@ -62,7 +62,7 @@
 
         <!-- Portal Card -->
         <div class="card bg-teal-500 py-8 rounded-lg mx-4 mt-10 lg:mt-0 shadow-lg transform hover:scale-105 hover:z-[10] transition-transform"
-            id="loginPage" onclick="window.open('/StEmelieLearningCenter.HopeSci66/sign-in', '_blank')">
+            id="loginPage" onclick="window.location.href = '/'">
             <div class="text-center text-white px-5">
                 <i
                     class="fa-solid fa-box fa-3x mb-4 text-teal-400 p-4 bg-white rounded-full border-[5px] border-teal-300 absolute left-[4.3rem] top-[-2rem] shadow-l"></i>
@@ -79,12 +79,12 @@
 
     <div id="modalprivacy"
         class="fixed hidden z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 px-2 flex justify-center items-center items-center">
-        <img src="{{ asset('../assets/images/data-privacy-avatar.png') }}"
-            class="w-96 h-auto absolute top-1/6 right-1/8 transform -translate-x-1/2 -translate-y-1/2 z-10 hidden lg:block"
-            alt="">
-        <div class="bg-white rounded-lg shadow-lg p-5 max-w-xl mx-auto z-20">
+        
+        <div class="bg-white rounded-md shadow-lg p-5 max-w-3xl mx-auto z-20">
+            <div class="flex justify-center items-center p-5 border-b border-gray-900">
             <p class="text-lg font-bold text-teal-800">Data Privacy Agreement</p>
-            <div class="overflow-y-scroll h-[20rem] scrollbar-width-thin my-3 px-3 py-1">
+            </div>
+            <div class="overflow-y-scroll h-[20rem] scrollbar-width-thin my-3 p-5">
                 <p class="text-[12px] text-justify">
                     We at <strong>St. Emilie Learning Center</strong> are committed to protecting the privacy and
                     security of your
@@ -135,7 +135,7 @@
                     information as described above.
                 </p>
             </div>
-            <div class="flex justify-start items-center">
+            <div class="flex justify-start items-center pt-5">
                 <input type="checkbox" id="checkprivacy"
                     class="mr-2 appearance-none rounded-sm bg-white checked:bg-teal-600 checked:border-teal-600 focus:outline-none">
                 <label for="checkprivacy" class="text-[12px]">I have read and agree to the Data Privacy
@@ -143,10 +143,10 @@
             </div>
             <div class="flex justify-end items-center mt-5">
                 <button onclick="document.getElementById('modalprivacy').classList.add('hidden')"
-                    class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300">Disagree</button>
-                <button onclick="window.location.href = '/StEmelieLearningCenter.HopeSci66/Registration'"
+                    class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Close</button>
+                <button onclick="window.location.href = '/Registration'"
                     id="nextbtnprivacy" disabled
-                    class="ml-3 bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300">Next</button>
+                    class="ml-3 bg-gray-500 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Next</button>
             </div>
         </div>
     </div>

@@ -10,7 +10,7 @@ class RedirectIfAuthenticated
 {
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        $loginPath = '/StEmelieLearningCenter.HopeSci66/sign-in';
+        $loginPath = '/';
 
         if (Auth::guard('admin')->check() && $request->is($loginPath)) {
             return redirect()->route('admin.admin_dashboard');

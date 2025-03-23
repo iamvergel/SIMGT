@@ -30,25 +30,20 @@ use App\Http\Controllers\RegistrarUserController;
 use App\Http\Controllers\AdmissionStudent;
 use App\Http\Controllers\RegistrarStudent;
 
-Route::get('/', function () {
+Route::get('/Admission', function () {
     // Redirect to the desired URL
-    return redirect('/StEmelieLearningCenter.HopeSci66/Admission');
-});
-
-// Landing Page
-Route::get('/StEmelieLearningCenter.HopeSci66/Admission', function () {
     return view('landing_page');
 });
 
-Route::get('/StEmelieLearningCenter.HopeSci66/Registration', function () {
+Route::get('/Registration', function () {
     return view('registration');
 });
 
 Route::post('/register', [Registration::class, 'store'])->name('student.register');
 
 // Authentication Routes
-Route::get('/StEmelieLearningCenter.HopeSci66/sign-in', [Clogin::class, 'showLoginForm'])->name('admin.login');
-Route::post('/StEmelieLearningCenter.HopeSci66/sign-in', [Clogin::class, 'login']);
+Route::get('/', [Clogin::class, 'showLoginForm'])->name('admin.login');
+Route::post('/', [Clogin::class, 'login']);
 Route::post('/logout', [Clogin::class, 'logout'])->name('logout');
 // Middleware to Prevent Back History and Redirect
 Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function () {

@@ -87,28 +87,9 @@
         const searchBar = document.getElementById('search-bar');
         const suggestionsContainer = document.getElementById('suggestions');
 
-        const basePath = '/StEmelieLearningCenter.HopeSci66'; // Base path
+        const basePath = '/'; // Base path
         const links = [
-            '/admin/dashboard',
-            '/admin/student-management',
-            '/admin/student-management/GradeOne',
-            '/admin/student-management/GradeTwo',
-            '/admin/student-management/GradeThree',
-            '/admin/student-management/GradeFour',
-            '/admin/student-management/GradeFive',
-            '/admin/student-management/GradeSix',
-            '/admin/Grade-book',
-            '/admin/Grade-book/GradeOne',
-            '/admin/Grade-book/GradeTwo',
-            '/admin/Grade-book/GradeThree',
-            '/admin/Grade-book/GradeFour',
-            '/admin/Grade-book/GradeFive',
-            '/admin/Grade-book/GradeSix',
-            '/admin/Report-Section/Graduate-Student',
-            '/admin/Report-Section/Drop-Student',
-            '/admin/Report-Section/Archive-Student',
-            '/admin/student-management/AllStudentData',
-            '/admin/Report-Section/Drop-Student/All-Drop-Data',
+
         ];
 
         toggleBtn.addEventListener('click', () => {

@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('register_student_info', function (Blueprint $table) {
-            $table->id();           // Student number (unique identifier)                                // School name                                  // LRN (Learner's Reference Number)
+            $table->id();           // Student number (unique identifier)                                
+            $table->string('lrn')->unique(); // School name                                  // LRN (Learner's Reference Number)
             $table->string('grade');                                 // Grade level
             $table->string('school_year');                           // School year (e.g., 2023-2024)                           // Section of the student
             $table->string('status');                          // Type of student (e.g., Elementary, Secondary, or High School)

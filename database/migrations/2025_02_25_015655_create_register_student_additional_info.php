@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('register_student_additional_info', function (Blueprint $table) {
             $table->id();
+            $table->string('lrn')->unique();
             $table->string('father_last_name');                       // Father's last name
             $table->string('father_first_name');                      // Father's first name
             $table->string('father_middle_name')->nullable();         // Father's middle name (optional)
