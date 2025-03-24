@@ -16,8 +16,10 @@
                         </span>
                         <p class="font-semibold mt-3 pl-5">Next Steps:</p>
                         <ul class="list-disc pl-5 mt-2">
-                            <li class="list-item">Registrar’s Office – Submit one copy along with the required documents.</li>
-                            <li class="list-item">Accounting Office – Submit one copy for payment and financial processing.</li>
+                            <li class="list-item">Registrar’s Office – Submit one copy along with the required documents.
+                            </li>
+                            <li class="list-item">Accounting Office – Submit one copy for payment and financial processing.
+                            </li>
                             <li class="list-item">Student Copy – Keep one copy for your personal reference.</li>
                         </ul>
                         <span class="block mt-5 bg-gray-200 p-2">
@@ -74,35 +76,119 @@
         </div>
 
         <div class="flex justify-center items-center my-5">
-            <p class="text-[15px] leading-[1.5rem] text-center md:text-[15px] lg:text-[20px] xl:text-[30px] font-bold text-teal-900">
+            <p
+                class="text-[15px] leading-[1.5rem] text-center md:text-[15px] lg:text-[20px] xl:text-[30px] font-bold text-teal-900">
                 Registration <br /><span class="text-[15px]">For School Year {{ date('Y') }}-{{ date('Y') + 1 }}</span>
             </p>
         </div>
 
         <div class="bg-gray-100">
             <!-- Modal body -->
-            <form class="p-5 lg:p-10 " onsubmit="return validateForm()" id="myform"
+            <form class="p-2 lg:p-3 " onsubmit="return validateForm()" id="myform"
                 action="{{ route('student.register') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                <div
+                    class="col-span-4 p-2 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-5 px-5">
+                        <div 
+                            class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 w-86 border-b border-b-gray-300 my-5">
+                            <p class="text-[20px] font-bold"><i class="fas fa-user mr-2 mb-5"></i>
+                                Primary Information
+                            </p>
+                        </div>
 
-                <div class="grid grid-cols-4 gap-4 mb-4 text-[13px] text-gray-900 lh:hidden">
+                        <div class="mb-5 hidden">
+                            <label for="schoolYear" class="block mb-2 text-sm font-bold text-gray-900">
+                                <span class="text-red-600 mr-1">*</span>School Year :
+                            </label>
+                            <input type="text" name="school_year" id="schoolYear" readonly
+                                value="{{ date('Y') }}-{{ date('Y') + 1}}"
+                                class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
+                            <div class="text-red-600 text-xs hidden" id="alert">This field is required</div>
+                        </div>  
+
+                        <div class="mb-5">
+                            <label for="status" class="block mb-2 text-sm font-bold text-gray-900">
+                                <span class="text-red-600 mr-1">*</span>Admission Type :</label>
+                            <select name="status" id="status" required
+                                class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                onchange="toggleQuarter(this)">
+                                <option value="" disabled selected>Select Admission Type</option>
+                                <option value="new Student">New Student</option>
+                                <option value="transferee">Transferee</option>
+                            </select>
+                            <div class="text-red-600 text-xs hidden" id="alert">This field is required</div>
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="grade" class="block mb-2 text-sm font-bold text-gray-900">
+                                <span class="text-red-600 mr-1">*</span>Select Grade :
+                            </label>
+                            <select id="grade" name="grade" required
+                                class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
+                                <option value="" disabled selected>Select Grade</option>
+                                <option value="Grade One">Grade One</option>
+                                <option value="Grade Two">Grade Two</option>
+                                <option value="Grade Three">Grade Three</option>
+                                <option value="Grade Four">Grade Four</option>
+                                <option value="Grade Five">Grade Five</option>
+                                <option value="Grade Six">Grade Six</option>
+                            </select>
+                            <div class="text-red-600 text-xs hidden" id="alert">This field is required</div>
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="quarter" class="block mb-2 text-sm font-bold text-gray-900">
+                                <span class="text-red-600 mr-1">*</span>Select Quarter :
+                            </label>
+                            <select id="quarter" name="quarter" required disabled
+                                class="myInput block w-full p-2.5 bg-gray-300 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
+                                <option value="" disabled selected>Select Quarter</option>
+                                <option value="1st Quarter">1st Quarter</option>
+                                <option value="2nd Quarter">2nd Quarter</option>
+                                <option value="3rd Quarter">3rd Quarter</option>
+                                <option value="4th Quarter">4th Quarter</option>
+                            </select>
+                            <div class="text-red-600 text-xs hidden" id="alert">This field is required</div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end">
+                        <button
+                            class="bg-teal-700 text-white hover:bg-teal-800 hover:text-white font-bold rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center"
+                            onclick="showNextStep()" type="button">Next</button>
+                    </div>
+                </div>
+
+                <script>
+                    function toggleQuarter(selectElement) {
+                        var quarterSelect = document.getElementById('quarter');
+                        if (selectElement.value === 'new Student') {
+                            quarterSelect.setAttribute('disabled', true);
+                            quarterSelect.classList.add('bg-gray-300');
+                        } else {
+                            quarterSelect.removeAttribute('disabled');
+                            quarterSelect.classList.remove('bg-gray-300');
+                        }
+                    }
+                </script>
+
+                <div class="grid grid-cols-4 gap-4 mb-4 text-[13px] text-gray-900 lh:hidden hidden">
                     <ol class="col-span-4 relative border-s border-teal-800" id="steps">
-                        <li class="mb-10 ms-2">
+
+                        <div>
                             <span
                                 class="absolute flex items-center justify-center w-6 h-6 bg-teal-100 rounded-full -start-3 ring-8 ring-white">
                                 <i class="fa-solid fa-file text-teal-700"></i>
                             </span>
-                            <h1 class="ml-5">Primary Information</h1>
+                            <h1 class="ml-5">Basic Information</h1>
+                        </div>
+
+                        <li class="hidden mb-10 ms-2">
                             <div
                                 class=" col-span-4 p-2 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
+
                                 <div
                                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-5 px-5">
-                                    <div
-                                        class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 w-86 border-b border-b-gray-300 my-5">
-                                        <p class="text-[20px] font-bold"><i class="fas fa-user mr-2 mb-5"></i>
-                                            Primary Information
-                                        </p>
-                                    </div>
 
                                     <div class="mb-5">
                                         <label for="lrn" class="block mb-2 text-[12px] font-bold text-gray-900">
@@ -110,73 +196,10 @@
                                             :</label>
                                         <input type="text" name="lrn" id="lrn" maxlength="12" inputmode="numeric"
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                            placeholder="Enter Learner Reference Number (LRN)" onkeydown="return event.key != 'ArrowUp' && event.key != 'ArrowDown'">
+                                            placeholder="Enter Learner Reference Number (LRN)"
+                                            onkeydown="return event.key != 'ArrowUp' && event.key != 'ArrowDown'">
                                         <div class="text-red-600 text-x hidden" id="alert">This field is required</div>
                                     </div>
-
-                                    <div class="mb-5">
-                                        <label for="schoolYear" class="block mb-2 text-sm font-bold text-gray-900">
-                                            <span class="text-red-600 mr-1">*</span>School Year :
-                                        </label>
-                                        <input type="text" name="school_year" id="schoolYear" readonly
-                                            value="{{ date('Y') }}-{{ date('Y') + 1}}"
-                                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
-                                        <div class="text-red-600 text-xs hidden" id="alert">This field is required</div>
-                                    </div>
-
-                                    <div class="mb-5">
-                                        <label for="status" class="block mb-2 text-sm font-bold text-gray-900">
-                                            <span class="text-red-600 mr-1">*</span>Admission Type :</label>
-                                        <select name="status" id="status" required
-                                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
-                                            <option value="" disabled selected>Select Admission Type</option>
-                                            <option value="new regular">New Regular</option>
-                                            <option value="transferee">Transferee</option>
-                                        </select>
-                                        <div class="text-red-600 text-xs hidden" id="alert">This field is required</div>
-                                    </div>
-
-                                    <div class="mb-5">
-                                        <label for="grade" class="block mb-2 text-sm font-bold text-gray-900">
-                                            <span class="text-red-600 mr-1">*</span>Select Grade :
-                                        </label>
-                                        <select id="grade" name="grade" required
-                                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
-                                            <option value="">Select Grade</option>
-                                            <option value="Grade One">Grade I</option>
-                                            <option value="Grade Two">Grade II</option>
-                                            <option value="Grade Three">Grade III</option>
-                                            <option value="Grade Four">Grade IV</option>
-                                            <option value="Grade Five">Grade V</option>
-                                            <option value="Grade Six">Grade VI</option>
-                                        </select>
-                                        <div class="text-red-600 text-xs hidden" id="alert">This field is required</div>
-                                    </div>
-
-                                </div>
-                                <div class="flex justify-end">
-                                    <button
-                                        class="bg-teal-700 text-white hover:bg-teal-800 hover:text-white font-bold rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center"
-                                        onclick="showNextStep()" type="button">Next</button>
-                                </div>
-                            </div>
-                        </li>
-                        <div>
-                            <span
-                                class="absolute flex items-center justify-center w-6 h-6 bg-teal-100 rounded-full -start-3 ring-8 ring-white">
-                                <i class="fa-solid fa-file text-teal-700"></i>
-                            </span>
-                            <h1 class="ml-5">Personal Information</h1>
-                        </div>
-
-                        <li class="hidden mb-10 ms-2">
-
-                            <div
-                                class=" col-span-4 p-2 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
-
-                                <div
-                                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-5 px-5">
-
                                     <!-- Personal Information -->
                                     <div
                                         class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 w-86 border-b border-b-gray-300 my-5">
@@ -730,44 +753,7 @@
 
 
 <script>
-    let step = 0;  // Start from step 0 since the first step is visible
-    const steps = document.querySelectorAll('#steps li');
-    const nextButton = document.querySelectorAll('button');
 
-    function showNextStep(event) {
-        const currentStep = steps[step];  // Get the current step
-        const inputs = currentStep.querySelectorAll('input, select'); // Select all input and select elements
-        let allFilled = true; // Flag to track if all fields are filled
-
-        // Loop through all inputs and check if they are empty
-        inputs.forEach(input => {
-            if (input.value === '' && !input.hasAttribute('required')) {
-                // Skip required validation for optional fields (middleName and suffixName)
-                return;
-            }
-
-            if (input.value === null || input.value === '') {
-                allFilled = false;
-                input.classList.add('border-red-500');  // Add red border if empty
-            } else {
-                input.classList.remove('border-red-500');  // Remove red border if filled
-            }
-        });
-
-        if (allFilled) {
-            // If all fields are filled, proceed to the next step
-            if (step + 1 < steps.length) {
-                step++;  // Increment the step
-                steps[step].classList.remove('hidden');  // Show the next step
-                event.target.classList.add('hidden');  // Hide the next button of the previous step
-            }
-        }
-    }
-
-    // Add event listeners to each "Next" button to trigger the showNextStep function
-    nextButton.forEach(button => {
-        button.addEventListener('click', showNextStep);
-    });
 
     function calculateAge() {
         const birthDateInput = document.getElementById('birthDate');
