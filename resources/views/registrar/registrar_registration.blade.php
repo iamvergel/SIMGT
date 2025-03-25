@@ -118,7 +118,7 @@
                                                                                     data-birthdat="{{ $student->birth_date }}"
                                                                                     class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-blue-700 rounded-full hover:bg-blue-600"
                                                                                     type="button" aria-label="Update Student" title="Update Student Info"
-                                                                                    onclick="window.location.href = '{{ route('student.show.enrollees.register', ['id' => $student->id]) }}'">
+                                                                                    onclick="window.location.href = '{{ route('student.show.enrollees.register', ['lrn' => $student->lrn]) }}'">
                                                                                     <i class="fa-solid fa-eye"></i>
                                                                                 </button>
                                                                             </td>

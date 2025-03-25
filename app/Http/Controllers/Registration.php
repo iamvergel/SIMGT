@@ -83,6 +83,7 @@ class Registration extends Controller
 
             // Create additional info record
             $additionalInfo = new RegisterAdditionalInfo();
+            $additionalInfo->lrn = $validatedData['lrn'];
             $additionalInfo->father_last_name = $validatedData['father_last_name'] ? ucwords(strtolower($validatedData['father_last_name'])) : null;
             $additionalInfo->father_first_name = $validatedData['father_first_name'] ? ucwords(strtolower($validatedData['father_first_name'])) : null;
             $additionalInfo->father_middle_name = $validatedData['father_middle_name'] ? ucwords(strtolower($validatedData['father_middle_name'])) : null;

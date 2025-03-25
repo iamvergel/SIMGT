@@ -81,15 +81,15 @@
                                             :</label>
                                         <input type="text" name="lrn" id="lrn"
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                            placeholder="Enter Learner Reference Number (LRN)" required>
+                                            placeholder="Enter Learner Reference Number (LRN)" required value="{{ $students->lrn }}">
                                     </div>
 
-                                    <div class="mb-5">
+                                    <div class="mb-5 ">
                                         <label for="studentNumber" class="block mb-2 text-sm font-bold text-gray-900">
                                             <span class="text-red-600 mr-1">*</span>students No. :</label>
                                         <input type="text" name="student_number" id="studentsNumber"
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                            placeholder="0000-0000" required>
+                                            placeholder="0000-0000" value="{{ $students->lrn }}" required>
                                     </div>
 
                                     <div class="mb-5 hidden">
@@ -302,7 +302,15 @@
                                         </select>
                                     </div>
 
-                                    <div class="hidden">
+                                    <div class="">
+                                        <label for="username" class="block mb-2 text-sm font-bold text-gray-900"><span
+                                                class="text-red-600 mr-1">*</span>Username :</label>
+                                        <input type="text" name="username" id="username"
+                                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none "
+                                            placeholder="username" required >
+                                    </div>
+
+                                    <div class="">
                                         <label for="password" class="block mb-2 text-sm font-bold text-gray-900"><span
                                                 class="text-red-600 mr-1">*</span>Password :</label>
                                         <input type="text" name="password" id="password"
@@ -478,7 +486,7 @@
                                             <input type="text" name="father_last_name" id="fatherLastName"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Father's Last Name" required 
-                                                value="{{ $studentsAdditional[$students->id]->father_last_name ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->father_last_name ?? '' }}">
                                         </div>
 
                                         <div class="mb-5">
@@ -488,7 +496,7 @@
                                             <input type="text" name="father_first_name" id="fatherFirstName"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Father's First Name" required 
-                                                value="{{ $studentsAdditional[$students->id]->father_first_name ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->father_first_name ?? '' }}">
                                         </div>
 
                                         <div class="mb-5">
@@ -499,7 +507,7 @@
                                             <input type="text" name="father_middle_name" id="fatherMiddleName"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Father's Middle Name" 
-                                                value="{{ $studentsAdditional[$students->id]->father_middle_name ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->father_middle_name ?? '' }}">
                                         </div>
 
                                         <!-- Father's Suffix Selection -->
@@ -529,7 +537,7 @@
                                             <input type="text" name="father_occupation" id="fatherOccupation"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Father's Occupation" required 
-                                                value="{{ $studentsAdditional[$students->id]->father_occupation ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->father_occupation ?? '' }}">
                                         </div>
 
 
@@ -545,7 +553,7 @@
                                             <input type="text" name="mother_last_name" id="motherLastName"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Mother's Last Name" required 
-                                                value="{{ $studentsAdditional[$students->id]->mother_last_name ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->mother_last_name ?? '' }}">
                                         </div>
 
                                         <div class="mb-5">
@@ -555,7 +563,7 @@
                                             <input type="text" name="mother_first_name" id="motherFirstName"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Mother's First Name" required 
-                                                value="{{ $studentsAdditional[$students->id]->mother_first_name ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->mother_first_name ?? '' }}">
                                         </div>
 
                                         <div class="mb-5">
@@ -566,7 +574,7 @@
                                             <input type="text" name="mother_middle_name" id="motherMiddleName"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Mother's Middle Name" 
-                                                value="{{ $studentsAdditional[$students->id]->mother_middle_name ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->mother_middle_name ?? '' }}">
                                         </div><br class=" lg:block">
 
                                         <div class="mb-5">
@@ -577,7 +585,7 @@
                                             <input type="text" name="mother_occupation" id="motherOccupation"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Mother's Occupation" required 
-                                                value="{{ $studentsAdditional[$students->id]->mother_occupation ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->mother_occupation ?? '' }}">
                                         </div>
                                 </div>
                             </div>
@@ -603,7 +611,7 @@
                                             <input type="text" name="guardian_last_name" id="guardianLastName"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Guardian's Last Name" required 
-                                                value="{{ $studentsAdditional[$students->id]->guardian_last_name ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->guardian_last_name ?? '' }}">
                                         </div>
 
                                         <div class="mb-5">
@@ -614,7 +622,7 @@
                                             <input type="text" name="guardian_first_name" id="guardianFirstName"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Guardian's First Name" required 
-                                                value="{{ $studentsAdditional[$students->id]->guardian_first_name ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->guardian_first_name ?? '' }}">
                                         </div>
 
                                         <div class="mb-5">
@@ -625,7 +633,7 @@
                                             <input type="text" name="guardian_middle_name" id="guardianMiddleName"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Guardian's Middle Name" 
-                                                value="{{ $studentsAdditional[$students->id]->guardian_middle_name ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->guardian_middle_name ?? '' }}">
                                         </div>
 
                                         <div class="mb-5">
@@ -654,7 +662,7 @@
                                             <input type="text" name="guardian_relationship" id="guardianRelationship"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Guardian's Relationship" required 
-                                                value="{{ $studentsAdditional[$students->id]->guardian_relationship ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->guardian_relationship ?? '' }}">
                                         </div>
 
                                         <div class="mb-5">
@@ -665,7 +673,7 @@
                                             <input type="text" name="guardian_contact_number" id="guardianContactNumber"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Guardian's Contact Number" required 
-                                                value="{{ $studentsAdditional[$students->id]->guardian_contact_number ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->guardian_contact_number ?? '' }}">
                                         </div>
 
                                         <div class="mb-5">
@@ -676,7 +684,7 @@
                                             <input type="text" name="guardian_religion" id="guardian_religion"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Guardian's Religion" required 
-                                                value="{{ $studentsAdditional[$students->id]->guardian_religion ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->guardian_religion ?? '' }}">
                                         </div>
                                 </div>
                             </div>
@@ -702,7 +710,7 @@
                                             <input type="text" name="emergency_contact_person" id="emergencyContactPerson"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Emergency Contact Person" required 
-                                                value="{{ $studentsAdditional[$students->id]->emergency_contact_person ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->emergency_contact_person ?? '' }}">
                                         </div>
 
                                         <div class="mb-5">
@@ -713,7 +721,7 @@
                                             <input type="text" name="emergency_contact_number" id="emergencyContactNumber"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Emergency Contact Number" required 
-                                                value="{{ $studentsAdditional[$students->id]->emergency_contact_number ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->emergency_contact_number ?? '' }}">
                                         </div>
 
                                         <div class="mb-5">
@@ -723,7 +731,7 @@
                                             <input type="email" name="email_address" id="emailAddress"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="Enter Email Address" required 
-                                                value="{{ $studentsAdditional[$students->id]->email_address ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->email_address ?? '' }}">
                                         </div>
 
                                         <div class="mb-5">
@@ -734,7 +742,7 @@
                                             <input type="text" name="messenger_account" id="messengerAccount"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                                 placeholder="e.g., Facebook Messenger ID" 
-                                                value="{{ $studentsAdditional[$students->id]->messenger_account ?? '' }}">
+                                                value="{{ $studentsAdditional[$students->lrn]->messenger_account ?? '' }}">
                                         </div>
                                 </div>
                             </div>
@@ -803,32 +811,33 @@
                         document.addEventListener("DOMContentLoaded", function () {
                             // Get input fields
                             const lastNameInput = document.getElementById('lastName');
+                            const firstNameInput = document.getElementById('firstName');
                             const studentsNumberInput = document.getElementById('studentsNumber');
                             const passwordInput = document.getElementById('password');
+                            const usernameInput = document.getElementById('username');
 
-                            // Function to update the password
-                            function updatePassword() {
-                                const lastName = lastNameInput.value;
-                                const studentsNumber = studentsNumberInput.value;
+                            // Automatically update the password
+                            const lastName = lastNameInput.value;
+                            const studentsNumber = studentsNumberInput.value;
 
-                                // Capitalize the first letter of the last name
-                                const capitalizedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
+                            // Capitalize the first letter of the last name
+                            const capitalizedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
 
-                                // Get the last four digits of the students number
-                                const lastFourDigits = studentsNumber.slice(-4);
+                            // Get the last four digits of the students number
+                            const lastFourDigits = studentsNumber.slice(-4);
 
-                                // Combine to form the password
-                                const newPassword = `SELC${capitalizedLastName}${lastFourDigits}`;
+                            // Combine to form the password
+                            const newPassword = `SELC${capitalizedLastName}${lastFourDigits}`;
 
-                                // Update the password input value
-                                passwordInput.value = newPassword;
-                            }
+                            // Update the password input value
+                            passwordInput.value = newPassword;
 
-                            // Add event listeners to update the password when input changes
-                            lastNameInput.addEventListener('input', updatePassword);
-                            studentsNumberInput.addEventListener('input', updatePassword);
+                            // Update the username input value
+                            const username = lastNameInput.value.toLowerCase().replace(/\s/g, '')  + firstNameInput.value.toLowerCase().replace(/\s/g, '') + '@stemilie.edu.ph';
+                            usernameInput.value = username;
                         });
 
+                        
 
                         function setGuardianInfo(type) {
                             const motherFirstName = document.getElementById('motherFirstName').value;
@@ -915,6 +924,10 @@
 
     form input[type="text"] {
         text-transform: capitalize;
+    }
+
+    #username {
+        text-transform: lowercase;
     }
 </style>
 

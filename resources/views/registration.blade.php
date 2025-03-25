@@ -365,10 +365,9 @@
                                             </label>
                                             <input type="tel" name="contactNo" id="contactNo" maxlength="11"
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                                                placeholder="Enter Contact Number" required pattern="^09\d{9,11}$"
-                                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                                value="" onfocus="if (this.value == '') { this.value = '09'; }"
-                                                onblur="if (this.value == '09') { this.value = ''; }" required>
+                                                placeholder="Enter Contact Number" required pattern="^09\d{9}$"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^(?!09).*/, '09');"
+                                                value="09">
                                             <small class="text-gray-500 text-xs">(Parents, guardian or Personal
                                                 Number)<br /><span class="text-red-600 hidden"
                                                     id="contactNoAlert">Contact Number is required</span></small>
@@ -382,7 +381,7 @@
                                             <!-- Custom dropdown with search -->
                                             <div class="relative">
                                                 <input type="text" id="religion" name="religion"
-                                                    placeholder="Select or type your religion"
+                                                    placeholder="Select or type your Religion"
                                                     class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                     oninput="filterReligionOptions()" onclick="showReligionList()"
                                                     required>
@@ -390,15 +389,29 @@
                                                 <ul id="religionList"
                                                     class="hidden absolute w-full bg-white border border-gray-300 mt-1 rounded shadow-lg max-h-60 overflow-y-auto z-10">
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
-                                                        onclick="selectReligion('Christianity')">Christianity</li>
+                                                        onclick="selectReligion('Roman Catholicism')">Roman Catholicism
+                                                    </li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligion('Protestantism')">Protestantism</li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
                                                         onclick="selectReligion('Islam')">Islam</li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligion('Iglesia ni Cristo')">Iglesia ni Cristo
+                                                    </li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
                                                         onclick="selectReligion('Hinduism')">Hinduism</li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
                                                         onclick="selectReligion('Buddhism')">Buddhism</li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
-                                                        onclick="selectReligion('Judaism')">Judaism</li>
+                                                        onclick="selectReligion('Indigenous Beliefs')">Indigenous
+                                                        Beliefs</li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligion('Atheism and Agnosticism')">Atheism and
+                                                        Agnosticism</li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligion('Sikhism')">Sikhism</li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligion('Zoroastrianism')">Zoroastrianism</li>
                                                 </ul>
                                             </div>
 
@@ -495,7 +508,7 @@
                                             <label for="region" class="block mb-2 text-sm font-normal text-gray-900">
                                                 <span class="text-red-600 mr-1">*</span>Region:
                                             </label>
-                                            <input type="hidden" name="home_number" id="regionValue">
+                                            <input type="hidden" name="house_number" id="regionValue">
                                             <select id="region"
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 required>
@@ -541,7 +554,7 @@
                                                 <span class="text-red-600 mr-1">*</span>Barangay:
                                             </label>
                                             <input type="hidden" name="barangay" id="barangayValue">
-                                            <select  id="barangay"
+                                            <select id="barangay"
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 required>
                                                 <option value="">Select Barangay</option>
@@ -661,6 +674,11 @@
                                         emailAlert.classList.remove('hidden');
                                         emailInput.classList.add('border-red-500');
                                         isValid = false;
+                                    } else if (!emailInput.value.endsWith('@gmail.com')) {
+                                        emailAlert.classList.remove('hidden');
+                                        emailAlert.innerText = 'Email must be @gmail.com';
+                                        emailInput.classList.add('border-red-500');
+                                        isValid = false;
                                     } else {
                                         emailInput.classList.remove('border-red-500');
                                     }
@@ -671,6 +689,12 @@
                                     if (contactNoInput.value === '') {
                                         contactNoAlert.classList.remove('hidden');
                                         contactNoInput.classList.add('border-red-500');
+                                        isValid = false;
+                                    } else if (contactNoInput.value.length !== 11) {
+                                        // If LRN is not exactly 12 digits, show 'LRN must be 12 digits' message
+                                        contactNoInput.classList.add('border-red-500');
+                                        contactNoAlert.classList.remove('hidden');
+                                        contactNoAlert.innerHTML = 'Contact Number must be 11 digits';
                                         isValid = false;
                                     } else {
                                         contactNoInput.classList.remove('border-red-500');
@@ -749,8 +773,8 @@
 
                                 function showMotherInfoStep() {
                                     if (checkParentInfoValidity()) {
-                                        document.getElementById('paraentsInfo').classList.remove('hidden'); // Show parentsInfo section
-                                        document.getElementById('paraentsInfo').classList.remove('hidden'); // Show addressInfo section
+                                        document.getElementById('parentsInfo').classList.remove('hidden'); // Show parentsInfo section
+                                    
                                     }
                                 }
 
@@ -809,7 +833,7 @@
                                         })
                                         .catch(err => console.error('Error fetching regions:', err));
 
-                                        
+
 
 
                                     // Event listener for Region change to fetch Provinces or handle NCR
@@ -833,6 +857,12 @@
 
                                             citySelect.innerHTML = '<option value="">Select City</option>';  // Reset city select
                                             barangaySelect.innerHTML = '<option value="">Select Barangay</option>';  // Reset barangay select
+
+                                            // Update cityValue when a city is selected
+                                            provinceSelect.addEventListener('change', function () {
+                                                const selectedOption = provinceSelect.options[provinceSelect.selectedIndex];
+                                                document.getElementById("provinceValue").value = selectedOption.textContent;
+                                            });
 
                                             fetchCities(selectedRegionCode);
                                         } else if (selectedRegionCode) {
@@ -861,7 +891,7 @@
                                                 barangaySelect.innerHTML = '<option value="">Select Barangay</option>'; // Reset barangay select
                                             })
                                             .catch(err => console.error('Error fetching provinces:', err));
-                                           
+
                                         // Update cityValue when a city is selected
                                         provinceSelect.addEventListener('change', function () {
                                             const selectedOption = provinceSelect.options[provinceSelect.selectedIndex];
@@ -928,7 +958,7 @@
                                             })
                                             .catch(err => console.error('Error fetching barangays:', err));
 
-                                            barangaySelect.addEventListener('change', function () {
+                                        barangaySelect.addEventListener('change', function () {
                                             const selectedOption = barangaySelect.options[barangaySelect.selectedIndex];
                                             document.getElementById("barangayValue").value = selectedOption.textContent;
                                         });
@@ -936,325 +966,216 @@
                                 });
                             </script>
 
-<div class="mt-5">
-    <span class="absolute flex items-center justify-center w-6 h-6 bg-teal-100 rounded-full -start-3 ring-8 ring-white">
-        <i class="fa-solid fa-file text-teal-700"></i>
-    </span>
-    <h1 class="ml-5">Parents Information</h1>
-</div>
-
-<li class=" mb-10 ms-2" id="paraentsInfo">
-    <div class="col-span-4 p-2 rounded-lg shadow-lg border my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-5 px-0 lg:px-3">
-        
-            <!-- Personal Information -->
-            <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 w-86 border-b border-b-gray-300 my-5">
-                <p class="text-[20px] font-normal"><i class="fas fa-address-card mr-2 mb-5"></i>Parents Information</p>
-            </div>
-
-            <!-- Father's Information -->
-            <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4">
-                <p class="mt-2 text-lg font-normal">Father Information:</p>
-            </div>
-
-            <!-- Father's Last Name -->
-            <div class="mb-5">
-                <label for="fatherLastName" class="text-sm font-normal text-gray-900">
-                    <span class="text-red-600 mr-1">*</span>Father's Last Name:
-                </label>
-                <input type="text" name="father_last_name" id="fatherLastName"
-                    class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                    placeholder="Enter Father's Last Name" required>
-                <small class="text-red-600 text-xs hidden" id="fatherLastNameAlert">Father's Last Name is required</small>
-            </div>
-
-            <!-- Father's First Name -->
-            <div class="mb-5">
-                <label for="fatherFirstName" class="text-sm font-normal text-gray-900">
-                    <span class="text-red-600 mr-1">*</span>Father's First Name:
-                </label>
-                <input type="text" name="father_first_name" id="fatherFirstName"
-                    class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                    placeholder="Enter Father's First Name" required>
-                <small class="text-red-600 text-xs hidden" id="fatherFirstNameAlert">Father's First Name is required</small>
-            </div>
-
-            <!-- Father's Middle Name -->
-            <div class="mb-5">
-                <label for="fatherMiddleName" class="text-sm font-normal text-gray-900">Father's Middle Name:</label>
-                <input type="text" name="father_middle_name" id="fatherMiddleName"
-                    class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                    placeholder="Enter Father's Middle Name">
-                <small class="text-red-600 text-xs hidden" id="fatherMiddleNameAlert">Father's Middle Name is optional</small>
-            </div>
-
-            <!-- Father's Suffix Name -->
-            <div class="mb-5">
-                <label for="fatherSuffixName" class="text-sm font-normal text-gray-900">Father's Suffix Name:</label>
-                <select id="fatherSuffixName" name="father_suffix_name"
-                    class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer">
-                    <option value="">Select Suffix Name</option>
-                    <option value="Jr.">Jr.</option>
-                    <option value="Sr.">Sr.</option>
-                    <option value="II">II</option>
-                    <option value="III">III</option>
-                    <option value="IV">IV</option>
-                    <option value="V">V</option>
-                </select>
-                <small class="text-red-600 text-xs hidden" id="fatherSuffixNameAlert">Suffix Name is optional</small>
-            </div>
-
-            <!-- Father's Occupation -->
-            <div class="mb-5">
-                <label for="fatherOccupation" class="text-sm font-normal text-gray-900">
-                    <span class="text-red-600 mr-1">*</span>Father's Occupation:
-                </label>
-                <input type="text" name="father_occupation" id="fatherOccupation"
-                    class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                    placeholder="Enter Father's Occupation" required>
-                <small class="text-red-600 text-xs hidden" id="fatherOccupationAlert">Father's Occupation is required</small>
-            </div>
-
-            <!-- Mother's Information -->
-            <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4">
-                <p class="mt-5 text-lg font-normal">Mother Information:</p>
-            </div>
-
-            <!-- Mother's Last Name -->
-            <div class="mb-5">
-                <label for="motherLastName" class="text-sm font-normal text-gray-900">
-                    <span class="text-red-600 mr-1">*</span>Mother's Last Name:
-                </label>
-                <input type="text" name="mother_last_name" id="motherLastName"
-                    class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                    placeholder="Enter Mother's Last Name" required>
-                <small class="text-red-600 text-xs hidden" id="motherLastNameAlert">Mother's Last Name is required</small>
-            </div>
-
-            <!-- Mother's First Name -->
-            <div class="mb-5">
-                <label for="motherFirstName" class="text-sm font-normal text-gray-900">
-                    <span class="text-red-600 mr-1">*</span>Mother's First Name:
-                </label>
-                <input type="text" name="mother_first_name" id="motherFirstName"
-                    class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                    placeholder="Enter Mother's First Name" required>
-                <small class="text-red-600 text-xs hidden" id="motherFirstNameAlert">Mother's First Name is required</small>
-            </div>
-
-            <!-- Mother's Middle Name -->
-            <div class="mb-5">
-                <label for="motherMiddleName" class="text-sm font-normal text-gray-900">Mother's Middle Name:</label>
-                <input type="text" name="mother_middle_name" id="motherMiddleName"
-                    class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                    placeholder="Enter Mother's Middle Name">
-                <small class="text-red-600 text-xs hidden" id="motherMiddleNameAlert">Mother's Middle Name is optional</small>
-            </div>
-
-            <!-- Mother's Occupation -->
-            <div class="mb-5">
-                <label for="motherOccupation" class="text-sm font-normal text-gray-900">
-                    <span class="text-red-600 mr-1">*</span>Mother's Occupation:
-                </label>
-                <input type="text" name="mother_occupation" id="motherOccupation"
-                    class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                    placeholder="Enter Mother's Occupation" required>
-                <small class="text-red-600 text-xs hidden" id="motherOccupationAlert">Mother's Occupation is required</small>
-            </div>
-        </div>
-
-        <button class="bg-teal-700 text-white hover:bg-teal-800 hover:text-white font-normal rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center" type="button" onclick="showNextStepGuardian()">
-    Next
-</button>
-
-    </div>
-</li>
-
-<script>
-    // Place this script at the end of the body to ensure DOM elements are loaded before any interaction
-    function checkParentInfoValidityParents() {
-        var isValid = true;
-
-        // Validate Father's Last Name
-        var fatherLastNameInput = document.getElementById('fatherLastName');
-        var fatherLastNameAlert = document.getElementById('fatherLastNameAlert');
-        if (fatherLastNameInput.value === '') {
-            fatherLastNameInput.classList.add('border-red-500');
-            fatherLastNameAlert.classList.remove('hidden');
-            isValid = false;
-        } else {
-            fatherLastNameInput.classList.remove('border-red-500');
-            fatherLastNameAlert.classList.add('hidden');
-        }
-
-        // Validate Father's First Name
-        var fatherFirstNameInput = document.getElementById('fatherFirstName');
-        var fatherFirstNameAlert = document.getElementById('fatherFirstNameAlert');
-        if (fatherFirstNameInput.value === '') {
-            fatherFirstNameInput.classList.add('border-red-500');
-            fatherFirstNameAlert.classList.remove('hidden');
-            isValid = false;
-        } else {
-            fatherFirstNameInput.classList.remove('border-red-500');
-            fatherFirstNameAlert.classList.add('hidden');
-        }
-
-        // Validate Father's Occupation
-        var fatherOccupationInput = document.getElementById('fatherOccupation');
-        var fatherOccupationAlert = document.getElementById('fatherOccupationAlert');
-        if (fatherOccupationInput.value === '') {
-            fatherOccupationInput.classList.add('border-red-500');
-            fatherOccupationAlert.classList.remove('hidden');
-            isValid = false;
-        } else {
-            fatherOccupationInput.classList.remove('border-red-500');
-            fatherOccupationAlert.classList.add('hidden');
-        }
-
-        // Validate Mother's Last Name
-        var motherLastNameInput = document.getElementById('motherLastName');
-        var motherLastNameAlert = document.getElementById('motherLastNameAlert');
-        if (motherLastNameInput.value === '') {
-            motherLastNameInput.classList.add('border-red-500');
-            motherLastNameAlert.classList.remove('hidden');
-            isValid = false;
-        } else {
-            motherLastNameInput.classList.remove('border-red-500');
-            motherLastNameAlert.classList.add('hidden');
-        }
-
-        // Validate Mother's First Name
-        var motherFirstNameInput = document.getElementById('motherFirstName');
-        var motherFirstNameAlert = document.getElementById('motherFirstNameAlert');
-        if (motherFirstNameInput.value === '') {
-            motherFirstNameInput.classList.add('border-red-500');
-            motherFirstNameAlert.classList.remove('hidden');
-            isValid = false;
-        } else {
-            motherFirstNameInput.classList.remove('border-red-500');
-            motherFirstNameAlert.classList.add('hidden');
-        }
-
-        // Validate Mother's Occupation
-        var motherOccupationInput = document.getElementById('motherOccupation');
-        var motherOccupationAlert = document.getElementById('motherOccupationAlert');
-        if (motherOccupationInput.value === '') {
-            motherOccupationInput.classList.add('border-red-500');
-            motherOccupationAlert.classList.remove('hidden');
-            isValid = false;
-        } else {
-            motherOccupationInput.classList.remove('border-red-500');
-            motherOccupationAlert.classList.add('hidden');
-        }
-
-        return isValid;
-    }
-
-    function showNextStepGuardian() {
-        if (checkParentInfoValidityParents()) {
-            // Show the guardian information section
-            document.getElementById('guardianInfo').classList.remove('hidden');
-        }
-    }
-
-    // Event listeners for dynamic validation
-    const fields = [
-        { id: 'fatherLastName', alertId: 'fatherLastNameAlert' },
-        { id: 'fatherFirstName', alertId: 'fatherFirstNameAlert' },
-        { id: 'fatherOccupation', alertId: 'fatherOccupationAlert' },
-        { id: 'motherLastName', alertId: 'motherLastNameAlert' },
-        { id: 'motherFirstName', alertId: 'motherFirstNameAlert' },
-        { id: 'motherOccupation', alertId: 'motherOccupationAlert' }
-    ];
-
-    fields.forEach(field => {
-        const element = document.getElementById(field.id);
-        const alertElement = document.getElementById(field.alertId);
-
-        element.addEventListener(element.tagName === 'SELECT' ? 'change' : 'input', function () {
-            if (this.value) {
-                alertElement.classList.add('hidden');
-                this.classList.remove('border-red-500');
-            }
-        });
-    });
-</script>
-
                             <div class="mt-5">
                                 <span
                                     class="absolute flex items-center justify-center w-6 h-6 bg-teal-100 rounded-full -start-3 ring-8 ring-white">
                                     <i class="fa-solid fa-file text-teal-700"></i>
                                 </span>
-                                <h1 class="ml-5">Guardian Information</h1>
+                                <h1 class="ml-5">Parents Information</h1>
                             </div>
-                            <li class="hidden mb-10 ms-2" id="guardianInfo">
+
+                            <li class=" mb-10 ms-2 hidden" id="parentsInfo">
                                 <div
-                                    class="col-span-4 p-2 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
+                                    class="col-span-4 p-2 rounded-lg shadow-lg border my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
                                     <div
-                                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-5 px-5">
+                                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-5 px-0 lg:px-3">
 
                                         <!-- Personal Information -->
                                         <div
                                             class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 w-86 border-b border-b-gray-300 my-5">
                                             <p class="text-[20px] font-normal"><i
-                                                    class="fas fa-address-card mr-2 mb-5"></i>
-                                                Guardian Information
-                                            </p>
+                                                    class="fas fa-address-card mr-2 mb-5"></i>Parents Information</p>
                                         </div>
 
+                                        <!-- Father's Information -->
                                         <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4">
-                                            <label class="block mb-2 text-sm font-normal text-gray-900">Guardian
-                                                Type:</label>
-                                            <div class="flex items-center mb-4">
-                                                <input type="radio" id="guardianMother" name="guardianType"
-                                                    value="mother" class="mr-2" onclick="setGuardianInfo('mother')">
-                                                <label for="guardianMother"
-                                                    class="mr-4 text-sm font-medium text-gray-900">Mother</label>
-
-                                                <input type="radio" id="guardianFather" name="guardianType"
-                                                    value="father" class="mr-2" onclick="setGuardianInfo('father')">
-                                                <label for="guardianFather"
-                                                    class="text-sm font-medium text-gray-900">Father</label>
-                                            </div>
+                                            <p class="mt-2 text-lg font-normal">Father Information:</p>
                                         </div>
 
+                                        <!-- Father's Last Name -->
                                         <div class="mb-5">
-                                            <label for="guardianLastName"
-                                                class="block mb-2 text-sm font-normal text-gray-900">
+                                            <label for="fatherLastName" class="text-sm font-normal text-gray-900">
+                                                <span class="text-red-600 mr-1">*</span>Father's Last Name:
+                                            </label>
+                                            <input type="text" name="father_last_name" id="fatherLastName"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                                                placeholder="Enter Father's Last Name" required>
+                                            <small class="text-red-600 text-xs hidden" id="fatherLastNameAlert">Father's
+                                                Last Name is required</small>
+                                        </div>
+
+                                        <!-- Father's First Name -->
+                                        <div class="mb-5">
+                                            <label for="fatherFirstName" class="text-sm font-normal text-gray-900">
+                                                <span class="text-red-600 mr-1">*</span>Father's First Name:
+                                            </label>
+                                            <input type="text" name="father_first_name" id="fatherFirstName"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                                                placeholder="Enter Father's First Name" required>
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="fatherFirstNameAlert">Father's First Name is required</small>
+                                        </div>
+
+                                        <!-- Father's Middle Name -->
+                                        <div class="mb-5">
+                                            <label for="fatherMiddleName"
+                                                class="text-sm font-normal text-gray-900">Father's Middle Name:</label>
+                                            <input type="text" name="father_middle_name" id="fatherMiddleName"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                                                placeholder="Enter Father's Middle Name">
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="fatherMiddleNameAlert">Father's Middle Name is optional</small>
+                                        </div>
+
+                                        <!-- Father's Suffix Name -->
+                                        <div class="mb-5">
+                                            <label for="fatherSuffixName"
+                                                class="text-sm font-normal text-gray-900">Father's Suffix Name:</label>
+                                            <select id="fatherSuffixName" name="father_suffix_name"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer">
+                                                <option value="">Select Suffix Name</option>
+                                                <option value="Jr.">Jr.</option>
+                                                <option value="Sr.">Sr.</option>
+                                                <option value="II">II</option>
+                                                <option value="III">III</option>
+                                                <option value="IV">IV</option>
+                                                <option value="V">V</option>
+                                            </select>
+                                            <small class="text-red-600 text-xs hidden" id="fatherSuffixNameAlert">Suffix
+                                                Name is optional</small>
+                                        </div>
+
+                                        <!-- Father's Occupation -->
+                                        <div class="mb-5">
+                                            <label for="fatherOccupation" class="text-sm font-normal text-gray-900">
+                                                <span class="text-red-600 mr-1">*</span>Father's Occupation:
+                                            </label>
+                                            <input type="text" name="father_occupation" id="fatherOccupation"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                                                placeholder="Enter Father's Occupation" required>
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="fatherOccupationAlert">Father's Occupation is required</small>
+                                        </div>
+
+                                        <!-- Mother's Information -->
+                                        <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4">
+                                            <p class="mt-5 text-lg font-normal">Mother Information:</p>
+                                        </div>
+
+                                        <!-- Mother's Last Name -->
+                                        <div class="mb-5">
+                                            <label for="motherLastName" class="text-sm font-normal text-gray-900">
+                                                <span class="text-red-600 mr-1">*</span>Mother's Last Name:
+                                            </label>
+                                            <input type="text" name="mother_last_name" id="motherLastName"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                                                placeholder="Enter Mother's Last Name" required>
+                                            <small class="text-red-600 text-xs hidden" id="motherLastNameAlert">Mother's
+                                                Last Name is required</small>
+                                        </div>
+
+                                        <!-- Mother's First Name -->
+                                        <div class="mb-5">
+                                            <label for="motherFirstName" class="text-sm font-normal text-gray-900">
+                                                <span class="text-red-600 mr-1">*</span>Mother's First Name:
+                                            </label>
+                                            <input type="text" name="mother_first_name" id="motherFirstName"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                                                placeholder="Enter Mother's First Name" required>
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="motherFirstNameAlert">Mother's First Name is required</small>
+                                        </div>
+
+                                        <!-- Mother's Middle Name -->
+                                        <div class="mb-5">
+                                            <label for="motherMiddleName"
+                                                class="text-sm font-normal text-gray-900">Mother's Middle Name:</label>
+                                            <input type="text" name="mother_middle_name" id="motherMiddleName"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                                                placeholder="Enter Mother's Middle Name">
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="motherMiddleNameAlert">Mother's Middle Name is optional</small>
+                                        </div>
+
+                                        <div></div>
+
+                                        <!-- Mother's Occupation -->
+                                        <div class="mb-5">
+                                            <label for="motherOccupation" class="text-sm font-normal text-gray-900">
+                                                <span class="text-red-600 mr-1">*</span>Mother's Occupation:
+                                            </label>
+                                            <input type="text" name="mother_occupation" id="motherOccupation"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                                                placeholder="Enter Mother's Occupation" required>
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="motherOccupationAlert">Mother's Occupation is required</small>
+                                        </div>
+
+                                        <!-- Mother's Information -->
+                                        <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4">
+                                            <p class="mt-5 text-lg font-normal">Guardian Information: </p>
+                                        </div>
+                                        <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4">
+                                            <label class="block mb-2 text-sm font-normal text-teal-700 text-sm">( If
+                                                your guardian is a parent, select 'Parent/Parents'; if your guardian is
+                                                someone else, select 'Other.' )<span class="text-red-600">*</span></label>
+                                            <div class="flex items-center mb-4 mt-4">
+                                                <input type="radio" id="guardianMother" name="guardianType"
+                                                    value="parent" class="mr-2" onclick="setGuardianInfo('parent')" required>
+                                                <label for="guardianParents"
+                                                    class="mr-4 text-sm font-medium text-gray-900">Parent/Parents</label>
+
+                                                <input type="radio" id="guardianother" name="guardianType"
+                                                    value="father" class="mr-2" onclick="setGuardianInfo('other')" required>
+                                                <label for="guardianOther"
+                                                    class="text-sm font-medium text-gray-900">Other</label>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Guardian's Information -->
+                                        <!-- Guardian's First Name -->
+                                        <div class="mb-5 hidden" id="gfname">
+                                            <label for="guardianLastName" class="text-sm font-normal text-gray-900">
                                                 <span class="text-red-600 mr-1">*</span>Guardian's Last Name:
                                             </label>
                                             <input type="text" name="guardian_last_name" id="guardianLastName"
-                                                class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                                placeholder="Enter Guardian's Last Name" required>
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                                                placeholder="Enter Guardian's last Name" required>
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="guardianLastNameAlert">Guardian's Last Name is required</small>
                                         </div>
 
-                                        <div class="mb-5">
-                                            <label for="guardianFirstName"
-                                                class="block mb-2 text-sm font-normal text-gray-900">
+                                        <!-- Guardian's First Name -->
+                                        <div class="mb-5 hidden" id="glname">
+                                            <label for="guardianFirstName" class="text-sm font-normal text-gray-900">
                                                 <span class="text-red-600 mr-1">*</span>Guardian's First Name:
                                             </label>
                                             <input type="text" name="guardian_first_name" id="guardianFirstName"
-                                                class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 placeholder="Enter Guardian's First Name" required>
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="guardianFirstNameAlert">Guardian's First Name is required</small>
                                         </div>
 
-                                        <div class="mb-5">
+                                        <!-- Guardian's Middle Name -->
+                                        <div class="mb-5 hidden" id="gmname">
                                             <label for="guardianMiddleName"
-                                                class="block mb-2 text-sm font-normal text-gray-900">
-                                                Guardian's Middle Name:
-                                            </label>
+                                                class="text-sm font-normal text-gray-900">Guardian's Middle
+                                                Name:</label>
                                             <input type="text" name="guardian_middle_name" id="guardianMiddleName"
-                                                class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 placeholder="Enter Guardian's Middle Name">
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="guardianMiddleNameAlert">Guardian's Middle Name is optional</small>
                                         </div>
 
-                                        <div class="mb-5">
+                                        <!-- Guardian's Suffix Name -->
+                                        <div class="mb-5 hidden" id="gsname">
                                             <label for="guardianSuffixName"
-                                                class="block mb-2 text-sm font-normal text-gray-900">
-                                                Suffix Name:
-                                            </label>
+                                                class="text-sm font-normal text-gray-900">Suffix Name:</label>
                                             <select id="guardianSuffixName" name="guardian_suffix_name"
-                                                class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer">
                                                 <option value="">Select Suffix Name</option>
                                                 <option value="Jr.">Jr.</option>
                                                 <option value="Sr.">Sr.</option>
@@ -1265,44 +1186,339 @@
                                             </select>
                                         </div>
 
-                                        <div class="mb-5">
-                                            <label for="guardianRelationship"
-                                                class="block mb-2 text-sm font-normal text-gray-900">
+                                        <!-- Guardian's Relationship -->
+                                        <div class="mb-5 hidden" id="grelatioanship">
+                                            <label for="guardianRelationship" class="text-sm font-normal text-gray-900">
                                                 <span class="text-red-600 mr-1">*</span>Guardian's Relationship to
                                                 Student:
                                             </label>
                                             <input type="text" name="guardian_relationship" id="guardianRelationship"
-                                                class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 placeholder="Enter Guardian's Relationship" required>
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="guardianRelationshipAlert">Guardian's Relationship is
+                                                required</small>
                                         </div>
 
-                                        <div class="mb-5">
+                                        <!-- Guardian's Contact Number -->
+                                        <div class="mb-5 hidden" id="gnumber">
                                             <label for="guardianContactNumber"
-                                                class="block mb-2 text-sm font-normal text-gray-900">
+                                                class="text-sm font-normal text-gray-900">
                                                 <span class="text-red-600 mr-1">*</span>Guardian's Contact Number:
                                             </label>
-                                            <input type="text" name="guardian_contact_number" id="guardianContactNumber"
-                                                class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                                placeholder="Enter Guardian's Contact Number" required>
+                                            <input type="tel" name="guardian_contact_number" id="guardianContactNumber"
+                                                maxlength="11"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                                                placeholder="Enter Guardian's Contact Number" required
+                                                pattern="^09\d{9}$"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^(?!09).*/, '09');"
+                                                value="09">
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="guardianContactNumberAlert">Guardian's Contact Number is
+                                                required</small>
                                         </div>
 
-                                        <div class="mb-5">
-                                            <label for="guardian_religion"
-                                                class="block mb-2 text-sm font-normal text-gray-900">
-                                                <span class="text-red-600 mr-1">*</span>Religion:
+                                        <div class="mb-5 hidden" id="greligion">
+                                            <label for="guardianReligion" class="text-sm font-normal text-gray-900">
+                                                <span class="text-red-600 mr-1">*</span>Religion
                                             </label>
-                                            <input type="text" name="guardian_religion" id="guardian_religion"
-                                                class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                                placeholder="Enter Guardian's Religion" required>
+
+                                            <!-- Custom dropdown with search -->
+                                            <div class="relative">
+                                                <input type="text" id="guardianReligion" name="guardian_religion"
+                                                    placeholder="Select or type religion"
+                                                    class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                                                    oninput="filterReligionOptions()"
+                                                    onclick="showGuardianReligionList()" required>
+
+                                                <ul id="GuardinreligionList"
+                                                    class="hidden absolute w-full bg-white border border-gray-300 mt-1 rounded shadow-lg max-h-60 overflow-y-auto z-10">
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligionGuardian('Roman Catholicism')">Roman
+                                                        Catholicism
+                                                    </li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligionGuardian('Protestantism')">Protestantism
+                                                    </li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligionGuardian('Islam')">Islam</li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligionGuardian('Iglesia ni Cristo')">Iglesia ni
+                                                        Cristo
+                                                    </li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligionGuardian('Hinduism')">Hinduism</li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligionGuardian('Buddhism')">Buddhism</li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligionGuardian('Indigenous Beliefs')">
+                                                        Indigenous
+                                                        Beliefs</li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligionGuardian('Atheism and Agnosticism')">
+                                                        Atheism and
+                                                        Agnosticism</li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligionGuardian('Sikhism')">Sikhism</li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectReligionGuardian('Zoroastrianism')">
+                                                        Zoroastrianism</li>
+                                                </ul>
+                                            </div>
+
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="guardianReligionAlert">Religion is
+                                                required</small>
                                         </div>
+
                                     </div>
-                                    <div class="flex justify-end">
+
+                                    <div class="flex justify-end p-2">
                                         <button
-                                            class="bg-teal-700 text-white hover:bg-teal-800 hover:text-white font-normal rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center"
-                                            onclick="showNextStep()" type="button">Next</button>
+                                            class="bg-teal-700 text-white hover:bg-teal-800 hover:text-white font-normal rounded-md text-sm w-full sm:w-auto px-10 py-2 text-center"
+                                            onclick="showNextStepGuardians()" type="button">Next</button>
                                     </div>
+
                                 </div>
                             </li>
+
+                            <script>
+                                // Function to show the list when clicked
+                                function showGuardianReligionList() {
+                                    const listGuardian = document.getElementById('GuardinreligionList');
+                                    listGuardian.classList.remove('hidden');
+                                }
+
+                                // Function to select a religion option
+                                function selectReligionGuardian(religion) {
+                                    const inputGuardian = document.getElementById('guardianReligion');
+                                    const listGuardian = document.getElementById('GuardinreligionList');
+
+                                    inputGuardian.value = religion;
+                                    listGuardian.classList.add('hidden'); // Hide dropdown after selection
+
+                                    // Optionally, validate religion
+                                    validateReligionGuardian();
+                                }
+
+                                // Validation to check if a religion is selected
+                                function validateReligionGuardian() {
+                                    const religionInputGuardian = document.getElementById('guardianReligion');
+                                    const religionAlertGuardian = document.getElementById('guardianReligionAlert');
+
+                                    if (religionInputGuardian.value === "") {
+                                        religionAlertGuardian.classList.remove('hidden');
+                                    } else {
+                                        religionAlertGuardian.classList.add('hidden');
+                                    }
+                                }
+
+                                // Close the dropdown when clicked outside
+                                document.addEventListener('click', function (event) {
+                                    const list = document.getElementById('GuardinreligionList');
+                                    const input = document.getElementById('guardianReligion');
+
+                                    if (!input.contains(event.target) && !list.contains(event.target)) {
+                                        list.classList.add('hidden');
+                                    }
+                                });
+
+                                // Place this script at the beginning to ensure the function is defined before use.
+                                function checkParentInfoValidityParents() {
+                                    var isValidParent = true;
+
+                                    // Validate Father's Last Name
+                                    var fatherLastNameInput = document.getElementById('fatherLastName');
+                                    var fatherLastNameAlert = document.getElementById('fatherLastNameAlert');
+                                    if (fatherLastNameInput.value === '') {
+                                        fatherLastNameInput.classList.add('border-red-500');
+                                        fatherLastNameAlert.classList.remove('hidden');
+                                        isValidParent = false;
+                                    } else {
+                                        fatherLastNameInput.classList.remove('border-red-500');
+                                        fatherLastNameAlert.classList.add('hidden');
+                                    }
+
+                                    // Validate Father's First Name
+                                    var fatherFirstNameInput = document.getElementById('fatherFirstName');
+                                    var fatherFirstNameAlert = document.getElementById('fatherFirstNameAlert');
+                                    if (fatherFirstNameInput.value === '') {
+                                        fatherFirstNameInput.classList.add('border-red-500');
+                                        fatherFirstNameAlert.classList.remove('hidden');
+                                        isValidParent = false;
+                                    } else {
+                                        fatherFirstNameInput.classList.remove('border-red-500');
+                                        fatherFirstNameAlert.classList.add('hidden');
+                                    }
+
+                                    // Validate Father's Occupation
+                                    var fatherOccupationInput = document.getElementById('fatherOccupation');
+                                    var fatherOccupationAlert = document.getElementById('fatherOccupationAlert');
+                                    if (fatherOccupationInput.value === '') {
+                                        fatherOccupationInput.classList.add('border-red-500');
+                                        fatherOccupationAlert.classList.remove('hidden');
+                                        isValidParent = false;
+                                    } else {
+                                        fatherOccupationInput.classList.remove('border-red-500');
+                                        fatherOccupationAlert.classList.add('hidden');
+                                    }
+
+                                    // Validate Mother's Last Name
+                                    var motherLastNameInput = document.getElementById('motherLastName');
+                                    var motherLastNameAlert = document.getElementById('motherLastNameAlert');
+                                    if (motherLastNameInput.value === '') {
+                                        motherLastNameInput.classList.add('border-red-500');
+                                        motherLastNameAlert.classList.remove('hidden');
+                                        isValidParent = false;
+                                    } else {
+                                        motherLastNameInput.classList.remove('border-red-500');
+                                        motherLastNameAlert.classList.add('hidden');
+                                    }
+
+                                    // Validate Mother's First Name
+                                    var motherFirstNameInput = document.getElementById('motherFirstName');
+                                    var motherFirstNameAlert = document.getElementById('motherFirstNameAlert');
+                                    if (motherFirstNameInput.value === '') {
+                                        motherFirstNameInput.classList.add('border-red-500');
+                                        motherFirstNameAlert.classList.remove('hidden');
+                                        isValidParent = false;
+                                    } else {
+                                        motherFirstNameInput.classList.remove('border-red-500');
+                                        motherFirstNameAlert.classList.add('hidden');
+                                    }
+
+                                    // Validate Mother's Occupation
+                                    var motherOccupationInput = document.getElementById('motherOccupation');
+                                    var motherOccupationAlert = document.getElementById('motherOccupationAlert');
+                                    if (motherOccupationInput.value === '') {
+                                        motherOccupationInput.classList.add('border-red-500');
+                                        motherOccupationAlert.classList.remove('hidden');
+                                        isValidParent = false;
+                                    } else {
+                                        motherOccupationInput.classList.remove('border-red-500');
+                                        motherOccupationAlert.classList.add('hidden');
+                                    }
+
+                                    // Validate Guardian's Last Name
+                                    var guardianLastNameInput = document.getElementById('guardianLastName');
+                                    var guardianLastNameAlert = document.getElementById('guardianLastNameAlert');
+                                    if (guardianLastNameInput.value === '') {
+                                        guardianLastNameInput.classList.add('border-red-500');
+                                        guardianLastNameAlert.classList.remove('hidden');
+                                        isValidGuardian = false;
+                                    } else {
+                                        guardianLastNameInput.classList.remove('border-red-500');
+                                        guardianLastNameAlert.classList.add('hidden');
+                                    }
+
+                                    // Validate Guardian's First Name
+                                    var guardianFirstNameInput = document.getElementById('guardianFirstName');
+                                    var guardianFirstNameAlert = document.getElementById('guardianFirstNameAlert');
+                                    if (guardianFirstNameInput.value === '') {
+                                        guardianFirstNameInput.classList.add('border-red-500');
+                                        guardianFirstNameAlert.classList.remove('hidden');
+                                        isValidGuardian = false;
+                                    } else if (guardianFirstNameInput.value === fatherFirstNameInput.value) {
+                                        guardianFirstNameInput.classList.add('border-red-500');
+                                        guardianFirstNameAlert.classList.remove('hidden');
+                                        guardianFirstNameAlert.innerHTML = 'Guardian cannot be Father';
+                                        isValidGuardian = false;
+                                    } else if (guardianFirstNameInput.value === motherFirstNameInput.value) {
+                                        guardianFirstNameInput.classList.add('border-red-500');
+                                        guardianFirstNameAlert.classList.remove('hidden');
+                                        guardianFirstNameAlert.innerHTML = 'Guardian cannot be Mother';
+                                        isValidGuardian = false;
+                                    } else {
+                                        guardianFirstNameInput.classList.remove('border-red-500');
+                                        guardianFirstNameAlert.classList.add('hidden');
+                                    }
+
+                                    // Validate Guardian's Relationship
+                                    var guardianRelationshipInput = document.getElementById('guardianRelationship');
+                                    var guardianRelationshipAlert = document.getElementById('guardianRelationshipAlert');
+                                    if (guardianRelationshipInput.value === '') {
+                                        guardianRelationshipInput.classList.add('border-red-500');
+                                        guardianRelationshipAlert.classList.remove('hidden');
+                                        isValidGuardian = false;
+                                    } else {
+                                        guardianRelationshipInput.classList.remove('border-red-500');
+                                        guardianRelationshipAlert.classList.add('hidden');
+                                    }
+
+                                    // Validate Guardian's Contact Number
+                                    var guardianContactNumberInput = document.getElementById('guardianContactNumber');
+                                    var guardianContactNumberAlert = document.getElementById('guardianContactNumberAlert');
+                                    if (guardianContactNumberInput.value === '') {
+                                        guardianContactNumberInput.classList.add('border-red-500');
+                                        guardianContactNumberAlert.classList.remove('hidden');
+                                        isValidGuardian = false;
+                                    } else if (guardianLastNameInput.value.toUpperCase() === 'N/A' || guardianLastNameInput.value.toUpperCase() === 'NA') {
+                                        guardianContactNumberInput.classList.remove('border-red-500');
+                                        guardianContactNumberAlert.classList.add('hidden');
+
+                                        isValidGuardian = true;
+                                    } else if (guardianContactNumberInput.value.length !== 11) {
+                                        guardianContactNumberInput.classList.add('border-red-500');
+                                        guardianContactNumberAlert.classList.remove('hidden');
+                                        guardianContactNumberAlert.innerHTML = 'Contact number must be 11 digits';
+                                        isValid = false;
+                                    } else {
+                                        guardianContactNumberInput.classList.remove('border-red-500');
+                                        guardianContactNumberAlert.classList.add('hidden');
+                                    }
+
+                                    // Validate Guardian's Religion
+                                    var guardianReligionInput = document.getElementById('guardianReligion');
+                                    var guardianReligionAlert = document.getElementById('guardianReligionAlert');
+                                    if (guardianReligionInput.value === '') {
+                                        guardianReligionInput.classList.add('border-red-500');
+                                        guardianReligionAlert.classList.remove('hidden');
+                                        isValidGuardian = false;
+                                    } else {
+                                        guardianReligionInput.classList.remove('border-red-500');
+                                        guardianReligionAlert.classList.add('hidden');
+                                    }
+
+
+                                    return isValidParent;
+                                }
+
+                                // This function is now defined before it is used
+                                function showNextStepGuardians() {
+                                    if (checkParentInfoValidityParents()) {
+                                        // Show the guardian information section
+                                       
+                                        document.getElementById('emergencyContactInfo').classList.remove('hidden');
+                                    }
+                                }
+
+                                // Event listeners for dynamic validation
+                                const fieldParents = [
+                                    { id: 'fatherLastName', alertId: 'fatherLastNameAlert' },
+                                    { id: 'fatherFirstName', alertId: 'fatherFirstNameAlert' },
+                                    { id: 'fatherOccupation', alertId: 'fatherOccupationAlert' },
+                                    { id: 'motherLastName', alertId: 'motherLastNameAlert' },
+                                    { id: 'motherFirstName', alertId: 'motherFirstNameAlert' },
+                                    { id: 'motherOccupation', alertId: 'motherOccupationAlert' },
+                                    { id: 'guardianLastName', alertId: 'guardianLastNameAlert' },
+                                    { id: 'guardianFirstName', alertId: 'guardianFirstNameAlert' },
+                                    { id: 'guardianRelationship', alertId: 'guardianRelationshipAlert' },
+                                    { id: 'guardianContactNumber', alertId: 'guardianContactNumberAlert' },
+                                    { id: 'guardianReligion', alertId: 'guardianReligionAlert' }
+                                ];
+
+                                fieldParents.forEach(field => {
+                                    const element = document.getElementById(field.id);
+                                    const alertElement = document.getElementById(field.alertId);
+
+                                    element.addEventListener(element.tagName === 'SELECT' ? 'change' : 'input', function () {
+                                        if (this.value) {
+                                            alertElement.classList.add('hidden');
+                                            this.classList.remove('border-red-500');
+                                        }
+                                    });
+                                });
+                            </script>
 
                             <div class="mt-5">
                                 <span
@@ -1311,100 +1527,271 @@
                                 </span>
                                 <h1 class="ml-5">Emergency Contact Information</h1>
                             </div>
-                            <li class="hidden mb-10 ms-2">
+
+                            <li class="mb-10 ms-2 hidden" id="emergencyContactInfo">
                                 <div
-                                    class=" col-span-4 p-2 rounded-lg shadow-lg border  my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
+                                    class="col-span-4 p-2 rounded-lg shadow-lg border my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
                                     <div
                                         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-5 px-5">
 
-                                        <!-- Personal Information -->
+                                        <!-- Emergency Contact Information -->
                                         <div
                                             class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 w-86 border-b border-b-gray-300 my-5">
                                             <p class="text-[20px] font-normal"><i
                                                     class="fa-regular fa-address-card mr-2 mb-5"></i>
-                                                Emergency Contact Information </p>
+                                                Emergency Contact Information</p>
                                         </div>
 
                                         <div class="mb-5">
                                             <label for="emergencyContactPerson"
-                                                class="block mb-2 text-sm font-normal text-gray-900">
+                                                class="text-sm font-normal text-gray-900">
                                                 <span class="text-red-600 mr-1">*</span>Emergency Contact Person:
                                             </label>
                                             <input type="text" name="emergency_contact_person"
                                                 id="emergencyContactPerson"
-                                                class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 placeholder="Enter Emergency Contact Person" required>
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="emergencyContactPersonAlert">Emergency contact person is
+                                                required</small>
                                         </div>
 
                                         <div class="mb-5">
                                             <label for="emergencyContactNumber"
-                                                class="block mb-2 text-sm font-normal text-gray-900">
+                                                class="text-sm font-normal text-gray-900">
                                                 <span class="text-red-600 mr-1">*</span>Emergency Contact Number:
                                             </label>
-                                            <input type="text" name="emergency_contact_number"
-                                                id="emergencyContactNumber"
-                                                class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                                placeholder="Enter Emergency Contact Number" required>
+                                            <input type="tel" name="emergency_contact_number"
+                                                id="emergencyContactNumber" maxlength="11"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                                                placeholder="Enter Emergency Contact Number" required
+                                                pattern="^09\d{9}$"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^(?!09).*/, '09');"
+                                                value="09">
+                                            <small class="text-gray-500 text-xs">(e.g. Parents, guardian or personal
+                                                number)</small><br />
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="emergencyContactNumberAlert">Emergency contact number is
+                                                required</small>
                                         </div>
 
                                         <div class="mb-5">
-                                            <label for="emailAddress"
-                                                class="block mb-2 text-sm font-normal text-gray-900">
+                                            <label for="emailAddress" class="text-sm font-normal text-gray-900">
                                                 <span class="text-red-600 mr-1">*</span>Email Address:
                                             </label>
                                             <input type="email" name="email_address" id="emailAddress"
-                                                class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 placeholder="Enter Email Address" required>
+                                            <small class="text-red-600 text-xs hidden" id="emailAlertContact">Email is
+                                                required</small>
                                         </div>
 
                                         <div class="mb-5">
-                                            <label for="messengerAccount"
-                                                class="block mb-2 text-sm font-normal text-gray-900">
+                                            <label for="messengerAccount" class="text-sm font-normal text-gray-900">
                                                 Messenger Account (optional):
                                             </label>
                                             <input type="text" name="messenger_account" id="messengerAccount"
-                                                class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 placeholder="e.g., Facebook Messenger ID">
                                         </div>
 
                                     </div>
-                                    <div class="col-span-4 flex justify-center mt-10">
-                                        <label class="flex items-center space-x-2 text-center">
-                                            <span class="text-gray-600 font-seminormal text-lg">Double check your
-                                                information
-                                                before you proceed <br /> <span onclick="window.location.href = '#top';"
-                                                    class="cursor-pointer p-2 px-3 mt-10 rounded-full text-xl text-white bg-teal-700 hover:bg-teal-800"><i
-                                                        class="fa-solid fa-chevron-up"></i></span></span>
 
-                                        </label>
+                                    <div class="flex justify-end p-2">
+                                        <button
+                                            class="bg-teal-700 text-white hover:bg-teal-800 hover:text-white font-normal rounded-md text-sm w-full sm:w-auto px-10 py-2 text-center"
+                                            onclick="showNextStepReview()" type="button" id="submitButton">Next</button>
                                     </div>
-                                    <div class="col-span-4 flex  justify-center lg:justify-end mt-20 lg:me-20">
-                                        <label class="flex items-center space-x-2">
-                                            <input type="checkbox" id="confirmCheck"
-                                                class="form-checkbox h-5 w-5 text-teal-600">
-                                            <span>I double-checked my information</span>
-
-                                        </label>
-                                    </div>
-                                    <div class="col-span-4 flex justify-end mt-5">
-                                        <button type="button" id="submitButton" disabled
-                                            class="text-white w-96 text-center bg-gray-400 focus:ring-4 focus:outline-none focus:ring-teal-300 font-normal rounded text-sm px-20 py-2.5 text-center">
-                                            Submit Registration
-                                        </button>
-                                    </div>
-
-                                    <script>
-                                        document.getElementById('confirmCheck').addEventListener('change', function () {
-                                            const submitButton = document.getElementById('submitButton');
-                                            submitButton.disabled = !this.checked;
-                                            submitButton.classList.toggle('bg-gray-400', !this.checked);
-                                            submitButton.classList.toggle('bg-sky-800', this.checked);
-                                            submitButton.classList.toggle('hover:bg-sky-700', this.checked);
-                                        });
-                                    </script>
                                 </div>
                             </li>
+
+                            <script>
+                                function checkValidityReview() {
+                                    var isValidReview = true;
+
+                                    // Emergency Contact Person validation
+                                    var emergencyContactPerson = document.getElementById('emergencyContactPerson');
+                                    var emergencyContactPersonAlert = document.getElementById('emergencyContactPersonAlert');
+                                    if (!emergencyContactPerson.value) {
+                                        emergencyContactPerson.classList.add('border-red-500');
+                                        emergencyContactPersonAlert.classList.remove('hidden');
+                                        isValidReview = false;
+                                    } else {
+                                        emergencyContactPerson.classList.remove('border-red-500');
+                                        emergencyContactPersonAlert.classList.add('hidden');
+                                    }
+
+                                    // Emergency Contact Number validation
+                                    var emergencyContactNumber = document.getElementById('emergencyContactNumber');
+                                    var emergencyContactNumberAlert = document.getElementById('emergencyContactNumberAlert');
+                                    if (emergencyContactNumber.value === '') {
+                                        emergencyContactNumberAlert.classList.remove('hidden');
+                                        emergencyContactNumber.classList.add('border-red-500');
+                                        isValidReview = false;
+                                    } else if (emergencyContactNumber.value.length !== 11) {
+                                        // If LRN is not exactly 12 digits, show 'LRN must be 12 digits' message
+                                        emergencyContactNumber.classList.add('border-red-500');
+                                        emergencyContactNumberAlert.classList.remove('hidden');
+                                        emergencyContactNumberAlert.innerHTML = 'Contact Number must be 11 digits';
+                                        isValidReview = false;
+                                    } else {
+                                        emergencyContactNumber.classList.remove('border-red-500');
+                                        emergencyContactNumberAlert.classList.add('hidden');
+                                    }
+
+                                    // Email validation
+                                    var emailAddress = document.getElementById('emailAddress');
+                                    var emailAlertContact = document.getElementById('emailAlertContact');
+                                    if (emailAddress.value === '') {
+                                        emailAlertContact.classList.remove('hidden');
+                                        emailAddress.classList.add('border-red-500');
+                                        isValidReview = false;
+                                    } else if (!emailAddress.value.endsWith('@gmail.com')) {
+                                        emailAlertContact.classList.remove('hidden');
+                                        emailAlertContact.innerText = 'Email must be @gmail.com';
+                                        emailAddress.classList.add('border-red-500');
+                                        isValidReview = false;
+                                    } else {
+                                        emailAddress.classList.remove('border-red-500');
+                                        emailAlertContact.classList.add('hidden');
+                                    }
+
+                                    return isValidReview;
+                                }
+
+                                function showNextStepReview() {
+                                    if (checkValidityReview()) {
+                                        document.getElementById('reviewModal').classList.remove('hidden');
+                                    }
+                                }
+
+                                // Event listeners for input validation
+                                document.getElementById('emergencyContactPerson').addEventListener('input', function () {
+                                    if (this.value) {
+                                        document.getElementById('emergencyContactPersonAlert').classList.add('hidden');
+                                        this.classList.remove('border-red-500');
+                                    }
+                                });
+
+                                document.getElementById('emergencyContactNumber').addEventListener('input', function () {
+                                    if (this.value) {
+                                        document.getElementById('emergencyContactNumberAlert').classList.add('hidden');
+                                        this.classList.remove('border-red-500');
+                                    }
+                                });
+
+                                document.getElementById('emailAddress').addEventListener('input', function () {
+                                    if (this.value) {
+                                        document.getElementById('emailAlertContact').classList.add('hidden');
+                                        this.classList.remove('border-red-500');
+                                    }
+                                });
+                            </script>
+                            </li>
                         </ol>
+                    </div>
+                </div>
+
+                <div id="reviewModal"
+                    class="fixed hidden z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 px-2 flex justify-center items-center">
+                    <div class="bg-white rounded-md shadow-lg p-5 max-w-6xl mx-auto z-20">
+                        <div class="flex justify-center items-center p-5 border-b border-gray-900">
+                            <p class="text-2xl font-bold text-teal-800">Review Information</p>
+                        </div>
+                        <div
+                            class="overflow-y-scroll h-[60vh] scrollbar-width-thin my-3 p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                            <h3 class="font-semibold">Primary info</h3>
+                            <div class="hidden md:block lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <h5>Admission type : <span id="reviewAdmissionType"></span></h5>
+                            <h5>Grade : <span id="reviewGrade"></span></h5>
+                            <div class="hidden lg:block"></div>
+                            <div class="hidden lg:block"></div>
+
+                            <h5 class="font-semibold mt-5">Basic Information</h5>
+                            <div class="hidden md:block lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <h5>LRN: <span id="reviewLRN"></span></h5>
+                            <div class="hidden md:block lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <h5>Last Name: <span id="reviewLastName"></span></h5>
+                            <h5>First Name: <span id="reviewFirstName"></span></h5>
+                            <h5>Middle Name: <span id="reviewMiddleName"></span></h5>
+                            <h5>Suffix: <span id="reviewSuffix"></span></h5>
+                            <h5>Birthplace: <span id="reviewBirthplace"></span></h5>
+                            <h5>Birth Date: <span id="reviewBirthDate"></span></h5>
+                            <h5>Age: <span id="reviewAge"></span></h5>
+                            <h5>Gender: <span id="reviewGender"></span></h5>
+                            <h5>Email Address: <span id="reviewEmailAddress"></span></h5>
+                            <h5>Contact Number: <span id="reviewContactNumber"></span></h5>
+                            <h5>Religion: <span id="reviewReligion"></span></h5>
+                            <div class="hidden md:block lg:block"></div>
+                            <h3 class="font-semibold mt-5">Permanent Address</h3>
+                            <div class="hidden md:block lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <h5>Region: <span id="revieRegion"></span></h5>
+                            <h5>province: <span id="reviewProvince"></span></h5>
+                            <h5>City: <span id="reviewCity"></span></h5>
+                            <h5>Barangay: <span id="reviewBarangay"></span></h5>
+                            <h5>Home/Building/Street:: <span id="reviewStreet"></span></h5>
+                            <div class="hidden md:block lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <div class="hidden lg:block"></div>
+
+                            <h5 class="font-semibold mt-5">Parents Information</h5>
+                            <div class="hidden md:block lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <h5>Father's Last Name: <span id="reviewFatherLastName"></span></h5>
+                            <h5>Father's First Name: <span id="reviewFatherFirstName"></span></h5>
+                            <h5>Father's Middle Name: <span id="reviewFatherMiddleName"></span></h5>
+                            <h5>Father's Suffix: <span id="reviewFatherSuffix"></span></h5>
+                            <h5>Father's Occupation: <span id="reviewFatherOccupation"></span></h5>
+                            <div class="hidden md:block lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <h5>Mother's Last Name: <span id="reviewMotherLastName"></span></h5>
+                            <h5>Mother's First Name: <span id="reviewMotherFirstName"></span></h5>
+                            <h5>Mother's Middle Name: <span id="reviewMotherMiddleName"></span></h5>
+                            <div class="hidden md:block lg:block"></div>
+                            <h5>Mother's Occupation: <span id="reviewMotherOccupation"></span></h5>
+                            <div class="hidden md:block lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <div class="hidden lg:block"></div>
+
+                            <h3 class="font-semibold mt-5">Guardian Information</h3>
+                            <div class="hidden md:block lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <h5>Guardian's Last Name: <span id="reviewGuardianLastName"></span></h5>
+                            <h5>Guardian's First Name: <span id="reviewGuardianFirstName"></span></h5>
+                            <h5>Guardian's Middle Name: <span id="reviewGuardianMiddleName"></span></h5>
+                            <h5>Guardian's Suffix: <span id="reviewGuardianSuffix"></span></h5>
+                            <h5>Guardian's Relationship: <span id="reviewGuardianRelationship"></span></h5>
+                            <h5>Guardian's Contact Number: <span id="reviewGuardianContactNumber"></span></h5>
+                            <h5>Guardian's Religion: <span id="reviewGuardianReligion"></span></h5>
+                            <div class="hidden lg:block"></div>
+
+                            <h3 class="font-semibold mt-5 col-span-1 md:col-span-2">Emergency Contact Information</h3>
+                            <div class="hidden lg:block"></div>
+                            <div class="hidden lg:block"></div>
+                            <h5>Emergency Contact Person: <span id="reviewEmergencyContactPerson"></span></h5>
+                            <h5>Emergency Contact Number: <span id="reviewEmergencyContactNumber"></span></h5>
+                            <h5>Email Address: <span id="reviewEmergencyEmail"></span></h5>
+                            <h5>Messenger Account: <span id="reviewMessengerAccount"></span></h5>
+
+                        </div>
+                        <div class="flex justify-end items-center mt-5">
+                            <button onclick="document.getElementById('reviewModal').classList.add('hidden')"
+                                class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Close</button>
+                            <button onclick="showNextStepReview()" id="nextbtnreview" disabled
+                                class="ml-3 bg-gray-500 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Next</button>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -1416,7 +1803,7 @@
 <script>
     // Initialize the flatpickr
     flatpickr("#birthDate", {
-        dateFormat: "m/d/Y",   // Set the desired format: MM/DD/YYYY
+
         onChange: function (selectedDates, dateStr, instance) {
             calculateAge(dateStr); // When date is selected, calculate age
         }
@@ -1455,8 +1842,6 @@
         }
     }
 
-
-
     function setGuardianInfo(type) {
         const motherFirstName = document.getElementById('motherFirstName').value;
         const motherLastName = document.getElementById('motherLastName').value;
@@ -1469,18 +1854,34 @@
 
         const guardianRelationship = document.getElementById('guardianRelationship');
 
-        if (type === 'mother') {
-            document.getElementById('guardianFirstName').value = motherFirstName;
-            document.getElementById('guardianLastName').value = motherLastName;
-            document.getElementById('guardianMiddleName').value = motherMiddleName; // Set middle name
+        if (type === 'parent') {
+            document.getElementById('guardianFirstName').value = "N/A";
+            document.getElementById('guardianLastName').value = "N/A";
+            document.getElementById('guardianMiddleName').value = "N/A"; // Set middle name
             document.getElementById('guardianSuffixName').value = ""; // Reset suffix when choosing mother
-            guardianRelationship.value = "Mother";
-        } else if (type === 'father') {
-            document.getElementById('guardianFirstName').value = fatherFirstName;
-            document.getElementById('guardianLastName').value = fatherLastName;
-            document.getElementById('guardianMiddleName').value = fatherMiddleName; // Set middle name;
-            document.getElementById('guardianSuffixName').value = fatherSuffix; // Set suffix when choosing father
-            guardianRelationship.value = "Father";
+            document.getElementById('guardianRelationship').value = "N/A";
+            document.getElementById('guardianReligion').value = "N/A";
+            document.getElementById('gfname').classList.add('hidden');
+            document.getElementById('glname').classList.add('hidden');
+            document.getElementById('gmname').classList.add('hidden');
+            document.getElementById('gsname').classList.add('hidden');
+            document.getElementById('grelatioanship').classList.add('hidden');
+            document.getElementById('gnumber').classList.add('hidden');
+            document.getElementById('greligion').classList.add('hidden');
+        } else if (type === 'other') {
+            document.getElementById('gfname').classList.remove('hidden');
+            document.getElementById('glname').classList.remove('hidden');
+            document.getElementById('gmname').classList.remove('hidden');
+            document.getElementById('gsname').classList.remove('hidden');
+            document.getElementById('grelatioanship').classList.remove('hidden');
+            document.getElementById('gnumber').classList.remove('hidden');
+            document.getElementById('greligion').classList.remove('hidden');
+            document.getElementById('guardianFirstName').value = "";
+            document.getElementById('guardianLastName').value = "";
+            document.getElementById('guardianMiddleName').value = ""; // Set middle name
+            document.getElementById('guardianSuffixName').value = ""; // Reset suffix when choosing mother
+            document.getElementById('guardianRelationship').value = "";
+            document.getElementById('guardianReligion').value = "";
         }
     }
 

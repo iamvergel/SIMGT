@@ -90,18 +90,20 @@
                                             </td>
                                             <td class="px-4 py-3">{{ $student->grade }}</td>
                                             <td class="px-4 py-3">
-                                                <!-- Update Student Info Button -->
-                                                <button data-modal-toggle="updatetudentinfo{{ $student->id }}"
-                                                    data-modal-target="updatetudentinfo{{ $student->id }}" data-fullname="{{ $student->student_last_name }}
-                                                            {{ $student->student_first_name }} {{ $student->student_middle_name }}
-                                                            {{ $student->student_suffix_name }}"
-                                                    data-gender="{{ $student->sex }}" data-grade="{{ $student->grade }}"
-                                                    data-birthdat="{{ $student->birth_date }}"
-                                                    class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-blue-700 rounded-full hover:bg-blue-600"
-                                                    type="button" aria-label="Update Student" title="Enrolled Student"
-                                                    type="button" onclick="window.location.href = '{{ route('student.show.enrollees', ['id' => $student->id]) }}'">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                </button>
+                                            <button 
+    data-modal-toggle="updatetudentinfo{{ $student->id }}"
+    data-modal-target="updatetudentinfo{{ $student->id }}"
+    data-fullname="{{ $student->student_last_name }} {{ $student->student_first_name }} {{ $student->student_middle_name }} {{ $student->student_suffix_name }}"
+    data-gender="{{ $student->sex }}" 
+    data-grade="{{ $student->grade }}"
+    data-birthdat="{{ $student->birth_date }}"
+    class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-blue-700 rounded-full hover:bg-blue-600"
+    type="button" 
+    aria-label="Update Student" 
+    title="Enrolled Student"
+    onclick="checkEnrollmentStatus('{{ $student->lrn }}')">
+    <i class="fa-solid fa-eye"></i>
+</button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -119,9 +121,22 @@
     @include('admin.includes.js-link')
     <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
     <script>
-       
-    </script>
-
+    function checkEnrollmentStatus(lrn) {
+        // Make an AJAX request to check the enrollment status
+        fetch(`/check-enrollment-status/${lrn}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'error') {
+                    // Show an alert if the student is already enrolled
+                    alert(data.message);
+                } else {
+                    // If the student is not enrolled, proceed to the normal action
+                    window.location.href = '{{ route('student.show.enrollees', ['lrn' => $student->lrn]) }}';
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
 </body>
 
 </html>

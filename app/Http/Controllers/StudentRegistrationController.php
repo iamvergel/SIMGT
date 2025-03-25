@@ -388,9 +388,9 @@ class StudentRegistrationController extends Controller
     }
 
     // Fetch the specific student based on the provided id
-    public function getPrimaryInfo(request $request, $id)
+    public function getPrimaryInfo(request $request, $lrn)
     {
-        $students = StudentPrimaryInfo::where('id', $id)->where('status', 'Registered')->first();
+        $students = StudentPrimaryInfo::where('lrn', $lrn)->where('status', 'Registered')->first();
 
         $studentsInfo = StudentInfo::where('lrn', $students->lrn)->first();
 

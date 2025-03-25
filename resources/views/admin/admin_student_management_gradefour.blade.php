@@ -100,7 +100,7 @@
                                                     $initials = strtoupper(substr($student->student_last_name, 0, 1) . substr($student->student_first_name, 0, 1));
                                                     $primaryInfo = $studentsPrimary[$student->student_number] ?? null;
                                                 @endphp
-                                                @if ($primaryInfo && $primaryInfo->grade == 'Grade four' && $primaryInfo->status == 'Enrolled')
+                                                @if ($primaryInfo && $primaryInfo->grade == 'Grade Four' && $primaryInfo->status == 'Enrolled')
                                                     <tr class="hover:bg-gray-100">
                                                         <td>
                                                             <span class="hidden">{{ $student->id }}</span>

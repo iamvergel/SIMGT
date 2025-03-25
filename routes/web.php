@@ -355,8 +355,11 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/StEmelieLearningCenter.HopeSci66/registrar/student-management/Add-Student', function () {
         return view('registrar.includes.add_student_form');
     });
-    Route::get('/StEmelieLearningCenter.HopeSci66/admin/online-application/{id}', [RegisterStudent::class, 'showEnrolleesInformation'])->name('student.show.enrollees');
-    Route::get('/StEmelieLearningCenter.HopeSci66/registrar/Student-Registration/{id}', [StudentRegistrationController::class, 'getPrimaryInfo'])->name('student.show.enrollees.register');
+    Route::get('/StEmelieLearningCenter.HopeSci66/registrar/online-application/{lrn}', [RegisterStudent::class, 'showEnrolleesInformation'])->name('student.show.enrollees');
+    Route::get('/StEmelieLearningCenter.HopeSci66/registrar/Student-Registration/{lrn}', [StudentRegistrationController::class, 'getPrimaryInfo'])->name('student.show.enrollees.register');
+
+    Route::get('/check-enrollment-status/{lrn}', [RegisterStudent::class, 'checkEnrollmentStatus']);
+
     Route::get('/StEmelieLearningCenter.HopeSci66/registrar/dashboard', [Cevent::class, 'showAllRegistrar'])->name('registrar.registrar_dashboard');
 
     Route::get('/StEmelieLearningCenter.HopeSci66/registrar/online-application', [RegisterStudent::class, 'showAllRegisterRegistrar'])->name('registrar.register.student');

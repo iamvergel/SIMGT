@@ -87,6 +87,7 @@ class Cstudentinfo extends Controller
             'sf10' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
             'sf9' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
             //usewraccount
+            'username' => 'required',
             'password' => 'required',
         ]);
 
@@ -98,7 +99,7 @@ class Cstudentinfo extends Controller
 
             $userAccount = new Mstudentaccount();
             $userAccount->student_number = $validatedData['student_number'];
-            $userAccount->username = $username;
+            $userAccount->username = $validatedData['username'];
             $userAccount->password = $validatedData['password'];
             $userAccount->save();
 
