@@ -603,10 +603,10 @@ class Cstudentinfo extends Controller
         return back()->with('success', 'Student information updated successfully!');
     }
 
-    public function showStudentInfotmation(Request $request, $id)
+    public function showStudentInfotmation(Request $request, $lrn)
     {
         // Fetch the specific student based on the provided id
-        $students = StudentInfo::where('id', $id)->where('status', 'Enrolled')->first();
+        $students = StudentInfo::where('lrn', $lrn)->where('status', 'Enrolled')->first();
 
         // If the student doesn't exist, you could redirect back or show an error message
         if (!$students) {

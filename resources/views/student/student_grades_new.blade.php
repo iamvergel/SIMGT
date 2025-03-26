@@ -2,13 +2,12 @@
 
 <body class="font-poppins bg-gray-200">
 
-    <div class="flex w-full h-screen">
-        <!-- Sidebar -->
-        @include('student.includes.sidebar')
+<div class="flex w-full h-screen">
+    <!-- Sidebar -->
+    @include('student.includes.sidebar')
 
-        <!-- Main Content -->
-        <main
-            class="flex-grow rounded-none lg:rounded-r-lg lg:rounded-l-none bg-white shadow-lg overflow-hidden overflow-y-scroll">
+    <!-- Main Content -->
+    <main class="flex-grow rounded-none  lg:rounded-l-none bg-white shadow-lg overflow-hidden overflow-y-scroll">
             @include('student.includes.topnav')
 
             <div class="p-5 py-3">

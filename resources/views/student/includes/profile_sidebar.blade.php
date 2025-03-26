@@ -17,13 +17,13 @@
       <div class="flex">
         <div class="hidden mx-2 lg:flex space-x-4">
           <div class="px-0 pt-2 pb-3 space-y-1 text-[15px]">
-            <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/account"
+            <a href="/student/student-profile/account"
               class="nav-link w-full text-teal-900 hover:bg-teal-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium py-5"><i
                 class="fas fa-user mr-2"></i>Account</a>
-            <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/security"
+            <a href="/student/student-profile/security"
               class="nav-link text-teal-900 hover:bg-teal-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium py-5"><i
                 class="fas fa-lock mr-2"></i>Security</a>
-            <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/additional-inforamtion"
+            <a href="/student/student-profile/additional-inforamtion"
               class="nav-link text-teal-900 hover:bg-teal-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium py-5"><i
                 class="fa-solid fa-file me-2"></i>Student Additional Information</a>
           </div>
@@ -34,13 +34,13 @@
 
   <div id="mobile-menu" class="max-h-0 overflow-hidden transition-max-height duration-300">
     <div class="px-2 pt-2 pb-3 space-y-1 text-[15px]">
-      <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/account"
+      <a href="/student/student-profile/account"
         class="nav-link text-teal-900 hover:bg-teal-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium py-5"><i
           class="fas fa-user mr-2"></i>Account</a>
-      <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/security"
+      <a href="/student/student-profile/security"
         class="nav-link text-teal-900 hover:bg-teal-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium py-5"><i
           class="fas fa-lock mr-2"></i>Security</a>
-      <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/additional-inforamtion"
+      <a href="/student/student-profile/additional-inforamtion"
         class="nav-link text-teal-900 hover:bg-teal-600 hover:text-white block px-3 py-2 rounded-md text-base font-medium py-5"><i
           class="fa-solid fa-file me-2"></i>Student Additional Information</a>
     </div>

@@ -179,7 +179,7 @@
             <p class="text-[14px] mt-10 ml-7 text-white font-normal uppercase tracking-wider">
                 REGISTRAR DASHBOARD
             </p>
-            <!-- <a href="/StEmelieLearningCenter.HopeSci66/admin/dashboard"
+            <!-- <a href="/admin/dashboard"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
                 id="dashboardLink">
                 <i class="fa-solid fa-table-columns"></i>
@@ -194,7 +194,7 @@
                 <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
             </button>
             <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="dashboard">
-                <a href="/StEmelieLearningCenter.HopeSci66/registrar/dashboard"
+                <a href="/registrar/dashboard"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
                     title="Dashbaord">
                     <i class="fa-solid fa-table-columns"></i>
@@ -215,37 +215,37 @@
                 <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
             </button>
             <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="studentmanagement">
-                <a href="/StEmelieLearningCenter.HopeSci66/registrar/student-management/GradeOne"
+                <a href="/registrar/student-management/GradeOne"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
                     title="Grade One">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade One</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/registrar/student-management/GradeTwo"
+                <a href="/registrar/student-management/GradeTwo"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Grade Two">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Two</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/registrar/student-management/GradeThree"
+                <a href="/registrar/student-management/GradeThree"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Grade Three">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Three</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/registrar/student-management/GradeFour"
+                <a href="/registrar/student-management/GradeFour"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Grade Four">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Four</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/registrar/student-management/GradeFive"
+                <a href="/registrar/student-management/GradeFive"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Grade Five">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Five</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/registrar/student-management/GradeSix"
+                <a href="/registrar/student-management/GradeSix"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Grade Six">
                     <i class="fa-regular fa-circle"></i>
@@ -347,31 +347,31 @@
                 <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
             </button>
             <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="reportsection">
-                <a href="/StEmelieLearningCenter.HopeSci66/registrar/online-application"
+                <a href="/registrar/online-application"
                     class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
                     title="Online Application">
                     <i class="fa-solid fa-folder-open"></i>
                     <span class="sidebar-text ml-2">Online Application</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/registrar/student-registration"
+                <a href="/registrar/student-registration"
                     class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
                     title="Student Registration">
                     <i class="fa-solid fa-folder-open"></i>
                     <span class="sidebar-text ml-2">Student Registration</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/registrar/Report-Section/Graduate-Student"
+                <a href="/registrar/Report-Section/Graduate-Student"
                     class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Graduate Student">
                     <i class="fa-solid fa-user-graduate"></i>
                     <span class="sidebar-text ml-2">Graduate Student</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/registrar/Report-Section/Drop-Student"
+                <a href="/registrar/Report-Section/Drop-Student"
                     class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Drop Student">
                     <i class="fa-solid fa-user-xmark"></i>
                     <span class="sidebar-text ml-2">Drop Student</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/registrar/Report-Section/Transfer-Student"
+                <a href="/registrar/Report-Section/Transfer-Student"
                     class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
                     title="Transfer Student">
                     <i class="fa-solid fa-box-archive"></i>
@@ -389,7 +389,7 @@
                     <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
                 </button>
                 <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="manageaccount">
-                    <a href="/StEmelieLearningCenter.HopeSci66/registrar/manage-accounts/teacher-users"
+                    <a href="/registrar/manage-accounts/teacher-users"
                         class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Teachers">
                         <i class="fa-solid fa-user"></i>
@@ -407,13 +407,13 @@
                     <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
                 </button>
                 <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="managesystem">
-                    <a href="/StEmelieLearningCenter.HopeSci66/registrar/manage-system/section"
+                    <a href="/registrar/manage-system/section"
                         class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Section">
                         <i class="fa-regular fa-circle"></i>
                         <span class="sidebar-text ml-2">Section</span>
                     </a>
-                    <a href="/StEmelieLearningCenter.HopeSci66/registrar/manage-system/subject"
+                    <a href="/registrar/manage-system/subject"
                         class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Subject">
                         <i class="fa-regular fa-circle"></i>
@@ -531,7 +531,7 @@
 
                                     // Create the subject link with the updated URL
                                     const subjectLink = $('<a>', {
-                                        href: `/StEmelieLearningCenter.HopeSci66/admin/Grade-book/class-record/GradeOne/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        href: `/admin/Grade-book/class-record/GradeOne/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
                                         class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
                                         title: `${subject.subject} - ${subject.grade} ${subject.section}`,
                                     });
@@ -616,7 +616,7 @@
 
                                     // Create the subject link with the updated URL
                                     const subjectLink = $('<a>', {
-                                        href: `/StEmelieLearningCenter.HopeSci66/admin/Grade-book/class-record/GradeTwo/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        href: `/admin/Grade-book/class-record/GradeTwo/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
                                         class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
                                         title: `${subject.subject} - ${subject.grade} ${subject.section}`,
                                     });
@@ -701,7 +701,7 @@
 
                                     // Create the subject link with the updated URL
                                     const subjectLink = $('<a>', {
-                                        href: `/StEmelieLearningCenter.HopeSci66/admin/Grade-book/class-record/GradeThree/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        href: `/admin/Grade-book/class-record/GradeThree/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
                                         class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
                                         title: `${subject.subject} - ${subject.grade} ${subject.section}`,
                                     });
@@ -786,7 +786,7 @@
 
                                     // Create the subject link with the updated URL
                                     const subjectLink = $('<a>', {
-                                        href: `/StEmelieLearningCenter.HopeSci66/admin/Grade-book/class-record/GradeFour/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        href: `/admin/Grade-book/class-record/GradeFour/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
                                         class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
                                         title: `${subject.subject} - ${subject.grade} ${subject.section}`,
                                     });
@@ -871,7 +871,7 @@
 
                                     // Create the subject link with the updated URL
                                     const subjectLink = $('<a>', {
-                                        href: `/StEmelieLearningCenter.HopeSci66/admin/Grade-book/class-record/GradeFive/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        href: `/admin/Grade-book/class-record/GradeFive/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
                                         class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
                                         title: `${subject.subject} - ${subject.grade} ${subject.section}`,
                                     });
@@ -956,7 +956,7 @@
 
                                     // Create the subject link with the updated URL
                                     const subjectLink = $('<a>', {
-                                        href: `/StEmelieLearningCenter.HopeSci66/admin/Grade-book/class-record/GradeSix/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        href: `/admin/Grade-book/class-record/GradeSix/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
                                         class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
                                         title: `${subject.subject} - ${subject.grade} ${subject.section}`,
                                     });

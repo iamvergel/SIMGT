@@ -220,7 +220,7 @@
 
         <div class="mt-10 mx-1">
             <p class="text-[14px] mt-5 ml-7 text-teal-100 font-semibold">STUDENT DASHBOARD</p>
-            <a href="/StEmelieLearningCenter.HopeSci66/student/dashboard"
+            <a href="/student/dashboard"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip mt-2"
                 id="dashboardLink">
                 <i class="fa-solid fa-table-columns"></i>
@@ -229,7 +229,7 @@
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>
 
-            <a href="/StEmelieLearningCenter.HopeSci66/student/calendar"
+            <a href="/student/calendar"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
                 id="dashboardLink">
                 <i class="fas fa-calendar"></i>
@@ -241,7 +241,7 @@
 
             <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">SIMGT PROFILE</p>
 
-            <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/account"
+            <a href="/student/student-profile/account"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
                 id="dashboardLink">
                 <i class="fas fa-user"></i>
@@ -253,7 +253,7 @@
 
             <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">STUDENT GRADES</p>
 
-            <a href="/StEmelieLearningCenter.HopeSci66/student/student-grade"
+            <a href="/student/student-grade"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip mt-2"
                 id="dashboardLink">
                 <i class="fa-solid fa-file"></i>
@@ -263,7 +263,7 @@
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>
 
-            <a href="/StEmelieLearningCenter.HopeSci66/student/grades"
+            <a href="/student/grades"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip hidden"
                 id="dashboardLink">
                 <i class="fa-solid fa-file"></i>
@@ -275,7 +275,7 @@
 
             <div id="registrationLink" class="block" style="display: none;">
                 <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold uppercase">Registration</p>
-                <a href="/StEmelieLearningCenter.HopeSci66/student/registration"
+                <a href="/student/registration"
                     class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip MT-2"
                     id="dashboardLink">
                     <i class="fa-solid fa-file"></i>
@@ -344,7 +344,7 @@
 
         <div class="mt-10 mx-1">
             <p class="text-[14px] mt-5 ml-7 text-teal-100 font-semibold">STUDENT DASHBOARD</p>
-            <a href="/StEmelieLearningCenter.HopeSci66/student/dashboard"
+            <a href="/student/dashboard"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip mt-2"
                 id="dashboardLink">
                 <i class="fa-solid fa-table-columns"></i>
@@ -353,7 +353,7 @@
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>
 
-            <a href="/StEmelieLearningCenter.HopeSci66/student/calendar"
+            <a href="/student/calendar"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
                 id="dashboardLink">
                 <i class="fas fa-calendar"></i>
@@ -364,7 +364,7 @@
             </a>
 
             <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">SIMGT PROFILE</p>
-            <a href="/StEmelieLearningCenter.HopeSci66/student/student-profile/account"
+            <a href="/student/student-profile/account"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip mt-2"
                 id="dashboardLink">
                 <i class="fas fa-user"></i>
@@ -375,7 +375,7 @@
             </a>
 
             <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold">STUDENT GRADES</p>
-            <a href="/StEmelieLearningCenter.HopeSci66/student/student-grade"
+            <a href="/student/student-grade"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip mt-2"
                 id="dashboardLink">
                 <i class="fa-solid fa-file"></i>
@@ -385,7 +385,7 @@
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>
 
-            <a href="/StEmelieLearningCenter.HopeSci66/student/grades"
+            <a href="/student/grades"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip hidden"
                 id="dashboardLink">
                 <i class="fa-solid fa-file"></i>
@@ -397,7 +397,7 @@
 
             <div id="registrationLinkMobile" class="block" style="display: none;">
                 <p class="text-[14px] mt-10 ml-7 text-teal-100 font-semibold uppercase">Registration</p>
-                <a href="/StEmelieLearningCenter.HopeSci66/student/registration"
+                <a href="/student/registration"
                     class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip MT-2"
                     id="dashboardLink">
                     <i class="fa-solid fa-file"></i>

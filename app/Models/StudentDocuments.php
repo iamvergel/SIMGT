@@ -13,6 +13,7 @@ class StudentDocuments extends Model
     protected $fillable = [
         'student_number',
         'birth_certificate',
-        'proof_of_residency',
+        'sf10',
+        'sf9',
     ];
 }

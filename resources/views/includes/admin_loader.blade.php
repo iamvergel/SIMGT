@@ -30,7 +30,7 @@
 
     <script>
         setTimeout(function () {
-            window.location.href = "/StEmelieLearningCenter.HopeSci66/admin/dashboard"; 
+            window.location.href = "/admin/dashboard"; 
         }, 1000);
     </script>
 </body>

@@ -788,7 +788,7 @@
                                             <input type="file" id="sf9" name="sf9"
                                                 accept=".pdf,.jpg,.jpeg,.png"  class="hidden">
                                         </label>
-                                        <div class="mt-2 text-gray-600" id="sf9">No file chosen
+                                        <div class="mt-2 text-gray-600" id="sf9New">No file chosen
                                         </div>
                                     </div>
                                 </div>
@@ -905,7 +905,7 @@
                         document
                         .querySelector("#sf9")
                         .addEventListener("change", function () {
-                            document.querySelector("#sf9").textContent = this
+                            document.querySelector("#sf9New").textContent = this
                                 .files[0]
                                 ? this.files[0].name
                                 : "No file chosen";

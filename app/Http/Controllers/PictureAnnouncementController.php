@@ -49,7 +49,7 @@ class PictureAnnouncementController extends Controller
         $request->image->storeAs('announcements', $fileName, 'public');
 
         // Store the announcement
-        PictureAnnouncement::create([
+        PictureAnnouncement::create(attributes: [
             'date' => $request->date,
             'image' => $fileName,
         ]);

@@ -183,7 +183,7 @@
             <p class="text-[14px] mt-10 ml-7 text-white font-normal uppercase tracking-wider">
                 TEACHER DASHBOARD
             </p>
-            <!-- <a href="/StEmelieLearningCenter.HopeSci66/admin/dashboard"
+            <!-- <a href="/admin/dashboard"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
                 id="dashboardLink">
                 <i class="fa-solid fa-table-columns"></i>
@@ -198,14 +198,14 @@
                 <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
             </button>
             <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="dashboard">
-                <a href="/StEmelieLearningCenter.HopeSci66/teacher/dashboard"
+                <a href="/teacher/dashboard"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
                     title="Dashbaord">
                     <i class="fa-solid fa-table-columns"></i>
                     <span class="sidebar-text ml-2">Dashboard</span>
 
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/teacher/calendar"
+                <a href="/teacher/calendar"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
                     title="Calendar">
                     <i class="fa-solid fa-calendar"></i>
@@ -225,7 +225,7 @@
                 My Advisory
             </p>
 
-            <a href="/StEmelieLearningCenter.HopeSci66/teacher/myadvisory"
+            <a href="/teacher/myadvisory"
                 class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
                 title="My Advisory">
                 <i class="fa-solid fa-users"></i>
@@ -239,7 +239,7 @@
                 Class Record
             </p>
 
-            <!-- <a href="/StEmelieLearningCenter.HopeSci66/teacher/class-record"
+            <!-- <a href="/teacher/class-record"
                 class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip {{ request()->is('teacher/class-record') ? 'bg-teal-700' : '' }}"
                 title="Class Record">
                 <i class="fa-solid fa-book-open"></i>
@@ -314,7 +314,7 @@
                         data.forEach(function (subject) {
                             const currentUrl = window.location.pathname;
                             const subjectElement = $('<a>', {
-                                href: `/StEmelieLearningCenter.HopeSci66/teacher/class-record/${subject.subject}`,
+                                href: `/teacher/class-record/${subject.subject}`,
                                 class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
                                 title: 'Class Record'
                             });

@@ -228,8 +228,8 @@
                                                 placeholder="Enter Learner Reference Number (LRN)"
                                                 onkeydown="return event.key != 'ArrowUp' && event.key != 'ArrowDown'"
                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 12)" />
-                                            <small class="text-gray-500 text-[12px]">(LRN is 12 digits) <span
-                                                    class="text-red-600 text-xs hidden" id="lrnAlert">LRN is
+                                            <small class="text-gray-500 text-[12px]">(LRN must be exactly 12 digits)
+                                                <span class="text-red-600 text-xs hidden" id="lrnAlert">LRN is
                                                     required</span></small>
                                         </div>
 
@@ -389,7 +389,7 @@
                                                 <ul id="religionList"
                                                     class="hidden absolute w-full bg-white border border-gray-300 mt-1 rounded shadow-lg max-h-60 overflow-y-auto z-10">
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
-                                                        onclick="selectReligion('Roman Catholicism')">Roman Catholicism
+                                                        onclick="selectReligion('Roman Catholic')">Roman Catholic
                                                     </li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
                                                         onclick="selectReligion('Protestantism')">Protestantism</li>
@@ -774,7 +774,7 @@
                                 function showMotherInfoStep() {
                                     if (checkParentInfoValidity()) {
                                         document.getElementById('parentsInfo').classList.remove('hidden'); // Show parentsInfo section
-                                    
+
                                     }
                                 }
 
@@ -1118,20 +1118,24 @@
                                         <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4">
                                             <label class="block mb-2 text-sm font-normal text-teal-700 text-sm">( If
                                                 your guardian is a parent, select 'Parent/Parents'; if your guardian is
-                                                someone else, select 'Other.' )<span class="text-red-600">*</span></label>
+                                                someone else, select 'Other.' )<span
+                                                    class="text-red-600">*</span></label>
                                             <div class="flex items-center mb-4 mt-4">
                                                 <input type="radio" id="guardianMother" name="guardianType"
-                                                    value="parent" class="mr-2" onclick="setGuardianInfo('parent')" required>
+                                                    value="parent" class="mr-2" onclick="setGuardianInfo('parent')"
+                                                    required>
                                                 <label for="guardianParents"
                                                     class="mr-4 text-sm font-medium text-gray-900">Parent/Parents</label>
 
-                                                <input type="radio" id="guardianother" name="guardianType"
-                                                    value="father" class="mr-2" onclick="setGuardianInfo('other')" required>
+                                                <input type="radio" id="guardianother" name="guardianType" value="other"
+                                                    class="mr-2" onclick="setGuardianInfo('other')" required>
                                                 <label for="guardianOther"
                                                     class="text-sm font-medium text-gray-900">Other</label>
                                             </div>
-
+                                            <small class="text-red-600 text-xs hidden"
+                                                id="guardianSelectionAlert">Select Guardian is required</small>
                                         </div>
+
 
                                         <!-- Guardian's Information -->
                                         <!-- Guardian's First Name -->
@@ -1235,7 +1239,7 @@
                                                     class="hidden absolute w-full bg-white border border-gray-300 mt-1 rounded shadow-lg max-h-60 overflow-y-auto z-10">
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
                                                         onclick="selectReligionGuardian('Roman Catholicism')">Roman
-                                                        Catholicism
+                                                        Catholic
                                                     </li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
                                                         onclick="selectReligionGuardian('Protestantism')">Protestantism
@@ -1323,9 +1327,74 @@
                                     }
                                 });
 
+                                function setGuardianInfo(type) {
+                                    const motherFirstName = document.getElementById('motherFirstName').value;
+                                    const motherLastName = document.getElementById('motherLastName').value;
+                                    const motherMiddleName = document.getElementById('motherMiddleName').value; // Get mother's middle name
+
+                                    const fatherFirstName = document.getElementById('fatherFirstName').value;
+                                    const fatherLastName = document.getElementById('fatherLastName').value;
+                                    const fatherMiddleName = document.getElementById('fatherMiddleName').value; // Get father's middle name
+                                    const fatherSuffix = document.getElementById('fatherSuffixName').value;
+
+                                    const guardianRelationship = document.getElementById('guardianRelationship');
+
+                                    if (type === 'parent') {
+                                        document.getElementById('guardianFirstName').value = "N/A";
+                                        document.getElementById('guardianLastName').value = "N/A";
+                                        document.getElementById('guardianMiddleName').value = "N/A"; // Set middle name
+                                        document.getElementById('guardianSuffixName').value = ""; // Reset suffix when choosing mother
+                                        document.getElementById('guardianRelationship').value = "N/A";
+                                        document.getElementById('guardianReligion').value = "N/A";
+                                        document.getElementById('gfname').classList.add('hidden');
+                                        document.getElementById('glname').classList.add('hidden');
+                                        document.getElementById('gmname').classList.add('hidden');
+                                        document.getElementById('gsname').classList.add('hidden');
+                                        document.getElementById('grelatioanship').classList.add('hidden');
+                                        document.getElementById('gnumber').classList.add('hidden');
+                                        document.getElementById('greligion').classList.add('hidden');
+                                    } else if (type === 'other') {
+                                        document.getElementById('gfname').classList.remove('hidden');
+                                        document.getElementById('glname').classList.remove('hidden');
+                                        document.getElementById('gmname').classList.remove('hidden');
+                                        document.getElementById('gsname').classList.remove('hidden');
+                                        document.getElementById('grelatioanship').classList.remove('hidden');
+                                        document.getElementById('gnumber').classList.remove('hidden');
+                                        document.getElementById('greligion').classList.remove('hidden');
+                                        document.getElementById('guardianFirstName').value = null;
+                                        document.getElementById('guardianLastName').value = null;
+                                        document.getElementById('guardianMiddleName').value = null; // Set middle name
+                                        document.getElementById('guardianSuffixName').value = null; // Reset suffix when choosing mother
+                                        document.getElementById('guardianRelationship').value = null;
+                                        document.getElementById('guardianReligion').value = null;
+                                    }
+                                }
+
                                 // Place this script at the beginning to ensure the function is defined before use.
                                 function checkParentInfoValidityParents() {
                                     var isValidParent = true;
+
+                                    const guardianSelectionAlert = document.getElementById('guardianSelectionAlert');
+                                    const guardianRadioButtons = document.getElementsByName('guardianType');
+
+                                    // Check if either 'Parent/Parents' or 'Other' radio button is selected
+                                    let hasChecked = false;
+                                    guardianRadioButtons.forEach(function (radioButton) {
+                                        if (radioButton.checked) {
+                                            hasChecked = true;
+                                            if (radioButton.value === 'other') {
+                                                isValidParent = false;
+                                            }
+                                        }
+                                    });
+
+                                    if (hasChecked) {
+                                        guardianSelectionAlert.classList.add('hidden');
+                                    } else {
+                                        guardianSelectionAlert.classList.remove('hidden');
+                                        isValidParent = false;
+                                    }
+
 
                                     // Validate Father's Last Name
                                     var fatherLastNameInput = document.getElementById('fatherLastName');
@@ -1405,7 +1474,7 @@
                                     if (guardianLastNameInput.value === '') {
                                         guardianLastNameInput.classList.add('border-red-500');
                                         guardianLastNameAlert.classList.remove('hidden');
-                                        isValidGuardian = false;
+                                        isValidParent = false;
                                     } else {
                                         guardianLastNameInput.classList.remove('border-red-500');
                                         guardianLastNameAlert.classList.add('hidden');
@@ -1417,17 +1486,17 @@
                                     if (guardianFirstNameInput.value === '') {
                                         guardianFirstNameInput.classList.add('border-red-500');
                                         guardianFirstNameAlert.classList.remove('hidden');
-                                        isValidGuardian = false;
+                                        isValidParent = false;
                                     } else if (guardianFirstNameInput.value === fatherFirstNameInput.value) {
                                         guardianFirstNameInput.classList.add('border-red-500');
                                         guardianFirstNameAlert.classList.remove('hidden');
                                         guardianFirstNameAlert.innerHTML = 'Guardian cannot be Father';
-                                        isValidGuardian = false;
+                                        isValidParent = false;
                                     } else if (guardianFirstNameInput.value === motherFirstNameInput.value) {
                                         guardianFirstNameInput.classList.add('border-red-500');
                                         guardianFirstNameAlert.classList.remove('hidden');
                                         guardianFirstNameAlert.innerHTML = 'Guardian cannot be Mother';
-                                        isValidGuardian = false;
+                                        isValidParent = false;
                                     } else {
                                         guardianFirstNameInput.classList.remove('border-red-500');
                                         guardianFirstNameAlert.classList.add('hidden');
@@ -1439,7 +1508,7 @@
                                     if (guardianRelationshipInput.value === '') {
                                         guardianRelationshipInput.classList.add('border-red-500');
                                         guardianRelationshipAlert.classList.remove('hidden');
-                                        isValidGuardian = false;
+                                        isValidParent = false;
                                     } else {
                                         guardianRelationshipInput.classList.remove('border-red-500');
                                         guardianRelationshipAlert.classList.add('hidden');
@@ -1451,12 +1520,12 @@
                                     if (guardianContactNumberInput.value === '') {
                                         guardianContactNumberInput.classList.add('border-red-500');
                                         guardianContactNumberAlert.classList.remove('hidden');
-                                        isValidGuardian = false;
+                                        isValidParent = false;
                                     } else if (guardianLastNameInput.value.toUpperCase() === 'N/A' || guardianLastNameInput.value.toUpperCase() === 'NA') {
                                         guardianContactNumberInput.classList.remove('border-red-500');
                                         guardianContactNumberAlert.classList.add('hidden');
 
-                                        isValidGuardian = true;
+                                        isValidParent = true;
                                     } else if (guardianContactNumberInput.value.length !== 11) {
                                         guardianContactNumberInput.classList.add('border-red-500');
                                         guardianContactNumberAlert.classList.remove('hidden');
@@ -1473,7 +1542,7 @@
                                     if (guardianReligionInput.value === '') {
                                         guardianReligionInput.classList.add('border-red-500');
                                         guardianReligionAlert.classList.remove('hidden');
-                                        isValidGuardian = false;
+                                        isValidParent = false;
                                     } else {
                                         guardianReligionInput.classList.remove('border-red-500');
                                         guardianReligionAlert.classList.add('hidden');
@@ -1487,7 +1556,7 @@
                                 function showNextStepGuardians() {
                                     if (checkParentInfoValidityParents()) {
                                         // Show the guardian information section
-                                       
+
                                         document.getElementById('emergencyContactInfo').classList.remove('hidden');
                                     }
                                 }
@@ -1600,7 +1669,7 @@
                                     <div class="flex justify-end p-2">
                                         <button
                                             class="bg-teal-700 text-white hover:bg-teal-800 hover:text-white font-normal rounded-md text-sm w-full sm:w-auto px-10 py-2 text-center"
-                                            onclick="showNextStepReview()" type="button" id="submitButton">Next</button>
+                                            onclick="showNextStepReview()" type="button">Next</button>
                                     </div>
                                 </div>
                             </li>
@@ -1786,13 +1855,90 @@
                             <h5>Messenger Account: <span id="reviewMessengerAccount"></span></h5>
 
                         </div>
+                        <div class="col-span-4 flex  justify-center lg:justify-end mt-20 lg:me-20">
+                                        <label class="flex items-center space-x-2">
+                                            <input type="checkbox" id="confirmCheck"
+                                                class="form-checkbox h-5 w-5 text-teal-600">
+                                            <span>I confirm that the above information is correct.</span>
+
+                                        </label>
+                                    </div>
                         <div class="flex justify-end items-center mt-5">
                             <button onclick="document.getElementById('reviewModal').classList.add('hidden')"
                                 class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Close</button>
-                            <button onclick="showNextStepReview()" id="nextbtnreview" disabled
-                                class="ml-3 bg-gray-500 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Next</button>
+                            <button onclick="showNextStepReview()" id="submitButton" type="submit" disabled
+                                class="ml-3 bg-gray-400 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Next</button>
                         </div>
                     </div>
+
+                    <script>
+    // Function to populate the review modal with the form input values
+    function populateModalAndLogValues() {
+        const elements = [
+            { id: 'status', reviewId: 'reviewAdmissionType' },
+            { id: 'grade', reviewId: 'reviewGrade' },
+            { id: 'lrn', reviewId: 'reviewLRN' },
+            { id: 'lastName', reviewId: 'reviewLastName' },
+            { id: 'firstName', reviewId: 'reviewFirstName' },
+            { id: 'middleName', reviewId: 'reviewMiddleName' },
+            { id: 'suffix', reviewId: 'reviewSuffix' },
+            { id: 'birthplace', reviewId: 'reviewBirthplace' },
+            { id: 'birthDate', reviewId: 'reviewBirthDate' },
+            { id: 'age', reviewId: 'reviewAge' },
+            { id: 'gender', reviewId: 'reviewGender' },
+            { id: 'email', reviewId: 'reviewEmailAddress' },
+            { id: 'contactNumber', reviewId: 'reviewContactNumber' },
+            { id: 'religion', reviewId: 'reviewReligion' },
+            { id: 'regionValue', reviewId: 'reviewRegion' },
+            { id: 'provinceValue', reviewId: 'reviewProvince' },
+            { id: 'cityvalue', reviewId: 'reviewCity' },
+            { id: 'barangayvalue', reviewId: 'reviewBarangay' },
+            { id: 'streetvalue', reviewId: 'reviewStreet' },
+            { id: 'fatherLastName', reviewId: 'reviewFatherLastName' },
+            { id: 'fatherFirstName', reviewId: 'reviewFatherFirstName' },
+            { id: 'fatherMiddleName', reviewId: 'reviewFatherMiddleName' },
+            { id: 'fatherOccupation', reviewId: 'reviewFatherOccupation' },
+            { id: 'motherLastName', reviewId: 'reviewMotherLastName' },
+            { id: 'motherFirstName', reviewId: 'reviewMotherFirstName' },
+            { id: 'motherMiddleName', reviewId: 'reviewMotherMiddleName' },
+            { id: 'motherOccupation', reviewId: 'reviewMotherOccupation' },
+            { id: 'guardianLastName', reviewId: 'reviewGuardianLastName' },
+            { id: 'guardianFirstName', reviewId: 'reviewGuardianFirstName' },
+            { id: 'guardianMiddleName', reviewId: 'reviewGuardianMiddleName' },
+            { id: 'guardianSuffix', reviewId: 'reviewGuardianSuffix' },
+            { id: 'guardianRelationship', reviewId: 'reviewGuardianRelationship' },
+            { id: 'guardianContactNumber', reviewId: 'reviewGuardianContactNumber' },
+            { id: 'guardianReligion', reviewId: 'reviewGuardianReligion' },
+            { id: 'emergencyContactPerson', reviewId: 'reviewEmergencyContactPerson' },
+            { id: 'emergencyContactNumber', reviewId: 'reviewEmergencyContactNumber' },
+            { id: 'emergencyEmail', reviewId: 'reviewEmergencyEmail' },
+            { id: 'messengerAccount', reviewId: 'reviewMessengerAccount' }
+        ];
+
+        elements.forEach(element => {
+            const inputElement = document.getElementById(element.id);
+            const value = inputElement ? (inputElement.value || inputElement.options[inputElement.selectedIndex]?.text) : ''; // For selects, we get the selected text
+            document.getElementById(element.reviewId).innerText = value;
+            console.log(`${element.reviewId}: ${value}`);
+        });
+    }
+
+    // When the checkbox is checked, enable the submit button and update the button style
+    document.getElementById('confirmCheck').addEventListener('change', function () {
+        const submitButton = document.getElementById('submitButton');
+        submitButton.disabled = !this.checked;
+        submitButton.classList.toggle('bg-gray-400', !this.checked);
+        submitButton.classList.toggle('bg-teal-700', this.checked);
+        submitButton.classList.toggle('hover:bg-sky-700', this.checked);
+    });
+
+    // Populate the modal with values from the form
+    populateModalAndLogValues();
+
+    // Show the modal
+    document.getElementById('reviewModal').classList.remove('hidden');
+</script>
+
                 </div>
             </form>
         </div>
@@ -1842,49 +1988,6 @@
         }
     }
 
-    function setGuardianInfo(type) {
-        const motherFirstName = document.getElementById('motherFirstName').value;
-        const motherLastName = document.getElementById('motherLastName').value;
-        const motherMiddleName = document.getElementById('motherMiddleName').value; // Get mother's middle name
-
-        const fatherFirstName = document.getElementById('fatherFirstName').value;
-        const fatherLastName = document.getElementById('fatherLastName').value;
-        const fatherMiddleName = document.getElementById('fatherMiddleName').value; // Get father's middle name
-        const fatherSuffix = document.getElementById('fatherSuffixName').value;
-
-        const guardianRelationship = document.getElementById('guardianRelationship');
-
-        if (type === 'parent') {
-            document.getElementById('guardianFirstName').value = "N/A";
-            document.getElementById('guardianLastName').value = "N/A";
-            document.getElementById('guardianMiddleName').value = "N/A"; // Set middle name
-            document.getElementById('guardianSuffixName').value = ""; // Reset suffix when choosing mother
-            document.getElementById('guardianRelationship').value = "N/A";
-            document.getElementById('guardianReligion').value = "N/A";
-            document.getElementById('gfname').classList.add('hidden');
-            document.getElementById('glname').classList.add('hidden');
-            document.getElementById('gmname').classList.add('hidden');
-            document.getElementById('gsname').classList.add('hidden');
-            document.getElementById('grelatioanship').classList.add('hidden');
-            document.getElementById('gnumber').classList.add('hidden');
-            document.getElementById('greligion').classList.add('hidden');
-        } else if (type === 'other') {
-            document.getElementById('gfname').classList.remove('hidden');
-            document.getElementById('glname').classList.remove('hidden');
-            document.getElementById('gmname').classList.remove('hidden');
-            document.getElementById('gsname').classList.remove('hidden');
-            document.getElementById('grelatioanship').classList.remove('hidden');
-            document.getElementById('gnumber').classList.remove('hidden');
-            document.getElementById('greligion').classList.remove('hidden');
-            document.getElementById('guardianFirstName').value = "";
-            document.getElementById('guardianLastName').value = "";
-            document.getElementById('guardianMiddleName').value = ""; // Set middle name
-            document.getElementById('guardianSuffixName').value = ""; // Reset suffix when choosing mother
-            document.getElementById('guardianRelationship').value = "";
-            document.getElementById('guardianReligion').value = "";
-        }
-    }
-
     document.addEventListener("DOMContentLoaded", function () {
         document
             .querySelector("#birth_certificate")
@@ -1905,5 +2008,11 @@
     });
 </script>
 </body>
+
+<style>
+    form input[type="text"] {
+        text-transform: capitalize;
+    }
+</style>
 
 </html>

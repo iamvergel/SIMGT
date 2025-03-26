@@ -79,7 +79,7 @@
             <div class="p-5" id="student-data">
                 <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
                 <p class="text-2xl font-bold text-teal-900 ml-5">
-                    <span onclick="window.location.href ='/StEmelieLearningCenter.HopeSci66/admin/student-management'"
+                    <span onclick="window.location.href ='/admin/student-management'"
                         class="hover:text-teal-700">Student Management
                 </p>
                 <!-- <div class="w-24 mt-5 ml-5 text-[12px] text-white shadow-lg bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full py-2 text-center"

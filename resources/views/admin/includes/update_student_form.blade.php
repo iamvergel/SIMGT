@@ -90,12 +90,12 @@
                                         <span class="text-red-600 mr-1">*</span>Status :</label>
                                     <select id="status" name="status"
                                         class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                        required >
+                                        required>
                                         <option value="">Select Status</option>
                                         <option value="Enrolled" {{ old('status', $student->status) == 'Enrolled' ? 'selected' : '' }}>
                                             Enrolled</option>
                                         <option value="Graduated" {{ old('status', $student->status) == 'Graduated' ? 'selected' : '' }}>Graduated</option>
-                                        
+
                                         <option value="Transfer" {{ old('status', $student->status) == 'Transfer' ? 'selected' : '' }}>
                                             Transfer</option>
                                     </select>
@@ -111,13 +111,13 @@
                                 </div>
 
                                 <div>
-    <label for="schoolYear" class="block mb-2 text-sm font-bold text-gray-900">
-        <span class="text-red-600 mr-1">*</span>School Year :</label>
-    <input type="text" name="school_year" id="schoolYear"
-        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-        value="{{ old('school_year', $primaryInfo->school_year) }}" placeholder="0000-0000"
-        required readonly>
-</div>
+                                    <label for="schoolYear" class="block mb-2 text-sm font-bold text-gray-900">
+                                        <span class="text-red-600 mr-1">*</span>School Year :</label>
+                                    <input type="text" name="school_year" id="schoolYear"
+                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                        value="{{ old('school_year', $primaryInfo->school_year) }}" placeholder="0000-0000"
+                                        required readonly>
+                                </div>
 
                                 <!-- <label for="school" class="block mb-2 text-sm font-bold text-gray-900">School :</label> -->
                                 <input type="hidden" name="school" id="school"
@@ -125,168 +125,180 @@
                                     value="St. Emelie Learning Center" readonly>
 
 
-                                    <div>
-    <label for="grade" class="block mb-2 text-sm font-bold text-gray-900">
-        <span class="text-red-600 mr-1">*</span>Select Grade :</label>
-    <input type="hidden" name="grade" id="grade"
-        value="{{ old('grade', $primaryInfo->grade) }}">
-    <select id="gradeSelect"
-        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-        required>
-        <!-- Grades options to be dynamically handled -->
-        <option value="Grade One" {{ old('grade', $primaryInfo->grade) == 'Grade One' ? 'selected' : '' }}>Grade One</option>
-        <option value="Grade Two" {{ old('grade', $primaryInfo->grade) == 'Grade Two' ? 'selected' : '' }}>Grade Two</option>
-        <option value="Grade Three" {{ old('grade', $primaryInfo->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
-        <option value="Grade Four" {{ old('grade', $primaryInfo->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
-        <option value="Grade Five" {{ old('grade', $primaryInfo->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
-        <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
-    </select>
-</div>
-
-<div>
-    <label for="section" class="block mb-2 text-sm font-bold text-gray-900">
-        <span class="text-red-600 mr-1">*</span>Section :</label>
-    <select id="sectionSelect" name="section"
-        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-        required>
-        <!-- Sections will be populated dynamically -->
-    </select>
-</div>
-
-<div>
-    <label for="adviser" class="block mb-2 text-sm font-bold text-gray-900 mt-5">
-        <span class="text-red-600 mr-1">*</span>Select Adviser :</label>
-    <select id="teacherSelect" name="adviser"
-        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-        required>
-        <!-- Teachers will be populated dynamically -->
-    </select>
-</div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const gradeSelect = document.getElementById("gradeSelect");
-        const sectionSelect = document.getElementById("sectionSelect");
-        const teacherSelect = document.getElementById("teacherSelect");
-        const schoolYearSelect = document.getElementById("schoolYear");
-
-        const currentSection = "{{ old('section', $primaryInfo->section) }}"; // Get the current section value
-        const currentTeacher = "{{ old('adviser', $primaryInfo->adviser) }}"; // Get the current teacher value
-
-        // Function to load sections based on selected grade and school year
-        function loadSections() {
-            const selectedGrade = gradeSelect.value;
-            const selectedSchoolYear = schoolYearSelect.value;
-
-            if (selectedGrade && selectedSchoolYear) {
-                fetch(`/api/sections?grade=${selectedGrade}&school_year=${selectedSchoolYear}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        sectionSelect.innerHTML = '<option value="">Select Section</option>';
-                        if (data.length) {
-                            data.forEach(section => {
-                                const option = document.createElement("option");
-                                option.value = section.section;
-                                option.textContent = section.section;
-                                sectionSelect.appendChild(option);
-                            });
-                        } else {
-                            const option = document.createElement("option");
-                            option.value = "";
-                            option.textContent = "No Sections Available";
-                            sectionSelect.appendChild(option);
-                        }
-
-                        // Set the current section value (if available)
-                        if (currentSection) {
-                            sectionSelect.value = currentSection;
-                        }
-                    })
-                    .catch(error => {
-                        const option = document.createElement("option");
-                        option.value = "";
-                        option.textContent = "Error loading sections";
-                        sectionSelect.appendChild(option);
-                    });
-            }
-        }
-
-        // Function to load teachers based on selected grade, section, and school year
-        function loadTeachers() {
-            const selectedGrade = gradeSelect.value;
-            const selectedSection = sectionSelect.value;
-            const selectedSchoolYear = schoolYearSelect.value;
-
-            if (selectedGrade && selectedSection && selectedSchoolYear) {
-                fetch(`/api/allteachers?grade=${selectedGrade}&section=${selectedSection}&school_year=${selectedSchoolYear}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
-                        if (data.length) {
-                            data.forEach(teacher => {
-                                const option = document.createElement("option");
-                                option.value = teacher.teacher_number;
-                                option.textContent = teacher.name;
-                                teacherSelect.appendChild(option);
-                            });
-                        } else {
-                            const option = document.createElement("option");
-                            option.value = "";
-                            option.textContent = "No Teachers Available";
-                            teacherSelect.appendChild(option);
-                        }
-
-                        // Set the current teacher value (if available)
-                        if (currentTeacher) {
-                            teacherSelect.value = currentTeacher;
-                        }
-                    })
-                    .catch(error => {
-                        const option = document.createElement("option");
-                        option.value = "";
-                        option.textContent = "Error loading teachers";
-                        teacherSelect.appendChild(option);
-                    });
-            }
-        }
-
-        // Function to update the sections and teachers when the page is loaded
-        function initialize() {
-            const selectedGrade = gradeSelect.value;
-            const selectedSchoolYear = schoolYearSelect.value;
-
-            // Load sections and teachers automatically based on current grade and school year
-            loadSections();
-            loadTeachers();
-        }
-
-        // Initialize the dropdowns when the page is loaded
-        initialize();
-
-        // Event listener for the grade selection
-        gradeSelect.addEventListener("change", function () {
-            // Hide all grades except the selected one
-            const selectedGrade = gradeSelect.value;
-            const allOptions = gradeSelect.querySelectorAll("option");
-
-            allOptions.forEach(option => {
-                option.style.display = option.value === selectedGrade ? "block" : "none";
-            });
-
-            // Load sections and teachers based on the selected grade
-            loadSections();
-            loadTeachers();
-        });
-
-        // Event listeners for the section and school year changes
-        sectionSelect.addEventListener("change", loadTeachers);
-        schoolYearSelect.addEventListener("change", function () {
-            loadSections();
-            loadTeachers();
-        });
-    });
-</script>
+                                <div>
+                                    <label for="grade" class="block mb-2 text-sm font-bold text-gray-900">
+                                        <span class="text-red-600 mr-1">*</span>Select Grade :</label>
+                                    <select id="gradeSelect"
+                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                        required disabled>
+                                        <!-- Grades options to be dynamically handled -->
+                                        <option value="Grade One" {{ old('grade', $primaryInfo->grade) == 'Grade One' ? 'selected' : '' }}>Grade One</option>
+                                        <option value="Grade Two" {{ old('grade', $primaryInfo->grade) == 'Grade Two' ? 'selected' : '' }}>Grade Two</option>
+                                        <option value="Grade Three" {{ old('grade', $primaryInfo->grade) == 'Grade Three' ? 'selected' : '' }}>Grade Three</option>
+                                        <option value="Grade Four" {{ old('grade', $primaryInfo->grade) == 'Grade Four' ? 'selected' : '' }}>Grade Four</option>
+                                        <option value="Grade Five" {{ old('grade', $primaryInfo->grade) == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
+                                        <option value="Grade Six" {{ old('grade', $primaryInfo->grade) == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
+                                    </select>
+                                    <input type="hidden" name="grade" id="grade"
+                                        value="{{ old('grade', $primaryInfo->grade) }}">
                                 </div>
+
+                                <div>
+                                    <label for="section" class="block mb-2 text-sm font-bold text-gray-900">
+                                        <span class="text-red-600 mr-1">*</span>Section :</label>
+                                    <!-- <select id="sectionSelect" name="section"
+                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                        >
+                                       
+                                    </select> -->
+                                    <input type="text" name="section" id="section"
+                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                        value="{{ old('section', $primaryInfo->section) }}" placeholder="0000-0000"
+                                        required readonly>
+                                </div>
+
+                                <div>
+                                    <label for="adviser" class="block mb-2 text-sm font-bold text-gray-900 mt-5">
+                                        <span class="text-red-600 mr-1">*</span>Select Adviser :</label>
+                                    <!-- <select id="teacherSelect" name="adviser"
+                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                        >
+                                        
+                                    </select> -->
+                                    <input type="text" id="adviser"
+                                        class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                        value="{{ $teacherInfo->first_name }} {{ $teacherInfo->middle_name }} {{ $teacherInfo->last_name }}" placeholder="0000-0000"
+                                        required readonly>
+                                    <input type="hidden" name="adviser" id="advisercurrent" value="{{$primaryInfo->adviser }}">
+                                    
+                                </div>
+
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                        const gradeSelect = document.getElementById("gradeSelect");
+                                        const sectionSelect = document.getElementById("sectionSelect");
+                                        const teacherSelect = document.getElementById("teacherSelect");
+                                        const schoolYearSelect = document.getElementById("schoolYear");
+
+                                        const currentSection = document.getElementById("section").value; // Get the current section value
+                                        const currentTeacher = document.getElementById("advisercurrent").value; // Get the current teacher value
+
+                                        // Function to load sections based on selected grade and school year
+                                        function loadSections() {
+                                            const selectedGrade = gradeSelect.value;
+                                            const selectedSchoolYear = schoolYearSelect.value;
+
+                                            console.log(selectedGrade, selectedSchoolYear);
+
+                                            if (selectedGrade && selectedSchoolYear) {
+                                                fetch(`/api/sections?grade=${selectedGrade}&school_year=${selectedSchoolYear}`)
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        sectionSelect.innerHTML = '<option value="">Select Section</option>';
+                                                        if (data.length) {
+                                                            data.forEach(section => {
+                                                                const option = document.createElement("option");
+                                                                option.value = section.section;
+                                                                option.textContent = section.section;
+                                                                sectionSelect.appendChild(option);
+                                                            });
+                                                        } else {
+                                                            const option = document.createElement("option");
+                                                            option.value = "";
+                                                            option.textContent = "No Sections Available";
+                                                            sectionSelect.appendChild(option);
+                                                        }
+
+                                                        // Set the current section value (if available)
+                                                        if (currentSection) {
+                                                            sectionSelect.value = currentSection;
+                                                        }
+                                                    })
+                                                    .catch(error => {
+                                                        const option = document.createElement("option");
+                                                        option.value = "";
+                                                        option.textContent = "Error loading sections";
+                                                        sectionSelect.appendChild(option);
+                                                    });
+                                            }
+                                        }
+
+                                        // Function to load teachers based on selected grade, section, and school year
+                                        function loadTeachers() {
+                                            const selectedGrade = gradeSelect.value;
+                                            const selectedSection = sectionSelect.value;
+                                            const selectedSchoolYear = schoolYearSelect.value;
+
+                                            if (selectedGrade && selectedSection && selectedSchoolYear) {
+                                                fetch(`/api/allteachers?grade=${selectedGrade}&section=${selectedSection}&school_year=${selectedSchoolYear}`)
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        teacherSelect.innerHTML = '<option value="">Select Teacher</option>';
+                                                        if (data.length) {
+                                                            data.forEach(teacher => {
+                                                                const option = document.createElement("option");
+                                                                option.value = teacher.teacher_number;
+                                                                option.textContent = teacher.name;
+                                                                teacherSelect.appendChild(option);
+                                                            });
+                                                        } else {
+                                                            const option = document.createElement("option");
+                                                            option.value = "";
+                                                            option.textContent = "No Teachers Available";
+                                                            teacherSelect.appendChild(option);
+                                                        }
+
+                                                        // Set the current teacher value (if available)
+                                                        if (currentTeacher) {
+                                                            teacherSelect.value = currentTeacher;
+                                                        }
+                                                    })
+                                                    .catch(error => {
+                                                        const option = document.createElement("option");
+                                                        option.value = "";
+                                                        option.textContent = "Error loading teachers";
+                                                        teacherSelect.appendChild(option);
+                                                    });
+                                            }
+                                        }
+
+                                        // Function to update the sections and teachers when the page is loaded
+                                        function initialize() {
+                                            const selectedGrade = gradeSelect.value;
+                                            const selectedSchoolYear = schoolYearSelect.value;
+
+                                            // Load sections and teachers automatically based on current grade and school year
+                                            loadSections();
+                                            loadTeachers();
+                                        }
+
+                                        // Initialize the dropdowns when the page is loaded
+                                        initialize();
+
+                                        // Event listener for the grade selection
+                                        gradeSelect.addEventListener("change", function () {
+                                            // Hide all grades except the selected one
+                                            const selectedGrade = gradeSelect.value;
+                                            const allOptions = gradeSelect.querySelectorAll("option");
+
+                                            allOptions.forEach(option => {
+                                                option.style.display = option.value === selectedGrade ? "block" : "none";
+                                            });
+
+                                            // Load sections and teachers based on the selected grade
+                                            loadSections();
+                                            loadTeachers();
+                                        });
+
+                                        // Event listeners for the section and school year changes
+                                        sectionSelect.addEventListener("change", loadTeachers);
+                                        schoolYearSelect.addEventListener("change", function () {
+                                            loadSections();
+                                            loadTeachers();
+                                        });
+                                    });
+                                </script>
+                            </div>
                         </div>
 
                         <!-- Personal Information -->
@@ -781,8 +793,7 @@
                         <div class="mb-6">
                             <label for="sf10" class="block font-semibold text-gray-700 mb-2">SF10(Form 137):</label>
 
-                            <input type="file" id="sf10" name="sf10"
-                                accept=".pdf,.jpg,.jpeg,.png"
+                            <input type="file" id="sf10" name="sf10" accept=".pdf,.jpg,.jpeg,.png"
                                 class="w-full p-3 border-2 uppercase rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-700 text-[15px] file:mr-4 file:rounded-full file:border-0 file:bg-teal-100 file:px-4 file:py-2 file:text-md file:font-semibold file:text-teal-800 hover:file:bg-teal-200">
                             <!-- <div class="mt-2 text-gray-600" id="residencyFileName">No file chosen</div> -->
                             @if($student->documents && $student->documents->sf10)
@@ -797,8 +808,7 @@
                         <div class="mb-6">
                             <label for="sf9" class="block font-semibold text-gray-700 mb-2">SF9(Form 138):</label>
 
-                            <input type="file" id="sf10" name="sf9"
-                                accept=".pdf,.jpg,.jpeg,.png"
+                            <input type="file" id="sf9" name="sf9" accept=".pdf,.jpg,.jpeg,.png"
                                 class="w-full p-3 border-2 uppercase rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-700 text-[15px] file:mr-4 file:rounded-full file:border-0 file:bg-teal-100 file:px-4 file:py-2 file:text-md file:font-semibold file:text-teal-800 hover:file:bg-teal-200">
                             <!-- <div class="mt-2 text-gray-600" id="residencyFileName">No file chosen</div> -->
                             @if($student->documents && $student->documents->sf9)

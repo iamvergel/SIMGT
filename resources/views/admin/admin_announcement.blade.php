@@ -380,7 +380,7 @@
       // document.getElementById("updateAnnouncementDate").value = date;
 
       // Set the form action dynamically to the correct route
-      document.getElementById("deleteAnnouncementForm").action = "/StEmelieLearningCenter.HopeSci66/admin/announcement/" + id;
+      document.getElementById("deleteAnnouncementForm").action = "/admin/announcement/" + id;
 
       // Set the image source in the modal
       document.getElementById("currentImageDelete").src = "/storage/announcements/" + image;  // Corrected here

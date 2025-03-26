@@ -17,7 +17,7 @@
                     <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
                     <p class="text-2xl font-bold text-teal-900 ml-5">
                         <span
-                            onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/admin/student-management'"
+                            onclick="window.location.href='/admin/student-management'"
                             class="hover:text-teal-700">Management Account</span> / Admission
                     </p>
                 </div>
@@ -36,7 +36,7 @@
                         </button>
                         <!-- <button
                             class="block w-86 right-0 mr-10 text-[12px] text-white shadow-lg px-10 bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded py-2.5 text-center"
-                            onclick="window.location.href = '/StEmelieLearningCenter.HopeSci66/admin/student-management/AllStudentData'">
+                            onclick="window.location.href = '/admin/student-management/AllStudentData'">
                             Show student data
                         </button> -->
                     </div>

@@ -17,7 +17,7 @@
                     <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
                     <p class="text-2xl font-bold text-teal-900 ml-5">
                         <span
-                            onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/admin/student-management'"
+                            onclick="window.location.href='/admin/student-management'"
                             class="hover:text-teal-700">Student Management</span> / Grade Five
                     </p>
                 </div>
@@ -36,7 +36,7 @@
                         </button> -->
                         <!-- <button
                             class="block w-86 right-0 mr-10 text-[12px] text-white shadow-lg px-10 bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded py-2.5 text-center"
-                            onclick="window.location.href = '/StEmelieLearningCenter.HopeSci66/admin/student-management/AllStudentData'">
+                            onclick="window.location.href = '/admin/student-management/AllStudentData'">
                             Show student data
                         </button> -->
                         <h1 class="mx-5 font-semibold text-xl text-teal-800" id="section">Section :</h1>
@@ -171,7 +171,7 @@
 
                                                             <!-- View Student Information Button -->
                                                             <button class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-blue-700 rounded-full hover:bg-blue-600"
-                                                                    type="button" onclick="window.location.href = '{{ route('student.show', ['id' => $student->id]) }}'" title="Show Student Information">
+                                                                    type="button" onclick="window.location.href = '{{ route('student.show', ['lrn' => $student->lrn]) }}'" title="Show Student Information">
                                                                 <i class="fa-solid fa-eye"></i>
                                                             </button>
                                                         </td>

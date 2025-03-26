@@ -179,7 +179,7 @@
             <p class="text-[14px] mt-10 ml-7 text-white font-normal uppercase tracking-wider">
                 {{ session('admission_role') ?? 'Guest' }} DASHBOARD
             </p>
-            <!-- <a href="/StEmelieLearningCenter.HopeSci66/admin/dashboard"
+            <!-- <a href="/admin/dashboard"
                 class="flex justify-start w-full items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
                 id="dashboardLink">
                 <i class="fa-solid fa-table-columns"></i>
@@ -194,20 +194,20 @@
                 <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
             </button>
             <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="dashboard">
-                <a href="/StEmelieLearningCenter.HopeSci66/admission/dashboard"
+                <a href="/admission/dashboard"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip"
                     title="Dashbaord">
                     <i class="fa-solid fa-table-columns"></i>
                     <span class="sidebar-text ml-2">Dashboard</span>
 
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/admission/calendar"
+                <a href="/admission/calendar"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 tooltip"
                     title="Calendar">
                     <i class="fa-solid fa-calendar"></i>
                     <span class="sidebar-text ml-2">Calendar</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/admission/announcement"
+                <a href="/admission/announcement"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0 tooltip"
                     title="Announcement">
                     <i class="fa-solid fa-bullhorn"></i>
@@ -227,37 +227,37 @@
                 <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
             </button>
             <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="studentmanagement">
-                <a href="/StEmelieLearningCenter.HopeSci66/admission/student-management/GradeOne"
+                <a href="/admission/student-management/GradeOne"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
                     title="Grade One">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade One</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/admission/student-management/GradeTwo"
+                <a href="/admission/student-management/GradeTwo"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                     title="Grade Two">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Two</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/admission/student-management/GradeThree"
+                <a href="/admission/student-management/GradeThree"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
                     title="Grade Three">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Three</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/admission/student-management/GradeFour"
+                <a href="/admission/student-management/GradeFour"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
                     title="Grade Four">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Four</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/admission/student-management/GradeFive"
+                <a href="/admission/student-management/GradeFive"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
                     title="Grade Five">
                     <i class="fa-regular fa-circle"></i>
                     <span class="sidebar-text ml-2">Grade Five</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/admission/student-management/GradeSix"
+                <a href="/admission/student-management/GradeSix"
                     class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-5 ml-0"
                     title="Grade Six">
                     <i class="fa-regular fa-circle"></i>
@@ -281,13 +281,13 @@
                 <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
             </button>
             <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="reportsection">
-                <a href="/StEmelieLearningCenter.HopeSci66/admission/online-application"
+                <a href="/admission/online-application"
                     class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
                     title="Online Application">
                     <i class="fa-solid fa-folder-open"></i>
                     <span class="sidebar-text ml-2">Online Application</span>
                 </a>
-                <a href="/StEmelieLearningCenter.HopeSci66/admission/student-registration"
+                <a href="/admission/student-registration"
                     class="flex justify-start pl-5 items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2"
                     title="Student Registration">
                     <i class="fa-solid fa-folder-open"></i>
@@ -327,13 +327,13 @@
                         <i class="fa-regular fa-circle"></i>
                         <span class="sidebar-text ml-2">School Admission</span>
                     </a>
-                    <a href="/StEmelieLearningCenter.HopeSci66/admission/website-gallery"
+                    <a href="/admission/website-gallery"
                         class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Gallery">
                         <i class="fa-regular fa-circle"></i>
                         <span class="sidebar-text ml-2">Gallery</span>
                     </a>
-                    <a href="/StEmelieLearningCenter.HopeSci66/admission/manage-registration"
+                    <a href="/admission/manage-registration"
                         class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Gallery">
                         <i class="fa-regular fa-circle"></i>
