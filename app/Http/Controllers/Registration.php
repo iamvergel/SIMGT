@@ -33,7 +33,6 @@ class Registration extends Controller
             'barangay' => 'required',
             'province' => 'required',
             'city' => 'required',
-            // Additional validation for additional info
             'father_last_name' => 'required',
             'father_first_name' => 'required',
             'father_middle_name' => 'nullable',
@@ -57,6 +56,12 @@ class Registration extends Controller
         ]);
 
         try {
+            // Check if LRN already exists
+            $existingStudent = RegisterStudentInfo::where('lrn', $validatedData['lrn'])->first();
+            if ($existingStudent) {
+                return back()->withErrors('This LRN has already been registered.');
+            }
+
             // Create student record
             $student = new RegisterStudentInfo();
             $student->lrn = $validatedData['lrn'];

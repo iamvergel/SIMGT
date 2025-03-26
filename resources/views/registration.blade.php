@@ -2,37 +2,38 @@
 <div class="2xl:max-w-[1600px] w-full h-full overflow-hidden overflow-y-scroll bg-gray-100">
     <div class="p-0 lg:p-5">
         @if (session('success'))
-            <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                <div class="bg-white rounded-lg shadow-lg p-5 max-w-sm">
-                    <div class="flex items-center text-green-700 text-md font-normal">
-                        <i class="fa-solid fa-check text-green-700 mr-2"></i>
-                        <span>Registration Submitted Successfully!</span>
+            <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-5">
+                <div class="bg-white rounded-md shadow-lg p-5 max-w-3xl mx-auto z-20">
+                    <div class="flex justify-center items-center p-5 border-b border-gray-900">
+                        <p class="text-lg lg:text-2xl font-bold text-green-500"><i class="fas fa-check mr-2"></i>Registration Submitted Successfully!</p>
                     </div>
-                    <hr class="border-1 border-teal-700 mt-5">
-                    <div class="mt-5 text-sm">
-                        <span class="text-justify">
-                            Please proceed to the Admissions Office to claim three (3) copies of your registration form.
-                            Next, submit them to the following offices:
-                        </span>
-                        <p class="font-seminormal mt-3 pl-5">Next Steps:</p>
-                        <ul class="list-disc pl-5 mt-2">
-                            <li class="list-item">Registrar’s Office – Submit one copy along with the required documents.
-                            </li>
-                            <li class="list-item">Accounting Office – Submit one copy for payment and financial processing.
-                            </li>
-                            <li class="list-item">Student Copy – Keep one copy for your personal reference.</li>
-                        </ul>
-                        <span class="block mt-5 bg-gray-200 p-2">
-                            <i class="fa-solid fa-circle-exclamation me-2 text-green-700 text-justify"></i><span
-                                class="font-normal">Important:</span> Your registration will only be fully processed once
-                            all required documents have been submitted.
-                        </span>
-                        <p class="font-seminormal pl-5 mt-3">Required Documents to Submit to the Registrar:</p>
-                        <ul class="list-disc pl-5 mt-2">
-                            <li class="list-item">Birth Certificate (PSA/NSO Copy)</li>
-                            <li class="list-item">Form 137 (SF10)</li>
-                            <li class="list-item">Form 138 (SF9) – (For Transferees)</li>
-                        </ul>
+                    <div
+                        class="overflow-y-scroll h-[60vh] scrollbar-width-thin my-3 p-5 w-full">
+                        <div class="mt-5 text-sm">
+                            <span class="text-justify">
+                                Please proceed to the Admissions Office to claim your Admission Slip.
+                            </span>
+                            <p class="font-seminormal mt-3 pl-5">Next Steps:</p>
+                            <ul class="list-disc pl-5 mt-2">
+                                <li class="list-item">Accounting Office – Submit your Admission Slip and complete the
+                                    payment
+                                    process.</li>
+                                <li class="list-item">Registrar’s Office – Submit your Admission Slip, and Official Receipt
+                                    along with the required documents.</li>
+                            </ul>
+                            <p class="font-seminormal pl-5 mt-3">Required Documents for Submission to the Registrar:</p>
+                            <ul class="list-disc pl-5 mt-2">
+                                <li class="list-item">Birth Certificate (PSA/NSO Copy)</li>
+                                <li class="list-item">Form 137 (SF10)</li>
+                                <li class="list-item">Form 138 (SF9) - (For Transferees)</li>
+                            </ul>
+                            <span class="block mt-5 bg-gray-200 p-2">
+                                <i class="fa-solid fa-circle-exclamation me-2 text-green-700 text-justify"></i><span
+                                    class="font-normal">Important:</span> Your registration will only be fully processed
+                                once
+                                all required documents have been submitted.
+                            </span>
+                        </div>
                     </div>
                     <div class="flex justify-end mt-5">
                         <button class="cursor-pointer bg-teal-700 hover:bg-teal-800 px-5 py-1 rounded text-white"
@@ -42,7 +43,6 @@
                 </div>
             </div>
         @endif
-
 
         @if ($errors->any())
             <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -62,7 +62,7 @@
                     <div class="flex justify-end mt-5">
                         <button class="cursor-pointer bg-red-500 hover:bg-red-700 px-5 py-1 rounded text-white"
                             onclick="this.parentElement.parentElement.parentElement.style.display='none';">
-                            Close</button>
+                            Okay</button>
                     </div>
                 </div>
             </div>
@@ -78,20 +78,22 @@
         <div class="flex justify-center items-center my-5">
             <p
                 class="text-[15px] leading-[1.5rem] text-center md:text-[15px] lg:text-[20px] xl:text-[30px] font-normal text-teal-900">
-                Registration <br /><span class="text-[15px]">For School Year {{ date('Y') }}-{{ date('Y') + 1 }}</span>
+                Registration <br /><span class="text-[15px]">For School Year
+                    {{ date('Y') }}-{{ date('Y') + 1 }}</span>
             </p>
         </div>
 
         <div class="bg-gray-100">
             <!-- Modal body -->
-            <form class="p-2 lg:p-3 " onsubmit="return validateForm()" id="myform"
-                action="{{ route('student.register') }}" method="POST" enctype="multipart/form-data">
+            <form class="p-2 lg:p-3 " action="{{ route('student.register') }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="p-2 rounded-lg shadow-lg border my-5 bg-gradient-to-tr from-sky-50 via-white to-white">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pb-5 px-5">
                         <div
                             class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 w-86 border-b border-b-gray-300 my-5">
-                            <p class="text-[20px] font-normal"><i class="fas fa-user mr-2 mb-5"></i>Primary Information
+                            <p class="text-[20px] font-normal"><i class="fas fa-user mr-2 mb-5"></i>Primary
+                                Information
                             </p>
                         </div>
 
@@ -114,7 +116,8 @@
                                 <span class="text-red-600 mr-1">*</span>Admission Type
                             </label>
                             <select name="status" id="status" required
-                                class="px-3 block py-2.5 px-0 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer ">
+                                class="px-3 block py-2.5 px-0 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                                onchange="toggleGradeOptions(this.value)">
                                 <option value="" disabled selected>Select Admission Type</option>
                                 <option value="New Student">New Student</option>
                                 <option value="Transferee">Transferee</option>
@@ -128,18 +131,31 @@
                                 <span class="text-red-600 mr-1">*</span>Grade
                             </label>
                             <select id="grade" name="grade" required
-                                class="px-3 block py-2.5 px-0 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer ">
+                                class="px-3 block py-2.5 px-0 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer">
                                 <option value="" disabled selected>Select Grade</option>
                                 <option value="Grade One">Grade One</option>
-                                <option value="Grade Two">Grade Two</option>
-                                <option value="Grade Three">Grade Three</option>
-                                <option value="Grade Four">Grade Four</option>
-                                <option value="Grade Five">Grade Five</option>
-                                <option value="Grade Six">Grade Six</option>
+                                <option value="Grade Two" class="transferee-option hidden">Grade Two</option>
+                                <option value="Grade Three" class="transferee-option hidden">Grade Three</option>
+                                <option value="Grade Four" class="transferee-option hidden">Grade Four</option>
+                                <option value="Grade Five" class="transferee-option hidden">Grade Five</option>
+                                <option value="Grade Six" class="transferee-option hidden">Grade Six</option>
                             </select>
                             <div class="text-red-600 text-xs hidden" id="gradeAlert">Grade is required</div>
                         </div>
                     </div>
+
+                    <script>
+                        function toggleGradeOptions(admissionType) {
+                            const transfereeOptions = document.querySelectorAll('.transferee-option');
+                            const gradeSelect = document.getElementById('grade');
+                            gradeSelect.value = "";
+                            if (admissionType === 'New Student') {
+                                transfereeOptions.forEach(option => option.classList.add('hidden'));
+                            } else if (admissionType === 'Transferee') {
+                                transfereeOptions.forEach(option => option.classList.remove('hidden'));
+                            }
+                        }
+                    </script>
 
                     <!-- Next Button -->
                     <div class="flex justify-end">
@@ -152,6 +168,9 @@
                 </div>
 
                 <script>
+                    var admissionType = document.getElementById("status").value;
+
+                    console.log(admissionType);
                     function checkValidity() {
                         var isValid = true;
 
@@ -248,7 +267,8 @@
                                             <input type="text" name="lastName" id="lastName"
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 placeholder="Enter Last Name" required>
-                                            <small class="text-red-600 text-xs hidden" id="lastNameAlert">Last Name is
+                                            <small class="text-red-600 text-xs hidden" id="lastNameAlert">Last Name
+                                                is
                                                 required</small>
                                         </div>
 
@@ -260,7 +280,8 @@
                                             <input type="text" name="firstName" id="firstName"
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 placeholder="Enter First Name" required>
-                                            <small class="text-red-600 text-xs hidden" id="firstNameAlert">First Name is
+                                            <small class="text-red-600 text-xs hidden" id="firstNameAlert">First
+                                                Name is
                                                 required</small>
                                         </div>
 
@@ -271,7 +292,8 @@
                                             <input type="text" name="middleName" id="middleName"
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 placeholder="Enter Middle Name">
-                                            <small class="text-red-600 text-xs hidden" id="middleNameAlert">Middle Name
+                                            <small class="text-red-600 text-xs hidden" id="middleNameAlert">Middle
+                                                Name
                                                 is optional</small>
                                         </div>
 
@@ -288,7 +310,8 @@
                                                 <option value="IV">IV</option>
                                                 <option value="V">V</option>
                                             </select>
-                                            <small class="text-red-600 text-xs hidden" id="suffixNameAlert">Suffix is
+                                            <small class="text-red-600 text-xs hidden" id="suffixNameAlert">Suffix
+                                                is
                                                 optional</small>
                                         </div>
 
@@ -312,7 +335,8 @@
                                             <input type="text" name="birthDate" id="birthDate" placeholder="MM/DD/YYYY"
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 required>
-                                            <small class="text-red-600 text-xs hidden" id="birthDateAlert">Birth Date is
+                                            <small class="text-red-600 text-xs hidden" id="birthDateAlert">Birth
+                                                Date is
                                                 required</small>
                                         </div>
 
@@ -396,7 +420,8 @@
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
                                                         onclick="selectReligion('Islam')">Islam</li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
-                                                        onclick="selectReligion('Iglesia ni Cristo')">Iglesia ni Cristo
+                                                        onclick="selectReligion('Iglesia ni Cristo')">Iglesia ni
+                                                        Cristo
                                                     </li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
                                                         onclick="selectReligion('Hinduism')">Hinduism</li>
@@ -406,16 +431,19 @@
                                                         onclick="selectReligion('Indigenous Beliefs')">Indigenous
                                                         Beliefs</li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
-                                                        onclick="selectReligion('Atheism and Agnosticism')">Atheism and
+                                                        onclick="selectReligion('Atheism and Agnosticism')">Atheism
+                                                        and
                                                         Agnosticism</li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
                                                         onclick="selectReligion('Sikhism')">Sikhism</li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
-                                                        onclick="selectReligion('Zoroastrianism')">Zoroastrianism</li>
+                                                        onclick="selectReligion('Zoroastrianism')">Zoroastrianism
+                                                    </li>
                                                 </ul>
                                             </div>
 
-                                            <small class="text-red-600 text-xs hidden" id="religionAlert">Religion is
+                                            <small class="text-red-600 text-xs hidden" id="religionAlert">Religion
+                                                is
                                                 required</small>
                                         </div>
 
@@ -499,7 +527,8 @@
                                         <div
                                             class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 w-86 border-b border-b-gray-300 my-5">
                                             <p class="text-[20px] font-normal"><i
-                                                    class="fa-solid fa-map-location-dot mr-2 mb-5"></i>Permanent Address
+                                                    class="fa-solid fa-map-location-dot mr-2 mb-5"></i>Permanent
+                                                Address
                                             </p>
                                         </div>
 
@@ -529,7 +558,8 @@
                                                 required>
                                                 <option value="">Select Province</option>
                                             </select>
-                                            <small class="text-red-600 text-xs hidden" id="provinceAlert">Province is
+                                            <small class="text-red-600 text-xs hidden" id="provinceAlert">Province
+                                                is
                                                 required</small>
                                         </div>
 
@@ -559,7 +589,8 @@
                                                 required>
                                                 <option value="">Select Barangay</option>
                                             </select>
-                                            <small class="text-red-600 text-xs hidden" id="barangayAlert">Barangay is
+                                            <small class="text-red-600 text-xs hidden" id="barangayAlert">Barangay
+                                                is
                                                 required</small>
                                         </div>
 
@@ -984,7 +1015,8 @@
                                         <div
                                             class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4 w-86 border-b border-b-gray-300 my-5">
                                             <p class="text-[20px] font-normal"><i
-                                                    class="fas fa-address-card mr-2 mb-5"></i>Parents Information</p>
+                                                    class="fas fa-address-card mr-2 mb-5"></i>Parents Information
+                                            </p>
                                         </div>
 
                                         <!-- Father's Information -->
@@ -1019,7 +1051,8 @@
                                         <!-- Father's Middle Name -->
                                         <div class="mb-5">
                                             <label for="fatherMiddleName"
-                                                class="text-sm font-normal text-gray-900">Father's Middle Name:</label>
+                                                class="text-sm font-normal text-gray-900">Father's Middle
+                                                Name:</label>
                                             <input type="text" name="father_middle_name" id="fatherMiddleName"
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 placeholder="Enter Father's Middle Name">
@@ -1030,7 +1063,8 @@
                                         <!-- Father's Suffix Name -->
                                         <div class="mb-5">
                                             <label for="fatherSuffixName"
-                                                class="text-sm font-normal text-gray-900">Father's Suffix Name:</label>
+                                                class="text-sm font-normal text-gray-900">Father's Suffix
+                                                Name:</label>
                                             <select id="fatherSuffixName" name="father_suffix_name"
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer">
                                                 <option value="">Select Suffix Name</option>
@@ -1048,11 +1082,15 @@
                                         <!-- Father's Occupation -->
                                         <div class="mb-5">
                                             <label for="fatherOccupation" class="text-sm font-normal text-gray-900">
-                                                <span class="text-red-600 mr-1">*</span>Father's Occupation:
+                                                <span class="text-red-600 mr-1">*</span>Father's Employee Status:
                                             </label>
-                                            <input type="text" name="father_occupation" id="fatherOccupation"
-                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                                                placeholder="Enter Father's Occupation" required>
+                                            <select id="fatherOccupation" name="father_occupation"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer">
+                                                <option value="">Select Occupation</option>
+                                                <option value="employed">Employed</option>
+                                                <option value="unemployed">Unemployed</option>
+                                                <option value="self-employed">Self-employed</option>
+                                            </select>
                                             <small class="text-red-600 text-xs hidden"
                                                 id="fatherOccupationAlert">Father's Occupation is required</small>
                                         </div>
@@ -1089,7 +1127,8 @@
                                         <!-- Mother's Middle Name -->
                                         <div class="mb-5">
                                             <label for="motherMiddleName"
-                                                class="text-sm font-normal text-gray-900">Mother's Middle Name:</label>
+                                                class="text-sm font-normal text-gray-900">Mother's Middle
+                                                Name:</label>
                                             <input type="text" name="mother_middle_name" id="motherMiddleName"
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 placeholder="Enter Mother's Middle Name">
@@ -1102,11 +1141,15 @@
                                         <!-- Mother's Occupation -->
                                         <div class="mb-5">
                                             <label for="motherOccupation" class="text-sm font-normal text-gray-900">
-                                                <span class="text-red-600 mr-1">*</span>Mother's Occupation:
+                                                <span class="text-red-600 mr-1">*</span>Mother's Employee Status:
                                             </label>
-                                            <input type="text" name="mother_occupation" id="motherOccupation"
-                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                                                placeholder="Enter Mother's Occupation" required>
+                                            <select id="motherOccupation" name="mother_occupation"
+                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer">
+                                                <option value="">Select Occupation</option>
+                                                <option value="employed">Employed</option>
+                                                <option value="unemployed">Unemployed</option>
+                                                <option value="self-employed">Self-employed</option>
+                                            </select>
                                             <small class="text-red-600 text-xs hidden"
                                                 id="motherOccupationAlert">Mother's Occupation is required</small>
                                         </div>
@@ -1117,7 +1160,8 @@
                                         </div>
                                         <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4">
                                             <label class="block mb-2 text-sm font-normal text-teal-700 text-sm">( If
-                                                your guardian is a parent, select 'Parent/Parents'; if your guardian is
+                                                your guardian is a parent, select 'Parent/Parents'; if your guardian
+                                                is
                                                 someone else, select 'Other.' )<span
                                                     class="text-red-600">*</span></label>
                                             <div class="flex items-center mb-4 mt-4">
@@ -1159,7 +1203,8 @@
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 placeholder="Enter Guardian's First Name" required>
                                             <small class="text-red-600 text-xs hidden"
-                                                id="guardianFirstNameAlert">Guardian's First Name is required</small>
+                                                id="guardianFirstNameAlert">Guardian's First Name is
+                                                required</small>
                                         </div>
 
                                         <!-- Guardian's Middle Name -->
@@ -1171,7 +1216,8 @@
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 placeholder="Enter Guardian's Middle Name">
                                             <small class="text-red-600 text-xs hidden"
-                                                id="guardianMiddleNameAlert">Guardian's Middle Name is optional</small>
+                                                id="guardianMiddleNameAlert">Guardian's Middle Name is
+                                                optional</small>
                                         </div>
 
                                         <!-- Guardian's Suffix Name -->
@@ -1196,9 +1242,31 @@
                                                 <span class="text-red-600 mr-1">*</span>Guardian's Relationship to
                                                 Student:
                                             </label>
-                                            <input type="text" name="guardian_relationship" id="guardianRelationship"
-                                                class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
-                                                placeholder="Enter Guardian's Relationship" required>
+                                            <div class="relative">
+                                                <input type="text" id="guardianRelationship"
+                                                    name="guardian_relationship"
+                                                    placeholder="Select or type relationship"
+                                                    class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
+                                                    oninput="filterRelationshipOptions()"
+                                                    onclick="showGuardianRelationshipList()" required>
+
+                                                <ul id="GuardinRelationshipList"
+                                                    class="hidden absolute w-full bg-white border border-gray-300 mt-1 rounded shadow-lg max-h-60 overflow-y-auto z-10">
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectRelationshipGuardian('Brother')">Brother</li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectRelationshipGuardian('Sister')">Sister</li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectRelationshipGuardian('Grandfather')">
+                                                        Grandfather
+                                                    </li>
+                                                    <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
+                                                        onclick="selectRelationshipGuardian('Grandmother')">
+                                                        Grandmother
+                                                    </li>
+                                                </ul>
+                                            </div>
+
                                             <small class="text-red-600 text-xs hidden"
                                                 id="guardianRelationshipAlert">Guardian's Relationship is
                                                 required</small>
@@ -1242,12 +1310,14 @@
                                                         Catholic
                                                     </li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
-                                                        onclick="selectReligionGuardian('Protestantism')">Protestantism
+                                                        onclick="selectReligionGuardian('Protestantism')">
+                                                        Protestantism
                                                     </li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
                                                         onclick="selectReligionGuardian('Islam')">Islam</li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
-                                                        onclick="selectReligionGuardian('Iglesia ni Cristo')">Iglesia ni
+                                                        onclick="selectReligionGuardian('Iglesia ni Cristo')">
+                                                        Iglesia ni
                                                         Cristo
                                                     </li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
@@ -1293,6 +1363,12 @@
                                     listGuardian.classList.remove('hidden');
                                 }
 
+                                // Function to show the list when clicked
+                                function showGuardianRelationshipList() {
+                                    const listGuardianRelation = document.getElementById('GuardinRelationshipList');
+                                    listGuardianRelation.classList.remove('hidden');
+                                }
+
                                 // Function to select a religion option
                                 function selectReligionGuardian(religion) {
                                     const inputGuardian = document.getElementById('guardianReligion');
@@ -1303,6 +1379,18 @@
 
                                     // Optionally, validate religion
                                     validateReligionGuardian();
+                                }
+
+                                // Function to select a religion option
+                                function selectRelationshipGuardian(relation) {
+                                    const inputGuardianRellation = document.getElementById('guardianRelationship');
+                                    const listGuardianRellation = document.getElementById('GuardinRelationshipList');
+
+                                    inputGuardian.value = religion;
+                                    listGuardian.classList.add('hidden'); // Hide dropdown after selection
+
+                                    // Optionally, validate religion
+                                    validateReligionGuardianRelation();
                                 }
 
                                 // Validation to check if a religion is selected
@@ -1317,13 +1405,31 @@
                                     }
                                 }
 
+                                // Validation to check if a religion is selected
+                                function validateReligionGuardianRelation() {
+                                    const religionInputGuardianRelation = document.getElementById('guardianRelationship');
+                                    const religionAlertGuardianRelation = document.getElementById('guardianRelationshipAlert');
+
+                                    if (religionInputGuardianRelation.value === "") {
+                                        religionAlertGuardianRelation.classList.remove('hidden');
+                                    } else {
+                                        religionAlertGuardianRelation.classList.add('hidden');
+                                    }
+                                }
+
                                 // Close the dropdown when clicked outside
                                 document.addEventListener('click', function (event) {
                                     const list = document.getElementById('GuardinreligionList');
                                     const input = document.getElementById('guardianReligion');
+                                    const listGuardian = document.getElementById('GuardinRelationshipList');
+                                    const inputGuardian = document.getElementById('guardianRelationship');
 
                                     if (!input.contains(event.target) && !list.contains(event.target)) {
                                         list.classList.add('hidden');
+                                    }
+
+                                    if (!inputGuardian.contains(event.target) && !listGuardian.contains(event.target)) {
+                                        listGuardian.classList.add('hidden');
                                     }
                                 });
 
@@ -1346,6 +1452,7 @@
                                         document.getElementById('guardianSuffixName').value = ""; // Reset suffix when choosing mother
                                         document.getElementById('guardianRelationship').value = "N/A";
                                         document.getElementById('guardianReligion').value = "N/A";
+                                        document.getElementById('guardianContactNumber').value = "09000000000";
                                         document.getElementById('gfname').classList.add('hidden');
                                         document.getElementById('glname').classList.add('hidden');
                                         document.getElementById('gmname').classList.add('hidden');
@@ -1361,12 +1468,13 @@
                                         document.getElementById('grelatioanship').classList.remove('hidden');
                                         document.getElementById('gnumber').classList.remove('hidden');
                                         document.getElementById('greligion').classList.remove('hidden');
-                                        document.getElementById('guardianFirstName').value = null;
-                                        document.getElementById('guardianLastName').value = null;
-                                        document.getElementById('guardianMiddleName').value = null; // Set middle name
-                                        document.getElementById('guardianSuffixName').value = null; // Reset suffix when choosing mother
-                                        document.getElementById('guardianRelationship').value = null;
-                                        document.getElementById('guardianReligion').value = null;
+                                        document.getElementById('guardianFirstName').value = "";
+                                        document.getElementById('guardianLastName').value = "";
+                                        document.getElementById('guardianMiddleName').value = ""; // Set middle name
+                                        document.getElementById('guardianSuffixName').value = ""; // Reset suffix when choosing mother
+                                        document.getElementById('guardianRelationship').value = "";
+                                        document.getElementById('guardianReligion').value = "";
+                                        document.getElementById('guardianContactNumber').value = "09";
                                     }
                                 }
 
@@ -1651,7 +1759,8 @@
                                             <input type="email" name="email_address" id="emailAddress"
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer"
                                                 placeholder="Enter Email Address" required>
-                                            <small class="text-red-600 text-xs hidden" id="emailAlertContact">Email is
+                                            <small class="text-red-600 text-xs hidden" id="emailAlertContact">Email
+                                                is
                                                 required</small>
                                         </div>
 
@@ -1731,6 +1840,62 @@
                                 function showNextStepReview() {
                                     if (checkValidityReview()) {
                                         document.getElementById('reviewModal').classList.remove('hidden');
+
+                                        // Function to populate the review modal with the form input values
+                                        var admissionType = document.getElementById("status").value;
+
+                                        console.log(admissionType);
+
+                                        const elements = [
+                                            { id: 'status', reviewId: 'reviewAdmissionType' },
+                                            { id: 'grade', reviewId: 'reviewGrade' },
+                                            { id: 'lrn', reviewId: 'reviewLRN' },
+                                            { id: 'lastName', reviewId: 'reviewLastName' },
+                                            { id: 'firstName', reviewId: 'reviewFirstName' },
+                                            { id: 'middleName', reviewId: 'reviewMiddleName' },
+                                            { id: 'suffixName', reviewId: 'reviewSuffix' },
+                                            { id: 'birthplace', reviewId: 'reviewBirthplace' },
+                                            { id: 'birthDate', reviewId: 'reviewBirthDate' },
+                                            { id: 'ageStudent', reviewId: 'reviewAge' },
+                                            { id: 'gender', reviewId: 'reviewGender' },
+                                            { id: 'email', reviewId: 'reviewEmailAddress' },
+                                            { id: 'contactNo', reviewId: 'reviewContactNumber' },
+                                            { id: 'religion', reviewId: 'reviewReligion' },
+                                            { id: 'regionValue', reviewId: 'reviewRegion' },
+                                            { id: 'provinceValue', reviewId: 'reviewProvince' },
+                                            { id: 'cityValue', reviewId: 'reviewCity' },
+                                            { id: 'barangayValue', reviewId: 'reviewBarangay' },
+                                            { id: 'street', reviewId: 'reviewStreet' },
+                                            { id: 'fatherLastName', reviewId: 'reviewFatherLastName' },
+                                            { id: 'fatherFirstName', reviewId: 'reviewFatherFirstName' },
+                                            { id: 'fatherMiddleName', reviewId: 'reviewFatherMiddleName' },
+                                            { id: 'fatherOccupation', reviewId: 'reviewFatherOccupation' },
+                                            { id: 'motherLastName', reviewId: 'reviewMotherLastName' },
+                                            { id: 'motherFirstName', reviewId: 'reviewMotherFirstName' },
+                                            { id: 'motherMiddleName', reviewId: 'reviewMotherMiddleName' },
+                                            { id: 'motherOccupation', reviewId: 'reviewMotherOccupation' },
+                                            { id: 'guardianLastName', reviewId: 'reviewGuardianLastName' },
+                                            { id: 'guardianFirstName', reviewId: 'reviewGuardianFirstName' },
+                                            { id: 'guardianMiddleName', reviewId: 'reviewGuardianMiddleName' },
+                                            { id: 'guardianSuffixName', reviewId: 'reviewGuardianSuffix' },
+                                            { id: 'guardianRelationship', reviewId: 'reviewGuardianRelationship' },
+                                            { id: 'guardianContactNumber', reviewId: 'reviewGuardianContactNumber' },
+                                            { id: 'guardianReligion', reviewId: 'reviewGuardianReligion' },
+                                            { id: 'emergencyContactPerson', reviewId: 'reviewEmergencyContactPerson' },
+                                            { id: 'emergencyContactNumber', reviewId: 'reviewEmergencyContactNumber' },
+                                            { id: 'emailAddress', reviewId: 'reviewEmergencyEmail' },
+                                            { id: 'messengerAccount', reviewId: 'reviewMessengerAccount' }
+                                        ];
+
+                                        elements.forEach(element => {
+                                            const inputElement = document.getElementById(element.id);
+                                            const value = inputElement ? inputElement.value || inputElement.options[inputElement.selectedIndex]?.text : ''; // For selects, we get the selected text
+                                            document.getElementById(element.reviewId).innerText = value;
+                                            console.log(`${element.reviewId}: ${value}`);
+
+                                            document.getElementById(element.reviewId).classList.add('text-green-700');
+                                            document.getElementById(element.reviewId).classList.add('font-semibold');
+                                        });
                                     }
                                 }
 
@@ -1762,7 +1927,7 @@
                 </div>
 
                 <div id="reviewModal"
-                    class="fixed hidden z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 px-2 flex justify-center items-center">
+                    class="fixed hidden z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 px-2 flex justify-center items-center p-5">
                     <div class="bg-white rounded-md shadow-lg p-5 max-w-6xl mx-auto z-20">
                         <div class="flex justify-center items-center p-5 border-b border-gray-900">
                             <p class="text-2xl font-bold text-teal-800">Review Information</p>
@@ -1774,8 +1939,8 @@
                             <div class="hidden md:block lg:block"></div>
                             <div class="hidden lg:block"></div>
                             <div class="hidden lg:block"></div>
-                            <h5>Admission type : <span id="reviewAdmissionType"></span></h5>
-                            <h5>Grade : <span id="reviewGrade"></span></h5>
+                            <h5>Admission type : <br /><span id="reviewAdmissionType"></span></h5>
+                            <h5>Grade : <br /><span id="reviewGrade"></span></h5>
                             <div class="hidden lg:block"></div>
                             <div class="hidden lg:block"></div>
 
@@ -1783,31 +1948,31 @@
                             <div class="hidden md:block lg:block"></div>
                             <div class="hidden lg:block"></div>
                             <div class="hidden lg:block"></div>
-                            <h5>LRN: <span id="reviewLRN"></span></h5>
+                            <h5>LRN: <br /><span id="reviewLRN"></span></h5>
                             <div class="hidden md:block lg:block"></div>
                             <div class="hidden lg:block"></div>
                             <div class="hidden lg:block"></div>
-                            <h5>Last Name: <span id="reviewLastName"></span></h5>
-                            <h5>First Name: <span id="reviewFirstName"></span></h5>
-                            <h5>Middle Name: <span id="reviewMiddleName"></span></h5>
-                            <h5>Suffix: <span id="reviewSuffix"></span></h5>
-                            <h5>Birthplace: <span id="reviewBirthplace"></span></h5>
-                            <h5>Birth Date: <span id="reviewBirthDate"></span></h5>
-                            <h5>Age: <span id="reviewAge"></span></h5>
-                            <h5>Gender: <span id="reviewGender"></span></h5>
-                            <h5>Email Address: <span id="reviewEmailAddress"></span></h5>
-                            <h5>Contact Number: <span id="reviewContactNumber"></span></h5>
-                            <h5>Religion: <span id="reviewReligion"></span></h5>
+                            <h5>Last Name: <br /><span id="reviewLastName"></span></h5>
+                            <h5>First Name: <br /><span id="reviewFirstName"></span></h5>
+                            <h5>Middle Name: <br /><span id="reviewMiddleName"></span></h5>
+                            <h5>Suffix: <br /><span id="reviewSuffix"></span></h5>
+                            <h5>Birthplace: <br /><span id="reviewBirthplace"></span></h5>
+                            <h5>Birth Date: <br /><span id="reviewBirthDate"></span></h5>
+                            <h5>Age: <br /><span id="reviewAge"></span></h5>
+                            <h5>Gender: <br /><span id="reviewGender"></span></h5>
+                            <h5>Email Address: <br /><span id="reviewEmailAddress"></span></h5>
+                            <h5>Contact Number: <br /><span id="reviewContactNumber"></span></h5>
+                            <h5>Religion: <br /><span id="reviewReligion"></span></h5>
                             <div class="hidden md:block lg:block"></div>
                             <h3 class="font-semibold mt-5">Permanent Address</h3>
                             <div class="hidden md:block lg:block"></div>
                             <div class="hidden lg:block"></div>
                             <div class="hidden lg:block"></div>
-                            <h5>Region: <span id="revieRegion"></span></h5>
-                            <h5>province: <span id="reviewProvince"></span></h5>
-                            <h5>City: <span id="reviewCity"></span></h5>
-                            <h5>Barangay: <span id="reviewBarangay"></span></h5>
-                            <h5>Home/Building/Street:: <span id="reviewStreet"></span></h5>
+                            <h5>Region: <br /><span id="reviewRegion"></span></h5>
+                            <h5>province: <br /><span id="reviewProvince"></span></h5>
+                            <h5>City: <br /><span id="reviewCity"></span></h5>
+                            <h5>Barangay: <br /><span id="reviewBarangay"></span></h5>
+                            <h5 class="col-sapn-1 md;col-span-2">Home/Building/Street:: <span id="reviewStreet"></span></h5>
                             <div class="hidden md:block lg:block"></div>
                             <div class="hidden lg:block"></div>
                             <div class="hidden lg:block"></div>
@@ -1816,19 +1981,19 @@
                             <div class="hidden md:block lg:block"></div>
                             <div class="hidden lg:block"></div>
                             <div class="hidden lg:block"></div>
-                            <h5>Father's Last Name: <span id="reviewFatherLastName"></span></h5>
-                            <h5>Father's First Name: <span id="reviewFatherFirstName"></span></h5>
-                            <h5>Father's Middle Name: <span id="reviewFatherMiddleName"></span></h5>
-                            <h5>Father's Suffix: <span id="reviewFatherSuffix"></span></h5>
-                            <h5>Father's Occupation: <span id="reviewFatherOccupation"></span></h5>
+                            <h5>Father's Last Name: <br /><span id="reviewFatherLastName"></span></h5>
+                            <h5>Father's First Name: <br /><span id="reviewFatherFirstName"></span></h5>
+                            <h5>Father's Middle Name: <br /><span id="reviewFatherMiddleName"></span></h5>
+                            <h5>Father's Suffix: <br /><span id="reviewFatherSuffix"></span></h5>
+                            <h5>Father's Employee Status: <br /><span id="reviewFatherOccupation"></span></h5>
                             <div class="hidden md:block lg:block"></div>
                             <div class="hidden lg:block"></div>
                             <div class="hidden lg:block"></div>
-                            <h5>Mother's Last Name: <span id="reviewMotherLastName"></span></h5>
-                            <h5>Mother's First Name: <span id="reviewMotherFirstName"></span></h5>
-                            <h5>Mother's Middle Name: <span id="reviewMotherMiddleName"></span></h5>
+                            <h5>Mother's Last Name: <br /><span id="reviewMotherLastName"></span></h5>
+                            <h5>Mother's First Name: <br /><span id="reviewMotherFirstName"></span></h5>
+                            <h5>Mother's Middle Name: <br /><span id="reviewMotherMiddleName"></span></h5>
                             <div class="hidden md:block lg:block"></div>
-                            <h5>Mother's Occupation: <span id="reviewMotherOccupation"></span></h5>
+                            <h5>Mother's Employee Status: <br /><span id="reviewMotherOccupation"></span></h5>
                             <div class="hidden md:block lg:block"></div>
                             <div class="hidden lg:block"></div>
                             <div class="hidden lg:block"></div>
@@ -1837,34 +2002,34 @@
                             <div class="hidden md:block lg:block"></div>
                             <div class="hidden lg:block"></div>
                             <div class="hidden lg:block"></div>
-                            <h5>Guardian's Last Name: <span id="reviewGuardianLastName"></span></h5>
-                            <h5>Guardian's First Name: <span id="reviewGuardianFirstName"></span></h5>
-                            <h5>Guardian's Middle Name: <span id="reviewGuardianMiddleName"></span></h5>
-                            <h5>Guardian's Suffix: <span id="reviewGuardianSuffix"></span></h5>
-                            <h5>Guardian's Relationship: <span id="reviewGuardianRelationship"></span></h5>
-                            <h5>Guardian's Contact Number: <span id="reviewGuardianContactNumber"></span></h5>
-                            <h5>Guardian's Religion: <span id="reviewGuardianReligion"></span></h5>
+                            <h5>Guardian's Last Name: <br /><span id="reviewGuardianLastName"></span></h5>
+                            <h5>Guardian's First Name: <br /><span id="reviewGuardianFirstName"></span></h5>
+                            <h5>Guardian's Middle Name: <br /><span id="reviewGuardianMiddleName"></span></h5>
+                            <h5>Guardian's Suffix: <br /><span id="reviewGuardianSuffix"></span></h5>
+                            <h5>Guardian's Relationship: <br /><span id="reviewGuardianRelationship"></span></h5>
+                            <h5>Guardian's Contact Number: <br /><span id="reviewGuardianContactNumber"></span></h5>
+                            <h5>Guardian's Religion: <br /><span id="reviewGuardianReligion"></span></h5>
                             <div class="hidden lg:block"></div>
 
-                            <h3 class="font-semibold mt-5 col-span-1 md:col-span-2">Emergency Contact Information</h3>
+                            <h3 class="font-semibold mt-5 col-span-1 md:col-span-2">Emergency Contact Information
+                            </h3>
                             <div class="hidden lg:block"></div>
                             <div class="hidden lg:block"></div>
-                            <h5>Emergency Contact Person: <span id="reviewEmergencyContactPerson"></span></h5>
-                            <h5>Emergency Contact Number: <span id="reviewEmergencyContactNumber"></span></h5>
-                            <h5>Email Address: <span id="reviewEmergencyEmail"></span></h5>
-                            <h5>Messenger Account: <span id="reviewMessengerAccount"></span></h5>
+                            <h5>Emergency Contact Person: <br /><span id="reviewEmergencyContactPerson"></span></h5>
+                            <h5>Emergency Contact Number: <br /><span id="reviewEmergencyContactNumber"></span></h5>
+                            <h5>Email Address: <br /><span id="reviewEmergencyEmail"></span></h5>
+                            <h5>Messenger Account: <br /><span id="reviewMessengerAccount"></span></h5>
 
                         </div>
-                        <div class="col-span-4 flex  justify-center lg:justify-end mt-20 lg:me-20">
-                                        <label class="flex items-center space-x-2">
-                                            <input type="checkbox" id="confirmCheck"
-                                                class="form-checkbox h-5 w-5 text-teal-600">
-                                            <span>I confirm that the above information is correct.</span>
-
-                                        </label>
-                                    </div>
+                        <div class="col-span-4 flex  justify-center lg:justify-start mt-20 lg:me-20">
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" id="confirmCheck" class="form-checkbox h-5 w-5 text-teal-600">
+                                <span>I confirm that the above information is correct.</span>
+                            </label>
+                        </div>
                         <div class="flex justify-end items-center mt-5">
                             <button onclick="document.getElementById('reviewModal').classList.add('hidden')"
+                                type="button"
                                 class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Close</button>
                             <button onclick="showNextStepReview()" id="submitButton" type="submit" disabled
                                 class="ml-3 bg-gray-400 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Next</button>
@@ -1872,72 +2037,22 @@
                     </div>
 
                     <script>
-    // Function to populate the review modal with the form input values
-    function populateModalAndLogValues() {
-        const elements = [
-            { id: 'status', reviewId: 'reviewAdmissionType' },
-            { id: 'grade', reviewId: 'reviewGrade' },
-            { id: 'lrn', reviewId: 'reviewLRN' },
-            { id: 'lastName', reviewId: 'reviewLastName' },
-            { id: 'firstName', reviewId: 'reviewFirstName' },
-            { id: 'middleName', reviewId: 'reviewMiddleName' },
-            { id: 'suffix', reviewId: 'reviewSuffix' },
-            { id: 'birthplace', reviewId: 'reviewBirthplace' },
-            { id: 'birthDate', reviewId: 'reviewBirthDate' },
-            { id: 'age', reviewId: 'reviewAge' },
-            { id: 'gender', reviewId: 'reviewGender' },
-            { id: 'email', reviewId: 'reviewEmailAddress' },
-            { id: 'contactNumber', reviewId: 'reviewContactNumber' },
-            { id: 'religion', reviewId: 'reviewReligion' },
-            { id: 'regionValue', reviewId: 'reviewRegion' },
-            { id: 'provinceValue', reviewId: 'reviewProvince' },
-            { id: 'cityvalue', reviewId: 'reviewCity' },
-            { id: 'barangayvalue', reviewId: 'reviewBarangay' },
-            { id: 'streetvalue', reviewId: 'reviewStreet' },
-            { id: 'fatherLastName', reviewId: 'reviewFatherLastName' },
-            { id: 'fatherFirstName', reviewId: 'reviewFatherFirstName' },
-            { id: 'fatherMiddleName', reviewId: 'reviewFatherMiddleName' },
-            { id: 'fatherOccupation', reviewId: 'reviewFatherOccupation' },
-            { id: 'motherLastName', reviewId: 'reviewMotherLastName' },
-            { id: 'motherFirstName', reviewId: 'reviewMotherFirstName' },
-            { id: 'motherMiddleName', reviewId: 'reviewMotherMiddleName' },
-            { id: 'motherOccupation', reviewId: 'reviewMotherOccupation' },
-            { id: 'guardianLastName', reviewId: 'reviewGuardianLastName' },
-            { id: 'guardianFirstName', reviewId: 'reviewGuardianFirstName' },
-            { id: 'guardianMiddleName', reviewId: 'reviewGuardianMiddleName' },
-            { id: 'guardianSuffix', reviewId: 'reviewGuardianSuffix' },
-            { id: 'guardianRelationship', reviewId: 'reviewGuardianRelationship' },
-            { id: 'guardianContactNumber', reviewId: 'reviewGuardianContactNumber' },
-            { id: 'guardianReligion', reviewId: 'reviewGuardianReligion' },
-            { id: 'emergencyContactPerson', reviewId: 'reviewEmergencyContactPerson' },
-            { id: 'emergencyContactNumber', reviewId: 'reviewEmergencyContactNumber' },
-            { id: 'emergencyEmail', reviewId: 'reviewEmergencyEmail' },
-            { id: 'messengerAccount', reviewId: 'reviewMessengerAccount' }
-        ];
-
-        elements.forEach(element => {
-            const inputElement = document.getElementById(element.id);
-            const value = inputElement ? (inputElement.value || inputElement.options[inputElement.selectedIndex]?.text) : ''; // For selects, we get the selected text
-            document.getElementById(element.reviewId).innerText = value;
-            console.log(`${element.reviewId}: ${value}`);
-        });
-    }
-
-    // When the checkbox is checked, enable the submit button and update the button style
-    document.getElementById('confirmCheck').addEventListener('change', function () {
-        const submitButton = document.getElementById('submitButton');
-        submitButton.disabled = !this.checked;
-        submitButton.classList.toggle('bg-gray-400', !this.checked);
-        submitButton.classList.toggle('bg-teal-700', this.checked);
-        submitButton.classList.toggle('hover:bg-sky-700', this.checked);
-    });
-
-    // Populate the modal with values from the form
-    populateModalAndLogValues();
-
-    // Show the modal
-    document.getElementById('reviewModal').classList.remove('hidden');
-</script>
+                        // When the checkbox is checked, enable the submit button and update the button style
+                        document.getElementById('confirmCheck').addEventListener('change', function () {
+                            const submitButton = document.getElementById('submitButton');
+                            if (this.checked) {
+                                submitButton.disabled = false;
+                                submitButton.classList.remove('bg-gray-400');
+                                submitButton.classList.add('bg-teal-700');
+                                submitButton.classList.add('hover:bg-teal-800');
+                            } else {
+                                submitButton.disabled = true;
+                                submitButton.classList.remove('bg-teal-700');
+                                submitButton.classList.remove('hover:bg-teal-700');
+                                submitButton.classList.add('bg-gray-400');
+                            }
+                        });
+                    </script>
 
                 </div>
             </form>

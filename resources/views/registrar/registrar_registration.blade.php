@@ -17,11 +17,12 @@
                     <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Registrar</p>
                     <p class="text-2xl font-bold text-teal-900 ml-5">
                         <span
-                            onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/registrar/student-management'"
+                            onclick="window.location.href='#'"
                             class="hover:text-teal-700">Report Section</span> / Student Registration
                     </p>
                 </div>
-                <div class="flex justify-between items-center gap-4 mt-10">
+                <div class="flex justify-end items-center gap-4 mt-10">
+                    <button onclick="window.location.href = '/registrar/registration-form'" class="bg-teal-700 hover:bg-teal-600 text-white text-[14px] px-10 py-2.5 rounded-md">Print Registration Form</button>
                     <!-- <div class="ml-5 flex items-center hidden">
                         <i class="fas fa-search text-xl text-teal-700 px-3"></i>
                         <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search by name..."
@@ -40,10 +41,6 @@
                             Show student data
                         </button> -->
                         <!-- <h1 class="mx-5 font-semibold text-xl text-teal-800" id="section">Section :</h1> -->
-                    </div>
-
-                    <div class="mr-10">
-
                     </div>
                 </div>
 

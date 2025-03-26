@@ -92,6 +92,16 @@ class Cstudentinfo extends Controller
         ]);
 
         try {
+
+            $existingStudent = StudentPrimaryInfo::where('lrn', $validatedData['lrn'])->first();
+            $existingStudentAccount = Mstudentaccount::where('student_number', $validatedData['lrn'])->first();
+            $existingStudentInfo = StudentInfo::where('lrn', $validatedData['lrn'])->first();
+            $existingStudentAdditionalInfo = StudentAdditionalInfo::where('student_number', $validatedData['lrn'])->first();
+            $existingStudentDocuments = StudentDocuments::where('student_number', $validatedData['lrn'])->first();
+            if ($existingStudent || $existingStudentAccount || $existingStudentInfo || $existingStudentAdditionalInfo || $existingStudentDocuments) {
+                return back()->withErrors('This LRN or Student Number has already been Enrolled.');
+            }
+
             // Create user account
             $username = strtolower($validatedData['lastName']) . strtolower($validatedData['firstName']) . '@stemilie.edu.ph';
             //$password = 'SELC' . $validatedData['lastName'] . substr($validatedData['student_number'], -4);

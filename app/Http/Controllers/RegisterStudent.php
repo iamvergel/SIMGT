@@ -7,6 +7,7 @@ use App\Models\RegisterAdditionalInfo;
 use App\Models\RegisterStudentInfo;
 use App\Models\RegisterDocuments;
 use App\Models\StudentPrimaryInfo;
+use App\Models\TeacherUser;
 
 class RegisterStudent extends Controller
 {
@@ -44,20 +45,27 @@ class RegisterStudent extends Controller
     }
 
     public function showAllRegisterRegistrar()
-    {
-        // Fetch all active student records with pagination
-        $students = RegisterStudentInfo::get();
+{
+    // Fetch all active student records
+    $students = RegisterStudentInfo::get();
 
-        // Fetch additional student information for each student
-        $studentsAdditional = RegisterAdditionalInfo::whereIn('lrn', $students->pluck('id'))->get()->keyBy('lrn');
-        // Fetch additional student information for each student
-        $studentDocuments = RegisterDocuments::whereIn('lrn', $students->pluck('id'))->get()->keyBy('lrn');
+    // Fetch additional student information using the 'lrn'
+    $studentsAdditional = RegisterAdditionalInfo::whereIn('lrn', $students->pluck('lrn'))->get()->keyBy('lrn');
 
-        // Check if there are no active students
-        $noActiveMessage = $students->isEmpty() ? "No active students found." : null;
+    // Fetch student documents using the 'lrn'
+    $studentDocuments = RegisterDocuments::whereIn('lrn', $students->pluck('lrn'))->get()->keyBy('lrn');
 
-        return view('registrar.registrar_online_aplication', compact('students', 'studentsAdditional', 'studentDocuments', 'noActiveMessage'));
-    }
+    // Fetch primary student info using the 'lrn'
+    $studentPrimaryInfo = StudentPrimaryInfo::where('status', 'Enrolled')->whereIn('lrn', $students->pluck('lrn'))->get()->keyBy('lrn');
+
+    // Fetch the advisers using the 'teacher_number' from primary student info
+    $advisers = TeacherUser::whereIn('teacher_number', $studentPrimaryInfo->pluck('adviser'))->get()->keyBy('teacher_number');
+
+    // Check if there are no active students
+    $noActiveMessage = $students->isEmpty() ? "No active students found." : null;
+
+    return view('registrar.registrar_online_aplication', compact('students', 'studentsAdditional', 'studentDocuments', 'noActiveMessage', 'studentPrimaryInfo', 'advisers'));
+}
 
     public function showEnrolleesInformation(Request $request, $lrn)
     {

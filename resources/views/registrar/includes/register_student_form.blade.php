@@ -24,7 +24,6 @@
                 @if (session('success'))
                     <script>
                         alert("Student Enrolled Successfully");
-                        window.location.href = '/StEmelieLearningCenter.HopeSci66/registrar/Student-Registration';
                     </script>
                 @endif
 
@@ -84,7 +83,7 @@
                                             placeholder="Enter Learner Reference Number (LRN)" required>
                                     </div>
 
-                                    <div class="mb-5">
+                                    <div class="mb-5 hidden">
                                         <label for="studentNumber" class="block mb-2 text-sm font-bold text-gray-900">
                                             <span class="text-red-600 mr-1">*</span>student No. :</label>
                                         <input type="text" name="student_number" id="studentsInfoNumber"  value="{{ $students->studentnumber }}"

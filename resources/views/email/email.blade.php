@@ -71,7 +71,7 @@
             <p style="margin-bottom: 1rem;">
                 <strong>Login Credentials:</strong><br>
                 Username (Email):
-                {{ strtolower($student->student_last_name) }}{{ strtolower($student->student_first_name) }}@stemilie.edu.ph<br>
+                {{ strtolower(str_replace(' ', '', $student->student_last_name)) }}{{ strtolower(str_replace(' ', '', $student->student_first_name)) }}@stemilie.edu.ph<br>
                 Password: SELC{{ $student->student_last_name }}{{ substr($student->student_number, -4) }}<br>
             </p>
             <p style="margin-bottom: 1rem;">

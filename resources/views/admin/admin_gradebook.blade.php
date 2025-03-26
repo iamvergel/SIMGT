@@ -71,7 +71,7 @@
                                 </div>
                             </div>
 
-                            <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeOne"
+                            <a href="/admin/Grade-book/GradeOne"
                                 class="flex text-white text-[15px] justify-center p-5 w-full bg-teal-700 items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 mt-5"
                                 id="studentManagementButton1">
                                 <i class="fa-solid fa-users"></i>
@@ -101,7 +101,7 @@
                                 </div>
                             </div>
 
-                            <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeTwo"
+                            <a href="/admin/Grade-book/GradeTwo"
                                 class="flex text-white text-[15px] justify-center p-5 w-full bg-teal-700 items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 mt-5"
                                 id="studentManagementButton1">
                                 <i class="fa-solid fa-users"></i>
@@ -131,7 +131,7 @@
                                 </div>
                             </div>
 
-                            <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeThree"
+                            <a href="/admin/Grade-book/GradeThree"
                                 class="flex text-white text-[15px] justify-center p-5 w-full bg-teal-700 items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 mt-5"
                                 id="studentManagementButton1">
                                 <i class="fa-solid fa-users"></i>
@@ -161,7 +161,7 @@
                                 </div>
                             </div>
 
-                            <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeFour"
+                            <a href="/admin/Grade-book/GradeFour"
                                 class="flex text-white text-[15px] justify-center p-5 w-full bg-teal-700 items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 mt-5"
                                 id="studentManagementButton1">
                                 <i class="fa-solid fa-users"></i>
@@ -191,7 +191,7 @@
                                 </div>
                             </div>
 
-                            <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeFive"
+                            <a href="/admin/Grade-book/GradeFive"
                                 class="flex text-white text-[15px] justify-center p-5 w-full bg-teal-700 items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 mt-5"
                                 id="studentManagementButton1">
                                 <i class="fa-solid fa-users"></i>
@@ -221,7 +221,7 @@
                                 </div>
                             </div>
 
-                            <a href="/StEmelieLearningCenter.HopeSci66/admin/Grade-book/GradeSix"
+                            <a href="/admin/Grade-book/GradeSix"
                                 class="flex text-white text-[15px] justify-center p-5 w-full bg-teal-700 items-center sidebar-link hover:bg-teal-600 rounded-md mb-2 mt-5"
                                 id="studentManagementButton1">
                                 <i class="fa-solid fa-users"></i>

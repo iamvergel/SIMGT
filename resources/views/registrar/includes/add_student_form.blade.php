@@ -24,7 +24,7 @@
                 @if (session('success'))
     <script>
         alert("Student Enrolled Successfully");
-        window.location.href = '/StEmelieLearningCenter.HopeSci66/registrar/online-application';
+        window.location.href = '/registrar/online-application';
     </script>
 @endif
 
@@ -81,16 +81,20 @@
                                             :</label>
                                         <input type="text" name="lrn" id="lrn"
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                            placeholder="Enter Learner Reference Number (LRN)" required value="{{ $students->lrn }}">
+                                            placeholder="Enter Learner Reference Number (LRN)" required value="{{ $students->lrn }}" onchange="document.getElementById('studentsNumber').value = this.value">
                                     </div>
 
-                                    <div class="mb-5 ">
+                                    <div class="mb-5 hidden">
                                         <label for="studentNumber" class="block mb-2 text-sm font-bold text-gray-900">
-                                            <span class="text-red-600 mr-1">*</span>students No. :</label>
+                                            <span class="text-red-600 mr-1">*</span>Student No. :</label>
                                         <input type="text" name="student_number" id="studentsNumber"
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                            placeholder="0000-0000" value="{{ $students->lrn }}" required>
+                                            placeholder="0000-0000"  required>
                                     </div>
+
+                                    <script>
+                                        document.getElementById("studentsNumber").value = document.getElementById("lrn").value;
+                                    </script>
 
                                     <div class="mb-5 hidden">
                                         <label for="status" class="block mb-2 text-sm font-bold text-gray-900">
@@ -99,6 +103,7 @@
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
                                             placeholder="0000-0000" required>
                                     </div>
+
                                     <div class="mb-5">
                                         <label for="schoolYear" class="block mb-2 text-sm font-bold text-gray-900">
                                             <span class="text-red-600 mr-1">*</span>School Year :
@@ -106,7 +111,7 @@
                                         <input type="text" name="school_year" id="schoolYear" 
                                             value="{{ $students->school_year }}"
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
-                                    </div>
+                                    </div> 
 
                                     <div class="mb-5">
                                         <label for="grade" class="block mb-2 text-sm font-bold text-gray-900">
@@ -122,12 +127,13 @@
                                             <option value="Grade Five" {{ $students->grade == 'Grade Five' ? 'selected' : '' }}>Grade Five</option>
                                             <option value="Grade Six" {{ $students->grade == 'Grade Six' ? 'selected' : '' }}>Grade Six</option>
                                         </select>
-                                    </div>
+                                    </div><div></div>
 
+                                    <div class="col-span-1 md:col-span-2 lg:cl-span-3 xl:col-span-4 text-lg text-gray-500">(Add Section And Adviser)</div>
                                     <div class="mb-5">
                                         <label for="section" class="block mb-2 text-sm font-bold text-gray-900">
                                             <span class="text-red-600 mr-1">*</span>Section :</label>
-                                        <select id="section" name="section"
+                                        <select id="section" name="section" required
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
                                             <option value="">Select Section</option>
                                         </select>
@@ -136,7 +142,7 @@
                                     <div class="mb-5">
                                         <label for="adviser" class="block mb-2 text-sm font-bold text-gray-900">
                                             <span class="text-red-600 mr-1">*</span>Select Adviser :</label>
-                                        <select id="teacher" name="adviser"
+                                        <select id="teacher" name="adviser" required
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none">
                                             <option value="">Select Teacher</option>
                                         </select>
@@ -302,7 +308,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="">
+                                    <div class="hidden">
                                         <label for="username" class="block mb-2 text-sm font-bold text-gray-900"><span
                                                 class="text-red-600 mr-1">*</span>Username :</label>
                                         <input type="text" name="username" id="username"
@@ -310,7 +316,7 @@
                                             placeholder="username" required >
                                     </div>
 
-                                    <div class="">
+                                    <div class="hidden">
                                         <label for="password" class="block mb-2 text-sm font-bold text-gray-900"><span
                                                 class="text-red-600 mr-1">*</span>Password :</label>
                                         <input type="text" name="password" id="password"
@@ -793,7 +799,7 @@
                                             <input type="file" id="sf9" name="sf9" accept=".pdf,.jpg,.jpeg,.png"
                                                 class="hidden">
                                         </label>
-                                        <div class="mt-2 text-gray-600" id="sf9">No file chosen
+                                        <div class="mt-2 text-gray-600" id="sf9File">No file chosen
                                         </div>
                                     </div>
                                 </div>
@@ -812,7 +818,7 @@
                             // Get input fields
                             const lastNameInput = document.getElementById('lastName');
                             const firstNameInput = document.getElementById('firstName');
-                            const studentsNumberInput = document.getElementById('studentsNumber');
+                            const studentsNumberInput = document.getElementById('lrn');
                             const passwordInput = document.getElementById('password');
                             const usernameInput = document.getElementById('username');
 
@@ -837,7 +843,37 @@
                             usernameInput.value = username;
                         });
 
-                        
+                        const lastNameInput = document.getElementById('lastName');
+                        const firstNameInput = document.getElementById('firstName');
+                        const studentsNumberInput = document.getElementById('lrn');
+                        const passwordInput = document.getElementById('password');
+                        const usernameInput = document.getElementById('username');
+
+                        // Update the password in real-time
+                        lastNameInput.addEventListener('input', updatePassword);
+                        firstNameInput.addEventListener('input', updatePassword);
+                        studentsNumberInput.addEventListener('input', updatePassword);
+
+                        function updatePassword() {
+                            const lastName = lastNameInput.value;
+                            const studentsNumber = studentsNumberInput.value;
+
+                            // Capitalize the first letter of the last name
+                            const capitalizedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
+
+                            // Get the last four digits of the students number
+                            const lastFourDigits = studentsNumber.slice(-4);
+
+                            // Combine to form the password
+                            const newPassword = `SELC${capitalizedLastName}${lastFourDigits}`;
+
+                            // Update the password input value
+                            passwordInput.value = newPassword;
+
+                            // Update the username input value
+                            const username = lastNameInput.value.toLowerCase().replace(/\s/g, '')  + firstNameInput.value.toLowerCase().replace(/\s/g, '') + '@stemilie.edu.ph';
+                            usernameInput.value = username;
+                        }
 
                         function setGuardianInfo(type) {
                             const motherFirstName = document.getElementById('motherFirstName').value;
@@ -887,7 +923,7 @@
                             document
                                 .querySelector("#sf9")
                                 .addEventListener("change", function () {
-                                    document.querySelector("#sf9").textContent = this
+                                    document.querySelector("#sf9File").textContent = this
                                         .files[0]
                                         ? this.files[0].name
                                         : "No file chosen";
