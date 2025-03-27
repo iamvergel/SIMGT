@@ -97,6 +97,14 @@
                                             </select>
                                         </div>
 
+                                        <div class="mb-5">
+                                            <label for="lrn" class="block mb-2 text-sm font-bold text-gray-900"><span
+                                                    class="text-red-600 mr-1">*</span>LRN :</label>
+                                            <input type="text" name="lrn" id="lrn"
+                                                value="{{ $student->lrn }}"
+                                                class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
+                                                placeholder="Enter Last Name" required readonly>
+                                        </div>
                                     </div>
                                 </div>
                             </li>
@@ -636,9 +644,9 @@
                                 '{{ $student->student_last_name }} {{ $student->student_first_name }} {{ $student->student_middle_name }} {{ $student->student_suffix_name }}', 
                                 '{{ $student->sex }}', 
                                 '{{ $student->grade }}', 
-                                '{{ $student->birth_date }}')"
+                                '{{ $student->birth_date }}', '{{ $student->lrn }}')"
     class="text-white w-96 text-center bg-teal-700 hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-bold rounded text-sm px-20 py-2.5 text-center">
-    <i class="fa-solid fa-print me-2"></i>Print Registration Form
+    <i class="fa-solid fa-print me-2"></i>Print Admission Slip
 </button>
     
                         </div>

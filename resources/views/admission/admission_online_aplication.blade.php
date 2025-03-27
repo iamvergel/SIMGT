@@ -135,20 +135,21 @@
                     var gender = "{{ $student->sex }}";
                     var grade = "{{ $student->grade }}";
                     var birthdate = "{{ $student->birth_date }}";
+                    var lrn = "{{ $student->lrn }}";
 
                     console.log(`FullName: ${fullName}`);
                     console.log(`Gender: ${gender}`);
                     console.log(`Grade: ${grade}`);
-                    console.log(`Birthdate: ${birthdate}`);
+                    console.log(`LRN: ${lrn}`);
                 }
             });
 
-            function printRegistrationForm(fullName, gender, grade, birthdate) {
+            function printRegistrationForm(fullName, gender, grade, birthdate, lrn) {
                 // Open a new window with about:blank (empty content)
                 var printWindow = window.open('about:blank', '', 'height=800, width=800');
 
                 // Generate the content for the registration form, passing the grade value
-                generateModalContent(grade, fullName, gender, birthdate).then(modalContent => {
+                generateModalContent(grade, fullName, gender, birthdate, lrn).then(modalContent => {
                     // Write the content into the new window
                     printWindow.document.write('<html><head><title>Print Registration Form</title>');
 
@@ -192,7 +193,7 @@
                 });
             }
 
-            function generateModalContent(grade, fullName, gender, birthdate) {
+            function generateModalContent(grade, fullName, gender, birthdate, lrn) {
                 return new Promise((resolve, reject) => {
                     // Use absolute URL for images
                     let logoUrlAdmin = "{{ asset('assets/images/SELC.png') }}"; // Absolute URL for the logo image
@@ -202,264 +203,49 @@
                     // Fetch subjects from the API based on the grade value
                     fetchSubjectsTable(grade).then(subjectsTable => {
                         const content = `
-                                                <div>
-                            <div class="header px-3 my-3">
-                                <div class="flex justify-end items-center" style="width: 100%;">
-                                    <div class="flex items-center mx-5">
-                                        <input type="checkbox" class="mr-2 text-white bg-black checked:bg-white checked:border-black focus:outline-none" name="new" value="1" checked>
-                                        <label for="new" class="text-[12px] text-start">New Student</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input type="checkbox" class="mr-2" name="old" value="0">
-                                        <label for="old" class="text-[12px] text-start">Old Student</label>
-                                    </div>
+                            <div>
+                                <div class="header px-3 my-3">
+                                    <h1 class="text-center text-[14px] font-bold">St. Emilie Learning Center Online Application Confirmation Slip</h1>
+                                    <p class="text-center text-[12px]">This is to confirm that ${fullName} has successfully completed the online application for admission to ${grade} for the academic year ${new Date().getFullYear()}-${new Date().getFullYear() + 1}.</p>
                                 </div>
-                                <img src="${logoUrlAdmin}" alt="Logo" width="80px" class="absolute top-10 left-5" style="display: block;">
-                                <div class="flex justify-center items-center" style="width: 100%;">
-                                    <div class="text-center">
-                                        <h1 class="text-[14px] font-bold me-20">St. Emilie Learning Center</h1>
-                                        <p class="text-[13px]">Amparo Village, 18 Bangkal, Caloocan, Metro Manila</p>
-                                        <div class="flex justify-between px-8">
-                                        <p class="text-[12px]">Tel : 7 955 03 92</p>
-                                        <p class="text-[12px]">School Year ${new Date().getFullYear()}-${new Date().getFullYear() + 1}</p>
-                                        </div>
+                                <div class="body px-3 mt-1 text-[12px]">
+                                    <ul class="grid grid-cols-2 gap-x-10 list-none">
+                                        <li class="flex items-center mb-0 px-0">
+                                            <label class="w-24">LRN:</label>
+                                            <div class="flex-1 border-b border-gray-900 text-start px-2">${lrn}</div>
+                                        </li>
+                                        <li class="flex items-center mb-0 px-0">
+                                            <label class="w-24">Student Name:</label>
+                                            <div class="flex-1 border-b border-gray-900 text-start px-2">${fullName}</div>
+                                        </li>
+                                        <li class="flex items-center mb-0 px-0">
+                                            <label class="w-24">Grade Level:</label>
+                                            <div class="flex-1 border-b border-gray-900 text-start px-2">${grade}</div>
+                                        </li>
+                                        <li class="flex items-center mb-0 px-0">
+                                            <label class="w-24">Admission Type:</label>
+                                            <div class="flex-1 border-b border-gray-900 text-start px-2">New Student</div>
+                                        </li>
+                                        <li class="flex items-center mb-0 px-0">
+                                            <label class="w-24">Date of Application:</label>
+                                            <div class="flex-1 border-b border-gray-900 text-start px-2">{{ \Carbon\Carbon::now()->format('F j, Y') }}</div>
+                                        </li>
+                                    </ul>
+
+                                    <p class="text-center mt-5 text-[12px]">
+                                        Please proceed with the next steps: <br>
+                                        1. Submit the required documents to the Registrar's Office. <br>
+                                        2. Pay the reservation fee to the Cashier. <br>
+                                        3. Take the entrance exam on the scheduled date. <br>
+                                    </p>
+
+                                    <div class="text-center mt-5">
+                                        <p class="text-[12px]">Authorized Signature:</p>
+                                        <p class="text-[12px]">(Admission Officer)</p>
+                                        <p class="text-[12px]">Date: {{ \Carbon\Carbon::now()->format('F j, Y') }}</p>
                                     </div>
-                                </div>
-                                <div class="text-center mt-3">
-                                    <h1 class="text-lg font-bold">Registration Form </h1>
-                                    (<span class="text-[10px]">Registrar Copy</span>)
                                 </div>
                             </div>
-                            <div class="body px-3 mt-1 text-[12px]">
-                                <ul class="grid grid-cols-2 gap-x-10 list-none">
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">LRN:</label>
-                                        <div class="flex-1 border-b border-gray-900 py-3"></div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Grade:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">${grade}</div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Student No.:</label>
-                                        <div class="flex-1 border-b border-gray-900 py-3"></div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Section:</label>
-                                        <div class="flex-1 border-b border-gray-900 py-3"></div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Name:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2 text-[10px]">${fullName}</div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Date:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">{{ \Carbon\Carbon::now()->format('F j, Y') }}</div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Gender:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">${gender}</div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Birth Date:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">${birthdate}</div>
-                                    </li>
-                                </ul>
-
-                                <!-- Subjects Table -->
-                                ${subjectsTable}
-
-                                <ul class="flex justify-between px-1 mt-5 text-[12px]">
-                                    <li class="text-center">
-                                        <div class="w-36 border-b border-gray-900 text-start py-3"></div>
-                                        <label class="w-24">Registrar</label>
-                                    </li>
-                                    <li class="text-center">
-                                        <div class="w-36 border-b border-gray-900 text-start py-3"></div>
-                                        <label class="w-24">Cashier</label>
-                                    </li>
-                                    <li class="text-center">
-                                        <div class="border-b border-gray-900 py-3"></div>
-                                        <label class="w-24">Signature Over Printed Name of Parents/guardian</label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <hr class="border border-gray-900 border-dashed mt-3">
-
-                        <div>
-                            <div class="header px-3 my-3">
-                                <div class="flex justify-end items-center" style="width: 100%;">
-                                    <div class="flex items-center mx-5">
-                                        <input type="checkbox" class="mr-2 text-white bg-black checked:bg-white checked:border-black focus:outline-none" name="new" value="1" checked>
-                                        <label for="new" class="text-[12px] text-start">New Student</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input type="checkbox" class="mr-2" name="old" value="0">
-                                        <label for="old" class="text-[12px] text-start">Old Student</label>
-                                    </div>
-                                </div>
-                                <img src="${logoUrlstudent}" alt="Logo" width="80px" class="absolute top-[5rem] left-5" style="display: block;">
-                                <div class="flex justify-center items-center" style="width: 100%;">
-                                    <div class="text-center">
-                                        <h1 class="text-[14px] font-bold me-20">St. Emilie Learning Center</h1>
-                                        <p class="text-[13px]">Amparo Village, 18 Bangkal, Caloocan, Metro Manila</p>
-                                        <div class="flex justify-between px-8">
-                                        <p class="text-[12px]">Tel : 7 955 03 92</p>
-                                        <p class="text-[12px]">School Year ${new Date().getFullYear()}-${new Date().getFullYear() + 1}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-center mt-3">
-                                    <h1 class="text-lg font-bold">Registration Form</h1>
-                                    (<span class="text-[10px]">Cashier Copy</span>)
-                                </div>
-                            </div>
-                            <div class="body px-3 mt-1 text-[12px]">
-                                <ul class="grid grid-cols-2 gap-x-10 list-none">
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">LRN:</label>
-                                        <div class="flex-1 border-b border-gray-900 py-3"></div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Grade:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">${grade}</div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Student No.:</label>
-                                        <div class="flex-1 border-b border-gray-900 py-3"></div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Section:</label>
-                                        <div class="flex-1 border-b border-gray-900 py-3"></div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Name:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">${fullName}</div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Date:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">{{ \Carbon\Carbon::now()->format('F j, Y') }}</div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Gender:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">${gender}</div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Birth Date:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">${birthdate}</div>
-                                    </li>
-                                </ul>
-
-                                <!-- Subjects Table -->
-                                ${subjectsTable}
-
-                                <ul class="flex justify-between px-1 mt-5 text-[12px] mb-5">
-                                    <li class="text-center">
-                                        <div class="w-36 border-b border-gray-900 text-start py-3"></div>
-                                        <label class="w-24">Registrar</label>
-                                    </li>
-                                    <li class="text-center">
-                                        <div class="w-36 border-b border-gray-900 text-start py-3"></div>
-                                        <label class="w-24">Cashier</label>
-                                    </li>
-                                    <li class="text-center">
-                                        <div class="border-b border-gray-900 py-3"></div>
-                                        <label class="w-24">Signature Over Printed Name of Parents/guardian</label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <hr class="border border-gray-900 border-dashed">
-
-                        <div class="" style="page-break-inside: avoid; margin-top: 1.5rem;">
-                        <div class="pt-1"></div>
-                            <div class="header px-3 my-3" style="margin-top: 1.5rem;">
-                                <div class="flex justify-end items-center" style="width: 100%;">
-                                    <div class="flex items-center mx-5">
-                                        <input type="checkbox" class="mr-2 text-white bg-black checked:bg-white checked:border-black focus:outline-none" name="new" value="1" checked>
-                                        <label for="new" class="text-[1 2px] text-start">New Student</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input type="checkbox" class="mr-2" name="old" value="0">
-                                        <label for="old" class="text-[12px] text-start">Old Student</label>
-                                    </div>
-                                </div>
-                                <div class="flex justify-center items-center" style="width: 100%;">
-                                    <img src="${logoUrlAdmin}" alt="Logo" width="80px" class="absolute top-[95rem] left-5" style="display: block;">
-                                    <div class="text-center">
-                                        <h1 class="text-[14px] font-bold me-20">St. Emilie Learning Center</h1>
-                                        <p class="text-[13px]">Amparo Village, 18 Bangkal, Caloocan, Metro Manila</p>
-                                        <div class="flex justify-between px-8">
-                                        <p class="text-[12px]">Tel : 7 955 03 92</p>
-                                        <p class="text-[12px]">School Year ${new Date().getFullYear()}-${new Date().getFullYear() + 1}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="text-center mt-3">
-                                    <h1 class="text-lg font-bold">Registration Form</h1>
-                                    (<span class="text-[10px]">Student Copy</span>)
-                                </div>
-                            </div>
-                            <div class="body px-3 mt-1 text-[12px]">
-                                <ul class="grid grid-cols-2 gap-x-10 list-none">
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">LRN:</label>
-                                        <div class="flex-1 border-b border-gray-900 py-3"></div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Grade:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">${grade}</div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Student No.:</label>
-                                        <div class="flex-1 border-b border-gray-900 py-3"></div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Section:</label>
-                                        <div class="flex-1 border-b border-gray-900 py-3"></div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Name:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">${fullName}</div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Date:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">{{ \Carbon\Carbon::now()->format('F j, Y') }}</div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Gender:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">${gender}</div>
-                                    </li>
-                                    <li class="flex items-center mb-0 px-0">
-                                        <label class="w-24">Birth Date:</label>
-                                        <div class="flex-1 border-b border-gray-900 text-start px-2">${birthdate}</div>
-                                    </li>
-                                </ul>
-
-                                <!-- Subjects Table -->
-                                ${subjectsTable}
-
-                                <ul class="flex justify-between px-1 mt-5 text-[12px]">
-                                    <li class="text-center">
-                                        <div class="w-36 border-b border-gray-900 text-start py-3"></div>
-                                        <label class="w-24">Registrar</label>
-                                    </li>
-                                    <li class="text-center">
-                                        <div class="w-36 border-b border-gray-900 text-start py-3"></div>
-                                        <label class="w-24">Cashier</label>
-                                    </li>
-                                    <li class="text-center">
-                                        <div class="border-b border-gray-900 py-3"></div>
-                                        <label class="w-24">Signature Over Printed Name of Parents/guardian</label>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <hr class="border border-gray-900 border-dashed mt-3">
                     `;
                         resolve(content);
                     }).catch(reject);

@@ -22,7 +22,7 @@ use App\Models\Madminaccount;
 use App\Mail\MLsendemail;
 use Illuminate\Support\Facades\Mail;
 use App\Models\StudentFinalGrade;
-
+use App\Models\TeacherUser;
 
 class StudentRegistrationController extends Controller
 {
@@ -466,10 +466,11 @@ class StudentRegistrationController extends Controller
         $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('studentnumber'))->get()->keyBy('student_number');
         $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('studentnumber'))->get()->keyBy('student_number');
         $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('studentnumber'))->get()->keyBy('student_number');
+        $teacherAdviser = TeacherUser::whereIn('teacher_number', $students->pluck('adviser'))->get()->keyBy('teacher_number');
 
         // Check if there are no active students
         $noActiveMessage = $students->isEmpty() ? "No active students found." : null;
 
-        return view('registrar.registrar_enrolled', compact('students', 'studentInfo', 'studentsAdditional', 'studentDocuments', 'studentAccount', 'noActiveMessage'));
+        return view('registrar.registrar_enrolled', compact('students', 'studentInfo', 'studentsAdditional', 'studentDocuments', 'studentAccount', 'noActiveMessage', 'teacherAdviser'));
     }
 }

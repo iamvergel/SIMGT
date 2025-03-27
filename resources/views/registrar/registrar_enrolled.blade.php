@@ -59,104 +59,81 @@
                                 <thead class="bg-gray-200">
                                     <tr class="text-[14px] font-normal uppercase text-left text-black">
                                         <th class="export">lrn</th>
-                                        <th class="export">Student Number</th>
                                         <th class="export">School Year</th>
                                         <th class="export">Status</th>
                                         <th class="export">Name</th>
                                         <th class="export">Grade</th>
-                                        <th class="export">Action</th>
+                                        <th >Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="" id="tableBody">
-                                    @foreach ($students as $student)
-                                        @php
-                                            $account = $studentAccount[$student->lrn] ?? null;
-                                            $avatar = $account && $account->avatar ? asset('storage/' . $account->avatar) : null;
-                                            $primaryInfo = $studentInfo[$student->lrn] ?? null;
-                                            $initials = strtoupper(substr($primaryInfo->student_last_name, 0, 1) . substr($primaryInfo->student_first_name, 0, 1));
-                                        @endphp
-                                        <tr class="hover:bg-gray-100 h-12">
-                                            <td class="px-4 py-3">{{ $student->lrn }}</td>
-                                            <td class="px-4 py-3 ">{{ $student->studentnumber }}</td>
-                                            <td class="px-4 py-3 text-xs">
-                                                {{ $student->school_year }}
-                                            </td>
-                                            <td class="px-4 py-3 text-xs">
-                                                <span class="bg-green-300 text-green-800 px-2 py-1 font-semibold rounded-full">{{ $student->status }}</span>
-                                            </td>
-                                            <td class="flex justify-start items-center">
-                                                <div class="w-12 h-12 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold mx-2">
-                                                    @if ($avatar)
-                                                        <img src="{{ $avatar }}" alt="Student Avatar" class="w-12 h-12 rounded-full object-cover">
-                                                    @else
-                                                        {{ $initials }}
-                                                    @endif
-                                                </div>
-                                                <div>
-                                                    <span class="text-sm font-semibold">{{ $primaryInfo->student_last_name }} {{ $primaryInfo->student_first_name }} {{ $primaryInfo->student_middle_name }} {{ $primaryInfo->student_suffix_name }}</span>
-                                                    <br><span class="text-xs text-gray-500">{{ $primaryInfo->email_address_send }}</span>
-                                                </div>
-                                            </td>
-                                            <td class="px-4 py-3">{{ $student->grade }}</td>
-                                            <td class="px-4 py-3">
-                                                <button
-                                                    data-fullname="{{ $student->student_last_name }} {{ $student->student_first_name }} {{ $student->student_middle_name }} {{ $student->student_suffix_name }}"
-                                                    data-gender="{{ $student->sex }}"
-                                                    data-grade="{{ isset($studentPrimaryInfo[$student->lrn]) ? $studentPrimaryInfo[$student->lrn]->grade : 'N/A' }}"
-                                                    data-birthdate="{{ $student->birth_date }}"
-                                                    data-studentstatus="{{ $student->status }}"
-                                                    data-lrn="{{ isset($studentPrimaryInfo[$student->lrn]) ? $studentPrimaryInfo[$student->lrn]->lrn : 'N/A' }}"
-                                                    data-adviser="{{ isset($studentPrimaryInfo[$student->lrn]) && isset($advisers[$studentPrimaryInfo[$student->lrn]->adviser]) ? $advisers[$studentPrimaryInfo[$student->lrn]->adviser]->first_name : 'N/A' }}"
-                                                    data-section="{{ isset($studentPrimaryInfo[$student->lrn]) ? $studentPrimaryInfo[$student->lrn]->section : 'N/A' }}"
-                                                    onclick="printRegistrationForm(this)"
-                                                    class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-green-700 rounded-full hover:bg-green-600">
-                                                    <i class="fa fa-print"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </main>
-    </div>
+    @foreach ($students as $student)
+        @php
+            $account = $studentAccount[$student->lrn] ?? null;
+            $avatar = $account && $account->avatar ? asset('storage/' . $account->avatar) : null;
+            $primaryInfo = $studentInfo[$student->lrn] ?? null;
+            $initials = strtoupper(substr($primaryInfo->student_last_name, 0, 1) . substr($primaryInfo->student_first_name, 0, 1));
+            $adviser = $teacherAdviser[$student->adviser] ?? 'N/A'; // Fetch the adviser information
+        @endphp
+        <tr class="hover:bg-gray-100 h-12">
+            <td class="px-4 py-3">{{ $student->lrn }}</td>
+            <td class="px-4 py-3 text-xs">{{ $student->school_year }}</td>
+            <td class="px-4 py-3 text-xs">
+                <span class="bg-green-300 text-green-800 px-2 py-1 font-semibold rounded-full">{{ $student->status }}</span>
+            </td>
+            <td class="flex justify-start items-center">
+                <div class="w-12 h-12 rounded-full bg-teal-700 text-white flex items-center justify-center font-bold mx-2">
+                    @if ($avatar)
+                        <img src="{{ $avatar }}" alt="Student Avatar" class="w-12 h-12 rounded-full object-cover">
+                    @else
+                        {{ $initials }}
+                    @endif
+                </div>
+                <div>
+                    <span class="text-sm font-semibold">{{ $primaryInfo->student_last_name }} {{ $primaryInfo->student_first_name }} {{ $primaryInfo->student_middle_name }} {{ $primaryInfo->student_suffix_name }}</span>
+                    <br><span class="text-xs text-gray-500">{{ $primaryInfo->email_address_send }}</span>
+                </div>
+            </td>
+            <td class="px-4 py-3">{{ $student->grade }}</td>
+            <td class="px-4 py-3">
+                <button
+                    class="print-button text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-green-700 rounded-full hover:bg-green-600"
+                    data-fullname="{{ $primaryInfo->student_last_name }} {{ $primaryInfo->student_first_name }} {{ $primaryInfo->student_middle_name }} {{ $primaryInfo->student_suffix_name }}"
+                    data-gender="{{ $primaryInfo->sex }}"
+                    data-grade="{{ $student->grade ?? 'N/A' }}"
+                    data-birthdate="{{ $primaryInfo->birth_date }}"
+                    data-studentstatus="{{ $student->status }}"
+                    data-lrn="{{ $primaryInfo->lrn ?? 'N/A' }}"
+                    data-section="{{ $student->section ?? 'N/A' }}"
+                    data-adviser="{{ $adviser->last_name }} {{ $adviser->first_name }} {{ $adviser->middle_name }} {{ $adviser->suffix }}" 
+                    onclick="printRegistrationForm(this)">
+                    <i class="fa fa-print"></i>
+                </button>
+            </td>
+        </tr>
+    @endforeach
+</tbody>
 
-    @include('admin.includes.js-link')
+@include('admin.includes.js-link')
     <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
-
-    <script>
-    // Fixing button click listener to properly handle the print button clicks
-    document.querySelectorAll('.print-button').forEach(button => {
-        button.addEventListener('click', function () {
-            const studentData = {
-                FullName: button.getAttribute('data-fullname'),
-                Gender: button.getAttribute('data-gender'),
-                BirthDate: button.getAttribute('data-birthdate'),
-                LRN: button.getAttribute('data-lrn'),
-                Status: button.closest('tr').querySelector('#statusValue') ? button.closest('tr').querySelector('#statusValue').value : '',
-                Adviser: button.closest('tr').querySelector('#adviserValue') ? button.closest('tr').querySelector('#adviserValue').value : '',
-                Section: button.closest('tr').querySelector('#sectionValue') ? button.closest('tr').querySelector('#sectionValue').value : '',
-                Grade: button.closest('tr').querySelector('#gradeValue') ? button.closest('tr').querySelector('#gradeValue').value : ''
-            };
-
-            // Log data for debugging
-            console.log('Student Data:', studentData);
-
-            // Call the print function
-            printRegistrationForm(button, studentData);
-        });
-    });
-
-    function printRegistrationForm(button, studentData) {
-        const { lrn, grade, FullName, section, adviser, gender, BirthDate, Status } = studentData;
+    
+<script>
+    // Function to handle the print button click and generate the registration form
+    function printRegistrationForm(button) {
+        const studentData = {
+            FullName: button.getAttribute('data-fullname'),
+            Gender: button.getAttribute('data-gender'),
+            BirthDate: button.getAttribute('data-birthdate'),
+            LRN: button.getAttribute('data-lrn'),
+            Status: button.getAttribute('data-studentstatus'),
+            Adviser: button.getAttribute('data-adviser'),
+            Section: button.getAttribute('data-section'),
+            Grade: button.getAttribute('data-grade')
+        };
 
         const printWindow = window.open('about:blank', '', 'height=800, width=800');
         
-        // Generate the content dynamically for printing
-        generateModalContent(lrn, grade, FullName, section, adviser, gender, BirthDate, Status).then(modalContent => {
+        generateModalContent(studentData).then(modalContent => {
             printWindow.document.write('<html><head><title>Print Registration Form</title>');
             printWindow.document.write('<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">');
             printWindow.document.write(`
@@ -175,7 +152,6 @@
             printWindow.document.write('</body></html>');
             printWindow.document.close();
 
-            // Wait until the window is fully loaded, then trigger print
             printWindow.onload = function () {
                 printWindow.print();
             };
@@ -186,10 +162,10 @@
     }
 
     // Function to generate the registration content
-    function generateModalContent(lrn, grade, studentName, section, adviser, gender, birthDay, statusStudent) {
+    function generateModalContent(studentData) {
         return new Promise((resolve, reject) => {
             const logoUrl = "{{ asset('assets/images/SELC.png') }}"; // Ensure your logo URL is correct
-            fetchSubjectsTable(grade).then(subjectsTable => {
+            fetchSubjectsTable(studentData.Grade).then(subjectsTable => {
                 const content = `
                     <div class="header px-3 my-3">
                         <img src="${logoUrl}" alt="Logo" width="60px" class="absolute top-15 left-5">
@@ -200,37 +176,37 @@
                             <p class="text-[12px]">School Year ${new Date().getFullYear()}-${new Date().getFullYear() + 1}</p>
                             <h1 class="text-lg font-bold my-5">Registration Form</h1>
                         </div>
-                        <div class="absolute top-2 right-5 font-semibold">${statusStudent}</div>
+                        <div class="absolute top-2 right-5 font-semibold">iOld Student</div>
                     </div>
                     <div class="body px-3 mt-1 text-[12px]">
                         <ul class="grid grid-cols-2 gap-x-10 list-none">
                             <li class="flex items-center mb-0 px-0">
                                 <label class="w-24">LRN:</label>
-                                <div class="flex-1 border-b border-gray-900 text-start px-2">${lrn}</div>
+                                <div class="flex-1 border-b border-gray-900 text-start px-2">${studentData.LRN}</div>
                             </li>
                             <li class="flex items-center mb-0 px-0">
                                 <label class="w-24">Grade:</label>
-                                <div class="flex-1 border-b border-gray-900 text-start px-2">${grade}</div>
+                                <div class="flex-1 border-b border-gray-900 text-start px-2">${studentData.Grade}</div>
                             </li>
                             <li class="flex items-center mb-0 px-0">
                                 <label class="w-24">Name:</label>
-                                <div class="flex-1 border-b border-gray-900 text-start px-2">${studentName}</div>
+                                <div class="flex-1 border-b border-gray-900 text-start px-2">${studentData.FullName}</div>
                             </li>
                             <li class="flex items-center mb-0 px-0">
                                 <label class="w-24">Section:</label>
-                                <div class="flex-1 border-b border-gray-900 text-start px-2">${section}</div>
+                                <div class="flex-1 border-b border-gray-900 text-start px-2">${studentData.Section}</div>
                             </li>
                             <li class="flex items-center mb-0 px-0">
                                 <label class="w-24">Gender:</label>
-                                <div class="flex-1 border-b border-gray-900 text-start px-2">${gender}</div>
+                                <div class="flex-1 border-b border-gray-900 text-start px-2">${studentData.Gender}</div>
                             </li>
                             <li class="flex items-center mb-0 px-0">
                                 <label class="w-24">Adviser:</label>
-                                <div class="flex-1 border-b border-gray-900 text-start px-2">${adviser}</div>
+                                <div class="flex-1 border-b border-gray-900 text-start px-2">${studentData.Adviser}</div>
                             </li>
                             <li class="flex items-center mb-0 px-0">
                                 <label class="w-24">Birth Date:</label>
-                                <div class="flex-1 border-b border-gray-900 text-start px-2">${new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(birthDay))}</div>
+                                <div class="flex-1 border-b border-gray-900 text-start px-2">${new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(studentData.BirthDate))}</div>
                             </li>
                             <li class="flex items-center mb-0 px-0">
                                 <label class="w-24">Date:</label>
@@ -256,41 +232,44 @@
         });
     }
 
-    // Function to fetch the subjects based on grade
     function fetchSubjectsTable(grade) {
-        const apiUrl = `/api/allsubjects?grade=${encodeURIComponent(grade)}`;
-        return fetch(apiUrl)
-            .then(response => response.json())
-            .then(subjects => {
-                const table = `
-                    <div class="mt-5">
-                        <table class="w-full border border-gray-900">
-                            <thead>
-                                <tr class="border border-gray-900 text-left">
-                                    <th class="px-4 py-1 text-left">Subject</th>
-                                    <th class="px-4 py-1 text-left"></th>
-                                    <th class="px-4 py-1 text-left">Teacher</th>
+    const apiUrl = `/api/allsubjects?grade=${encodeURIComponent(grade)}`;
+    return fetch(apiUrl)
+        .then(response => response.json())
+        .then(subjects => {
+            console.log('Fetched Subjects:', subjects);  // Debugging line
+            const table = `
+                <div class="mt-5">
+                    <table class="w-full border border-gray-900">
+                        <thead>
+                            <tr class="border border-gray-900 text-left">
+                                <th class="px-4 py-1 text-left">Subject</th>
+                                <th class="px-4 py-1 text-left"></th>
+                                <th class="px-4 py-1 text-left">Teacher</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${subjects.map(subject => `
+                                <tr>
+                                    <td class="px-4 py-1">${subject.subject}</td>
+                                    <td class="px-4 py-1"></td>
+                                    <td class="px-4 py-1"></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                ${subjects.map(subject => `
-                                    <tr>
-                                        <td class="px-4 py-1">${subject.subject}</td>
-                                        <td class="px-4 py-1"></td>
-                                        <td class="px-4 py-1"></td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>`;
-                return table;
-            })
-            .catch(error => {
-                console.error('Error fetching subjects:', error);
-                return '<p>Unable to fetch subjects.</p>';
-            });
-    }
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>`;
+            return table;
+        })
+        .catch(error => {
+            console.error('Error fetching subjects:', error);
+            return '<p>Unable to fetch subjects.</p>';
+        });
+}
+
+    
 </script>
+
 
 </body>
 

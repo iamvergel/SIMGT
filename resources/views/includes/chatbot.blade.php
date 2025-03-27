@@ -51,6 +51,11 @@
     type="button" onclick="toggleChat()">
     <span class="hidden text-sm me-2">Open Chat</span><i class="fa-brands fa-facebook-messenger text-2xl"></i>
 </button>
+<button id="scrollToTop" style="display: none;" class=" fixed z-[10] bottom-[1.5rem] right-[6rem] lg:bottom-[2.5rem] lg:right-[8rem] inline-flex items-center justify-center w-14 h-14 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg transition-all duration-300">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+
 
 <!-- onclick="window.open('//www.facebook.com/messages/t/343328209464206')" -->
 <!-- Chat Window -->
@@ -58,7 +63,7 @@
     class="fixed z-[13] bottom-[1rem] right-[1rem] lg:bottom-[2rem] lg:right-[3rem] bg-white w-[300px] h-[300px] lg:w-[350px] lg:h-[300px] rounded-xl shadow-lg border-2 border overflow-hidden hidden flex flex-col">
 
     <!-- Header Section -->
-    <div class="bg-gradient-to-r from-teal-600 to-teal-800 p-4 text-white flex items-center justify-between">
+    <div class="bg-teal-800 p-4 text-white flex items-center justify-between">
         <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-300 to-blue-400 p-[0.1rem]">
                 <img src="{{ asset('../assets/images/SELC.png') }}" alt="Support Avatar"

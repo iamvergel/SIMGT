@@ -77,6 +77,7 @@
 
     @include("includes.chatbot")
 
+
     <div id="modalprivacy"
         class="fixed hidden z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 px-2 flex justify-center items-center items-center">
         
@@ -161,7 +162,7 @@
         });
     </script>
 
-    <div class="w-full px-2 mt-[20rem] lg:mt-[5rem] md:px-[8rem] xl:px-[15rem] 2xl:px-[20rem] py-10 relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8"
+    <div class="w-full bg-sky-100 px-2 mt-[13rem] lg:mt-[4rem] md:px-[8rem] xl:px-[15rem] 2xl:px-[20rem] py-10 relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-24"
         id="missionvission">
         <!-- Mission Card -->
         <div
@@ -184,10 +185,10 @@
 
     </div>
 
-    <div class="w-full px-5 lg:px-10 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center mt-[15rem] lg:mt-5"
+    <div class="w-full px-2 lg:px-5 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center mt-[15rem] lg:mt-0 bg-teal-50"
         id="aboutSchool">
         <div class="container mx-auto lg:px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-3 lg:p-5 border-lg relative shadow-lg">
+            <div class="grid grid-cols-1 lg:grid-cols-3 lg:p-5 border-lg relative">
                 <!-- Video Box -->
                 <div class="w-full h-full bg-cover bg-center flex justify-center items-stretch rounded-lg" id="imageone"
                     style="background-image: url({{ asset('../assets/images/imageonebg.png') }}); min-height: 400px;">
@@ -196,7 +197,7 @@
                 <!-- Icon Boxes -->
                 <div class="col-span-2 w-full flex flex-col justify-center  text-center py-5 px-4 lg:px-5">
                     <h3 class="text-teal-900 text-3xl font-bold mb-4">Welcome to St. Emilie Learning Center!</h3>
-                    <p class="text-teal-900 text-sm text-justify">At St. Emilie Learning Center, we are dedicated to
+                    <p class="text-teal-900 text-md text-justify px-0 lg:px-10">At St. Emilie Learning Center, we are dedicated to
                         providing a nurturing and engaging learning environment where students develop academically,
                         socially, and emotionally. Our school upholds high standards of education, ensuring that each
                         student receives the knowledge and skills necessary for lifelong success. Through a balanced
@@ -219,9 +220,9 @@
         </div>
     </div>
 
-    <div class="w-full px-5 lg:px-10 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center mt-[10rem] lg:mt-5" id="aboutSchool">
+    <div class="w-full px-2 lg:px-10 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center mt-[15rem] lg:mt-2 bg-sky-100" id="aboutSchool">
         <div class="container mx-auto lg:px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-3 lg:p-5 border-lg relative shadow-lg">
+            <div class="grid grid-cols-1 lg:grid-cols-3 lg:p-5 border-lg relative ">
                 <!-- Video Box -->
                 <div class="w-full h-full bg-cover bg-center flex justify-center items-stretch rounded-lg" id="imagetwo"
                     style="background-image: url({{ asset('../assets/images/imagetwobg.png') }}); min-height: 400px;">
@@ -229,7 +230,7 @@
 
                 <!-- Icon Boxes -->
                 <div class="col-span-2 w-full flex flex-col justify-center  text-center py-5 px-4 lg:px-5">
-                    <p class="text-teal-900 text-sm text-justify mt-5 lg:mt-0">"Discover, Learn, and Shine at St. Emelie Learning
+                    <p class="text-teal-900 text-md text-justify mt-5 lg:mt-0 px-0 lg:px-10">"Discover, Learn, and Shine at St. Emelie Learning
                         Center!
                         Where young minds grow, friendships flourish, and dreams take flight. Join us for a journey of
                         curiosity, creativity, and endless possibilities. Enroll now and be part of our vibrant learning
@@ -237,9 +238,9 @@
                         Would you like further tweaks or a different tone?</p>
 
                     <div class="flex justify-center items-center mt-5">
-                    <a type="button"
+                    <button type="button"  onclick="document.getElementById('modalprivacy').classList.remove('hidden')"
                         class="text-white w-80 text-center bg-teal-800 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-300 font-bold rounded-full text-lg px-20 py-2.5 text-center mt-20"
-                        href="#top">Enroll Now</a>
+                        >Register Now</button>
                     </div>
                 </div>
             </div>

@@ -144,6 +144,30 @@
                         </div>
                     </div>
 
+                    <!-- Proceed Modal -->
+                    <div class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden p-5 flex items-center justify-center" id="proceedModal">
+                        <div class="bg-white rounded-lg shadow-lg p-5 max-w-lg mx-auto mt-16">
+                            <div class="flex items-center text-green-700 text-md font-normal">
+                                <span>Proceed to our admission process</span>
+                            </div>
+                            <hr class="border-1 border-green-500 mt-5">
+                            <div class="mt-5 text-sm">
+                            <p class="text-gray-600 text-justify">You have chosen Grade One as your grade level. Please proceed to our admission process to complete your registration and obtain your Learner Reference Number (LRN).</p>
+
+                            </div>
+                            <div class="flex justify-end mt-10 text-sm">
+                                <button class="cursor-pointer bg-red-500 hover:bg-red-600 px-5 py-2 rounded-sm text-white"
+                                    onclick="document.getElementById('proceedModal').classList.add('hidden');">
+                                    Close
+                                </button>
+                                <button class="cursor-pointer bg-teal-700 hover:bg-teal-800 px-5 py-2 rounded-sm text-white ml-5"
+                                    onclick="handleProceedToAdmissionProcess()">
+                                    I Already Have LRN
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                     <script>
                         function toggleGradeOptions(admissionType) {
                             const transfereeOptions = document.querySelectorAll('.transferee-option');
@@ -151,8 +175,10 @@
                             gradeSelect.value = "";
                             if (admissionType === 'New Student') {
                                 transfereeOptions.forEach(option => option.classList.add('hidden'));
+                                document.getElementById('basicinfo').classList.add('hidden');
                             } else if (admissionType === 'Transferee') {
                                 transfereeOptions.forEach(option => option.classList.remove('hidden'));
+                                document.getElementById('basicinfo').classList.add('hidden');
                             }
                         }
                     </script>
@@ -200,9 +226,27 @@
                     }
 
                     function showNextStep() {
-                        if (checkValidity()) {
-                            document.getElementById('basicinfo').classList.remove('hidden');
+                        var gradeSelect = document.getElementById('grade');
+                        var gradeAlert = document.getElementById('gradeAlert');
+                        var statusSelect = document.getElementById('status');
+                        var statusAlert = document.getElementById('statusAlert');
+                        
+                        if (statusSelect.value === 'New Student' && gradeSelect.value === 'Grade One') {
+                            document.getElementById('proceedModal').classList.remove('hidden');
+
+                        } else {
+                            if (checkValidity()) {
+                                document.getElementById('basicinfo').classList.remove('hidden');
+                            }
                         }
+                    }
+
+                    function handleProceedToAdmissionProcess() {
+                        if (checkValidity()) {
+                                document.getElementById('basicinfo').classList.remove('hidden');
+                            }
+
+                            document.getElementById('proceedModal').classList.add   ('hidden');
                     }
 
                     document.getElementById('grade').addEventListener('change', function () {
@@ -1895,6 +1939,12 @@
 
                                             document.getElementById(element.reviewId).classList.add('text-green-700');
                                             document.getElementById(element.reviewId).classList.add('font-semibold');
+
+                                            inputElement.addEventListener('input', function () {
+                                                const newValue = inputElement.value || inputElement.options[inputElement.selectedIndex]?.text;
+                                                document.getElementById(element.reviewId).innerText = newValue;
+                                                console.log(`${element.reviewId}: ${newValue}`);
+                                            });
                                         });
                                     }
                                 }

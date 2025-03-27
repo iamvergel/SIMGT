@@ -83,7 +83,7 @@
                                     <thead class="bg-gray-200">
                                         <tr class="text-[14px] font-normal uppercase text-left text-black">
                                             <th class="export">lrn</th>
-                                            <th class="export">Student Number</th>
+
                                             <th class="export">Status</th>
                                             <th class="export">Profile</th>
                                             <th class="export">Grade</th>
@@ -106,9 +106,7 @@
                                                             <span class="hidden">{{ $student->id }}</span>
                                                             <span class="ml-2">{{ $student->lrn }}</span>
                                                         </td>
-                                                        <td>
-                                                            <span class="ml-2">{{ $student->student_number }}</span>
-                                                        </td>
+                                                       
                                                         <td>
                                                             <span class="px-2 py-1 uppercase font-semibold text-[10px] rounded-lg leading-tight text-green-800 bg-green-200">
                                                                 {{ $primaryInfo->status }}

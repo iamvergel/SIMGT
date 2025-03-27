@@ -188,9 +188,11 @@
                             printButton.classList.add('hidden');
                         }
 
-                        button.addEventListener('click', function () {
-                            window.location.href = `{{ route('student.show.enrollees', ['lrn' => $student->lrn]) }}`;
-                        });
+                        if (lrn) {
+                            button.addEventListener('click', function () {
+                                window.location.href = `{{ route('student.show.enrollees', ['lrn' => ':lrn']) }}`.replace(':lrn', lrn);
+                            });
+                        }
                     }
                 })
                 .catch(error => console.error('Error:', error));

@@ -61,12 +61,12 @@
                                 <thead class="bg-gray-200">
                                     <tr class="text-[14px] font-normal uppercase text-left text-black">
                                         <th class="export">lrn</th>
-                                        <th class="export">Student Number</th>
+                                        
                                         <th class="export">School Year</th>
                                         <th class="export">Admission Type</th>
                                         <th class="export">Name</th>
                                         <th class="export">Grade</th>
-                                        <th class="export">Action</th>
+                                        <th class="hidden">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="" id="tableBody">
@@ -79,7 +79,7 @@
                                                                         @endphp
                                                                         <tr class="hover:bg-gray-100 h-12">
                                                                             <td class="px-4 py-3">{{ $student->lrn }}</td>
-                                                                            <td class="px-4 py-3 ">{{ $student->studentnumber }}</td>
+                                                                            
                                                                             <td class="px-4 py-3 text-xs">
                                                                                 {{ $student->school_year }}
                                                                             </td>
@@ -108,7 +108,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td class="px-4 py-3">{{ $student->grade }}</td>
-                                                                            <td class="px-4 py-3">
+                                                                            <td class="px-4 py-3 hidden">
                                                                                 <!-- Update Student Info Button -->
                                                                                 <button data-modal-toggle="updatetudentinfo{{ $student->id }}"
                                                                                     data-modal-target="updatetudentinfo{{ $student->id }}" data-fullname="{{ $student->student_last_name }}
