@@ -1360,7 +1360,7 @@
                                                     oninput="filterReligionOptions()"
                                                     onclick="showGuardianReligionList()" required>
 
-                                                <ul id="GuardinreligionList"
+                                                <ul id="guardianReligionList"
                                                     class="hidden absolute w-full bg-white border border-gray-300 mt-1 rounded shadow-lg max-h-60 overflow-y-auto z-10">
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
                                                         onclick="selectReligionGuardian('Roman Catholicism')">Roman
@@ -1416,7 +1416,7 @@
                             <script>
                                 // Function to show the list when clicked
                                 function showGuardianReligionList() {
-                                    const listGuardian = document.getElementById('GuardinreligionList');
+                                    const listGuardian = document.getElementById('guardianReligionList');
                                     listGuardian.classList.remove('hidden');
                                 }
 
@@ -1429,7 +1429,7 @@
                                 // Function to select a religion option
                                 function selectReligionGuardian(religion) {
                                     const inputGuardian = document.getElementById('guardianReligion');
-                                    const listGuardian = document.getElementById('GuardinreligionList');
+                                    const listGuardian = document.getElementById('guardianReligionList');
 
                                     inputGuardian.value = religion;
                                     listGuardian.classList.add('hidden'); // Hide dropdown after selection
@@ -1438,15 +1438,15 @@
                                     validateReligionGuardian();
                                 }
 
-                                // Function to select a religion option
+                                // Function to select a relationship option
                                 function selectRelationshipGuardian(relation) {
-                                    const inputGuardianRellation = document.getElementById('guardianRelationship');
-                                    const listGuardianRellation = document.getElementById('GuardinRelationshipList');
+                                    const inputGuardianRelation = document.getElementById('guardianRelationship');
+                                    const listGuardianRelation = document.getElementById('GuardinRelationshipList');
 
-                                    inputGuardian.value = religion;
-                                    listGuardian.classList.add('hidden'); // Hide dropdown after selection
+                                    inputGuardianRelation.value = relation;
+                                    listGuardianRelation.classList.add('hidden'); // Hide dropdown after selection
 
-                                    // Optionally, validate religion
+                                    // Optionally, validate relationship
                                     validateReligionGuardianRelation();
                                 }
 
@@ -1462,7 +1462,7 @@
                                     }
                                 }
 
-                                // Validation to check if a religion is selected
+                                // Validation to check if a relationship is selected
                                 function validateReligionGuardianRelation() {
                                     const religionInputGuardianRelation = document.getElementById('guardianRelationship');
                                     const religionAlertGuardianRelation = document.getElementById('guardianRelationshipAlert');
@@ -1476,7 +1476,7 @@
 
                                 // Close the dropdown when clicked outside
                                 document.addEventListener('click', function (event) {
-                                    const list = document.getElementById('GuardinreligionList');
+                                    const list = document.getElementById('guardianReligionList');
                                     const input = document.getElementById('guardianReligion');
                                     const listGuardian = document.getElementById('GuardinRelationshipList');
                                     const inputGuardian = document.getElementById('guardianRelationship');
@@ -1692,7 +1692,7 @@
                                         guardianContactNumberInput.classList.remove('border-red-500');
                                         guardianContactNumberAlert.classList.add('hidden');
 
-                                        isValidParent = true;
+                                        isValidParent = false;
                                     } else if (guardianContactNumberInput.value.length !== 11) {
                                         guardianContactNumberInput.classList.add('border-red-500');
                                         guardianContactNumberAlert.classList.remove('hidden');
