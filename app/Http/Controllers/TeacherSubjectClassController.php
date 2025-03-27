@@ -29,6 +29,19 @@ class TeacherSubjectClassController extends Controller
         // List of quarters
         $quarters = ['1st Quarter', '2nd Quarter', '3rd Quarter', '4th Quarter'];
 
+        // Check if the teacher already have this subject
+        $checkSubject = TeacherSubjectClass::where([
+            'teacher_number' => $validatedData['teacher_number'],
+            'grade' => ucwords(strtolower($validatedData['grade'])),
+            'section' => ucwords(strtolower($validatedData['section'])),
+            'subject' => $validatedData['subject'],
+            'school_year' => $validatedData['school_year'],
+        ])->first();
+
+        if ($checkSubject) {
+            return back()->with('error', 'The teacher already has this subject assigned.');
+        }
+
         // Create TeacherSubjectClass records for each quarter
         foreach ($quarters as $quarter) {
             TeacherSubjectClass::updateOrCreate(
@@ -78,7 +91,7 @@ class TeacherSubjectClassController extends Controller
         ])->update(['teacher_number' => $validatedData['teacher_number']]);
 
         // Return success response
-        return redirect()->route('teacher.user')->with('success', 'Subject Class added successfully!');
+        return back()->with('success', 'Subject Class added successfully!');
     }
 
     public function update(Request $request, $id)

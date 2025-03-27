@@ -58,7 +58,7 @@ class TeacherUserController extends Controller
         ]);
 
         // Return success response
-        return redirect()->route('teacher.user')->with('success', 'New teacher added successfully!');
+        return back()->with('success', 'New teacher added successfully!');
     }
 
     public function update(Request $request, $id)
@@ -136,6 +136,34 @@ class TeacherUserController extends Controller
         return view('admin.includes.teacher_information', compact('teachers', 'teacherAdvisory', 'teacherSubjects'));
     }
 
+    public function showTeacherInfotmationRegistrar(Request $request, $id)
+    {
+        // Fetch the specific teacher based on the provided id
+        $teachers = TeacherUser::where('id', $id)->first();
+
+        // If the teacher doesn't exist, you could redirect back or show an error message
+        if (!$teachers) {
+            return redirect()->route('teacher.user')->with('error', 'Teacher not found.');
+        }
+
+        $teacherAdvisory = null;
+
+        // Fetch related data for the specific teacher
+        $teacherAdvisory = TeacherAdvisory::where('teacher_number', $teachers->teacher_number)->first();
+        $teacherSubjects = TeacherSubjectClass::where('teacher_number', $teachers->teacher_number)->get();
+        // $teacherDocuments = teacherDocuments::where('teacher_number', $teachers->teacher_number)->first();
+        // $teacherAccount = TeacherUser::where('teacher_number', $teachers->teacher_number)->first();
+        // $teacherGradeOne = Mteachergradeone::where('teacher_number', $teachers->teacher_number)->first();
+        // $teacherGradeTwo = Mteachergradetwo::where('teacher_number', $teachers->teacher_number)->first();
+        // $teacherGradeThree = Mteachergradethree::where('teacher_number', $teachers->teacher_number)->first();
+        // $teacherGradeFour = Mteachergradefour::where('teacher_number', $teachers->teacher_number)->first();
+        // $teacherGradeFive = Mteachergradefive::where('teacher_number', $teachers->teacher_number)->first();
+        // $teacherGradeSix = Mteachergradesix::where('teacher_number', $teachers->teacher_number)->first();
+
+        // You can pass other data here as needed
+        return view('registrar.includes.teacher_information', compact('teachers', 'teacherAdvisory', 'teacherSubjects'));
+    }
+
     public function resetAccount(Request $request, $teacherId)
     {
         // Find the teacher by ID
@@ -209,6 +237,20 @@ class TeacherUserController extends Controller
         $noteacher = $teacher->isEmpty() ? "No teacher found" : null;
 
         return view('admin.admin_teacher_user', compact('teacher', 'noteacher'));
+    }
+
+    public function showAllTeacherRegistrar()
+    {
+        // Get the currently logged-in teacher's ID
+        $currentteacherId = auth()->id(); // Assuming you use Laravel's built-in auth system
+
+        // Fetch all teachers but exclude the currently logged-in teacher
+        $teacher = TeacherUser::all();
+
+        // Check if there are no teachers
+        $noteacher = $teacher->isEmpty() ? "No teacher found" : null;
+
+        return view('registrar.registrar_teacher_user', compact('teacher', 'noteacher'));
     }
 
     public function changePassword(Request $request, $teacherId)

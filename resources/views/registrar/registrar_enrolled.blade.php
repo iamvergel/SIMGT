@@ -20,10 +20,13 @@
                         Registration-Form
                     </p>
                 </div>
+                <div class="flex justify-start my-8" onclick="window.history.back();"><button
+                                                    class="text-[12px] text-white shadow-lg bg-sky-700 rounded-full shadow hover:bg-sky-600 px-3 mt-3"><i
+                                                        class="fas fa-arrow-left" style="color: white;"></i>
+                                                    Go Back</button>
+                                            </div>
                 <div class="flex justify-start items-center gap-4 mt-10">
-                    <button onclick="window.history.back()"
-                        class="bg-teal-700 hover:bg-teal-600 text-white text-[14px] px-10 py-2.5 rounded-md">Go
-                        Back</button>
+                    
                     <!-- <div class="ml-5 flex items-center hidden">
                         <i class="fas fa-search text-xl text-teal-700 px-3"></i>
                         <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search by name..."
@@ -176,7 +179,7 @@
                             <p class="text-[12px]">School Year ${new Date().getFullYear()}-${new Date().getFullYear() + 1}</p>
                             <h1 class="text-lg font-bold my-5">Registration Form</h1>
                         </div>
-                        <div class="absolute top-2 right-5 font-semibold">iOld Student</div>
+                        <div class="absolute top-2 right-5 font-semibold">Old Student</div>
                     </div>
                     <div class="body px-3 mt-1 text-[12px]">
                         <ul class="grid grid-cols-2 gap-x-10 list-none">
@@ -245,7 +248,7 @@
                             <tr class="border border-gray-900 text-left">
                                 <th class="px-4 py-1 text-left">Subject</th>
                                 <th class="px-4 py-1 text-left"></th>
-                                <th class="px-4 py-1 text-left">Teacher</th>
+                                <th class="px-4 py-1 text-left"></th>
                             </tr>
                         </thead>
                         <tbody>

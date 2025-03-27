@@ -154,7 +154,7 @@
         </div>
 
         <div class="col-span-2 lg:col-span-1 p-5 mt-0 lg:mt-[7.5rem]">
-          <div class="bg-white h-auto xl:h-[700px] shadow-lg border-t-4 border-b-4 border-teal-700"
+          <div class="bg-white h-auto xl:h-[730px] shadow-lg border-t-4  border-b-4 border-teal-700"
             id="announcementPicture">
             <div class="w-full h-full border-4 border-teal-50 rounded-lg">
               <div class="table-responsive">
@@ -174,7 +174,7 @@
             </table>
           </div>
         @else
-      <table id="announcementTable" class="display">
+      <table id="announcementTable" class="display ">
         <thead class="table-header bg-gray-100">
         <tr class="text-sm tracking-wide text-left uppercase">
           <th class="">Announcement</th>

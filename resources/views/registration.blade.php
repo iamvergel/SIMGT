@@ -156,7 +156,7 @@
 
                             </div>
                             <div class="flex justify-end mt-10 text-sm">
-                                <button class="cursor-pointer bg-red-500 hover:bg-red-600 px-5 py-2 rounded-sm text-white"
+                                <button class="cursor-pointer bg-gray-500 hover:bg-gray-600 px-5 py-2 rounded-sm text-white"
                                     onclick="document.getElementById('proceedModal').classList.add('hidden');">
                                     Close
                                 </button>
@@ -209,6 +209,7 @@
                         } else {
                             gradeSelect.classList.remove('border-red-500');
                             gradeAlert.classList.add('hidden');
+                            
                         }
 
                         var statusSelect = document.getElementById('status');
@@ -246,7 +247,7 @@
                                 document.getElementById('basicinfo').classList.remove('hidden');
                             }
 
-                            document.getElementById('proceedModal').classList.add   ('hidden');
+                            document.getElementById('proceedModal').classList.add('hidden');
                     }
 
                     document.getElementById('grade').addEventListener('change', function () {
@@ -254,6 +255,9 @@
                             document.getElementById('gradeAlert').classList.add('hidden');
                             this.classList.remove('border-red-500');
                         }
+
+                        document.getElementById('basicinfo').classList.add('hidden');
+                        document.getElementById('parentsInfo').classList.add('hidden');
                     });
 
                     document.getElementById('status').addEventListener('change', function () {
@@ -261,6 +265,9 @@
                             document.getElementById('statusAlert').classList.add('hidden');
                             this.classList.remove('border-red-500');
                         }
+
+                        document.getElementById('basicinfo').classList.add('hidden');
+                        document.getElementById('emergencyContactInfo').classList.add('hidden');
                     });
                 </script>
 
@@ -882,6 +889,9 @@
                                             alertElement.classList.add('hidden');
                                             this.classList.remove('border-red-500');
                                         }
+
+                                        document.getElementById('parentsInfo').classList.add('hidden');
+                                        document.getElementById('emergencyContactInfo').classList.add('hidden');
                                     });
                                 });
                             </script>
@@ -1504,6 +1514,7 @@
                                         document.getElementById('grelatioanship').classList.add('hidden');
                                         document.getElementById('gnumber').classList.add('hidden');
                                         document.getElementById('greligion').classList.add('hidden');
+                                        document.getElementById('emergencyContactInfo').classList.add('hidden');
                                     } else if (type === 'other') {
                                         document.getElementById('gfname').classList.remove('hidden');
                                         document.getElementById('glname').classList.remove('hidden');
@@ -1519,6 +1530,7 @@
                                         document.getElementById('guardianRelationship').value = "";
                                         document.getElementById('guardianReligion').value = "";
                                         document.getElementById('guardianContactNumber').value = "09";
+                                        document.getElementById('emergencyContactInfo').classList.add('hidden');
                                     }
                                 }
 
@@ -1737,6 +1749,7 @@
                                             alertElement.classList.add('hidden');
                                             this.classList.remove('border-red-500');
                                         }
+                                        document.getElementById('emergencyContactInfo').classList.add('hidden');
                                     });
                                 });
                             </script>
@@ -1978,12 +1991,12 @@
 
                 <div id="reviewModal"
                     class="fixed hidden z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 px-2 flex justify-center items-center p-5">
-                    <div class="bg-white rounded-md shadow-lg p-5 max-w-6xl mx-auto z-20">
+                    <div class="bg-white rounded-md shadow-lg p-5 max-w-1xl mx-auto z-20">
                         <div class="flex justify-center items-center p-5 border-b border-gray-900">
                             <p class="text-2xl font-bold text-teal-800">Review Information</p>
                         </div>
                         <div
-                            class="overflow-y-scroll h-[60vh] scrollbar-width-thin my-3 p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            class="overflow-y-scroll h-[40vh] lg:h-[60vh] scrollbar-width-thin my-3 p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
                             <h3 class="font-semibold">Primary info</h3>
                             <div class="hidden md:block lg:block"></div>
@@ -2071,7 +2084,7 @@
                             <h5>Messenger Account: <br /><span id="reviewMessengerAccount"></span></h5>
 
                         </div>
-                        <div class="col-span-4 flex  justify-center lg:justify-start mt-20 lg:me-20">
+                        <div class="col-span-4 flex  justify-center lg:justify-start mt-20 lg:me-20" id="confirmation">
                             <label class="flex items-center space-x-2">
                                 <input type="checkbox" id="confirmCheck" class="form-checkbox h-5 w-5 text-teal-600">
                                 <span>I confirm that the above information is correct.</span>
@@ -2079,10 +2092,18 @@
                         </div>
                         <div class="flex justify-end items-center mt-5">
                             <button onclick="document.getElementById('reviewModal').classList.add('hidden')"
-                                type="button"
+                                type="button" id="closeClose"
                                 class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Close</button>
                             <button onclick="showNextStepReview()" id="submitButton" type="submit" disabled
                                 class="ml-3 bg-gray-400 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Next</button>
+                            <button type="button" class="hidden w-80 flex justify-center items-center bg-teal-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300 ml-10"
+                                id="processingButton" disabled>
+                                <svg class="mr-3 size-5 animate-spin" viewBox="0 0 24 24">
+                                    <path fill="currentColor"
+                                        d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" />
+                                </svg>
+                                Processing…
+                            </button>
                         </div>
                     </div>
 
@@ -2095,12 +2116,22 @@
                                 submitButton.classList.remove('bg-gray-400');
                                 submitButton.classList.add('bg-teal-700');
                                 submitButton.classList.add('hover:bg-teal-800');
+                                submitButton.classList.remove('hover:bg-gray-400');
                             } else {
                                 submitButton.disabled = true;
                                 submitButton.classList.remove('bg-teal-700');
                                 submitButton.classList.remove('hover:bg-teal-700');
                                 submitButton.classList.add('bg-gray-400');
+                                submitButton.classList.add('hover:bg-gray-400');
                             }
+                        });
+
+                        // When the form is submitted, show the processing button and hide the close and submit buttons
+                        document.getElementById('submitButton').addEventListener('click', function () {
+                            document.getElementById('closeClose').classList.add('hidden');
+                            document.getElementById('submitButton').classList.add('hidden');
+                            document.getElementById('processingButton').classList.remove('hidden');
+                            document.getElementById('confirmation').classList.add('hidden');
                         });
                     </script>
 

@@ -61,21 +61,79 @@
         <div class="absolute right-0 mt-2 w-56 bg-gray-100 border-t-4 border border-teal-700 rounded-lg shadow-lg hidden mt-4 z-[49]"
             id="dropdownMenu">
             <ul class="text-gray-800">
-                <li class="px-4 py-2 hover:bg-gray-300 bg-gray-100 text-[14px] mt-5"
-                    onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/registrar/SIMGT-Profile'">
-                    <i class="fa-solid fa-user mr-3"></i>SIMGT Profile
+                <li class="px-4 py-2 hover:bg-gray-300 bg-gray-100 text-[14px] mt-5 flex items-center cursor-pointer"
+                    onclick="window.location.href='/registrar/SIMGT-Profile'">
+                    <i class="fa-solid fa-user mr-3"></i>
+                    <span>SIMGT Profile</span>
                 </li>
 
-                <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline">
-                    @csrf
-                    <li class="px-4 py-2 hover:bg-gray-300 rounded-b-lg text-[14px]" onclick="confirmLogout(event)">
-                        <i class="fa-solid fa-arrow-right-from-bracket mr-3"></i>Logout
-                    </li>
-                </form>
+                <li class="px-4 py-2 hover:bg-gray-300 bg-gray-100 text-[14px]flex items-center cursor-pointer"
+                    onclick="document.getElementById('logoutModal').classList.remove('hidden');">
+                    <i class="fa-solid fa-arrow-right-from-bracket mr-3"></i>
+                    <span>Logout</span>
+                </li>
+
+
             </ul>
         </div>
     </div>
 </nav>
+
+<div class="fixed inset-0 z-10 bg-black bg-opacity-50 hidden transition-opacity duration-300 p-5 flex items-center justify-center"
+    id="logoutModal">
+    <div
+        class="relative rounded-md shadow-lg p-5 w-96 mx-auto relative bg-white overflow-hidden">
+        <div class="flex items-center text-teal-700 text-lg font-semibold" id="logoutMessage">
+            <span>Confirm Logout</span>
+        </div>
+        <hr class="border-t border-teal-600 mt-5">
+        <div class="mt-5 text-sm" id="logoutPrompt">
+            <p class="text-gray-800 text-justify">Are you sure you want to logout?</p>
+        </div>
+        <div class="flex justify-end mt-10 text-sm">
+            <button
+                class="cursor-pointer bg-gray-500 hover:bg-gray-600 px-5 py-2 rounded-sm text-white transition-colors duration-300"
+                onclick="document.getElementById('logoutModal').classList.add('hidden');" id="cancelLogout">
+                Cancel
+            </button>
+            <button id="confirmLogout"
+                class="ml-5 cursor-pointer bg-teal-700 hover:bg-teal-800 px-5 py-2 rounded-sm text-white transition-colors duration-300">
+                Yes, I'm sure
+            </button>
+            <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="inline-block ml-3 hidden">
+                @csrf
+                <button type="submit"
+                    class="cursor-pointer bg-teal-700 hover:bg-teal-800 px-5 py-2 rounded-sm text-white transition-colors duration-300">
+                    Yes, I'm sure
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.getElementById('confirmLogout').addEventListener('click', function () {
+        let countdown = 5;
+        const logoutMessage = document.getElementById('logoutMessage');
+        const logoutPrompt = document.getElementById('logoutPrompt');
+        const cancelLogout = document.getElementById('cancelLogout');
+        const confirmLogout = document.getElementById('confirmLogout');
+        const interval = setInterval(() => {
+            logoutMessage.innerHTML = " ";
+            logoutPrompt.innerHTML = `<div class="text-teal-700 text-lg font-semibold text-center">Logging out in <br/><div class="text-teal-600 text-2xl font-semibold text-center mt-5">${countdown}...</div></div>`;
+            cancelLogout.classList.add('hidden');
+            confirmLogout.classList.add('hidden');
+            countdown--;
+            if (countdown < 0) {
+                clearInterval(interval);
+                document.getElementById('logoutForm').submit();
+            }
+        }, 1000);
+    });
+</script>
+
+
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -87,28 +145,28 @@
         const searchBar = document.getElementById('search-bar');
         const suggestionsContainer = document.getElementById('suggestions');
 
-        const basePath = '/StEmelieLearningCenter.HopeSci66'; // Base path
+        const basePath = ''; // Base path
         const links = [
-            '/admin/dashboard',
-            '/admin/student-management',
-            '/admin/student-management/GradeOne',
-            '/admin/student-management/GradeTwo',
-            '/admin/student-management/GradeThree',
-            '/admin/student-management/GradeFour',
-            '/admin/student-management/GradeFive',
-            '/admin/student-management/GradeSix',
-            '/admin/Grade-book',
-            '/admin/Grade-book/GradeOne',
-            '/admin/Grade-book/GradeTwo',
-            '/admin/Grade-book/GradeThree',
-            '/admin/Grade-book/GradeFour',
-            '/admin/Grade-book/GradeFive',
-            '/admin/Grade-book/GradeSix',
-            '/admin/Report-Section/Graduate-Student',
-            '/admin/Report-Section/Drop-Student',
-            '/admin/Report-Section/Archive-Student',
-            '/admin/student-management/AllStudentData',
-            '/admin/Report-Section/Drop-Student/All-Drop-Data',
+            '/registrar/dashboard',
+            '/registrar/student-management',
+            '/registrar/student-management/GradeOne',
+            '/registrar/student-management/GradeTwo',
+            '/registrar/student-management/GradeThree',
+            '/registrar/student-management/GradeFour',
+            '/registrar/student-management/GradeFive',
+            '/registrar/student-management/GradeSix',
+            '/registrar/Grade-book',
+            '/registrar/Grade-book/GradeOne',
+            '/registrar/Grade-book/GradeTwo',
+            '/registrar/Grade-book/GradeThree',
+            '/registrar/Grade-book/GradeFour',
+            '/registrar/Grade-book/GradeFive',
+            '/registrar/Grade-book/GradeSix',
+            '/registrar/Report-Section/Graduate-Student',
+            '/registrar/Report-Section/Drop-Student',
+            '/registrar/Report-Section/Archive-Student',
+            '/registrar/student-management/AllStudentData',
+            '/registrar/Report-Section/Drop-Student/All-Drop-Data',
         ];
 
         toggleBtn.addEventListener('click', () => {

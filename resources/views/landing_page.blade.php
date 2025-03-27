@@ -185,7 +185,7 @@
 
     </div>
 
-    <div class="w-full px-2 lg:px-5 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center mt-[15rem] lg:mt-0 bg-teal-50"
+    <div class="w-full px-2 lg:px-5 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center mt-[20rem] lg:mt-0 bg-teal-50"
         id="aboutSchool">
         <div class="container mx-auto lg:px-4">
             <div class="grid grid-cols-1 lg:grid-cols-3 lg:p-5 border-lg relative">
@@ -220,7 +220,7 @@
         </div>
     </div>
 
-    <div class="w-full px-2 lg:px-10 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center mt-[15rem] lg:mt-2 bg-sky-100" id="aboutSchool">
+    <div class="w-full px-2 lg:px-10 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center mt-[18rem] lg:mt-2 bg-sky-100" id="aboutSchool">
         <div class="container mx-auto lg:px-4">
             <div class="grid grid-cols-1 lg:grid-cols-3 lg:p-5 border-lg relative ">
                 <!-- Video Box -->

@@ -399,31 +399,6 @@
 
                 <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">
 
-                <p class="text-[14px] mt-10 ml-7 text-white font-normal uppercase tracking-wider">MANAGE SYSTEM
-                </p>
-                <button class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2"
-                    id="studentManagementButton4" aria-expanded="false" aria-controls="managesystem" title="Manage System">
-                    <i class="fa-solid fa-globe"><span class="sidebar-text ml-2">Manage System</span></i>
-                    <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
-                </button>
-                <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="managesystem">
-                    <a href="/registrar/manage-system/section"
-                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
-                        title="Section">
-                        <i class="fa-regular fa-circle"></i>
-                        <span class="sidebar-text ml-2">Section</span>
-                    </a>
-                    <a href="/registrar/manage-system/subject"
-                        class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
-                        title="Subject">
-                        <i class="fa-regular fa-circle"></i>
-                        <span class="sidebar-text ml-2">Subject</span>
-                    </a>
-                </div>
-
-
-            <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">
-
             <br /><br />
 
 
@@ -531,7 +506,7 @@
 
                                     // Create the subject link with the updated URL
                                     const subjectLink = $('<a>', {
-                                        href: `/admin/Grade-book/class-record/GradeOne/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        href: `/registrar/Grade-book/class-record/GradeOne/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
                                         class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
                                         title: `${subject.subject} - ${subject.grade} ${subject.section}`,
                                     });
@@ -616,7 +591,7 @@
 
                                     // Create the subject link with the updated URL
                                     const subjectLink = $('<a>', {
-                                        href: `/admin/Grade-book/class-record/GradeTwo/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        href: `/registrar/Grade-book/class-record/GradeTwo/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
                                         class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
                                         title: `${subject.subject} - ${subject.grade} ${subject.section}`,
                                     });
@@ -701,7 +676,7 @@
 
                                     // Create the subject link with the updated URL
                                     const subjectLink = $('<a>', {
-                                        href: `/admin/Grade-book/class-record/GradeThree/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        href: `/registrar/Grade-book/class-record/GradeThree/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
                                         class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
                                         title: `${subject.subject} - ${subject.grade} ${subject.section}`,
                                     });
@@ -786,7 +761,7 @@
 
                                     // Create the subject link with the updated URL
                                     const subjectLink = $('<a>', {
-                                        href: `/admin/Grade-book/class-record/GradeFour/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        href: `/registrar/Grade-book/class-record/GradeFour/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
                                         class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
                                         title: `${subject.subject} - ${subject.grade} ${subject.section}`,
                                     });
@@ -871,7 +846,7 @@
 
                                     // Create the subject link with the updated URL
                                     const subjectLink = $('<a>', {
-                                        href: `/admin/Grade-book/class-record/GradeFive/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        href: `/registrar/Grade-book/class-record/GradeFive/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
                                         class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
                                         title: `${subject.subject} - ${subject.grade} ${subject.section}`,
                                     });
@@ -956,7 +931,7 @@
 
                                     // Create the subject link with the updated URL
                                     const subjectLink = $('<a>', {
-                                        href: `/admin/Grade-book/class-record/GradeSix/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
+                                        href: `/registrar/Grade-book/class-record/GradeSix/${teacher.teacher_number}/${subject.subject}`,  // Updated link format
                                         class: `flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0 mt-2 tooltip ${currentUrl.includes(subject.subject.replace(/\s/g, '%20')) ? 'active2' : ''}`,
                                         title: `${subject.subject} - ${subject.grade} ${subject.section}`,
                                     });

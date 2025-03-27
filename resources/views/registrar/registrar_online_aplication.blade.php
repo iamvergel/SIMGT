@@ -319,7 +319,7 @@
                                     <tr class="border border-gray-900 text-left">
                                         <th class="px-4 py-1 text-left">Subject</th>
                                         <th class="px-4 py-1 text-left"></th>
-                                        <th class="px-4 py-1 text-left">Teacher</th>
+                                        <th class="px-4 py-1 text-left"></th>
                                     </tr>
                                 </thead>
                                 <tbody>

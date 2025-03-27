@@ -19,16 +19,26 @@ class TeacherAdvisoryController extends Controller
             'school_year' => 'required|string',
         ]);
 
-        // Create the new teacher user
+        // Check if the advisory already exists for the same school year and grade
+        $existingAdvisory = TeacherAdvisory::where('teacher_number', $request->teacher_number)
+            ->where('grade', ucwords(strtolower($request['grade'])))
+            ->where('school_year', $request->school_year)
+            ->first();
+
+        if ($existingAdvisory) {
+            return back()->with('error', 'An advisory already exists for this teacher in the specified school year and grade. Please try again.');
+        }
+
+        // Create the new teacher advisory
         $teacherUser = TeacherAdvisory::create([
             'teacher_number' => $request->teacher_number,
-            'grade' => $request->grade ? ucwords(strtolower($request['grade'])) : null,
-            'section' => $request->section ? ucwords(strtolower($request['section'])) : null,
+            'grade' => ucwords(strtolower($request['grade'])),
+            'section' => ucwords(strtolower($request['section'])),
             'school_year' => $request->school_year,
         ]);
 
         // Return success response
-        return redirect()->route('teacher.user')->with('success', 'Advisory added successfully!');
+        return back()->with('success', 'Advisory added successfully!');
     }
 
     public function update(Request $request, $id)

@@ -4,9 +4,11 @@ use App\Models\Student;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Clogin;
 use App\Http\Controllers\Admin\Cpages;
+use App\Http\Controllers\Admin\CpagesRegistrar;
 use App\Http\Middleware\PreventBackHistory;
 use App\Http\Controllers\Cstudentinfo;
 use App\Http\Controllers\Cadmininfo;
+use App\Http\Controllers\CstudentinfoRegistrar;
 use App\Http\Controllers\Cevent;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\Cstudentgrades;
@@ -108,6 +110,17 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         Route::get('/GradeFour/{teachernumber}/{subject}', [Cpages::class, 'showGradeBookGradefour'])->name('admin.admin_gradebook_gradefour');
         Route::get('/GradeFive/{teachernumber}/{subject}', [Cpages::class, 'showGradeBookGradefive'])->name('admin.admin_gradebook_gradefive');
         Route::get('/GradeSix/{teachernumber}/{subject}', [Cpages::class, 'showGradeBookGradesix'])->name('admin.admin_gradebook_gradesix');
+    });
+
+    // Grade Book Routes
+    Route::prefix('/registrar/Grade-book/class-record')->group(function () {
+        Route::get('/', [CpagesRegistrar::class, 'showGradeBook'])->name('registrar.registrar_gradebook');
+        Route::get('/GradeOne/{teachernumber}/{subject}', [CpagesRegistrar::class, 'showGradeBookGradeone'])->name('registrar.registrar_gradebook_gradeone');
+        Route::get('/GradeTwo/{teachernumber}/{subject}', [CpagesRegistrar::class, 'showGradeBookGradetwo'])->name('registrar.registrar_gradebook_gradetwo');
+        Route::get('/GradeThree/{teachernumber}/{subject}', [CpagesRegistrar::class, 'showGradeBookGradethree'])->name('registrar.registrar_gradebook_gradethree');
+        Route::get('/GradeFour/{teachernumber}/{subject}', [CpagesRegistrar::class, 'showGradeBookGradefour'])->name('registrar.registrar_gradebook_gradefour');
+        Route::get('/GradeFive/{teachernumber}/{subject}', [CpagesRegistrar::class, 'showGradeBookGradefive'])->name('registrar.registrar_gradebook_gradefive');
+        Route::get('/GradeSix/{teachernumber}/{subject}', [CpagesRegistrar::class, 'showGradeBookGradesix'])->name('registrar.registrar_gradebook_gradesix');
     });
 
     // Report Section Routes
@@ -345,6 +358,16 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
         return view('registrar.registrar_profile');
     });
 
+    Route::get('/registrar/Report-Section/Graduate-Student', [CstudentinfoRegistrar::class, 'showAllStudentGraduateData'])->name('registrar.registrar_graduate_students');
+    Route::get('/registrar/Report-Section/Drop-Student', [CstudentinfoRegistrar::class, 'showAllStudentDropData'])->name('registrar.registrar_drop_students');
+    Route::get('/registrar/Report-Section/Drop-Student/All-Drop-Data', [CstudentinfoRegistrar::class, 'showAllStudentDroppedData'])->name('registrar.registrar_show_all_drop_data');
+
+    Route::get('/registrar/Report-Section/Transfer-Student', [CstudentinfoRegistrar::class, 'showAllStudentArchiveData'])->name('registrar.registrar_archive_student');
+
+    Route::get('/registrar/student-management/dropped/{id}', [CstudentinfoRegistrar::class, 'showDroppedStudentInfotmation'])->name('student.show.dropped.registrar');
+    Route::get('/registrar/student-management/gradute/{id}', [CstudentinfoRegistrar::class, 'showGradutedStudentInfotmation'])->name('student.show.gradute.registrar');
+    Route::get('/registrar/student-management/transfer/{id}', [CstudentinfoRegistrar::class, 'showTransferStudentInfotmation'])->name('student.show.transfer.registrar');
+
     Route::post('/registrar/update-avatar', [RegistrarUserController::class, 'updateProfile'])->name('registrar.update-avatar');
     Route::put('/registrar/{id}/update', [RegistrarUserController::class, 'update'])->name('registrar.update');
     Route::post('/registrar/change-password/{studentId}', [RegistrarUserController::class, 'changePassword'])->name('registrar.changePassword');
@@ -365,6 +388,9 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
 
     Route::get('/registrar/online-application', [RegisterStudent::class, 'showAllRegisterRegistrar'])->name('registrar.register.student');
 
+    Route::get('/registrar/manage-accounts/teacher-users', [TeacherUserController::class, 'showAllTeacherRegistrar'])->name('teacher.user.registrar');
+
+    Route::get('/registrar/teacher-management/{id}', [TeacherUserController::class, 'showTeacherInfotmationRegistrar'])->name('teacher.show.registrar');
     //ADMISSION________________________________________________________________
     //________________________________________________________________
     Route::get('/admission/dashboard', function () {
@@ -420,7 +446,7 @@ Route::get('/caloocan_barangay', function () {
 });
 
 // In routes/api.php
-Route::post('/manage-account/{studentId}/reset', [Cstudentinfo::class, 'resetAccount'])->name('account.reset');
+Route::post('/manage-account/{studentId}/reset/student', [Cstudentinfo::class, 'resetAccount'])->name('account.reset');
 Route::put('/students/{id}', [Cstudentinfo::class, 'updateStudentInfo'])->name('students.update');
 Route::put('/students/primary/{id}', [Cstudentinfo::class, 'updateStudentInfoPrimary'])->name('students.update.primary');
 Route::post('/send-email/{id}', [Cstudentinfo::class, 'sendEmail'])->name('send.email');
