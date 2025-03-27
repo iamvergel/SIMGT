@@ -129,7 +129,7 @@
                                         </select>
                                     </div><div></div>
 
-                                    <div class="col-span-1 md:col-span-2 lg:cl-span-3 xl:col-span-4 text-lg text-gray-500">(Add Section And Adviser)</div>
+                                    <div class="col-span-1 md:col-span-2 lg:cl-span-3 xl:col-span-4 text-lg text-teal-800 font-semibold my-3">( Add Section And Adviser )</div>
                                     <div class="mb-5">
                                         <label for="section" class="block mb-2 text-sm font-bold text-gray-900">
                                             <span class="text-red-600 mr-1">*</span>Section :</label>
