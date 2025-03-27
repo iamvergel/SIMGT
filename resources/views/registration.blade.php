@@ -5,10 +5,10 @@
             <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-5">
                 <div class="bg-white rounded-md shadow-lg p-5 max-w-3xl mx-auto z-20">
                     <div class="flex justify-center items-center p-5 border-b border-gray-900">
-                        <p class="text-lg lg:text-2xl font-bold text-green-500"><i class="fas fa-check mr-2"></i>Registration Submitted Successfully!</p>
+                        <p class="text-lg lg:text-2xl font-bold text-green-500"><i
+                                class="fas fa-check mr-2"></i>Registration Submitted Successfully!</p>
                     </div>
-                    <div
-                        class="overflow-y-scroll h-[60vh] scrollbar-width-thin my-3 p-5 w-full">
+                    <div class="overflow-y-scroll h-[60vh] scrollbar-width-thin my-3 p-5 w-full">
                         <div class="mt-5 text-sm">
                             <span class="text-justify">
                                 Please proceed to the Admissions Office to claim your Admission Slip.
@@ -145,22 +145,25 @@
                     </div>
 
                     <!-- Proceed Modal -->
-                    <div class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden p-5 flex items-center justify-center" id="proceedModal">
+                    <div class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden p-5 flex items-center justify-center"
+                        id="proceedModal">
                         <div class="bg-white rounded-lg shadow-lg p-5 max-w-lg mx-auto mt-16">
                             <div class="flex items-center text-green-700 text-md font-normal">
-                                <span>Proceed to our admission process</span>
+                                <span>Important Notice:</span>
                             </div>
                             <hr class="border-1 border-green-500 mt-5">
                             <div class="mt-5 text-sm">
-                            <p class="text-gray-600 text-justify">You have chosen Grade One as your grade level. Please proceed to our admission process to complete your registration and obtain your Learner Reference Number (LRN).</p>
+                                <p class="text-gray-600 text-justify">Do you have your Learner Reference Number (LRN)? If not, please be sure to visit the admission office to process it.</p>
 
                             </div>
                             <div class="flex justify-end mt-10 text-sm">
-                                <button class="cursor-pointer bg-gray-500 hover:bg-gray-600 px-5 py-2 rounded-sm text-white"
+                                <button
+                                    class="cursor-pointer bg-gray-500 hover:bg-gray-600 px-5 py-2 rounded-sm text-white"
                                     onclick="document.getElementById('proceedModal').classList.add('hidden');">
                                     Close
                                 </button>
-                                <button class="cursor-pointer bg-teal-700 hover:bg-teal-800 px-5 py-2 rounded-sm text-white ml-5"
+                                <button
+                                    class="cursor-pointer bg-teal-700 hover:bg-teal-800 px-5 py-2 rounded-sm text-white ml-5"
                                     onclick="handleProceedToAdmissionProcess()">
                                     I Already Have LRN
                                 </button>
@@ -209,7 +212,7 @@
                         } else {
                             gradeSelect.classList.remove('border-red-500');
                             gradeAlert.classList.add('hidden');
-                            
+
                         }
 
                         var statusSelect = document.getElementById('status');
@@ -231,10 +234,12 @@
                         var gradeAlert = document.getElementById('gradeAlert');
                         var statusSelect = document.getElementById('status');
                         var statusAlert = document.getElementById('statusAlert');
-                        
+
                         if (statusSelect.value === 'New Student' && gradeSelect.value === 'Grade One') {
                             document.getElementById('proceedModal').classList.remove('hidden');
 
+                        } else if (statusSelect.value === 'Transferee' && gradeSelect.value === 'Grade One') {
+                            document.getElementById('proceedModal').classList.remove('hidden');
                         } else {
                             if (checkValidity()) {
                                 document.getElementById('basicinfo').classList.remove('hidden');
@@ -244,10 +249,10 @@
 
                     function handleProceedToAdmissionProcess() {
                         if (checkValidity()) {
-                                document.getElementById('basicinfo').classList.remove('hidden');
-                            }
+                            document.getElementById('basicinfo').classList.remove('hidden');
+                        }
 
-                            document.getElementById('proceedModal').classList.add('hidden');
+                        document.getElementById('proceedModal').classList.add('hidden');
                     }
 
                     document.getElementById('grade').addEventListener('change', function () {
@@ -1213,17 +1218,16 @@
                                             <p class="mt-5 text-lg font-normal">Guardian Information: </p>
                                         </div>
                                         <div class="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4">
-                                            <label class="block mb-2 text-sm font-normal text-teal-700 text-sm">( If
-                                                your guardian is a parent, select 'Parent/Parents'; if your guardian
-                                                is
-                                                someone else, select 'Other.' )<span
+                                            <label class="block mb-2 text-sm font-normal text-teal-700 text-sm">( "If
+                                                your guardian is your parent or parents, select 'Parent/s'. If your
+                                                guardian is a relative other than your parents, select 'Others'. )<span
                                                     class="text-red-600">*</span></label>
                                             <div class="flex items-center mb-4 mt-4">
                                                 <input type="radio" id="guardianMother" name="guardianType"
                                                     value="parent" class="mr-2" onclick="setGuardianInfo('parent')"
                                                     required>
                                                 <label for="guardianParents"
-                                                    class="mr-4 text-sm font-medium text-gray-900">Parent/Parents</label>
+                                                    class="mr-4 text-sm font-medium text-gray-900">Parent/s</label>
 
                                                 <input type="radio" id="guardianother" name="guardianType" value="other"
                                                     class="mr-2" onclick="setGuardianInfo('other')" required>
@@ -1233,7 +1237,6 @@
                                             <small class="text-red-600 text-xs hidden"
                                                 id="guardianSelectionAlert">Select Guardian is required</small>
                                         </div>
-
 
                                         <!-- Guardian's Information -->
                                         <!-- Guardian's First Name -->
@@ -1307,9 +1310,9 @@
                                                 <ul id="GuardinRelationshipList"
                                                     class="hidden absolute w-full bg-white border border-gray-300 mt-1 rounded shadow-lg max-h-60 overflow-y-auto z-10">
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
-                                                        onclick="selectRelationshipGuardian('Brother')">Brother</li>
+                                                        onclick="selectRelationshipGuardian('Uncle')">Uncle</li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
-                                                        onclick="selectRelationshipGuardian('Sister')">Sister</li>
+                                                        onclick="selectRelationshipGuardian('Aunt')">Aunt</li>
                                                     <li class="px-3 py-2 cursor-pointer hover:bg-gray-200"
                                                         onclick="selectRelationshipGuardian('Grandfather')">
                                                         Grandfather
@@ -1903,62 +1906,53 @@
 
                                         console.log(admissionType);
 
-                                        const elements = [
-                                            { id: 'status', reviewId: 'reviewAdmissionType' },
-                                            { id: 'grade', reviewId: 'reviewGrade' },
-                                            { id: 'lrn', reviewId: 'reviewLRN' },
-                                            { id: 'lastName', reviewId: 'reviewLastName' },
-                                            { id: 'firstName', reviewId: 'reviewFirstName' },
-                                            { id: 'middleName', reviewId: 'reviewMiddleName' },
-                                            { id: 'suffixName', reviewId: 'reviewSuffix' },
-                                            { id: 'birthplace', reviewId: 'reviewBirthplace' },
-                                            { id: 'birthDate', reviewId: 'reviewBirthDate' },
-                                            { id: 'ageStudent', reviewId: 'reviewAge' },
-                                            { id: 'gender', reviewId: 'reviewGender' },
-                                            { id: 'email', reviewId: 'reviewEmailAddress' },
-                                            { id: 'contactNo', reviewId: 'reviewContactNumber' },
-                                            { id: 'religion', reviewId: 'reviewReligion' },
-                                            { id: 'regionValue', reviewId: 'reviewRegion' },
-                                            { id: 'provinceValue', reviewId: 'reviewProvince' },
-                                            { id: 'cityValue', reviewId: 'reviewCity' },
-                                            { id: 'barangayValue', reviewId: 'reviewBarangay' },
-                                            { id: 'street', reviewId: 'reviewStreet' },
-                                            { id: 'fatherLastName', reviewId: 'reviewFatherLastName' },
-                                            { id: 'fatherFirstName', reviewId: 'reviewFatherFirstName' },
-                                            { id: 'fatherMiddleName', reviewId: 'reviewFatherMiddleName' },
-                                            { id: 'fatherOccupation', reviewId: 'reviewFatherOccupation' },
-                                            { id: 'motherLastName', reviewId: 'reviewMotherLastName' },
-                                            { id: 'motherFirstName', reviewId: 'reviewMotherFirstName' },
-                                            { id: 'motherMiddleName', reviewId: 'reviewMotherMiddleName' },
-                                            { id: 'motherOccupation', reviewId: 'reviewMotherOccupation' },
-                                            { id: 'guardianLastName', reviewId: 'reviewGuardianLastName' },
-                                            { id: 'guardianFirstName', reviewId: 'reviewGuardianFirstName' },
-                                            { id: 'guardianMiddleName', reviewId: 'reviewGuardianMiddleName' },
-                                            { id: 'guardianSuffixName', reviewId: 'reviewGuardianSuffix' },
-                                            { id: 'guardianRelationship', reviewId: 'reviewGuardianRelationship' },
-                                            { id: 'guardianContactNumber', reviewId: 'reviewGuardianContactNumber' },
-                                            { id: 'guardianReligion', reviewId: 'reviewGuardianReligion' },
-                                            { id: 'emergencyContactPerson', reviewId: 'reviewEmergencyContactPerson' },
-                                            { id: 'emergencyContactNumber', reviewId: 'reviewEmergencyContactNumber' },
-                                            { id: 'emailAddress', reviewId: 'reviewEmergencyEmail' },
-                                            { id: 'messengerAccount', reviewId: 'reviewMessengerAccount' }
-                                        ];
+                                        // Update the review modal with the values
+                                        document.getElementById('reviewAdmissionType').innerText = document.getElementById("status").value;
+                                        document.getElementById('reviewGrade').innerText = document.getElementById("grade").value;
+                                        document.getElementById('reviewLRN').innerText = document.getElementById("lrn").value;
+                                        document.getElementById('reviewLastName').innerText = document.getElementById("lastName").value;
+                                        document.getElementById('reviewFirstName').innerText = document.getElementById("firstName").value;
+                                        document.getElementById('reviewMiddleName').innerText = document.getElementById("middleName").value;
+                                        document.getElementById('reviewSuffix').innerText = document.getElementById("suffixName").value;
+                                        document.getElementById('reviewBirthplace').innerText = document.getElementById("birthplace").value;
+                                        document.getElementById('reviewBirthDate').innerText = document.getElementById("birthDate").value;
+                                        document.getElementById('reviewAge').innerText = document.getElementById("ageStudent").value;
+                                        document.getElementById('reviewGender').innerText = document.getElementById("gender").value;
+                                        document.getElementById('reviewEmailAddress').innerText = document.getElementById("email").value;
+                                        document.getElementById('reviewContactNumber').innerText = document.getElementById("contactNo").value;
+                                        document.getElementById('reviewReligion').innerText = document.getElementById("religion").value;
+                                        document.getElementById('reviewRegion').innerText = document.getElementById("regionValue").value;
+                                        document.getElementById('reviewProvince').innerText = document.getElementById("provinceValue").value;
+                                        document.getElementById('reviewCity').innerText = document.getElementById("cityValue").value;
+                                        document.getElementById('reviewBarangay').innerText = document.getElementById("barangayValue").value;
+                                        document.getElementById('reviewStreet').innerText = document.getElementById("street").value;
+                                        document.getElementById('reviewFatherLastName').innerText = document.getElementById("fatherLastName").value;
+                                        document.getElementById('reviewFatherFirstName').innerText = document.getElementById("fatherFirstName").value;
+                                        document.getElementById('reviewFatherMiddleName').innerText = document.getElementById("fatherMiddleName").value;
+                                        document.getElementById('reviewFatherSuffix').innerText = document.getElementById("fatherSuffixName").value;
+                                        document.getElementById('reviewFatherOccupation').innerText = document.getElementById("fatherOccupation").value;
+                                        document.getElementById('reviewMotherLastName').innerText = document.getElementById("motherLastName").value;
+                                        document.getElementById('reviewMotherFirstName').innerText = document.getElementById("motherFirstName").value;
+                                        document.getElementById('reviewMotherMiddleName').innerText = document.getElementById("motherMiddleName").value;
+                                        document.getElementById('reviewMotherOccupation').innerText = document.getElementById("motherOccupation").value;
+                                        document.getElementById('reviewGuardianLastName').innerText = document.getElementById("guardianLastName").value;
+                                        document.getElementById('reviewGuardianFirstName').innerText = document.getElementById("guardianFirstName").value;
+                                        document.getElementById('reviewGuardianMiddleName').innerText = document.getElementById("guardianMiddleName").value;
+                                        document.getElementById('reviewGuardianSuffix').innerText = document.getElementById("guardianSuffixName").value;
+                                        document.getElementById('reviewGuardianRelationship').innerText = document.getElementById("guardianRelationship").value;
+                                        document.getElementById('reviewGuardianContactNumber').innerText = document.getElementById("guardianContactNumber").value;
+                                        document.getElementById('reviewGuardianReligion').innerText = document.getElementById("guardianReligion").value;
+                                        document.getElementById('reviewEmergencyContactPerson').innerText = document.getElementById("emergencyContactPerson").value;
+                                        document.getElementById('reviewEmergencyContactNumber').innerText = document.getElementById("emergencyContactNumber").value;
+                                        document.getElementById('reviewEmergencyEmail').innerText = document.getElementById("emailAddress").value;
+                                        document.getElementById('reviewMessengerAccount').innerText = document.getElementById("messengerAccount").value;
 
-                                        elements.forEach(element => {
-                                            const inputElement = document.getElementById(element.id);
-                                            const value = inputElement ? inputElement.value || inputElement.options[inputElement.selectedIndex]?.text : ''; // For selects, we get the selected text
-                                            document.getElementById(element.reviewId).innerText = value;
-                                            console.log(`${element.reviewId}: ${value}`);
-
-                                            document.getElementById(element.reviewId).classList.add('text-green-700');
-                                            document.getElementById(element.reviewId).classList.add('font-semibold');
-
-                                            inputElement.addEventListener('input', function () {
-                                                const newValue = inputElement.value || inputElement.options[inputElement.selectedIndex]?.text;
-                                                document.getElementById(element.reviewId).innerText = newValue;
-                                                console.log(`${element.reviewId}: ${newValue}`);
-                                            });
+                                        // Add styling
+                                        document.querySelectorAll('span').forEach(element => {
+                                            element.classList.add('text-green-700');
+                                            element.classList.add('font-semibold');
                                         });
+
                                     }
                                 }
 
@@ -1990,7 +1984,7 @@
                 </div>
 
                 <div id="reviewModal"
-                    class="fixed hidden z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 px-2 flex justify-center items-center p-5">
+                    class="fixed hidden z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 px-2 flex justify-center items-center p-5 lg:p-20">
                     <div class="bg-white rounded-md shadow-lg p-5 max-w-1xl mx-auto z-20">
                         <div class="flex justify-center items-center p-5 border-b border-gray-900">
                             <p class="text-2xl font-bold text-teal-800">Review Information</p>
@@ -2035,7 +2029,8 @@
                             <h5>province: <br /><span id="reviewProvince"></span></h5>
                             <h5>City: <br /><span id="reviewCity"></span></h5>
                             <h5>Barangay: <br /><span id="reviewBarangay"></span></h5>
-                            <h5 class="col-sapn-1 md;col-span-2">Home/Building/Street:: <span id="reviewStreet"></span></h5>
+                            <h5 class="col-sapn-1 md;col-span-2">Home/Building/Street:: <span id="reviewStreet"></span>
+                            </h5>
                             <div class="hidden md:block lg:block"></div>
                             <div class="hidden lg:block"></div>
                             <div class="hidden lg:block"></div>
@@ -2084,10 +2079,10 @@
                             <h5>Messenger Account: <br /><span id="reviewMessengerAccount"></span></h5>
 
                         </div>
-                        <div class="col-span-4 flex  justify-center lg:justify-start mt-20 lg:me-20" id="confirmation">
+                        <div class="col-span-4 flex  justify-center lg:justify-start mt-5 lg:me-20" id="confirmation">
                             <label class="flex items-center space-x-2">
                                 <input type="checkbox" id="confirmCheck" class="form-checkbox h-5 w-5 text-teal-600">
-                                <span>I confirm that the above information is correct.</span>
+                                <p class="text-[14px]">I confirm that the information provided above is correct.</p>
                             </label>
                         </div>
                         <div class="flex justify-end items-center mt-5">
@@ -2096,7 +2091,8 @@
                                 class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Close</button>
                             <button onclick="showNextStepReview()" id="submitButton" type="submit" disabled
                                 class="ml-3 bg-gray-400 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Next</button>
-                            <button type="button" class="hidden w-80 flex justify-center items-center bg-teal-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300 ml-10"
+                            <button type="button"
+                                class="hidden w-80 flex justify-center items-center bg-teal-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300 ml-10"
                                 id="processingButton" disabled>
                                 <svg class="mr-3 size-5 animate-spin" viewBox="0 0 24 24">
                                     <path fill="currentColor"
@@ -2137,6 +2133,25 @@
 
                 </div>
             </form>
+
+            <!-- Drop Student Modal -->
+            <div class="fixed inset-0 z-10 bg-black bg-opacity-50  p-5 flex items-center justify-center hidden"
+                id="ageDropdown">
+                <div class="bg-white rounded-lg shadow-lg p-5 max-w-lg mx-auto w-96">
+                    <div class="flex items-center text-teal-800 text-lg font-semibold font-normal justify-center">
+                        <span id="ageConfirmation" class="text-center"></span>
+                    </div>
+                    <div class="flex justify-end mt-10 text-sm">
+
+                        <button type="button"
+                            class="cursor-pointer bg-gray-500 hover:bg-gray-600 px-5 py-2 rounded-sm text-white ml-3"
+                            onclick="document.getElementById('ageDropdown').classList.add('hidden')">
+                            Okay
+                        </button>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -2172,11 +2187,13 @@
 
         // Check if the age is within the valid range
         if (age < 5) {
-            alert('The minimum age allowed is 5.');
+            document.getElementById('ageConfirmation').innerText = "The minimum age allowed is 5.";
+            document.getElementById('ageDropdown').classList.remove('hidden');
             ageInput.value = '';  // Clear age input if below minimum age
             birthDateInput.value = ''; // Clear birthdate input as well
         } else if (age > 16) {
-            alert('The maximum age allowed is 16.');
+            document.getElementById('ageConfirmation').innerText = "The maximum age allowed is 16.";
+            document.getElementById('ageDropdown').classList.remove('hidden');
             ageInput.value = '';  // Clear age input if above maximum age
             birthDateInput.value = ''; // Clear birthdate input as well
         } else {
