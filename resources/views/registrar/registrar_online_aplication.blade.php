@@ -144,7 +144,7 @@
                                                     data-lrn="{{ $student->lrn }}"
                                                     class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-blue-700 rounded-full hover:bg-blue-600"
                                                     type="button" aria-label="Update Student" title="Enrolled Student"
-                                                    onclick="checkEnrollmentStatus('{{ $student->lrn }}')">
+                                                    onclick="window.location.href = `{{ route('student.show.enrollees', ['lrn' => $student->lrn]) }}`">   
                                                     <i class="fa-solid fa-eye"></i>
                                                 </button>
                                                 <button

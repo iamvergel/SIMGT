@@ -33,8 +33,8 @@
             <div class="text-center text-white px-5">
                 <i
                     class="fas fa-book fa-3x mb-4 text-yellow-500 p-4 px-5 bg-white rounded-full border-[5px] border-yellow-400 absolute left-[4.3rem] top-[-2rem] shadow-lg"></i>
-                <h2 class="text-lg font-bold mb-2 mt-10 bg-yellow-600 rounded-full shadow-lg">Courses</h2>
-                <p>Browse our courses</p>
+                <h2 class="text-lg font-bold mb-2 mt-10 bg-yellow-600 rounded-full shadow-lg">Course</h2>
+                <p>Browse our course</p>
             </div>
         </div>
 
@@ -252,7 +252,7 @@
             <i class="fa-solid fa-book font-bold lg:text-[150px] text-teal-900 me-5 text-[50px]"></i>
             <h1
                 class="font-bold xl:text-[120px] lg:text-[100px] text-teal-900 text-start lg:leading-[5rem] xl:leading-[7rem] text-[50px] leading-[2.5rem]">
-                <span class="text-teal-500">S</span>CHOOL <span class="text-teal-500">C</span>OURSES
+                <span class="text-teal-500">S</span>CHOOL <span class="text-teal-500">C</span>OURSE
             </h1>
         </div>
         <div class="container mx-auto px-0 mt-10 lg:mt-20">

@@ -33,7 +33,7 @@
                         setTimeout(function() {
                             document.getElementById("success-alert").remove();
                             window.location.href = '/registrar/online-application';
-                        }, 3000);
+                        }, 1000);
                     </script>
                 @endif
 
