@@ -2084,11 +2084,11 @@
                         <div class="flex justify-end items-center mt-5">
                             <button onclick="document.getElementById('reviewModal').classList.add('hidden')"
                                 type="button" id="closeClose"
-                                class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Close</button>
+                                class=" bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Close</button>
                             <button onclick="showNextStepReview()" id="submitButton" type="submit" disabled
-                                class="ml-3 bg-gray-400 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Next</button>
+                                class=" ml-3 bg-gray-400 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Next</button>
                             <button type="button"
-                                class="hidden w-80 flex justify-center items-center bg-teal-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300 ml-10"
+                                class="hidden w-48 lg:w-80 flex justify-center items-center bg-teal-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300 ml-10"
                                 id="processingButton" disabled>
                                 <svg class="mr-3 size-5 animate-spin" viewBox="0 0 24 24">
                                     <path fill="currentColor"

@@ -23,7 +23,7 @@
 
 <button
     class="sticky z-[10] top-[1.5rem] mt-5 left-[1.5rem] lg:hidden block items-center font-semibold justify-center border-2 border-teal-500 w-40 my-1 h-12 shadow-lg bg-teal-600 hover:bg-teal-700 text-white rounded-full shadow-lg transition-all duration-300"
-    type="button" onclick="window.open('/StEmelieLearningCenter.HopeSci66/sign-in', '_blank')">Sign-in
+    type="button" onclick="window.open('/', '_blank')">Sign-in
 </button>
 
 <div class="course-button-container fixed top-[20rem] right-[1.5rem] z-[13] w-14 bl  ock lg:hidden block">
