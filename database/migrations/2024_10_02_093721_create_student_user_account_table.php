@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('student_user_account', function (Blueprint $table) {
             $table->id(); // Auto-incrementing ID
             $table->string('student_number')->unique();
-            $table->string('username')->nullable();
+            $table->string('username')->unique();
             $table->string('password')->nullable();
             $table->rememberToken();
             $table->string('avatar')->nullable(); // Add avatar column
