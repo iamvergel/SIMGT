@@ -35,7 +35,7 @@
                         </button> -->
                         <!-- <button
                             class="block w-86 right-0 mr-10 text-[12px] text-white shadow-lg px-10 bg-sky-700 hover:bg-sky-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded py-2.5 text-center"
-                            onclick="window.location.href = '/StEmelieLearningCenter.HopeSci66/admin/student-management/AllStudentData'">
+                            onclick="window.location.href = '/admin/student-management/AllStudentData'">
                             Show student data
                         </button> -->
                     </div>

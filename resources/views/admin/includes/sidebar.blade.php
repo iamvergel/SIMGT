@@ -287,7 +287,7 @@
                     <i class="fa-solid fa-book"><span class="sidebar-text ml-2">Grade Book</span></i>
                     <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
                 </button>
-                <div class="collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0" id="gradebook">
+                <div class="collapse-content bg-teal-800 rounded-lg mx-1 mt-1 px-0" id="gradebook">
                     <button
                         class="flex justify-between w-full items-center sidebar-link hover:bg-teal-700 rounded-md mt-2 tooltip"
                         id="studentManagementButton15" aria-expanded="false" aria-controls="teachersList" title="Grade One">
@@ -620,7 +620,7 @@
                             const teacherDropdown = $('<div>', {
                                 class: 'collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0 hidden', // hidden by default
                                 id: `teachersList${teacher.teacher_number}`,
-                                style: 'max-height: 1000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
+                                style: 'max-height: 10000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
                             });
 
                             // Add teacher's subjects to the dropdown as clickable links
@@ -705,7 +705,7 @@
                             const teacherDropdown = $('<div>', {
                                 class: 'collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0 hidden', // hidden by default
                                 id: `teachersList${teacher.teacher_number}`,
-                                style: 'max-height: 1000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
+                                style: 'max-height: 10000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
                             });
 
                             // Add teacher's subjects to the dropdown as clickable links
@@ -790,7 +790,7 @@
                             const teacherDropdown = $('<div>', {
                                 class: 'collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0 hidden', // hidden by default
                                 id: `teachersList${teacher.teacher_number}`,
-                                style: 'max-height: 1000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
+                                style: 'max-height: 10000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
                             });
 
                             // Add teacher's subjects to the dropdown as clickable links
@@ -875,7 +875,7 @@
                             const teacherDropdown = $('<div>', {
                                 class: 'collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0 hidden', // hidden by default
                                 id: `teachersList${teacher.teacher_number}`,
-                                style: 'max-height: 1000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
+                                style: 'max-height: 10000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
                             });
 
                             // Add teacher's subjects to the dropdown as clickable links
@@ -960,7 +960,7 @@
                             const teacherDropdown = $('<div>', {
                                 class: 'collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0 hidden', // hidden by default
                                 id: `teachersList${teacher.teacher_number}`,
-                                style: 'max-height: 1000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
+                                style: 'max-height: 10000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
                             });
 
                             // Add teacher's subjects to the dropdown as clickable links
@@ -1045,7 +1045,7 @@
                             const teacherDropdown = $('<div>', {
                                 class: 'collapse-content bg-teal-800 rounded-lg mx-2 mt-1 px-0 hidden', // hidden by default
                                 id: `teachersList${teacher.teacher_number}`,
-                                style: 'max-height: 1000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
+                                style: 'max-height: 10000px; overflow-y: auto;', // Set a fixed height and add a scrollbar if needed
                             });
 
                             // Add teacher's subjects to the dropdown as clickable links

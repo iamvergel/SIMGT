@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('grade', function (Blueprint $table) {
             $table->id();
+            $table->string('grade'); // grade column (type string)
+            $table->string('status');
             $table->timestamps();
         });
     }
