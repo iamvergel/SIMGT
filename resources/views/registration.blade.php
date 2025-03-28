@@ -1145,7 +1145,7 @@
                                             </label>
                                             <select id="fatherOccupation" name="father_occupation"
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer">
-                                                <option value="">Select Occupation</option>
+                                                <option value="" disabled selected>Father's Employee Status:</option>
                                                 <option value="employed">Employed</option>
                                                 <option value="unemployed">Unemployed</option>
                                                 <option value="self-employed">Self-employed</option>
@@ -1204,7 +1204,7 @@
                                             </label>
                                             <select id="motherOccupation" name="mother_occupation"
                                                 class="px-3 block py-2.5 w-full text-sm text-gray-900 bg-gray-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-teal-600 peer">
-                                                <option value="">Select Occupation</option>
+                                                <option value="" disabled selected>Mother's Employee Status</option>
                                                 <option value="employed">Employed</option>
                                                 <option value="unemployed">Unemployed</option>
                                                 <option value="self-employed">Self-employed</option>
@@ -1490,53 +1490,7 @@
                                     }
                                 });
 
-                                function setGuardianInfo(type) {
-                                    const motherFirstName = document.getElementById('motherFirstName').value;
-                                    const motherLastName = document.getElementById('motherLastName').value;
-                                    const motherMiddleName = document.getElementById('motherMiddleName').value; // Get mother's middle name
-
-                                    const fatherFirstName = document.getElementById('fatherFirstName').value;
-                                    const fatherLastName = document.getElementById('fatherLastName').value;
-                                    const fatherMiddleName = document.getElementById('fatherMiddleName').value; // Get father's middle name
-                                    const fatherSuffix = document.getElementById('fatherSuffixName').value;
-
-                                    const guardianRelationship = document.getElementById('guardianRelationship');
-
-                                    if (type === 'parent') {
-                                        document.getElementById('guardianFirstName').value = "N/A";
-                                        document.getElementById('guardianLastName').value = "N/A";
-                                        document.getElementById('guardianMiddleName').value = "N/A"; // Set middle name
-                                        document.getElementById('guardianSuffixName').value = ""; // Reset suffix when choosing mother
-                                        document.getElementById('guardianRelationship').value = "N/A";
-                                        document.getElementById('guardianReligion').value = "N/A";
-                                        document.getElementById('guardianContactNumber').value = "09000000000";
-                                        document.getElementById('gfname').classList.add('hidden');
-                                        document.getElementById('glname').classList.add('hidden');
-                                        document.getElementById('gmname').classList.add('hidden');
-                                        document.getElementById('gsname').classList.add('hidden');
-                                        document.getElementById('grelatioanship').classList.add('hidden');
-                                        document.getElementById('gnumber').classList.add('hidden');
-                                        document.getElementById('greligion').classList.add('hidden');
-                                        document.getElementById('emergencyContactInfo').classList.add('hidden');
-                                    } else if (type === 'other') {
-                                        document.getElementById('gfname').classList.remove('hidden');
-                                        document.getElementById('glname').classList.remove('hidden');
-                                        document.getElementById('gmname').classList.remove('hidden');
-                                        document.getElementById('gsname').classList.remove('hidden');
-                                        document.getElementById('grelatioanship').classList.remove('hidden');
-                                        document.getElementById('gnumber').classList.remove('hidden');
-                                        document.getElementById('greligion').classList.remove('hidden');
-                                        document.getElementById('guardianFirstName').value = "";
-                                        document.getElementById('guardianLastName').value = "";
-                                        document.getElementById('guardianMiddleName').value = ""; // Set middle name
-                                        document.getElementById('guardianSuffixName').value = ""; // Reset suffix when choosing mother
-                                        document.getElementById('guardianRelationship').value = "";
-                                        document.getElementById('guardianReligion').value = "";
-                                        document.getElementById('guardianContactNumber').value = "09";
-                                        document.getElementById('emergencyContactInfo').classList.add('hidden');
-                                    }
-                                }
-
+                            
                                 // Place this script at the beginning to ensure the function is defined before use.
                                 function checkParentInfoValidityParents() {
                                     var isValidParent = true;
@@ -1546,22 +1500,26 @@
 
                                     // Check if either 'Parent/Parents' or 'Other' radio button is selected
                                     let hasChecked = false;
-                                    guardianRadioButtons.forEach(function (radioButton) {
+                                    for (const radioButton of guardianRadioButtons) {
                                         if (radioButton.checked) {
                                             hasChecked = true;
-                                            if (radioButton.value === 'other') {
+                                            if (radioButton.value === 'parent') {
+                                                isValidParent = true;
+                                            } else if (radioButton.value === 'other') {
+                                                isValidParent = true;
+                                            } else {
                                                 isValidParent = false;
                                             }
                                         }
-                                    });
-
-                                    if (hasChecked) {
-                                        guardianSelectionAlert.classList.add('hidden');
-                                    } else {
-                                        guardianSelectionAlert.classList.remove('hidden');
-                                        isValidParent = false;
                                     }
 
+                                    if (!hasChecked) {
+                                        guardianSelectionAlert.classList.remove('hidden');
+                                        isValidParent = false;
+                                    } else {
+                                        guardianSelectionAlert.classList.add('hidden');
+                                        isValidParent = true;
+                                    }
 
                                     // Validate Father's Last Name
                                     var fatherLastNameInput = document.getElementById('fatherLastName');
@@ -1688,16 +1646,11 @@
                                         guardianContactNumberInput.classList.add('border-red-500');
                                         guardianContactNumberAlert.classList.remove('hidden');
                                         isValidParent = false;
-                                    } else if (guardianLastNameInput.value.toUpperCase() === 'N/A' || guardianLastNameInput.value.toUpperCase() === 'NA') {
-                                        guardianContactNumberInput.classList.remove('border-red-500');
-                                        guardianContactNumberAlert.classList.add('hidden');
-
-                                        isValidParent = false;
                                     } else if (guardianContactNumberInput.value.length !== 11) {
                                         guardianContactNumberInput.classList.add('border-red-500');
                                         guardianContactNumberAlert.classList.remove('hidden');
                                         guardianContactNumberAlert.innerHTML = 'Contact number must be 11 digits';
-                                        isValid = false;
+                                        isValidParent = false;
                                     } else {
                                         guardianContactNumberInput.classList.remove('border-red-500');
                                         guardianContactNumberAlert.classList.add('hidden');
@@ -1715,15 +1668,60 @@
                                         guardianReligionAlert.classList.add('hidden');
                                     }
 
-
                                     return isValidParent;
+                                }
+
+                                function setGuardianInfo(type) {
+                                    const motherFirstName = document.getElementById('motherFirstName').value;
+                                    const motherLastName = document.getElementById('motherLastName').value;
+                                    const motherMiddleName = document.getElementById('motherMiddleName').value; // Get mother's middle name
+
+                                    const fatherFirstName = document.getElementById('fatherFirstName').value;
+                                    const fatherLastName = document.getElementById('fatherLastName').value;
+                                    const fatherMiddleName = document.getElementById('fatherMiddleName').value; // Get father's middle name
+                                    const fatherSuffix = document.getElementById('fatherSuffixName').value;
+
+                                    const guardianRelationship = document.getElementById('guardianRelationship');
+
+                                    if (type === 'parent') {
+                                        document.getElementById('guardianFirstName').value = "N/A";
+                                        document.getElementById('guardianLastName').value = "N/A";
+                                        document.getElementById('guardianMiddleName').value = "N/A"; // Set middle name
+                                        document.getElementById('guardianSuffixName').value = ""; // Reset suffix when choosing mother
+                                        document.getElementById('guardianRelationship').value = "N/A";
+                                        document.getElementById('guardianReligion').value = "N/A";
+                                        document.getElementById('guardianContactNumber').value = "09000000000";
+                                        document.getElementById('gfname').classList.add('hidden');
+                                        document.getElementById('glname').classList.add('hidden');
+                                        document.getElementById('gmname').classList.add('hidden');
+                                        document.getElementById('gsname').classList.add('hidden');
+                                        document.getElementById('grelatioanship').classList.add('hidden');
+                                        document.getElementById('gnumber').classList.add('hidden');
+                                        document.getElementById('greligion').classList.add('hidden');
+                                        document.getElementById('emergencyContactInfo').classList.add('hidden');
+                                    } else if (type === 'other') {
+                                        document.getElementById('gfname').classList.remove('hidden');
+                                        document.getElementById('glname').classList.remove('hidden');
+                                        document.getElementById('gmname').classList.remove('hidden');
+                                        document.getElementById('gsname').classList.remove('hidden');
+                                        document.getElementById('grelatioanship').classList.remove('hidden');
+                                        document.getElementById('gnumber').classList.remove('hidden');
+                                        document.getElementById('greligion').classList.remove('hidden');
+                                        document.getElementById('guardianFirstName').value = "";
+                                        document.getElementById('guardianLastName').value = "";
+                                        document.getElementById('guardianMiddleName').value = ""; // Set middle name
+                                        document.getElementById('guardianSuffixName').value = ""; // Reset suffix when choosing mother
+                                        document.getElementById('guardianRelationship').value = "";
+                                        document.getElementById('guardianReligion').value = "";
+                                        document.getElementById('guardianContactNumber').value = "09";
+                                        document.getElementById('emergencyContactInfo').classList.add('hidden');
+                                    }
                                 }
 
                                 // This function is now defined before it is used
                                 function showNextStepGuardians() {
                                     if (checkParentInfoValidityParents()) {
                                         // Show the guardian information section
-
                                         document.getElementById('emergencyContactInfo').classList.remove('hidden');
                                     }
                                 }
@@ -1805,8 +1803,6 @@
                                                 pattern="^09\d{9}$"
                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/^(?!09).*/, '09');"
                                                 value="09">
-                                            <small class="text-gray-500 text-xs">(e.g. Parents, guardian or personal
-                                                number)</small><br />
                                             <small class="text-red-600 text-xs hidden"
                                                 id="emergencyContactNumberAlert">Emergency contact number is
                                                 required</small>

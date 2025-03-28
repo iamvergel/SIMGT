@@ -21,12 +21,21 @@
                     </p>
                 </div>
 
-                @if (session('success'))
-    <script>
-        alert("Student Enrolled Successfully");
-        window.location.href = '/registrar/online-application';
-    </script>
-@endif
+
+@if (session('success'))
+                    <div class="bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md my-5"
+                        role="alert" id="success-alert">
+                        <div class="flex">
+                            <div class="py-1">{{ session('success') }}<i class="fa-solid fa-check text-green-500"></i></div>
+                        </div>
+                    </div>
+                    <script>
+                        setTimeout(function() {
+                            document.getElementById("success-alert").remove();
+                            window.location.href = '/registrar/online-application';
+                        }, 3000);
+                    </script>
+                @endif
 
                 @if ($errors->any())
                     <div class="bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md my-5"
@@ -36,19 +45,20 @@
                                     class="fa-solid fa-circle-exclamation text-red-500"></i></div>
                             <div>
                                 <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <script>
-                        setTimeout(function () {
+                        setTimeout(function() {
                             document.getElementById("error-alert").remove();
-                        }, 1000000);
+                        }, 3000);
                     </script>
                 @endif
+
 
                 <div class="bg-teal-800 p-5 shadow-lg mt-10 rounded-t-lg">
                     <h2 class="text-md font-semibold text-white">

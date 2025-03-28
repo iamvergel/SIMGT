@@ -79,7 +79,7 @@
                     <script>
                         setTimeout(function() {
                             document.getElementById("success-alert").remove();
-                        }, 5000);
+                        }, 3000);
                     </script>
                 @endif
 
@@ -101,7 +101,7 @@
                     <script>
                         setTimeout(function() {
                             document.getElementById("error-alert").remove();
-                        }, 1000000);
+                        }, 3000);
                     </script>
                 @endif
                 <!-- component -->
