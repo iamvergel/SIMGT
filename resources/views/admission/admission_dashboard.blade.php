@@ -210,6 +210,23 @@
                 </div>
               </div>
 
+              <div class="col-span-4 lg:col-span-2 mt-5">
+                <div class="flex items-center border-t-2 border-violet-700 rounded-lg shadow-lg">
+                  <div class="bg-violet-100 rounded-l-lg h-48 flex items-center justify-center w-1/2">
+                    <h2 class="text-[50px] font-bold text-violet-900">
+                      <i class="fa-solid fa-user"></i>
+                    </h2>
+                  </div>
+                  <div class="px-5 w-full">
+                    <h5 class="mb-2 text-md font-semibold tracking-tight text-gray-900 ">TRANSFER STUDENTS</h5>
+                    <hr>
+                    <p class="mb-3 font-bold text-end text-violet-700  text-[3rem] px-3">
+                      {{ $studentGraduatedCounts->sum() }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <hr class="col-span-4 border-0 h-[1px] bg-gray-300 mt-10">
 
               <!-- @if($studentCounts->isEmpty())

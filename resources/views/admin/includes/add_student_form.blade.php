@@ -313,11 +313,19 @@
                                     </div>
 
                                     <div class="hidden">
+                                        <label for="username" class="block mb-2 text-sm font-bold text-gray-900"><span
+                                                class="text-red-600 mr-1">*</span>Username :</label>
+                                        <input type="text" name="username" id="username"
+                                            class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none "
+                                            placeholder="username" required >
+                                    </div>
+
+                                    <div class="hidden">
                                         <label for="password" class="block mb-2 text-sm font-bold text-gray-900"><span
                                                 class="text-red-600 mr-1">*</span>Password :</label>
                                         <input type="text" name="password" id="password"
                                             class="myInput block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
-                                            placeholder="password" required readonly>
+                                            placeholder="password" required >
                                     </div>
 
                                     <div class="mb-5">
@@ -806,38 +814,65 @@
 
             <script>
                 document.addEventListener("DOMContentLoaded", function () {
-                    // Get the current URL
-                    const currentUrl = window.location.pathname;
+                            // Get input fields
+                            const lastNameInput = document.getElementById('lastName');
+                            const firstNameInput = document.getElementById('firstName');
+                            const studentsNumberInput = document.getElementById('lrn');
+                            const passwordInput = document.getElementById('password');
+                            const usernameInput = document.getElementById('username');
 
-                    // Check if the URL contains 'GradeOne', 'GradeTwo', etc.
-                    const gradeMatch = currentUrl.match(/\/admin\/student-management\/(GradeOne|GradeTwo|GradeThree|GradeFour|GradeFive|GradeSix)/);
+                            // Automatically update the password
+                            const lastName = lastNameInput.value;
+                            const studentsNumber = studentsNumberInput.value;
 
-                    // If a match is found, set the selected option
-                    if (gradeMatch) {
-                        const grade = gradeMatch[1].replace(/([A-Z])/g, ' $1').trim(); // Convert 'GradeOne' to 'Grade One'
-                        const selectElement = document.getElementById("grade");
+                            // Capitalize the first letter of the last name
+                            const capitalizedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
 
-                        // Set the selected option
-                        selectElement.value = grade; // Sets the value to the corresponding grade
-                    }
+                            // Get the last four digits of the students number
+                            const lastFourDigits = studentsNumber.slice(-4);
 
-                    const lastNameInput = document.getElementById('lastName');
-                    const studentNumberInput = document.getElementById('studentNumber');
-                    const passwordInput = document.getElementById('password');
+                            // Combine to form the password
+                            const newPassword = `SELC${capitalizedLastName}${lastFourDigits}`;
 
-                    function updatePassword() {
-                        const lastName = lastNameInput.value;
-                        const capitalizedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase(); // Capitalize first letter
-                        const studentNumber = studentNumberInput.value;
-                        const lastFourDigits = studentNumber.slice(-4);
+                            // Update the password input value
+                            passwordInput.value = newPassword;
 
-                        const newPassword = `SELC${capitalizedLastName}${lastFourDigits}`;
-                        passwordInput.value = newPassword;
-                    }
+                            // Update the username input value
+                            const username = lastNameInput.value.toLowerCase().replace(/\s/g, '')  + firstNameInput.value.toLowerCase().replace(/\s/g, '') + '@stemilie.edu.ph';
+                            usernameInput.value = username;
+                        });
 
-                    lastNameInput.addEventListener('input', updatePassword);
-                    studentNumberInput.addEventListener('input', updatePassword);
-                });
+                        const lastNameInput = document.getElementById('lastName');
+                        const firstNameInput = document.getElementById('firstName');
+                        const studentsNumberInput = document.getElementById('lrn');
+                        const passwordInput = document.getElementById('password');
+                        const usernameInput = document.getElementById('username');
+
+                        // Update the password in real-time
+                        lastNameInput.addEventListener('input', updatePassword);
+                        firstNameInput.addEventListener('input', updatePassword);
+                        studentsNumberInput.addEventListener('input', updatePassword);
+
+                        function updatePassword() {
+                            const lastName = lastNameInput.value;
+                            const studentsNumber = studentsNumberInput.value;
+
+                            // Capitalize the first letter of the last name
+                            const capitalizedLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1).toLowerCase();
+
+                            // Get the last four digits of the students number
+                            const lastFourDigits = studentsNumber.slice(-4);
+
+                            // Combine to form the password
+                            const newPassword = `SELC${capitalizedLastName}${lastFourDigits}`;
+
+                            // Update the password input value
+                            passwordInput.value = newPassword;
+
+                            // Update the username input value
+                            const username = lastNameInput.value.toLowerCase().replace(/\s/g, '')  + firstNameInput.value.toLowerCase().replace(/\s/g, '') + '@stemilie.edu.ph';
+                            usernameInput.value = username;
+                        }
 
                 function calculateAge() {
                     const birthDateInput = document.getElementById('birthDate');
