@@ -56,8 +56,8 @@ class TeacherAdvisoryController extends Controller
         }
 
         // Update the other fields
-        $user->grade = $request->grade ? ucfirst(strtolower($request['grade'])) : null;
-        $user->section = $request->section ? ucfirst(strtolower($request['section'])) : null;
+        $user->grade = $request->grade ? ucfirst($request['grade']) : null;
+        $user->section = $request->section ? ucfirst($request['section']) : null;
 
         // Save the updated user details
         $user->save();

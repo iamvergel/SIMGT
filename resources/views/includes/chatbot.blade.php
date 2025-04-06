@@ -51,9 +51,27 @@
     type="button" onclick="toggleChat()">
     <span class="hidden text-sm me-2">Open Chat</span><i class="fa-brands fa-facebook-messenger text-2xl"></i>
 </button>
-<button id="scrollToTop" style="display: none;" class=" fixed z-[10] bottom-[1.5rem] right-[6rem] lg:bottom-[2.5rem] lg:right-[8rem] inline-flex items-center justify-center w-14 h-14 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg transition-all duration-300">
+
+<button id="scrollToTop" onclick="window.location.href = '#top'" 
+    class="fixed z-[10] bottom-[1.5rem] right-[5.5rem] lg:bottom-[2.5rem] lg:right-[7.5rem] inline-flex items-center justify-center w-14 h-14 bg-sky-500 hover:bg-sky-600 text-white rounded-full shadow-lg transition-all duration-300" 
+    style="display: none;">
     <i class="fas fa-arrow-up"></i>
 </button>
+
+<script>
+    const scrollToTopButton = document.getElementById('scrollToTop');
+    const mainContent = document.getElementById('mainContent'); // Get the main content div
+
+    // Listen to the scroll event on the mainContent div
+    mainContent.addEventListener('scroll', () => {
+        if (mainContent.scrollTop > 0) { // 200px is the threshold
+            scrollToTopButton.style.display = 'block'; // Show the button
+            
+        } else {
+            scrollToTopButton.style.display = 'none'; // Hide the button
+        }
+    });
+</script>
 
 
 

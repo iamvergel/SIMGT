@@ -122,6 +122,7 @@ class TeacherUserController extends Controller
 
         // Fetch related data for the specific teacher
         $teacherAdvisory = TeacherAdvisory::where('teacher_number', $teachers->teacher_number)->first();
+        $teacherAdvisoryAll = TeacherAdvisory::where('teacher_number', $teachers->teacher_number)->get();
         $teacherSubjects = TeacherSubjectClass::where('teacher_number', $teachers->teacher_number)->get();
         // $teacherDocuments = teacherDocuments::where('teacher_number', $teachers->teacher_number)->first();
         // $teacherAccount = TeacherUser::where('teacher_number', $teachers->teacher_number)->first();
@@ -133,7 +134,7 @@ class TeacherUserController extends Controller
         // $teacherGradeSix = Mteachergradesix::where('teacher_number', $teachers->teacher_number)->first();
 
         // You can pass other data here as needed
-        return view('admin.includes.teacher_information', compact('teachers', 'teacherAdvisory', 'teacherSubjects'));
+        return view('admin.includes.teacher_information', compact('teachers', 'teacherAdvisory', 'teacherSubjects', 'teacherAdvisoryAll'));
     }
 
     public function showTeacherInfotmationRegistrar(Request $request, $id)
@@ -174,7 +175,7 @@ class TeacherUserController extends Controller
         }
 
         // Create username
-        $username = strtolower($teacher->teacher_last_name) . strtolower($teacher->teacher_first_name) . '@stemilie.edu.ph';
+        $username = strtolower($teacher->last_name) . strtolower($teacher->first_name) . '@stemilie.edu.ph';
 
         // Validate incoming request for defaultPassword
         $validatedData = $request->validate([

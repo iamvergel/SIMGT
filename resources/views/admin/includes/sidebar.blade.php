@@ -466,12 +466,12 @@
                         <i class="fa-regular fa-circle"></i>
                         <span class="sidebar-text ml-2">Subject</span>
                     </a>
-                    <a href="/admin/manage-system/Grade"
+                    <!-- <a href="/admin/manage-system/Grade"
                         class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Grade">
                         <i class="fa-regular fa-circle"></i>
                         <span class="sidebar-text ml-2">Grade</span>
-                    </a>
+                    </a> -->
                 </div>
 
                 <hr class="w-full border-0 h-[1px] bg-teal-700 mt-5">
@@ -485,7 +485,7 @@
                     <p class="ml-10"><i class="fa-solid fa-chevron-right text-[8px] me-5"></i></p>
                 </button>
                 <div class="collapse-content bg-teal-800 rounded-lg mx-5 mt-1 px-2" id="managewebsite">
-                    <a href="#" class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
+                    <!-- <a href="#" class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Mission Vision">
                         <i class="fa-regular fa-circle"></i>
                         <span class="sidebar-text ml-2">Mission Vision</span>
@@ -505,7 +505,7 @@
                         title="School Admission">
                         <i class="fa-regular fa-circle"></i>
                         <span class="sidebar-text ml-2">School Admission</span>
-                    </a>
+                    </a> -->
                     <a href="/admin/website-gallery"
                         class="flex justify-start items-center sidebar-link hover:bg-teal-700 rounded-md mb-2 ml-0"
                         title="Gallery">

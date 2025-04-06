@@ -42,6 +42,9 @@
 
 
     <style>
+        * {
+            scroll-behavior: smooth;
+        }
         #imageone {
             position: relative;
         }

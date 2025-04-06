@@ -121,7 +121,7 @@
         const confirmLogout = document.getElementById('confirmLogout');
         const interval = setInterval(() => {
             logoutMessage.innerHTML = " ";
-            logoutPrompt.innerHTML = `<div class="text-teal-700 text-lg font-semibold text-center">Logging out in <br/><div class="text-teal-600 text-2xl font-semibold text-center mt-5">${countdown}...</div></div>`;
+            logoutPrompt.innerHTML = `<div class="text-teal-700 text-lg font-semibold text-center">Logging out in <br/><div class="text-teal-600 text-2xl font-semibold text-center mt-5">${countdown}</div></div>`;
             cancelLogout.classList.add('hidden');
             confirmLogout.classList.add('hidden');
             countdown--;
@@ -129,7 +129,7 @@
                 clearInterval(interval);
                 document.getElementById('logoutForm').submit();
             }
-        }, 1000);
+        }, 800);
     });
 </script>
 

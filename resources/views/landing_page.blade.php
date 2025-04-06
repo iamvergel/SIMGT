@@ -1,9 +1,10 @@
 @include("includes.header")
-<div class=" 2xl:max-w-[1500px] w-full h-full overflow-hidden overflow-y-scroll" >
+<div class=" 2xl:max-w-[1500px] w-full h-full overflow-hidden overflow-y-scroll scrollbehavior" id="mainContent">
     <div class="main1" id="top">
         <canvas id="canvas" class="w-screen h-screen absolute bg-transparent z-[11] left-0 top-0 "></canvas>
-        <!-- @include("main.topbar") -->
+        @include("main.topbar")
         <div class=" w-full h-full relative top-0">
+
             <div class="pl-[1rem] lg:pl-[5rem] text-start z-[10] w-full text-white relative mt-[2rem]">
                 <p class="text-sm lg:text-[1.5rem] leading-8">Welcome To Our Website</p>
                 <h1 class="text-[3rem] lg:text-[5rem] 2xl:text-[5rem] font-bold uppercase leading-none">Primary
@@ -12,6 +13,7 @@
                 <h1 class="text-[1.5rem] lg:text-[3rem] 2xl:text-[5rem] font-bold leading-none text-yellow-300">St.
                     Emilie Learning
                     Center
+                    <small class="text-sm font-normal">Beta Testing</small>
                 </h1>
                 <p class="my-5">St. Emilie Learning Center is committed to empower the love of God to become a
                     responsible citizen</p>
@@ -22,6 +24,7 @@
                     class="z-[700] bg-transparent border-4 border-yellow-300 py-4 px-10 text-white rounded-full font-bold text-lg uppercase mt-5 text-center transform transition-all duration-300 hover:scale-110 hover:z-[10] hover:bg-yellow-100 hover:border-yellow-700 hover:text-yellow-500 transition-transform">register
                     Now <i class="fa-solid fa-location-arrow ml-3 text-2xl"></i></button>
             </div>
+
         </div>
     </div>
 
@@ -79,11 +82,41 @@
 
 
     <div id="modalprivacy"
+        class="fixed z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 px-2 flex justify-center items-center items-center">
+        <div class="bg-white rounded-md shadow-lg p-5 max-w-3xl mx-auto z-20 relative">
+                <button onclick="document.getElementById('modalprivacy').classList.add('hidden')"
+                    class="absolute right-5 top-5 text-gray-600 hover:text-gray-800 rounded-sm transition-all duration-300">
+                    <i class="fas fa-times"></i>
+                </button>
+        <div class="flex justify-center items-center">
+                <img src="{{ asset('../assets/beta-svgrepo-com.svg') }}" alt="" width="50px" class="ml-[10rem] lg:ml-[18rem]">
+            </div>
+            <div class="flex justify-center items-center text-center px-5 pb-5 border-b border-gray-900">
+                <p class="text-lg font-bold text-teal-800">Welcome to our Beta Testing</p>
+            </div>
+            <div class="text-sm text-justify mt-5">
+                This is a <strong>Beta version</strong> of our system and you may encounter some rough edges or missing
+                features. Your feedback is valuable to us and will help us refine the website. Please report any issues
+                you come across, thank you!
+            </div>
+
+            <div class="flex justify-center items-center">
+                <img src="{{ asset('../assets/gmail-svgrepo-com.svg') }}" alt="" width="200px">
+                
+            </div>
+            <div class="flex justify-center items-center">
+                <a href="mailto:vergelmacayan7@gmail.com" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Send feedback</a>
+            </div>
+            
+        </div>
+    </div>
+
+    <div id="modalprivacy"
         class="fixed hidden z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 px-2 flex justify-center items-center items-center">
-        
+
         <div class="bg-white rounded-md shadow-lg p-5 max-w-3xl mx-auto z-20">
             <div class="flex justify-center items-center p-5 border-b border-gray-900">
-            <p class="text-lg font-bold text-teal-800">Data Privacy Agreement</p>
+                <p class="text-lg font-bold text-teal-800">Data Privacy Agreement</p>
             </div>
             <div class="overflow-y-scroll h-[20rem] scrollbar-width-thin my-3 p-5">
                 <p class="text-[12px] text-justify">
@@ -145,8 +178,7 @@
             <div class="flex justify-end items-center mt-5">
                 <button onclick="document.getElementById('modalprivacy').classList.add('hidden')"
                     class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Close</button>
-                <button onclick="window.location.href = '/Registration'"
-                    id="nextbtnprivacy" disabled
+                <button onclick="window.location.href = '/Registration'" id="nextbtnprivacy" disabled
                     class="ml-3 bg-gray-500 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Next</button>
             </div>
         </div>
@@ -197,7 +229,8 @@
                 <!-- Icon Boxes -->
                 <div class="col-span-2 w-full flex flex-col justify-center  text-center py-5 px-4 lg:px-5">
                     <h3 class="text-teal-900 text-3xl font-bold mb-4">Welcome to St. Emilie Learning Center!</h3>
-                    <p class="text-teal-900 text-md text-justify px-0 lg:px-10">At St. Emilie Learning Center, we are dedicated to
+                    <p class="text-teal-900 text-md text-justify px-0 lg:px-10">At St. Emilie Learning Center, we are
+                        dedicated to
                         providing a nurturing and engaging learning environment where students develop academically,
                         socially, and emotionally. Our school upholds high standards of education, ensuring that each
                         student receives the knowledge and skills necessary for lifelong success. Through a balanced
@@ -220,7 +253,8 @@
         </div>
     </div>
 
-    <div class="w-full px-2 lg:px-10 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center mt-[18rem] lg:mt-2 bg-sky-100" id="aboutSchool">
+    <div class="w-full px-2 lg:px-10 py-10 h-[900px] lg:h-[600px] relative flex justify-center items-center mt-[18rem] lg:mt-2 bg-sky-100"
+        id="aboutSchool">
         <div class="container mx-auto lg:px-4">
             <div class="grid grid-cols-1 lg:grid-cols-3 lg:p-5 border-lg relative ">
                 <!-- Video Box -->
@@ -230,7 +264,8 @@
 
                 <!-- Icon Boxes -->
                 <div class="col-span-2 w-full flex flex-col justify-center  text-center py-5 px-4 lg:px-5">
-                    <p class="text-teal-900 text-md text-justify mt-5 lg:mt-0 px-0 lg:px-10">"Discover, Learn, and Shine at St. Emelie Learning
+                    <p class="text-teal-900 text-md text-justify mt-5 lg:mt-0 px-0 lg:px-10">"Discover, Learn, and Shine
+                        at St. Emelie Learning
                         Center!
                         Where young minds grow, friendships flourish, and dreams take flight. Join us for a journey of
                         curiosity, creativity, and endless possibilities. Enroll now and be part of our vibrant learning
@@ -238,9 +273,10 @@
                         Would you like further tweaks or a different tone?</p>
 
                     <div class="flex justify-center items-center mt-5">
-                    <button type="button"  onclick="document.getElementById('modalprivacy').classList.remove('hidden')"
-                        class="text-white w-80 text-center bg-teal-800 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-300 font-bold rounded-full text-lg px-20 py-2.5 text-center mt-20"
-                        >Register Now</button>
+                        <button type="button"
+                            onclick="document.getElementById('modalprivacy').classList.remove('hidden')"
+                            class="text-white w-80 text-center bg-teal-800 hover:bg-teal-700 focus:ring-4 focus:outline-none focus:ring-teal-300 font-bold rounded-full text-lg px-20 py-2.5 text-center mt-20">Register
+                            Now</button>
                     </div>
                 </div>
             </div>

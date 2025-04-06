@@ -16,6 +16,42 @@
         <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admission</p>
         <h1 class="text-2xl font-bold text-teal-900 ml-5">Dashboard</h1>
 
+        @if (session('success'))
+                    <div class="bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md my-5"
+                        role="alert" id="success-alert">
+                        <div class="flex">
+                            <div class="py-1">{{ session('success') }}<i class="fa-solid fa-check text-green-500"></i></div>
+                        </div>
+                    </div>
+                    <script>
+                        setTimeout(function() {
+                            document.getElementById("success-alert").remove();
+                        }, 3000);
+                    </script>
+                @endif
+
+                @if ($errors->any())
+                    <div class="bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md my-5"
+                        role="alert" id="error-alert">
+                        <div class="flex">
+                            <div class="py-1">{{ session('success') }}<i
+                                    class="fa-solid fa-circle-exclamation text-red-500"></i></div>
+                            <div>
+                                <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        setTimeout(function() {
+                            document.getElementById("error-alert").remove();
+                        }, 3000);
+                    </script>
+                @endif
+
         <div class="flex justify-between items-center bg-teal-700 p-5 shadow-lg mt-10 rounded-t-lg">
           <h2 class="text-md font-semibold text-white">
             <i class="fa-solid fa-bullhorn mr-2"></i> Announcement

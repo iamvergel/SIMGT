@@ -169,8 +169,9 @@ Route::middleware([PreventBackHistory::class, 'auth.redirect'])->group(function 
     Route::get('/admission/student-registration', [StudentRegistrationController::class, 'showAllRegisterAdmission'])->name('admission.new.student');
     Route::get('/registrar/student-registration', [StudentRegistrationController::class, 'showAllRegisterRegistrar'])->name('registrar.new.student');
     Route::get('/registrar/registration-form', [StudentRegistrationController::class, 'showAllEnrolledRegistrar'])->name('registrar.enrolled.student');
-
+    
     Route::get('/teacher/myadvisory', [TeacherClassAdvisory::class, 'showMyadvisory'])->name('teacher.advisory');
+    
     Route::get('/teacher/class-record', [TeacherSubjectClassController::class, 'showclasssubjectadvisory'])->name('teacher.class-record');
     Route::get('/teacher/class-record/{subject}', [TeacherSubjectClassController::class, 'showclasssubjectadvisory'])->name('teacher.class-record');
 

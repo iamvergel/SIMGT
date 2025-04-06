@@ -44,8 +44,30 @@
 
 
                 @if (session('success'))
+                    <div class="bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md my-5"
+                        role="alert" id="success-alert">
+                        <div class="flex">
+                            <div class="py-1"><i class="fa-solid fa-check text-green-500 me-2"></i>{{ session('success') }}</div>
+                        </div>
+                    </div>
                     <script>
-                        alert("{{ session('success') }}");
+                        setTimeout(function() {
+                            document.getElementById("success-alert").remove();
+                        }, 3000);
+                    </script>
+                @endif
+
+                @if (session('error'))
+                    <div class="bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md my-5"
+                        role="alert" id="error-alert">
+                        <div class="flex">
+                            <div class="py-1"><i class="fa-solid fa-circle-exclamation text-red-500 me-2"></i>{{ session('error') }}</i></div>
+                        </div>
+                    </div>
+                    <script>
+                        setTimeout(function() {
+                            document.getElementById("error-alert").remove();
+                        }, 3000);
                     </script>
                 @endif
 
@@ -297,8 +319,9 @@
                                             <td class="{{ $teachers->status == "Inactive" ? "bg-red-100" : "" }}">
                                                 <span class="ml-2">{{ $teachers->contact_number }}</span>
                                             </td>
-                                            <td class="{{ $teachers->status == "Inactive" ? "bg-red-100" : "" }}">
-                                                <button {{ $teachers->status == "Inactive" ? "disabled" : "" }}
+                                            <td>
+
+                                             <button {{ $teachers->status == "Inactive" ? "disabled" : "" }}
                                                     id="addAdviser{{ $teachers->id }}"
                                                     class="{{ $teachers->status == "Inactive" ? "bg-gray-400" : "bg-pink-700 hover:bg-pink-600" }} text-white font-medium text-md p-3 text-center inline-flex items-center rounded-full "
                                                     type="button" aria-label="Add Advisory" title="Add Advisory">
@@ -317,24 +340,77 @@
                                                     type="button" aria-label="Update Student" title="Update teacher Info">
                                                     <i class="fa-solid fa-square-pen"></i>
                                                 </button>
+                                                <!-- Reset Account Form -->
                                                 <form action="{{ route('teacher.reset', $teachers->id) }}" method="POST"
-                                                    style="display:inline;"
-                                                    onsubmit="return confirm('Are you sure you want to reset this student\'s account?');">
+                                                    style="display:inline;">
                                                     @csrf
-                                                    <input class="hidden" type="text" name="defaultPassword"
-                                                        value="{{ 'SELC' . $teachers->last_name . substr($teachers->teacher_number, -4) }}"
-                                                        required>
-                                                    <button type={{ $teachers->status == "Inactive" ? "button" : "submit" }}
-                                                        class="{{ $teachers->status == "Inactive" ? "bg-gray-400" : "bg-cyan-700 hover:bg-cyan-600" }} text-white font-medium text-md p-3 text-center inline-flex items-center rounded-full"
+                                                    <button {{ $teachers->status == "Inactive" ? "disabled" : "" }} type="button" onclick="document.getElementById('resetAccountModal{{ $teachers->id }}').classList.remove('hidden');"
+                                                        class="{{ $teachers->status == "Inactive" ? "bg-gray-400" : "bg-sky-800 hover:bg-sky-700"}} text-white font-medium text-md p-3 text-center inline-flex items-center me-1 rounded-full "
                                                         title="Reset Teacher Account">
                                                         <i class="fa-solid fa-rotate-right"></i>
                                                     </button>
                                                 </form>
-                                                <form action="{{ route('teacher.email', $teachers->id) }}" method="POST"
-                                                    style="display:inline;">
+                                                <!-- Reset Account Modal -->
+                                                <div class="fixed inset-0 z-10 bg-black bg-opacity-50 hidden p-5 flex items-center justify-center"
+                                                    id="resetAccountModal{{ $teachers->id }}">
+                                                    <div class="bg-white rounded-lg shadow-lg p-5 max-w-lg mx-auto mt-16">
+                                                        <div class="flex items-center text-sky-700 text-lg font-semibold font-normal">
+                                                            <span>Reset Teacher Account Confirmation</span>
+                                                        </div>
+                                                        <hr class="border-1 border-sky-600 mt-5">
+                                                        <div class="mt-5 text-sm">
+                                                            <p class="text-gray-800 text-justify">Are you sure you want to reset this teacher's account?</p>
+                                                        </div>
+                                                        <div class="flex justify-end mt-10 text-sm">
+                                                            <button class="cursor-pointer bg-gray-500 hover:bg-gray-600 px-5 py-2 rounded-sm text-white"
+                                                                onclick="document.getElementById('resetAccountModal{{ $teachers->id }}').classList.add('hidden');">
+                                                                Cancel
+                                                            </button>
+                                                            <form action="{{ route('teacher.reset', $teachers->id) }}"
+                                                                method="POST" style="display:inline;">
+                                                                @csrf
+                                                                <input class="hidden" type="text" name="defaultPassword"
+                                                                    value="{{ 'SELC' . $teachers->last_name . substr($teachers->teacher_number, -4) }}"
+                                                                    required>
+                                                                <button type="submit"
+                                                                    class="cursor-pointer bg-sky-700 hover:bg-sky-800 px-5 py-2 rounded-sm text-white ml-3">
+                                                                    Yes, I'm sure
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Send Email Modal -->
+                                                <div class="fixed inset-0 z-10 bg-black bg-opacity-50 hidden p-5 flex items-center justify-center"
+                                                    id="sendEmailModal{{ $teachers->id }}">
+                                                    <div class="bg-white rounded-lg shadow-lg p-5 max-w-lg mx-auto mt-16">
+                                                        <div class="flex items-center text-sky-700 text-lg font-semibold font-normal">
+                                                            <span>Send Email Confirmation</span>
+                                                        </div>
+                                                        <hr class="border-1 border-sky-600 mt-5">
+                                                        <div class="mt-5 text-sm">
+                                                            <p class="text-gray-800 text-justify">Are you sure you want to send an email to this teacher?</p>
+                                                        </div>
+                                                        <div class="flex justify-end mt-10 text-sm">
+                                                            <button class="cursor-pointer bg-gray-500 hover:bg-gray-600 px-5 py-2 rounded-sm text-white"
+                                                                onclick="document.getElementById('sendEmailModal{{ $teachers->id }}').classList.add('hidden');">
+                                                                Cancel
+                                                            </button>
+                                                            <form action="{{ route('teacher.email', $teachers->id) }}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                <button type="submit"
+                                                                    class="cursor-pointer bg-sky-700 hover:bg-sky-800 px-5 py-2 rounded-sm text-white ml-3">
+                                                                    Yes, I'm sure
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Send Email Form -->
+                                                <form action="{{ route('teacher.email', $teachers->id) }}" method="POST" style="display:inline;">
                                                     @csrf
-                                                    <button type={{ $teachers->status == "Inactive" ? "button" : "submit" }}
-                                                        class="{{ $teachers->status == "Inactive" ? "bg-gray-400" : "bg-cyan-700 hover:bg-cyan-600" }} text-white font-medium text-md p-3 text-center inline-flex items-center   rounded-full"
+                                                    <button type="button" onclick="document.getElementById('sendEmailModal{{ $teachers->id }}').classList.remove('hidden');"
+                                                        class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-cyan-700 rounded-full hover:bg-cyan-600"
                                                         title="Send Email">
                                                         <i class="fa-solid fa-envelope"></i>
                                                     </button>

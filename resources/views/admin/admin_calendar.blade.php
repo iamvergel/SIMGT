@@ -22,6 +22,33 @@
           </h2>
         </div>
         <!---->
+        @if (session('success'))
+                    <div class="bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md my-5"
+                        role="alert" id="success-alert">
+                        <div class="flex">
+                            <div class="py-1"><i class="fa-solid fa-check text-green-500 me-2"></i>{{ session('success') }}</div>
+                        </div>
+                    </div>
+                    <script>
+                        setTimeout(function() {
+                            document.getElementById("success-alert").remove();
+                        }, 3000);
+                    </script>
+                @endif
+
+                @if (session('error'))
+                    <div class="bg-red-100 border-t-4 border-red-500 rounded-b text-red-900 px-4 py-3 shadow-md my-5"
+                        role="alert" id="error-alert">
+                        <div class="flex">
+                            <div class="py-1"><i class="fa-solid fa-circle-exclamation text-red-500 me-2"></i>{{ session('error') }}</i></div>
+                        </div>
+                    </div>
+                    <script>
+                        setTimeout(function() {
+                            document.getElementById("error-alert").remove();
+                        }, 3000);
+                    </script>
+                @endif
         <div
           class="bg-white rounded-b-lg p-5 shadow-lg mt-3 border-t-2 border-teal-700 col-span-4 lg:col-span-4 xl:col-span-4 calendar ">
           <div class="w-full flex justify-end py-2 px-5">

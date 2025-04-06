@@ -45,6 +45,30 @@ class TeacherClassAdvisory extends Controller
 
     }
 
+    public function showMyadvisoryTeacher()
+    {
+        // Fetch only active students and filter them by the status 'Enrolled' and grade 'Grade One'
+        $students = StudentInfo::with('student') // Only eager load 'student' relationship
+            ->where('status', 'Enrolled') // Active students only
+            ->get();
+
+        // Fetch related primary info for students that are in Grade One and have an 'Enrolled' status
+        $studentsPrimary = StudentPrimaryInfo::whereIn('studentnumber', $students->pluck('student_number'))
+            ->where('status', 'Enrolled') // Ensure students are enrolled
+            ->get()->keyBy('studentnumber');
+
+        $studentsAdditional = StudentAdditionalInfo::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentDocuments = StudentDocuments::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+        $studentAccount = Mstudentaccount::whereIn('student_number', $students->pluck('student_number'))->get()->keyBy('student_number');
+
+        // Check if there are no students found in Grade One
+        $noGradeOneMessage = $studentsPrimary->isEmpty() ? "No students found in Grade One." : null;
+
+        // Pass the data to the view
+        return view('admin.includes.teacher_information', compact('students', 'noGradeOneMessage', 'studentsPrimary', 'studentsAdditional', 'studentDocuments', 'studentAccount'));
+
+    }
+
     public function showStudentInfotmation(Request $request, $id)
     {
         // Fetch the specific student based on the provided id
