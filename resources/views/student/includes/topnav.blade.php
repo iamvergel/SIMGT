@@ -68,7 +68,7 @@
                 id="dropdownMenuMobile">
                 <ul class="text-gray-1=800">
                     <li class="px-4 py-2 hover:bg-gray-300 bg-gray-100 cursor-pointer text-[14px] mt-5"
-                        onclick="window.location.href='/StEmelieLearningCenter.HopeSci66/student/student-profile/account'">
+                        onclick="window.location.href='/student/student-profile/account'">
                         <i class="fa-solid fa-user mr-3"></i>SIMGT Profile
                     </li>
 
@@ -108,7 +108,7 @@
             id="dropdownMenu">
             <ul class="text-gray-800">
                 <li class="px-4 py-2 hover:bg-gray-300 bg-gray-100 text-[14px] mt-5 flex items-center cursor-pointer"
-                    onclick="window.location.href='/registrar/SIMGT-Profile'">
+                    onclick="window.location.href='/student/student-profile/account'">
                     <i class="fa-solid fa-user mr-3"></i>
                     <span>SIMGT Profile</span>
                 </li>

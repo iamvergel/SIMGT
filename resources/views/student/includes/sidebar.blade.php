@@ -369,7 +369,7 @@
                 id="dashboardLink">
                 <i class="fas fa-user"></i>
                 <span class="sidebar-text ml-2">
-                    Student Profile</span>
+                SIMGT PROFILE</span>
                 <span
                     class="tooltiptext text-teal-900 bg-white rounded-lg w-full text-[10px] py-2 font-bold">Dashboard</span>
             </a>

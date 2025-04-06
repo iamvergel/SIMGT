@@ -14,7 +14,7 @@
             <div id="container">
                 <div class="p-5 py-3">
                     <p class="text-[15px] font-normal text-teal-900 mt-5">Student</p>
-                    <h1 class="text-xl font-bold text-teal-900">Student Profile</h1>
+                    <h1 class="text-xl font-bold text-teal-900">SIMGT Profile</h1>
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-4 gap-2">
                     <div class="col-span-1">
