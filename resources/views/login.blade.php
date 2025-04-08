@@ -64,35 +64,7 @@
 </head>
 
 <body class="bg-zinc-50 lg:bg-white">
-<div id="modalprivacy"
-        class="fixed z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 px-2 flex justify-center items-center items-center">
-        <div class="bg-white rounded-md shadow-lg p-5 max-w-3xl mx-auto z-20 relative">
-                <button onclick="document.getElementById('modalprivacy').classList.add('hidden')"
-                    class="absolute right-5 top-5 text-gray-600 hover:text-gray-800 rounded-sm transition-all duration-300">
-                    <i class="fas fa-times"></i>
-                </button>
-        <div class="flex justify-center items-center">
-                <img src="{{ asset('../assets/beta-svgrepo-com.svg') }}" alt="" width="50px" class="ml-[10rem] lg:ml-[18rem]">
-            </div>
-            <div class="flex justify-center items-center text-center px-5 pb-5 border-b border-gray-900">
-                <p class="text-lg font-bold text-teal-800">Welcome to our Beta Testing</p>
-            </div>
-            <div class="text-sm text-justify mt-5">
-                This is a <strong>Beta version</strong> of our system and you may encounter some rough edges or missing
-                features. Your feedback is valuable to us and will help us refine the website. Please report any issues
-                you come across, thank you!
-            </div>
 
-            <div class="flex justify-center items-center">
-                <img src="{{ asset('../assets/gmail-svgrepo-com.svg') }}" alt="" width="200px">
-                
-            </div>
-            <div class="flex justify-center items-center">
-                <a href="mailto:vergelmacayan7@gmail.com" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Send feedback</a>
-            </div>
-            
-        </div>
-    </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div class="bg-rhombus hidden lg:block">
             <div class="mask absolute inset-0 bg-teal-800 opacity-50 z-10"></div>

@@ -261,10 +261,39 @@
                                                 <div class="table-container w-full mt-0 pb-10" id="Advisory" style="display: none;">
                                                         <div class="grid grid-cols-4 gap-4">
                                                             <div class="col-span-4 bg-gray-100 shadow rounded-md p-2">
-                                                                <div
+                                                            <div
                                                                     class="bg-white p-5 flex justify-between items-end hover:bg-gray-50">
-                                                                    
-                                                                </p> 
+                                                                    <table class="min-w-full bg-white border border-gray-200">
+                                                                    <thead>
+                                                                        <tr class="bg-gray-200">
+                                                                        <th
+                                                                                class="py-2 px-4 text-left text-sm font-medium text-gray-700">
+                                                                                School Year</th>
+                                                                            <th
+                                                                                class="py-2 px-4 text-left text-sm font-medium text-gray-700">
+                                                                                Grade</th>
+                                                                            <th
+                                                                                class="py-2 px-4 text-left text-sm font-medium text-gray-700">
+                                                                                Section</th>
+                                                                            
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody style="overflow-y: auto;">
+                                                                        @foreach($teacherAdvisoryAll as $adviser)
+                                                                            <tr>
+                                                                            <td class="py-2 px-4 text-sm text-gray-700">
+                                                                            {{ $adviser->school_year }}</td>
+                                                                                <td class="py-2 px-4 text-sm text-gray-700">
+                                                                                    {{ $adviser->grade }}</td>
+                                                                                <td class="py-2 px-4 text-sm text-gray-700">
+                                                                                    {{ $adviser->section }}</td>
+                                                                                
+                                                                                
+                                                                                
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    </tbody>
+                                                                </table>
                                                                 </div>
                                                             </div>
                                                         </div>

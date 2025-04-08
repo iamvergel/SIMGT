@@ -81,10 +81,10 @@
     @include("includes.chatbot")
 
 
-    <div id="modalprivacy"
+    <div id="feedbackModal"
         class="fixed z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 px-2 flex justify-center items-center items-center">
         <div class="bg-white rounded-md shadow-lg p-5 max-w-3xl mx-auto z-20 relative">
-                <button onclick="document.getElementById('modalprivacy').classList.add('hidden')"
+                <button onclick="document.getElementById('feedbackModal').classList.add('hidden')"
                     class="absolute right-5 top-5 text-gray-600 hover:text-gray-800 rounded-sm transition-all duration-300">
                     <i class="fas fa-times"></i>
                 </button>

@@ -302,6 +302,9 @@
                                                                     <table class="min-w-full bg-white border border-gray-200">
                                                                     <thead>
                                                                         <tr class="bg-gray-200">
+                                                                        <th
+                                                                                class="py-2 px-4 text-left text-sm font-medium text-gray-700">
+                                                                                School Year</th>
                                                                             <th
                                                                                 class="py-2 px-4 text-left text-sm font-medium text-gray-700">
                                                                                 Grade</th>
@@ -309,22 +312,19 @@
                                                                                 class="py-2 px-4 text-left text-sm font-medium text-gray-700">
                                                                                 Section</th>
                                                                             
-                                                                            <th
-                                                                                class="py-2 px-4 text-left text-sm font-medium text-gray-700">
-                                                                                School Year</th>
-                                                                            
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody style="overflow-y: auto;">
                                                                         @foreach($teacherAdvisoryAll as $adviser)
                                                                             <tr>
+                                                                            <td class="py-2 px-4 text-sm text-gray-700">
+                                                                            {{ $adviser->school_year }}</td>
                                                                                 <td class="py-2 px-4 text-sm text-gray-700">
                                                                                     {{ $adviser->grade }}</td>
                                                                                 <td class="py-2 px-4 text-sm text-gray-700">
                                                                                     {{ $adviser->section }}</td>
                                                                                 
-                                                                                <td class="py-2 px-4 text-sm text-gray-700">
-                                                                                    {{ $adviser->school_year }}</td>
+                                                                                
                                                                                 
                                                                             </tr>
                                                                         @endforeach

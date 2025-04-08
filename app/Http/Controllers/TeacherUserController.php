@@ -151,6 +151,7 @@ class TeacherUserController extends Controller
 
         // Fetch related data for the specific teacher
         $teacherAdvisory = TeacherAdvisory::where('teacher_number', $teachers->teacher_number)->first();
+        $teacherAdvisoryAll = TeacherAdvisory::where('teacher_number', $teachers->teacher_number)->get();
         $teacherSubjects = TeacherSubjectClass::where('teacher_number', $teachers->teacher_number)->get();
         // $teacherDocuments = teacherDocuments::where('teacher_number', $teachers->teacher_number)->first();
         // $teacherAccount = TeacherUser::where('teacher_number', $teachers->teacher_number)->first();
@@ -162,7 +163,7 @@ class TeacherUserController extends Controller
         // $teacherGradeSix = Mteachergradesix::where('teacher_number', $teachers->teacher_number)->first();
 
         // You can pass other data here as needed
-        return view('registrar.includes.teacher_information', compact('teachers', 'teacherAdvisory', 'teacherSubjects'));
+        return view('registrar.includes.teacher_information', compact('teachers', 'teacherAdvisory', 'teacherSubjects', 'teacherAdvisoryAll'));
     }
 
     public function resetAccount(Request $request, $teacherId)
