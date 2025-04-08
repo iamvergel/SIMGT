@@ -83,8 +83,8 @@
         </div>
 
         <div class="bg-transparent w-full h-screen flex items-start justify-center sm:items-center lg:justify-start">
-            <div class="bg-zinc-50 sm:bg-white rounded-2xl shadow-none sm:shadow-xl lg:shadow-none p-5">
-                <div class="signinForm p-10 w-full">
+            <div class="bg-zinc-50 sm:bg-white rounded-2xl shadow-none sm:shadow-xl lg:shadow-none p-0 lg:p-5">
+                <div class="signinForm p-5 lg:p-10 w-full">
                     <div
                         class="header text-center block lg:hidden py-10 flex justify-start sm:justify-center items-center ">
                         <div class="flex justify-center items-center ">
@@ -98,7 +98,7 @@
                     <div class="main">
                         <form class="mt-5" action="{{ route('admin.login') }}" method="POST">
                             @csrf
-                            <div class="loginForm lg:w-96">
+                            <div class="loginForm w-80 lg:w-96">
                                 <div class="divider text-start text-emerald-900">
                                     <p class="font-bold text-lg text-emerald-900">
                                         Sign in
