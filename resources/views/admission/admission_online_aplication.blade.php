@@ -118,7 +118,7 @@
 
 
     @include('admin.includes.js-link')
-    <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
+    
     <script>
     @foreach ($students as $student)
         const updateModal{{ $student->id }} = document.getElementById("updatetudentinfo{{ $student->id }}");
@@ -301,7 +301,7 @@
             });
     }
 </script>
-
+<script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
 </body>
 
 </html>
