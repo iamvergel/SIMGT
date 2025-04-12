@@ -61,7 +61,7 @@
             <img src="{{ asset('../assets/images/SELC.png') }}" alt="SELC"
                 class="w-12 h-12 rounded-full mb-0 ml-3 border-2 border-teal-900">
             <img src="{{ asset('../assets/images/grouplogo.png') }}" alt="HSMGT66"
-                class="w-12 h-12 mb-0 ml-2 grayscale brightness-0 rounded-full border-2 border-black">
+                class="w-12 h-12 mb-0 ml-2 grayscale brightness-0 rounded-full border-2 border-black" onclick="window.location.href = 'https://hopesci.vercel.app/';">
 
         </div>
         <p class="text-[12px] pl-3 tracking-wider text-left text-black py-3">@ Copyright &copy; 2024 St
