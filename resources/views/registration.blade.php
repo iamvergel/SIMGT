@@ -153,7 +153,8 @@
                             </div>
                             <hr class="border-1 border-green-500 mt-5">
                             <div class="mt-5 text-sm">
-                                <p class="text-gray-600 text-justify">Do you have your Learner Reference Number (LRN)? If not, please be sure to visit the admission office to process it.</p>
+                                <p class="text-gray-600 text-justify">Do you have your Learner Reference Number (LRN)?
+                                    If not, please be sure to visit the admission office to process it.</p>
 
                             </div>
                             <div class="flex justify-end mt-10 text-sm">
@@ -434,8 +435,10 @@
                                                 placeholder="Ex. StEmilieLearningCenter@gmail.com" required
                                                 pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$"
                                                 title="Please enter a valid Gmail address.">
-                                            <small class="text-red-600 text-xs hidden" id="emailAlert">Email is
-                                                required</small>
+                                            <small class="text-gray-500 text-xs">(Parents, guardian or Personal
+                                                Email)<br /><span class="text-red-600 hidden" id="emailAlert">Email is
+                                                    required</span></small>
+
                                         </div>
 
                                         <!-- Contact Number -->
@@ -1490,7 +1493,7 @@
                                     }
                                 });
 
-                            
+
                                 // Place this script at the beginning to ensure the function is defined before use.
                                 function checkParentInfoValidityParents() {
                                     var isValidParent = true;

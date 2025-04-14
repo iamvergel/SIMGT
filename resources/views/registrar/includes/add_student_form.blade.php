@@ -548,7 +548,7 @@
                                         <div class="mb-5">
                                             <label for="fatherOccupation"
                                                 class="block mb-2 text-sm font-bold text-gray-900">
-                                                <span class="text-red-600 mr-1">*</span>Father's Occupation:
+                                                <span class="text-red-600 mr-1">*</span>Father's Employee Status:
                                             </label>
                                             <input type="text" name="father_occupation" id="fatherOccupation"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"
@@ -596,7 +596,7 @@
                                         <div class="mb-5">
                                             <label for="motherOccupation"
                                                 class="block mb-2 text-sm font-bold text-gray-900">
-                                                <span class="text-red-600 mr-1">*</span>Mother's Occupation:
+                                                <span class="text-red-600 mr-1">*</span>Mother's Employee Status:
                                             </label>
                                             <input type="text" name="mother_occupation" id="motherOccupation"
                                                 class="block w-full p-2.5 bg-gray-50 border border-gray-300 focus:ring-1 focus:shadow-lg focus:ring-gray-200 focus:outline-none"

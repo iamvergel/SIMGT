@@ -40,6 +40,12 @@
   <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
 
+        <!-- Include Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Include Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">
 </head>
