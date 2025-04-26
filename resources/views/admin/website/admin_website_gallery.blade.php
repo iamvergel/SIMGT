@@ -61,7 +61,7 @@
                         </div>
                         <div class="">
                             <div id="website-container" class="w-full h-[650px]">
-                                <iframe src="/StEmelieLearningCenter.HopeSci66/Admission#gallery" width="100%"
+                                <iframe src="/Admission" width="100%"
                                     height="100%" class="border-0"></iframe>
                             </div>
                         </div>
