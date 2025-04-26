@@ -84,12 +84,13 @@
     <div id="feedbackModal"
         class="fixed z-[100] top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 px-2 flex justify-center items-center items-center">
         <div class="bg-white rounded-md shadow-lg p-5 max-w-3xl mx-auto z-20 relative">
-                <button onclick="document.getElementById('feedbackModal').classList.add('hidden')"
-                    class="absolute right-5 top-5 text-gray-600 hover:text-gray-800 rounded-sm transition-all duration-300">
-                    <i class="fas fa-times"></i>
-                </button>
-        <div class="flex justify-center items-center">
-                <img src="{{ asset('../assets/beta-svgrepo-com.svg') }}" alt="" width="50px" class="ml-[10rem] lg:ml-[18rem]">
+            <button onclick="document.getElementById('feedbackModal').classList.add('hidden')"
+                class="absolute right-5 top-5 text-gray-600 hover:text-gray-800 rounded-sm transition-all duration-300">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="flex justify-center items-center">
+                <img src="{{ asset('../assets/beta-svgrepo-com.svg') }}" alt="" width="50px"
+                    class="ml-[10rem] lg:ml-[18rem]">
             </div>
             <div class="flex justify-center items-center text-center px-5 pb-5 border-b border-gray-900">
                 <p class="text-lg font-bold text-teal-800">Welcome to our Beta Testing</p>
@@ -102,12 +103,14 @@
 
             <div class="flex justify-center items-center">
                 <img src="{{ asset('../assets/gmail-svgrepo-com.svg') }}" alt="" width="200px">
-                
+
             </div>
             <div class="flex justify-center items-center">
-                <a href="mailto:vergelmacayan7@gmail.com" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Send feedback</a>
+                <a href="mailto:vergelmacayan7@gmail.com"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-4 rounded-sm transition-all duration-300">Send
+                    feedback</a>
             </div>
-            
+
         </div>
     </div>
 
@@ -194,24 +197,32 @@
         });
     </script>
 
-    <div class="w-full bg-sky-100 px-2 mt-[13rem] lg:mt-[4rem] md:px-[8rem] xl:px-[15rem] 2xl:px-[20rem] py-10 relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-24"
+    <div class="w-full bg-sky-100 px-2 mt-[13rem] lg:mt-[4rem] md:px-[8rem] xl:px-[15rem] 2xl:px-[10rem] py-10 relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 lg:gap-24"
         id="missionvission">
         <!-- Mission Card -->
         <div
             class="block p-6 bg-white border border-gray-200 rounded-lg rounded-t-none shadow-lg hover:bg-white bg-gradient-to-tr from-teal-50 via-teal-50 to-white border-0 border-t-4 border-teal-700">
             <h5 class="mb-2 text-[50px] font-bold tracking-tight text-teal-700">Our Mission</h5>
-            <p class="font-normal text-teal-900">
-                Our mission is to provide quality and innovative solutions to our clients, ensuring sustainability and
-                growth while empowering communities.
+            <p class="font-normal text-teal-900 text-justify">
+                St. Learning Center is committed to: <br /><br />
+
+                Develop critical thinking among the children through updated and creative tools sensitive to their
+                context for effective learning experiences<br /><br />
+
+                Foster positive consciousness among children to see the beauty of others and creation<br /><br />
+
+                Cultivate the capacity of children to love and care for others by an experience of being valued, cared
+                for and loved
             </p>
         </div>
 
         <div
             class="block p-6 bg-white border border-gray-200 rounded-lg rounded-t-none shadow-lg hover:bg-white bg-gradient-to-tr from-teal-50 via-teal-50 to-white border-0 border-t-4 border-teal-700">
             <h5 class="mb-2 text-[50px] font-bold tracking-tight text-teal-700">Our Vision</h5>
-            <p class="font-normal text-teal-900">
-                Our vision is to be a global leader in innovation, shaping the future of our industry and contributing
-                to the betterment of society as a whole.
+            <p class="font-normal text-teal-900 text-justify">
+                Empowered by the love of God, St. Emilie Learning Center is an educational institution that reflects
+                God's loving care for the formation of children as academically equipped and morally responsible
+                persons.
             </p>
         </div>
 
@@ -222,9 +233,7 @@
         <div class="container mx-auto lg:px-4">
             <div class="grid grid-cols-1 lg:grid-cols-3 lg:p-5 border-lg relative">
                 <!-- Video Box -->
-                <div class="w-full h-full bg-cover bg-center flex justify-center items-stretch rounded-lg" id="imageone"
-                    style="background-image: url({{ asset('../assets/images/imageonebg.png') }}); min-height: 400px;">
-                </div>
+                
 
                 <!-- Icon Boxes -->
                 <div class="col-span-2 w-full flex flex-col justify-center  text-center py-5 px-4 lg:px-5">
@@ -248,6 +257,9 @@
                         updates on school policies, activities, and events. We encourage everyone to stay engaged and
                         connected as we work together to create an enriching educational experience. Welcome to St.
                         Emilie Learning Center, where little learners become big achievers!</p>
+                </div>
+                <div class="w-full h-full bg-cover bg-center flex justify-center items-stretch rounded-lg" id="imageone"
+                    style="background-image: url({{ asset('../assets/images/imageonebg.png') }}); min-height: 400px;">
                 </div>
             </div>
         </div>

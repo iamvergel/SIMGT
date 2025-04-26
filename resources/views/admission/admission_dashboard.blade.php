@@ -204,7 +204,7 @@
                     <h5 class="mb-2 text-md font-semibold tracking-tight text-gray-900 ">APPLICANT STUDENTS</h5>
                     <hr>
                     <p class="mb-3 font-bold text-end text-yellow-700  text-[3rem] px-3">
-                      {{ $studentGraduatedCounts->sum() }}
+                      {{ $studentOnlineCount->sum() }}
                     </p>
                   </div>
                 </div>
@@ -221,7 +221,7 @@
                     <h5 class="mb-2 text-md font-semibold tracking-tight text-gray-900 ">TRANSFER STUDENTS</h5>
                     <hr>
                     <p class="mb-3 font-bold text-end text-violet-700  text-[3rem] px-3">
-                      {{ $studentGraduatedCounts->sum() }}
+                      {{ $studentTransferCounts->sum() }}
                     </p>
                   </div>
                 </div>

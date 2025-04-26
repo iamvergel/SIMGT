@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use App\Models\Madminaccount;
 use App\Models\PictureAnnouncement;
+use App\Models\RegisterStudentInfo;
 use App\Mail\MLsendemail;
 use Illuminate\Routing\Controller as BaseController; // Correct import
 
@@ -86,12 +87,12 @@ class Cevent extends BaseController // Extend the correct base controller
         return response()->json($announcements, 200);
     }
 
-     // Show all announcements
-     public function showAnnouncementsAdmission()
-     {
-         $announcements = Mannouncement::orderBy('created_at', 'desc')->get(); // Retrieve all announcements, ordered by created_at descending
-         return response()->json($announcements, 200);
-     }
+    // Show all announcements
+    public function showAnnouncementsAdmission()
+    {
+        $announcements = Mannouncement::orderBy('created_at', 'desc')->get(); // Retrieve all announcements, ordered by created_at descending
+        return response()->json($announcements, 200);
+    }
 
     // Store a new announcement
     public function storeAnnouncement(Request $request)
@@ -153,9 +154,17 @@ class Cevent extends BaseController // Extend the correct base controller
             ->where('status', 'Dropped')->groupBy('id')
             ->pluck('count', 'id');
 
+        $studentOnlineCount = RegisterStudentInfo::select(DB::raw('count(*) as count, id'))
+            ->whereIn('status', ['New Student', 'Transferee'])->groupBy('id')
+            ->pluck('count', 'id');
+
         // Count the number of active students for each grade (Grade One to Grade Six)
         $studentGraduatedCounts = StudentInfo::select(DB::raw('count(*) as count, id'))
             ->where('status', 'Graduated')->groupBy('id')
+            ->pluck('count', 'id');
+
+        $studentTransferCounts = StudentInfo::select(DB::raw('count(*) as count, id'))
+            ->where('status', 'Transfer')->groupBy('id')
             ->pluck('count', 'id');
 
         // Count the number of active male students
@@ -179,7 +188,7 @@ class Cevent extends BaseController // Extend the correct base controller
         $currentStaff = Madminaccount::count();
 
         // Return the view with all the necessary data
-        return view('admin.admin_dashboard', compact('studentCounts', 'studentGraduatedCounts', 'studentDroppedCounts', 'totalStaff', 'currentStaff', 'totalMaleStudent', 'totalFemaleStudent'));
+        return view('admin.admin_dashboard', compact('studentCounts', 'studentTransferCounts', 'studentOnlineCount', 'studentGraduatedCounts', 'studentDroppedCounts', 'totalStaff', 'currentStaff', 'totalMaleStudent', 'totalFemaleStudent'));
     }
 
     public function showAllAdmission()
@@ -191,6 +200,14 @@ class Cevent extends BaseController // Extend the correct base controller
             ->groupBy('grade')
             ->pluck('count', 'grade');
 
+        $studentOnlineCount = RegisterStudentInfo::select(DB::raw('count(*) as count, id'))
+            ->whereIn('status', ['New Student', 'Transferee'])->groupBy('id')
+            ->pluck('count', 'id');
+
+        $studentTransferCounts = StudentInfo::select(DB::raw('count(*) as count, id'))
+            ->where('status', 'Transfer')->groupBy('id')
+            ->pluck('count', 'id');
+
         // Count the number of active students for each grade (Grade One to Grade Six)
         $studentDroppedCounts = StudentInfo::select(DB::raw('count(*) as count, id'))
             ->where('status', 'Dropped')->groupBy('id')
@@ -222,7 +239,7 @@ class Cevent extends BaseController // Extend the correct base controller
         $currentStaff = Madminaccount::count();
 
         // Return the view with all the necessary data
-        return view('admission.admission_dashboard', compact('studentCounts', 'studentGraduatedCounts', 'studentDroppedCounts', 'totalStaff', 'currentStaff', 'totalMaleStudent', 'totalFemaleStudent'));
+        return view('admission.admission_dashboard', compact('studentCounts', 'studentTransferCounts', 'studentOnlineCount', 'studentGraduatedCounts', 'studentDroppedCounts', 'totalStaff', 'currentStaff', 'totalMaleStudent', 'totalFemaleStudent'));
     }
 
     public function showAllRegistrar()
@@ -234,6 +251,14 @@ class Cevent extends BaseController // Extend the correct base controller
             ->groupBy('grade')
             ->pluck('count', 'grade');
 
+        $studentOnlineCount = RegisterStudentInfo::select(DB::raw('count(*) as count, id'))
+            ->whereIn('status', ['New Student', 'Transferee'])->groupBy('id')
+            ->pluck('count', 'id');
+
+        $studentTransferCounts = StudentInfo::select(DB::raw('count(*) as count, id'))
+            ->where('status', 'Transfer')->groupBy('id')
+            ->pluck('count', 'id');
+
         // Count the number of active students for each grade (Grade One to Grade Six)
         $studentDroppedCounts = StudentInfo::select(DB::raw('count(*) as count, id'))
             ->where('status', 'Dropped')->groupBy('id')
@@ -265,14 +290,14 @@ class Cevent extends BaseController // Extend the correct base controller
         $currentStaff = Madminaccount::count();
 
         // Return the view with all the necessary data
-        return view('registrar.registrar_dashboard', compact('studentCounts', 'studentGraduatedCounts', 'studentDroppedCounts', 'totalStaff', 'currentStaff', 'totalMaleStudent', 'totalFemaleStudent'));
+        return view('registrar.registrar_dashboard', compact('studentCounts', 'studentTransferCounts', 'studentOnlineCount', 'studentGraduatedCounts', 'studentDroppedCounts', 'totalStaff', 'currentStaff', 'totalMaleStudent', 'totalFemaleStudent'));
     }
 
     public function showDashboardstudent()
     {
         // Retrieve the latest announcements (Ensure 'Mannouncement' is your model)
         $latestAnnouncements = Mannouncement::latest()->take(5)->get();
-        
+
 
         // Check if there are any announcements
         $newAnnouncements = $latestAnnouncements->count() > 0;
@@ -287,7 +312,7 @@ class Cevent extends BaseController // Extend the correct base controller
     {
         // Retrieve the latest announcements (Ensure 'Mannouncement' is your model)
         $latestAnnouncements = Mannouncement::latest()->take(5)->get();
-        
+
 
         // Check if there are any announcements
         $newAnnouncements = $latestAnnouncements->count() > 0;
