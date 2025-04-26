@@ -169,7 +169,7 @@
                                         for="section">
                                         <span class="text-red-600 mr-1">*</span>Subject
                                     </label>
-                                    <input type="text" name="subject" placeholder="Input Section Name.." id="section"
+                                    <input type="text" name="subject" placeholder="Input Grade Name.." id="section"
                                         required
                                         class="form-input block text-sm text-normal text-dark tracking-wider w-full lg:w-96 pl-5 p-3 border border-gray-400 rounded-md px-5">
                                 </div>
