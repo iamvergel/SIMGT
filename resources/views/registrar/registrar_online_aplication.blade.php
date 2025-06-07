@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <script>
-                        setTimeout(function() {
+                        setTimeout(function () {
                             document.getElementById("success-alert").remove();
                         }, 3000);
                     </script>
@@ -69,15 +69,15 @@
                                     class="fa-solid fa-circle-exclamation text-red-500"></i></div>
                             <div>
                                 <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <script>
-                        setTimeout(function() {
+                        setTimeout(function () {
                             document.getElementById("error-alert").remove();
                         }, 3000);
                     </script>
@@ -109,7 +109,7 @@
                                                     value="{{ isset($studentPrimaryInfo[$student->lrn]) ? $studentPrimaryInfo[$student->lrn]->section : 'N/A' }}">
                                                 <input type="hidden" name="" id="gradeValue"
                                                     value="{{ isset($studentPrimaryInfo[$student->lrn]) ? $studentPrimaryInfo[$student->lrn]->grade : 'N/A' }}">
-                                                    <input type="hidden" name="" id="statusValue"
+                                                <input type="hidden" name="" id="statusValue"
                                                     value=" {{ $student->status }}">
                                             </td>
 
@@ -144,7 +144,7 @@
                                                     data-lrn="{{ $student->lrn }}"
                                                     class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-blue-700 rounded-full hover:bg-blue-600"
                                                     type="button" aria-label="Update Student" title="Enrolled Student"
-                                                    onclick="window.location.href = `{{ route('student.show.enrollees', ['lrn' => $student->lrn]) }}`">   
+                                                    onclick="window.location.href = `{{ route('student.show.enrollees', ['lrn' => $student->lrn]) }}`">
                                                     <i class="fa-solid fa-eye"></i>
                                                 </button>
                                                 <button
@@ -177,8 +177,84 @@
 
 
     @include('admin.includes.js-link')
-    <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
+    <!-- <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script> -->
     <script>
+        var table = $("#studentTable").DataTable({
+            dom:
+                `<'grid grid-cols-12 gap-4 mb-4'<><'col-span-12 md:col-span-10 lg:col-span-8 xl:col-span-6 block xl:hidden'B><>>` +
+                `<tr>` +
+                `<'grid grid-cols-12 gap-4 mb-4'<'col-span-12 xl:col-span-3 xl:block hidden'l><'col-span-0 xl:col-span-6 xl:block 2xl:me-[15rem] hidden'B><'col-span-12 xl:col-span-3 xl:block hidden'f>>` +
+                `<tr>` +
+                `<'grid grid-cols-12 gap-4 mb-4'<'col-span-12 md:col-span-6 md:block flex items-center justify-center xl:hidden'l><'col-span-12 md:col-span-6 md:block flex items-center justify-center xl:hidden'f>>` +
+                `<tr>` +
+                `<'grid grid-cols-12 gap-4'<'col-span-12 lg:block flex items-center justify-center lg:col-span-6'i><'col-span-12 lg:block flex items-center justify-center lg:col-span-6'p>>`,
+            paging: true,
+            searching: true,
+            ordering: true,
+            info: true,
+            lengthChange: true,
+            responsive: true,
+            pageLength: 50,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search",
+            },
+            buttons: [
+                {
+                    extend: "excelHtml5",
+                    text: '<i class="fas fa-file-excel"></i> Excel',
+                    className:
+                        "!bg-teal-700 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !important !flex !items-center !justify-center",
+                    titleAttr: "Export to Excel",
+                    exportOptions: {
+                        columns: ".export",
+                    },
+                },
+                {
+                    extend: "pdfHtml5",
+                    text: '<i class="fas fa-file-pdf"></i> PDF',
+                    className:
+                        "!bg-green-600 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
+                    orientation: "landscape",
+                    pageSize: "A4",
+                    titleAttr: "Export to PDF",
+                    exportOptions: {
+                        columns: ".export",
+                    },
+                    customize: function (doc) {
+                        doc.content[1].table.widths = Array(
+                            doc.content[1].table.body[0].length + 1
+                        )
+                            .join("*")
+                            .split("");
+                    },
+                },
+                {
+                    extend: "print",
+                    text: '<i class="fas fa-print"></i> Print',
+                    className:
+                        "!bg-blue-600 !text-[12px] !text-white !border-none !hover:bg-blue-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
+                    orientation: "landscape",
+                    autoPrint: true,
+                    titleAttr: "Print Table",
+                    exportOptions: {
+                        columns: ".export",
+                    },
+                    customize: function (win) {
+                        $(win.document.body).find("table").css("width", "100%");
+                        $(win.document.body).find("table").css("font-size", "10px");
+                    },
+                },
+            ],
+            initComplete: function () {
+                $(".dt-buttons").css({
+                    display: "flex",
+                    "justify-content": "flex-end",
+                    width: "100%",
+                });
+            },
+        });
+
         document.addEventListener('DOMContentLoaded', function () {
             const enrollButtons = document.querySelectorAll('#enrollStudent');
             enrollButtons.forEach(button => {
@@ -236,7 +312,7 @@
             const adviser = button.closest('tr').querySelector('#adviserValue').value;
             const gender = button.getAttribute('data-gender');
             const birthDay = button.getAttribute('data-birthdat');
-            const statusStudent =  button.closest('tr').querySelector('#statusValue').value;
+            const statusStudent = button.closest('tr').querySelector('#statusValue').value;
 
             const printWindow = window.open('about:blank', '', 'height=800, width=800');
             generateModalContent(lrn, grade, studentName, section, adviser, gender, birthDay, statusStudent).then(modalContent => {

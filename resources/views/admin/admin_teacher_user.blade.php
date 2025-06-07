@@ -16,8 +16,7 @@
                 <div>
                     <p class="text-[15px] font-normal text-teal-900 mt-5 ml-5">Admin</p>
                     <p class="text-2xl font-bold text-teal-900 ml-5">
-                        <span
-                            onclick="window.location.href='/admin/student-management'"
+                        <span onclick="window.location.href='/admin/student-management'"
                             class="hover:text-teal-700">Management Account</span> / Teacher
                     </p>
                 </div>
@@ -47,11 +46,12 @@
                     <div class="bg-green-100 border-t-4 border-green-500 rounded-b text-green-900 px-4 py-3 shadow-md my-5"
                         role="alert" id="success-alert">
                         <div class="flex">
-                            <div class="py-1"><i class="fa-solid fa-check text-green-500 me-2"></i>{{ session('success') }}</div>
+                            <div class="py-1"><i class="fa-solid fa-check text-green-500 me-2"></i>{{ session('success') }}
+                            </div>
                         </div>
                     </div>
                     <script>
-                        setTimeout(function() {
+                        setTimeout(function () {
                             document.getElementById("success-alert").remove();
                         }, 3000);
                     </script>
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <script>
-                        setTimeout(function() {
+                        setTimeout(function () {
                             document.getElementById("error-alert").remove();
                         }, 3000);
                     </script>
@@ -278,6 +278,7 @@
                                         <!-- <th class="export">Department</th> -->
                                         <th class="export">Position</th>
                                         <th class="export">Teacher</th>
+                                        <th class="export">Advisory</th>
                                         <th class="export">Email</th>
                                         <th class="export">Contact No.</th>
                                         <th class="">Action</th>
@@ -290,8 +291,8 @@
                                                 <span class="ml-2">{{ $teachers->teacher_number }}</span>
                                             </td>
                                             <!-- <td>
-                                                                                                                <span class="ml-2">{{ $teachers->department }}</span>
-                                                                                                            </td> -->
+                                                                                                                    <span class="ml-2">{{ $teachers->department }}</span>
+                                                                                                                </td> -->
                                             <td class="{{ $teachers->status == "Inactive" ? "bg-red-100" : "" }}">
                                                 <span class="ml-2">{{ $teachers->position }}</span>
                                             </td>
@@ -314,6 +315,20 @@
                                                 </div>
                                             </td>
                                             <td class="{{ $teachers->status == "Inactive" ? "bg-red-100" : "" }}">
+                                                <span class="ml-2">
+                                                    @if ($teachers->advisory->isNotEmpty())
+                                                        @foreach ($teachers->advisory as $advisory)
+                                                            {{ $advisory->section }} ({{ $advisory->grade }})
+                                                            @if (!$loop->last)
+                                                                <br>
+                                                            @endif
+                                                        @endforeach
+                                                    @else
+                                                        None
+                                                    @endif
+                                                </span>
+                                            </td>
+                                            <td class="{{ $teachers->status == "Inactive" ? "bg-red-100" : "" }}">
                                                 <span class="ml-2">{{ $teachers->email }}</span>
                                             </td>
                                             <td class="{{ $teachers->status == "Inactive" ? "bg-red-100" : "" }}">
@@ -321,7 +336,7 @@
                                             </td>
                                             <td>
 
-                                             <button {{ $teachers->status == "Inactive" ? "disabled" : "" }}
+                                                <button {{ $teachers->status == "Inactive" ? "disabled" : "" }}
                                                     id="addAdviser{{ $teachers->id }}"
                                                     class="{{ $teachers->status == "Inactive" ? "bg-gray-400" : "bg-pink-700 hover:bg-pink-600" }} text-white font-medium text-md p-3 text-center inline-flex items-center rounded-full "
                                                     type="button" aria-label="Add Advisory" title="Add Advisory">
@@ -329,6 +344,7 @@
                                                 </button>
                                                 <button {{ $teachers->status == "Inactive" ? "disabled" : "" }}
                                                     id="adddSubject{{ $teachers->id }}"
+                                                    data-teacher-advisory="{{ $teachers->advisory->isNotEmpty() ? $teachers->advisory->pluck('section')->implode(', ') : 'None' }}"
                                                     class=" {{ $teachers->status == "Inactive" ? "bg-gray-400" : "bg-yellow-700 hover:bg-yellow-600" }} text-white font-medium text-md p-3 text-center inline-flex items-center rounded-full "
                                                     type="button" aria-label="Add subject" title="Add subject">
                                                     <i class="fa-solid fa-book"></i>
@@ -344,7 +360,9 @@
                                                 <form action="{{ route('teacher.reset', $teachers->id) }}" method="POST"
                                                     style="display:inline;">
                                                     @csrf
-                                                    <button {{ $teachers->status == "Inactive" ? "disabled" : "" }} type="button" onclick="document.getElementById('resetAccountModal{{ $teachers->id }}').classList.remove('hidden');"
+                                                    <button {{ $teachers->status == "Inactive" ? "disabled" : "" }}
+                                                        type="button"
+                                                        onclick="document.getElementById('resetAccountModal{{ $teachers->id }}').classList.remove('hidden');"
                                                         class="{{ $teachers->status == "Inactive" ? "bg-gray-400" : "bg-sky-800 hover:bg-sky-700"}} text-white font-medium text-md p-3 text-center inline-flex items-center me-1 rounded-full "
                                                         title="Reset Teacher Account">
                                                         <i class="fa-solid fa-rotate-right"></i>
@@ -354,15 +372,18 @@
                                                 <div class="fixed inset-0 z-10 bg-black bg-opacity-50 hidden p-5 flex items-center justify-center"
                                                     id="resetAccountModal{{ $teachers->id }}">
                                                     <div class="bg-white rounded-lg shadow-lg p-5 max-w-lg mx-auto mt-16">
-                                                        <div class="flex items-center text-sky-700 text-lg font-semibold font-normal">
+                                                        <div
+                                                            class="flex items-center text-sky-700 text-lg font-semibold font-normal">
                                                             <span>Reset Teacher Account Confirmation</span>
                                                         </div>
                                                         <hr class="border-1 border-sky-600 mt-5">
                                                         <div class="mt-5 text-sm">
-                                                            <p class="text-gray-800 text-justify">Are you sure you want to reset this teacher's account?</p>
+                                                            <p class="text-gray-800 text-justify">Are you sure you want to
+                                                                reset this teacher's account?</p>
                                                         </div>
                                                         <div class="flex justify-end mt-10 text-sm">
-                                                            <button class="cursor-pointer bg-gray-500 hover:bg-gray-600 px-5 py-2 rounded-sm text-white"
+                                                            <button
+                                                                class="cursor-pointer bg-gray-500 hover:bg-gray-600 px-5 py-2 rounded-sm text-white"
                                                                 onclick="document.getElementById('resetAccountModal{{ $teachers->id }}').classList.add('hidden');">
                                                                 Cancel
                                                             </button>
@@ -384,19 +405,23 @@
                                                 <div class="fixed inset-0 z-10 bg-black bg-opacity-50 hidden p-5 flex items-center justify-center"
                                                     id="sendEmailModal{{ $teachers->id }}">
                                                     <div class="bg-white rounded-lg shadow-lg p-5 max-w-lg mx-auto mt-16">
-                                                        <div class="flex items-center text-sky-700 text-lg font-semibold font-normal">
+                                                        <div
+                                                            class="flex items-center text-sky-700 text-lg font-semibold font-normal">
                                                             <span>Send Email Confirmation</span>
                                                         </div>
                                                         <hr class="border-1 border-sky-600 mt-5">
                                                         <div class="mt-5 text-sm">
-                                                            <p class="text-gray-800 text-justify">Are you sure you want to send an email to this teacher?</p>
+                                                            <p class="text-gray-800 text-justify">Are you sure you want to
+                                                                send an email to this teacher?</p>
                                                         </div>
                                                         <div class="flex justify-end mt-10 text-sm">
-                                                            <button class="cursor-pointer bg-gray-500 hover:bg-gray-600 px-5 py-2 rounded-sm text-white"
+                                                            <button
+                                                                class="cursor-pointer bg-gray-500 hover:bg-gray-600 px-5 py-2 rounded-sm text-white"
                                                                 onclick="document.getElementById('sendEmailModal{{ $teachers->id }}').classList.add('hidden');">
                                                                 Cancel
                                                             </button>
-                                                            <form action="{{ route('teacher.email', $teachers->id) }}" method="POST" style="display:inline;">
+                                                            <form action="{{ route('teacher.email', $teachers->id) }}"
+                                                                method="POST" style="display:inline;">
                                                                 @csrf
                                                                 <button type="submit"
                                                                     class="cursor-pointer bg-sky-700 hover:bg-sky-800 px-5 py-2 rounded-sm text-white ml-3">
@@ -407,9 +432,11 @@
                                                     </div>
                                                 </div>
                                                 <!-- Send Email Form -->
-                                                <form action="{{ route('teacher.email', $teachers->id) }}" method="POST" style="display:inline;">
+                                                <form action="{{ route('teacher.email', $teachers->id) }}" method="POST"
+                                                    style="display:inline;">
                                                     @csrf
-                                                    <button type="button" onclick="document.getElementById('sendEmailModal{{ $teachers->id }}').classList.remove('hidden');"
+                                                    <button type="button"
+                                                        onclick="document.getElementById('sendEmailModal{{ $teachers->id }}').classList.remove('hidden');"
                                                         class="text-white font-medium text-md p-3 text-center inline-flex items-center me-1 bg-cyan-700 rounded-full hover:bg-cyan-600"
                                                         title="Send Email">
                                                         <i class="fa-solid fa-envelope"></i>
@@ -599,8 +626,8 @@
                                             </label>
                                             <select name="school_year" id="schoolYear" required
                                                 class="form-select block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
-                                                <option value="" disabled selected>Select School Year</option>
-                                                <option value="{{ date('Y')}}-{{ date('Y') + 1 }}">
+                                                <option value="" disabled >Select School Year</option>
+                                                <option value="{{ date('Y')}}-{{ date('Y') + 1 }}" selected>
                                                     {{ date('Y')}}-{{ date('Y') + 1 }}
                                                 </option>
                                             </select>
@@ -615,12 +642,12 @@
                                                 class="form-select block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize"
                                                 onchange="updateOptions(this.value, {{ $teachers->id }})">
                                                 <option value="">Select Grade</option>
-                                                <option value="Grade One">Grade One</option>
-                                                <option value="Grade Two">Grade Two</option>
-                                                <option value="Grade Three">Grade Three</option>
-                                                <option value="Grade Four">Grade Four</option>
-                                                <option value="Grade Five">Grade Five</option>
-                                                <option value="Grade Six">Grade Six</option>
+                                                <option value="Grade One" {{ old('grade', $teachers->advisory->first()->grade ?? '') == "Grade One" ? 'selected' : '' }}>Grade One</option>
+                                                <option value="Grade Two" {{ old('grade', $teachers->advisory->first()->grade ?? '') == "Grade Two" ? 'selected' : '' }}>Grade Two</option>
+                                                <option value="Grade Three" {{ old('grade', $teachers->advisory->first()->grade ?? '') == "Grade Three" ? 'selected' : '' }}>Grade Three</option>
+                                                <option value="Grade Four" {{ old('grade', $teachers->advisory->first()->grade ?? '') == "Grade Four" ? 'selected' : '' }}>Grade Four</option>
+                                                <option value="Grade Five" {{ old('grade', $teachers->advisory->first()->grade ?? '') == "Grade Five" ? 'selected' : '' }}>Grade Five</option>
+                                                <option value="Grade Six" {{ old('grade', $teachers->advisory->first()->grade ?? '') == "Grade Six" ? 'selected' : '' }}>Grade Six</option>
                                             </select>
                                         </div>
 
@@ -632,8 +659,16 @@
                                             </label>
                                             <select name="section" id="subject_section{{ $teachers->id }}" required
                                                 class="form-select block w-full text-sm text-normal text-dark tracking-wider p-3 border border-gray-400 rounded-md capitalize">
+                                                <option value="" disabled selected>Select Section</option>
+                                                @if ($teachers->advisory->isNotEmpty())
+                                                    @foreach ($teachers->advisory as $advisory)
+                                                        <option value="{{ $advisory->section }}" {{ old('section', $advisory->section) == $advisory->section ? 'selected' : '' }}>{{ $advisory->section }}</option>
+                                                    @endforeach
+                                                @endif
                                             </select>
                                         </div>
+
+                                        <input type="text" id="old_section{{ $teachers->id }}" value="{{ old('section', $teachers->advisory->first()->section ?? '') }}" class="hidden">
 
                                         <div class="col-span-1 mt-5">
                                             <label
@@ -647,6 +682,15 @@
                                         </div>
 
                                         <script>
+                                            const oldSection = document.getElementById("old_section{{ $teachers->id }}").value;
+
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                const gradeSelect = document.getElementById("subject_grade{{ $teachers->id }}");
+                                                if (gradeSelect.value) {
+                                                    updateOptions(gradeSelect.value, {{ $teachers->id }});
+                                                }
+                                            });
+
                                             // Unified function to handle both section and subject population
                                             function updateOptions(grade, id) {
                                                 // Fetch sections and subjects simultaneously based on grade
@@ -655,21 +699,27 @@
 
                                                 // Clear previous options
                                                 sectionSelect.innerHTML = '<option value="">Select Section</option>';
-                                                subjectSelect.innerHTML = '<option value="">Select Subject</option>';
+                                                subjectSelect.innerHTML = '<option value="">Select Subject</option>'; 
 
+                                                
                                                 // Fetch sections
                                                 fetch(`/api/allsections?grade=${grade}`)
                                                     .then(response => response.json())
                                                     .then(data => {
-                                                        console.log(data);  // Check the output here
                                                         if (data.length) {
                                                             data.forEach(section => {
                                                                 const option = document.createElement("option");
                                                                 option.value = section;
                                                                 option.textContent = section;
+                                                                if (section === oldSection) {
+                                                                    option.selected = true; // Auto-select the old section
+                                                                }
                                                                 sectionSelect.appendChild(option);
                                                             });
+                                                            // Auto-select the old section
+                                                            sectionSelect.value = oldSection;
                                                         } else {
+                                                            sectionSelect.innerHTML = '<option value="">No Sections Available</option>';
                                                             const option = document.createElement("option");
                                                             option.value = "";
                                                             option.textContent = "No Sections Available";
@@ -678,13 +728,13 @@
                                                     })
                                                     .catch(error => {
                                                         console.error('Error fetching sections:', error);
+                                                        sectionSelect.innerHTML = '<option value="">Error loading sections</option>';
                                                         const option = document.createElement("option");
                                                         option.value = "";
                                                         option.textContent = "Error loading sections";
                                                         sectionSelect.appendChild(option);
                                                     });
-
-
+                                            
                                                 // Fetch subjects
                                                 fetch(`/api/allsubjects?grade=${grade}`)
                                                     .then(response => response.json())
@@ -697,6 +747,7 @@
                                                                 subjectSelect.appendChild(option);
                                                             });
                                                         } else {
+                                                            subjectSelect.innerHTML = '<option value="">No Subjects Available</option>';
                                                             const option = document.createElement("option");
                                                             option.value = "";
                                                             option.textContent = "No Subjects Available";
@@ -705,6 +756,7 @@
                                                     })
                                                     .catch(error => {
                                                         console.error('Error fetching subjects:', error);
+                                                        subjectSelect.innerHTML = '<option value="">Error loading subjects</option>';
                                                         const option = document.createElement("option");
                                                         option.value = "";
                                                         option.textContent = "Error loading subjects";
@@ -939,10 +991,8 @@
         </main>
     </div>
 
-
-
     @include('admin.includes.js-link')
-    <script src="{{ asset('../js/admin/mgtgradeone.js') }}" type="text/javascript"></script>
+
     <script>
         // Get modal and buttons
         const modal = document.getElementById("addTeacherModal");
@@ -1058,6 +1108,7 @@
                     addSubjectModal{{ $teachers->id }}.addEventListener("click", () => {
                         if (addSubjectModal{{ $teachers->id }}) {
                             subjectModal{{ $teachers->id }}.classList.remove("hidden");
+
                         }
                     });
                 }
@@ -1071,6 +1122,82 @@
                 }
             @endforeach
         });
+
+        var table = $("#studentTable").DataTable({
+        dom:
+            `<'grid grid-cols-12 gap-4 mb-4'<><'col-span-12 md:col-span-10 lg:col-span-8 xl:col-span-6 block xl:hidden'B><>>` +
+            `<tr>` +
+            `<'grid grid-cols-12 gap-4 mb-4'<'col-span-12 xl:col-span-3 xl:block hidden'l><'col-span-0 xl:col-span-6 xl:block 2xl:me-[15rem] hidden'B><'col-span-12 xl:col-span-3 xl:block hidden'f>>` +
+            `<tr>` +
+            `<'grid grid-cols-12 gap-4 mb-4'<'col-span-12 md:col-span-6 md:block flex items-center justify-center xl:hidden'l><'col-span-12 md:col-span-6 md:block flex items-center justify-center xl:hidden'f>>` +
+            `<tr>` +
+            `<'grid grid-cols-12 gap-4'<'col-span-12 lg:block flex items-center justify-center lg:col-span-6'i><'col-span-12 lg:block flex items-center justify-center lg:col-span-6'p>>`,
+        paging: true,
+        searching: true,
+        ordering: true,
+        info: true,
+        lengthChange: true,
+        responsive: true,
+        pageLength: 50,
+        language: {
+            search: "_INPUT_",
+            searchPlaceholder: "Search",
+        },
+        buttons: [
+            {
+                extend: "excelHtml5",
+                text: '<i class="fas fa-file-excel"></i> Excel',
+                className:
+                    "!bg-teal-700 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !important !flex !items-center !justify-center",
+                titleAttr: "Export to Excel",
+                exportOptions: {
+                    columns: ".export",
+                },
+            },
+            {
+                extend: "pdfHtml5",
+                text: '<i class="fas fa-file-pdf"></i> PDF',
+                className:
+                    "!bg-green-600 !text-[12px] !text-white !border-none !hover:bg-green-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
+                orientation: "landscape",
+                pageSize: "A4",
+                titleAttr: "Export to PDF",
+                exportOptions: {
+                    columns: ".export",
+                },
+                customize: function (doc) {
+                    doc.content[1].table.widths = Array(
+                        doc.content[1].table.body[0].length + 1
+                    )
+                        .join("*")
+                        .split("");
+                },
+            },
+            {
+                extend: "print",
+                text: '<i class="fas fa-print"></i> Print',
+                className:
+                    "!bg-blue-600 !text-[12px] !text-white !border-none !hover:bg-blue-500 !px-4 !py-2 !rounded !flex !items-center !justify-center !important",
+                orientation: "landscape",
+                autoPrint: true,
+                titleAttr: "Print Table",
+                exportOptions: {
+                    columns: ".export",
+                },
+                customize: function (win) {
+                    $(win.document.body).find("table").css("width", "100%");
+                    $(win.document.body).find("table").css("font-size", "10px");
+                },
+            },
+        ],
+        initComplete: function () {
+            $(".dt-buttons").css({
+                display: "flex",
+                "justify-content": "flex-end",
+                width: "100%",
+            });
+        },
+    });
     </script>
 </body>
 

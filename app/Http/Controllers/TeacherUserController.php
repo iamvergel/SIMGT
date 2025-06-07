@@ -235,6 +235,12 @@ class TeacherUserController extends Controller
         // Fetch all teachers but exclude the currently logged-in teacher
         $teacher = TeacherUser::all();
 
+        // Fetch all teacher advisory
+        $teacher = $teacher->map(function ($teacher) {
+            $teacher->advisory = TeacherAdvisory::where('teacher_number', $teacher->teacher_number)->get();
+            return $teacher;
+        });
+
         // Check if there are no teachers
         $noteacher = $teacher->isEmpty() ? "No teacher found" : null;
 
