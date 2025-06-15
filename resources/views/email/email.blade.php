@@ -57,7 +57,7 @@
 
 <body>
     <div class="container">
-        <img src="https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/462537292_515369887923680_7814019648934416783_n.png"
+        <img src="https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg.png"
             alt="SELC" class="header-img">
 
         <div class="bg-gray">

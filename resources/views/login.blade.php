@@ -40,24 +40,24 @@
 
         @keyframes bgimage {
             0% {
-                background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/12.jpg
+                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg.png);
 );
             }
 
             30% {
-                background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/13.jpg);
+                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg.png);
             }
 
             60% {
-                background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/12.jpg);
+                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg.png);
             }
 
             80% {
-                background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/13.jpg);
+                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg.png);
             }
 
             100% {
-                background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/12.jpg);
+                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg.png);
             }
         }
     </style>
