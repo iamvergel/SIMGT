@@ -31,7 +31,7 @@
             width: 100%;
             height: 100%;
             clip-path: polygon(0 0, 100% 0%, 71% 100%, 0% 100%);
-            background-image: url('https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/12.jpg');
+            background-image: url('https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg1.jpg');
             background-size: cover;
             background-position: center;
             z-index: -1;
@@ -40,24 +40,24 @@
 
         @keyframes bgimage {
             0% {
-                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg.png);
+                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg1.jpg);
 );
             }
 
             30% {
-                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg.png);
+                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg2.jpg);
             }
 
             60% {
-                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg.png);
+                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg1.jpg);
             }
 
             80% {
-                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg.png);
+                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg2.jpg);
             }
 
             100% {
-                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg.png);
+                background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg1.jpg);
             }
         }
     </style>

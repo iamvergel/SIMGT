@@ -21,7 +21,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/12.jpg");
+    background-image: url("https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg1.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -33,23 +33,23 @@
 
 @keyframes bgimage {
     0% {
-        background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/12.jpg);
+        background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg1.jpg);
     }
 
     30% {
-        background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/13.jpg);
+        background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg2.jpg);
     }
 
     60% {
-        background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/12.jpg);
+        background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg1.jpg);
     }
 
     80% {
-        background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/13.jpg);
+        background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg2.jpg);
     }
 
     100% {
-        background-image: url(https://raw.githubusercontent.com/iamvergel/St.-Emilie-Learning-Center/main/public/assets/images/12.jpg);
+        background-image: url(https://raw.githubusercontent.com/iamvergel/SIMGT/main/public/assets/images/bg1.jpg);
     }
 }
 
